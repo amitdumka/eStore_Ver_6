@@ -38,7 +38,8 @@ function groupingAllOnSelect(props) {
 
 // check official documentations: https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Row%20Selection&selectedStory=Custom%20Selection%20Column%20Header%20Style&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
 export function getSelectRow(props) {
-  const { entities, ids, setIds } = props;
+  const { entities, ids, setIds ,idName} = props;
+  //console.log(entities);
   return {
     mode: "checkbox",
     clickToSelect: true,
@@ -55,8 +56,9 @@ export function getSelectRow(props) {
       );
     },
     selectionRenderer: ({ rowIndex }) => {
-      const isSelected = ids.some((el) => el === entities[rowIndex].id);
-      const props = { ids, setIds, customerId: entities[rowIndex].id };
+      
+      const isSelected = ids.some((el) => el === entities[rowIndex][idName]);
+      const props = { ids, setIds, customerId: entities[rowIndex]?entities[rowIndex][idName]:rowIndex };
       return (
         <SelectionCheckbox
           isSelected={isSelected}

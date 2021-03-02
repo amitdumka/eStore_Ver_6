@@ -19,14 +19,14 @@ import Counter from "../core/Counter";
 // const ReactBootstrapPage = lazy(() =>
 //     import("./modules/ReactBootstrapExamples/ReactBootstrapPage")
 // );
-// const ECommercePage = lazy(() =>
-//     import("./modules/ECommerce/pages/eCommercePage")
-// );
+const ECommercePage = lazy(() =>
+    import("./modules/ECommerce/pages/eCommercePage")
+);
 // const UserProfilepage = lazy(() =>
 //     import("./modules/UserProfile/UserProfilePage")
 // );
-// const AdminPage = lazy(() =>import("./modules/Admin/pages/AdminPage"));
-
+ //const StoreMainPage = lazy(() =>import("./modules/Admin/pages/StoreMainPage"));
+const LPage=lazy(()=>import("./modules/Admin/pages/simplelogin/slogin") )
 
 
 export default function BasePage() {
@@ -51,6 +51,8 @@ export default function BasePage() {
                 <Route path="/user-profile" component={UserProfilepage} />
                 <ContentRoute path="/counter" component={Counter} />
                 <Route path="/admin-p" component={AdminPage}/> */}
+                <Route path="/e-commerce" component={ECommercePage} />
+                <Route path="/slogin" component={LPage}/>
                 <Redirect to="error/error-v1" />
                 
             
