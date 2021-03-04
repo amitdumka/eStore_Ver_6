@@ -63,7 +63,7 @@ namespace eStore
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseReactDevelopmentServer(npmScript: "start_net");
+                    spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
         }
