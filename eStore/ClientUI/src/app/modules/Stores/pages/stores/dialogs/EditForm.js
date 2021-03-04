@@ -118,10 +118,10 @@ export function EditForm({ saveStore, store, actionsLoading, onHide }) {
                   {/* Store Manger Contact  */}
                   <div className="col-lg-4">
                     <Field
-                      name="smContact"
+                      name="storeManagerPhoneNo"
                       component={Input}
                       placeholder="Store Manager Contact"
-                      label="Store Manager Contac"
+                      label="Store Manager Contact"
                     />
                   </div>
                 </div>
@@ -153,15 +153,7 @@ export function EditForm({ saveStore, store, actionsLoading, onHide }) {
                       label="Opening Date"
                     />
                   </div>
-                  {/* Store No Of Employee  */}
-                  <div className="col-lg-4">
-                    <Field
-                      name="noOfEmployees"
-                      component={Number}
-                      placeholder="Employee Count"
-                      label="Employee Count"
-                    />
-                  </div>
+                 
                 </div>
               </Form>
             </Modal.Body>

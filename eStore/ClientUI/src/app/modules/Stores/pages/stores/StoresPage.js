@@ -1,15 +1,14 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { EditDialog } from "./dialogs/EditDialog";
-import {useSubheader} from "../../../../../_metronic/layout";
+//import { useSubheader } from "../../../../../_metronic/layout";
 import { StoresCard } from "./StoresCard";
-import {StoresUIProvider} from "./StoreUIContext";
+import { StoresUIProvider } from "./StoreUIContext";
 
-
-export function StoresPage ({ history }){
+export function StoresPage({ history }) {
   //const suhbeader = useSubheader();
   //suhbeader.setTitle("eStores: Stores");
-  
+
   const storesUIEvents = {
     newStoreButtonClick: () => {
       history.push("/store/stores/new");
@@ -28,33 +27,34 @@ export function StoresPage ({ history }){
     },
     openUpdateStoresStatusDialog: () => {
       history.push("/store/stores/updateStatus");
-    }
-  }
+    },
+  };
 
   return (
-  <StoresUIProvider storesUIEvents={storesUIEvents}>
-    <Route path="/admin-p/stores/new">
+    <StoresUIProvider storesUIEvents={storesUIEvents}>
+      <Route path="/store/stores/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/admin-p/stores");
+              history.push("/store/stores");
             }}
           />
         )}
       </Route>
-      <Route path="/admin-p/stores/:id/edit">
+      <Route path="/store/stores/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/admin-p/stores");
+              history.push("/store/stores");
             }}
           />
         )}
       </Route>
-  <StoresCard/>
-  </StoresUIProvider>
+      
+      <StoresCard />
+    </StoresUIProvider>
   );
-};
+}
