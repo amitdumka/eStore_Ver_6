@@ -6,6 +6,11 @@ import { NavLink } from "react-router-dom";
 import SVG from "react-inlinesvg";
 import { toAbsoluteUrl, checkIsActive } from "../../../../_helpers";
 
+import TailoringMenu from "./eStore/Tailoring/TailoringMenu";
+import PayrollMenu from "./eStore/Payroll/PayrollMenu";
+import StoreMenu from "./eStore/Stores/StoreMenu";
+import ExpenseMenu from "./eStore/Accounting/Accouting-menu";
+
 export function AsideMenuList({ layoutProps }) {
   const location = useLocation();
   const getMenuItemActive = (url, hasSubmenu = false) => {
@@ -46,6 +51,13 @@ export function AsideMenuList({ layoutProps }) {
           </NavLink>
         </li>
         {/*end::1 Level*/}
+        {/**Start of eStore Menu  */}
+        <ExpenseMenu/>
+        <TailoringMenu/>
+        <PayrollMenu />
+        <StoreMenu/>
+        {/**end of eStore Menu*/}
+
       </ul>
 
       {/* end::Menu Nav */}
