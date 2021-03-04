@@ -17,6 +17,7 @@ import { DashboardPage } from "./pages/DashboardPage";
 // const UserProfilepage = lazy(() =>
 //   import("./modules/UserProfile/UserProfilePage")
 // );
+const StoreMainPage = lazy(() =>import("./modules/Stores/pages/StoreMainPage"));
 
 export default function BasePage() {
   // useEffect(() => {
@@ -38,6 +39,7 @@ export default function BasePage() {
         <Route path="/react-bootstrap" component={ReactBootstrapPage} />
         <Route path="/e-commerce" component={ECommercePage} />
         <Route path="/user-profile" component={UserProfilepage} /> */}
+        <Route path="/store" component={StoreMainPage}/>
         <Redirect to="error/error-v1" />
       </Switch>
     </Suspense>

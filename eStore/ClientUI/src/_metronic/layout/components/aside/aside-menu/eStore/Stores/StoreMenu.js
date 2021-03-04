@@ -23,10 +23,10 @@ export default function StoreMenuList({ layoutProps }) {
       </li>
       {/*begin::1 Level*/}
       <li
-        className={`menu-item ${getMenuItemActive("/store", false)}`}
+        className={`menu-item ${getMenuItemActive("/store/stores", false)}`}
         aria-haspopup="true"
       >
-        <NavLink className="menu-link" to="/store">
+        <NavLink className="menu-link" to="/store/stores">
           <span className="svg-icon menu-icon">
             <SVG
               src={toAbsoluteUrl("/media/svg/icons/Communication/Add-user.svg")}
