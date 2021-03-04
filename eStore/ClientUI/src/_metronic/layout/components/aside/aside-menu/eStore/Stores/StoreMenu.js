@@ -23,10 +23,10 @@ export default function AccoutingMenuList({ layoutProps }) {
       </li>
       {/*begin::1 Level*/}
       <li
-        className={`menu-item ${getMenuItemActive("/stores", false)}`}
+        className={`menu-item ${getMenuItemActive("/store", false)}`}
         aria-haspopup="true"
       >
-        <NavLink className="menu-link" to="/stores">
+        <NavLink className="menu-link" to="/store">
           <span className="svg-icon menu-icon">
             <SVG
               src={toAbsoluteUrl("/media/svg/icons/Communication/Add-user.svg")}
@@ -37,10 +37,10 @@ export default function AccoutingMenuList({ layoutProps }) {
       </li>
       {/*begin::1 Level*/}
       <li
-        className={`menu-item ${getMenuItemActive("/stores", false)}`}
+        className={`menu-item ${getMenuItemActive("/store/customers", false)}`}
         aria-haspopup="true"
       >
-        <NavLink className="menu-link" to="/stores/customers">
+        <NavLink className="menu-link" to="/store/customers">
           <span className="svg-icon menu-icon">
             <SVG
               src={toAbsoluteUrl("/media/svg/icons/Communication/Add-user.svg")}

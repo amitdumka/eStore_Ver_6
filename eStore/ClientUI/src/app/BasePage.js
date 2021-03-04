@@ -4,7 +4,7 @@ import { LayoutSplashScreen, ContentRoute } from "../_metronic/layout";
 import { BuilderPage } from "./pages/BuilderPage";
 import { MyPage } from "./pages/MyPage";
 import { DashboardPage } from "./pages/DashboardPage";
-import Counter from "../core/Counter";
+//import StoreMainPage from "../core/Counter";
 
 //import FetchData from "../core/FetchData";
 //import AuthorizeRoute from '../core/api-authorization/AuthorizeRoute';
@@ -25,7 +25,7 @@ const ECommercePage = lazy(() =>
 // const UserProfilepage = lazy(() =>
 //     import("./modules/UserProfile/UserProfilePage")
 // );
- //const StoreMainPage = lazy(() =>import("./modules/Admin/pages/StoreMainPage"));
+const StoreMainPage = lazy(() =>import("./modules/Stores/pages/StoreMainPage"));
 const LPage=lazy(()=>import("./modules/Admin/pages/simplelogin/slogin") )
 
 
@@ -52,6 +52,7 @@ export default function BasePage() {
                 <ContentRoute path="/counter" component={Counter} />
                 <Route path="/admin-p" component={AdminPage}/> */}
                 <Route path="/e-commerce" component={ECommercePage} />
+                <Route path="/store" component={StoreMainPage} />
                 <Route path="/slogin" component={LPage}/>
                 <Redirect to="error/error-v1" />
                 

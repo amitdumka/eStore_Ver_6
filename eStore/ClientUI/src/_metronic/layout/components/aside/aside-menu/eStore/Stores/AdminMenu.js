@@ -19,13 +19,13 @@ export default function AdminMenuList({ layoutProps }) {
       {/*begin::1 Level*/}
       <li
         className={`menu-item menu-item-submenu ${getMenuItemActive(
-          "/google-material",
+          "/admin",
           true
         )}`}
         aria-haspopup="true"
         data-menu-toggle="hover"
       >
-        <NavLink className="menu-link menu-toggle" to="/due-menu">
+        <NavLink className="menu-link menu-toggle" to="/admin">
           <span className="svg-icon menu-icon">
             <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
           </span>
@@ -44,11 +44,11 @@ export default function AdminMenuList({ layoutProps }) {
             {/*begin::2 Level*/}
             <li
               className={`menu-item ${getMenuItemActive(
-                "/due/duelist"
+                "/admin/users"
               )}`}
               aria-haspopup="true"
             >
-              <NavLink className="menu-link" to="/due/duelist">
+              <NavLink className="menu-link" to="/admin/users">
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
                 </i>
@@ -59,11 +59,11 @@ export default function AdminMenuList({ layoutProps }) {
                {/*begin::2 Level*/}
                <li
                 className={`menu-item ${getMenuItemActive(
-                  "/due/recoverd"
+                  "/admin/roles"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/due/recoverd">
+                <NavLink className="menu-link" to="/admin/roles">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
