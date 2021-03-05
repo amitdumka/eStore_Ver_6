@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import { Redirect, Switch } from "react-router-dom";
 import { EmployeesPage } from "./employees/EmployeesPage";
+import {AttendancesPage} from "./attendances/AttendancesPage";
 import { LayoutSplashScreen, ContentRoute } from "../../../../_metronic/layout";
 
 export default function PayrollPage() {
@@ -17,6 +18,7 @@ export default function PayrollPage() {
         }
         {/* <ContentRoute path="/payroll/stores" component={StoresPage}/> */}
         <ContentRoute path="/payroll/employee/employees" component={EmployeesPage} />
+        <ContentRoute path="/payroll/employee/attendances" component={AttendancesPage} />
       </Switch>
     </Suspense>
   );

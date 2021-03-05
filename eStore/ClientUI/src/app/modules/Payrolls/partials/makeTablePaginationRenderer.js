@@ -15,7 +15,7 @@ export const makeTablePaginationRenderer = ({
       {pages.map(p => (
         <button
           key={p.page}
-          className="btn btn-success"
+          className="btn btn-success btn-rounded"
           onClick={() => onPageChange(p.page)}
         >
           {p.page}

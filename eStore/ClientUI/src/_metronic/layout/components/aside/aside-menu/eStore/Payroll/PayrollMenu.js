@@ -51,10 +51,10 @@ export default function PayRollMenuList({ layoutProps }) {
             {/**Menu Item Will Follow from Level 2 */}
             {/*begin::2 Level*/}
             <li
-              className={`menu-item ${getMenuItemActive("/payroll/salary/payslip")}`}
+              className={`menu-item ${getMenuItemActive("/payroll/salary/payslips")}`}
               aria-haspopup="true"
             >
-              <NavLink className="menu-link" to="/payroll/salary/payslip">
+              <NavLink className="menu-link" to="/payroll/salary/payslips">
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
                 </i>
@@ -65,11 +65,11 @@ export default function PayRollMenuList({ layoutProps }) {
             {/*begin::2 Level*/}
             <li
               className={`menu-item ${getMenuItemActive(
-                "/payroll/salary/current-salary"
+                "/payroll/salary/current-salarys"
               )}`}
               aria-haspopup="true"
             >
-              <NavLink className="menu-link" to="/payroll/salary/current-salary">
+              <NavLink className="menu-link" to="/payroll/salary/current-salarys">
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
                 </i>
@@ -152,11 +152,11 @@ export default function PayRollMenuList({ layoutProps }) {
             {/*begin::2 Level*/}
             <li
               className={`menu-item ${getMenuItemActive(
-                "/payroll/attendance"
+                "/payroll/employee/attendances"
               )}`}
               aria-haspopup="true"
             >
-              <NavLink className="menu-link" to="/payroll/employee/attendance">
+              <NavLink className="menu-link" to="/payroll/employee/attendances">
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
                 </i>
@@ -166,10 +166,10 @@ export default function PayRollMenuList({ layoutProps }) {
             {/*end::2 Level*/}
             {/*begin::2 Level*/}
             <li
-              className={`menu-item ${getMenuItemActive("/payroll/employee/salary")}`}
+              className={`menu-item ${getMenuItemActive("/payroll/employee/salarys")}`}
               aria-haspopup="true"
             >
-              <NavLink className="menu-link" to="/payroll/employee/salary">
+              <NavLink className="menu-link" to="/payroll/employee/salarys">
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
                 </i>
@@ -179,10 +179,10 @@ export default function PayRollMenuList({ layoutProps }) {
             {/*end::2 Level*/}
             {/*begin::2 Level*/}
             <li
-              className={`menu-item ${getMenuItemActive("/payroll/employee/welfare")}`}
+              className={`menu-item ${getMenuItemActive("/payroll/employee/welfares")}`}
               aria-haspopup="true"
             >
-              <NavLink className="menu-link" to="/payroll/employee/welfare">
+              <NavLink className="menu-link" to="/payroll/employee/welfares">
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
                 </i>

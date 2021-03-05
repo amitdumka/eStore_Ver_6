@@ -10,15 +10,8 @@ import {
   Input,
   Select,
   DatePickerField,
-  Checkbox,
-  HeaderCheckbox,
 } from "../../../../../../_metronic/_partials/controls";
-import {
-  LabelImportantOutlined,
-  LabelImportantRounded,
-} from "@material-ui/icons";
-import { InputLabel } from "@material-ui/core";
-//import { Checkbox, FormControlLabel } from "@material-ui/core";
+
 
 // Validation schema
 const EmployeeEditSchema = Yup.object().shape({
