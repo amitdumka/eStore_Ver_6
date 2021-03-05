@@ -9,7 +9,7 @@ import * as Yup from "yup";
 import {
   Input,
   Select,
-  DatePickerField,
+  DatePickerField,Checkbox,
 } from "../../../../../../_metronic/_partials/controls";
 
 // Validation schema
@@ -22,17 +22,24 @@ const EmployeeEditSchema = Yup.object().shape({
     .min(3, "Minimum 3 symbols")
     .max(50, "Maximum 50 symbols")
     .required("Lastname is required"),
-  mobileNo: Yup.string()
-    .required("Mobile No  is required"),
+  mobileNo: Yup.string().required("Mobile No  is required"),
   city: Yup.string().required("City is required"),
+  joiningDate: Yup.string().required("Joining is required"),
+  eMail: Yup.string()
+    .email()
+    .required("Email is required"),
+  dateOfBirth: Yup.string().required("Date of Birth is required"),
+  adharNumber: Yup.string().required("Aadhar is required"),
+  address: Yup.string().required("Address is required"),
+  state: Yup.string().required("State is required"),
+  fatherName: Yup.string().required("Father Name is required"),
+  highestQualification: Yup.string().required(
+    "Highest Qualification is required"
+  ),
+  storeId: Yup.number().required("Store is required"),
 });
 
-export function EditForm({
-  saveEmployee,
-  employee,
-  actionsLoading,
-  onHide,
-}) {
+export function EditForm({ saveEmployee, employee, actionsLoading, onHide }) {
   return (
     <>
       <Formik
@@ -53,7 +60,7 @@ export function EditForm({
               )}
               <Form className="form form-label-right">
                 <div className="form-group row">
-                  {/* First Name */}
+                  {/* Staff Name */}
                   <div className="col-lg-4">
                     <Field
                       name="firstName"
@@ -81,45 +88,154 @@ export function EditForm({
                     />
                   </div>
                 </div>
-                {/* Email */}
+
                 <div className="form-group row">
+                  {/* Email */}
                   <div className="col-lg-4">
-                    <Field 
-                      name="city"
+                    <Field
+                      name="eMail"
                       component={Input}
-                      placeholder="City"
-                      label="City"
+                      placeholder="eMail"
+                      label="eMail"
                     />
                   </div>
+
                   {/* Date of birth */}
                   <div className="col-lg-4">
                     <DatePickerField
-                    dateFormat="yyyy-mm-ddT00:00:00"
+                      dateFormat="yyyy-mm-ddT00:00:00"
                       name="dateOfBirth"
                       label="Date of Birth"
                     />
                   </div>
-                  {/* IP Address */}
+                  {/*  Father Name*/}
                   <div className="col-lg-4">
                     <Field
-                      name="age"
+                      name="fatherName"
                       component={Input}
-                      placeholder="Age"
-                      label="Age"
-                     
+                      placeholder="Father Name"
+                      label="Father Name"
                     />
                   </div>
                 </div>
                 <div className="form-group row">
-                  {/* Gender */}
+                  {/* Store */}
                   <div className="col-lg-4">
-                    <Select name="Gender" label="Gender">
-                     <option value="0">Male</option>
-                     <option value="1">Female</option>
-                      
+                    <Select name="storeId" label="Store">
+                      <option value="1">Aprajita Retails</option>
+                      <option value="2">Aprajita Retails, Jamshedpur</option>
                     </Select>
                   </div>
+
+                  {/* Date of Joining */}
+                  <div className="col-lg-4">
+                    <DatePickerField
+                      dateFormat="yyyy-mm-ddT00:00:00"
+                      name="joiningDate"
+                      label="Joining Date"
+                    />
+                  </div>
+                  {/* Date of Leaving */}
+                  <div className="col-lg-4">
+                    <DatePickerField
+                      dateFormat="yyyy-mm-ddT00:00:00"
+                      name="leavingDate"
+                      label="Leaving Date"
+                    />
+                  </div>
                 </div>
+                <div className="form-group row">
+                  {/* Address */}
+                  <div className="col-lg-4">
+                    <Field
+                      name="address"
+                      component={Input}
+                      placeholder="Address"
+                      label="Address"
+                    />
+                  </div>
+
+                  {/* City */}
+                  <div className="col-lg-4">
+                    <Field
+                      component={Input}
+                      name="city"
+                      label="City"
+                      placeholder="City"
+                    />
+                  </div>
+                  {/*  State Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="state"
+                      component={Input}
+                      placeholder="State"
+                      label="State"
+                    />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  
+                   {/* Department */}
+                   <div className="col-lg-4">
+                    <Select name="categoryId" label="Department">
+                      <option value="1">Store Manager</option>
+                      <option value="2">Salesman</option>
+                      <option value="3">HouseKeeping</option>
+                      <option value="4">Accountant</option>
+                    </Select>
+                  </div>
+                   {/*  Qualification*/}
+                   <div className="col-lg-4">
+                    <Field
+                      name="highestQualification"
+                      component={Input}
+                      placeholder="Highest Qualification"
+                      label="Qualification"
+                    />
+                  </div>
+
+                </div>
+                <div className="form-group row">
+                  {/*  Addhar Number */}
+                  <div className="col-lg-4">
+                    <Field
+                      name="adharNumber"
+                      component={Input}
+                      placeholder="Aadhar No"
+                      label="Aadhar Number"
+                    />
+                  </div>
+                   {/*  Pan Number */}
+                   <div className="col-lg-4">
+                    <Field
+                      name="panNo"
+                      component={Input}
+                      placeholder="PAN No"
+                      label="PAN No"
+                    />
+                  </div>
+                   {/*  Other Id*/}
+                   <div className="col-lg-4">
+                    <Field
+                      name="otherIdDetails"
+                      component={Input}
+                      placeholder="Other Id"
+                      label="Other Id"
+                    />
+                  </div>
+                </div>
+                <div className="form-group row">
+                   {/* isWorking */}
+                   <div className="col-lg-4">
+                    <Field name="isWorking" label="Is Working" component={Checkbox}> Working   </Field>
+                  </div>
+                   {/* Tailoring Division */}
+                   <div className="col-lg-4">
+                    <Checkbox name="isTailors"> Tailoring Division </Checkbox>
+                  </div>
+                </div>
+             
               </Form>
             </Modal.Body>
             <Modal.Footer>

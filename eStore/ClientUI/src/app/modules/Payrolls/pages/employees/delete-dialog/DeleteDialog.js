@@ -1,18 +1,18 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/employees/Actions";
-import { useUIContext } from "../UIContext";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
+import * as actions from "../../../_redux/employees/Actions";
+import {useUIContext} from "../UIContext";
 
-export function DeleteDialog({ show, onHide }) {
+// Delete particular record.
+export function DeleteDialog({ id, show, onHide }) {
   // Employees UI Context
   const employeesUIContext = useUIContext();
   const employeesUIProps = useMemo(() => {
     return {
-      ids: employeesUIContext.ids,
       setIds: employeesUIContext.setIds,
-      queryParams: employeesUIContext.queryParams,
+      queryParams: employeesUIContext.queryParams
     };
   }, [employeesUIContext]);
 
@@ -23,29 +23,26 @@ export function DeleteDialog({ show, onHide }) {
     shallowEqual
   );
 
-  // if employees weren't selected we should close modal
+  // if !id we should close modal
   useEffect(() => {
-    if (!employeesUIProps.ids || employeesUIProps.ids.length === 0) {
+    if (!id) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [employeesUIProps.ids]);
+  }, [id]);
 
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading, dispatch]);
 
-  const deleteEmployees = () => {
-    // server request for deleting employee by selected ids
-    dispatch(actions.deleteEmployees(employeesUIProps.ids)).then(() => {
+  const deleteEmployee = () => {
+    // server request for deleting employee by id
+    dispatch(actions.deleteEmployee(id)).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchEmployees(employeesUIProps.queryParams)).then(
-        () => {
-          // clear selections list
-          employeesUIProps.setIds([]);
-          // closing delete modal
-          onHide();
-        }
-      );
+      dispatch(actions.fetchEmployees(employeesUIProps.queryParams));
+      // clear selections list
+      employeesUIProps.setIds([]);
+      // closing delete modal
+      onHide();
     });
   };
 
@@ -60,14 +57,14 @@ export function DeleteDialog({ show, onHide }) {
       {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Employees Delete
+          Employee Delete
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete selected employees?</span>
+          <span>Are you sure to permanently delete this employee?</span>
         )}
-        {isLoading && <span>Employee are deleting...</span>}
+        {isLoading && <span>Employee is deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -81,7 +78,7 @@ export function DeleteDialog({ show, onHide }) {
           <> </>
           <button
             type="button"
-            onClick={deleteEmployees}
+            onClick={deleteEmployee}
             className="btn btn-primary btn-elevate"
           >
             Delete
