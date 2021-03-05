@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Formik } from "formik";
 import { isEqual } from "lodash";
-import { useCustomersUIContext } from "../CustomersUIContext";
+import { useUIContext } from "../UIContext";
 
 const prepareFilter = (queryParams, values) => {
   const { status, type, searchText } = values;
@@ -22,23 +22,23 @@ const prepareFilter = (queryParams, values) => {
   return newQueryParams;
 };
 
-export function CustomersFilter({ listLoading }) {
-  // Customers UI Context
-  const customersUIContext = useCustomersUIContext();
-  const customersUIProps = useMemo(() => {
+export function EmployeesFilter({ listLoading }) {
+  // Employees UI Context
+  const employeesUIContext = useUIContext();
+  const employeesUIProps = useMemo(() => {
     return {
-      queryParams: customersUIContext.queryParams,
-      setQueryParams: customersUIContext.setQueryParams,
+      queryParams: employeesUIContext.queryParams,
+      setQueryParams: employeesUIContext.setQueryParams,
     };
-  }, [customersUIContext]);
+  }, [employeesUIContext]);
 
   // queryParams, setQueryParams,
   const applyFilter = (values) => {
-    const newQueryParams = prepareFilter(customersUIProps.queryParams, values);
-    if (!isEqual(newQueryParams, customersUIProps.queryParams)) {
+    const newQueryParams = prepareFilter(employeesUIProps.queryParams, values);
+    if (!isEqual(newQueryParams, employeesUIProps.queryParams)) {
       newQueryParams.pageNumber = 1;
       // update list by queryParams
-      customersUIProps.setQueryParams(newQueryParams);
+      employeesUIProps.setQueryParams(newQueryParams);
     }
   };
 

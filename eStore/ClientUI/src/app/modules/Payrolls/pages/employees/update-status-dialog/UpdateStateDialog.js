@@ -1,67 +1,63 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import {
-  CustomerStatusCssClasses,
-  CustomerStatusTitles,
-} from "../CustomersUIHelpers";
-import * as actions from "../../../_redux/customers/customersActions";
-import { useCustomersUIContext } from "../CustomersUIContext";
+import * as actions from "../../../_redux/employees/Actions";
+import { useUIContext } from "../UIContext";
 
-const selectedCustomers = (entities, ids) => {
-  const _customers = [];
+const selectedEmployees = (entities, ids) => {
+  const _employees = [];
   ids.forEach((id) => {
-    const customer = entities.find((el) => el.id === id);
-    if (customer) {
-      _customers.push(customer);
+    const employee = entities.find((el) => el.id === id);
+    if (employee) {
+      _employees.push(employee);
     }
   });
-  return _customers;
+  return _employees;
 };
 
-export function CustomersUpdateStateDialog({ show, onHide }) {
-  // Customers UI Context
-  const customersUIContext = useCustomersUIContext();
-  const customersUIProps = useMemo(() => {
+export function UpdateStateDialog({ show, onHide }) {
+  // Employees UI Context
+  const employeesUIContext = useUIContext();
+  const employeesUIProps = useMemo(() => {
     return {
-      ids: customersUIContext.ids,
-      setIds: customersUIContext.setIds,
-      queryParams: customersUIContext.queryParams,
+      ids: employeesUIContext.ids,
+      setIds: employeesUIContext.setIds,
+      queryParams: employeesUIContext.queryParams,
     };
-  }, [customersUIContext]);
+  }, [employeesUIContext]);
 
-  // Customers Redux state
-  const { customers, isLoading } = useSelector(
+  // Employees Redux state
+  const { employees, isLoading } = useSelector(
     (state) => ({
-      customers: selectedCustomers(
-        state.customers.entities,
-        customersUIProps.ids
+      employees: selectedEmployees(
+        state.employees.entities,
+        employeesUIProps.ids
       ),
-      isLoading: state.customers.actionsLoading,
+      isLoading: state.employees.actionsLoading,
     }),
     shallowEqual
   );
 
   // if !id we should close modal
   useEffect(() => {
-    if (!customersUIProps.ids || customersUIProps.ids.length === 0) {
+    if (!employeesUIProps.ids || employeesUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [customersUIProps.ids]);
+  }, [employeesUIProps.ids]);
 
   const [status, setStatus] = useState(0);
 
   const dispatch = useDispatch();
   const updateStatus = () => {
-    // server request for update customers status by selected ids
-    dispatch(actions.updateCustomersStatus(customersUIProps.ids, status)).then(
+    // server request for update employees status by selected ids
+    dispatch(actions.updateEmployeesStatus(employeesUIProps.ids, status)).then(
       () => {
         // refresh list after deletion
-        dispatch(actions.fetchCustomers(customersUIProps.queryParams)).then(
+        dispatch(actions.fetchEmployees(employeesUIProps.queryParams)).then(
           () => {
             // clear selections list
-            customersUIProps.setIds([]);
+            employeesUIProps.setIds([]);
             // closing delete modal
             onHide();
           }
@@ -78,7 +74,7 @@ export function CustomersUpdateStateDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Status has been updated for selected customers
+          Status has been updated for selected employees
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="overlay overlay-block cursor-default">
@@ -98,22 +94,13 @@ export function CustomersUpdateStateDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {customers.map((customer) => (
-              <tr key={`id${customer.id}`}>
-                <td>{customer.id}</td>
-                <td>
-                  <span
-                    className={`label label-lg label-light-${
-                      CustomerStatusCssClasses[customer.status]
-                    } label-inline`}
-                  >
-                    {" "}
-                    {CustomerStatusTitles[customer.status]}
-                  </span>
-                </td>
+            {employees.map((employee) => (
+              <tr key={`id${employee.id}`}>
+                <td>{employee.id}</td>
+                
                 <td>
                   <span className="ml-3">
-                    {customer.lastName}, {customer.firstName}
+                    {employee.lastName}, {employee.firstName}
                   </span>
                 </td>
               </tr>

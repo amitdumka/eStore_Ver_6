@@ -1,19 +1,19 @@
 import React, { useMemo } from "react";
-import { useCustomersUIContext } from "../CustomersUIContext";
+import { useUIContext } from "../UIContext";
 
-export function CustomersGrouping() {
-  // Customers UI Context
-  const customersUIContext = useCustomersUIContext();
-  const customersUIProps = useMemo(() => {
+export function EmployeesGrouping() {
+  // Employees UI Context
+  const employeesUIContext = useUIContext();
+  const employeesUIProps = useMemo(() => {
     return {
-      ids: customersUIContext.ids,
-      setIds: customersUIContext.setIds,
-      openDeleteCustomersDialog: customersUIContext.openDeleteCustomersDialog,
-      openFetchCustomersDialog: customersUIContext.openFetchCustomersDialog,
-      openUpdateCustomersStatusDialog:
-        customersUIContext.openUpdateCustomersStatusDialog,
+      ids: employeesUIContext.ids,
+      setIds: employeesUIContext.setIds,
+      openDeleteEmployeesDialog: employeesUIContext.openDeleteEmployeesDialog,
+      openFetchEmployeesDialog: employeesUIContext.openFetchEmployeesDialog,
+      openUpdateEmployeesStatusDialog:
+        employeesUIContext.openUpdateEmployeesStatusDialog,
     };
-  }, [customersUIContext]);
+  }, [employeesUIContext]);
 
   return (
     <div className="form">
@@ -23,7 +23,7 @@ export function CustomersGrouping() {
             <div className="form-label form-label-no-wrap">
               <label className="font-bold font-danger">
                 <span>
-                  Selected records count: <b>{customersUIProps.ids.length}</b>
+                  Selected records count: <b>{employeesUIProps.ids.length}</b>
                 </span>
               </label>
             </div>
@@ -31,7 +31,7 @@ export function CustomersGrouping() {
               <button
                 type="button"
                 className="btn btn-danger font-weight-bolder font-size-sm"
-                onClick={customersUIProps.openDeleteCustomersDialog}
+                onClick={employeesUIProps.openDeleteEmployeesDialog}
               >
                 <i className="fa fa-trash"></i> Delete All
               </button>
@@ -39,7 +39,7 @@ export function CustomersGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={customersUIProps.openFetchCustomersDialog}
+                onClick={employeesUIProps.openFetchEmployeesDialog}
               >
                 <i className="fa fa-stream"></i> Fetch Selected
               </button>
@@ -47,7 +47,7 @@ export function CustomersGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={customersUIProps.openUpdateCustomersStatusDialog}
+                onClick={employeesUIProps.openUpdateEmployeesStatusDialog}
               >
                 <i className="fa fa-sync-alt"></i> Update Status
               </button>

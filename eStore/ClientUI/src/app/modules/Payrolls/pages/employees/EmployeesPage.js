@@ -1,9 +1,12 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { LoadingDialog } from "./loading-dialog/LoadingDialog";
+import { EmployeesLoadingDialog } from "./loading-dialog/LoadingDialog";
 import { EditDialog } from "./edit-dialog/EditDialog";
-import { DeleteDialog } from "./deletes-dialog/Dialog";
-import { DeletesDialog } from "./delete-dialog/Dialog";
+
+import { DeleteDialog } from "./delete-dialog/DeleteDialog";
+
+import { DeletesDialog } from "./deletes-dialog/DeletesDialog";
+
 import { FetchDialog } from "./fetch-dialog/FetchDialog";
 import { UpdateStateDialog } from "./update-status-dialog/UpdateStateDialog";
 import { UIProvider } from "./UIContext";
@@ -32,8 +35,8 @@ export function EmployeesPage({ history }) {
   }
 
   return (
-    <UIProvider employeesUIEvents={employeesUIEvents}>
-      <LoadingDialog />
+    <UIProvider UIEvents={employeesUIEvents}>
+      <EmployeesLoadingDialog />
       <Route path="/payroll/employees/new">
         {({ history, match }) => (
           <EditDialog

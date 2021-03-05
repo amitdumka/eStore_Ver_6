@@ -18,6 +18,7 @@ import { DashboardPage } from "./pages/DashboardPage";
 //   import("./modules/UserProfile/UserProfilePage")
 // );
 const StoreMainPage = lazy(() =>import("./modules/Stores/pages/StoreMainPage"));
+const PayrollPage=lazy(() =>import("./modules/Payrolls/pages/PayrollPage"));
 
 export default function BasePage() {
   // useEffect(() => {
@@ -40,6 +41,7 @@ export default function BasePage() {
         <Route path="/e-commerce" component={ECommercePage} />
         <Route path="/user-profile" component={UserProfilepage} /> */}
         <Route path="/store" component={StoreMainPage}/>
+        <Route path="/payroll" component={PayrollPage}/>
         <Redirect to="error/error-v1" />
       </Switch>
     </Suspense>

@@ -5,37 +5,37 @@ import {
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../_metronic/_partials/controls";
-import { CustomersFilter } from "./filter/Filter";
-import { CustomersTable } from "./table/EmployeesTable";
-import { CustomersGrouping } from "./grouping/Grouping";
-import { useCustomersUIContext } from "./CustomersUIContext";
+import { EmployeesFilter } from "./filter/Filter";
+import { EmployeesTable } from "./table/Table";
+import { EmployeesGrouping } from "./grouping/Grouping";
+import { useUIContext } from "./UIContext";
 
-export function CustomersCard() {
-  const customersUIContext = useCustomersUIContext();
-  const customersUIProps = useMemo(() => {
+export function EmployeesCard() {
+  const employeesUIContext = useUIContext();
+  const employeesUIProps = useMemo(() => {
     return {
-      ids: customersUIContext.ids,
-      newCustomerButtonClick: customersUIContext.newCustomerButtonClick,
+      ids: employeesUIContext.ids,
+      newEmployeeButtonClick: employeesUIContext.newEmployeeButtonClick,
     };
-  }, [customersUIContext]);
+  }, [employeesUIContext]);
 
   return (
     <Card>
-      <CardHeader title="Customers list">
+      <CardHeader title="Employees list">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
-            onClick={customersUIProps.newCustomerButtonClick}
+            onClick={employeesUIProps.newEmployeeButtonClick}
           >
-            New Customer
+            New Employee
           </button>
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        <CustomersFilter />
-        {customersUIProps.ids.length > 0 && <CustomersGrouping />}
-        <CustomersTable />
+        <EmployeesFilter />
+        {employeesUIProps.ids.length > 0 && <EmployeesGrouping />}
+        <EmployeesTable />
       </CardBody>
     </Card>
   );

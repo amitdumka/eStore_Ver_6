@@ -8,15 +8,16 @@ export function useUIContext() {
   return useContext(UIContext);
 }
 
-export function getCurrentDate(separator=''){
-
-  let newDate = new Date()
+export function getCurrentDate(separator = "") {
+  let newDate = new Date();
   let date = newDate.getDate();
   let month = newDate.getMonth() + 1;
   let year = newDate.getFullYear();
-  
-  return `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}0${date}T00:00:00`
-  }
+
+  return `${year}${separator}${
+    month < 10 ? `0${month}` : `${month}`
+  }${separator}0${date}T00:00:00`;
+}
 
 export const UIConsumer = UIContext.Consumer;
 
@@ -36,22 +37,36 @@ export function UIProvider({ UIEvents, children }) {
       return nextQueryParams;
     });
   }, []);
-  
+
   const initEmployee = {
-      employeeId: 0,
-      firstName: "Demo",
-      lastName: "Demo",
-      age: 18,
-      dateOfBirth: "2020-10-21T00:00:00",
-      city: "Dumka",
-      mobileNo: "Demo",
-      gender: 0,
-      noOfBills: 0,
-      totalAmount: 0.0000,
-      createdDate: getCurrentDate("-"),
-      fullName: "Demo Demo",
-      invoices: null
-    
+    employeeId: 0,
+    firstName: "Alok1",
+    lastName: "Kumar1 ",
+    staffName: "Alok Kumar1 ",
+    mobileNo: "9386601284",
+    joiningDate: "2016-02-17T00:00:00",
+    leavingDate: null,
+    isWorking: true,
+    category: 1,
+    isTailors: false,
+    eMail: "alokkumar18111@gmail.com",
+    dateOfBirth: "0001-01-01T00:00:00",
+    adharNumber: "483173455467",
+    panNo: "FDVPK0626P",
+    otherIdDetails: "N/A",
+    address: "Shiv Pahar Dumka",
+    city: "Dumka",
+    state: "Jharkhand",
+    fatherName: "Rabindra Chandra Das",
+    highestQualification: "",
+    salesmen: null,
+    attendances: null,
+    user: null,
+    storeId: 1,
+    store: null,
+    userId: "TestID",
+    entryStatus: 0,
+    isReadOnly: false,
   };
 
   const value = {
@@ -66,13 +81,8 @@ export function UIProvider({ UIEvents, children }) {
     openDeleteEmployeeDialog: UIEvents.openDeleteEmployeeDialog,
     openDeleteEmployeesDialog: UIEvents.openDeleteEmployeesDialog,
     openFetchEmployeesDialog: UIEvents.openFetchEmployeesDialog,
-    openUpdateEmployeesStatusDialog:
-      UIEvents.openUpdateEmployeesStatusDialog,
+    openUpdateEmployeesStatusDialog: UIEvents.openUpdateEmployeesStatusDialog,
   };
 
-  return (
-    <UIContext.Provider value={value}>
-      {children}
-    </UIContext.Provider>
-  );
+  return <UIContext.Provider value={value}>{children}</UIContext.Provider>;
 }

@@ -1,47 +1,47 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/customers/customersActions";
-import { useCustomersUIContext } from "../CustomersUIContext";
+import * as actions from "../../../_redux/employees/Actions";
+import { useUIContext } from "../UIContext";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
 
-export function CustomersDeleteDialog({ show, onHide }) {
-  // Customers UI Context
-  const customersUIContext = useCustomersUIContext();
-  const customersUIProps = useMemo(() => {
+export function DeleteDialog({ show, onHide }) {
+  // Employees UI Context
+  const employeesUIContext = useUIContext();
+  const employeesUIProps = useMemo(() => {
     return {
-      ids: customersUIContext.ids,
-      setIds: customersUIContext.setIds,
-      queryParams: customersUIContext.queryParams,
+      ids: employeesUIContext.ids,
+      setIds: employeesUIContext.setIds,
+      queryParams: employeesUIContext.queryParams,
     };
-  }, [customersUIContext]);
+  }, [employeesUIContext]);
 
-  // Customers Redux state
+  // Employees Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.customers.actionsLoading }),
+    (state) => ({ isLoading: state.employees.actionsLoading }),
     shallowEqual
   );
 
-  // if customers weren't selected we should close modal
+  // if employees weren't selected we should close modal
   useEffect(() => {
-    if (!customersUIProps.ids || customersUIProps.ids.length === 0) {
+    if (!employeesUIProps.ids || employeesUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [customersUIProps.ids]);
+  }, [employeesUIProps.ids]);
 
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading, dispatch]);
 
-  const deleteCustomers = () => {
-    // server request for deleting customer by selected ids
-    dispatch(actions.deleteCustomers(customersUIProps.ids)).then(() => {
+  const deleteEmployees = () => {
+    // server request for deleting employee by selected ids
+    dispatch(actions.deleteEmployees(employeesUIProps.ids)).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchCustomers(customersUIProps.queryParams)).then(
+      dispatch(actions.fetchEmployees(employeesUIProps.queryParams)).then(
         () => {
           // clear selections list
-          customersUIProps.setIds([]);
+          employeesUIProps.setIds([]);
           // closing delete modal
           onHide();
         }
@@ -60,14 +60,14 @@ export function CustomersDeleteDialog({ show, onHide }) {
       {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Customers Delete
+          Employees Delete
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete selected customers?</span>
+          <span>Are you sure to permanently delete selected employees?</span>
         )}
-        {isLoading && <span>Customer are deleting...</span>}
+        {isLoading && <span>Employee are deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -81,7 +81,7 @@ export function CustomersDeleteDialog({ show, onHide }) {
           <> </>
           <button
             type="button"
-            onClick={deleteCustomers}
+            onClick={deleteEmployees}
             className="btn btn-primary btn-elevate"
           >
             Delete

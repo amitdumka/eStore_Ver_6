@@ -1,50 +1,50 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useSelector } from "react-redux";
-import {
-  CustomerStatusCssClasses,
-  CustomerStatusTitles,
-} from "../CustomersUIHelpers";
-import { useCustomersUIContext } from "../CustomersUIContext";
+// import {
+//   EmployeeStatusCssClasses,
+//   EmployeeStatusTitles,
+// } from "../UIHelpers";
+import { useUIContext } from "../UIContext";
 
-const selectedCustomers = (entities, ids) => {
-  const _customers = [];
+const selectedEmployees = (entities, ids) => {
+  const _employees = [];
   ids.forEach((id) => {
-    const customer = entities.find((el) => el.id === id);
-    if (customer) {
-      _customers.push(customer);
+    const employee = entities.find((el) => el.id === id);
+    if (employee) {
+      _employees.push(employee);
     }
   });
-  return _customers;
+  return _employees;
 };
 
-export function CustomersFetchDialog({ show, onHide }) {
-  // Customers UI Context
-  const customersUIContext = useCustomersUIContext();
-  const customersUIProps = useMemo(() => {
+export function FetchDialog({ show, onHide }) {
+  // Employees UI Context
+  const employeesUIContext = useUIContext();
+  const employeesUIProps = useMemo(() => {
     return {
-      ids: customersUIContext.ids,
+      ids: employeesUIContext.ids,
     };
-  }, [customersUIContext]);
+  }, [employeesUIContext]);
 
-  // Customers Redux state
-  const { customers } = useSelector(
+  // Employees Redux state
+  const { employees } = useSelector(
     (state) => ({
-      customers: selectedCustomers(
-        state.customers.entities,
-        customersUIProps.ids
+      employees: selectedEmployees(
+        state.employees.entities,
+        employeesUIProps.ids
       ),
     }),
     shallowEqual
   );
 
-  // if customers weren't selected we should close modal
+  // if employees weren't selected we should close modal
   useEffect(() => {
-    if (!customersUIProps.ids || customersUIProps.ids.length === 0) {
+    if (!employeesUIProps.ids || employeesUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [customersUIProps.ids]);
+  }, [employeesUIProps.ids]);
 
   return (
     <Modal
@@ -67,22 +67,12 @@ export function CustomersFetchDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {customers.map((customer) => (
-              <tr key={`id${customer.id}`}>
-                <td>{customer.id}</td>
-                <td>
-                  <span
-                    className={`label label-lg label-light-${
-                      CustomerStatusCssClasses[customer.status]
-                    } label-inline`}
-                  >
-                    {" "}
-                    {CustomerStatusTitles[customer.status]}
-                  </span>
-                </td>
+            {employees.map((employee) => (
+              <tr key={`id${employee.id}`}>
+                <td>{employee.id}</td>
                 <td>
                   <span className="ml-3">
-                    {customer.lastName}, {customer.firstName}
+                    {employee.lastName}, {employee.firstName}
                   </span>
                 </td>
               </tr>
