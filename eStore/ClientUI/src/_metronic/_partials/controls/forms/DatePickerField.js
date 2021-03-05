@@ -22,6 +22,7 @@ export function DatePickerField({ ...props }) {
     <>
       {props.label && <label>{props.label}</label>}
       <DatePicker
+        todayButton="ToDay"
         className={getFieldCSSClasses(touched[field.name], errors[field.name])}
         style={{ width: "100%" }}
         {...field}
@@ -37,7 +38,7 @@ export function DatePickerField({ ...props }) {
         </div>
       ) : (
         <div className="feedback">
-          Please enter <b>{props.label}</b> in 'mm/dd/yyyy' format
+          Please enter <b>{props.label}</b> in 'yyyy/MM/dda' format
         </div>
       )}
     </>

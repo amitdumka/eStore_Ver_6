@@ -42,7 +42,7 @@ export function UIProvider({ UIEvents, children }) {
     attendanceId: 0,
     employeeId: 1,
     employee: null,
-    attDate: "",
+    attDate: new Date(),
     entryTime: "",
     status: 0,
     remarks: "Testing",
