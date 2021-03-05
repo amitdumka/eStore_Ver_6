@@ -12,11 +12,11 @@ export default function PayrollPage() {
           <Redirect 
             exact={true}
             from="/payroll"
-            to="/payroll/employees"
+            to="/payroll/employee/employees"
           />
         }
         {/* <ContentRoute path="/payroll/stores" component={StoresPage}/> */}
-        <ContentRoute path="/payroll/employees" component={EmployeesPage} />
+        <ContentRoute path="/payroll/employee/employees" component={EmployeesPage} />
       </Switch>
     </Suspense>
   );

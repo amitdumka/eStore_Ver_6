@@ -6,6 +6,7 @@ import SVG from "react-inlinesvg";
 import { toAbsoluteUrl, checkIsActive } from "../../../../../../_helpers";
 
 export default function PayRollMenuList({ layoutProps }) {
+
   const location = useLocation();
   const getMenuItemActive = (url, hasSubmenu = false) => {
     return checkIsActive(location, url)
@@ -13,13 +14,15 @@ export default function PayRollMenuList({ layoutProps }) {
           "menu-item-active"} menu-item-open menu-item-not-hightlighted`
       : "";
   };
+
+  
   return (
     <>
       <li className="menu-section ">
-          <h4 className="menu-text">PayRoll</h4>
-          <i className="menu-icon flaticon-more-v2"></i>
-        </li>
-     
+        <h4 className="menu-text">PayRoll</h4>
+        <i className="menu-icon flaticon-more-v2"></i>
+      </li>
+  
       {/* Salary-Menu */}
       {/*begin::1 Level*/}
       <li
@@ -48,10 +51,10 @@ export default function PayRollMenuList({ layoutProps }) {
             {/**Menu Item Will Follow from Level 2 */}
             {/*begin::2 Level*/}
             <li
-              className={`menu-item ${getMenuItemActive("/payroll/payslip")}`}
+              className={`menu-item ${getMenuItemActive("/payroll/salary/payslip")}`}
               aria-haspopup="true"
             >
-              <NavLink className="menu-link" to="/payroll/payslip">
+              <NavLink className="menu-link" to="/payroll/salary/payslip">
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
                 </i>
@@ -61,10 +64,12 @@ export default function PayRollMenuList({ layoutProps }) {
             {/*end::2 Level*/}
             {/*begin::2 Level*/}
             <li
-              className={`menu-item ${getMenuItemActive("/payroll/current-salary")}`}
+              className={`menu-item ${getMenuItemActive(
+                "/payroll/salary/current-salary"
+              )}`}
               aria-haspopup="true"
             >
-              <NavLink className="menu-link" to="/payroll/current-salary">
+              <NavLink className="menu-link" to="/payroll/salary/current-salary">
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
                 </i>
@@ -74,10 +79,10 @@ export default function PayRollMenuList({ layoutProps }) {
             {/*end::2 Level*/}
             {/*begin::2 Level*/}
             <li
-              className={`menu-item ${getMenuItemActive("/payroll/leaves")}`}
+              className={`menu-item ${getMenuItemActive("/payroll/salary/leaves")}`}
               aria-haspopup="true"
             >
-              <NavLink className="menu-link" to="/payroll/leaves">
+              <NavLink className="menu-link" to="/payroll/salary/leaves">
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
                 </i>
@@ -85,12 +90,12 @@ export default function PayRollMenuList({ layoutProps }) {
               </NavLink>
             </li>
             {/*end::2 Level*/}
-             {/*begin::2 Level*/}
-             <li
-              className={`menu-item ${getMenuItemActive("/payroll/receipts")}`}
+            {/*begin::2 Level*/}
+            <li
+              className={`menu-item ${getMenuItemActive("/payroll/salary/receipts")}`}
               aria-haspopup="true"
             >
-              <NavLink className="menu-link" to="/payroll/receipts">
+              <NavLink className="menu-link" to="/payroll/salary/receipts">
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
                 </i>
@@ -106,13 +111,13 @@ export default function PayRollMenuList({ layoutProps }) {
       {/*begin::1 Level*/}
       <li
         className={`menu-item menu-item-submenu ${getMenuItemActive(
-          "/payroll-menu",
+          "/payroll/employee",
           true
         )}`}
         aria-haspopup="true"
         data-menu-toggle="hover"
       >
-        <NavLink className="menu-link menu-toggle" to="/payroll/employees">
+        <NavLink className="menu-link menu-toggle" to="/payroll/employee">
           <span className="svg-icon menu-icon">
             <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
           </span>
@@ -121,32 +126,37 @@ export default function PayRollMenuList({ layoutProps }) {
         </NavLink>
         <div className="menu-submenu ">
           <i className="menu-arrow" />
+
           <ul className="menu-subnav">
+          
             <li className="menu-item  menu-item-parent" aria-haspopup="true">
               <span className="menu-link">
                 <span className="menu-text">Employee</span>
               </span>
             </li>
+          
             {/**Menu Item Will Follow from Level 2 */}
             {/*begin::2 Level*/}
             <li
-              className={`menu-item ${getMenuItemActive("/payroll/employees")}`}
+              className={`menu-item ${getMenuItemActive("/payroll/employee/employees")}`}
               aria-haspopup="true"
             >
-              <NavLink className="menu-link" to="/payroll/employees">
+              <NavLink className="menu-link" to="/payroll/employee/employees">
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
                 </i>
-                <span className="menu-text">Employee</span>
+                <span className="menu-text">Employees</span>
               </NavLink>
             </li>
             {/*end::2 Level*/}
             {/*begin::2 Level*/}
             <li
-              className={`menu-item ${getMenuItemActive("/payroll/attendance")}`}
+              className={`menu-item ${getMenuItemActive(
+                "/payroll/attendance"
+              )}`}
               aria-haspopup="true"
             >
-              <NavLink className="menu-link" to="/payroll/attendance">
+              <NavLink className="menu-link" to="/payroll/employee/attendance">
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
                 </i>
@@ -156,10 +166,10 @@ export default function PayRollMenuList({ layoutProps }) {
             {/*end::2 Level*/}
             {/*begin::2 Level*/}
             <li
-              className={`menu-item ${getMenuItemActive("/payroll/salary")}`}
+              className={`menu-item ${getMenuItemActive("/payroll/employee/salary")}`}
               aria-haspopup="true"
             >
-              <NavLink className="menu-link" to="/payroll/salary">
+              <NavLink className="menu-link" to="/payroll/employee/salary">
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
                 </i>
@@ -167,16 +177,16 @@ export default function PayRollMenuList({ layoutProps }) {
               </NavLink>
             </li>
             {/*end::2 Level*/}
-             {/*begin::2 Level*/}
-             <li
-              className={`menu-item ${getMenuItemActive("/payroll/welfare")}`}
+            {/*begin::2 Level*/}
+            <li
+              className={`menu-item ${getMenuItemActive("/payroll/employee/welfare")}`}
               aria-haspopup="true"
             >
-              <NavLink className="menu-link" to="/payroll/welfare">
+              <NavLink className="menu-link" to="/payroll/employee/welfare">
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
                 </i>
-                <span className="menu-text">Wellfare</span>
+                <span className="menu-text">Welfare</span>
               </NavLink>
             </li>
             {/*end::2 Level*/}
