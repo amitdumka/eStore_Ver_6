@@ -15,6 +15,25 @@ import {
 //attendance
 //Attendance
 
+export function EmpDaata() {
+  const [employeeData, setEmployeeData] = React.useState([]);
+  React.useEffect(() => {
+    async function getEmployeeData() {
+      const response = await fetch(
+        "https://www.aprajitaretails.in/api/employees"
+      );
+      const body = await response.json();
+      setEmployeeData(
+        body.results.map(({ employeeId, staffName }) => ({
+          label: staffName,
+          value: employeeId,
+        }))
+      );
+    }
+    getEmployeeData();
+  }, []);
+}
+
 // Validation schema
 const AttendanceEditSchema = Yup.object().shape({
   attDate: Yup.date().required("Date is required"),
@@ -28,6 +47,23 @@ export function EditForm({
   actionsLoading,
   onHide,
 }) {
+
+  const [employeeData, setEmployeeData] = React.useState([]);
+  React.useEffect(() => {
+    async function getEmployeeData() {
+      const response = await fetch(
+        "https://www.aprajitaretails.in/api/employees"
+      );
+      const body = await response.json();
+      setEmployeeData(
+        body.results.map(({ employeeId, staffName }) => ({
+          label: staffName,
+          value: employeeId,
+        }))
+      );
+    }
+    getEmployeeData();
+  }, []);
   return (
     <>
       <Formik
@@ -57,12 +93,18 @@ export function EditForm({
                   </div>
                   {/* Email */}
                   <div className="col-lg-4">
-                    <Field
+                    <Select
                       name="employeeId"
-                      component={Input}
                       placeholder="Employee"
                       label="Employee"
-                    />
+                    >
+                      <option value="">Select Employee</option>
+                      {employeeData.map((item) => (
+                        <option key={item.value} value={item.value}>
+                          {item.label}
+                        </option>
+                      ))}
+                    </Select>
                   </div>
                 </div>
                 <div className="form-group row">
@@ -72,7 +114,6 @@ export function EditForm({
                       dateFormat="yyyy-MM-dd"
                       name="attDate"
                       label="On Date"
-                      
                     />
                   </div>
                   {/*  Father Name*/}

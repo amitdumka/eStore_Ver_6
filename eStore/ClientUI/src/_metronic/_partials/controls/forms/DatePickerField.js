@@ -27,7 +27,7 @@ export function DatePickerField({ ...props }) {
         style={{ width: "100%" }}
         {...field}
         {...props}
-        selected={(field.value && new Date(field.value)) || null}
+        selected={(field.value && new Date(field.value))|| null}
         onChange={val => {
           setFieldValue(field.name, val);
         }}

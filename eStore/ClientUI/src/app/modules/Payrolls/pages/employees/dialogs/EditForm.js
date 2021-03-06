@@ -12,7 +12,6 @@ import {
   DatePickerField,
 } from "../../../../../../_metronic/_partials/controls";
 
-
 // Validation schema
 const EmployeeEditSchema = Yup.object().shape({
   firstName: Yup.string()
