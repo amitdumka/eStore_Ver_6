@@ -37,7 +37,7 @@ export function SalaryPaymentsCard() {
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        <SalaryPaymentsFilter />
+        {/* <SalaryPaymentsFilter /> */}
         {SalaryPaymentsUIProps.ids.length > 0 && <SalaryPaymentsGrouping />}
         <SalaryPaymentsTable />
       </CardBody>

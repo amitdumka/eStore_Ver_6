@@ -21,9 +21,12 @@ import * as uiHelpers from "../UIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
+import FieldDateFormater from "../../../../../../_estore/formaters/FieldDateFormater";
 
 //SalaryPayment
 //salaryPayment
+
+
 
 export function SalaryPaymentsTable() {
   // SalaryPayments UI Context
@@ -76,7 +79,7 @@ export function SalaryPaymentsTable() {
       text: "Date",
       sort: true,
       type:      'date',
-      format:"dd/MM/yyyy",
+      formatter: FieldDateFormater,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
