@@ -3,6 +3,25 @@ import {attendancesSlice, callTypes} from "./Slice";
 
 const {actions} = attendancesSlice;
 
+export const fetchEmployees =id=>dispatch => {
+  
+  dispatch(actions.startCall({callType:callTypes.list}));
+
+  return requestFromServer
+  .getAllEmployees()
+  .then(response=>{
+    const entities  = response.data; 
+    const totalCount=response.data.length;
+    console.log(entities);
+    dispatch(actions.employeesListFetched({totalCount, entities}));
+  })
+  .catch(error =>{
+    console.log(error);
+    error.clientMessage="Can't load employees list"; 
+    dispatch(actions.catchError({error,callTypes:callTypes.list}));
+  });
+}
+
 export const fetchAttendances = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer

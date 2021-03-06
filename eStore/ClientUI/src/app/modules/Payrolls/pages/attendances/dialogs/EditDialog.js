@@ -19,10 +19,11 @@ export function EditDialog({ id, show, onHide }) {
 
   // Attendances Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, attendanceForEdit } = useSelector(
+  const { actionsLoading, attendanceForEdit ,employeeList} = useSelector(
     (state) => ({
       actionsLoading: state.attendances.actionsLoading,
       attendanceForEdit: state.attendances.attendanceForEdit,
+      employeeList:state.attendances.employeeEntities
     }),
     shallowEqual
   );
@@ -30,6 +31,7 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting Attendance by id
     dispatch(actions.fetchAttendance(id));
+    dispatch(actions.fetchEmployees());
   }, [id, dispatch]);
 
   // server request for saving attendance
@@ -56,6 +58,7 @@ export function EditDialog({ id, show, onHide }) {
         actionsLoading={actionsLoading}
         attendance={attendanceForEdit || attendancesUIProps.initAttendance}
         onHide={onHide}
+        employeeList={employeeList}
       />
     </Modal>
   );

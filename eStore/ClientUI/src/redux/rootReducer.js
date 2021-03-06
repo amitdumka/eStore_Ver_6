@@ -6,6 +6,7 @@ import {customersSlice} from "../app/modules/Stores/_redux/customers/customersSl
 import {storesSlice} from "../app/modules/Stores/_redux/stores/Slice";
 import {employeesSlice} from "../app/modules/Payrolls/_redux/employees/Slice";
 import {attendancesSlice} from "../app/modules/Payrolls/_redux/attendances/Slice";
+import {salaryPaymentsSlice} from "../app/modules/Payrolls/_redux/salaryPayments/Slice";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -13,6 +14,7 @@ export const rootReducer = combineReducers({
   employees: employeesSlice.reducer, 
   attendances: attendancesSlice.reducer,
   stores:storesSlice.reducer,
+  salaryPayments: salaryPaymentsSlice.reducer,
 });
 
 export function* rootSaga() {

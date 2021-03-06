@@ -1,4 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
+import { stubTrue } from "lodash-es";
 
 const initialAttendancesState = {
   listLoading: false,
@@ -6,7 +7,9 @@ const initialAttendancesState = {
   totalCount: 0,
   entities: null,
   attendanceForEdit: undefined,
-  lastError: null
+  lastError: null, 
+  employeeEntities: null, 
+  totalCountEmp:0
 };
 export const callTypes = {
   list: "list",
@@ -32,6 +35,16 @@ export const attendancesSlice = createSlice({
       } else {
         state.actionsLoading = true;
       }
+    },
+    // get All employee List 
+    employeesListFetched: function(state,action){
+      const{totalCount,entities}=action.payload;
+     state.actionsLoading=false;
+     state.listLoading =false;
+     state.error=null;
+     state.employeeEntities=entities;
+     state.totalCountEmp=totalCount;
+
     },
     // getAttendanceById
     attendanceFetched: (state, action) => {
@@ -78,6 +91,8 @@ export const attendancesSlice = createSlice({
         el => !action.payload.ids.includes(el.attendanceId)
       );
     },
+
+    
     // attendancesUpdateState
     attendancesStatusUpdated: (state, action) => {
       state.actionsLoading = false;

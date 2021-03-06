@@ -166,10 +166,10 @@ export default function PayRollMenuList({ layoutProps }) {
             {/*end::2 Level*/}
             {/*begin::2 Level*/}
             <li
-              className={`menu-item ${getMenuItemActive("/payroll/employee/salarys")}`}
+              className={`menu-item ${getMenuItemActive("/payroll/employee/salarypayments")}`}
               aria-haspopup="true"
             >
-              <NavLink className="menu-link" to="/payroll/employee/salarys">
+              <NavLink className="menu-link" to="/payroll/employee/salarypayments">
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
                 </i>

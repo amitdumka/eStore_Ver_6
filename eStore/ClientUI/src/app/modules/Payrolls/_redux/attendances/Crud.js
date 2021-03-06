@@ -43,6 +43,11 @@ export async function findAttendances(queryParams) {
   return await axios.get(`${API_URL}`);//find`, { queryParams });
 }
 
+// function to get all list of employees
+export async function getAllEmployees(){
+  return await axios.get("https://www.aprajitaretails.in/api/employees") ; 
+}
+
 // UPDATE => PUT: update the attendance on the server
 export async function updateAttendance(attendance) {
   return await axios.put(`${API_URL}/${attendance.attendanceId}`, JSON.stringify( attendance ),{

@@ -12,33 +12,35 @@ import {
   DatePickerField,
 } from "../../../../../../_metronic/_partials/controls";
 
-//attendance
-//Attendance
-
+//salaryPayment
+//SalaryPayment
 
 // Validation schema
-const AttendanceEditSchema = Yup.object().shape({
-  attDate: Yup.date().required("Date is required"),
-  status: Yup.string().required("Status is required"),
-  storeId: Yup.number().required("Store is required"),
+const SalaryPaymentEditSchema = Yup.object().shape({
+  paymentDate: Yup.date().required("Date is required"),
+  amount: Yup.number().integer().moreThan(0).positive().min(1).required("Amount is required"),
+  employeeId: Yup.number().required("Employee is required"),
+  salaryMonth: Yup.string().required("Salary Month is required"),
+  payMode: Yup.number().required("Payment Mode is required"),
+  details: Yup.string().required("Details is required"),
+  salaryComponet: Yup.number().required("Salary Component is required"),
 });
 
 export function EditForm({
-  saveAttendance,
-  attendance,
+  saveSalaryPayment,
+  salaryPayment,
   actionsLoading,
-  onHide,employeeList,
+  onHide,
+  employeeList,
 }) {
-
-  
   return (
     <>
       <Formik
         enableReinitialize={true}
-        initialValues={attendance}
-        validationSchema={AttendanceEditSchema}
+        initialValues={salaryPayment}
+        validationSchema={SalaryPaymentEditSchema}
         onSubmit={(values) => {
-          saveAttendance(values);
+          saveSalaryPayment(values);
         }}
       >
         {({ handleSubmit }) => (
@@ -51,13 +53,23 @@ export function EditForm({
               )}
               <Form className="form form-label-right">
                 <div className="form-group row">
-                  {/* Store */}
-                  <div className="col-lg-4">
+                  
+                   {/* Store */}
+                   <div className="col-lg-4">
                     <Select name="storeId" label="Store">
-                      <option value="1">Aprajita Retails</option>
-                      <option value="2">Aprajita Retails, Jamshedpur</option>
+                      <option value="1">Dumka</option>
+                      <option value="2">Jamshedpur</option>
                     </Select>
                   </div>
+                  
+                  {/* Salary Component */}
+                  <div className="col-lg-4">
+                    <Select name="salaryComponet" label="Salary Component">
+                      <option value="0">Net Salary</option>
+                      <option value="1">Last Pcs</option>
+                    </Select>
+                  </div>
+                  
                   {/* Email */}
                   <div className="col-lg-4">
                     <Select
@@ -74,22 +86,23 @@ export function EditForm({
                     </Select>
                   </div>
                 </div>
+               
                 <div className="form-group row">
-                  {/* Date of Attendance */}
+                  {/* Date of SalaryPayment */}
                   <div className="col-lg-4">
                     <DatePickerField
                       dateFormat="yyyy-MM-dd"
-                      name="attDate"
+                      name="paymentDate"
                       label="On Date"
                     />
                   </div>
                   {/*  Father Name*/}
                   <div className="col-lg-4">
                     <Field
-                      name="entryTime"
+                      name="salaryMonth"
                       component={Input}
-                      placeholder="Entry Time"
-                      label="Entry Time"
+                      placeholder="Salary Month"
+                      label="Salary Month"
                     />
                   </div>
                 </div>
@@ -97,18 +110,29 @@ export function EditForm({
                   {/*  State Name*/}
                   <div className="col-lg-4">
                     <Field
-                      name="remarks"
+                      name="amount"
                       component={Input}
-                      placeholder="Remarks"
-                      label="Remarks"
+                      placeholder="Amount"
+                      label="Amount"
                     />
                   </div>
-                  {/* Tailoring Division */}
-                  <div className="col-lg-4">
-                    <Field name="isTailoring" type="checkbox" />
-                    {} Tailoring Division
+                 {/*  State Name*/}
+                 <div className="col-lg-4">
+                    <Field
+                      name="details"
+                      component={Input}
+                      placeholder="Details"
+                      label="Details"
+                    />
                   </div>
-                </div>
+                   {/* PayMode */}
+                   <div className="col-lg-4">
+                    <Select name="payMode" label="Salary payMode">
+                      <option value="0">Cash</option>
+                      <option value="1">Card</option>
+                    </Select>
+                  </div>
+                 </div> 
               </Form>
             </Modal.Body>
             <Modal.Footer>

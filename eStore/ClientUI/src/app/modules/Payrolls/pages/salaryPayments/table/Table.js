@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/attendances/Actions";
+import * as actions from "../../../_redux/salaryPayments/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -22,41 +22,43 @@ import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 
+//SalaryPayment
+//salaryPayment
 
-export function AttendancesTable() {
-  // Attendances UI Context
-  const attendancesUIContext = useUIContext();
-  const attendancesUIProps = useMemo(() => {
+export function SalaryPaymentsTable() {
+  // SalaryPayments UI Context
+  const salaryPaymentsUIContext = useUIContext();
+  const salaryPaymentsUIProps = useMemo(() => {
     return {
-      ids: attendancesUIContext.ids,
-      setIds: attendancesUIContext.setIds,
-      queryParams: attendancesUIContext.queryParams,
-      setQueryParams: attendancesUIContext.setQueryParams,
-      openEditAttendanceDialog: attendancesUIContext.openEditAttendanceDialog,
-      openDeleteAttendanceDialog: attendancesUIContext.openDeleteAttendanceDialog,
+      ids: salaryPaymentsUIContext.ids,
+      setIds: salaryPaymentsUIContext.setIds,
+      queryParams: salaryPaymentsUIContext.queryParams,
+      setQueryParams: salaryPaymentsUIContext.setQueryParams,
+      openEditSalaryPaymentDialog: salaryPaymentsUIContext.openEditSalaryPaymentDialog,
+      openDeleteSalaryPaymentDialog: salaryPaymentsUIContext.openDeleteSalaryPaymentDialog,
     };
-  }, [attendancesUIContext]);
+  }, [salaryPaymentsUIContext]);
 
-  // Getting curret state of attendances list from store (Redux)
+  // Getting curret state of salaryPayments list from store (Redux)
   const { currentState } = useSelector(
-    (state) => ({ currentState: state.attendances }),
+    (state) => ({ currentState: state.salaryPayments }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
 
-  // Attendances Redux state
+  // SalaryPayments Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    attendancesUIProps.setIds([]);
+    salaryPaymentsUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchAttendances(attendancesUIProps.queryParams));
+    dispatch(actions.fetchSalaryPayments(salaryPaymentsUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [attendancesUIProps.queryParams, dispatch]);
+  }, [salaryPaymentsUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "attendanceId",
+      dataField: "salaryPaymentId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
@@ -70,31 +72,41 @@ export function AttendancesTable() {
       headerSortingClasses,
     },
     {
-      dataField: "attDate",
+      dataField: "paymentDate",
       text: "Date",
       sort: true,
+      type:      'date',
+      format:"dd/MM/yyyy",
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "entryTime",
-      text: "Entry Time",
+      dataField: "salaryMonth",
+      text: "Salary Month",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "remarks",
-      text: "Remarks",
+      dataField: "salaryComponet",
+      text: "Salary Component",
+      formatter: columnFormatters.SalaryComponentsColumnFormatter,
       sort: false,
       sortCaret: sortCaret,
     },
     
     {
-      dataField: "status",
-      text: "Status",
+      dataField: "amount",
+      text: "amount",
       sort: true,
-      formatter: columnFormatters.StatusColumnFormatter,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "payMode",
+      text: "Mode",
+      sort: true,
+      formatter: columnFormatters.PayModeColumnFormatter,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
@@ -110,8 +122,8 @@ export function AttendancesTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditAttendanceDialog: attendancesUIProps.openEditAttendanceDialog,
-        openDeleteAttendanceDialog: attendancesUIProps.openDeleteAttendanceDialog,
+        openEditSalaryPaymentDialog: salaryPaymentsUIProps.openEditSalaryPaymentDialog,
+        openDeleteSalaryPaymentDialog: salaryPaymentsUIProps.openDeleteSalaryPaymentDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -125,8 +137,8 @@ export function AttendancesTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: attendancesUIProps.queryParams.pageSize,
-    page: attendancesUIProps.queryParams.pageNumber,
+    sizePerPage: salaryPaymentsUIProps.queryParams.pageSize,
+    page: salaryPaymentsUIProps.queryParams.pageNumber,
   };
 
   
@@ -140,25 +152,26 @@ export function AttendancesTable() {
               paginationProps={paginationProps}
             > 
               <BootstrapTable
+             
                 wrapperClasses="table-responsive"
                 bordered={true}
                 classes="table table-head-custom table-vertical-center overflow-hidden"
                 bootstrap4
                 remote
                 noDataIndication="No Record Found now.."
-                keyField="attendanceId"
+                keyField="salaryPaymentId"
                 data={entities === null ? []: totalCount ?entities:[]}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  attendancesUIProps.setQueryParams
+                  salaryPaymentsUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: attendancesUIProps.ids,
-                  setIds: attendancesUIProps.setIds,
-                  idName:"attendanceId",
+                  ids: salaryPaymentsUIProps.ids,
+                  setIds: salaryPaymentsUIProps.setIds,
+                  idName:"salaryPaymentId",
                 })}
                 {...paginationTableProps}
               >
