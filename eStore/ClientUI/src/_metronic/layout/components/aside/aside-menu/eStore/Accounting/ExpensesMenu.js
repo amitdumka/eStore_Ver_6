@@ -19,13 +19,13 @@ export default function ExpensesMenuList({ layoutProps }) {
       {/*begin::1 Level*/}
       <li
         className={`menu-item menu-item-submenu ${getMenuItemActive(
-          "/google-material",
+          "/accouting/expense",
           true
         )}`}
         aria-haspopup="true"
         data-menu-toggle="hover"
       >
-        <NavLink className="menu-link menu-toggle" to="/google-material">
+        <NavLink className="menu-link menu-toggle" to="/accouting/expense">
           <span className="svg-icon menu-icon">
             <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
           </span>
@@ -45,7 +45,7 @@ export default function ExpensesMenuList({ layoutProps }) {
             {/*begin::2 Level*/}
             <li
               className={`menu-item menu-item-submenu ${getMenuItemActive(
-                "/google-material/inputs",
+                "/accouting/expense/rents",
                 true
               )}`}
               aria-haspopup="true"
@@ -53,7 +53,7 @@ export default function ExpensesMenuList({ layoutProps }) {
             >
               <NavLink
                 className="menu-link menu-toggle"
-                to="/google-material/inputs"
+                to="/accouting/expense/rents"
               >
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
@@ -67,13 +67,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item  ${getMenuItemActive(
-                      "/google-material/inputs/autocomplete"
+                      "/accouting/expense/rents/rentlocations"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/google-material/inputs/autocomplete"
+                      to="/accouting/expense/rents/rentlocations"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -86,13 +86,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/google-material/inputs/buttons"
+                      "/accouting/expense/rents/rentpayments"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/google-material/inputs/buttons"
+                      to="/accouting/expense/rents/rentpayments"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -111,7 +111,7 @@ export default function ExpensesMenuList({ layoutProps }) {
             {/*begin::2 Level*/}
             <li
               className={`menu-item menu-item-submenu  ${getMenuItemActive(
-                "/google-material/navigation",
+                "/accouting/expense/electicity",
                 true
               )}`}
               aria-haspopup="true"
@@ -119,7 +119,7 @@ export default function ExpensesMenuList({ layoutProps }) {
             >
               <NavLink
                 className="menu-link menu-toggle"
-                to="/google-material/navigation"
+                to="/accouting/expense/electicity"
               >
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
@@ -133,13 +133,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/google-material/navigation/bottom-navigation"
+                      "/accouting/expense/electicity/connections"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/google-material/navigation/bottom-navigation"
+                      to="/accouting/expense/electicity/connections"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -152,13 +152,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/google-material/navigation/breadcrumbs"
+                      "/accouting/expense/electicity/bills"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/google-material/navigation/breadcrumbs"
+                      to="/accouting/expense/electicity/bills"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -171,13 +171,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/google-material/navigation/drawern"
+                      "/accouting/expense/electicity/ebilpayments"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/google-material/navigation/drawer"
+                      to="/accouting/expense/electicity/ebilpayments"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -198,7 +198,7 @@ export default function ExpensesMenuList({ layoutProps }) {
             {/*begin::2 Level*/}
             <li
               className={`menu-item menu-item-submenu ${getMenuItemActive(
-                "/google-material/surfaces",
+                "/accouting/expense",
                 true
               )}`}
               aria-haspopup="true"
@@ -206,7 +206,7 @@ export default function ExpensesMenuList({ layoutProps }) {
             >
               <NavLink
                 className="menu-link menu-toggle"
-                to="/google-material/surfaces"
+                to="/accouting/expense"
               >
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
@@ -220,13 +220,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/google-material/surfaces/app-bar"
+                      "/accouting/expense/payments"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/google-material/surfaces/app-bar"
+                      to="/accouting/expense/payments"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -239,13 +239,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/google-material/surfaces/paper"
+                      "/accouting/expense/cashpayments"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/google-material/surfaces/paper"
+                      to="/accouting/expense/cashpayments"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -258,13 +258,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/google-material/surfaces/cards"
+                      "/accouting/expense/expenses"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/google-material/surfaces/cards"
+                      to="/accouting/expense/expenses"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -284,7 +284,7 @@ export default function ExpensesMenuList({ layoutProps }) {
             {/*begin::2 Level*/}
             <li
               className={`menu-item menu-item-submenu ${getMenuItemActive(
-                "/google-material/feedback",
+                "/accouting/receipt",
                 true
               )}`}
               aria-haspopup="true"
@@ -292,7 +292,7 @@ export default function ExpensesMenuList({ layoutProps }) {
             >
               <NavLink
                 className="menu-link menu-toggle"
-                to="/google-material/feedback"
+                to="/accouting/receipt"
               >
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
@@ -306,13 +306,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/google-material/feedback/progress"
+                      "/accouting/receipt/cashreceipts"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/google-material/feedback/progress"
+                      to="/accouting/receipt/cashreceipts"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -325,13 +325,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/google-material/feedback/dialogs"
+                      "/accouting/expense/feedback/dialogs"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/google-material/feedback/dialogs"
+                      to="/accouting/expense/feedback/dialogs"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -344,13 +344,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/google-material/feedback/snackbars"
+                      "/accouting/receipt/receipts"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/google-material/feedback/snackbars"
+                      to="/accouting/receipt/receipts"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />

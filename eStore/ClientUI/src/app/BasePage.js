@@ -19,6 +19,7 @@ import { DashboardPage } from "./pages/DashboardPage";
 // );
 const StoreMainPage = lazy(() =>import("./modules/Stores/pages/StoreMainPage"));
 const PayrollPage=lazy(() =>import("./modules/Payrolls/pages/PayrollPage"));
+const AccountingPage=lazy(() =>import("./modules/Accounting/pages/AccountingPage"));
 
 export default function BasePage() {
   // useEffect(() => {
@@ -42,6 +43,8 @@ export default function BasePage() {
         <Route path="/user-profile" component={UserProfilepage} /> */}
         <Route path="/store" component={StoreMainPage}/>
         <Route path="/payroll" component={PayrollPage}/>
+        <Route path="/accounting" component={AccountingPage}/>
+        
         <Redirect to="error/error-v1" />
       </Switch>
     </Suspense>
