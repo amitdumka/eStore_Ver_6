@@ -18,7 +18,7 @@ export const rootReducer = combineReducers({
   stores:storesSlice.reducer,
   salaryPayments: salaryPaymentsSlice.reducer,
 
-  expenses:expensesSlice,
+  expenses:expensesSlice.reducer,
 });
 
 export function* rootSaga() {

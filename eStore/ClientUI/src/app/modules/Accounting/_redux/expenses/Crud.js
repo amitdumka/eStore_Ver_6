@@ -45,7 +45,7 @@ export async function getExpenseById(expenseId) {
 // items => filtered/sorted result
 export async function findExpenses(queryParams) {
   //verifyLogin();
-  return await axios.get(`${API_URL}`);//find`, { queryParams });
+  return await axios.get(`${API_URL}/dto`);//find`, { queryParams });
 }
 
 // function to get all list of employees

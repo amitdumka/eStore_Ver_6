@@ -17,13 +17,14 @@ import {
 
 // Validation schema
 const ExpenseEditSchema = Yup.object().shape({
-  paymentDate: Yup.date().required("Date is required"),
+  onDate: Yup.date().required("Date is required"),
   amount: Yup.number().integer().moreThan(0).positive().min(1).required("Amount is required"),
-  employeeId: Yup.number().required("Employee is required"),
-  salaryMonth: Yup.string().required("Salary Month is required"),
+  employeeId: Yup.number().moreThan(0).required("Paid By is required"),
+  particulars: Yup.string().required("Particulars Month is required"),
   payMode: Yup.number().required("Payment Mode is required"),
-  details: Yup.string().required("Details is required"),
-  salaryComponet: Yup.number().required("Salary Component is required"),
+  partyName: Yup.string().required("Paid To is required"),
+  remarks: Yup.string().required("Expense details is required"),
+  storeId: Yup.number().required("Select Store "),
 });
 
 export function EditForm({
@@ -61,21 +62,13 @@ export function EditForm({
                       <option value="2">Jamshedpur</option>
                     </Select>
                   </div>
-                  
-                  {/* Salary Component */}
-                  <div className="col-lg-4">
-                    <Select name="salaryComponet" label="Salary Component">
-                      <option value="0">Net Salary</option>
-                      <option value="1">Last Pcs</option>
-                    </Select>
-                  </div>
-                  
-                  {/* Email */}
-                  <div className="col-lg-4">
+
+                   {/* Paid By */}
+                   <div className="col-lg-4">
                     <Select
                       name="employeeId"
-                      placeholder="Employee"
-                      label="Employee"
+                      placeholder="Paid By"
+                      label="Paid By"
                     >
                       <option value="">Select Employee</option>
                       {employeeList.map((item) => (
@@ -85,6 +78,17 @@ export function EditForm({
                       ))}
                     </Select>
                   </div>
+                  
+                  {/* Party  */}
+                  <div className="col-lg-4">
+                    <Select name="partyId" label="Ledger">
+                      <option value={null} >Select Party</option>
+                      <option value="1">Testing</option>
+                      <option value="2">CityNet</option>
+                    </Select>
+                  </div>
+                  
+                 
                 </div>
                
                 <div className="form-group row">
@@ -92,17 +96,26 @@ export function EditForm({
                   <div className="col-lg-4">
                     <DatePickerField
                       dateFormat="yyyy-MM-dd"
-                      name="paymentDate"
+                      name="onDate"
                       label="On Date"
                     />
                   </div>
-                  {/*  Father Name*/}
+                  {/*  particulars Name*/}
                   <div className="col-lg-4">
                     <Field
-                      name="salaryMonth"
+                      name="particulars"
                       component={Input}
-                      placeholder="Salary Month"
-                      label="Salary Month"
+                      placeholder="Particular(s)"
+                      label="Particular(s)"
+                    />
+                  </div>
+                   {/*  Paid To Name*/}
+                   <div className="col-lg-4">
+                    <Field
+                      name="partyName"
+                      component={Input}
+                      placeholder="Paid To"
+                      label="Paid To"
                     />
                   </div>
                 </div>
@@ -119,19 +132,39 @@ export function EditForm({
                  {/*  State Name*/}
                  <div className="col-lg-4">
                     <Field
-                      name="details"
+                      name="remarks"
                       component={Input}
-                      placeholder="Details"
-                      label="Details"
+                      placeholder="Remarks"
+                      label="Remarks"
                     />
                   </div>
                    {/* PayMode */}
                    <div className="col-lg-4">
-                    <Select name="payMode" label="Salary payMode">
+                    <Select name="payMode" label="Payment Mode">
                       <option value="0">Cash</option>
                       <option value="1">Card</option>
                     </Select>
                   </div>
+                 </div>
+                 <div className="form-group row">
+                    {/* FROM aCCOUNT */}
+                    <div className="col-lg-4">
+                    <Select name="bankAccountId" label="From Account">
+                      <option value={null}>Select Bank Account</option>
+                      <option value="2">ICICI</option>
+                      <option value="1">SBI</option>
+                    </Select>
+                  </div>                  
+                 {/*  State Name*/}
+                 <div className="col-lg-4">
+                    <Field
+                      name="paymentDetails"
+                      component={Input}
+                      placeholder="Payment Details"
+                      label="Payment Details"
+                    />
+                  </div>
+                  
                  </div> 
               </Form>
             </Modal.Body>

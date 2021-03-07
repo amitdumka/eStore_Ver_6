@@ -66,15 +66,7 @@ export function ExpensesTable() {
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
-    },
-    {
-      dataField: "partyName",
-      text: "Party",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
+    }, {
       dataField: "onDate",
       text: "Date",
       sort: true,
@@ -83,6 +75,8 @@ export function ExpensesTable() {
       sortCaret: sortCaret,
       headerSortingClasses,
     },
+    
+   
     {
       dataField: "particulars",
       text: "Particular(s)",
@@ -91,13 +85,12 @@ export function ExpensesTable() {
       headerSortingClasses,
     },
     {
-      dataField: "paymentDetails",
-      text: "Payment Details",
-      formatter: columnFormatters.SalaryComponentsColumnFormatter,
-      sort: false,
+      dataField: "partyName",
+      text: "Party",
+      sort: true,
       sortCaret: sortCaret,
-    },
-    
+      headerSortingClasses,
+    },   
     {
       dataField: "amount",
       text: "amount",
@@ -114,8 +107,22 @@ export function ExpensesTable() {
       headerSortingClasses,
     },
     {
-      dataField: "employee.store.storeName",
-      text: "Store",
+      dataField: "paymentDetails",
+      text: "Payment Details",
+      //formatter: columnFormatters.SalaryComponentsColumnFormatter,
+      sort: false,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "paidBy.staffName",
+      text: "PaidBy",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "party.partyName",
+      text: "Ledger",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,

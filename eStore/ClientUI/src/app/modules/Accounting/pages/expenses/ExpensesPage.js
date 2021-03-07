@@ -18,86 +18,86 @@ import { ExpensesCard } from "./ExpensesCard";
 export function ExpensesPage({ history }) {
   const expensesUIEvents = {
     newExpenseButtonClick: () => {
-      history.push("/accouting/expense/expenses/new");
+      history.push("/accounting/expense/expenses/new");
     },
     openEditExpenseDialog: (id) => {
-      history.push(`/accouting/expense/expenses/${id}/edit`);
+      history.push(`/accounting/expense/expenses/${id}/edit`);
     },
     openDeleteExpenseDialog: (id) => {
-      history.push(`/accouting/expense/expenses/${id}/delete`);
+      history.push(`/accounting/expense/expenses/${id}/delete`);
     },
     openDeleteExpensesDialog: () => {
-      history.push(`/accouting/expense/expenses/deleteExpenses`);
+      history.push(`/accounting/expense/expenses/deleteExpenses`);
     },
     openFetchExpensesDialog: () => {
-      history.push(`/accouting/expense/expenses/fetch`);
+      history.push(`/accounting/expense/expenses/fetch`);
     },
     openUpdateExpensesStatusDialog: () => {
-      history.push("/accouting/expense/expenses/updateStatus");
+      history.push("/accounting/expense/expenses/updateStatus");
     }
   }
 
   return (
     <UIProvider UIEvents={expensesUIEvents}>
       <ExpensesLoadingDialog />
-      <Route path="/accouting/expense/expenses/new">
+      <Route path="/accounting/expense/expenses/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/accouting/expense/expenses");
+              history.push("/accounting/expense/expenses");
             }}
           />
         )}
       </Route>
-      <Route path="/accouting/expense/expenses/:id/edit">
+      <Route path="/accounting/expense/expenses/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/accouting/expense/expenses");
+              history.push("/accounting/expense/expenses");
             }}
           />
         )}
       </Route>
-      <Route path="/accouting/expense/expenses/deleteExpenses">
+      <Route path="/accounting/expense/expenses/deleteExpenses">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/accouting/expense/expenses");
+              history.push("/accounting/expense/expenses");
             }}
           />
         )}
       </Route>
-      <Route path="/accouting/expense/expenses/:id/delete">
+      <Route path="/accounting/expense/expenses/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/accouting/expense/expenses");
+              history.push("/accounting/expense/expenses");
             }}
           />
         )}
       </Route>
-      <Route path="/accouting/expense/expenses/fetch">
+      <Route path="/accounting/expense/expenses/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/accouting/expense/expenses");
+              history.push("/accounting/expense/expenses");
             }}
           />
         )}
       </Route>
-      <Route path="/accouting/expense/expenses/updateStatus">
+      <Route path="/accounting/expense/expenses/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/accouting/expense/expenses");
+              history.push("/accounting/expense/expenses");
             }}
           />
         )}

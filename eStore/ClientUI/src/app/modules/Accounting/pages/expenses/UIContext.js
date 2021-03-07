@@ -43,19 +43,27 @@ export function UIProvider({ UIEvents, children }) {
 
   const initExpense = {
     expenseId: 0,
+    particulars: "",
+    partyName: "",
     employeeId: 0,
-    employee: null,
-    salaryMonth: "",
-    salaryComponet: 0,
-    paymentDate: new Date(),
-    amount: 0.0,
+    paidBy: null,
+    onDate: new Date(),
     payMode: 0,
-    details: "",
+    bankAccountId: null,
+    fromAccount: null,
+    paymentDetails: "",
+    amount: 0.0,
+    remarks: "",
     partyId: null,
+    ledgerEnteryId: null,
+    isCash: false,
+    isOn: false,
+    isDyn: false,
     party: null,
+    ledgerEntry: null,
     storeId: 1,
     store: null,
-    userId: "WebUI",
+    userId: "WeBUI",
     entryStatus: 0,
     isReadOnly: false,
   };
@@ -72,8 +80,7 @@ export function UIProvider({ UIEvents, children }) {
     openDeleteExpenseDialog: UIEvents.openDeleteExpenseDialog,
     openDeleteExpensesDialog: UIEvents.openDeleteExpensesDialog,
     openFetchExpensesDialog: UIEvents.openFetchExpensesDialog,
-    openUpdateExpensesStatusDialog:
-      UIEvents.openUpdateExpensesStatusDialog,
+    openUpdateExpensesStatusDialog: UIEvents.openUpdateExpensesStatusDialog,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

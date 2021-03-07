@@ -19,13 +19,13 @@ export default function ExpensesMenuList({ layoutProps }) {
       {/*begin::1 Level*/}
       <li
         className={`menu-item menu-item-submenu ${getMenuItemActive(
-          "/accouting/expense",
+          "/accounting/expense",
           true
         )}`}
         aria-haspopup="true"
         data-menu-toggle="hover"
       >
-        <NavLink className="menu-link menu-toggle" to="/accouting/expense">
+        <NavLink className="menu-link menu-toggle" to="/accounting/expense">
           <span className="svg-icon menu-icon">
             <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
           </span>
@@ -45,7 +45,7 @@ export default function ExpensesMenuList({ layoutProps }) {
             {/*begin::2 Level*/}
             <li
               className={`menu-item menu-item-submenu ${getMenuItemActive(
-                "/accouting/expense/rents",
+                "/accounting/expense/rents",
                 true
               )}`}
               aria-haspopup="true"
@@ -53,7 +53,7 @@ export default function ExpensesMenuList({ layoutProps }) {
             >
               <NavLink
                 className="menu-link menu-toggle"
-                to="/accouting/expense/rents"
+                to="/accounting/expense/rents"
               >
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
@@ -67,13 +67,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item  ${getMenuItemActive(
-                      "/accouting/expense/rents/rentlocations"
+                      "/accounting/expense/rents/rentlocations"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/accouting/expense/rents/rentlocations"
+                      to="/accounting/expense/rents/rentlocations"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -86,13 +86,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/accouting/expense/rents/rentpayments"
+                      "/accounting/expense/rents/rentpayments"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/accouting/expense/rents/rentpayments"
+                      to="/accounting/expense/rents/rentpayments"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -111,7 +111,7 @@ export default function ExpensesMenuList({ layoutProps }) {
             {/*begin::2 Level*/}
             <li
               className={`menu-item menu-item-submenu  ${getMenuItemActive(
-                "/accouting/expense/electicity",
+                "/accounting/expense/electicity",
                 true
               )}`}
               aria-haspopup="true"
@@ -119,7 +119,7 @@ export default function ExpensesMenuList({ layoutProps }) {
             >
               <NavLink
                 className="menu-link menu-toggle"
-                to="/accouting/expense/electicity"
+                to="/accounting/expense/electicity"
               >
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
@@ -133,13 +133,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/accouting/expense/electicity/connections"
+                      "/accounting/expense/electicity/connections"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/accouting/expense/electicity/connections"
+                      to="/accounting/expense/electicity/connections"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -152,13 +152,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/accouting/expense/electicity/bills"
+                      "/accounting/expense/electicity/bills"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/accouting/expense/electicity/bills"
+                      to="/accounting/expense/electicity/bills"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -171,13 +171,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/accouting/expense/electicity/ebilpayments"
+                      "/accounting/expense/electicity/ebilpayments"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/accouting/expense/electicity/ebilpayments"
+                      to="/accounting/expense/electicity/ebilpayments"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -198,7 +198,7 @@ export default function ExpensesMenuList({ layoutProps }) {
             {/*begin::2 Level*/}
             <li
               className={`menu-item menu-item-submenu ${getMenuItemActive(
-                "/accouting/expense",
+                "/accounting/expense",
                 true
               )}`}
               aria-haspopup="true"
@@ -206,7 +206,7 @@ export default function ExpensesMenuList({ layoutProps }) {
             >
               <NavLink
                 className="menu-link menu-toggle"
-                to="/accouting/expense"
+                to="/accounting/expense"
               >
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
@@ -220,13 +220,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/accouting/expense/payments"
+                      "/accounting/expense/payments"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/accouting/expense/payments"
+                      to="/accounting/expense/payments"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -239,13 +239,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/accouting/expense/cashpayments"
+                      "/accounting/expense/cashpayments"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/accouting/expense/cashpayments"
+                      to="/accounting/expense/cashpayments"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -258,13 +258,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/accouting/expense/expenses"
+                      "/accounting/expense/expenses"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/accouting/expense/expenses"
+                      to="/accounting/expense/expenses"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -284,7 +284,7 @@ export default function ExpensesMenuList({ layoutProps }) {
             {/*begin::2 Level*/}
             <li
               className={`menu-item menu-item-submenu ${getMenuItemActive(
-                "/accouting/receipt",
+                "/accounting/receipt",
                 true
               )}`}
               aria-haspopup="true"
@@ -292,7 +292,7 @@ export default function ExpensesMenuList({ layoutProps }) {
             >
               <NavLink
                 className="menu-link menu-toggle"
-                to="/accouting/receipt"
+                to="/accounting/receipt"
               >
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
@@ -306,13 +306,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/accouting/receipt/cashreceipts"
+                      "/accounting/receipt/cashreceipts"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/accouting/receipt/cashreceipts"
+                      to="/accounting/receipt/cashreceipts"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -325,13 +325,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/accouting/expense/feedback/dialogs"
+                      "/accounting/expense/feedback/dialogs"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/accouting/expense/feedback/dialogs"
+                      to="/accounting/expense/feedback/dialogs"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />
@@ -344,13 +344,13 @@ export default function ExpensesMenuList({ layoutProps }) {
                   {/*begin::3 Level*/}
                   <li
                     className={`menu-item ${getMenuItemActive(
-                      "/accouting/receipt/receipts"
+                      "/accounting/receipt/receipts"
                     )}`}
                     aria-haspopup="true"
                   >
                     <NavLink
                       className="menu-link"
-                      to="/accouting/receipt/receipts"
+                      to="/accounting/receipt/receipts"
                     >
                       <i className="menu-bullet menu-bullet-dot">
                         <span />

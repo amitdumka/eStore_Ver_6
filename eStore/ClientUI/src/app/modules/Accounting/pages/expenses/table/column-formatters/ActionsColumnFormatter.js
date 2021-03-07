@@ -17,7 +17,7 @@ export function ActionsColumnFormatter(
   return (
     <>
       <a
-        title="Edit salary payment"
+        title="Edit expense"
         className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
         onClick={() => openEditExpenseDialog(row.expenseId)}
       >
