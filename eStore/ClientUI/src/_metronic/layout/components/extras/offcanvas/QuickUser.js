@@ -8,7 +8,19 @@ import { toAbsoluteUrl } from "../../../../_helpers";
 
 export function QuickUser() {
   const history = useHistory();
-  const user = useSelector((state) => state.auth.user, shallowEqual);
+  const user1 = useSelector((state) => state.auth.user, shallowEqual);
+  
+  
+  const user={
+    firstname :"AmitKr",
+    lastname :"Sah",
+    occupation:"CEO",
+    email:"amit@microsoft.com",
+    url:"",
+    
+  };
+
+
   const logoutClick = () => {
     const toggle = document.getElementById("kt_quick_user_toggle");
     if (toggle) {
@@ -40,9 +52,9 @@ export function QuickUser() {
           <div className="symbol symbol-100 mr-5">
             <div
               className="symbol-label"
-              style={{
+               style={{
                 backgroundImage: `url(${user.pic})`,
-              }}
+               }}
             />
             <i className="symbol-badge bg-success" />
           </div>
@@ -51,7 +63,7 @@ export function QuickUser() {
               href="#"
               className="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"
             >
-              {user.firstname} {user.lastname}
+              {user.firstname} {user.lastname} 
             </a>
             <div className="text-muted mt-1">{user.occupation}</div>
             <div className="navi mt-2">

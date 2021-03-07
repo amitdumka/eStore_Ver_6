@@ -3,6 +3,7 @@ import storage from "redux-persist/lib/storage";
 import { put, takeLatest } from "redux-saga/effects";
 import { getUserByToken } from "./authCrud";
 
+
 export const actionTypes = {
   Login: "[Login] Action",
   Logout: "[Logout] Action",
@@ -11,6 +12,8 @@ export const actionTypes = {
   UserLoaded: "[Load User] Auth API",
   SetUser: "[Set User] Action",
 };
+
+
 
 const initialAuthState = {
   user: undefined,
@@ -23,7 +26,6 @@ export const reducer = persistReducer(
     switch (action.type) {
       case actionTypes.Login: {
         const { authToken } = action.payload;
-
         return { authToken, user: undefined };
       }
 

@@ -10,7 +10,17 @@ import { toAbsoluteUrl } from "../../../../_helpers";
 import { DropdownTopbarItemToggler } from "../../../../_partials/dropdowns";
 
 export function UserProfileDropdown() {
-  const { user } = useSelector((state) => state.auth);
+  const { user1 } = useSelector((state) => state.auth);
+  
+  const user={
+    firstname :"AmitKr",
+    lastname :"Sah",
+    occupation:"CEO",
+    email:"amit@microsoft.com",
+    url:"",
+    
+  };
+  
   const uiService = useHtmlClassService();
   const layoutProps = useMemo(() => {
     return {
@@ -39,7 +49,7 @@ export function UserProfileDropdown() {
           </span>
           <span className="symbol symbol-35 symbol-light-success">
             <span className="symbol-label font-size-h5 font-weight-bold">
-              {user.firstname[0]}
+             {user.firstname[0]}
             </span>
           </span>
         </div>
