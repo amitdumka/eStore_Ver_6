@@ -9,6 +9,8 @@ import {attendancesSlice} from "../app/modules/Payrolls/_redux/attendances/Slice
 import {salaryPaymentsSlice} from "../app/modules/Payrolls/_redux/salaryPayments/Slice";
 //Expense system and Accouting
 import {expensesSlice} from "../app/modules/Accounting/_redux/expenses/Slice";
+import {paymentsSlice} from "../app/modules/Accounting/_redux/payments/Slice";
+
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -17,7 +19,7 @@ export const rootReducer = combineReducers({
   attendances: attendancesSlice.reducer,
   stores:storesSlice.reducer,
   salaryPayments: salaryPaymentsSlice.reducer,
-
+  payments: paymentsSlice.reducer,
   expenses:expensesSlice.reducer,
 });
 
