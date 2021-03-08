@@ -64,7 +64,7 @@ export function EditForm({
                     </Select>
                   </div>
 
-                   {/* Paid By */}
+                   {/* Paid By
                    <div className="col-lg-4">
                     <Select
                       name="employeeId"
@@ -78,7 +78,7 @@ export function EditForm({
                         </option>
                       ))}
                     </Select>
-                  </div>
+                  </div> */}
                   
                   {/* Party  */}
                   <div className="col-lg-4">

@@ -68,19 +68,20 @@ export function ReceiptsTable() {
       headerSortingClasses,
     },
     {
+      dataField: "partyName",
+      text: "Party",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    }, 
+    {
       dataField: "remarks",
       text: "Particular(s)",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
-    {
-      dataField: "partyName",
-      text: "Party",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },   
+      
     {
       dataField: "amount",
       text: "amount",
@@ -98,18 +99,12 @@ export function ReceiptsTable() {
     },
     {
       dataField: "paymentDetails",
-      text: "Receipt Details",
+      text: "Payment Details",
       //formatter: columnFormatters.SalaryComponentsColumnFormatter,
       sort: false,
       sortCaret: sortCaret,
     },
-    {
-      dataField: "paidBy.staffName",
-      text: "PaidBy",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
+    
     {
       dataField: "party.partyName",
       text: "Ledger",
