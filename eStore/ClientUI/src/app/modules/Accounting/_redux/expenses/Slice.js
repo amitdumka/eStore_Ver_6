@@ -13,7 +13,11 @@ const initialExpensesState = {
   expenseForEdit: undefined,
   lastError: null, 
   employeeEntities: null, 
-  totalCountEmp:0
+  totalCountEmp:0,
+  partiesEntities:null,
+  bankaccEntities:null,
+  totalCountbankacc:undefined, 
+  totalCountparty:undefined
 };
 export const callTypes = {
   list: "list",
@@ -48,6 +52,26 @@ export const expensesSlice = createSlice({
      state.error=null;
      state.employeeEntities=entities;
      state.totalCountEmp=totalCount;
+
+    },
+    // get All parties List 
+    partiesListFetched: function(state,action){
+      const{totalCount,entities}=action.payload;
+     state.actionsLoading=false;
+     state.listLoading =false;
+     state.error=null;
+     state.partiesEntities=entities;
+     state.totalCountparty=totalCount;
+
+    },
+    // get All bank account List 
+    bankAccountsListFetched: function(state,action){
+      const{totalCount,entities}=action.payload;
+     state.actionsLoading=false;
+     state.listLoading =false;
+     state.error=null;
+     state.bankaccEntities=entities;
+     state.totalCountbankacc=totalCount;
 
     },
     // getExpenseById

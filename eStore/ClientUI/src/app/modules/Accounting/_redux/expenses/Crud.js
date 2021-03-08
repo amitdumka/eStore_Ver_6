@@ -53,6 +53,15 @@ export async function getAllEmployees(){
   return await axios.get("https://www.aprajitaretails.in/api/employees") ; 
 }
 
+export async function getAllParty(){
+  return await axios.get("https://www.aprajitaretails.in/api/parties") ; 
+}
+
+export async function getAllBankAccount(){
+  return await axios.get("https://www.aprajitaretails.in/api/bankaccounts") ; 
+}
+
+
 // UPDATE => PUT: update the expense on the server
 export async function updateExpense(expense) {
   return await axios.put(`${API_URL}/${expense.expenseId}`, JSON.stringify( expense ),{

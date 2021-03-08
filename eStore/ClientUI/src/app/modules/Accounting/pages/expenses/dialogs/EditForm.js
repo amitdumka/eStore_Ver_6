@@ -32,7 +32,7 @@ export function EditForm({
   expense,
   actionsLoading,
   onHide,
-  employeeList,
+  employeeList, partiesList, bankAccountsList
 }) {
   return (
     <>
@@ -83,8 +83,11 @@ export function EditForm({
                   <div className="col-lg-4">
                     <Select name="partyId" label="Ledger">
                       <option value={null} >Select Party</option>
-                      <option value="1">Testing</option>
-                      <option value="2">CityNet</option>
+                      {partiesList.map((item) => (
+                        <option key={item.partyId} value={item.partyId}>
+                          {item.partyName}
+                        </option>
+                      ))}
                     </Select>
                   </div>
                   
@@ -151,8 +154,11 @@ export function EditForm({
                     <div className="col-lg-4">
                     <Select name="bankAccountId" label="From Account">
                       <option value={null}>Select Bank Account</option>
-                      <option value="2">ICICI</option>
-                      <option value="1">SBI</option>
+                      {bankAccountsList.map((item) => (
+                        <option key={item.bankAccountId} value={item.bankAccountId}>
+                          {item.account}
+                        </option>
+                      ))}
                     </Select>
                   </div>                  
                  {/*  State Name*/}

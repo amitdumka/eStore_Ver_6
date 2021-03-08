@@ -20,11 +20,13 @@ export function EditDialog({ id, show, onHide }) {
 
   // Expenses Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, expenseForEdit ,employeeList} = useSelector(
+  const { actionsLoading, expenseForEdit ,employeeList, partiesList, bankAccountsList} = useSelector(
     (state) => ({
       actionsLoading: state.expenses.actionsLoading,
       expenseForEdit: state.expenses.expenseForEdit,
-      employeeList:state.expenses.employeeEntities
+      employeeList:state.expenses.employeeEntities,
+      partiesList:state.expenses.partiesEntities, 
+      bankAccountsList:state.expenses.bankaccEntities
     }),
     shallowEqual
   );
@@ -32,6 +34,8 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting Expense by id
     dispatch(actions.fetchExpense(id));
+    dispatch(actions.fetchParties());
+    dispatch(actions.fetchBankAccounts());
     dispatch(actions.fetchEmployees());
   }, [id, dispatch]);
 
@@ -60,6 +64,8 @@ export function EditDialog({ id, show, onHide }) {
         expense={expenseForEdit || expensesUIProps.initExpense}
         onHide={onHide}
         employeeList={employeeList}
+        partiesList={partiesList}
+        bankAccountsList={bankAccountsList}
       />
     </Modal>
   );
