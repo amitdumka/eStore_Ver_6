@@ -1,10 +1,10 @@
 import * as requestFromServer from "./Crud";
-import { receiptsSlice, callTypes } from "./Slice";
+import { cashPaymentsSlice, callTypes } from "./Slice";
 
-//Receipt
-//receipt
+//CashPayment
+//cashPayment
 
-const { actions } = receiptsSlice;
+const { actions } = cashPaymentsSlice;
 
 export const fetchParties = (id) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
@@ -43,16 +43,16 @@ export const fetchBankAccounts = (id) => (dispatch) => {
 
 
 
-export const fetchEmployees = (id) => (dispatch) => {
+export const fetchTranscations = (id) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
 
   return requestFromServer
-    .getAllEmployees()
+    .getAllTranscations()
     .then((response) => {
       const entities = response.data;
       const totalCount = response.data.length;
       console.log(entities);
-      dispatch(actions.employeesListFetched({ totalCount, entities }));
+      dispatch(actions.transcationsListFetched({ totalCount, entities }));
     })
     .catch((error) => {
       console.log(error);
@@ -61,108 +61,108 @@ export const fetchEmployees = (id) => (dispatch) => {
     });
 };
 
-export const fetchReceipts = (queryParams) => (dispatch) => {
+export const fetchCashPayments = (queryParams) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findReceipts(queryParams)
+    .findCashPayments(queryParams)
     .then((response) => {
       const entities = response.data;
       const totalCount = response.data.length;
       console.log(response.data);
       
-      dispatch(actions.receiptsFetched({ totalCount, entities }));
+      dispatch(actions.cashPaymentsFetched({ totalCount, entities }));
     })
     .catch((error) => {
       console.log(error);
-      error.clientMessage = "Can't find receipts";
+      error.clientMessage = "Can't find cashPayments";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
-export const fetchReceipt = (id) => (dispatch) => {
+export const fetchCashPayment = (id) => (dispatch) => {
   if (!id) {
-    return dispatch(actions.receiptFetched({ receiptForEdit: undefined }));
+    return dispatch(actions.cashPaymentFetched({ cashPaymentForEdit: undefined }));
   }
 
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .getReceiptById(id)
+    .getCashPaymentById(id)
     .then((response) => {
-      const receipt = response.data;
-      dispatch(actions.receiptFetched({ receiptForEdit: receipt }));
+      const cashPayment = response.data;
+      dispatch(actions.cashPaymentFetched({ cashPaymentForEdit: cashPayment }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't find receipt";
+      error.clientMessage = "Can't find cashPayment";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteReceipt = (id) => (dispatch) => {
+export const deleteCashPayment = (id) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteReceipt(id)
+    .deleteCashPayment(id)
     .then((response) => {
-      dispatch(actions.receiptDeleted({ id }));
+      dispatch(actions.cashPaymentDeleted({ id }));
     })
     .catch((error) => {
       console.log("CD=" + error);
-      error.clientMessage = "Can't delete receipt";
+      error.clientMessage = "Can't delete cashPayment";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const createReceipt = (receiptForCreation) => (dispatch) => {
+export const createCashPayment = (cashPaymentForCreation) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .createReceipt(JSON.stringify(receiptForCreation))
+    .createCashPayment(JSON.stringify(cashPaymentForCreation))
     .then((response) => {
-      const receipt = response.data;
-      dispatch(actions.receiptCreated({ receipt }));
+      const cashPayment = response.data;
+      dispatch(actions.cashPaymentCreated({ cashPayment }));
     })
     .catch((error) => {
       console.log(error);
-      error.clientMessage = "Can't create receipt";
+      error.clientMessage = "Can't create cashPayment";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateReceipt = (receipt) => (dispatch) => {
+export const updateCashPayment = (cashPayment) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateReceipt(receipt)
+    .updateCashPayment(cashPayment)
     .then(() => {
-      console.log(receipt);
-      dispatch(actions.receiptUpdated({ receipt }));
+      console.log(cashPayment);
+      dispatch(actions.cashPaymentUpdated({ cashPayment }));
     })
     .catch((error) => {
       console.log(error);
-      error.clientMessage = "Can't update receipt";
+      error.clientMessage = "Can't update cashPayment";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateReceiptsStatus = (ids, status) => (dispatch) => {
+export const updateCashPaymentsStatus = (ids, status) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateStatusForReceipts(ids, status)
+    .updateStatusForCashPayments(ids, status)
     .then(() => {
-      dispatch(actions.receiptsStatusUpdated({ ids, status }));
+      dispatch(actions.cashPaymentsStatusUpdated({ ids, status }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't update receipts status";
+      error.clientMessage = "Can't update cashPayments status";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteReceipts = (ids) => (dispatch) => {
+export const deleteCashPayments = (ids) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteReceipts(ids)
+    .deleteCashPayments(ids)
     .then(() => {
-      dispatch(actions.receiptsDeleted({ ids }));
+      dispatch(actions.cashPaymentsDeleted({ ids }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't delete receipts";
+      error.clientMessage = "Can't delete cashPayments";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };

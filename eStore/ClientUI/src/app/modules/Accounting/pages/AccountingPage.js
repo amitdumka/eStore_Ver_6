@@ -3,6 +3,9 @@ import { Redirect, Switch } from "react-router-dom";
 import { ExpensesPage } from "./expenses/ExpensesPage";
 import {PaymentsPage} from "./payments/PaymentsPage";
 import {ReceiptsPage} from "./receipts/ReceiptsPage";
+import {CashReceiptsPage} from "./cashReceipts/CashReceiptsPage";
+import {CashPaymentsPage} from "./cashPayments/CashPaymentsPage";
+
 import { LayoutSplashScreen, ContentRoute } from "../../../../_metronic/layout";
 
 export default function AccountingPage() {
@@ -10,7 +13,7 @@ export default function AccountingPage() {
     <Suspense fallback={<LayoutSplashScreen />}>
       <Switch>
         {
-          /* Redirect from acctouning root URL to /expense/expenses */
+          /* Redirect from accounting root URL to /expense/expenses */
           <Redirect 
             exact={true}
             from="/accounting"
@@ -20,8 +23,9 @@ export default function AccountingPage() {
         <ContentRoute path="/accounting/receipt/receipts" component={ReceiptsPage}/> 
         <ContentRoute path="/accounting/expense/expenses" component={ExpensesPage} />
         <ContentRoute path="/accounting/expense/payments" component={PaymentsPage} />
-        {/* //<ContentRoute path="/payroll/employee/attendances" component={AttendancesPage} />
-         */}
+        <ContentRoute path="/accounting/receipt/cashReceipts" component={CashReceiptsPage} />
+        <ContentRoute path="/accounting/expense/cashPayments" component={CashPaymentsPage} />
+         
       </Switch>
     </Suspense>
   );

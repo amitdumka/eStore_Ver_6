@@ -8,66 +8,58 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/payments/Actions";
-import {
-  getSelectRow,
-  getHandlerTableChange,
-  NoRecordsFoundMessage,
-  PleaseWaitMessage,
-  sortCaret,
-  headerSortingClasses,
-} from "../../../../../../_metronic/_helpers";
+
+import * as actions from "../../../_redux/cashReceipts/Actions";
+import {  getSelectRow,  getHandlerTableChange,  NoRecordsFoundMessage,  PleaseWaitMessage,  sortCaret,  headerSortingClasses,} from "../../../../../../_metronic/_helpers";
 import * as uiHelpers from "../UIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 import FieldDateFormater from "../../../../../../_estore/formaters/FieldDateFormater";
 
-//Payment
-//payment
+//CashReceipt
+//cashReceipt
 
-
-
-export function PaymentsTable() {
-  // Payments UI Context
-  const paymentsUIContext = useUIContext();
-  const paymentsUIProps = useMemo(() => {
+export function CashReceiptsTable() {
+  // CashReceipts UI Context
+  const cashReceiptsUIContext = useUIContext();
+  const cashReceiptsUIProps = useMemo(() => {
     return {
-      ids: paymentsUIContext.ids,
-      setIds: paymentsUIContext.setIds,
-      queryParams: paymentsUIContext.queryParams,
-      setQueryParams: paymentsUIContext.setQueryParams,
-      openEditPaymentDialog: paymentsUIContext.openEditPaymentDialog,
-      openDeletePaymentDialog: paymentsUIContext.openDeletePaymentDialog,
+      ids: cashReceiptsUIContext.ids,
+      setIds: cashReceiptsUIContext.setIds,
+      queryParams: cashReceiptsUIContext.queryParams,
+      setQueryParams: cashReceiptsUIContext.setQueryParams,
+      openEditCashReceiptDialog: cashReceiptsUIContext.openEditCashReceiptDialog,
+      openDeleteCashReceiptDialog: cashReceiptsUIContext.openDeleteCashReceiptDialog,
     };
-  }, [paymentsUIContext]);
+  }, [cashReceiptsUIContext]);
 
-  // Getting curret state of payments list from store (Redux)
+  // Getting curret state of cashReceipts list from store (Redux)
   const { currentState } = useSelector(
-    (state) => ({ currentState: state.payments }),
+    (state) => ({ currentState: state.cashReceipts }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
 
-  // Payments Redux state
+  // CashReceipts Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    paymentsUIProps.setIds([]);
+    cashReceiptsUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchPayments(paymentsUIProps.queryParams));
+    dispatch(actions.fetchCashReceipts(cashReceiptsUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paymentsUIProps.queryParams, dispatch]);
+  }, [cashReceiptsUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "paymentId",
+      dataField: "cashReceiptId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     }, {
-      dataField: "onDate",
+      dataField: "inwardDate",
       text: "Date",
       sort: true,
       type:      'date',
@@ -75,22 +67,28 @@ export function PaymentsTable() {
       sortCaret: sortCaret,
       headerSortingClasses,
     },
-    
-   
     {
-      dataField: "paymentSlipNo",
-      text: "Payment Slip No",
+      dataField: "mode.transcation",
+      text: "Transaction",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "partyName",
+      dataField: "receiptFrom",
       text: "Party",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
-    },   
+    }, 
+    {
+      dataField: "slipNo",
+      text: "Slip No",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+      
     {
       dataField: "amount",
       text: "amount",
@@ -99,41 +97,21 @@ export function PaymentsTable() {
       headerSortingClasses,
     },
     {
-      dataField: "payMode",
-      text: "Mode",
-      sort: true,
-      formatter: columnFormatters.PayModeColumnFormatter,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "paymentDetails",
-      text: "Payment Details",
+      dataField: "remarks",
+      text: "Remarks",
       //formatter: columnFormatters.SalaryComponentsColumnFormatter,
       sort: false,
       sortCaret: sortCaret,
     },
-    {
-      dataField: "fromAccount.account",
-      text: "Account",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "party.partyName",
-      text: "Ledger",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
+    
+   
     {
       dataField: "action",
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditPaymentDialog: paymentsUIProps.openEditPaymentDialog,
-        openDeletePaymentDialog: paymentsUIProps.openDeletePaymentDialog,
+        openEditCashReceiptDialog: cashReceiptsUIProps.openEditCashReceiptDialog,
+        openDeleteCashReceiptDialog: cashReceiptsUIProps.openDeleteCashReceiptDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -147,8 +125,8 @@ export function PaymentsTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: paymentsUIProps.queryParams.pageSize,
-    page: paymentsUIProps.queryParams.pageNumber,
+    sizePerPage: cashReceiptsUIProps.queryParams.pageSize,
+    page: cashReceiptsUIProps.queryParams.pageNumber,
   };
 
   
@@ -169,19 +147,19 @@ export function PaymentsTable() {
                 bootstrap4
                 remote
                 noDataIndication="No Record Found now.."
-                keyField="paymentId"
+                keyField="cashReceiptId"
                 data={entities === null ? []: totalCount ?entities:[]}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  paymentsUIProps.setQueryParams
+                  cashReceiptsUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: paymentsUIProps.ids,
-                  setIds: paymentsUIProps.setIds,
-                  idName:"paymentId",
+                  ids: cashReceiptsUIProps.ids,
+                  setIds: cashReceiptsUIProps.setIds,
+                  idName:"cashReceiptId",
                 })}
                 {...paginationTableProps}
               >

@@ -14,35 +14,35 @@ export function DropdownMenu1() {
             <li className="navi-item">
                 <a href="#" className="navi-link">
             <span className="navi-text">
-                <span className="label label-xl label-inline label-light-success">Customer</span>
+                <span className="label label-xl label-inline label-light-success">DailySale</span>
             </span>
                 </a>
             </li>
             <li className="navi-item">
                 <a href="#" className="navi-link">
             <span className="navi-text">
-                <span className="label label-xl label-inline label-light-danger">Partner</span>
+                <span className="label label-xl label-inline label-light-danger">Attendances</span>
             </span>
                 </a>
             </li>
             <li className="navi-item">
                 <a href="#" className="navi-link">
             <span className="navi-text">
-                <span className="label label-xl label-inline label-light-warning">Suplier</span>
+                <span className="label label-xl label-inline label-light-warning">Cash Payment</span>
             </span>
                 </a>
             </li>
             <li className="navi-item">
                 <a href="#" className="navi-link">
             <span className="navi-text">
-                <span className="label label-xl label-inline label-light-primary">Member</span>
+                <span className="label label-xl label-inline label-light-primary">Booking</span>
             </span>
                 </a>
             </li>
             <li className="navi-item">
                 <a href="#" className="navi-link">
             <span className="navi-text">
-                <span className="label label-xl label-inline label-light-dark">Staff</span>
+                <span className="label label-xl label-inline label-light-dark">End Of Days</span>
             </span>
                 </a>
             </li>

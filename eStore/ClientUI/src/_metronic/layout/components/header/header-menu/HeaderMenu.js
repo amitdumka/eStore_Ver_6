@@ -34,7 +34,7 @@ export function HeaderMenu({ layoutProps }) {
                 aria-haspopup="true"
                 className={`menu-item menu-item-submenu menu-item-rel ${getMenuItemActive('/google-material')}`}>
                 <NavLink className="menu-link menu-toggle" to="/google-material">
-                    <span className="menu-text">Material UI</span>
+                    <span className="menu-text">Payrolls</span>
                     <i className="menu-arrow"></i>
                 </NavLink>
                 <div className="menu-submenu menu-submenu-classic menu-submenu-left">
@@ -604,7 +604,7 @@ export function HeaderMenu({ layoutProps }) {
                 aria-haspopup="true"
             >
                 <NavLink className="menu-link menu-toggle" to="/react-bootstrap">
-                    <span className="menu-text">Bootstrap</span>
+                    <span className="menu-text">Sales</span>
                     <i className="menu-arrow"></i>
                 </NavLink>
                 <div
@@ -873,7 +873,7 @@ export function HeaderMenu({ layoutProps }) {
                 aria-haspopup="true"
                 className={`menu-item menu-item-submenu menu-item-rel ${getMenuItemActive('/custom')}`}>
                 <NavLink className="menu-link menu-toggle" to="/custom">
-                    <span className="menu-text">Custom</span>
+                    <span className="menu-text">Purchase</span>
                     <i className="menu-arrow"></i>
                 </NavLink>
                 <div className="menu-submenu menu-submenu-classic menu-submenu-left">

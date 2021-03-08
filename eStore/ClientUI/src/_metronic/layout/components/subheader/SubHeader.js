@@ -38,6 +38,8 @@ export function SubHeader() {
 
   // Do not remove this useEffect, need from update title/breadcrumbs outside (from the page)
   useEffect(() => {}, [subheader]);
+  const MonthName=["Jan","Feb","Mar","Apr","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const curDate =""+MonthName[ new Date().getMonth()+1]+", "+ new Date().getDate();
 
   return (
       <div
@@ -77,7 +79,7 @@ export function SubHeader() {
             <a href="#" className="btn btn-light btn-sm font-weight-bold" id="kt_dashboard_daterangepicker"
                data-toggle="tooltip" title="Select dashboard daterange" data-placement="left">
               <span className="text-muted font-weight-bold mr-2" id="kt_dashboard_daterangepicker_title">Today</span>
-              <span className="text-primary font-weight-bold" id="kt_dashboard_daterangepicker_date">Aug 16</span>
+              <span className="text-primary font-weight-bold" id="kt_dashboard_daterangepicker_date">{curDate}</span>
             </a>
             <QuickActions/>
           </div>

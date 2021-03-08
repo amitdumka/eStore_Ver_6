@@ -96,7 +96,7 @@ export function QuickActionsDropdown() {
                       Accounting
                     </span>
                     <span className="d-block text-dark-50 font-size-lg">
-                      eCommerce
+                      Expenses  & Payments
                     </span>
                   </a>
                 </div>
@@ -136,10 +136,10 @@ export function QuickActionsDropdown() {
                       ></SVG>
                     </span>
                     <span className="d-block text-dark-75 font-weight-bold font-size-h6 mt-2 mb-1">
-                      Projects
+                      Sales
                     </span>
                     <span className="d-block text-dark-50 font-size-lg">
-                      Pending Tasks
+                      Sales Tasks
                     </span>
                   </a>
                 </div>
@@ -157,10 +157,10 @@ export function QuickActionsDropdown() {
                       ></SVG>
                     </span>
                     <span className="d-block text-dark-75 font-weight-bold font-size-h6 mt-2 mb-1">
-                      Customers
+                      Payrolls
                     </span>
                     <span className="d-block text-dark-50 font-size-lg">
-                      Latest cases
+                      Leaves , Attendance
                     </span>
                   </a>
                 </div>

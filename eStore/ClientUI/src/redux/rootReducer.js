@@ -7,10 +7,13 @@ import {storesSlice} from "../app/modules/Stores/_redux/stores/Slice";
 import {employeesSlice} from "../app/modules/Payrolls/_redux/employees/Slice";
 import {attendancesSlice} from "../app/modules/Payrolls/_redux/attendances/Slice";
 import {salaryPaymentsSlice} from "../app/modules/Payrolls/_redux/salaryPayments/Slice";
-//Expense system and Accouting
+//Expense system and Accounting
 import {expensesSlice} from "../app/modules/Accounting/_redux/expenses/Slice";
 import {paymentsSlice} from "../app/modules/Accounting/_redux/payments/Slice";
 import {receiptsSlice} from "../app/modules/Accounting/_redux/receipts/Slice";
+import {cashReceiptsSlice} from "../app/modules/Accounting/_redux/cashReceipts/Slice";
+
+import {cashPaymentsSlice} from "../app/modules/Accounting/_redux/cashPayments/Slice";
 
 
 export const rootReducer = combineReducers({
@@ -23,6 +26,8 @@ export const rootReducer = combineReducers({
   payments: paymentsSlice.reducer,
   expenses:expensesSlice.reducer,
   receipts: receiptsSlice.reducer,
+  cashReceipts: cashReceiptsSlice.reducer,
+  cashPayments: cashPaymentsSlice.reducer,
 });
 
 export function* rootSaga() {

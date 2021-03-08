@@ -105,7 +105,7 @@ export function MixedWidget1({ className }) {
                 href="#"
                 className="text-primary font-weight-bold font-size-h6 mt-2"
               >
-                New Users
+                Attendance
               </a>
             </div>
           </div>
@@ -120,7 +120,7 @@ export function MixedWidget1({ className }) {
                 href="#"
                 className="text-danger font-weight-bold font-size-h6 mt-2"
               >
-                Item Orders
+                Daily Sales
               </a>
             </div>
             <div className="col bg-light-success px-6 py-8 rounded-xl">
@@ -135,7 +135,7 @@ export function MixedWidget1({ className }) {
                 href="#"
                 className="text-success font-weight-bold font-size-h6 mt-2"
               >
-                Bug Reports
+                Reports
               </a>
             </div>
           </div>

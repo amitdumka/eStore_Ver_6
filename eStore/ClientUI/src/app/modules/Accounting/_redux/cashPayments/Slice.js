@@ -2,18 +2,18 @@ import {createSlice} from "@reduxjs/toolkit";
 import { stubTrue } from "lodash-es";
 
 
-//CashReceipt
-//cashReceipt
+//CashPayment
+//cashPayment
 
-const initialCashReceiptsState = {
+const initialCashPaymentsState = {
   listLoading: false,
   actionsLoading: false,
   totalCount: 0,
   entities: null,
-  cashReceiptForEdit: undefined,
+  cashPaymentForEdit: undefined,
   lastError: null, 
-  employeeEntities: null, 
-  totalCountEmp:0,
+  transcationEntities: null, 
+  totalCountTran:0,
   partiesEntities:null,
   bankaccEntities:null,
   totalCountbankacc:undefined, 
@@ -24,9 +24,9 @@ export const callTypes = {
   action: "action"
 };
 
-export const cashReceiptsSlice = createSlice({
-  name: "cashReceipts",
-  initialState: initialCashReceiptsState,
+export const cashPaymentsSlice = createSlice({
+  name: "cashPayments",
+  initialState: initialCashPaymentsState,
   reducers: {
     catchError: (state, action) => {
       state.error = `${action.type}: ${action.payload.error}`;
@@ -44,14 +44,14 @@ export const cashReceiptsSlice = createSlice({
         state.actionsLoading = true;
       }
     },
-    // get All employee List 
-    employeesListFetched: function(state,action){
+    // get All transcation List 
+    transcationsListFetched: function(state,action){
       const{totalCount,entities}=action.payload;
      state.actionsLoading=false;
      state.listLoading =false;
      state.error=null;
-     state.employeeEntities=entities;
-     state.totalCountEmp=totalCount;
+     state.transcationEntities=entities;
+     state.totalCountTran=totalCount;
 
     },
     // get All parties List 
@@ -74,60 +74,60 @@ export const cashReceiptsSlice = createSlice({
      state.totalCountbankacc=totalCount;
 
     },
-    // getCashReceiptById
-    cashReceiptFetched: (state, action) => {
+    // getCashPaymentById
+    cashPaymentFetched: (state, action) => {
       state.actionsLoading = false;
-      state.cashReceiptForEdit = action.payload.cashReceiptForEdit;
+      state.cashPaymentForEdit = action.payload.cashPaymentForEdit;
       state.error = null;
     },
-    // findCashReceipts
-    cashReceiptsFetched: (state, action) => {
+    // findCashPayments
+    cashPaymentsFetched: (state, action) => {
       const { totalCount, entities } = action.payload;
       state.listLoading = false;
       state.error = null;
       state.entities = entities;
       state.totalCount = totalCount;
     },
-    // createCashReceipt
-    cashReceiptCreated: (state, action) => {
+    // createCashPayment
+    cashPaymentCreated: (state, action) => {
       state.ewactionsLoading = false;
       state.error = null;
-      state.entities.push(action.payload.cashReceipt);
+      state.entities.push(action.payload.cashPayment);
     },
-    // updateCashReceipt
-    cashReceiptUpdated: (state, action) => {
+    // updateCashPayment
+    cashPaymentUpdated: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.map(entity => {
-        if (entity.cashReceiptId === action.payload.cashReceipt.cashReceiptId) {
-          return action.payload.cashReceipt;
+        if (entity.cashPaymentId === action.payload.cashPayment.cashPaymentId) {
+          return action.payload.cashPayment;
         }
         return entity;
       });
     },
-    // deleteCashReceipt
-    cashReceiptDeleted: (state, action) => {
+    // deleteCashPayment
+    cashPaymentDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(el => el.cashReceiptId !== action.payload.cashReceiptId);
+      state.entities = state.entities.filter(el => el.cashPaymentId !== action.payload.cashPaymentId);
     },
-    // deleteCashReceipts
-    cashReceiptsDeleted: (state, action) => {
+    // deleteCashPayments
+    cashPaymentsDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        el => !action.payload.ids.includes(el.cashReceiptId)
+        el => !action.payload.ids.includes(el.cashPaymentId)
       );
     },
 
     
-    // cashReceiptsUpdateState
-    cashReceiptsStatusUpdated: (state, action) => {
+    // cashPaymentsUpdateState
+    cashPaymentsStatusUpdated: (state, action) => {
       state.actionsLoading = false;
       state.error = null;
       const { ids, status } = action.payload;
       state.entities = state.entities.map(entity => {
-        if (ids.findIndex(id => id === entity.cashReceiptId) > -1) {
+        if (ids.findIndex(id => id === entity.cashPaymentId) > -1) {
           entity.status = status;
         }
         return entity;
