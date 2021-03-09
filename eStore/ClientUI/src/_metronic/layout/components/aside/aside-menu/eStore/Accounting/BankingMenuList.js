@@ -19,13 +19,13 @@ export default function BankingMenuList({ layoutProps }) {
       {/*begin::1 Level*/}
       <li
         className={`menu-item menu-item-submenu ${getMenuItemActive(
-          "/react-bootstrap",
+          "/accounting/banking",
           true
         )}`}
         aria-haspopup="true"
         data-menu-toggle="hover"
       >
-        <NavLink className="menu-link menu-toggle" to="/react-bootstrap">
+        <NavLink className="menu-link menu-toggle" to="/accounting/banking">
           <span className="svg-icon menu-icon">
             <SVG src={toAbsoluteUrl("/media/svg/icons/Shopping/Box2.svg")} />
           </span>
@@ -44,11 +44,11 @@ export default function BankingMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/react-bootstrap/alert"
+                  "/accounting/banking/banks"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/react-bootstrap/alert">
+                <NavLink className="menu-link" to="/accounting/banking/banks">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -60,11 +60,11 @@ export default function BankingMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/react-bootstrap/badge"
+                  "/accounting/banking/accounts"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/react-bootstrap/badge">
+                <NavLink className="menu-link" to="/accounting/banking/accounts">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -76,11 +76,11 @@ export default function BankingMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/react-bootstrap/breadcrumb"
+                  "/accounting/banking/deposits"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/react-bootstrap/breadcrumb">
+                <NavLink className="menu-link" to="/accounting/banking/deposit">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -92,11 +92,11 @@ export default function BankingMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/react-bootstrap/buttons"
+                  "/accounting/banking/withdrawl"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/react-bootstrap/buttons">
+                <NavLink className="menu-link" to="/accounting/banking/dithdrawl">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -108,13 +108,13 @@ export default function BankingMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/react-bootstrap/button-group"
+                  "/accounting/banking/chequesLog"
                 )}`}
                 aria-haspopup="true"
               >
                 <NavLink
                   className="menu-link"
-                  to="/react-bootstrap/button-group"
+                  to="/accounting/banking/chequesLog"
                 >
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
@@ -127,11 +127,11 @@ export default function BankingMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/react-bootstrap/cards"
+                  "/accounting/banking/chequesIssue"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/react-bootstrap/cards">
+                <NavLink className="menu-link" to="/accounting/banking/chequesIssue">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -143,11 +143,11 @@ export default function BankingMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/react-bootstrap/carousel"
+                  "/accounting/banking/bankAccounts"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/react-bootstrap/carousel">
+                <NavLink className="menu-link" to="/accounting/banking/bankAccounts">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -159,11 +159,11 @@ export default function BankingMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/react-bootstrap/dropdowns"
+                  "/accounting/banking/accountSecurity"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/react-bootstrap/dropdowns">
+                <NavLink className="menu-link" to="/accounting/banking/accountSecurity">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>

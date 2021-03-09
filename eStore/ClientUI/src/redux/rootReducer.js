@@ -15,6 +15,9 @@ import {cashReceiptsSlice} from "../app/modules/Accounting/_redux/cashReceipts/S
 
 import {cashPaymentsSlice} from "../app/modules/Accounting/_redux/cashPayments/Slice";
 
+import {banksSlice} from "../app/modules/Banking/_redux/banks/Slice";
+
+
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -28,6 +31,8 @@ export const rootReducer = combineReducers({
   receipts: receiptsSlice.reducer,
   cashReceipts: cashReceiptsSlice.reducer,
   cashPayments: cashPaymentsSlice.reducer,
+  banks:banksSlice.reducer,
+
 });
 
 export function* rootSaga() {
