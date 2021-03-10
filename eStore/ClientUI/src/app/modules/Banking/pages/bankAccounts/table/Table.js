@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/banks/Actions";
+import * as actions from "../../../_redux/bankAccounts/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -22,52 +22,88 @@ import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 
+//BankAccount
+//bankAccount
 
-//Bank
-//bank
 
-export function BanksTable() {
-  // Banks UI Context
-  const banksUIContext = useUIContext();
-  const banksUIProps = useMemo(() => {
+export function BankAccountsTable() {
+  // BankAccounts UI Context
+  const bankAccountsUIContext = useUIContext();
+  const bankAccountsUIProps = useMemo(() => {
     return {
-      ids: banksUIContext.ids,
-      setIds: banksUIContext.setIds,
-      queryParams: banksUIContext.queryParams,
-      setQueryParams: banksUIContext.setQueryParams,
-      openEditBankDialog: banksUIContext.openEditBankDialog,
-      openDeleteBankDialog: banksUIContext.openDeleteBankDialog,
+      ids: bankAccountsUIContext.ids,
+      setIds: bankAccountsUIContext.setIds,
+      queryParams: bankAccountsUIContext.queryParams,
+      setQueryParams: bankAccountsUIContext.setQueryParams,
+      openEditBankAccountDialog: bankAccountsUIContext.openEditBankAccountDialog,
+      openDeleteBankAccountDialog: bankAccountsUIContext.openDeleteBankAccountDialog,
     };
-  }, [banksUIContext]);
+  }, [bankAccountsUIContext]);
 
-  // Getting curret state of banks list from store (Redux)
+  // Getting curret state of bankAccounts list from store (Redux)
   const { currentState } = useSelector(
-    (state) => ({ currentState: state.banks }),
+    (state) => ({ currentState: state.bankAccounts }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
 
-  // Banks Redux state
+  // BankAccounts Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    banksUIProps.setIds([]);
+    bankAccountsUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchBanks(banksUIProps.queryParams));
+    dispatch(actions.fetchBankAccounts(bankAccountsUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [banksUIProps.queryParams, dispatch]);
+  }, [bankAccountsUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "bankId",
+      dataField: "bankAccountId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "bankName",
-      text: "Bank Name",
+      dataField: "employee.staffName",
+      text: "Employee",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "attDate",
+      text: "Date",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "entryTime",
+      text: "Entry Time",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "remarks",
+      text: "Remarks",
+      sort: false,
+      sortCaret: sortCaret,
+    },
+    
+    {
+      dataField: "status",
+      text: "Status",
+      sort: true,
+      formatter: columnFormatters.StatusColumnFormatter,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "employee.store.storeName",
+      text: "Store",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -77,8 +113,8 @@ export function BanksTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditBankDialog: banksUIProps.openEditBankDialog,
-        openDeleteBankDialog: banksUIProps.openDeleteBankDialog,
+        openEditBankAccountDialog: bankAccountsUIProps.openEditBankAccountDialog,
+        openDeleteBankAccountDialog: bankAccountsUIProps.openDeleteBankAccountDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -92,8 +128,8 @@ export function BanksTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: banksUIProps.queryParams.pageSize,
-    page: banksUIProps.queryParams.pageNumber,
+    sizePerPage: bankAccountsUIProps.queryParams.pageSize,
+    page: bankAccountsUIProps.queryParams.pageNumber,
   };
 
   
@@ -113,19 +149,19 @@ export function BanksTable() {
                 bootstrap4
                 remote
                 noDataIndication="No Record Found now.."
-                keyField="bankId"
+                keyField="bankAccountId"
                 data={entities === null ? []: totalCount ?entities:[]}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  banksUIProps.setQueryParams
+                  bankAccountsUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: banksUIProps.ids,
-                  setIds: banksUIProps.setIds,
-                  idName:"bankId",
+                  ids: bankAccountsUIProps.ids,
+                  setIds: bankAccountsUIProps.setIds,
+                  idName:"bankAccountId",
                 })}
                 {...paginationTableProps}
               >

@@ -16,6 +16,7 @@ import {cashReceiptsSlice} from "../app/modules/Accounting/_redux/cashReceipts/S
 import {cashPaymentsSlice} from "../app/modules/Accounting/_redux/cashPayments/Slice";
 
 import {banksSlice} from "../app/modules/Banking/_redux/banks/Slice";
+import {bankAccountsSlice} from "../app/modules/Banking/_redux/bankAccounts/Slice";
 
 
 
@@ -32,6 +33,7 @@ export const rootReducer = combineReducers({
   cashReceipts: cashReceiptsSlice.reducer,
   cashPayments: cashPaymentsSlice.reducer,
   banks:banksSlice.reducer,
+  bankAccounts: bankAccountsSlice.reducer,
 
 });
 

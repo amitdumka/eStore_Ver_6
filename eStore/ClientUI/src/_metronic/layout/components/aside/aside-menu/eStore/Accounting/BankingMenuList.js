@@ -19,13 +19,13 @@ export default function BankingMenuList({ layoutProps }) {
       {/*begin::1 Level*/}
       <li
         className={`menu-item menu-item-submenu ${getMenuItemActive(
-          "/accounting/banking",
+          "/banking",
           true
         )}`}
         aria-haspopup="true"
         data-menu-toggle="hover"
       >
-        <NavLink className="menu-link menu-toggle" to="/accounting/banking">
+        <NavLink className="menu-link menu-toggle" to="/banking">
           <span className="svg-icon menu-icon">
             <SVG src={toAbsoluteUrl("/media/svg/icons/Shopping/Box2.svg")} />
           </span>
@@ -44,11 +44,11 @@ export default function BankingMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/accounting/banking/banks"
+                  "/banking/banks"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/accounting/banking/banks">
+                <NavLink className="menu-link" to="/banking/banks">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -60,11 +60,11 @@ export default function BankingMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/accounting/banking/accounts"
+                  "/banking/accounts"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/accounting/banking/accounts">
+                <NavLink className="menu-link" to="/banking/accounts">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -76,11 +76,11 @@ export default function BankingMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/accounting/banking/deposits"
+                  "/banking/deposits"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/accounting/banking/deposit">
+                <NavLink className="menu-link" to="/banking/deposit">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -92,11 +92,11 @@ export default function BankingMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/accounting/banking/withdrawl"
+                  "/banking/withdrawl"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/accounting/banking/dithdrawl">
+                <NavLink className="menu-link" to="/banking/dithdrawl">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -108,13 +108,13 @@ export default function BankingMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/accounting/banking/chequesLog"
+                  "/banking/chequesLog"
                 )}`}
                 aria-haspopup="true"
               >
                 <NavLink
                   className="menu-link"
-                  to="/accounting/banking/chequesLog"
+                  to="/banking/chequesLog"
                 >
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
@@ -127,11 +127,11 @@ export default function BankingMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/accounting/banking/chequesIssue"
+                  "/banking/chequesIssue"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/accounting/banking/chequesIssue">
+                <NavLink className="menu-link" to="/banking/chequesIssue">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -143,11 +143,11 @@ export default function BankingMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/accounting/banking/bankAccounts"
+                  "/banking/bankAccounts"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/accounting/banking/bankAccounts">
+                <NavLink className="menu-link" to="/banking/bankAccounts">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -159,11 +159,11 @@ export default function BankingMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/accounting/banking/accountSecurity"
+                  "/banking/accountSecurity"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/accounting/banking/accountSecurity">
+                <NavLink className="menu-link" to="/banking/accountSecurity">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>

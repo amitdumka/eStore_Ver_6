@@ -20,7 +20,7 @@ import { DashboardPage } from "./pages/DashboardPage";
 const StoreMainPage = lazy(() =>import("./modules/Stores/pages/StoreMainPage"));
 const PayrollPage=lazy(() =>import("./modules/Payrolls/pages/PayrollPage"));
 const AccountingPage=lazy(() =>import("./modules/Accounting/pages/AccountingPage"));
-const BankingPage=lazy(() =>import("./modules/Banking/pages/BankingMainPage"));
+const BankingPage=lazy(() =>import("./modules/Banking/pages/BankingPage"));
 
 export default function BasePage() {
   // useEffect(() => {
@@ -45,7 +45,7 @@ export default function BasePage() {
         <Route path="/store" component={StoreMainPage}/>
         <Route path="/payroll" component={PayrollPage}/>
         <Route path="/accounting" component={AccountingPage}/>
-        <Route path="/accounting/banking" component={BankingPage}/>
+        <Route path="/banking" component={BankingPage}/>
         
         
         <Redirect to="error/error-v1" />
