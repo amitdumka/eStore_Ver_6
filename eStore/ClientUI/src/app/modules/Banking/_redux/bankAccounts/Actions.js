@@ -55,6 +55,7 @@ export const fetchBankAccount = id => dispatch => {
     .getBankAccountById(id)
     .then(response => {
       const bankAccount = response.data;
+      console.log(bankAccount);
       dispatch(actions.bankAccountFetched({ bankAccountForEdit: bankAccount }));
     })
     .catch(error => {

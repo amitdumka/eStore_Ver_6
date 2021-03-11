@@ -53,19 +53,19 @@ export function UpdateStateDialog({ show, onHide }) {
   const dispatch = useDispatch();
   const updateStatus = () => {
     // server request for update bankAccounts status by selected ids
-    dispatch(
-      actions.updateBankAccountsStatus(bankAccountsUIProps.ids, status)
-    ).then(() => {
-      // refresh list after deletion
-      dispatch(actions.fetchBankAccounts(bankAccountsUIProps.queryParams)).then(
-        () => {
-          // clear selections list
-          bankAccountsUIProps.setIds([]);
-          // closing delete modal
-          onHide();
-        }
-      );
-    });
+    dispatch(actions.updateBankAccountsStatus(bankAccountsUIProps.ids, status)).then(
+      () => {
+        // refresh list after deletion
+        dispatch(actions.fetchBankAccounts(bankAccountsUIProps.queryParams)).then(
+          () => {
+            // clear selections list
+            bankAccountsUIProps.setIds([]);
+            // closing delete modal
+            onHide();
+          }
+        );
+      }
+    );
   };
 
   return (
@@ -99,7 +99,7 @@ export function UpdateStateDialog({ show, onHide }) {
             {bankAccounts.map((bankAccount) => (
               <tr key={`id${bankAccount.id}`}>
                 <td>{bankAccount.id}</td>
-
+                
                 <td>
                   <span className="ml-3">
                     {bankAccount.lastName}, {bankAccount.firstName}

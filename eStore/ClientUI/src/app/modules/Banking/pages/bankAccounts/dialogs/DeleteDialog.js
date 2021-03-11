@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
+import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
 import * as actions from "../../../_redux/bankAccounts/Actions";
-import { useUIContext } from "../UIContext";
+import {useUIContext} from "../UIContext";
 
 //bankAccount
 //BankAccount
@@ -15,7 +15,7 @@ export function DeleteDialog({ id, show, onHide }) {
   const bankAccountsUIProps = useMemo(() => {
     return {
       setIds: bankAccountsUIContext.setIds,
-      queryParams: bankAccountsUIContext.queryParams,
+      queryParams: bankAccountsUIContext.queryParams
     };
   }, [bankAccountsUIContext]);
 

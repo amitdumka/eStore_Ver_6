@@ -15,8 +15,6 @@ import { BankAccountsCard } from "./BankAccountsCard";
 //BankAccount
 //bankAccount
 
-
-
 export function BankAccountsPage({ history }) {
   const bankAccountsUIEvents = {
     newBankAccountButtonClick: () => {

@@ -25,7 +25,6 @@ import { useUIContext } from "../UIContext";
 //BankAccount
 //bankAccount
 
-
 export function BankAccountsTable() {
   // BankAccounts UI Context
   const bankAccountsUIContext = useUIContext();
@@ -35,8 +34,10 @@ export function BankAccountsTable() {
       setIds: bankAccountsUIContext.setIds,
       queryParams: bankAccountsUIContext.queryParams,
       setQueryParams: bankAccountsUIContext.setQueryParams,
-      openEditBankAccountDialog: bankAccountsUIContext.openEditBankAccountDialog,
-      openDeleteBankAccountDialog: bankAccountsUIContext.openDeleteBankAccountDialog,
+      openEditBankAccountDialog:
+        bankAccountsUIContext.openEditBankAccountDialog,
+      openDeleteBankAccountDialog:
+        bankAccountsUIContext.openDeleteBankAccountDialog,
     };
   }, [bankAccountsUIContext]);
 
@@ -67,14 +68,7 @@ export function BankAccountsTable() {
     },
     {
       dataField: "bankId",
-      text: "bankId",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "bank.bankName",
-      text: "Bank Name",
+      text: "Bank",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -89,25 +83,26 @@ export function BankAccountsTable() {
     {
       dataField: "branchName",
       text: "Branch Name",
-      sort: false,
+      sort: true,
       sortCaret: sortCaret,
+      headerSortingClasses,
     },
-    
     {
       dataField: "accountType",
       text: "Account Type",
-      sort: true,
-      formatter: columnFormatters.StatusColumnFormatter,
+      sort: false,
+      formatter:columnFormatters.TypeColumnFormatter,
       sortCaret: sortCaret,
-      headerSortingClasses,
     },
     {
       dataField: "action",
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditBankAccountDialog: bankAccountsUIProps.openEditBankAccountDialog,
-        openDeleteBankAccountDialog: bankAccountsUIProps.openDeleteBankAccountDialog,
+        openEditBankAccountDialog:
+          bankAccountsUIProps.openEditBankAccountDialog,
+        openDeleteBankAccountDialog:
+          bankAccountsUIProps.openDeleteBankAccountDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -125,16 +120,15 @@ export function BankAccountsTable() {
     page: bankAccountsUIProps.queryParams.pageNumber,
   };
 
-  
   return (
     <>
-       <PaginationProvider pagination={paginationFactory(paginationOptions)}>
+      <PaginationProvider pagination={paginationFactory(paginationOptions)}>
         {({ paginationProps, paginationTableProps }) => {
-          return ( 
-             <Pagination
+          return (
+            <Pagination
               isLoading={listLoading}
               paginationProps={paginationProps}
-            > 
+            >
               <BootstrapTable
                 wrapperClasses="table-responsive"
                 bordered={true}
@@ -143,7 +137,7 @@ export function BankAccountsTable() {
                 remote
                 noDataIndication="No Record Found now.."
                 keyField="bankAccountId"
-                data={entities === null ? []: totalCount ?entities:[]}
+                data={entities === null ? [] : totalCount ? entities : []}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
@@ -154,17 +148,17 @@ export function BankAccountsTable() {
                   entities,
                   ids: bankAccountsUIProps.ids,
                   setIds: bankAccountsUIProps.setIds,
-                  idName:"bankAccountId",
+                  idName: "bankAccountId",
                 })}
                 {...paginationTableProps}
               >
                 <PleaseWaitMessage entities={entities} />
                 <NoRecordsFoundMessage entities={entities} />
               </BootstrapTable>
-             </Pagination>
+            </Pagination>
           );
         }}
-      </PaginationProvider> 
+      </PaginationProvider>
     </>
   );
 }

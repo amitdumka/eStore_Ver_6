@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { useUIContext } from "../UIContext";
 
-
 //BankAccount
 //bankAccount
 

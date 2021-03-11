@@ -17,10 +17,9 @@ import {
 
 // Validation schema
 const BankAccountEditSchema = Yup.object().shape({
-  account: Yup.string().required("Account Number is required"),
-  bankId: Yup.number().required("Bank is required"),
+  account: Yup.string().required("Account is required"),
   branchName: Yup.string().required("Branch Name is required"),
-  accountType: Yup.number().required("Select Account Type"),
+  bankId: Yup.number().required("Store is required"),
 });
 
 export function EditForm({
@@ -50,7 +49,17 @@ export function EditForm({
               )}
               <Form className="form form-label-right">
                 <div className="form-group row">
-                  {/* Bank */}
+                  {/* Store */}
+                  <div className="col-lg-4">
+                    <Select name="accountType" label="Account Type">
+                      <option value="0">Saving</option>
+                      <option value="1">Current</option>
+                      <option value="2">CC</option>
+                      <option value="3">OD</option>
+                      <option value="4">Others</option>
+                    </Select>
+                  </div>
+                  {/* Email */}
                   <div className="col-lg-4">
                     <Select name="bankId" placeholder="Bank" label="Bank">
                       <option value="">Select Bank</option>
@@ -61,17 +70,6 @@ export function EditForm({
                       ))}
                     </Select>
                   </div>
-                  {/* Bank */}
-                  <div className="col-lg-4">
-                    <Select name="accountType" placeholder="Account Type" label="Account Type">
-                      <option value="">Select Account Type</option>
-                      <option value="0">Saving</option>
-                      <option value="1">Current</option>
-                      <option value="2">Cash Credit</option>
-                      <option value="3">OD</option>
-                      <option value="4">Others</option>
-                    </Select>
-                  </div>
                 </div>
                 <div className="form-group row">
                   {/*  Father Name*/}
@@ -79,7 +77,7 @@ export function EditForm({
                     <Field
                       name="account"
                       component={Input}
-                      placeholder="Account No"
+                      placeholder="Account No."
                       label="Account No"
                     />
                   </div>
@@ -91,7 +89,7 @@ export function EditForm({
                       name="branchName"
                       component={Input}
                       placeholder="Branch Name"
-                      label="Branch Name"
+                      label="BranchName"
                     />
                   </div>
                 </div>

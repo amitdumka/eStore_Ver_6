@@ -1,8 +1,8 @@
 export const StatusCssClasses = ["success","danger", "warning","info",""];
 export const StatusTitles = ["Present", "Absent", "HalfDay","Sunday" ,""];
-//export const CustomerTypeCssClasses = ["success", "primary", ""];
-//export const CustomerTypeTitles = ["Business", "Individual", ""];
-export const defaultSorted = [{ dataField: "firstName", order: "asc" }];
+export const AccountTypeCssClasses = ["success", "primary", "danger","warning","info",""];
+export const AccountTypeTitles = ["Saving", "Current", "CC","OD","Other",""];
+export const defaultSorted = [{ dataField: "bankName", order: "asc" }];
 export const sizePerPageList = [
   { text: "3", value: 3 },
   { text: "5", value: 5 },
@@ -10,10 +10,10 @@ export const sizePerPageList = [
 ];
 export const initialFilter = {
   filter: {
-    lastName: "",
-    firstName: "",
-    email: "",
-    purchaseAmount: ""
+    account: "",
+    branchName: "",
+    bankName: "",
+    accountType: ""
   },
   sortOrder: "asc", // asc||desc
   sortField: "id",

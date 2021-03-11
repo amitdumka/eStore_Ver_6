@@ -10,7 +10,6 @@ import { BankAccountsTable } from "./table/Table";
 import { BankAccountsGrouping } from "./grouping/Grouping";
 import { useUIContext } from "./UIContext";
 
-
 //BankAccount
 //bankAccount
 
@@ -26,14 +25,14 @@ export function BankAccountsCard() {
 
   return (
     <Card>
-      <CardHeader title="BankAccounts list">
+      <CardHeader title="Bank Accounts list">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
             onClick={BankAccountsUIProps.newBankAccountButtonClick}
           >
-            New BankAccount
+            New Bank Account
           </button>
         </CardHeaderToolbar>
       </CardHeader>
