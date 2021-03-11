@@ -43,18 +43,10 @@ export function UIProvider({ UIEvents, children }) {
 
   const initBankAccount = {
     bankAccountId: 0,
-    employeeId: 1,
-    employee: null,
-    attDate: new Date(),
-    entryTime: "",
-    status: 0,
-    remarks: "Testing",
-    isTailoring: false,
-    storeId: 1,
-    store: null,
-    userId: "AlokKumar",
-    entryStatus: 0,
-    isReadOnly: false,
+    bankId: 0,
+    account: null,
+    branchName: "",
+    accountType: 0
   };
 
   const value = {

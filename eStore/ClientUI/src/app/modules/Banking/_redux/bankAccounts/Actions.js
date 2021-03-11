@@ -80,6 +80,7 @@ export const deleteBankAccount = id => dispatch => {
 
 export const createBankAccount = bankAccountForCreation => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
+  console.log(bankAccountForCreation);
   return requestFromServer
     .createBankAccount(JSON.stringify( bankAccountForCreation))
     .then(response => {
@@ -88,6 +89,7 @@ export const createBankAccount = bankAccountForCreation => dispatch => {
       dispatch(actions.bankAccountCreated({ bankAccount }));
     })
     .catch(error => {
+      console.log(error);
       error.clientMessage = "Can't create bankAccount";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });

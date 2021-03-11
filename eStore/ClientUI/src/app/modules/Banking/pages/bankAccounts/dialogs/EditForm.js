@@ -15,22 +15,21 @@ import {
 //bankAccount
 //BankAccount
 
-
 // Validation schema
 const BankAccountEditSchema = Yup.object().shape({
-  attDate: Yup.date().required("Date is required"),
-  status: Yup.string().required("Status is required"),
-  storeId: Yup.number().required("Store is required"),
+  account: Yup.string().required("Account Number is required"),
+  bankId: Yup.number().required("Bank is required"),
+  branchName: Yup.string().required("Branch Name is required"),
+  accountType: Yup.number().required("Select Account Type"),
 });
 
 export function EditForm({
   saveBankAccount,
   bankAccount,
   actionsLoading,
-  onHide,bankList,
+  onHide,
+  bankList,
 }) {
-
-  
   return (
     <>
       <Formik
@@ -51,14 +50,9 @@ export function EditForm({
               )}
               <Form className="form form-label-right">
                 <div className="form-group row">
-                  
                   {/* Bank */}
                   <div className="col-lg-4">
-                    <Select
-                      name="bankId"
-                      placeholder="Bank"
-                      label="Bank"
-                    >
+                    <Select name="bankId" placeholder="Bank" label="Bank">
                       <option value="">Select Bank</option>
                       {bankList.map((item) => (
                         <option key={item.bankId} value={item.bankId}>
@@ -67,23 +61,26 @@ export function EditForm({
                       ))}
                     </Select>
                   </div>
+                  {/* Bank */}
+                  <div className="col-lg-4">
+                    <Select name="accountType" placeholder="Account Type" label="Account Type">
+                      <option value="">Select Account Type</option>
+                      <option value="0">Saving</option>
+                      <option value="1">Current</option>
+                      <option value="2">Cash Credit</option>
+                      <option value="3">OD</option>
+                      <option value="4">Others</option>
+                    </Select>
+                  </div>
                 </div>
                 <div className="form-group row">
-                  {/* Date of BankAccount */}
-                  <div className="col-lg-4">
-                    <DatePickerField
-                      dateFormat="yyyy-MM-dd"
-                      name="attDate"
-                      label="On Date"
-                    />
-                  </div>
                   {/*  Father Name*/}
                   <div className="col-lg-4">
                     <Field
-                      name="entryTime"
+                      name="account"
                       component={Input}
-                      placeholder="Entry Time"
-                      label="Entry Time"
+                      placeholder="Account No"
+                      label="Account No"
                     />
                   </div>
                 </div>
@@ -91,16 +88,11 @@ export function EditForm({
                   {/*  State Name*/}
                   <div className="col-lg-4">
                     <Field
-                      name="remarks"
+                      name="branchName"
                       component={Input}
-                      placeholder="Remarks"
-                      label="Remarks"
+                      placeholder="Branch Name"
+                      label="Branch Name"
                     />
-                  </div>
-                  {/* Tailoring Division */}
-                  <div className="col-lg-4">
-                    <Field name="isTailoring" type="checkbox" />
-                    {} Tailoring Division
                   </div>
                 </div>
               </Form>
