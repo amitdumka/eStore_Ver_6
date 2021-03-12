@@ -1,6 +1,6 @@
 import axios from "axios";
 
-//BankDeposits
+//BankDeposit
 //bankDeposit
 
 export const API_URL = "https://www.aprajitaretails.in/api/bankDeposits";
@@ -24,54 +24,54 @@ export async function verifyLogin(){
 
 }
 // CREATE =>  POST: add a new bankDeposit to the server
-export async function createBankDeposits(bankDeposit) {
+export async function createBankDeposit(bankDeposit) {
   return await axios.post(API_URL,  bankDeposit,{
     headers: {         'Content-Type' : 'application/json; charset=utf-8' }
 });
 }
 
 // READ
-export  function getAllBankDepositss() {
+export  function getAllBankDeposits() {
   return  axios.get(API_URL);//.catch(function (error){console.log(error)});
 }
 
-export async function getBankDepositsById(bankDepositId) {
+export async function getBankDepositById(bankDepositId) {
   return await axios.get(`${API_URL}/${bankDepositId}`);
 }
 
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
 // items => filtered/sorted result
-export async function findBankDepositss(queryParams) {
+export async function findBankDeposits(queryParams) {
   //verifyLogin();
   return await axios.get(`${API_URL}`);//find`, { queryParams });
 }
 
 // function to get all list of banks
 export async function getAllBanks(){
-  return await axios.get("https://www.aprajitaretails.in/api/banks") ; 
+  return await axios.get("https://www.aprajitaretails.in/api/bankAccounts") ; 
 }
 
 // UPDATE => PUT: update the bankDeposit on the server
-export async function updateBankDeposits(bankDeposit) {
+export async function updateBankDeposit(bankDeposit) {
   return await axios.put(`${API_URL}/${bankDeposit.bankDepositId}`, JSON.stringify( bankDeposit ),{
     headers: {         'Content-Type' : 'application/json; charset=utf-8' }
 });
 }
 
 // UPDATE Status
-export async function updateStatusForBankDepositss(ids, status) {
-  return await axios.post(`${API_URL}/updateStatusForBankDepositss`, {
+export async function updateStatusForBankDeposits(ids, status) {
+  return await axios.post(`${API_URL}/updateStatusForBankDeposits`, {
     ids,
     status
   });
 }
 
 // DELETE => delete the bankDeposit from the server
-export async function deleteBankDeposits(bankDepositId) {
+export async function deleteBankDeposit(bankDepositId) {
   return await axios.delete(`${API_URL}/${bankDepositId}`);
 }
 
 // DELETE BankDepositss by ids
-export async function deleteBankDepositss(ids) {
-  return await axios.post(`${API_URL}/deleteBankDepositss`, { ids });
+export async function deleteBankDeposits(ids) {
+  return await axios.post(`${API_URL}/deleteBankDeposits`, { ids });
 }

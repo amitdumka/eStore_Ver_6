@@ -12,33 +12,31 @@ import {
   DatePickerField,
 } from "../../../../../../_metronic/_partials/controls";
 
-//bankAccount
-//BankAccount
-
+//bankDeposit
+//BankDeposit
 
 // Validation schema
-const BankAccountEditSchema = Yup.object().shape({
-  attDate: Yup.date().required("Date is required"),
-  status: Yup.string().required("Status is required"),
+const BankDepositEditSchema = Yup.object().shape({
+  onDate: Yup.date().required("Date is required"),
+  inNameOf: Yup.string().required("Status is required"),
   storeId: Yup.number().required("Store is required"),
 });
 
 export function EditForm({
-  saveBankAccount,
-  bankAccount,
+  saveBankDeposit,
+  bankDeposit,
   actionsLoading,
-  onHide,bankList,
+  onHide,
+  bankList,
 }) {
-
-  
   return (
     <>
       <Formik
         enableReinitialize={true}
-        initialValues={bankAccount}
-        validationSchema={BankAccountEditSchema}
+        initialValues={bankDeposit}
+        validationSchema={BankDepositEditSchema}
         onSubmit={(values) => {
-          saveBankAccount(values);
+          saveBankDeposit(values);
         }}
       >
         {({ handleSubmit }) => (
@@ -51,40 +49,78 @@ export function EditForm({
               )}
               <Form className="form form-label-right">
                 <div className="form-group row">
-                  
                   {/* Bank */}
                   <div className="col-lg-4">
-                    <Select
-                      name="bankId"
-                      placeholder="Bank"
-                      label="Bank"
-                    >
+                    <Select name="bankId" placeholder="Bank" label="Bank">
                       <option value="">Select Bank</option>
-                      {bankList.map((item) => (
-                        <option key={item.bankId} value={item.bankId}>
-                          {item.bankName}
-                        </option>
-                      ))}
+                      {bankList ? (
+                        bankList.map((item) => (
+                          <option
+                            key={item.bankAccountId}
+                            value={item.bankAccountId}
+                          >
+                            {item.account}
+                          </option>
+                        ))
+                      ) : (
+                        <option>No Item Found</option>
+                      )}
                     </Select>
                   </div>
-                </div>
-                <div className="form-group row">
-                  {/* Date of BankAccount */}
+
+                  {/* Date of BankDeposit */}
                   <div className="col-lg-4">
                     <DatePickerField
                       dateFormat="yyyy-MM-dd"
-                      name="attDate"
+                      name="onDate"
                       label="On Date"
                     />
                   </div>
                   {/*  Father Name*/}
                   <div className="col-lg-4">
                     <Field
-                      name="entryTime"
+                      name="chequeNo"
                       component={Input}
-                      placeholder="Entry Time"
-                      label="Entry Time"
+                      placeholder="Cheque No"
+                      label="Cheque No"
                     />
+                  </div>
+                </div>
+
+                <div className="form-group row">
+                  {/*  Father Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="inNameOf"
+                      component={Input}
+                      placeholder="Name"
+                      label="Name"
+                    />
+                  </div>
+                  {/*  Father Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="amount"
+                      component={Input}
+                      placeholder="Amount"
+                      label="Amount"
+                    />
+                  </div>
+                  <div className="col-lg-4">
+                    <Select
+                      name="payMode"
+                      placeholder="PayMode"
+                      label="PayMode"
+                    >
+                      <option value="">Select Mode</option>
+                      <option value="1">Cash</option>
+                      <option value="2">Card</option>
+                      <option value="3">Cheque</option>
+                      <option value="4">RTGS</option>
+                      <option value="5">NEFT</option>
+                      <option value="6">IMPS</option>
+                      <option value="7">Others</option>
+                    </Select>
                   </div>
                 </div>
                 <div className="form-group row">
@@ -97,10 +133,22 @@ export function EditForm({
                       label="Remarks"
                     />
                   </div>
-                  {/* Tailoring Division */}
+                  {/*  Father Name*/}
                   <div className="col-lg-4">
-                    <Field name="isTailoring" type="checkbox" />
-                    {} Tailoring Division
+                    <Field
+                      name="details"
+                      component={Input}
+                      placeholder="Details"
+                      label="Details"
+                    />
+                  </div>
+                  <div className="col-lg-4">
+                    <Field name="isInHouse" type="checkbox" />
+                    {} Aprajita Retails <br />
+                    <Select name="storeId" placeholder="Store" label="Store">
+                      <option value="1">Dumka</option>
+                      <option value="2">Jamshedpur</option>
+                    </Select>
                   </div>
                 </div>
               </Form>

@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/bankAccounts/Actions";
+import * as actions from "../../../_redux/bankDeposits/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -22,66 +22,88 @@ import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 
-//BankAccount
-//bankAccount
+//BankDeposit
+//bankDeposit
 
 
-export function BankAccountsTable() {
-  // BankAccounts UI Context
-  const bankAccountsUIContext = useUIContext();
-  const bankAccountsUIProps = useMemo(() => {
+export function BankDepositsTable() {
+  // BankDeposits UI Context
+  const bankDepositsUIContext = useUIContext();
+  const bankDepositsUIProps = useMemo(() => {
     return {
-      ids: bankAccountsUIContext.ids,
-      setIds: bankAccountsUIContext.setIds,
-      queryParams: bankAccountsUIContext.queryParams,
-      setQueryParams: bankAccountsUIContext.setQueryParams,
-      openEditBankAccountDialog: bankAccountsUIContext.openEditBankAccountDialog,
-      openDeleteBankAccountDialog: bankAccountsUIContext.openDeleteBankAccountDialog,
+      ids: bankDepositsUIContext.ids,
+      setIds: bankDepositsUIContext.setIds,
+      queryParams: bankDepositsUIContext.queryParams,
+      setQueryParams: bankDepositsUIContext.setQueryParams,
+      openEditBankDepositDialog: bankDepositsUIContext.openEditBankDepositDialog,
+      openDeleteBankDepositDialog: bankDepositsUIContext.openDeleteBankDepositDialog,
     };
-  }, [bankAccountsUIContext]);
+  }, [bankDepositsUIContext]);
 
-  // Getting curret state of bankAccounts list from store (Redux)
+  // Getting curret state of bankDeposits list from store (Redux)
   const { currentState } = useSelector(
-    (state) => ({ currentState: state.bankAccounts }),
+    (state) => ({ currentState: state.bankDeposits }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
 
-  // BankAccounts Redux state
+  // BankDeposits Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    bankAccountsUIProps.setIds([]);
+    bankDepositsUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchBankAccounts(bankAccountsUIProps.queryParams));
+    dispatch(actions.fetchBankDeposits(bankDepositsUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bankAccountsUIProps.queryParams, dispatch]);
+  }, [bankDepositsUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "bankAccountId",
+      dataField: "bankDepositId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "employee.staffName",
-      text: "Employee",
+      dataField: "bankAccountId",
+      text: "AccountNo",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "attDate",
+      dataField: "onDate",
       text: "Date",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "entryTime",
-      text: "Entry Time",
+      dataField: "chequeNo",
+      text: "ChequeNo",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "inNameOf",
+      text: "In-Name",
+      sort: false,
+      sortCaret: sortCaret,
+    },
+    
+    {
+      dataField: "payMode",
+      text: "Mode",
+      sort: true,
+      formatter: columnFormatters.StatusColumnFormatter,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "amount",
+      text: "Amount",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -89,21 +111,6 @@ export function BankAccountsTable() {
     {
       dataField: "remarks",
       text: "Remarks",
-      sort: false,
-      sortCaret: sortCaret,
-    },
-    
-    {
-      dataField: "status",
-      text: "Status",
-      sort: true,
-      formatter: columnFormatters.StatusColumnFormatter,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "employee.store.storeName",
-      text: "Store",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -113,8 +120,8 @@ export function BankAccountsTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditBankAccountDialog: bankAccountsUIProps.openEditBankAccountDialog,
-        openDeleteBankAccountDialog: bankAccountsUIProps.openDeleteBankAccountDialog,
+        openEditBankDepositDialog: bankDepositsUIProps.openEditBankDepositDialog,
+        openDeleteBankDepositDialog: bankDepositsUIProps.openDeleteBankDepositDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -128,8 +135,8 @@ export function BankAccountsTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: bankAccountsUIProps.queryParams.pageSize,
-    page: bankAccountsUIProps.queryParams.pageNumber,
+    sizePerPage: bankDepositsUIProps.queryParams.pageSize,
+    page: bankDepositsUIProps.queryParams.pageNumber,
   };
 
   
@@ -149,19 +156,19 @@ export function BankAccountsTable() {
                 bootstrap4
                 remote
                 noDataIndication="No Record Found now.."
-                keyField="bankAccountId"
+                keyField="bankDepositId"
                 data={entities === null ? []: totalCount ?entities:[]}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  bankAccountsUIProps.setQueryParams
+                  bankDepositsUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: bankAccountsUIProps.ids,
-                  setIds: bankAccountsUIProps.setIds,
-                  idName:"bankAccountId",
+                  ids: bankDepositsUIProps.ids,
+                  setIds: bankDepositsUIProps.setIds,
+                  idName:"bankDepositId",
                 })}
                 {...paginationTableProps}
               >

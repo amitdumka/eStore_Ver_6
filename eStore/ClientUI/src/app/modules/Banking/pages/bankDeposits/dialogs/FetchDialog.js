@@ -4,48 +4,48 @@ import { shallowEqual, useSelector } from "react-redux";
 
 import { useUIContext } from "../UIContext";
 
-//bankAccount
-//BankAccount
+//bankDeposit
+//BankDeposit
 
 
-const selectedBankAccounts = (entities, ids) => {
-  const _bankAccounts = [];
+const selectedBankDeposits = (entities, ids) => {
+  const _bankDeposits = [];
   ids.forEach((id) => {
-    const bankAccount = entities.find((el) => el.id === id);
-    if (bankAccount) {
-      _bankAccounts.push(bankAccount);
+    const bankDeposit = entities.find((el) => el.id === id);
+    if (bankDeposit) {
+      _bankDeposits.push(bankDeposit);
     }
   });
-  return _bankAccounts;
+  return _bankDeposits;
 };
 
 export function FetchDialog({ show, onHide }) {
-  // BankAccounts UI Context
-  const bankAccountsUIContext = useUIContext();
-  const bankAccountsUIProps = useMemo(() => {
+  // BankDeposits UI Context
+  const bankDepositsUIContext = useUIContext();
+  const bankDepositsUIProps = useMemo(() => {
     return {
-      ids: bankAccountsUIContext.ids,
+      ids: bankDepositsUIContext.ids,
     };
-  }, [bankAccountsUIContext]);
+  }, [bankDepositsUIContext]);
 
-  // BankAccounts Redux state
-  const { bankAccounts } = useSelector(
+  // BankDeposits Redux state
+  const { bankDeposits } = useSelector(
     (state) => ({
-      bankAccounts: selectedBankAccounts(
-        state.bankAccounts.entities,
-        bankAccountsUIProps.ids
+      bankDeposits: selectedBankDeposits(
+        state.bankDeposits.entities,
+        bankDepositsUIProps.ids
       ),
     }),
     shallowEqual
   );
 
-  // if bankAccounts weren't selected we should close modal
+  // if bankDeposits weren't selected we should close modal
   useEffect(() => {
-    if (!bankAccountsUIProps.ids || bankAccountsUIProps.ids.length === 0) {
+    if (!bankDepositsUIProps.ids || bankDepositsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bankAccountsUIProps.ids]);
+  }, [bankDepositsUIProps.ids]);
 
   return (
     <Modal
@@ -68,12 +68,12 @@ export function FetchDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {bankAccounts.map((bankAccount) => (
-              <tr key={`id${bankAccount.id}`}>
-                <td>{bankAccount.id}</td>
+            {bankDeposits.map((bankDeposit) => (
+              <tr key={`id${bankDeposit.id}`}>
+                <td>{bankDeposit.id}</td>
                 <td>
                   <span className="ml-3">
-                    {bankAccount.lastName}, {bankAccount.firstName}
+                    {bankDeposit.lastName}, {bankDeposit.firstName}
                   </span>
                 </td>
               </tr>

@@ -2,23 +2,23 @@ import React, { useMemo } from "react";
 import { useUIContext } from "../UIContext";
 
 
-//BankAccount
-//bankAccount
+//BankDeposit
+//bankDeposit
 
 
-export function BankAccountsGrouping() {
-  // BankAccounts UI Context
-  const bankAccountsUIContext = useUIContext();
-  const bankAccountsUIProps = useMemo(() => {
+export function BankDepositsGrouping() {
+  // BankDeposits UI Context
+  const bankDepositsUIContext = useUIContext();
+  const bankDepositsUIProps = useMemo(() => {
     return {
-      ids: bankAccountsUIContext.ids,
-      setIds: bankAccountsUIContext.setIds,
-      openDeleteBankAccountsDialog: bankAccountsUIContext.openDeleteBankAccountsDialog,
-      openFetchBankAccountsDialog: bankAccountsUIContext.openFetchBankAccountsDialog,
-      openUpdateBankAccountsStatusDialog:
-        bankAccountsUIContext.openUpdateBankAccountsStatusDialog,
+      ids: bankDepositsUIContext.ids,
+      setIds: bankDepositsUIContext.setIds,
+      openDeleteBankDepositsDialog: bankDepositsUIContext.openDeleteBankDepositsDialog,
+      openFetchBankDepositsDialog: bankDepositsUIContext.openFetchBankDepositsDialog,
+      openUpdateBankDepositsStatusDialog:
+        bankDepositsUIContext.openUpdateBankDepositsStatusDialog,
     };
-  }, [bankAccountsUIContext]);
+  }, [bankDepositsUIContext]);
 
   return (
     <div className="form">
@@ -28,7 +28,7 @@ export function BankAccountsGrouping() {
             <div className="form-label form-label-no-wrap">
               <label className="font-bold font-danger">
                 <span>
-                  Selected records count: <b>{bankAccountsUIProps.ids.length}</b>
+                  Selected records count: <b>{bankDepositsUIProps.ids.length}</b>
                 </span>
               </label>
             </div>
@@ -36,7 +36,7 @@ export function BankAccountsGrouping() {
               <button
                 type="button"
                 className="btn btn-danger font-weight-bolder font-size-sm"
-                onClick={bankAccountsUIProps.openDeleteBankAccountsDialog}
+                onClick={bankDepositsUIProps.openDeleteBankDepositsDialog}
               >
                 <i className="fa fa-trash"></i> Delete All
               </button>
@@ -44,7 +44,7 @@ export function BankAccountsGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={bankAccountsUIProps.openFetchBankAccountsDialog}
+                onClick={bankDepositsUIProps.openFetchBankDepositsDialog}
               >
                 <i className="fa fa-stream"></i> Fetch Selected
               </button>
@@ -52,7 +52,7 @@ export function BankAccountsGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={bankAccountsUIProps.openUpdateBankAccountsStatusDialog}
+                onClick={bankDepositsUIProps.openUpdateBankDepositsStatusDialog}
               >
                 <i className="fa fa-sync-alt"></i> Update Status
               </button>

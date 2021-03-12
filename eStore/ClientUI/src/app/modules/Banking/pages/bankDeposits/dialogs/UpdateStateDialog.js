@@ -1,66 +1,66 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/bankAccounts/Actions";
+import * as actions from "../../../_redux/bankDeposits/Actions";
 import { useUIContext } from "../UIContext";
-//bankAccount
-//BankAccount
+//bankDeposit
+//BankDeposit
 
-const selectedBankAccounts = (entities, ids) => {
-  const _bankAccounts = [];
+const selectedBankDeposits = (entities, ids) => {
+  const _bankDeposits = [];
   ids.forEach((id) => {
-    const bankAccount = entities.find((el) => el.id === id);
-    if (bankAccount) {
-      _bankAccounts.push(bankAccount);
+    const bankDeposit = entities.find((el) => el.id === id);
+    if (bankDeposit) {
+      _bankDeposits.push(bankDeposit);
     }
   });
-  return _bankAccounts;
+  return _bankDeposits;
 };
 
 export function UpdateStateDialog({ show, onHide }) {
-  // BankAccounts UI Context
-  const bankAccountsUIContext = useUIContext();
-  const bankAccountsUIProps = useMemo(() => {
+  // BankDeposits UI Context
+  const bankDepositsUIContext = useUIContext();
+  const bankDepositsUIProps = useMemo(() => {
     return {
-      ids: bankAccountsUIContext.ids,
-      setIds: bankAccountsUIContext.setIds,
-      queryParams: bankAccountsUIContext.queryParams,
+      ids: bankDepositsUIContext.ids,
+      setIds: bankDepositsUIContext.setIds,
+      queryParams: bankDepositsUIContext.queryParams,
     };
-  }, [bankAccountsUIContext]);
+  }, [bankDepositsUIContext]);
 
-  // BankAccounts Redux state
-  const { bankAccounts, isLoading } = useSelector(
+  // BankDeposits Redux state
+  const { bankDeposits, isLoading } = useSelector(
     (state) => ({
-      bankAccounts: selectedBankAccounts(
-        state.bankAccounts.entities,
-        bankAccountsUIProps.ids
+      bankDeposits: selectedBankDeposits(
+        state.bankDeposits.entities,
+        bankDepositsUIProps.ids
       ),
-      isLoading: state.bankAccounts.actionsLoading,
+      isLoading: state.bankDeposits.actionsLoading,
     }),
     shallowEqual
   );
 
   // if !id we should close modal
   useEffect(() => {
-    if (!bankAccountsUIProps.ids || bankAccountsUIProps.ids.length === 0) {
+    if (!bankDepositsUIProps.ids || bankDepositsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bankAccountsUIProps.ids]);
+  }, [bankDepositsUIProps.ids]);
 
   const [status, setStatus] = useState(0);
 
   const dispatch = useDispatch();
   const updateStatus = () => {
-    // server request for update bankAccounts status by selected ids
+    // server request for update bankDeposits status by selected ids
     dispatch(
-      actions.updateBankAccountsStatus(bankAccountsUIProps.ids, status)
+      actions.updateBankDepositsStatus(bankDepositsUIProps.ids, status)
     ).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchBankAccounts(bankAccountsUIProps.queryParams)).then(
+      dispatch(actions.fetchBankDeposits(bankDepositsUIProps.queryParams)).then(
         () => {
           // clear selections list
-          bankAccountsUIProps.setIds([]);
+          bankDepositsUIProps.setIds([]);
           // closing delete modal
           onHide();
         }
@@ -76,7 +76,7 @@ export function UpdateStateDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Status has been updated for selected bankAccounts
+          Status has been updated for selected bankDeposits
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="overlay overlay-block cursor-default">
@@ -96,13 +96,13 @@ export function UpdateStateDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {bankAccounts.map((bankAccount) => (
-              <tr key={`id${bankAccount.id}`}>
-                <td>{bankAccount.id}</td>
+            {bankDeposits.map((bankDeposit) => (
+              <tr key={`id${bankDeposit.id}`}>
+                <td>{bankDeposit.id}</td>
 
                 <td>
                   <span className="ml-3">
-                    {bankAccount.lastName}, {bankAccount.firstName}
+                    {bankDeposit.lastName}, {bankDeposit.firstName}
                   </span>
                 </td>
               </tr>

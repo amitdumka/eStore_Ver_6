@@ -3,6 +3,9 @@ import { Formik } from "formik";
 import { isEqual } from "lodash";
 import { useUIContext } from "../UIContext";
 
+//BankDeposit
+//bankDeposit
+
 
 const prepareFilter = (queryParams, values) => {
   const { status, type, searchText } = values;
@@ -23,23 +26,23 @@ const prepareFilter = (queryParams, values) => {
   return newQueryParams;
 };
 
-export function BankAccountsFilter({ listLoading }) {
-  // BankAccounts UI Context
-  const bankAccountsUIContext = useUIContext();
-  const bankAccountsUIProps = useMemo(() => {
+export function BankDepositsFilter({ listLoading }) {
+  // BankDeposits UI Context
+  const bankDepositsUIContext = useUIContext();
+  const bankDepositsUIProps = useMemo(() => {
     return {
-      queryParams: bankAccountsUIContext.queryParams,
-      setQueryParams: bankAccountsUIContext.setQueryParams,
+      queryParams: bankDepositsUIContext.queryParams,
+      setQueryParams: bankDepositsUIContext.setQueryParams,
     };
-  }, [bankAccountsUIContext]);
+  }, [bankDepositsUIContext]);
 
   // queryParams, setQueryParams,
   const applyFilter = (values) => {
-    const newQueryParams = prepareFilter(bankAccountsUIProps.queryParams, values);
-    if (!isEqual(newQueryParams, bankAccountsUIProps.queryParams)) {
+    const newQueryParams = prepareFilter(bankDepositsUIProps.queryParams, values);
+    if (!isEqual(newQueryParams, bankDepositsUIProps.queryParams)) {
       newQueryParams.pageNumber = 1;
       // update list by queryParams
-      bankAccountsUIProps.setQueryParams(newQueryParams);
+      bankDepositsUIProps.setQueryParams(newQueryParams);
     }
   };
 

@@ -1,47 +1,47 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/bankAccounts/Actions";
+import * as actions from "../../../_redux/bankDeposits/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
-//bankAccount
-//BankAccount
+//bankDeposit
+//BankDeposit
 
 export function EditDialog({ id, show, onHide }) {
-  // BankAccounts UI Context
-  const bankAccountsUIContext = useUIContext();
-  const bankAccountsUIProps = useMemo(() => {
+  // BankDeposits UI Context
+  const bankDepositsUIContext = useUIContext();
+  const bankDepositsUIProps = useMemo(() => {
     return {
-      initBankAccount: bankAccountsUIContext.initBankAccount,
+      initBankDeposit: bankDepositsUIContext.initBankDeposit,
     };
-  }, [bankAccountsUIContext]);
+  }, [bankDepositsUIContext]);
 
-  // BankAccounts Redux state
+  // BankDeposits Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, bankAccountForEdit ,bankList} = useSelector(
+  const { actionsLoading, bankDepositForEdit ,bankList} = useSelector(
     (state) => ({
-      actionsLoading: state.bankAccounts.actionsLoading,
-      bankAccountForEdit: state.bankAccounts.bankAccountForEdit,
-      bankList:state.bankAccounts.bankEntities
+      actionsLoading: state.bankDeposits.actionsLoading,
+      bankDepositForEdit: state.bankDeposits.bankDepositForEdit,
+      bankList:state.bankDeposits.bankEntities
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    // server call for getting BankAccount by id
-    dispatch(actions.fetchBankAccount(id));
+    // server call for getting BankDeposit by id
+    dispatch(actions.fetchBankDeposit(id));
     dispatch(actions.fetchBanks());
   }, [id, dispatch]);
 
-  // server request for saving bankAccount
-  const saveBankAccount = (bankAccount) => {
+  // server request for saving bankDeposit
+  const saveBankDeposit = (bankDeposit) => {
     if (!id) {
-      // server request for creating bankAccount
-      dispatch(actions.createBankAccount(bankAccount)).then(() => onHide());
+      // server request for creating bankDeposit
+      dispatch(actions.createBankDeposit(bankDeposit)).then(() => onHide());
     } else {
-      // server request for updating bankAccount
-      dispatch(actions.updateBankAccount(bankAccount)).then(() => onHide());
+      // server request for updating bankDeposit
+      dispatch(actions.updateBankDeposit(bankDeposit)).then(() => onHide());
     }
   };
 
@@ -54,9 +54,9 @@ export function EditDialog({ id, show, onHide }) {
     >
       <EditDialogHeader id={id} />
       <EditForm
-        saveBankAccount={saveBankAccount}
+        saveBankDeposit={saveBankDeposit}
         actionsLoading={actionsLoading}
-        bankAccount={bankAccountForEdit || bankAccountsUIProps.initBankAccount}
+        bankDeposit={bankDepositForEdit || bankDepositsUIProps.initBankDeposit}
         onHide={onHide}
         bankList={bankList}
       />

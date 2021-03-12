@@ -2,6 +2,8 @@ import React, { Suspense } from "react";
 import { Redirect, Switch } from "react-router-dom";
 import { BanksPage } from "./banks/BanksPage";
 import {BankAccountsPage} from "./bankAccounts/BankAccountsPage";
+import {BankDepositsPage} from "./bankDeposits/BankDepositsPage";
+
 
 import { LayoutSplashScreen, ContentRoute } from "../../../../_metronic/layout";
 
@@ -19,6 +21,7 @@ export default function BankingPage() {
         }
         <ContentRoute path="/banking/banks" component={BanksPage} />
         <ContentRoute path="/banking/bankAccounts"  component={BankAccountsPage}/>
+        <ContentRoute path="/banking/deposit" component={BankDepositsPage}/>
         
       </Switch>
     </Suspense>

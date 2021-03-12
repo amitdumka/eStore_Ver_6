@@ -2,27 +2,27 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
-import * as actions from "../../../_redux/bankAccounts/Actions";
+import * as actions from "../../../_redux/bankDeposits/Actions";
 import { useUIContext } from "../UIContext";
 
-//bankAccount
-//BankAccount
+//bankDeposit
+//BankDeposit
 
 // Delete particular record.
 export function DeleteDialog({ id, show, onHide }) {
-  // BankAccounts UI Context
-  const bankAccountsUIContext = useUIContext();
-  const bankAccountsUIProps = useMemo(() => {
+  // BankDeposits UI Context
+  const bankDepositsUIContext = useUIContext();
+  const bankDepositsUIProps = useMemo(() => {
     return {
-      setIds: bankAccountsUIContext.setIds,
-      queryParams: bankAccountsUIContext.queryParams,
+      setIds: bankDepositsUIContext.setIds,
+      queryParams: bankDepositsUIContext.queryParams,
     };
-  }, [bankAccountsUIContext]);
+  }, [bankDepositsUIContext]);
 
-  // BankAccounts Redux state
+  // BankDeposits Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.bankAccounts.actionsLoading }),
+    (state) => ({ isLoading: state.bankDeposits.actionsLoading }),
     shallowEqual
   );
 
@@ -37,13 +37,13 @@ export function DeleteDialog({ id, show, onHide }) {
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading, dispatch]);
 
-  const deleteBankAccount = () => {
-    // server request for deleting bankAccount by id
-    dispatch(actions.deleteBankAccount(id)).then(() => {
+  const deleteBankDeposit = () => {
+    // server request for deleting bankDeposit by id
+    dispatch(actions.deleteBankDeposit(id)).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchBankAccounts(bankAccountsUIProps.queryParams));
+      dispatch(actions.fetchBankDeposits(bankDepositsUIProps.queryParams));
       // clear selections list
-      bankAccountsUIProps.setIds([]);
+      bankDepositsUIProps.setIds([]);
       // closing delete modal
       onHide();
     });
@@ -60,14 +60,14 @@ export function DeleteDialog({ id, show, onHide }) {
       {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          BankAccount Delete
+          BankDeposit Delete
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete this bankAccount?</span>
+          <span>Are you sure to permanently delete this bankDeposit?</span>
         )}
-        {isLoading && <span>BankAccount is deleting...</span>}
+        {isLoading && <span>BankDeposit is deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -81,7 +81,7 @@ export function DeleteDialog({ id, show, onHide }) {
           <> </>
           <button
             type="button"
-            onClick={deleteBankAccount}
+            onClick={deleteBankDeposit}
             className="btn btn-primary btn-elevate"
           >
             Delete

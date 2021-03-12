@@ -43,18 +43,18 @@ export function UIProvider({ UIEvents, children }) {
 
   const initBankDeposit = {
     bankDepositId: 0,
-    employeeId: 1,
-    employee: null,
-    attDate: new Date(),
-    entryTime: "",
-    status: 0,
+    bankAccountId: 1,
+    chequeNo: null,
+    onDate: new Date(),
+    inNameOf: "",
+    payMode: 0,
     remarks: "Testing",
     isTailoring: false,
     storeId: 1,
-    store: null,
-    userId: "AlokKumar",
-    entryStatus: 0,
-    isReadOnly: false,
+    amount:0.0, 
+    details:"",
+    isInHouse:false
+
   };
 
   const value = {
