@@ -14,7 +14,8 @@ const initialBankWithdrawalsState = {
   bankWithdrawalForEdit: undefined,
   lastError: null, 
   bankEntities: null, 
-  totalCountEmp:0
+  totalCountEmp:0,
+  payModes:null
 };
 export const callTypes = {
   list: "list",
@@ -49,6 +50,16 @@ export const bankWithdrawalsSlice = createSlice({
      state.error=null;
      state.bankEntities=entities;
      state.totalCountEmp=totalCount;
+
+    },
+    // get All bank List 
+    payModeListFetched: function(state,action){
+      const{entities}=action.payload;
+     state.actionsLoading=false;
+     state.listLoading =false;
+     state.error=null;
+     state.payModes=entities;
+     //state.totalCountEmp=totalCount;
 
     },
     // getBankWithdrawalById

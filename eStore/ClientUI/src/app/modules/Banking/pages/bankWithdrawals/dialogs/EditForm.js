@@ -15,11 +15,10 @@ import {
 //bankWithdrawal
 //BankWithdrawal
 
-
 // Validation schema
 const BankWithdrawalEditSchema = Yup.object().shape({
-  attDate: Yup.date().required("Date is required"),
-  status: Yup.string().required("Status is required"),
+  onDate: Yup.date().required("Date is required"),
+  signedBy: Yup.string().required("signedBy is required"),
   storeId: Yup.number().required("Store is required"),
 });
 
@@ -27,10 +26,10 @@ export function EditForm({
   saveBankWithdrawal,
   bankWithdrawal,
   actionsLoading,
-  onHide,bankList,
+  onHide,
+  bankList,
+  payMode,
 }) {
-
-  
   return (
     <>
       <Formik
@@ -51,56 +50,120 @@ export function EditForm({
               )}
               <Form className="form form-label-right">
                 <div className="form-group row">
-                  
+                  {/* Bank */}
+                  <div className="col-lg-4">
+                    <Select name="storeId" placeholder="Store" label="Store">
+                      <option value="1">Dumka</option>
+                      <option value="2">Jamshedpur</option>
+                    </Select>
+                  </div>
                   {/* Bank */}
                   <div className="col-lg-4">
                     <Select
-                      name="bankId"
-                      placeholder="Bank"
-                      label="Bank"
+                      name="bankAccountId"
+                      placeholder="Account"
+                      label="Account"
                     >
                       <option value="">Select Bank</option>
-                      {bankList.map((item) => (
-                        <option key={item.bankId} value={item.bankId}>
-                          {item.bankName}
-                        </option>
-                      ))}
+                      {bankList ? (
+                        bankList.map((item) => (
+                          <option
+                            key={item.bankAccountId}
+                            value={item.bankAccountId}
+                          >
+                            {item.account}
+                          </option>
+                        ))
+                      ) : (
+                        <option value="">Reload Page</option>
+                      )}
                     </Select>
                   </div>
-                </div>
-                <div className="form-group row">
                   {/* Date of BankWithdrawal */}
                   <div className="col-lg-4">
                     <DatePickerField
                       dateFormat="yyyy-MM-dd"
-                      name="attDate"
+                      name="onDate"
                       label="On Date"
                     />
                   </div>
+                </div>
+
+                <div className="form-group row">
                   {/*  Father Name*/}
                   <div className="col-lg-4">
                     <Field
-                      name="entryTime"
+                      name="inNameOf"
                       component={Input}
-                      placeholder="Entry Time"
-                      label="Entry Time"
+                      placeholder="inNameOf"
+                      label="inNameOf"
                     />
+                  </div>
+                  {/*  State Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="details"
+                      component={Input}
+                      placeholder="details"
+                      label="details"
+                    />
+                  </div>
+                  <div className="col-lg-4">
+                    <Select
+                      name="payMode"
+                      placeholder="payMode"
+                      label="payMode"
+                    >
+                      <option value="">Select Mode</option>
+                      {payMode ? (
+                        payMode.map((item) => (
+                          <option key={item.name} value={item.value}>
+                            {item.name}
+                          </option>
+                        ))
+                      ) : (
+                        <option value="">Modes not Found, Reload</option>
+                      )}
+                    </Select>
                   </div>
                 </div>
                 <div className="form-group row">
                   {/*  State Name*/}
                   <div className="col-lg-4">
                     <Field
-                      name="remarks"
+                      name="amount"
                       component={Input}
-                      placeholder="Remarks"
-                      label="Remarks"
+                      placeholder="Amount"
+                      label="Amount"
                     />
                   </div>
-                  {/* Tailoring Division */}
+
+                  {/*  State Name*/}
                   <div className="col-lg-4">
-                    <Field name="isTailoring" type="checkbox" />
-                    {} Tailoring Division
+                    <Field
+                      name="signedBy"
+                      component={Input}
+                      placeholder="signedBy"
+                      label="signedBy"
+                    />
+                  </div>
+                  {/*  State Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="approvedBy"
+                      component={Input}
+                      placeholder="approvedBy"
+                      label="approvedBy"
+                    />
+                  </div>
+                  {/*  State Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="remarks"
+                      component={Input}
+                      placeholder="remarks"
+                      label="remarks"
+                    />
                   </div>
                 </div>
               </Form>

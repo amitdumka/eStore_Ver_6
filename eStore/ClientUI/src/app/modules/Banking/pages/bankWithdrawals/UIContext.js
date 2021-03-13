@@ -43,18 +43,19 @@ export function UIProvider({ UIEvents, children }) {
 
   const initBankWithdrawal = {
     bankWithdrawalId: 0,
-    employeeId: 1,
-    employee: null,
-    attDate: new Date(),
-    entryTime: "",
-    status: 0,
-    remarks: "Testing",
-    isTailoring: false,
+    bankAccountId: 1,
+    account: null,
+    onDate: new Date(),
+    chequeNo: "",
+    payMode: 0,
+    inNameOf: "",
+    details: "",
     storeId: 1,
     store: null,
-    userId: "AlokKumar",
-    entryStatus: 0,
-    isReadOnly: false,
+    signedBy: "",
+    approvedBy: "",
+    remarks: "",
+    amount:0.0
   };
 
   const value = {

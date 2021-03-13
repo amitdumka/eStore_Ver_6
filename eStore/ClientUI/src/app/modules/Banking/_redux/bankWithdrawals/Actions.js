@@ -26,6 +26,23 @@ export const fetchBanks =id=>dispatch => {
     dispatch(actions.catchError({error,callTypes:callTypes.list}));
   });
 }
+export const fetchPayModes =id=>dispatch => {
+  
+  dispatch(actions.startCall({callType:callTypes.list}));
+
+  return requestFromServer
+  .getAllPayModes()
+  .then(response=>{
+    const entities  = response.data; 
+    console.log(entities);
+    dispatch(actions.payModeListFetched({ entities}));
+  })
+  .catch(error =>{
+    console.log(error);
+    error.clientMessage="Can't load Paymode list"; 
+    dispatch(actions.catchError({error,callTypes:callTypes.list}));
+  });
+}
 
 export const fetchBankWithdrawals = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));

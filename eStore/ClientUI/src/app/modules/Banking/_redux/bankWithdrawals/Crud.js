@@ -46,9 +46,13 @@ export async function findBankWithdrawals(queryParams) {
   return await axios.get(`${API_URL}`);//find`, { queryParams });
 }
 
+export async function getAllPayModes(){
+  return await axios.get("https://www.aprajitaretails.in/api/EnumValue/paymode/all") ; 
+}
+
 // function to get all list of banks
 export async function getAllBanks(){
-  return await axios.get("https://www.aprajitaretails.in/api/banks") ; 
+  return await axios.get("https://www.aprajitaretails.in/api/bankAccounts") ; 
 }
 
 // UPDATE => PUT: update the bankWithdrawal on the server

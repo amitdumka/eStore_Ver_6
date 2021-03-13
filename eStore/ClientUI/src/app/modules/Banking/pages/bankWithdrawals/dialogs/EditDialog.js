@@ -19,11 +19,12 @@ export function EditDialog({ id, show, onHide }) {
 
   // BankWithdrawals Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, bankWithdrawalForEdit ,bankList} = useSelector(
+  const { actionsLoading, bankWithdrawalForEdit ,bankList,payModes} = useSelector(
     (state) => ({
       actionsLoading: state.bankWithdrawals.actionsLoading,
       bankWithdrawalForEdit: state.bankWithdrawals.bankWithdrawalForEdit,
-      bankList:state.bankWithdrawals.bankEntities
+      bankList:state.bankWithdrawals.bankEntities,
+      payModes: state.bankWithdrawals.payModes
     }),
     shallowEqual
   );
@@ -32,6 +33,7 @@ export function EditDialog({ id, show, onHide }) {
     // server call for getting BankWithdrawal by id
     dispatch(actions.fetchBankWithdrawal(id));
     dispatch(actions.fetchBanks());
+    dispatch(actions.fetchPayModes());
   }, [id, dispatch]);
 
   // server request for saving bankWithdrawal
@@ -59,6 +61,7 @@ export function EditDialog({ id, show, onHide }) {
         bankWithdrawal={bankWithdrawalForEdit || bankWithdrawalsUIProps.initBankWithdrawal}
         onHide={onHide}
         bankList={bankList}
+        payModes={payModes}
       />
     </Modal>
   );
