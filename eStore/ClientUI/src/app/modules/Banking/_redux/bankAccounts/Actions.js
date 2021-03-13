@@ -98,6 +98,7 @@ export const createBankAccount = bankAccountForCreation => dispatch => {
 
 export const updateBankAccount = bankAccount => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
+  console.log(bankAccount);
   return requestFromServer
     .updateBankAccount(bankAccount)
     .then(() => {

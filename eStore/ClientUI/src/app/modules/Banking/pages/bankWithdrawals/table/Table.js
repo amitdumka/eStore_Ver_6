@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/bankAccounts/Actions";
+import * as actions from "../../../_redux/bankWithdrawals/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -22,44 +22,44 @@ import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 
-//BankAccount
-//bankAccount
+//BankWithdrawal
+//bankWithdrawal
 
 
-export function BankAccountsTable() {
-  // BankAccounts UI Context
-  const bankAccountsUIContext = useUIContext();
-  const bankAccountsUIProps = useMemo(() => {
+export function BankWithdrawalsTable() {
+  // BankWithdrawals UI Context
+  const bankWithdrawalsUIContext = useUIContext();
+  const bankWithdrawalsUIProps = useMemo(() => {
     return {
-      ids: bankAccountsUIContext.ids,
-      setIds: bankAccountsUIContext.setIds,
-      queryParams: bankAccountsUIContext.queryParams,
-      setQueryParams: bankAccountsUIContext.setQueryParams,
-      openEditBankAccountDialog: bankAccountsUIContext.openEditBankAccountDialog,
-      openDeleteBankAccountDialog: bankAccountsUIContext.openDeleteBankAccountDialog,
+      ids: bankWithdrawalsUIContext.ids,
+      setIds: bankWithdrawalsUIContext.setIds,
+      queryParams: bankWithdrawalsUIContext.queryParams,
+      setQueryParams: bankWithdrawalsUIContext.setQueryParams,
+      openEditBankWithdrawalDialog: bankWithdrawalsUIContext.openEditBankWithdrawalDialog,
+      openDeleteBankWithdrawalDialog: bankWithdrawalsUIContext.openDeleteBankWithdrawalDialog,
     };
-  }, [bankAccountsUIContext]);
+  }, [bankWithdrawalsUIContext]);
 
-  // Getting curret state of bankAccounts list from store (Redux)
+  // Getting curret state of bankWithdrawals list from store (Redux)
   const { currentState } = useSelector(
-    (state) => ({ currentState: state.bankAccounts }),
+    (state) => ({ currentState: state.bankWithdrawals }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
 
-  // BankAccounts Redux state
+  // BankWithdrawals Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    bankAccountsUIProps.setIds([]);
+    bankWithdrawalsUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchBankAccounts(bankAccountsUIProps.queryParams));
+    dispatch(actions.fetchBankWithdrawals(bankWithdrawalsUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bankAccountsUIProps.queryParams, dispatch]);
+  }, [bankWithdrawalsUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "bankAccountId",
+      dataField: "bankWithdrawalId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
@@ -113,8 +113,8 @@ export function BankAccountsTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditBankAccountDialog: bankAccountsUIProps.openEditBankAccountDialog,
-        openDeleteBankAccountDialog: bankAccountsUIProps.openDeleteBankAccountDialog,
+        openEditBankWithdrawalDialog: bankWithdrawalsUIProps.openEditBankWithdrawalDialog,
+        openDeleteBankWithdrawalDialog: bankWithdrawalsUIProps.openDeleteBankWithdrawalDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -128,8 +128,8 @@ export function BankAccountsTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: bankAccountsUIProps.queryParams.pageSize,
-    page: bankAccountsUIProps.queryParams.pageNumber,
+    sizePerPage: bankWithdrawalsUIProps.queryParams.pageSize,
+    page: bankWithdrawalsUIProps.queryParams.pageNumber,
   };
 
   
@@ -149,19 +149,19 @@ export function BankAccountsTable() {
                 bootstrap4
                 remote
                 noDataIndication="No Record Found now.."
-                keyField="bankAccountId"
+                keyField="bankWithdrawalId"
                 data={entities === null ? []: totalCount ?entities:[]}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  bankAccountsUIProps.setQueryParams
+                  bankWithdrawalsUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: bankAccountsUIProps.ids,
-                  setIds: bankAccountsUIProps.setIds,
-                  idName:"bankAccountId",
+                  ids: bankWithdrawalsUIProps.ids,
+                  setIds: bankWithdrawalsUIProps.setIds,
+                  idName:"bankWithdrawalId",
                 })}
                 {...paginationTableProps}
               >

@@ -12,6 +12,8 @@ import {
   DatePickerField,
 } from "../../../../../../_metronic/_partials/controls";
 
+
+
 //bankAccount
 //BankAccount
 
@@ -20,6 +22,7 @@ const BankAccountEditSchema = Yup.object().shape({
   account: Yup.string().required("Account is required"),
   branchName: Yup.string().required("Branch Name is required"),
   bankId: Yup.number().required("Store is required"),
+  accountType: Yup.number().required("Account Type is required")
 });
 
 export function EditForm({
@@ -54,9 +57,11 @@ export function EditForm({
                     <Select name="accountType" label="Account Type">
                       <option value="0">Saving</option>
                       <option value="1">Current</option>
-                      <option value="2">CC</option>
-                      <option value="3">OD</option>
+                      <option value="2">CashCredit</option>
+                      <option value="3">OverDraft</option>
                       <option value="4">Others</option>
+                      <option value="5">Loan</option>
+                      <option value="6">CF</option>
                     </Select>
                   </div>
                   {/* Email */}

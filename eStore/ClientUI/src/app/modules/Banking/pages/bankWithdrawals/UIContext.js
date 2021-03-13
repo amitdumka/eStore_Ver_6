@@ -2,8 +2,8 @@ import React, { createContext, useContext, useState, useCallback } from "react";
 import { isEqual, isFunction } from "lodash";
 import { initialFilter } from "./UIHelpers";
 
-//BankAccount
-//bankAccount
+//BankWithdrawal
+//bankWithdrawal
 
 const UIContext = createContext();
 
@@ -41,8 +41,8 @@ export function UIProvider({ UIEvents, children }) {
     });
   }, []);
 
-  const initBankAccount = {
-    bankAccountId: 0,
+  const initBankWithdrawal = {
+    bankWithdrawalId: 0,
     employeeId: 1,
     employee: null,
     attDate: new Date(),
@@ -63,14 +63,14 @@ export function UIProvider({ UIEvents, children }) {
     ids,
     setIds,
     setQueryParams,
-    initBankAccount,
-    newBankAccountButtonClick: UIEvents.newBankAccountButtonClick,
-    openEditBankAccountDialog: UIEvents.openEditBankAccountDialog,
-    openDeleteBankAccountDialog: UIEvents.openDeleteBankAccountDialog,
-    openDeleteBankAccountsDialog: UIEvents.openDeleteBankAccountsDialog,
-    openFetchBankAccountsDialog: UIEvents.openFetchBankAccountsDialog,
-    openUpdateBankAccountsStatusDialog:
-      UIEvents.openUpdateBankAccountsStatusDialog,
+    initBankWithdrawal,
+    newBankWithdrawalButtonClick: UIEvents.newBankWithdrawalButtonClick,
+    openEditBankWithdrawalDialog: UIEvents.openEditBankWithdrawalDialog,
+    openDeleteBankWithdrawalDialog: UIEvents.openDeleteBankWithdrawalDialog,
+    openDeleteBankWithdrawalsDialog: UIEvents.openDeleteBankWithdrawalsDialog,
+    openFetchBankWithdrawalsDialog: UIEvents.openFetchBankWithdrawalsDialog,
+    openUpdateBankWithdrawalsStatusDialog:
+      UIEvents.openUpdateBankWithdrawalsStatusDialog,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

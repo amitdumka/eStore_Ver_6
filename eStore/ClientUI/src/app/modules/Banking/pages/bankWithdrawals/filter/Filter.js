@@ -23,23 +23,23 @@ const prepareFilter = (queryParams, values) => {
   return newQueryParams;
 };
 
-export function BankAccountsFilter({ listLoading }) {
-  // BankAccounts UI Context
-  const bankAccountsUIContext = useUIContext();
-  const bankAccountsUIProps = useMemo(() => {
+export function BankWithdrawalsFilter({ listLoading }) {
+  // BankWithdrawals UI Context
+  const bankWithdrawalsUIContext = useUIContext();
+  const bankWithdrawalsUIProps = useMemo(() => {
     return {
-      queryParams: bankAccountsUIContext.queryParams,
-      setQueryParams: bankAccountsUIContext.setQueryParams,
+      queryParams: bankWithdrawalsUIContext.queryParams,
+      setQueryParams: bankWithdrawalsUIContext.setQueryParams,
     };
-  }, [bankAccountsUIContext]);
+  }, [bankWithdrawalsUIContext]);
 
   // queryParams, setQueryParams,
   const applyFilter = (values) => {
-    const newQueryParams = prepareFilter(bankAccountsUIProps.queryParams, values);
-    if (!isEqual(newQueryParams, bankAccountsUIProps.queryParams)) {
+    const newQueryParams = prepareFilter(bankWithdrawalsUIProps.queryParams, values);
+    if (!isEqual(newQueryParams, bankWithdrawalsUIProps.queryParams)) {
       newQueryParams.pageNumber = 1;
       // update list by queryParams
-      bankAccountsUIProps.setQueryParams(newQueryParams);
+      bankWithdrawalsUIProps.setQueryParams(newQueryParams);
     }
   };
 

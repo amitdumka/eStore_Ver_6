@@ -31,10 +31,14 @@ export function UIProvider({ UIEvents, children }) {
 
   const initBankAccount = {
     bankAccountId: 0,
-    bankId: 1,
-    account: null,
+    bankId: 0,
+    account: "",
     branchName: "",
     accountType: 0,
+    bankTranscations:null,
+    bankDeposits:null,
+    bankWithdrawals:null,
+    banks:null
   };
 
   const value = {

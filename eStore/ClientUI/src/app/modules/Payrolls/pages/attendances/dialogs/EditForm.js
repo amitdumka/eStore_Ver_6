@@ -19,8 +19,10 @@ import {
 // Validation schema
 const AttendanceEditSchema = Yup.object().shape({
   attDate: Yup.date().required("Date is required"),
-  status: Yup.string().required("Status is required"),
-  storeId: Yup.number().required("Store is required"),
+  status: Yup.number().moreThan(0).required("Status is required"),
+  storeId: Yup.number().moreThan(0).required("Store is required"),
+  entryTime:Yup.string().required("Entry time is required"), 
+  employeeId: Yup.number().moreThan(0).required("Employee is required"),
 });
 
 export function EditForm({
@@ -71,6 +73,19 @@ export function EditForm({
                           {item.staffName}
                         </option>
                       ))}
+                    </Select>
+                  </div>
+                  <div className="col-lg-4">
+                    <Select
+                      name="status"
+                      placeholder="Status"
+                      label="Status"
+                    >
+                      <option value="0">Select Status</option>
+                      <option value="0">Present</option>
+                      <option value="1">Absent</option>
+                      <option value="2">Sunday</option>
+                      <option value="3">SundayHoliday</option>
                     </Select>
                   </div>
                 </div>

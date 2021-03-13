@@ -4,48 +4,48 @@ import { shallowEqual, useSelector } from "react-redux";
 
 import { useUIContext } from "../UIContext";
 
-//bankAccount
-//BankAccount
+//bankWithdrawal
+//BankWithdrawal
 
 
-const selectedBankAccounts = (entities, ids) => {
-  const _bankAccounts = [];
+const selectedBankWithdrawals = (entities, ids) => {
+  const _bankWithdrawals = [];
   ids.forEach((id) => {
-    const bankAccount = entities.find((el) => el.id === id);
-    if (bankAccount) {
-      _bankAccounts.push(bankAccount);
+    const bankWithdrawal = entities.find((el) => el.id === id);
+    if (bankWithdrawal) {
+      _bankWithdrawals.push(bankWithdrawal);
     }
   });
-  return _bankAccounts;
+  return _bankWithdrawals;
 };
 
 export function FetchDialog({ show, onHide }) {
-  // BankAccounts UI Context
-  const bankAccountsUIContext = useUIContext();
-  const bankAccountsUIProps = useMemo(() => {
+  // BankWithdrawals UI Context
+  const bankWithdrawalsUIContext = useUIContext();
+  const bankWithdrawalsUIProps = useMemo(() => {
     return {
-      ids: bankAccountsUIContext.ids,
+      ids: bankWithdrawalsUIContext.ids,
     };
-  }, [bankAccountsUIContext]);
+  }, [bankWithdrawalsUIContext]);
 
-  // BankAccounts Redux state
-  const { bankAccounts } = useSelector(
+  // BankWithdrawals Redux state
+  const { bankWithdrawals } = useSelector(
     (state) => ({
-      bankAccounts: selectedBankAccounts(
-        state.bankAccounts.entities,
-        bankAccountsUIProps.ids
+      bankWithdrawals: selectedBankWithdrawals(
+        state.bankWithdrawals.entities,
+        bankWithdrawalsUIProps.ids
       ),
     }),
     shallowEqual
   );
 
-  // if bankAccounts weren't selected we should close modal
+  // if bankWithdrawals weren't selected we should close modal
   useEffect(() => {
-    if (!bankAccountsUIProps.ids || bankAccountsUIProps.ids.length === 0) {
+    if (!bankWithdrawalsUIProps.ids || bankWithdrawalsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bankAccountsUIProps.ids]);
+  }, [bankWithdrawalsUIProps.ids]);
 
   return (
     <Modal
@@ -68,12 +68,12 @@ export function FetchDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {bankAccounts.map((bankAccount) => (
-              <tr key={`id${bankAccount.id}`}>
-                <td>{bankAccount.id}</td>
+            {bankWithdrawals.map((bankWithdrawal) => (
+              <tr key={`id${bankWithdrawal.id}`}>
+                <td>{bankWithdrawal.id}</td>
                 <td>
                   <span className="ml-3">
-                    {bankAccount.lastName}, {bankAccount.firstName}
+                    {bankWithdrawal.lastName}, {bankWithdrawal.firstName}
                   </span>
                 </td>
               </tr>

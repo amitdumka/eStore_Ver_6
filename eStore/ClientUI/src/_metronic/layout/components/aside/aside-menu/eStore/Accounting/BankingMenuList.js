@@ -96,7 +96,7 @@ export default function BankingMenuList({ layoutProps }) {
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/banking/dithdrawl">
+                <NavLink className="menu-link" to="/banking/bankWithdrawals">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>

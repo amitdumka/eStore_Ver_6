@@ -1,66 +1,66 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/bankAccounts/Actions";
+import * as actions from "../../../_redux/bankWithdrawals/Actions";
 import { useUIContext } from "../UIContext";
-//bankAccount
-//BankAccount
+//bankWithdrawal
+//BankWithdrawal
 
-const selectedBankAccounts = (entities, ids) => {
-  const _bankAccounts = [];
+const selectedBankWithdrawals = (entities, ids) => {
+  const _bankWithdrawals = [];
   ids.forEach((id) => {
-    const bankAccount = entities.find((el) => el.id === id);
-    if (bankAccount) {
-      _bankAccounts.push(bankAccount);
+    const bankWithdrawal = entities.find((el) => el.id === id);
+    if (bankWithdrawal) {
+      _bankWithdrawals.push(bankWithdrawal);
     }
   });
-  return _bankAccounts;
+  return _bankWithdrawals;
 };
 
 export function UpdateStateDialog({ show, onHide }) {
-  // BankAccounts UI Context
-  const bankAccountsUIContext = useUIContext();
-  const bankAccountsUIProps = useMemo(() => {
+  // BankWithdrawals UI Context
+  const bankWithdrawalsUIContext = useUIContext();
+  const bankWithdrawalsUIProps = useMemo(() => {
     return {
-      ids: bankAccountsUIContext.ids,
-      setIds: bankAccountsUIContext.setIds,
-      queryParams: bankAccountsUIContext.queryParams,
+      ids: bankWithdrawalsUIContext.ids,
+      setIds: bankWithdrawalsUIContext.setIds,
+      queryParams: bankWithdrawalsUIContext.queryParams,
     };
-  }, [bankAccountsUIContext]);
+  }, [bankWithdrawalsUIContext]);
 
-  // BankAccounts Redux state
-  const { bankAccounts, isLoading } = useSelector(
+  // BankWithdrawals Redux state
+  const { bankWithdrawals, isLoading } = useSelector(
     (state) => ({
-      bankAccounts: selectedBankAccounts(
-        state.bankAccounts.entities,
-        bankAccountsUIProps.ids
+      bankWithdrawals: selectedBankWithdrawals(
+        state.bankWithdrawals.entities,
+        bankWithdrawalsUIProps.ids
       ),
-      isLoading: state.bankAccounts.actionsLoading,
+      isLoading: state.bankWithdrawals.actionsLoading,
     }),
     shallowEqual
   );
 
   // if !id we should close modal
   useEffect(() => {
-    if (!bankAccountsUIProps.ids || bankAccountsUIProps.ids.length === 0) {
+    if (!bankWithdrawalsUIProps.ids || bankWithdrawalsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bankAccountsUIProps.ids]);
+  }, [bankWithdrawalsUIProps.ids]);
 
   const [status, setStatus] = useState(0);
 
   const dispatch = useDispatch();
   const updateStatus = () => {
-    // server request for update bankAccounts status by selected ids
+    // server request for update bankWithdrawals status by selected ids
     dispatch(
-      actions.updateBankAccountsStatus(bankAccountsUIProps.ids, status)
+      actions.updateBankWithdrawalsStatus(bankWithdrawalsUIProps.ids, status)
     ).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchBankAccounts(bankAccountsUIProps.queryParams)).then(
+      dispatch(actions.fetchBankWithdrawals(bankWithdrawalsUIProps.queryParams)).then(
         () => {
           // clear selections list
-          bankAccountsUIProps.setIds([]);
+          bankWithdrawalsUIProps.setIds([]);
           // closing delete modal
           onHide();
         }
@@ -76,7 +76,7 @@ export function UpdateStateDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Status has been updated for selected bankAccounts
+          Status has been updated for selected bankWithdrawals
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="overlay overlay-block cursor-default">
@@ -96,13 +96,13 @@ export function UpdateStateDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {bankAccounts.map((bankAccount) => (
-              <tr key={`id${bankAccount.id}`}>
-                <td>{bankAccount.id}</td>
+            {bankWithdrawals.map((bankWithdrawal) => (
+              <tr key={`id${bankWithdrawal.id}`}>
+                <td>{bankWithdrawal.id}</td>
 
                 <td>
                   <span className="ml-3">
-                    {bankAccount.lastName}, {bankAccount.firstName}
+                    {bankWithdrawal.lastName}, {bankWithdrawal.firstName}
                   </span>
                 </td>
               </tr>

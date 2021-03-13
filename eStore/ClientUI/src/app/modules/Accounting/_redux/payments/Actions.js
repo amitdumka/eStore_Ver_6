@@ -112,6 +112,7 @@ export const deletePayment = (id) => (dispatch) => {
 };
 
 export const createPayment = (paymentForCreation) => (dispatch) => {
+  console.log(paymentForCreation);
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
     .createPayment(JSON.stringify(paymentForCreation))

@@ -12,20 +12,20 @@ import {
   DatePickerField,
 } from "../../../../../../_metronic/_partials/controls";
 
-//bankAccount
-//BankAccount
+//bankWithdrawal
+//BankWithdrawal
 
 
 // Validation schema
-const BankAccountEditSchema = Yup.object().shape({
+const BankWithdrawalEditSchema = Yup.object().shape({
   attDate: Yup.date().required("Date is required"),
   status: Yup.string().required("Status is required"),
   storeId: Yup.number().required("Store is required"),
 });
 
 export function EditForm({
-  saveBankAccount,
-  bankAccount,
+  saveBankWithdrawal,
+  bankWithdrawal,
   actionsLoading,
   onHide,bankList,
 }) {
@@ -35,10 +35,10 @@ export function EditForm({
     <>
       <Formik
         enableReinitialize={true}
-        initialValues={bankAccount}
-        validationSchema={BankAccountEditSchema}
+        initialValues={bankWithdrawal}
+        validationSchema={BankWithdrawalEditSchema}
         onSubmit={(values) => {
-          saveBankAccount(values);
+          saveBankWithdrawal(values);
         }}
       >
         {({ handleSubmit }) => (
@@ -69,7 +69,7 @@ export function EditForm({
                   </div>
                 </div>
                 <div className="form-group row">
-                  {/* Date of BankAccount */}
+                  {/* Date of BankWithdrawal */}
                   <div className="col-lg-4">
                     <DatePickerField
                       dateFormat="yyyy-MM-dd"

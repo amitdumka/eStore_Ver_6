@@ -3,15 +3,15 @@ import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
 
-//bankAccount
-//BankAccount
+//bankWithdrawal
+//BankWithdrawal
 
 export function EditDialogHeader({ id }) {
-  // BankAccounts Redux state
-  const { bankAccountForEdit, actionsLoading } = useSelector(
+  // BankWithdrawals Redux state
+  const { bankWithdrawalForEdit, actionsLoading } = useSelector(
     (state) => ({
-      bankAccountForEdit: state.bankAccounts.bankAccountForEdit,
-      actionsLoading: state.bankAccounts.actionsLoading,
+      bankWithdrawalForEdit: state.bankWithdrawals.bankWithdrawalForEdit,
+      actionsLoading: state.bankWithdrawals.actionsLoading,
     }),
     shallowEqual
   );
@@ -19,14 +19,14 @@ export function EditDialogHeader({ id }) {
   const [title, setTitle] = useState("");
   // Title couting
   useEffect(() => {
-    let _title = id ? "" : "New BankAccount";
-    if (bankAccountForEdit && id) {
-      _title = `Edit bankAccount '${bankAccountForEdit.firstName} ${bankAccountForEdit.lastName}'`;
+    let _title = id ? "" : "New BankWithdrawal";
+    if (bankWithdrawalForEdit && id) {
+      _title = `Edit bankWithdrawal '${bankWithdrawalForEdit.firstName} ${bankWithdrawalForEdit.lastName}'`;
     }
 
     setTitle(_title);
     // eslint-disable-next-line
-  }, [bankAccountForEdit, actionsLoading]);
+  }, [bankWithdrawalForEdit, actionsLoading]);
 
   return (
     <>
