@@ -26,14 +26,14 @@ export function BankDepositsCard() {
 
   return (
     <Card>
-      <CardHeader title="BankDeposits list">
+      <CardHeader title="Bank Deposits list">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
             onClick={BankDepositsUIProps.newBankDepositButtonClick}
           >
-            New BankDeposit
+            New Bank Deposit
           </button>
         </CardHeaderToolbar>
       </CardHeader>

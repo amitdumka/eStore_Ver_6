@@ -26,14 +26,14 @@ export function BankWithdrawalsCard() {
 
   return (
     <Card>
-      <CardHeader title="BankWithdrawals list">
+      <CardHeader title="Bank Withdrawals list">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
             onClick={BankWithdrawalsUIProps.newBankWithdrawalButtonClick}
           >
-            New BankWithdrawal
+            New Bank Withdrawal
           </button>
         </CardHeaderToolbar>
       </CardHeader>

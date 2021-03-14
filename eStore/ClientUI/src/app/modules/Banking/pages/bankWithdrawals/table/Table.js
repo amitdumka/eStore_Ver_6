@@ -67,7 +67,7 @@ export function BankWithdrawalsTable() {
     },
     {
       dataField: "bankAccountId",
-      text: "BankAccountId",
+      text: "Account",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -81,7 +81,7 @@ export function BankWithdrawalsTable() {
     },
     {
       dataField: "inNameOf",
-      text: "InNameOf",
+      text: "Name",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,

@@ -19,7 +19,15 @@ import {
 const BankWithdrawalEditSchema = Yup.object().shape({
   onDate: Yup.date().required("Date is required"),
   signedBy: Yup.string().required("signedBy is required"),
-  storeId: Yup.number().required("Store is required"),
+  storeId: Yup.number().moreThan(0).required("Store is required"),
+  inNameOf: Yup.string().required("Name is required"),
+  approvedBy: Yup.string().required("Approved By is required"), 
+  bankAccountId:Yup.number().moreThan(0).required("Select Account"), 
+  details: Yup.string().required("Details is required"), 
+  remarks: Yup.string().required("Remarks is required"), 
+  amount:Yup.number().moreThan(0).required("Amount is required"),
+
+
 });
 
 export function EditForm({
@@ -31,6 +39,7 @@ export function EditForm({
   payMode,
 }) {
   return (
+
     <>
       <Formik
         enableReinitialize={true}
@@ -95,8 +104,8 @@ export function EditForm({
                     <Field
                       name="inNameOf"
                       component={Input}
-                      placeholder="inNameOf"
-                      label="inNameOf"
+                      placeholder="Name"
+                      label="Name"
                     />
                   </div>
                   {/*  State Name*/}
@@ -104,15 +113,15 @@ export function EditForm({
                     <Field
                       name="details"
                       component={Input}
-                      placeholder="details"
-                      label="details"
+                      placeholder="Details"
+                      label="Details"
                     />
                   </div>
                   <div className="col-lg-4">
                     <Select
                       name="payMode"
-                      placeholder="payMode"
-                      label="payMode"
+                      placeholder="Mode"
+                      label="Mode"
                     >
                       <option value="">Select Mode</option>
                       {payMode ? (
@@ -143,8 +152,8 @@ export function EditForm({
                     <Field
                       name="signedBy"
                       component={Input}
-                      placeholder="signedBy"
-                      label="signedBy"
+                      placeholder="Signed By"
+                      label="Signed By"
                     />
                   </div>
                   {/*  State Name*/}
@@ -152,8 +161,8 @@ export function EditForm({
                     <Field
                       name="approvedBy"
                       component={Input}
-                      placeholder="approvedBy"
-                      label="approvedBy"
+                      placeholder="Approved By"
+                      label="Approved By"
                     />
                   </div>
                   {/*  State Name*/}
@@ -161,8 +170,8 @@ export function EditForm({
                     <Field
                       name="remarks"
                       component={Input}
-                      placeholder="remarks"
-                      label="remarks"
+                      placeholder="Remarks"
+                      label="Remarks"
                     />
                   </div>
                 </div>

@@ -92,7 +92,7 @@ export default function BankingMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/banking/withdrawl"
+                  "/banking/bankWithdrawals"
                 )}`}
                 aria-haspopup="true"
               >
@@ -100,7 +100,7 @@ export default function BankingMenuList({ layoutProps }) {
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
-                  <span className="menu-text">Withdrawl</span>
+                  <span className="menu-text">Withdrawal</span>
                 </NavLink>
               </li>
               {/*end::2 Level*/}
