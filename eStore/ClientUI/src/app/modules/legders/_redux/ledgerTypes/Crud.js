@@ -2,7 +2,7 @@ import axios from "axios";
 
 //legderType
 //LedgerType
-
+export const API_BASE_URL="https://www.aprajitaretails.in/api/";
 export const API_URL = "https://www.aprajitaretails.in/api/ledgerTypes";
 // CREATE =>  POST: add a new legderType to the server
 export async function createLedgerType(legderType) {
@@ -15,7 +15,9 @@ export async function createLedgerType(legderType) {
 export function getAllLedgerTypes() {
   return axios.get(API_URL); //.catch(function (error){console.log(error)});
 }
-
+export async function getLedgerCategory(){
+  return await axios.get(`${API_BASE_URL}EnumValue/ledgercategory/all`);
+}
 export async function getLedgerTypeById(legderTypeId) {
   return await axios.get(`${API_URL}/${legderTypeId}`);
 }

@@ -5,7 +5,19 @@ const { actions } = ledgerTypesSlice;
 
 //ledgerType
 //LedgerType
-
+export const fetchLedgerCategory = () => (dispatch) => {
+  dispatch(actions.startCall({ callType: callTypes.list }));
+  return requestFromServer
+    .getLedgerCategory()
+    .then((response) => {
+      const entities = response.data;
+      dispatch(actions.ledgerCategoryFetched({ entities }));
+    })
+    .catch((error) => {
+      error.clientMessage = "Can't load Category";
+      dispatch(actions.catchError({ error, callType: callTypes.list }));
+    });
+};
 export const fetchLedgerTypes = (queryParams) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer

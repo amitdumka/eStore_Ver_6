@@ -10,6 +10,7 @@ const initialLedgerTypesState = {
   entities: null,
   ledgerTypeForEdit: undefined,
   lastError: null,
+  ledgerCategory: null,
 };
 export const callTypes = {
   list: "list",
@@ -49,6 +50,12 @@ export const ledgerTypesSlice = createSlice({
       state.error = null;
       state.entities = entities;
       state.totalCount = totalCount;
+    },
+    ledgerCategoryFetched: (state, action) => {
+      const { entities } = action.payload;
+      state.listLoading = false;
+      state.error = null;
+      state.ledgerCategory = entities;
     },
     // createLedgerType
     ledgerTypeCreated: (state, action) => {

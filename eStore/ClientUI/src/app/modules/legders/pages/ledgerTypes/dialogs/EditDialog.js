@@ -21,10 +21,11 @@ export function EditDialog({ id, show, onHide }) {
 
   // LedgerTypes Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, ledgerTypeForEdit } = useSelector(
+  const { actionsLoading, ledgerTypeForEdit , ledgerCategory} = useSelector(
     (state) => ({
       actionsLoading: state.ledgerTypes.actionsLoading,
       ledgerTypeForEdit: state.ledgerTypes.ledgerTypeForEdit,
+      ledgerType: state.ledgerTypes.ledgerCategory,
     }),
     shallowEqual
   );
@@ -32,6 +33,7 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting LedgerType by id
     dispatch(actions.fetchLedgerType(id));
+    dispatch(actions.fetchLedgerCategory());
   }, [id, dispatch]);
 
   // server request for saving ledgerType
@@ -58,6 +60,7 @@ export function EditDialog({ id, show, onHide }) {
         actionsLoading={actionsLoading}
         ledgerType={ledgerTypeForEdit || ledgerTypesUIProps.initLedgerType}
         onHide={onHide}
+        ledgerCategory={ledgerCategory}
       />
     </Modal>
   );

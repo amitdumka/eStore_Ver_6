@@ -21,9 +21,7 @@ const LedgerTypeEditSchema = Yup.object().shape({
     .min(3, "Minimum 3 symbols")
     .max(50, "Maximum 50 symbols")
     .required("Ledger Type Name is required"),
-
   remark: Yup.string().required("Remark   is required"),
-
   category: Yup.number().required("Category is required"),
 });
 
@@ -32,6 +30,7 @@ export function EditForm({
   ledgerType,
   actionsLoading,
   onHide,
+  ledgerCategory,
 }) {
   return (
     <>

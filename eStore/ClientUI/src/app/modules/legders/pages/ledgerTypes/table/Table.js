@@ -41,8 +41,8 @@ export function LedgerTypesTable() {
   }, [ledgerTypesUIContext]);
 
   // Getting curret state of ledgerTypes list from store (Redux)
-  const { currentState } = useSelector(
-    (state) => ({ currentState: state.ledgerTypes }),
+  const { currentState ,ledgerCategory} = useSelector(
+    (state) => ({ currentState: state.ledgerTypes , ledgerCategory:state.ledgerTypes.ledgerTypes}),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
@@ -54,6 +54,7 @@ export function LedgerTypesTable() {
     ledgerTypesUIProps.setIds([]);
     // server call by queryParams
     dispatch(actions.fetchLedgerTypes(ledgerTypesUIProps.queryParams));
+    dispatch(actions.fetchLedgerCategory());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ledgerTypesUIProps.queryParams, dispatch]);
   // Table columns
