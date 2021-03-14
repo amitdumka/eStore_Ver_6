@@ -19,13 +19,13 @@ export default function LedgerMenuList({ layoutProps }) {
       {/*begin::1 Level*/}
       <li
         className={`menu-item menu-item-submenu ${getMenuItemActive(
-          "/google-material",
+          "/ledger",
           true
         )}`}
         aria-haspopup="true"
         data-menu-toggle="hover"
       >
-        <NavLink className="menu-link menu-toggle" to="/ledger-menu">
+        <NavLink className="menu-link menu-toggle" to="/ledger">
           <span className="svg-icon menu-icon">
             <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
           </span>
@@ -44,10 +44,10 @@ export default function LedgerMenuList({ layoutProps }) {
 
             {/*begin::2 Level*/}
             <li
-              className={`menu-item ${getMenuItemActive("/ledger/ledgertype")}`}
+              className={`menu-item ${getMenuItemActive("/ledger/ledgerTypes")}`}
               aria-haspopup="true"
             >
-              <NavLink className="menu-link" to="/ledger/ledgertype">
+              <NavLink className="menu-link" to="/ledger/ledgerTypes">
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
                 </i>
@@ -71,11 +71,11 @@ export default function LedgerMenuList({ layoutProps }) {
             {/*begin::2 Level*/}
             <li
               className={`menu-item ${getMenuItemActive(
-                "/ledger/ledgermaster"
+                "/ledger/ledgerMaster"
               )}`}
               aria-haspopup="true"
             >
-              <NavLink className="menu-link" to="/ledger/ledgermaster">
+              <NavLink className="menu-link" to="/ledger/ledgerMaster">
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
                 </i>
@@ -85,10 +85,10 @@ export default function LedgerMenuList({ layoutProps }) {
             {/*end::2 Level*/}
             {/*begin::2 Level*/}
             <li
-              className={`menu-item ${getMenuItemActive("/ledger/ledgerentry")}`}
+              className={`menu-item ${getMenuItemActive("/ledger/ledgerEntry")}`}
               aria-haspopup="true"
             >
-              <NavLink className="menu-link" to="/ledger/ledgerentry">
+              <NavLink className="menu-link" to="/ledger/ledgerEntry">
                 <i className="menu-bullet menu-bullet-dot">
                   <span />
                 </i>

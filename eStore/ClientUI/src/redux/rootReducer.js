@@ -19,10 +19,11 @@ import { banksSlice } from "../app/modules/Banking/_redux/banks/Slice";
 import { bankAccountsSlice } from "../app/modules/Banking/_redux/bankAccounts/Slice";
 import { bankDepositsSlice } from "../app/modules/Banking/_redux/bankDeposits/Slice";
 import { bankWithdrawalsSlice } from "../app/modules/Banking/_redux/bankWithdrawals/Slice";
-//import { accountsSlice } from "../app/modules/Banking/_redux/accounts/Slice";
+import {ledgerTypesSlice} from "../app/modules/legders/_redux/ledgerTypes/Slice";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
+  ledgerTypes: ledgerTypesSlice.reducer,
   customers: customersSlice.reducer,
   employees: employeesSlice.reducer,
   attendances: attendancesSlice.reducer,
@@ -37,7 +38,7 @@ export const rootReducer = combineReducers({
   bankAccounts: bankAccountsSlice.reducer,
   bankDeposits: bankDepositsSlice.reducer,
   bankWithdrawals: bankWithdrawalsSlice.reducer,
-  //accounts: accountsSlice.reducer,
+
 });
 
 export function* rootSaga() {
