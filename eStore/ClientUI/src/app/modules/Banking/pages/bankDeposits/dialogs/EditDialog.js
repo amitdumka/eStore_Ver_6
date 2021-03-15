@@ -36,6 +36,7 @@ export function EditDialog({ id, show, onHide }) {
 
   // server request for saving bankDeposit
   const saveBankDeposit = (bankDeposit) => {
+    bankDeposit.payMode=parseInt(bankDeposit.payMode);
     if (!id) {
       // server request for creating bankDeposit
       dispatch(actions.createBankDeposit(bankDeposit)).then(() => onHide());

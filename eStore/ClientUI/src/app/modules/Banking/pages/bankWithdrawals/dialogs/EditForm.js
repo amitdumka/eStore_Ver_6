@@ -19,15 +19,19 @@ import {
 const BankWithdrawalEditSchema = Yup.object().shape({
   onDate: Yup.date().required("Date is required"),
   signedBy: Yup.string().required("signedBy is required"),
-  storeId: Yup.number().moreThan(0).required("Store is required"),
+  storeId: Yup.number()
+    .moreThan(0)
+    .required("Store is required"),
   inNameOf: Yup.string().required("Name is required"),
-  approvedBy: Yup.string().required("Approved By is required"), 
-  bankAccountId:Yup.number().moreThan(0).required("Select Account"), 
-  details: Yup.string().required("Details is required"), 
-  remarks: Yup.string().required("Remarks is required"), 
-  amount:Yup.number().moreThan(0).required("Amount is required"),
-
-
+  approvedBy: Yup.string().required("Approved By is required"),
+  bankAccountId: Yup.number()
+    .moreThan(0)
+    .required("Select Account"),
+  details: Yup.string().required("Details is required"),
+  remarks: Yup.string().required("Remarks is required"),
+  amount: Yup.number()
+    .moreThan(0)
+    .required("Amount is required"),
 });
 
 export function EditForm({
@@ -36,10 +40,9 @@ export function EditForm({
   actionsLoading,
   onHide,
   bankList,
-  payMode,
+  payModes,
 }) {
   return (
-
     <>
       <Formik
         enableReinitialize={true}
@@ -73,7 +76,7 @@ export function EditForm({
                       placeholder="Account"
                       label="Account"
                     >
-                      <option value="">Select Bank</option>
+                      <option value="-1">Select Bank</option>
                       {bankList ? (
                         bankList.map((item) => (
                           <option
@@ -118,21 +121,13 @@ export function EditForm({
                     />
                   </div>
                   <div className="col-lg-4">
-                    <Select
-                      name="payMode"
-                      placeholder="Mode"
-                      label="Mode"
-                    >
+                    <Select name="payMode" placeholder="Mode" label="Mode">
                       <option value="">Select Mode</option>
-                      {payMode ? (
-                        payMode.map((item) => (
-                          <option key={item.name} value={item.value}>
-                            {item.name}
-                          </option>
-                        ))
-                      ) : (
-                        <option value="">Modes not Found, Reload</option>
-                      )}
+                      {payModes.map((item) => (
+                        <option key={item.value} value={item.value}>
+                          {item.name}
+                        </option>
+                      ))}
                     </Select>
                   </div>
                 </div>

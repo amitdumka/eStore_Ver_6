@@ -38,6 +38,7 @@ export function EditDialog({ id, show, onHide }) {
 
   // server request for saving bankWithdrawal
   const saveBankWithdrawal = (bankWithdrawal) => {
+    bankWithdrawal.payMode=parseInt(bankWithdrawal.payMode);
     if (!id) {
       // server request for creating bankWithdrawal
       dispatch(actions.createBankWithdrawal(bankWithdrawal)).then(() => onHide());

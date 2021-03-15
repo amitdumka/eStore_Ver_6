@@ -17,7 +17,7 @@ export function ActionsColumnFormatter(
       <a
         title="Edit Bank Withdrawal"
         className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-        onClick={() => openEditBankWithdrawalDialog(row.BankWithdrawalId)}
+        onClick={() => openEditBankWithdrawalDialog(row.bankWithdrawalId)}
       >
         <span className="svg-icon svg-icon-md svg-icon-primary">
           <SVG
@@ -30,7 +30,7 @@ export function ActionsColumnFormatter(
       <a
         title="Delete BankWithdrawal"
         className="btn btn-icon btn-light btn-hover-danger btn-sm"
-        onClick={() => openDeleteBankWithdrawalDialog(row.BankWithdrawalId)}
+        onClick={() => openDeleteBankWithdrawalDialog(row.bankWithdrawalId)}
       >
         <span className="svg-icon svg-icon-md svg-icon-danger">
           <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />

@@ -79,6 +79,7 @@ export const deleteBankDeposit = id => dispatch => {
 };
 
 export const createBankDeposit = bankDepositForCreation => dispatch => {
+  console.log((bankDepositForCreation));
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
     .createBankDeposit(JSON.stringify( bankDepositForCreation))
@@ -88,6 +89,7 @@ export const createBankDeposit = bankDepositForCreation => dispatch => {
       dispatch(actions.bankDepositCreated({ bankDeposit }));
     })
     .catch(error => {
+      console.log(error);
       error.clientMessage = "Can't create bankDeposit";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
@@ -95,6 +97,7 @@ export const createBankDeposit = bankDepositForCreation => dispatch => {
 
 export const updateBankDeposit = bankDeposit => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
+  console.log((bankDeposit));
   return requestFromServer
     .updateBankDeposit(bankDeposit)
     .then(() => {
