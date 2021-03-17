@@ -36,6 +36,7 @@ export function EditDialog({ id, show, onHide }) {
 
   // server request for saving attendance
   const saveAttendance = (attendance) => {
+    attendance.status=parseInt(attendance.status);
     if (!id) {
       // server request for creating attendance
       dispatch(actions.createAttendance(attendance)).then(() => onHide());

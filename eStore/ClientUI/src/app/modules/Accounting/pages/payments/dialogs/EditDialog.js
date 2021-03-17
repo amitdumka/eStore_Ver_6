@@ -41,6 +41,7 @@ export function EditDialog({ id, show, onHide }) {
 
   // server request for saving payment
   const savePayment = (payment) => {
+    payment.payMode=parseInt(payment.payMode);
     if (!id) {
       // server request for creating payment
       dispatch(actions.createPayment(payment)).then(() => onHide());

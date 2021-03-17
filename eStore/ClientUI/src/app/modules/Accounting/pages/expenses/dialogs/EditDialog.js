@@ -41,6 +41,7 @@ export function EditDialog({ id, show, onHide }) {
 
   // server request for saving expense
   const saveExpense = (expense) => {
+    expense.payMode=parseInt(expense.payMode);
     if (!id) {
       // server request for creating expense
       dispatch(actions.createExpense(expense)).then(() => onHide());

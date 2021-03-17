@@ -113,7 +113,7 @@ export function CustomerEditForm({
                 <div className="form-group row">
                   {/* Gender */}
                   <div className="col-lg-4">
-                    <Select name="Gender" label="Gender">
+                    <Select name="gender" label="Gender">
                      <option value="0">Male</option>
                      <option value="1">Female</option>
                       

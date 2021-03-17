@@ -37,6 +37,9 @@ export function EditDialog({ id, show, onHide }) {
 
   // server request for saving salaryPayment
   const saveSalaryPayment = (salaryPayment) => {
+    salaryPayment.salaryComponet=parseInt(salaryPayment.salaryComponet);
+    salaryPayment.payMode=parseInt(salaryPayment.payMode);
+    
     if (!id) {
       // server request for creating salaryPayment
       dispatch(actions.createSalaryPayment(salaryPayment)).then(() => onHide());

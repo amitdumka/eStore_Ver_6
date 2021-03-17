@@ -32,6 +32,7 @@ export function EditDialog({ id, show, onHide }) {
 
   // server request for saving employee
   const saveEmployee = (employee) => {
+    employee.categoryId=parseInt(employee.categoryId);
     if (!id) {
       // server request for creating employee
       dispatch(actions.createEmployee(employee)).then(() => onHide());

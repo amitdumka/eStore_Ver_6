@@ -41,6 +41,7 @@ export function EditDialog({ id, show, onHide }) {
 
   // server request for saving receipt
   const saveReceipt = (receipt) => {
+    receipt.payMode=parseInt(receipt.payMode);
     if (!id) {
       // server request for creating receipt
       dispatch(actions.createReceipt(receipt)).then(() => onHide());

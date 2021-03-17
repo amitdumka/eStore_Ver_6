@@ -32,6 +32,7 @@ export function CustomerEditDialog({ id, show, onHide }) {
 
   // server request for saving customer
   const saveCustomer = (customer) => {
+    customer.gender=parseInt(customer.gender);
     if (!id) {
       // server request for creating customer
       dispatch(actions.createCustomer(customer)).then(() => onHide());
