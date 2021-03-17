@@ -86,6 +86,8 @@ export const createLedgerType = (ledgerTypeForCreation) => (dispatch) => {
 };
 
 export const updateLedgerType = (ledgerType) => (dispatch) => {
+  console.log(ledgerType);
+
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
     .updateLedgerType(ledgerType)
@@ -93,6 +95,7 @@ export const updateLedgerType = (ledgerType) => (dispatch) => {
       dispatch(actions.ledgerTypeUpdated({ ledgerType }));
     })
     .catch((error) => {
+      console.log(error);
       error.clientMessage = "Can't update ledgerType";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });

@@ -22,7 +22,7 @@ export function EditDialogHeader({ id }) {
   useEffect(() => {
     let _title = id ? "" : "New LedgerType";
     if (ledgerTypeForEdit && id) {
-      _title = `Edit ledgerType '${ledgerTypeForEdit.firstName} ${ledgerTypeForEdit.lastName}'`;
+      _title = `Edit ledgerType '${ledgerTypeForEdit.ledgerTypeName}'`;
     }
 
     setTitle(_title);

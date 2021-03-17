@@ -73,8 +73,12 @@ export function EditForm({
                   {/* Store */}
                   <div className="col-lg-4">
                     <Select name="category" label="Category">
-                      <option value="1">Cash</option>
-                      <option value="2">Expenses</option>
+                    <option >Select Category</option>
+                    {ledgerCategory.map((item) => (
+                        <option key={item.value} value={item.value}>
+                          {item.name}
+                        </option>
+                      ))}
                     </Select>
                   </div>
                 </div>

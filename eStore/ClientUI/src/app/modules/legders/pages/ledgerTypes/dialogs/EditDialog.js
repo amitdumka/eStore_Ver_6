@@ -6,7 +6,6 @@ import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
 
-
 //ledgerType
 //LedgerType
 
@@ -21,11 +20,11 @@ export function EditDialog({ id, show, onHide }) {
 
   // LedgerTypes Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, ledgerTypeForEdit , ledgerCategory} = useSelector(
+  const { actionsLoading, ledgerTypeForEdit, ledgerCategory } = useSelector(
     (state) => ({
       actionsLoading: state.ledgerTypes.actionsLoading,
       ledgerTypeForEdit: state.ledgerTypes.ledgerTypeForEdit,
-      ledgerType: state.ledgerTypes.ledgerCategory,
+      ledgerCategory: state.ledgerTypes.ledgerCategory,
     }),
     shallowEqual
   );
@@ -38,6 +37,8 @@ export function EditDialog({ id, show, onHide }) {
 
   // server request for saving ledgerType
   const saveLedgerType = (ledgerType) => {
+    ledgerType.category = parseInt(ledgerType.category);
+
     if (!id) {
       // server request for creating ledgerType
       dispatch(actions.createLedgerType(ledgerType)).then(() => onHide());

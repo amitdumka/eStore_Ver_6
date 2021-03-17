@@ -16,7 +16,7 @@ export function StickyToolbar() {
               to="/payroll/employee/attendances"
               className="btn btn-sm btn-icon btn-bg-light btn-text-primary btn-hover-primary"
             >
-             <i class="fas fa-user-tie"></i>
+             <i className="fas fa-user-tie"></i>
             </Link>
           </li>
         </OverlayTrigger>
@@ -32,7 +32,7 @@ export function StickyToolbar() {
               rel="noopener noreferrer"
               href="https://keenthemes.com/metronic/?page=docs&section=react-quick-start"
             >
-             <i class="fas fa-cart-plus"></i>
+             <i className="fas fa-cart-plus"></i>
             </a>
           </li>
         </OverlayTrigger>

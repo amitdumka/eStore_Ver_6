@@ -1,12 +1,12 @@
 import axios from "axios";
 
-//legderType
+//ledgerType
 //LedgerType
 export const API_BASE_URL="https://www.aprajitaretails.in/api/";
 export const API_URL = "https://www.aprajitaretails.in/api/ledgerTypes";
-// CREATE =>  POST: add a new legderType to the server
-export async function createLedgerType(legderType) {
-  return await axios.post(API_URL, legderType, {
+// CREATE =>  POST: add a new ledgerType to the server
+export async function createLedgerType(ledgerType) {
+  return await axios.post(API_URL, ledgerType, {
     headers: { "Content-Type": "application/json; charset=utf-8" },
   });
 }
@@ -16,10 +16,10 @@ export function getAllLedgerTypes() {
   return axios.get(API_URL); //.catch(function (error){console.log(error)});
 }
 export async function getLedgerCategory(){
-  return await axios.get(`${API_BASE_URL}EnumValue/ledgercategory/all`);
+  return await axios.get(`${API_BASE_URL}EnumValue/ledgercategorytype/all`);
 }
-export async function getLedgerTypeById(legderTypeId) {
-  return await axios.get(`${API_URL}/${legderTypeId}`);
+export async function getLedgerTypeById(ledgerTypeId) {
+  return await axios.get(`${API_URL}/${ledgerTypeId}`);
 }
 
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
@@ -29,11 +29,12 @@ export async function findLedgerTypes(queryParams) {
   return await axios.get(`${API_URL}`); //find`, { queryParams });
 }
 
-// UPDATE => PUT: update the legderType on the server
-export async function updateLedgerType(legderType) {
+// UPDATE => PUT: update the ledgerType on the server
+export async function updateLedgerType(ledgerType) {
+  console.error(ledgerType);
   return await axios.put(
-    `${API_URL}/${legderType.legderTypeId}`,
-    JSON.stringify(legderType),
+    `${API_URL}/${ledgerType.ledgerTypeId}`,
+    JSON.stringify(ledgerType),
     {
       headers: { "Content-Type": "application/json; charset=utf-8" },
     }
@@ -48,9 +49,9 @@ export async function updateStatusForLedgerTypes(ids, status) {
   });
 }
 
-// DELETE => delete the legderType from the server
-export async function deleteLedgerType(legderTypeId) {
-  return await axios.delete(`${API_URL}/${legderTypeId}`);
+// DELETE => delete the ledgerType from the server
+export async function deleteLedgerType(ledgerTypeId) {
+  return await axios.delete(`${API_URL}/${ledgerTypeId}`);
 }
 
 // DELETE LedgerTypes by ids
