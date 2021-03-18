@@ -97,7 +97,7 @@ export function BankDepositsTable() {
       dataField: "payMode",
       text: "Mode",
       sort: true,
-      formatter: columnFormatters.StatusColumnFormatter,
+      formatter: columnFormatters.PayModeColumnFormatter,
       sortCaret: sortCaret,
       headerSortingClasses,
     },

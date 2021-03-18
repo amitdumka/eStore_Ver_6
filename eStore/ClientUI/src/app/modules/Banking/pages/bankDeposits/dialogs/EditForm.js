@@ -20,6 +20,10 @@ const BankDepositEditSchema = Yup.object().shape({
   onDate: Yup.date().required("Date is required"),
   inNameOf: Yup.string().required("Status is required"),
   storeId: Yup.number().required("Store is required"),
+  chequeNo:Yup.string().required("Cheque No is required"), 
+  amount: Yup.number().moreThan(0).required("Amount is required"), 
+  bankAccountId: Yup.number().moreThan(0).required("Select Bank Account"), 
+  
 });
 
 export function EditForm({
@@ -51,7 +55,7 @@ export function EditForm({
                 <div className="form-group row">
                   {/* Bank */}
                   <div className="col-lg-4">
-                    <Select name="bankId" placeholder="Bank" label="Bank">
+                    <Select name="bankAccountId" placeholder="Bank" label="Bank">
                       <option value="">Select Bank</option>
                       {bankList ? (
                         bankList.map((item) => (

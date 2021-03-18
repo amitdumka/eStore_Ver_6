@@ -36,6 +36,9 @@ export function EditDialog({ id, show, onHide }) {
 
   // server request for saving bankAccount
   const saveBankAccount = (bankAccount) => {
+    
+    bankAccount.accountType=parseInt(bankAccount.accountType);
+
     if (!id) {
       // server request for creating bankAccount
       dispatch(actions.createBankAccount(bankAccount)).then(() => onHide());

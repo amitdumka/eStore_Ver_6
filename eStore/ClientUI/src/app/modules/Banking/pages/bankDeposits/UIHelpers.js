@@ -1,7 +1,7 @@
 export const StatusCssClasses = ["success","danger", "warning","info",""];
 export const StatusTitles = ["Present", "Absent", "HalfDay","Sunday" ,""];
-//export const CustomerTypeCssClasses = ["success", "primary", ""];
-//export const CustomerTypeTitles = ["Business", "Individual", ""];
+export const PayModeCssClasses = ["success", "primary","danger","warning","info", "default","warning","info", "default","warning","info", "default","primary",""];
+export const PayModeTitles = ["Cash", "Card", "RTGS", "NEFT", "IMPS", "Wallets", "Cheques", "DemandDraft", "Points", "Others", "Coupons", "MixPayments", "UPI", ""];
 export const defaultSorted = [{ dataField: "firstName", order: "asc" }];
 export const sizePerPageList = [
   { text: "3", value: 3 },
