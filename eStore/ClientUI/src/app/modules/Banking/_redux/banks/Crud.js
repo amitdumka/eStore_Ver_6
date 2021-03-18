@@ -42,7 +42,7 @@ export async function getBankById(bankId) {
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
 // items => filtered/sorted result
 export async function findBanks(queryParams) {
-  //verifyLogin();
+  console.log(queryParams);
   return await axios.get(`${API_URL}`);//find`, { queryParams });
 }
 
