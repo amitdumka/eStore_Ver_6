@@ -41,8 +41,8 @@ export function PurchaseTaxesTable() {
   }, [purchaseTaxesUIContext]);
 
   // Getting curret state of purchaseTaxes list from store (Redux)
-  const { currentState ,ledgerCategory} = useSelector(
-    (state) => ({ currentState: state.purchaseTaxes , ledgerCategory:state.purchaseTaxes.purchaseTaxes}),
+  const { currentState ,taxTypes} = useSelector(
+    (state) => ({ currentState: state.purchaseTaxes , taxTypes:state.purchaseTaxes.purchaseTaxes}),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
@@ -54,7 +54,7 @@ export function PurchaseTaxesTable() {
     purchaseTaxesUIProps.setIds([]);
     // server call by queryParams
     dispatch(actions.fetchPurchaseTaxes(purchaseTaxesUIProps.queryParams));
-    dispatch(actions.fetchLedgerCategory());
+    dispatch(actions.fetchTaxType());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [purchaseTaxesUIProps.queryParams, dispatch]);
   // Table columns

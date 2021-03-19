@@ -31,10 +31,10 @@ export function UIProvider({ UIEvents, children }) {
   }, []);
 
   const initPurchaseTax = {
-    purchaseTaxId: 0,
-    ledgerNameType: "",
-    category: 0,
-    remark: "",
+    purchaseItemId: 0,
+    taxName: "",
+    taxType: 0,
+    compositeRate: 0.0,
   };
 
   const value = {

@@ -10,17 +10,17 @@ import {saleTaxesSlice, callTypes} from "./Slice";
 
 const {actions} = saleTaxesSlice;
 
-export const fetchledgerTypes =id=>dispatch => {
+export const fetchTaxTypes =id=>dispatch => {
   
   dispatch(actions.startCall({callType:callTypes.list}));
 
   return requestFromServer
-  .getAllLedgerTypes()
+  .getAllTaxTypes()
   .then(response=>{
     const entities  = response.data; 
     const totalCount=response.data.length;
     console.log(entities);
-    dispatch(actions.ledgerTypesFetched({totalCount, entities}));
+    dispatch(actions.taxTypesFetched({totalCount, entities}));
   })
   .catch(error =>{
     console.log(error);

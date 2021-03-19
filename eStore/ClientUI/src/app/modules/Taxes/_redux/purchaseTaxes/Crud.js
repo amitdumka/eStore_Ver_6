@@ -7,7 +7,7 @@ import axios from "axios";
 
 
 export const API_BASE_URL="https://www.aprajitaretails.in/api/";
-export const API_URL = "https://www.aprajitaretails.in/api/purchaseTaxes";
+export const API_URL = "https://www.aprajitaretails.in/api/purchaseTaxTypes";
 // CREATE =>  POST: add a new purchaseTax to the server
 export async function createPurchaseTax(purchaseTax) {
   return await axios.post(API_URL, purchaseTax, {
@@ -19,8 +19,8 @@ export async function createPurchaseTax(purchaseTax) {
 export function getAllPurchaseTaxes() {
   return axios.get(API_URL); //.catch(function (error){console.log(error)});
 }
-export async function getLedgerCategory(){
-  return await axios.get(`${API_BASE_URL}EnumValue/ledgercategorytype/all`);
+export async function getTaxType(){
+  return await axios.get(`${API_BASE_URL}EnumValue/taxtype/all`);
 }
 export async function getPurchaseTaxById(purchaseTaxId) {
   return await axios.get(`${API_URL}/${purchaseTaxId}`);

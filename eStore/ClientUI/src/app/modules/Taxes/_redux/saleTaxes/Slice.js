@@ -14,7 +14,7 @@ const initialSaleTaxesState = {
   entities: null,
   saleTaxForEdit: undefined,
   lastError: null,
-  ledgerTypes: null,
+  taxTypes: null,
 };
 export const callTypes = {
   list: "list",
@@ -42,12 +42,12 @@ export const saleTaxesSlice = createSlice({
       }
     },
     // get All bank List
-    ledgerTypesFetched: function(state, action) {
+    taxTypesFetched: function(state, action) {
       const { totalCount, entities } = action.payload;
       state.actionsLoading = false;
       state.listLoading = false;
       state.error = null;
-      state.ledgerTypes = entities;
+      state.taxTypes = entities;
     },
     // getSaleTaxById
     saleTaxFetched: (state, action) => {

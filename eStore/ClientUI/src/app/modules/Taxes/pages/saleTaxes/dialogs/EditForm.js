@@ -12,8 +12,6 @@ import {
   DatePickerField,
 } from "../../../../../../_metronic/_partials/controls";
 
-
-
 //SaleTaxes
 //saleTaxes
 //SaleTax
@@ -21,13 +19,11 @@ import {
 
 // Validation schema
 const SaleTaxEditSchema = Yup.object().shape({
-  saleTaxName: Yup.string().required("Account is required"),
-  address: Yup.string().required("Branch Name is required"),
-  ledgerTypeId: Yup.number().required("Store is required"),
-  panNo: Yup.string().required("Account Type is required"), 
-  gstNo:Yup.string().required("GSTIN is is required"),
-  openningBalance: Yup.number().required("Openning Balance is required"), 
-  openningDate: Yup.string().required("Date is required")
+  taxName: Yup.string().required("Tax Name is required"),
+  taxType: Yup.number().required("Tax Type is required"),
+  compositeRate: Yup.number()
+    .moreThan(0)
+    .required("Composite Rate is required"),
 });
 
 export function EditForm({
@@ -35,7 +31,7 @@ export function EditForm({
   saleTax,
   actionsLoading,
   onHide,
-  ledgerTypes,
+  taxTypes,
 }) {
   return (
     <>
@@ -57,22 +53,28 @@ export function EditForm({
               )}
               <Form className="form form-label-right">
                 <div className="form-group row">
-                 
                   {/* LedgerType */}
                   <div className="col-lg-4">
-                    <Select name="ledgerTypeId" placeholder="Ledger Type" label="Ledger Type">
-                      <option value="">Select Ledger Type </option>
-                      {ledgerTypes.map((item) => (
-                        <option key={item.ledgerTypeId} value={item.ledgerTypeId}>
-                          {item.ledgerNameType}
+                    <Select
+                      name="taxType"
+                      placeholder="Tax Type"
+                      label="Tax Type"
+                    >
+                      <option value="">Select Tax Type </option>
+                      {taxTypes.map((item) => (
+                        <option
+                          key={item.value}
+                          value={item.value}
+                        >
+                          {item.name}
                         </option>
                       ))}
-                    </Select>                    
+                    </Select>
                   </div>
-                   {/*  Father Name*/}
-                   <div className="col-lg-4">
+                  {/*  Father Name*/}
+                  <div className="col-lg-4">
                     <Field
-                      name="saleTaxName"
+                      name="taxName"
                       component={Input}
                       placeholder="SaleTax Name"
                       label="SaleTax Name"
@@ -80,50 +82,13 @@ export function EditForm({
                   </div>
                 </div>
                 <div className="form-group row">
-                    {/* Date of CashPayment */}
-                    <div className="col-lg-4">
-                    <DatePickerField
-                      dateFormat="yyyy-MM-dd"
-                      name="openningDate"
-                      label="Date"
-                    />
-                  </div>
                   {/*  Father Name*/}
                   <div className="col-lg-4">
                     <Field
-                      name="openningBalance"
+                      name="compositeRate"
                       component={Input}
-                      placeholder="Balance"
-                      label="Balance"
-                    />
-                  </div>
-                </div>
-                <div className="form-group row">
-                  {/*  State Name*/}
-                  <div className="col-lg-4">
-                    <Field
-                      name="address"
-                      component={Input}
-                      placeholder="Address"
-                      label="Address"
-                    />
-                  </div>
-                  {/*  State Name*/}
-                  <div className="col-lg-4">
-                    <Field
-                      name="gstNo"
-                      component={Input}
-                      placeholder="GSTIN"
-                      label="GSTIN"
-                    />
-                  </div>
-                  {/*  State Name*/}
-                  <div className="col-lg-4">
-                    <Field
-                      name="panNo"
-                      component={Input}
-                      placeholder="PAN"
-                      label="PAN"
+                      placeholder="Composite Rate"
+                      label="Composite Rate"
                     />
                   </div>
                 </div>

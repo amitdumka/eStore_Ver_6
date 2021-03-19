@@ -22,11 +22,11 @@ export function EditDialog({ id, show, onHide }) {
 
   // SaleTaxes Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, saleTaxForEdit ,ledgerTypes} = useSelector(
+  const { actionsLoading, saleTaxForEdit ,taxTypes} = useSelector(
     (state) => ({
       actionsLoading: state.saleTaxes.actionsLoading,
       saleTaxForEdit: state.saleTaxes.saleTaxForEdit,
-      ledgerTypes:state.saleTaxes.ledgerTypes
+      taxTypes:state.saleTaxes.taxTypes
     }),
     shallowEqual
   );
@@ -34,7 +34,7 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting SaleTax by id
     dispatch(actions.fetchSaleTax(id));
-    dispatch(actions.fetchledgerTypes());
+    dispatch(actions.fetchTaxTypes());
   }, [id, dispatch]);
 
   // server request for saving saleTax
@@ -64,7 +64,7 @@ export function EditDialog({ id, show, onHide }) {
         actionsLoading={actionsLoading}
         saleTax={saleTaxForEdit || saleTaxesUIProps.initSaleTax}
         onHide={onHide}
-        ledgerTypes={ledgerTypes}
+        taxTypes={taxTypes}
       />
     </Modal>
   );

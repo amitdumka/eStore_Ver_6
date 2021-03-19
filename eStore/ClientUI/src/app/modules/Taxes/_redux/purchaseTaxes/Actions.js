@@ -8,13 +8,13 @@ const { actions } = purchaseTaxesSlice;
 //purchaseTax
 //PurchaseTax
 
-export const fetchLedgerCategory = () => (dispatch) => {
+export const fetchTaxType = () => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .getLedgerCategory()
+    .getTaxType()
     .then((response) => {
       const entities = response.data;
-      dispatch(actions.ledgerCategoryFetched({ entities }));
+      dispatch(actions.taxTypeFetched({ entities }));
     })
     .catch((error) => {
       error.clientMessage = "Can't load Category";

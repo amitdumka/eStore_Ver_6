@@ -17,12 +17,9 @@ import {
 
 // Validation schema
 const PurchaseTaxEditSchema = Yup.object().shape({
-  ledgerNameType: Yup.string()
-    .min(3, "Minimum 3 symbols")
-    .max(50, "Maximum 50 symbols")
-    .required("Ledger Type Name is required"),
-  remark: Yup.string().required("Remark   is required"),
-  category: Yup.number().required("Category is required"),
+  taxName: Yup.string().required("Tax Name is required"),
+  taxType: Yup.number().required("Tax Type   is required"),
+  compositeRate: Yup.number().moreThan(0).required("Composite Rate is required"),
 });
 
 export function EditForm({
@@ -30,7 +27,7 @@ export function EditForm({
   purchaseTax,
   actionsLoading,
   onHide,
-  ledgerCategory,
+  taxTypes,
 }) {
   return (
     <>
@@ -55,26 +52,26 @@ export function EditForm({
                   {/* Staff Name */}
                   <div className="col-lg-4">
                     <Field
-                      name="ledgerNameType"
+                      name="taxName"
                       component={Input}
-                      placeholder="ledger Name Type"
-                      label="ledger Name Type"
+                      placeholder="Tax Name"
+                      label="Tax Name"
                     />
                   </div>
                   {/* Last Name */}
                   <div className="col-lg-4">
                     <Field
-                      name="remark"
+                      name="compositeRate"
                       component={Input}
-                      placeholder="Remark"
-                      label="Remark"
+                      placeholder="Composite Rate"
+                      label="Composite Rate"
                     />
                   </div>
                   {/* Store */}
                   <div className="col-lg-4">
-                    <Select name="category" label="Category">
-                    <option >Select Category</option>
-                    {ledgerCategory.map((item) => (
+                    <Select name="taxType" label="Tax Type">
+                    <option >Select Tax Types</option>
+                    {taxTypes.map((item) => (
                         <option key={item.value} value={item.value}>
                           {item.name}
                         </option>

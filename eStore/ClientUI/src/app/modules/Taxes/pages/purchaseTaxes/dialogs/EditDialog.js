@@ -20,11 +20,11 @@ export function EditDialog({ id, show, onHide }) {
 
   // PurchaseTaxes Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, purchaseTaxForEdit, ledgerCategory } = useSelector(
+  const { actionsLoading, purchaseTaxForEdit, taxTypes } = useSelector(
     (state) => ({
       actionsLoading: state.purchaseTaxes.actionsLoading,
       purchaseTaxForEdit: state.purchaseTaxes.purchaseTaxForEdit,
-      ledgerCategory: state.purchaseTaxes.ledgerCategory,
+      taxTypes: state.purchaseTaxes.taxTypes,
     }),
     shallowEqual
   );
@@ -32,7 +32,7 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting PurchaseTax by id
     dispatch(actions.fetchPurchaseTax(id));
-    dispatch(actions.fetchLedgerCategory());
+    dispatch(actions.fetchTaxType());
   }, [id, dispatch]);
 
   // server request for saving purchaseTax
@@ -61,7 +61,7 @@ export function EditDialog({ id, show, onHide }) {
         actionsLoading={actionsLoading}
         purchaseTax={purchaseTaxForEdit || purchaseTaxesUIProps.initPurchaseTax}
         onHide={onHide}
-        ledgerCategory={ledgerCategory}
+        taxTypes={taxTypes}
       />
     </Modal>
   );

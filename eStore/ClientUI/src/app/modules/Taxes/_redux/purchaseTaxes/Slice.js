@@ -14,7 +14,7 @@ const initialPurchaseTaxesState = {
   entities: null,
   purchaseTaxForEdit: undefined,
   lastError: null,
-  ledgerCategory: null,
+  taxType: null,
 };
 export const callTypes = {
   list: "list",
@@ -55,11 +55,11 @@ export const purchaseTaxesSlice = createSlice({
       state.entities = entities;
       state.totalCount = totalCount;
     },
-    ledgerCategoryFetched: (state, action) => {
+    taxTypeFetched: (state, action) => {
       const { entities } = action.payload;
       state.listLoading = false;
       state.error = null;
-      state.ledgerCategory = entities;
+      state.taxTypes = entities;
     },
     // createPurchaseTax
     purchaseTaxCreated: (state, action) => {
