@@ -19,17 +19,17 @@ export default function LedgerMenuList({ layoutProps }) {
       {/*begin::1 Level*/}
       <li
         className={`menu-item menu-item-submenu ${getMenuItemActive(
-          "/google-material",
+          "/taxes",
           true
         )}`}
         aria-haspopup="true"
         data-menu-toggle="hover"
       >
-        <NavLink className="menu-link menu-toggle" to="/ledger-menu">
+        <NavLink className="menu-link menu-toggle" to="/taxes">
           <span className="svg-icon menu-icon">
             <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
           </span>
-          <span className="menu-text">Ledger(s)</span>
+          <span className="menu-text">Taxes</span>
           <i className="menu-arrow" />
         </NavLink>
         <div className="menu-submenu ">
@@ -37,7 +37,7 @@ export default function LedgerMenuList({ layoutProps }) {
           <ul className="menu-subnav">
             <li className="menu-item  menu-item-parent" aria-haspopup="true">
               <span className="menu-link">
-                <span className="menu-text">Ledger(s)</span>
+                <span className="menu-text">Taxes</span>
               </span>
             </li>
             {/**Menu Item Will Follow from Level 2 */}
