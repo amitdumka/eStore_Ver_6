@@ -1,16 +1,16 @@
 import axios from "axios";
 
-//Party
-//party
-//Parties
-//parties
+//SaleTax
+//saleTax
+//SaleTaxes
+//saleTaxes
 
-export const API_URL = "https://www.aprajitaretails.in/api/parties";
+export const API_URL = "https://www.aprajitaretails.in/api/saleTaxes";
 
 
-// CREATE =>  POST: add a new party to the server
-export async function createParty(party) {
-  return await axios.post(API_URL, party, {
+// CREATE =>  POST: add a new saleTax to the server
+export async function createSaleTax(saleTax) {
+  return await axios.post(API_URL, saleTax, {
     headers: { "Content-Type": "application/json; charset=utf-8" },
   });
 }
@@ -20,8 +20,8 @@ export function getAllParties() {
   return axios.get(API_URL); //.catch(function (error){console.log(error)});
 }
 
-export async function getPartyById(partyId) {
-  return await axios.get(`${API_URL}/${partyId}`);
+export async function getSaleTaxById(saleTaxId) {
+  return await axios.get(`${API_URL}/${saleTaxId}`);
 }
 
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
@@ -36,11 +36,11 @@ export async function getAllLedgerTypes() {
   return await axios.get("https://www.aprajitaretails.in/api/ledgerTypes");
 }
 
-// UPDATE => PUT: update the party on the server
-export async function updateParty(party) {
+// UPDATE => PUT: update the saleTax on the server
+export async function updateSaleTax(saleTax) {
   return await axios.put(
-    `${API_URL}/${party.partyId}`,
-    JSON.stringify(party),
+    `${API_URL}/${saleTax.saleTaxId}`,
+    JSON.stringify(saleTax),
     {
       headers: { "Content-Type": "application/json; charset=utf-8" },
     }
@@ -55,9 +55,9 @@ export async function updateStatusForParties(ids, status) {
   });
 }
 
-// DELETE => delete the party from the server
-export async function deleteParty(partyId) {
-  return await axios.delete(`${API_URL}/${partyId}`);
+// DELETE => delete the saleTax from the server
+export async function deleteSaleTax(saleTaxId) {
+  return await axios.delete(`${API_URL}/${saleTaxId}`);
 }
 
 // DELETE Parties by ids

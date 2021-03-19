@@ -1,18 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { stubTrue } from "lodash-es";
 
-//Party
-//party
+//SaleTax
+//saleTax
 
-//Parties
-//parties
+//SaleTaxes
+//saleTaxes
 
-const initialPartiesState = {
+const initialSaleTaxesState = {
   listLoading: false,
   actionsLoading: false,
   totalCount: 0,
   entities: null,
-  partyForEdit: undefined,
+  saleTaxForEdit: undefined,
   lastError: null,
   ledgerTypes: null,
 };
@@ -21,9 +21,9 @@ export const callTypes = {
   action: "action",
 };
 
-export const partiesSlice = createSlice({
-  name: "parties",
-  initialState: initialPartiesState,
+export const saleTaxesSlice = createSlice({
+  name: "saleTaxes",
+  initialState: initialSaleTaxesState,
   reducers: {
     catchError: (state, action) => {
       state.error = `${action.type}: ${action.payload.error}`;
@@ -49,61 +49,61 @@ export const partiesSlice = createSlice({
       state.error = null;
       state.ledgerTypes = entities;
     },
-    // getPartyById
-    partyFetched: (state, action) => {
+    // getSaleTaxById
+    saleTaxFetched: (state, action) => {
       state.actionsLoading = false;
-      state.partyForEdit = action.payload.partyForEdit;
+      state.saleTaxForEdit = action.payload.saleTaxForEdit;
       state.error = null;
     },
-    // findParties
-    partiesFetched: (state, action) => {
+    // findSaleTaxes
+    saleTaxesFetched: (state, action) => {
       const { totalCount, entities } = action.payload;
       state.listLoading = false;
       state.error = null;
       state.entities = entities;
       state.totalCount = totalCount;
     },
-    // createParty
-    partyCreated: (state, action) => {
+    // createSaleTax
+    saleTaxCreated: (state, action) => {
       state.ewactionsLoading = false;
       state.error = null;
-      state.entities.push(action.payload.party);
+      state.entities.push(action.payload.saleTax);
     },
-    // updateParty
-    partyUpdated: (state, action) => {
+    // updateSaleTax
+    saleTaxUpdated: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.map((entity) => {
-        if (entity.partyId === action.payload.party.partyId) {
-          return action.payload.party;
+        if (entity.saleTaxId === action.payload.saleTax.saleTaxId) {
+          return action.payload.saleTax;
         }
         return entity;
       });
     },
-    // deleteParty
-    partyDeleted: (state, action) => {
+    // deleteSaleTax
+    saleTaxDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        (el) => el.partyId !== action.payload.partyId
+        (el) => el.saleTaxId !== action.payload.saleTaxId
       );
     },
-    // deleteParties
-    partiesDeleted: (state, action) => {
+    // deleteSaleTaxes
+    saleTaxesDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        (el) => !action.payload.ids.includes(el.partyId)
+        (el) => !action.payload.ids.includes(el.saleTaxId)
       );
     },
 
-    // partiesUpdateState
-    partiesStatusUpdated: (state, action) => {
+    // saleTaxesUpdateState
+    saleTaxesStatusUpdated: (state, action) => {
       state.actionsLoading = false;
       state.error = null;
       const { ids, status } = action.payload;
       state.entities = state.entities.map((entity) => {
-        if (ids.findIndex((id) => id === entity.partyId) > -1) {
+        if (ids.findIndex((id) => id === entity.saleTaxId) > -1) {
           entity.status = status;
         }
         return entity;

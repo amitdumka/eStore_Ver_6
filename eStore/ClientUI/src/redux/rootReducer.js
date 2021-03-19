@@ -21,6 +21,8 @@ import { bankDepositsSlice } from "../app/modules/Banking/_redux/bankDeposits/Sl
 import { bankWithdrawalsSlice } from "../app/modules/Banking/_redux/bankWithdrawals/Slice";
 import {ledgerTypesSlice} from "../app/modules/legders/_redux/ledgerTypes/Slice";
 import {partiesSlice} from "../app/modules/legders/_redux/parties/Slice";
+import {purchaseTaxesSlice} from "../app/modules/Taxes/_redux/purchaseTaxes/Slice";
+import {saleTaxesSlice} from "../app/modules/Taxes/_redux/saleTaxes/Slice";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -40,6 +42,8 @@ export const rootReducer = combineReducers({
   bankDeposits: bankDepositsSlice.reducer,
   bankWithdrawals: bankWithdrawalsSlice.reducer,
   parties: partiesSlice.reducer,
+  saleTaxes: saleTaxesSlice.reducer,
+  purchaseTaxes: purchaseTaxesSlice.reducer
 
 });
 

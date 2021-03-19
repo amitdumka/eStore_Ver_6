@@ -1,10 +1,13 @@
 import * as requestFromServer from "./Crud";
-import { ledgerTypesSlice, callTypes } from "./Slice";
+import { purchaseTaxesSlice, callTypes } from "./Slice";
 
-const { actions } = ledgerTypesSlice;
+const { actions } = purchaseTaxesSlice;
 
-//ledgerType
-//LedgerType
+//purchaseTaxes
+//PurchaseTaxes
+//purchaseTax
+//PurchaseTax
+
 export const fetchLedgerCategory = () => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
@@ -18,111 +21,111 @@ export const fetchLedgerCategory = () => (dispatch) => {
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
-export const fetchLedgerTypes = (queryParams) => (dispatch) => {
+export const fetchPurchaseTaxes = (queryParams) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findLedgerTypes(queryParams)
+    .findPurchaseTaxes(queryParams)
     .then((response) => {
       const entities = response.data;
       const totalCount = response.data.length;
       console.log(response);
       console.log(response.data.length);
-      dispatch(actions.ledgerTypesFetched({ totalCount, entities }));
+      dispatch(actions.purchaseTaxesFetched({ totalCount, entities }));
     })
     .catch((error) => {
       console.log(error);
-      error.clientMessage = "Can't find ledgerTypes";
+      error.clientMessage = "Can't find purchaseTaxes";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
-export const fetchLedgerType = (id) => (dispatch) => {
+export const fetchPurchaseTax = (id) => (dispatch) => {
   if (!id) {
     return dispatch(
-      actions.ledgerTypeFetched({ ledgerTypeForEdit: undefined })
+      actions.purchaseTaxFetched({ purchaseTaxForEdit: undefined })
     );
   }
 
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .getLedgerTypeById(id)
+    .getPurchaseTaxById(id)
     .then((response) => {
-      const ledgerType = response.data;
-      dispatch(actions.ledgerTypeFetched({ ledgerTypeForEdit: ledgerType }));
+      const purchaseTax = response.data;
+      dispatch(actions.purchaseTaxFetched({ purchaseTaxForEdit: purchaseTax }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't find ledgerType";
+      error.clientMessage = "Can't find purchaseTax";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteLedgerType = (id) => (dispatch) => {
+export const deletePurchaseTax = (id) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteLedgerType(id)
+    .deletePurchaseTax(id)
     .then((response) => {
-      dispatch(actions.ledgerTypeDeleted({ id }));
+      dispatch(actions.purchaseTaxDeleted({ id }));
     })
     .catch((error) => {
       console.log("CD=" + error);
-      error.clientMessage = "Can't delete ledgerType";
+      error.clientMessage = "Can't delete purchaseTax";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const createLedgerType = (ledgerTypeForCreation) => (dispatch) => {
+export const createPurchaseTax = (purchaseTaxForCreation) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .createLedgerType(JSON.stringify(ledgerTypeForCreation))
+    .createPurchaseTax(JSON.stringify(purchaseTaxForCreation))
     .then((response) => {
-      const ledgerType = response.data;
+      const purchaseTax = response.data;
       // console.log(response.data);
-      dispatch(actions.ledgerTypeCreated({ ledgerType }));
+      dispatch(actions.purchaseTaxCreated({ purchaseTax }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't create ledgerType";
+      error.clientMessage = "Can't create purchaseTax";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateLedgerType = (ledgerType) => (dispatch) => {
-  console.log(ledgerType);
+export const updatePurchaseTax = (purchaseTax) => (dispatch) => {
+  console.log(purchaseTax);
 
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateLedgerType(ledgerType)
+    .updatePurchaseTax(purchaseTax)
     .then(() => {
-      dispatch(actions.ledgerTypeUpdated({ ledgerType }));
+      dispatch(actions.purchaseTaxUpdated({ purchaseTax }));
     })
     .catch((error) => {
       console.log(error);
-      error.clientMessage = "Can't update ledgerType";
+      error.clientMessage = "Can't update purchaseTax";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateLedgerTypesStatus = (ids, status) => (dispatch) => {
+export const updatePurchaseTaxesStatus = (ids, status) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateStatusForLedgerTypes(ids, status)
+    .updateStatusForPurchaseTaxes(ids, status)
     .then(() => {
-      dispatch(actions.ledgerTypesStatusUpdated({ ids, status }));
+      dispatch(actions.purchaseTaxesStatusUpdated({ ids, status }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't update ledgerTypes status";
+      error.clientMessage = "Can't update purchaseTaxes status";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteLedgerTypes = (ids) => (dispatch) => {
+export const deletePurchaseTaxes = (ids) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteLedgerTypes(ids)
+    .deletePurchaseTaxes(ids)
     .then(() => {
-      dispatch(actions.ledgerTypesDeleted({ ids }));
+      dispatch(actions.purchaseTaxesDeleted({ ids }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't delete ledgerTypes";
+      error.clientMessage = "Can't delete purchaseTaxes";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };

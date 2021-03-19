@@ -1,14 +1,14 @@
 import * as requestFromServer from "./Crud";
-import {partiesSlice, callTypes} from "./Slice";
+import {saleTaxesSlice, callTypes} from "./Slice";
 
 
-//Party
-//party
-//Parties
-//parties
+//SaleTax
+//saleTax
+//SaleTaxes
+//saleTaxes
 
 
-const {actions} = partiesSlice;
+const {actions} = saleTaxesSlice;
 
 export const fetchledgerTypes =id=>dispatch => {
   
@@ -29,114 +29,114 @@ export const fetchledgerTypes =id=>dispatch => {
   });
 }
 
-export const fetchParties = queryParams => dispatch => {
+export const fetchSaleTaxes = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findParties(queryParams)
+    .findSaleTaxes(queryParams)
     .then(response => {
       const  entities  = response.data;
       const totalCount = response.data.length;
       console.log(response);
       console.log(response.data.length);
-      dispatch(actions.partiesFetched({ totalCount, entities }));
+      dispatch(actions.saleTaxesFetched({ totalCount, entities }));
     })
     .catch(error => {
       console.log(error);
-      error.clientMessage = "Can't find parties";
+      error.clientMessage = "Can't find saleTaxes";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
-export const fetchParty = id => dispatch => {
+export const fetchSaleTax = id => dispatch => {
   if (!id) {
-    return dispatch(actions.partyFetched({ partyForEdit: undefined }));
+    return dispatch(actions.saleTaxFetched({ saleTaxForEdit: undefined }));
   }
 
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .getPartyById(id)
+    .getSaleTaxById(id)
     .then(response => {
-      const party = response.data;
-      console.log(party);
-      dispatch(actions.partyFetched({ partyForEdit: party }));
+      const saleTax = response.data;
+      console.log(saleTax);
+      dispatch(actions.saleTaxFetched({ saleTaxForEdit: saleTax }));
     })
     .catch(error => {
-      error.clientMessage = "Can't find party";
+      error.clientMessage = "Can't find saleTax";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteParty = id => dispatch => {
+export const deleteSaleTax = id => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteParty(id)
+    .deleteSaleTax(id)
     .then(response => {
-      dispatch(actions.partyDeleted({ id }));
+      dispatch(actions.saleTaxDeleted({ id }));
     })
     .catch(error => {
       
       console.log("CD="+error);
-      error.clientMessage = "Can't delete party";
+      error.clientMessage = "Can't delete saleTax";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const createParty = partyForCreation => dispatch => {
+export const createSaleTax = saleTaxForCreation => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-  console.log(partyForCreation);
+  console.log(saleTaxForCreation);
   return requestFromServer
-    .createParty(JSON.stringify( partyForCreation))
+    .createSaleTax(JSON.stringify( saleTaxForCreation))
     .then(response => {
-      const  party  = response.data;
+      const  saleTax  = response.data;
       console.log(response.data);
-      dispatch(actions.partyCreated({ party }));
+      dispatch(actions.saleTaxCreated({ saleTax }));
     })
     .catch(error => {
       console.log(error);
-      error.clientMessage = "Can't create party";
+      error.clientMessage = "Can't create saleTax";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateParty = party => dispatch => {
+export const updateSaleTax = saleTax => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-  console.log(party);
+  console.log(saleTax);
   return requestFromServer
-    .updateParty(party)
+    .updateSaleTax(saleTax)
     .then(() => {
-      console.log(party);
-      dispatch(actions.partyUpdated({ party }));
+      console.log(saleTax);
+      dispatch(actions.saleTaxUpdated({ saleTax }));
     })
     .catch(error => {
       console.log(error);
-      error.clientMessage = "Can't update party";
+      error.clientMessage = "Can't update saleTax";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updatePartiesStatus = (ids, status) => dispatch => {
+export const updateSaleTaxesStatus = (ids, status) => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateStatusForParties(ids, status)
+    .updateStatusForSaleTaxes(ids, status)
     .then(() => {
-      dispatch(actions.partiesStatusUpdated({ ids, status }));
+      dispatch(actions.saleTaxesStatusUpdated({ ids, status }));
     })
     .catch(error => {
-      error.clientMessage = "Can't update parties status";
+      error.clientMessage = "Can't update saleTaxes status";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteParties = ids => dispatch => {
+export const deleteSaleTaxes = ids => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteParties(ids)
+    .deleteSaleTaxes(ids)
     .then(() => {
 
-      dispatch(actions.partiesDeleted({ ids }));
+      dispatch(actions.saleTaxesDeleted({ ids }));
     })
     .catch(error => {
-      error.clientMessage = "Can't delete parties";
+      error.clientMessage = "Can't delete saleTaxes";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };

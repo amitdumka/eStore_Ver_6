@@ -1,40 +1,44 @@
 import axios from "axios";
 
-//ledgerType
-//LedgerType
+//purchaseTaxes
+//PurchaseTaxes
+//purchaseTax
+//PurchaseTax
+
+
 export const API_BASE_URL="https://www.aprajitaretails.in/api/";
-export const API_URL = "https://www.aprajitaretails.in/api/ledgerTypes";
-// CREATE =>  POST: add a new ledgerType to the server
-export async function createLedgerType(ledgerType) {
-  return await axios.post(API_URL, ledgerType, {
+export const API_URL = "https://www.aprajitaretails.in/api/purchaseTaxes";
+// CREATE =>  POST: add a new purchaseTax to the server
+export async function createPurchaseTax(purchaseTax) {
+  return await axios.post(API_URL, purchaseTax, {
     headers: { "Content-Type": "application/json; charset=utf-8" },
   });
 }
 
 // READ
-export function getAllLedgerTypes() {
+export function getAllPurchaseTaxes() {
   return axios.get(API_URL); //.catch(function (error){console.log(error)});
 }
 export async function getLedgerCategory(){
   return await axios.get(`${API_BASE_URL}EnumValue/ledgercategorytype/all`);
 }
-export async function getLedgerTypeById(ledgerTypeId) {
-  return await axios.get(`${API_URL}/${ledgerTypeId}`);
+export async function getPurchaseTaxById(purchaseTaxId) {
+  return await axios.get(`${API_URL}/${purchaseTaxId}`);
 }
 
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
 // items => filtered/sorted result
-export async function findLedgerTypes(queryParams) {
+export async function findPurchaseTaxes(queryParams) {
   //verifyLogin();
   return await axios.get(`${API_URL}`); //find`, { queryParams });
 }
 
-// UPDATE => PUT: update the ledgerType on the server
-export async function updateLedgerType(ledgerType) {
-  console.error(ledgerType);
+// UPDATE => PUT: update the purchaseTax on the server
+export async function updatePurchaseTax(purchaseTax) {
+  console.error(purchaseTax);
   return await axios.put(
-    `${API_URL}/${ledgerType.ledgerTypeId}`,
-    JSON.stringify(ledgerType),
+    `${API_URL}/${purchaseTax.purchaseTaxId}`,
+    JSON.stringify(purchaseTax),
     {
       headers: { "Content-Type": "application/json; charset=utf-8" },
     }
@@ -42,19 +46,19 @@ export async function updateLedgerType(ledgerType) {
 }
 
 // UPDATE Status
-export async function updateStatusForLedgerTypes(ids, status) {
-  return await axios.post(`${API_URL}/updateStatusForLedgerTypes`, {
+export async function updateStatusForPurchaseTaxes(ids, status) {
+  return await axios.post(`${API_URL}/updateStatusForPurchaseTaxes`, {
     ids,
     status,
   });
 }
 
-// DELETE => delete the ledgerType from the server
-export async function deleteLedgerType(ledgerTypeId) {
-  return await axios.delete(`${API_URL}/${ledgerTypeId}`);
+// DELETE => delete the purchaseTax from the server
+export async function deletePurchaseTax(purchaseTaxId) {
+  return await axios.delete(`${API_URL}/${purchaseTaxId}`);
 }
 
-// DELETE LedgerTypes by ids
-export async function deleteLedgerTypes(ids) {
-  return await axios.post(`${API_URL}/deleteLedgerTypes`, { ids });
+// DELETE PurchaseTaxes by ids
+export async function deletePurchaseTaxes(ids) {
+  return await axios.post(`${API_URL}/deletePurchaseTaxes`, { ids });
 }
