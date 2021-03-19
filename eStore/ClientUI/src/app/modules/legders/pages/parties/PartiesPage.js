@@ -13,93 +13,93 @@ import { UIProvider } from "./UIContext";
 import { PartiesCard } from "./PartiesCard";
 
 //Parties
-//parties
+//party
 //Party
 //party
 
 export function PartiesPage({ history }) {
   const partiesUIEvents = {
     newPartyButtonClick: () => {
-      history.push("/banking/parties/new");
+      history.push("/ledger/party/new");
     },
     openEditPartyDialog: (id) => {
-      history.push(`/banking/parties/${id}/edit`);
+      history.push(`/ledger/party/${id}/edit`);
     },
     openDeletePartyDialog: (id) => {
-      history.push(`/banking/parties/${id}/delete`);
+      history.push(`/ledger/party/${id}/delete`);
     },
     openDeletePartiesDialog: () => {
-      history.push(`/banking/parties/deleteParties`);
+      history.push(`/ledger/party/deleteParties`);
     },
     openFetchPartiesDialog: () => {
-      history.push(`/banking/parties/fetch`);
+      history.push(`/ledger/party/fetch`);
     },
     openUpdatePartiesStatusDialog: () => {
-      history.push("/banking/parties/updateStatus");
+      history.push("/ledger/party/updateStatus");
     }
   }
 
   return (
     <UIProvider UIEvents={partiesUIEvents}>
       <PartiesLoadingDialog />
-      <Route path="/banking/parties/new">
+      <Route path="/ledger/party/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/banking/parties");
+              history.push("/ledger/party");
             }}
           />
         )}
       </Route>
-      <Route path="/banking/parties/:id/edit">
+      <Route path="/ledger/party/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/banking/parties");
+              history.push("/ledger/party");
             }}
           />
         )}
       </Route>
-      <Route path="/banking/parties/deleteParties">
+      <Route path="/ledger/party/deleteParties">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/banking/parties");
+              history.push("/ledger/party");
             }}
           />
         )}
       </Route>
-      <Route path="/banking/parties/:id/delete">
+      <Route path="/ledger/party/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/banking/parties");
+              history.push("/ledger/party");
             }}
           />
         )}
       </Route>
-      <Route path="/banking/parties/fetch">
+      <Route path="/ledger/party/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/banking/parties");
+              history.push("/ledger/party");
             }}
           />
         )}
       </Route>
-      <Route path="/banking/parties/updateStatus">
+      <Route path="/ledger/party/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/banking/parties");
+              history.push("/ledger/party");
             }}
           />
         )}

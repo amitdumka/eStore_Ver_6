@@ -14,8 +14,7 @@ const initialPartiesState = {
   entities: null,
   partyForEdit: undefined,
   lastError: null,
-  bankEntities: null,
-  totalCountEmp: 0,
+  ledgerTypes: null,
 };
 export const callTypes = {
   list: "list",
@@ -43,13 +42,12 @@ export const partiesSlice = createSlice({
       }
     },
     // get All bank List
-    banksListFetched: function(state, action) {
+    ledgerTypesFetched: function(state, action) {
       const { totalCount, entities } = action.payload;
       state.actionsLoading = false;
       state.listLoading = false;
       state.error = null;
-      state.bankEntities = entities;
-      state.totalCountEmp = totalCount;
+      state.ledgerTypes = entities;
     },
     // getPartyById
     partyFetched: (state, action) => {

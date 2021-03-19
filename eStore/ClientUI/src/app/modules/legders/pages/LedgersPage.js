@@ -10,10 +10,10 @@ export default function LedgersPage() {
       <Switch>
         {
           /* Redirect from payroll root URL to /employees */
-          <Redirect exact={true} from="/ledger" to="/ledger/parties" />
+          <Redirect exact={true} from="/ledger" to="/ledger/party" />
         }
         <ContentRoute path="/ledger/ledgerTypes" component={LedgerTypesPage}/>
-        <ContentRoute path="/ledger/parties" component={PartiesPage}/>
+        <ContentRoute path="/ledger/party" component={PartiesPage}/>
        
       </Switch>
     </Suspense>

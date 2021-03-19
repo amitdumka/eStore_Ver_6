@@ -22,11 +22,11 @@ export function EditDialog({ id, show, onHide }) {
 
   // Parties Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, partyForEdit ,bankList} = useSelector(
+  const { actionsLoading, partyForEdit ,ledgerTypes} = useSelector(
     (state) => ({
       actionsLoading: state.parties.actionsLoading,
       partyForEdit: state.parties.partyForEdit,
-      bankList:state.parties.bankEntities
+      ledgerTypes:state.parties.ledgerTypes
     }),
     shallowEqual
   );
@@ -34,7 +34,7 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting Party by id
     dispatch(actions.fetchParty(id));
-    dispatch(actions.fetchBanks());
+    dispatch(actions.fetchledgerTypes());
   }, [id, dispatch]);
 
   // server request for saving party
@@ -64,7 +64,7 @@ export function EditDialog({ id, show, onHide }) {
         actionsLoading={actionsLoading}
         party={partyForEdit || partiesUIProps.initParty}
         onHide={onHide}
-        bankList={bankList}
+        ledgerTypes={ledgerTypes}
       />
     </Modal>
   );

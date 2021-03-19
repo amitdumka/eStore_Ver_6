@@ -26,14 +26,14 @@ export function PartiesCard() {
 
   return (
     <Card>
-      <CardHeader title="Bank Accounts list">
+      <CardHeader title="Party list">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
             onClick={PartiesUIProps.newPartyButtonClick}
           >
-            New Bank Account
+            New Party
           </button>
         </CardHeaderToolbar>
       </CardHeader>

@@ -32,8 +32,8 @@ export async function findParties(queryParams) {
 }
 
 // function to get all list of banks
-export async function getAllBanks() {
-  return await axios.get("https://www.aprajitaretails.in/api/banks");
+export async function getAllLedgerTypes() {
+  return await axios.get("https://www.aprajitaretails.in/api/ledgerTypes");
 }
 
 // UPDATE => PUT: update the party on the server

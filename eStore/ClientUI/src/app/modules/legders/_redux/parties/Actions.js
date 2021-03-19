@@ -10,21 +10,21 @@ import {partiesSlice, callTypes} from "./Slice";
 
 const {actions} = partiesSlice;
 
-export const fetchBanks =id=>dispatch => {
+export const fetchledgerTypes =id=>dispatch => {
   
   dispatch(actions.startCall({callType:callTypes.list}));
 
   return requestFromServer
-  .getAllBanks()
+  .getAllLedgerTypes()
   .then(response=>{
     const entities  = response.data; 
     const totalCount=response.data.length;
     console.log(entities);
-    dispatch(actions.banksListFetched({totalCount, entities}));
+    dispatch(actions.ledgerTypesFetched({totalCount, entities}));
   })
   .catch(error =>{
     console.log(error);
-    error.clientMessage="Can't load banks list"; 
+    error.clientMessage="Can't load Ledger Types"; 
     dispatch(actions.catchError({error,callTypes:callTypes.list}));
   });
 }

@@ -21,10 +21,13 @@ import {
 
 // Validation schema
 const PartyEditSchema = Yup.object().shape({
-  account: Yup.string().required("Account is required"),
-  branchName: Yup.string().required("Branch Name is required"),
-  bankId: Yup.number().required("Store is required"),
-  accountType: Yup.number().required("Account Type is required")
+  partyName: Yup.string().required("Account is required"),
+  address: Yup.string().required("Branch Name is required"),
+  ledgerTypeId: Yup.number().required("Store is required"),
+  panNo: Yup.string().required("Account Type is required"), 
+  gstNo:Yup.string().required("GSTIN is is required"),
+  openningBalance: Yup.number().required("Openning Balance is required"), 
+  openningDate: Yup.string().required("Date is required")
 });
 
 export function EditForm({
@@ -32,7 +35,7 @@ export function EditForm({
   party,
   actionsLoading,
   onHide,
-  bankList,
+  ledgerTypes,
 }) {
   return (
     <>
@@ -54,38 +57,44 @@ export function EditForm({
               )}
               <Form className="form form-label-right">
                 <div className="form-group row">
-                  {/* Store */}
+                 
+                  {/* LedgerType */}
                   <div className="col-lg-4">
-                    <Select name="accountType" label="Account Type">
-                      <option value="0">Saving</option>
-                      <option value="1">Current</option>
-                      <option value="2">CashCredit</option>
-                      <option value="3">OverDraft</option>
-                      <option value="4">Others</option>
-                      <option value="5">Loan</option>
-                      <option value="6">CF</option>
-                    </Select>
-                  </div>
-                  {/* Email */}
-                  <div className="col-lg-4">
-                    <Select name="bankId" placeholder="Bank" label="Bank">
-                      <option value="">Select Bank</option>
-                      {bankList.map((item) => (
-                        <option key={item.bankId} value={item.bankId}>
-                          {item.bankName}
+                    <Select name="ledgerTypeId" placeholder="Ledger Type" label="Ledger Type">
+                      <option value="">Select Ledger Type </option>
+                      {ledgerTypes.map((item) => (
+                        <option key={item.ledgerTypeId} value={item.ledgerTypeId}>
+                          {item.ledgerNameType}
                         </option>
                       ))}
-                    </Select>
+                    </Select>                    
+                  </div>
+                   {/*  Father Name*/}
+                   <div className="col-lg-4">
+                    <Field
+                      name="partyName"
+                      component={Input}
+                      placeholder="Party Name"
+                      label="Party Name"
+                    />
                   </div>
                 </div>
                 <div className="form-group row">
+                    {/* Date of CashPayment */}
+                    <div className="col-lg-4">
+                    <DatePickerField
+                      dateFormat="yyyy-MM-dd"
+                      name="openningDate"
+                      label="Date"
+                    />
+                  </div>
                   {/*  Father Name*/}
                   <div className="col-lg-4">
                     <Field
-                      name="account"
+                      name="openningBalance"
                       component={Input}
-                      placeholder="Account No."
-                      label="Account No"
+                      placeholder="Balance"
+                      label="Balance"
                     />
                   </div>
                 </div>
@@ -93,10 +102,28 @@ export function EditForm({
                   {/*  State Name*/}
                   <div className="col-lg-4">
                     <Field
-                      name="branchName"
+                      name="address"
                       component={Input}
-                      placeholder="Branch Name"
-                      label="BranchName"
+                      placeholder="Address"
+                      label="Address"
+                    />
+                  </div>
+                  {/*  State Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="gstNo"
+                      component={Input}
+                      placeholder="GSTIN"
+                      label="GSTIN"
+                    />
+                  </div>
+                  {/*  State Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="panNo"
+                      component={Input}
+                      placeholder="PAN"
+                      label="PAN"
                     />
                   </div>
                 </div>
