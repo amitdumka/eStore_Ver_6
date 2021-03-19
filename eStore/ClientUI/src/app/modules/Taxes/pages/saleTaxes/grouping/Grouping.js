@@ -1,25 +1,25 @@
 import React, { useMemo } from "react";
 import { useUIContext } from "../UIContext";
 
-//Parties
-//parties
-//Party
-//party
+//SaleTaxes
+//saleTaxes
+//SaleTax
+//saleTax
 
 
-export function PartiesGrouping() {
-  // Parties UI Context
-  const partiesUIContext = useUIContext();
-  const partiesUIProps = useMemo(() => {
+export function SaleTaxesGrouping() {
+  // SaleTaxes UI Context
+  const saleTaxesUIContext = useUIContext();
+  const saleTaxesUIProps = useMemo(() => {
     return {
-      ids: partiesUIContext.ids,
-      setIds: partiesUIContext.setIds,
-      openDeletePartiesDialog: partiesUIContext.openDeletePartiesDialog,
-      openFetchPartiesDialog: partiesUIContext.openFetchPartiesDialog,
-      openUpdatePartiesStatusDialog:
-        partiesUIContext.openUpdatePartiesStatusDialog,
+      ids: saleTaxesUIContext.ids,
+      setIds: saleTaxesUIContext.setIds,
+      openDeleteSaleTaxesDialog: saleTaxesUIContext.openDeleteSaleTaxesDialog,
+      openFetchSaleTaxesDialog: saleTaxesUIContext.openFetchSaleTaxesDialog,
+      openUpdateSaleTaxesStatusDialog:
+        saleTaxesUIContext.openUpdateSaleTaxesStatusDialog,
     };
-  }, [partiesUIContext]);
+  }, [saleTaxesUIContext]);
 
   return (
     <div className="form">
@@ -29,7 +29,7 @@ export function PartiesGrouping() {
             <div className="form-label form-label-no-wrap">
               <label className="font-bold font-danger">
                 <span>
-                  Selected records count: <b>{partiesUIProps.ids.length}</b>
+                  Selected records count: <b>{saleTaxesUIProps.ids.length}</b>
                 </span>
               </label>
             </div>
@@ -37,7 +37,7 @@ export function PartiesGrouping() {
               <button
                 type="button"
                 className="btn btn-danger font-weight-bolder font-size-sm"
-                onClick={partiesUIProps.openDeletePartiesDialog}
+                onClick={saleTaxesUIProps.openDeleteSaleTaxesDialog}
               >
                 <i className="fa fa-trash"></i> Delete All
               </button>
@@ -45,7 +45,7 @@ export function PartiesGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={partiesUIProps.openFetchPartiesDialog}
+                onClick={saleTaxesUIProps.openFetchSaleTaxesDialog}
               >
                 <i className="fa fa-stream"></i> Fetch Selected
               </button>
@@ -53,7 +53,7 @@ export function PartiesGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={partiesUIProps.openUpdatePartiesStatusDialog}
+                onClick={saleTaxesUIProps.openUpdateSaleTaxesStatusDialog}
               >
                 <i className="fa fa-sync-alt"></i> Update Status
               </button>

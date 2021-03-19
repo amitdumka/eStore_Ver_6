@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { PartiesLoadingDialog } from "./dialogs/LoadingDialog";
+import { SaleTaxesLoadingDialog } from "./dialogs/LoadingDialog";
 import { EditDialog } from "./dialogs/EditDialog";
 
 import { DeleteDialog } from "./dialogs/DeleteDialog";
@@ -10,101 +10,101 @@ import { DeletesDialog } from "./dialogs/DeletesDialog";
 import { FetchDialog } from "./dialogs/FetchDialog";
 import { UpdateStateDialog } from "./dialogs/UpdateStateDialog";
 import { UIProvider } from "./UIContext";
-import { PartiesCard } from "./PartiesCard";
+import { SaleTaxesCard } from "./SaleTaxesCard";
 
-//Parties
-//party
-//Party
-//party
+//SaleTaxes
+//saleTax
+//SaleTax
+//saleTax
 
-export function PartiesPage({ history }) {
-  const partiesUIEvents = {
-    newPartyButtonClick: () => {
-      history.push("/ledger/party/new");
+export function SaleTaxesPage({ history }) {
+  const saleTaxesUIEvents = {
+    newSaleTaxButtonClick: () => {
+      history.push("/ledger/saleTax/new");
     },
-    openEditPartyDialog: (id) => {
-      history.push(`/ledger/party/${id}/edit`);
+    openEditSaleTaxDialog: (id) => {
+      history.push(`/ledger/saleTax/${id}/edit`);
     },
-    openDeletePartyDialog: (id) => {
-      history.push(`/ledger/party/${id}/delete`);
+    openDeleteSaleTaxDialog: (id) => {
+      history.push(`/ledger/saleTax/${id}/delete`);
     },
-    openDeletePartiesDialog: () => {
-      history.push(`/ledger/party/deleteParties`);
+    openDeleteSaleTaxesDialog: () => {
+      history.push(`/ledger/saleTax/deleteSaleTaxes`);
     },
-    openFetchPartiesDialog: () => {
-      history.push(`/ledger/party/fetch`);
+    openFetchSaleTaxesDialog: () => {
+      history.push(`/ledger/saleTax/fetch`);
     },
-    openUpdatePartiesStatusDialog: () => {
-      history.push("/ledger/party/updateStatus");
+    openUpdateSaleTaxesStatusDialog: () => {
+      history.push("/ledger/saleTax/updateStatus");
     }
   }
 
   return (
-    <UIProvider UIEvents={partiesUIEvents}>
-      <PartiesLoadingDialog />
-      <Route path="/ledger/party/new">
+    <UIProvider UIEvents={saleTaxesUIEvents}>
+      <SaleTaxesLoadingDialog />
+      <Route path="/ledger/saleTax/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/ledger/party");
+              history.push("/ledger/saleTax");
             }}
           />
         )}
       </Route>
-      <Route path="/ledger/party/:id/edit">
+      <Route path="/ledger/saleTax/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/ledger/party");
+              history.push("/ledger/saleTax");
             }}
           />
         )}
       </Route>
-      <Route path="/ledger/party/deleteParties">
+      <Route path="/ledger/saleTax/deleteSaleTaxes">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/ledger/party");
+              history.push("/ledger/saleTax");
             }}
           />
         )}
       </Route>
-      <Route path="/ledger/party/:id/delete">
+      <Route path="/ledger/saleTax/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/ledger/party");
+              history.push("/ledger/saleTax");
             }}
           />
         )}
       </Route>
-      <Route path="/ledger/party/fetch">
+      <Route path="/ledger/saleTax/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/ledger/party");
+              history.push("/ledger/saleTax");
             }}
           />
         )}
       </Route>
-      <Route path="/ledger/party/updateStatus">
+      <Route path="/ledger/saleTax/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/ledger/party");
+              history.push("/ledger/saleTax");
             }}
           />
         )}
       </Route>
-      <PartiesCard />
+      <SaleTaxesCard />
     </UIProvider>
   );
 }

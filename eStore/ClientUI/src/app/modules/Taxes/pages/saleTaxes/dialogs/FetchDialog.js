@@ -4,51 +4,51 @@ import { shallowEqual, useSelector } from "react-redux";
 
 import { useUIContext } from "../UIContext";
 
-//Parties
-//parties
-//Party
-//party
+//SaleTaxes
+//saleTaxes
+//SaleTax
+//saleTax
 
 
 
-const selectedParties = (entities, ids) => {
-  const _parties = [];
+const selectedSaleTaxes = (entities, ids) => {
+  const _saleTaxes = [];
   ids.forEach((id) => {
-    const party = entities.find((el) => el.id === id);
-    if (party) {
-      _parties.push(party);
+    const saleTax = entities.find((el) => el.id === id);
+    if (saleTax) {
+      _saleTaxes.push(saleTax);
     }
   });
-  return _parties;
+  return _saleTaxes;
 };
 
 export function FetchDialog({ show, onHide }) {
-  // Parties UI Context
-  const partiesUIContext = useUIContext();
-  const partiesUIProps = useMemo(() => {
+  // SaleTaxes UI Context
+  const saleTaxesUIContext = useUIContext();
+  const saleTaxesUIProps = useMemo(() => {
     return {
-      ids: partiesUIContext.ids,
+      ids: saleTaxesUIContext.ids,
     };
-  }, [partiesUIContext]);
+  }, [saleTaxesUIContext]);
 
-  // Parties Redux state
-  const { parties } = useSelector(
+  // SaleTaxes Redux state
+  const { saleTaxes } = useSelector(
     (state) => ({
-      parties: selectedParties(
-        state.parties.entities,
-        partiesUIProps.ids
+      saleTaxes: selectedSaleTaxes(
+        state.saleTaxes.entities,
+        saleTaxesUIProps.ids
       ),
     }),
     shallowEqual
   );
 
-  // if parties weren't selected we should close modal
+  // if saleTaxes weren't selected we should close modal
   useEffect(() => {
-    if (!partiesUIProps.ids || partiesUIProps.ids.length === 0) {
+    if (!saleTaxesUIProps.ids || saleTaxesUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [partiesUIProps.ids]);
+  }, [saleTaxesUIProps.ids]);
 
   return (
     <Modal
@@ -71,12 +71,12 @@ export function FetchDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {parties.map((party) => (
-              <tr key={`id${party.id}`}>
-                <td>{party.id}</td>
+            {saleTaxes.map((saleTax) => (
+              <tr key={`id${saleTax.id}`}>
+                <td>{saleTax.id}</td>
                 <td>
                   <span className="ml-3">
-                    {party.lastName}, {party.firstName}
+                    {saleTax.lastName}, {saleTax.firstName}
                   </span>
                 </td>
               </tr>

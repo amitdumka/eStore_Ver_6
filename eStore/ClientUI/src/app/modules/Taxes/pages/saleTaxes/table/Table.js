@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/parties/Actions";
+import * as actions from "../../../_redux/saleTaxes/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -22,56 +22,56 @@ import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 
-//Parties
-//parties
-//Party
-//party
+//SaleTaxes
+//saleTaxes
+//SaleTax
+//saleTax
 
 
-export function PartiesTable() {
-  // Parties UI Context
-  const partiesUIContext = useUIContext();
-  const partiesUIProps = useMemo(() => {
+export function SaleTaxesTable() {
+  // SaleTaxes UI Context
+  const saleTaxesUIContext = useUIContext();
+  const saleTaxesUIProps = useMemo(() => {
     return {
-      ids: partiesUIContext.ids,
-      setIds: partiesUIContext.setIds,
-      queryParams: partiesUIContext.queryParams,
-      setQueryParams: partiesUIContext.setQueryParams,
-      openEditPartyDialog:
-        partiesUIContext.openEditPartyDialog,
-      openDeletePartyDialog:
-        partiesUIContext.openDeletePartyDialog,
+      ids: saleTaxesUIContext.ids,
+      setIds: saleTaxesUIContext.setIds,
+      queryParams: saleTaxesUIContext.queryParams,
+      setQueryParams: saleTaxesUIContext.setQueryParams,
+      openEditSaleTaxDialog:
+        saleTaxesUIContext.openEditSaleTaxDialog,
+      openDeleteSaleTaxDialog:
+        saleTaxesUIContext.openDeleteSaleTaxDialog,
     };
-  }, [partiesUIContext]);
+  }, [saleTaxesUIContext]);
 
-  // Getting curret state of parties list from store (Redux)
+  // Getting curret state of saleTaxes list from store (Redux)
   const { currentState } = useSelector(
-    (state) => ({ currentState: state.parties }),
+    (state) => ({ currentState: state.saleTaxes }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
 
-  // Parties Redux state
+  // SaleTaxes Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    partiesUIProps.setIds([]);
+    saleTaxesUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchParties(partiesUIProps.queryParams));
+    dispatch(actions.fetchSaleTaxes(saleTaxesUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [partiesUIProps.queryParams, dispatch]);
+  }, [saleTaxesUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "partyId",
+      dataField: "saleTaxId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "partyName",
-      text: "Party",
+      dataField: "saleTaxName",
+      text: "SaleTax",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -123,10 +123,10 @@ export function PartiesTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditPartyDialog:
-          partiesUIProps.openEditPartyDialog,
-        openDeletePartyDialog:
-          partiesUIProps.openDeletePartyDialog,
+        openEditSaleTaxDialog:
+          saleTaxesUIProps.openEditSaleTaxDialog,
+        openDeleteSaleTaxDialog:
+          saleTaxesUIProps.openDeleteSaleTaxDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -140,8 +140,8 @@ export function PartiesTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: partiesUIProps.queryParams.pageSize,
-    page: partiesUIProps.queryParams.pageNumber,
+    sizePerPage: saleTaxesUIProps.queryParams.pageSize,
+    page: saleTaxesUIProps.queryParams.pageNumber,
   };
 
   return (
@@ -160,19 +160,19 @@ export function PartiesTable() {
                 bootstrap4
                 remote
                 noDataIndication="No Record Found now.."
-                keyField="partyId"
+                keyField="saleTaxId"
                 data={entities === null ? [] : totalCount ? entities : []}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  partiesUIProps.setQueryParams
+                  saleTaxesUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: partiesUIProps.ids,
-                  setIds: partiesUIProps.setIds,
-                  idName: "partyId",
+                  ids: saleTaxesUIProps.ids,
+                  setIds: saleTaxesUIProps.setIds,
+                  idName: "saleTaxId",
                 })}
                 {...paginationTableProps}
               >

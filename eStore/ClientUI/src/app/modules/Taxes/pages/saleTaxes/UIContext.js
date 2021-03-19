@@ -2,10 +2,10 @@ import React, { createContext, useContext, useState, useCallback } from "react";
 import { isEqual, isFunction } from "lodash";
 import { initialFilter } from "./UIHelpers";
 
-//Party
-//party
-//Parties
-//parties
+//SaleTax
+//saleTax
+//SaleTaxes
+//saleTaxes
 
 const UIContext = createContext();
 
@@ -32,9 +32,9 @@ export function UIProvider({ UIEvents, children }) {
     });
   }, []);
 
-  const initParty = {
-    partyId: 0,
-    partyName: "",
+  const initSaleTax = {
+    saleTaxId: 0,
+    saleTaxName: "",
     openningDate: new Date(),
     openningBalance: 0.0,
     address: "",
@@ -52,13 +52,13 @@ export function UIProvider({ UIEvents, children }) {
     ids,
     setIds,
     setQueryParams,
-    initParty,
-    newPartyButtonClick: UIEvents.newPartyButtonClick,
-    openEditPartyDialog: UIEvents.openEditPartyDialog,
-    openDeletePartyDialog: UIEvents.openDeletePartyDialog,
-    openDeletePartiesDialog: UIEvents.openDeletePartiesDialog,
-    openFetchPartiesDialog: UIEvents.openFetchPartiesDialog,
-    openUpdatePartiesStatusDialog: UIEvents.openUpdatePartiesStatusDialog,
+    initSaleTax,
+    newSaleTaxButtonClick: UIEvents.newSaleTaxButtonClick,
+    openEditSaleTaxDialog: UIEvents.openEditSaleTaxDialog,
+    openDeleteSaleTaxDialog: UIEvents.openDeleteSaleTaxDialog,
+    openDeleteSaleTaxesDialog: UIEvents.openDeleteSaleTaxesDialog,
+    openFetchSaleTaxesDialog: UIEvents.openFetchSaleTaxesDialog,
+    openUpdateSaleTaxesStatusDialog: UIEvents.openUpdateSaleTaxesStatusDialog,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

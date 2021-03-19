@@ -1,69 +1,69 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/parties/Actions";
+import * as actions from "../../../_redux/saleTaxes/Actions";
 import { useUIContext } from "../UIContext";
 
-//Parties
-//parties
-//Party
-//party
+//SaleTaxes
+//saleTaxes
+//SaleTax
+//saleTax
 
 
-const selectedParties = (entities, ids) => {
-  const _parties = [];
+const selectedSaleTaxes = (entities, ids) => {
+  const _saleTaxes = [];
   ids.forEach((id) => {
-    const party = entities.find((el) => el.id === id);
-    if (party) {
-      _parties.push(party);
+    const saleTax = entities.find((el) => el.id === id);
+    if (saleTax) {
+      _saleTaxes.push(saleTax);
     }
   });
-  return _parties;
+  return _saleTaxes;
 };
 
 export function UpdateStateDialog({ show, onHide }) {
-  // Parties UI Context
-  const partiesUIContext = useUIContext();
-  const partiesUIProps = useMemo(() => {
+  // SaleTaxes UI Context
+  const saleTaxesUIContext = useUIContext();
+  const saleTaxesUIProps = useMemo(() => {
     return {
-      ids: partiesUIContext.ids,
-      setIds: partiesUIContext.setIds,
-      queryParams: partiesUIContext.queryParams,
+      ids: saleTaxesUIContext.ids,
+      setIds: saleTaxesUIContext.setIds,
+      queryParams: saleTaxesUIContext.queryParams,
     };
-  }, [partiesUIContext]);
+  }, [saleTaxesUIContext]);
 
-  // Parties Redux state
-  const { parties, isLoading } = useSelector(
+  // SaleTaxes Redux state
+  const { saleTaxes, isLoading } = useSelector(
     (state) => ({
-      parties: selectedParties(
-        state.parties.entities,
-        partiesUIProps.ids
+      saleTaxes: selectedSaleTaxes(
+        state.saleTaxes.entities,
+        saleTaxesUIProps.ids
       ),
-      isLoading: state.parties.actionsLoading,
+      isLoading: state.saleTaxes.actionsLoading,
     }),
     shallowEqual
   );
 
   // if !id we should close modal
   useEffect(() => {
-    if (!partiesUIProps.ids || partiesUIProps.ids.length === 0) {
+    if (!saleTaxesUIProps.ids || saleTaxesUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [partiesUIProps.ids]);
+  }, [saleTaxesUIProps.ids]);
 
   const [status, setStatus] = useState(0);
 
   const dispatch = useDispatch();
   const updateStatus = () => {
-    // server request for update parties status by selected ids
-    dispatch(actions.updatePartiesStatus(partiesUIProps.ids, status)).then(
+    // server request for update saleTaxes status by selected ids
+    dispatch(actions.updateSaleTaxesStatus(saleTaxesUIProps.ids, status)).then(
       () => {
         // refresh list after deletion
-        dispatch(actions.fetchParties(partiesUIProps.queryParams)).then(
+        dispatch(actions.fetchSaleTaxes(saleTaxesUIProps.queryParams)).then(
           () => {
             // clear selections list
-            partiesUIProps.setIds([]);
+            saleTaxesUIProps.setIds([]);
             // closing delete modal
             onHide();
           }
@@ -80,7 +80,7 @@ export function UpdateStateDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Status has been updated for selected parties
+          Status has been updated for selected saleTaxes
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="overlay overlay-block cursor-default">
@@ -100,13 +100,13 @@ export function UpdateStateDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {parties.map((party) => (
-              <tr key={`id${party.id}`}>
-                <td>{party.id}</td>
+            {saleTaxes.map((saleTax) => (
+              <tr key={`id${saleTax.id}`}>
+                <td>{saleTax.id}</td>
                 
                 <td>
                   <span className="ml-3">
-                    {party.lastName}, {party.firstName}
+                    {saleTax.lastName}, {saleTax.firstName}
                   </span>
                 </td>
               </tr>

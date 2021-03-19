@@ -1,54 +1,54 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/parties/Actions";
+import * as actions from "../../../_redux/saleTaxes/Actions";
 import { useUIContext } from "../UIContext";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
 
 // Delete Selected Records
-//Parties
-//parties
-//Party
-//party
+//SaleTaxes
+//saleTaxes
+//SaleTax
+//saleTax
 
 
 export function DeletesDialog({ show, onHide }) {
-  // Parties UI Context
-  const partiesUIContext = useUIContext();
-  const partiesUIProps = useMemo(() => {
+  // SaleTaxes UI Context
+  const saleTaxesUIContext = useUIContext();
+  const saleTaxesUIProps = useMemo(() => {
     return {
-      ids: partiesUIContext.ids,
-      setIds: partiesUIContext.setIds,
-      queryParams: partiesUIContext.queryParams,
+      ids: saleTaxesUIContext.ids,
+      setIds: saleTaxesUIContext.setIds,
+      queryParams: saleTaxesUIContext.queryParams,
     };
-  }, [partiesUIContext]);
+  }, [saleTaxesUIContext]);
 
-  // Parties Redux state
+  // SaleTaxes Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.parties.actionsLoading }),
+    (state) => ({ isLoading: state.saleTaxes.actionsLoading }),
     shallowEqual
   );
 
-  // if parties weren't selected we should close modal
+  // if saleTaxes weren't selected we should close modal
   useEffect(() => {
-    if (!partiesUIProps.ids || partiesUIProps.ids.length === 0) {
+    if (!saleTaxesUIProps.ids || saleTaxesUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [partiesUIProps.ids]);
+  }, [saleTaxesUIProps.ids]);
 
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading, dispatch]);
 
-  const deleteParties = () => {
-    // server request for deleting party by selected ids
-    dispatch(actions.deleteParties(partiesUIProps.ids)).then(() => {
+  const deleteSaleTaxes = () => {
+    // server request for deleting saleTax by selected ids
+    dispatch(actions.deleteSaleTaxes(saleTaxesUIProps.ids)).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchParties(partiesUIProps.queryParams)).then(
+      dispatch(actions.fetchSaleTaxes(saleTaxesUIProps.queryParams)).then(
         () => {
           // clear selections list
-          partiesUIProps.setIds([]);
+          saleTaxesUIProps.setIds([]);
           // closing delete modal
           onHide();
         }
@@ -67,14 +67,14 @@ export function DeletesDialog({ show, onHide }) {
       {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Parties Delete
+          SaleTaxes Delete
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete selected parties?</span>
+          <span>Are you sure to permanently delete selected saleTaxes?</span>
         )}
-        {isLoading && <span>Party are deleting...</span>}
+        {isLoading && <span>SaleTax are deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -88,7 +88,7 @@ export function DeletesDialog({ show, onHide }) {
           <> </>
           <button
             type="button"
-            onClick={deleteParties}
+            onClick={deleteSaleTaxes}
             className="btn btn-primary btn-elevate"
           >
             Delete

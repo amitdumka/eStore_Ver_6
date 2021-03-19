@@ -2,30 +2,30 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
-import * as actions from "../../../_redux/parties/Actions";
+import * as actions from "../../../_redux/saleTaxes/Actions";
 import {useUIContext} from "../UIContext";
 
-///Parties
-//parties
-//Party
-//party
+///SaleTaxes
+//saleTaxes
+//SaleTax
+//saleTax
 
 
 // Delete particular record.
 export function DeleteDialog({ id, show, onHide }) {
-  // Parties UI Context
-  const partiesUIContext = useUIContext();
-  const partiesUIProps = useMemo(() => {
+  // SaleTaxes UI Context
+  const saleTaxesUIContext = useUIContext();
+  const saleTaxesUIProps = useMemo(() => {
     return {
-      setIds: partiesUIContext.setIds,
-      queryParams: partiesUIContext.queryParams
+      setIds: saleTaxesUIContext.setIds,
+      queryParams: saleTaxesUIContext.queryParams
     };
-  }, [partiesUIContext]);
+  }, [saleTaxesUIContext]);
 
-  // Parties Redux state
+  // SaleTaxes Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.parties.actionsLoading }),
+    (state) => ({ isLoading: state.saleTaxes.actionsLoading }),
     shallowEqual
   );
 
@@ -40,13 +40,13 @@ export function DeleteDialog({ id, show, onHide }) {
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading, dispatch]);
 
-  const deleteParty = () => {
-    // server request for deleting party by id
-    dispatch(actions.deleteParty(id)).then(() => {
+  const deleteSaleTax = () => {
+    // server request for deleting saleTax by id
+    dispatch(actions.deleteSaleTax(id)).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchParties(partiesUIProps.queryParams));
+      dispatch(actions.fetchSaleTaxes(saleTaxesUIProps.queryParams));
       // clear selections list
-      partiesUIProps.setIds([]);
+      saleTaxesUIProps.setIds([]);
       // closing delete modal
       onHide();
     });
@@ -63,14 +63,14 @@ export function DeleteDialog({ id, show, onHide }) {
       {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Party Delete
+          SaleTax Delete
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete this party?</span>
+          <span>Are you sure to permanently delete this saleTax?</span>
         )}
-        {isLoading && <span>Party is deleting...</span>}
+        {isLoading && <span>SaleTax is deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -84,7 +84,7 @@ export function DeleteDialog({ id, show, onHide }) {
           <> </>
           <button
             type="button"
-            onClick={deleteParty}
+            onClick={deleteSaleTax}
             className="btn btn-primary btn-elevate"
           >
             Delete

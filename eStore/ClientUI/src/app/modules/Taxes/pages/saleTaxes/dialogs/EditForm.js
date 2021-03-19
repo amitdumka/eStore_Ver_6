@@ -14,14 +14,14 @@ import {
 
 
 
-//Parties
-//parties
-//Party
-//party
+//SaleTaxes
+//saleTaxes
+//SaleTax
+//saleTax
 
 // Validation schema
-const PartyEditSchema = Yup.object().shape({
-  partyName: Yup.string().required("Account is required"),
+const SaleTaxEditSchema = Yup.object().shape({
+  saleTaxName: Yup.string().required("Account is required"),
   address: Yup.string().required("Branch Name is required"),
   ledgerTypeId: Yup.number().required("Store is required"),
   panNo: Yup.string().required("Account Type is required"), 
@@ -31,8 +31,8 @@ const PartyEditSchema = Yup.object().shape({
 });
 
 export function EditForm({
-  saveParty,
-  party,
+  saveSaleTax,
+  saleTax,
   actionsLoading,
   onHide,
   ledgerTypes,
@@ -41,10 +41,10 @@ export function EditForm({
     <>
       <Formik
         enableReinitialize={true}
-        initialValues={party}
-        validationSchema={PartyEditSchema}
+        initialValues={saleTax}
+        validationSchema={SaleTaxEditSchema}
         onSubmit={(values) => {
-          saveParty(values);
+          saveSaleTax(values);
         }}
       >
         {({ handleSubmit }) => (
@@ -72,10 +72,10 @@ export function EditForm({
                    {/*  Father Name*/}
                    <div className="col-lg-4">
                     <Field
-                      name="partyName"
+                      name="saleTaxName"
                       component={Input}
-                      placeholder="Party Name"
-                      label="Party Name"
+                      placeholder="SaleTax Name"
+                      label="SaleTax Name"
                     />
                   </div>
                 </div>

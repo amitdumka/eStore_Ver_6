@@ -1,53 +1,53 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/parties/Actions";
+import * as actions from "../../../_redux/saleTaxes/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
 
-//Parties
-//parties
-//Party
-//party
+//SaleTaxes
+//saleTaxes
+//SaleTax
+//saleTax
 
 export function EditDialog({ id, show, onHide }) {
-  // Parties UI Context
-  const partiesUIContext = useUIContext();
-  const partiesUIProps = useMemo(() => {
+  // SaleTaxes UI Context
+  const saleTaxesUIContext = useUIContext();
+  const saleTaxesUIProps = useMemo(() => {
     return {
-      initParty: partiesUIContext.initParty,
+      initSaleTax: saleTaxesUIContext.initSaleTax,
     };
-  }, [partiesUIContext]);
+  }, [saleTaxesUIContext]);
 
-  // Parties Redux state
+  // SaleTaxes Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, partyForEdit ,ledgerTypes} = useSelector(
+  const { actionsLoading, saleTaxForEdit ,ledgerTypes} = useSelector(
     (state) => ({
-      actionsLoading: state.parties.actionsLoading,
-      partyForEdit: state.parties.partyForEdit,
-      ledgerTypes:state.parties.ledgerTypes
+      actionsLoading: state.saleTaxes.actionsLoading,
+      saleTaxForEdit: state.saleTaxes.saleTaxForEdit,
+      ledgerTypes:state.saleTaxes.ledgerTypes
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    // server call for getting Party by id
-    dispatch(actions.fetchParty(id));
+    // server call for getting SaleTax by id
+    dispatch(actions.fetchSaleTax(id));
     dispatch(actions.fetchledgerTypes());
   }, [id, dispatch]);
 
-  // server request for saving party
-  const saveParty = (party) => {
+  // server request for saving saleTax
+  const saveSaleTax = (saleTax) => {
     
-    party.accountType=parseInt(party.accountType);
+    saleTax.accountType=parseInt(saleTax.accountType);
 
     if (!id) {
-      // server request for creating party
-      dispatch(actions.createParty(party)).then(() => onHide());
+      // server request for creating saleTax
+      dispatch(actions.createSaleTax(saleTax)).then(() => onHide());
     } else {
-      // server request for updating party
-      dispatch(actions.updateParty(party)).then(() => onHide());
+      // server request for updating saleTax
+      dispatch(actions.updateSaleTax(saleTax)).then(() => onHide());
     }
   };
 
@@ -60,9 +60,9 @@ export function EditDialog({ id, show, onHide }) {
     >
       <EditDialogHeader id={id} />
       <EditForm
-        saveParty={saveParty}
+        saveSaleTax={saveSaleTax}
         actionsLoading={actionsLoading}
-        party={partyForEdit || partiesUIProps.initParty}
+        saleTax={saleTaxForEdit || saleTaxesUIProps.initSaleTax}
         onHide={onHide}
         ledgerTypes={ledgerTypes}
       />

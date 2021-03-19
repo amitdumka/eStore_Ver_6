@@ -3,10 +3,10 @@ import { Formik } from "formik";
 import { isEqual } from "lodash";
 import { useUIContext } from "../UIContext";
 
-//Parties
-//parties
-//Party
-//party
+//SaleTaxes
+//saleTaxes
+//SaleTax
+//saleTax
 
 const prepareFilter = (queryParams, values) => {
   const { status, type, searchText } = values;
@@ -27,23 +27,23 @@ const prepareFilter = (queryParams, values) => {
   return newQueryParams;
 };
 
-export function PartiesFilter({ listLoading }) {
-  // Parties UI Context
-  const partiesUIContext = useUIContext();
-  const partiesUIProps = useMemo(() => {
+export function SaleTaxesFilter({ listLoading }) {
+  // SaleTaxes UI Context
+  const saleTaxesUIContext = useUIContext();
+  const saleTaxesUIProps = useMemo(() => {
     return {
-      queryParams: partiesUIContext.queryParams,
-      setQueryParams: partiesUIContext.setQueryParams,
+      queryParams: saleTaxesUIContext.queryParams,
+      setQueryParams: saleTaxesUIContext.setQueryParams,
     };
-  }, [partiesUIContext]);
+  }, [saleTaxesUIContext]);
 
   // queryParams, setQueryParams,
   const applyFilter = (values) => {
-    const newQueryParams = prepareFilter(partiesUIProps.queryParams, values);
-    if (!isEqual(newQueryParams, partiesUIProps.queryParams)) {
+    const newQueryParams = prepareFilter(saleTaxesUIProps.queryParams, values);
+    if (!isEqual(newQueryParams, saleTaxesUIProps.queryParams)) {
       newQueryParams.pageNumber = 1;
       // update list by queryParams
-      partiesUIProps.setQueryParams(newQueryParams);
+      saleTaxesUIProps.setQueryParams(newQueryParams);
     }
   };
 

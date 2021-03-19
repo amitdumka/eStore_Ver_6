@@ -3,18 +3,18 @@ import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
 
-//Parties
-//parties
-//Party
-//party
+//SaleTaxes
+//saleTaxes
+//SaleTax
+//saleTax
 
 
 export function EditDialogHeader({ id }) {
-  // Parties Redux state
-  const { partyForEdit, actionsLoading } = useSelector(
+  // SaleTaxes Redux state
+  const { saleTaxForEdit, actionsLoading } = useSelector(
     (state) => ({
-      partyForEdit: state.parties.partyForEdit,
-      actionsLoading: state.parties.actionsLoading,
+      saleTaxForEdit: state.saleTaxes.saleTaxForEdit,
+      actionsLoading: state.saleTaxes.actionsLoading,
     }),
     shallowEqual
   );
@@ -22,14 +22,14 @@ export function EditDialogHeader({ id }) {
   const [title, setTitle] = useState("");
   // Title couting
   useEffect(() => {
-    let _title = id ? "" : "New Party";
-    if (partyForEdit && id) {
-      _title = `Edit party '${partyForEdit.partyName}'`;
+    let _title = id ? "" : "New SaleTax";
+    if (saleTaxForEdit && id) {
+      _title = `Edit saleTax '${saleTaxForEdit.saleTaxName}'`;
     }
 
     setTitle(_title);
     // eslint-disable-next-line
-  }, [partyForEdit, actionsLoading]);
+  }, [saleTaxForEdit, actionsLoading]);
 
   return (
     <>
