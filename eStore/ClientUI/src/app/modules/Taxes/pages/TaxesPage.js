@@ -10,10 +10,10 @@ export default function TaxesPage() {
       <Switch>
         {
           /* Redirect from payroll root URL to /employees */
-          <Redirect exact={true} from="/taxes" to="/taxes/saleTaxes" />
+          <Redirect exact={true} from="/taxes" to="/taxes/saletax" />
         }
-        <ContentRoute path="/taxes/saleTaxes" component={SaleTaxesPage} />
-        <ContentRoute path="/taxes/purchaseTaxes" component={PurchaseTaxesPage}/>
+        <ContentRoute path="/taxes/saletax" component={SaleTaxesPage} />
+        <ContentRoute path="/taxes/purchasetax" component={PurchaseTaxesPage}/>
        
       </Switch>
     </Suspense>

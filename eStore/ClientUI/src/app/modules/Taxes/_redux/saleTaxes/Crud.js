@@ -16,7 +16,7 @@ export async function createSaleTax(saleTax) {
 }
 
 // READ
-export function getAllParties() {
+export function getAllSaleTaxes() {
   return axios.get(API_URL); //.catch(function (error){console.log(error)});
 }
 
@@ -26,7 +26,7 @@ export async function getSaleTaxById(saleTaxId) {
 
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
 // items => filtered/sorted result
-export async function findParties(queryParams) {
+export async function findSaleTaxes(queryParams) {
   //verifyLogin();
   return await axios.get(`${API_URL}`); //find`, { queryParams });
 }
@@ -48,8 +48,8 @@ export async function updateSaleTax(saleTax) {
 }
 
 // UPDATE Status
-export async function updateStatusForParties(ids, status) {
-  return await axios.post(`${API_URL}/updateStatusForParties`, {
+export async function updateStatusForSaleTaxes(ids, status) {
+  return await axios.post(`${API_URL}/updateStatusForSaleTaxes`, {
     ids,
     status,
   });
@@ -60,7 +60,7 @@ export async function deleteSaleTax(saleTaxId) {
   return await axios.delete(`${API_URL}/${saleTaxId}`);
 }
 
-// DELETE Parties by ids
-export async function deleteParties(ids) {
-  return await axios.post(`${API_URL}/deleteParties`, { ids });
+// DELETE SaleTaxes by ids
+export async function deleteSaleTaxes(ids) {
+  return await axios.post(`${API_URL}/deleteSaleTaxes`, { ids });
 }

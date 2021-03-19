@@ -27,7 +27,6 @@ import { useUIContext } from "../UIContext";
 //SaleTax
 //saleTax
 
-
 export function SaleTaxesTable() {
   // SaleTaxes UI Context
   const saleTaxesUIContext = useUIContext();
@@ -37,14 +36,12 @@ export function SaleTaxesTable() {
       setIds: saleTaxesUIContext.setIds,
       queryParams: saleTaxesUIContext.queryParams,
       setQueryParams: saleTaxesUIContext.setQueryParams,
-      openEditSaleTaxDialog:
-        saleTaxesUIContext.openEditSaleTaxDialog,
-      openDeleteSaleTaxDialog:
-        saleTaxesUIContext.openDeleteSaleTaxDialog,
+      openEditSaleTaxDialog: saleTaxesUIContext.openEditSaleTaxDialog,
+      openDeleteSaleTaxDialog: saleTaxesUIContext.openDeleteSaleTaxDialog,
     };
   }, [saleTaxesUIContext]);
 
-  // Getting curret state of saleTaxes list from store (Redux)
+  // Getting current state of saleTaxes list from store (Redux)
   const { currentState } = useSelector(
     (state) => ({ currentState: state.saleTaxes }),
     shallowEqual
@@ -63,70 +60,40 @@ export function SaleTaxesTable() {
   // Table columns
   const columns = [
     {
-      dataField: "saleTaxId",
+      dataField: "saleTaxTypeId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "saleTaxName",
+      dataField: "taxName",
       text: "SaleTax",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "panNo",
-      text: "PAN",
+      dataField: "taxType",
+      text: "Tax Type",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "gstNo",
-      text: "GSTIN",
+      dataField: "compositeRate",
+      text: "Composite Rate",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
-    },
-    {
-      dataField: "address",
-      text: "Address",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "openningDate",
-      text: "Openning Date",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "openningBalance",
-      text: "Openning Balance",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "ledgerType.ledgerNameType",
-      text: "Ledger Type",
-      sort: false,
-      //formatter:columnFormatters.TypeColumnFormatter,
-      sortCaret: sortCaret,
     },
     {
       dataField: "action",
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditSaleTaxDialog:
-          saleTaxesUIProps.openEditSaleTaxDialog,
-        openDeleteSaleTaxDialog:
-          saleTaxesUIProps.openDeleteSaleTaxDialog,
+        openEditSaleTaxDialog: saleTaxesUIProps.openEditSaleTaxDialog,
+        openDeleteSaleTaxDialog: saleTaxesUIProps.openDeleteSaleTaxDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",

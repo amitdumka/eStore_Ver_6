@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { SaleTaxesLoadingDialog } from "./dialogs/LoadingDialog";
+import { PurchaseTaxesLoadingDialog } from "./dialogs/LoadingDialog";
 import { EditDialog } from "./dialogs/EditDialog";
 
 import { DeleteDialog } from "./dialogs/DeleteDialog";
@@ -10,101 +10,100 @@ import { DeletesDialog } from "./dialogs/DeletesDialog";
 import { FetchDialog } from "./dialogs/FetchDialog";
 import { UpdateStateDialog } from "./dialogs/UpdateStateDialog";
 import { UIProvider } from "./UIContext";
-import { SaleTaxesCard } from "./SaleTaxesCard";
+import { PurchaseTaxesCard } from "./PurchaseTaxesCard";
 
-//SaleTaxes
-//saleTax
-//SaleTax
-//saleTax
+//purchaseTax
+//PurchaseTax
 
-export function SaleTaxesPage({ history }) {
-  const saleTaxesUIEvents = {
-    newSaleTaxButtonClick: () => {
-      history.push("/taxes/saletax/new");
+
+export function PurchaseTaxesPage({ history }) {
+  const purchaseTaxesUIEvents = {
+    newPurchaseTaxButtonClick: () => {
+      history.push("/taxes/purchasetax/new");
     },
-    openEditSaleTaxDialog: (id) => {
-      history.push(`/taxes/saletax/${id}/edit`);
+    openEditPurchaseTaxDialog: (id) => {
+      history.push(`/taxes/purchasetax/${id}/edit`);
     },
-    openDeleteSaleTaxDialog: (id) => {
-      history.push(`/taxes/saletax/${id}/delete`);
+    openDeletePurchaseTaxDialog: (id) => {
+      history.push(`/taxes/purchasetax/${id}/delete`);
     },
-    openDeleteSaleTaxesDialog: () => {
-      history.push(`/taxes/saletax/deleteSaleTaxes`);
+    openDeletePurchaseTaxesDialog: () => {
+      history.push(`/taxes/purchasetax/deletePurchaseTaxes`);
     },
-    openFetchSaleTaxesDialog: () => {
-      history.push(`/taxes/saletax/fetch`);
+    openFetchPurchaseTaxesDialog: () => {
+      history.push(`/taxes/purchasetax/fetch`);
     },
-    openUpdateSaleTaxesStatusDialog: () => {
-      history.push("/taxes/saletax/updateStatus");
+    openUpdatePurchaseTaxesStatusDialog: () => {
+      history.push("/taxes/purchasetax/updateStatus");
     }
   }
 
   return (
-    <UIProvider UIEvents={saleTaxesUIEvents}>
-      <SaleTaxesLoadingDialog />
-      <Route path="/taxes/saletax/new">
+    <UIProvider UIEvents={purchaseTaxesUIEvents}>
+      <PurchaseTaxesLoadingDialog />
+      <Route path="/taxes/purchasetax/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/taxes/saletax");
+              history.push("/taxes/purchasetax");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/saletax/:id/edit">
+      <Route path="/taxes/purchasetax/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/taxes/saletax");
+              history.push("/taxes/purchasetax");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/saletax/deleteSaleTaxes">
+      <Route path="/taxes/purchasetax/deletePurchaseTaxes">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/taxes/saletax");
+              history.push("/taxes/purchasetax");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/saletax/:id/delete">
+      <Route path="/taxes/purchasetax/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/taxes/saletax");
+              history.push("/taxes/purchasetax");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/saletax/fetch">
+      <Route path="/taxes/purchasetax/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/taxes/saletax");
+              history.push("/taxes/purchasetax");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/saletax/updateStatus">
+      <Route path="/taxes/purchasetax/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/taxes/saletax");
+              history.push("/taxes/purchasetax");
             }}
           />
         )}
       </Route>
-      <SaleTaxesCard />
+      <PurchaseTaxesCard />
     </UIProvider>
   );
 }

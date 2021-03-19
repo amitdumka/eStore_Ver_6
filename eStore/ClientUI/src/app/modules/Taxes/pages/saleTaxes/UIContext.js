@@ -33,17 +33,10 @@ export function UIProvider({ UIEvents, children }) {
   }, []);
 
   const initSaleTax = {
-    saleTaxId: 0,
-    saleTaxName: "",
-    openningDate: new Date(),
-    openningBalance: 0.0,
-    address: "",
-    panNo: "",
-    gstNo: "",
-    ledgerTypeId: 0,
-    ledgerType: null,
-    ledgerMaster: null,
-    ledgers: null,
+    saleTaxTypeId: 0,
+    taxName: "",
+    taxType: 0,
+    compositeRate: 0.0,
   };
 
   const value = {
