@@ -2,53 +2,53 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useSelector } from "react-redux";
 // import {
-//   LedgerTypeStatusCssClasses,
-//   LedgerTypeStatusTitles,
+//   PurchaseTaxestatusCssClasses,
+//   PurchaseTaxestatusTitles,
 // } from "../UIHelpers";
 import { useUIContext } from "../UIContext";
 
-//ledgerType
-//LedgerType
+//purchaseTax
+//PurchaseTax
 
 
-const selectedLedgerTypes = (entities, ids) => {
-  const _ledgerTypes = [];
+const selectedPurchaseTaxes = (entities, ids) => {
+  const _purchaseTaxes = [];
   ids.forEach((id) => {
-    const ledgerType = entities.find((el) => el.id === id);
-    if (ledgerType) {
-      _ledgerTypes.push(ledgerType);
+    const purchaseTax = entities.find((el) => el.id === id);
+    if (purchaseTax) {
+      _purchaseTaxes.push(purchaseTax);
     }
   });
-  return _ledgerTypes;
+  return _purchaseTaxes;
 };
 
 export function FetchDialog({ show, onHide }) {
-  // LedgerTypes UI Context
-  const ledgerTypesUIContext = useUIContext();
-  const ledgerTypesUIProps = useMemo(() => {
+  // PurchaseTaxes UI Context
+  const purchaseTaxesUIContext = useUIContext();
+  const purchaseTaxesUIProps = useMemo(() => {
     return {
-      ids: ledgerTypesUIContext.ids,
+      ids: purchaseTaxesUIContext.ids,
     };
-  }, [ledgerTypesUIContext]);
+  }, [purchaseTaxesUIContext]);
 
-  // LedgerTypes Redux state
-  const { ledgerTypes } = useSelector(
+  // PurchaseTaxes Redux state
+  const { purchaseTaxes } = useSelector(
     (state) => ({
-      ledgerTypes: selectedLedgerTypes(
-        state.ledgerTypes.entities,
-        ledgerTypesUIProps.ids
+      purchaseTaxes: selectedPurchaseTaxes(
+        state.purchaseTaxes.entities,
+        purchaseTaxesUIProps.ids
       ),
     }),
     shallowEqual
   );
 
-  // if ledgerTypes weren't selected we should close modal
+  // if purchaseTaxes weren't selected we should close modal
   useEffect(() => {
-    if (!ledgerTypesUIProps.ids || ledgerTypesUIProps.ids.length === 0) {
+    if (!purchaseTaxesUIProps.ids || purchaseTaxesUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ledgerTypesUIProps.ids]);
+  }, [purchaseTaxesUIProps.ids]);
 
   return (
     <Modal
@@ -71,12 +71,12 @@ export function FetchDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {ledgerTypes.map((ledgerType) => (
-              <tr key={`id${ledgerType.id}`}>
-                <td>{ledgerType.id}</td>
+            {purchaseTaxes.map((purchaseTax) => (
+              <tr key={`id${purchaseTax.id}`}>
+                <td>{purchaseTax.id}</td>
                 <td>
                   <span className="ml-3">
-                    {ledgerType.lastName}, {ledgerType.firstName}
+                    {purchaseTax.lastName}, {purchaseTax.firstName}
                   </span>
                 </td>
               </tr>

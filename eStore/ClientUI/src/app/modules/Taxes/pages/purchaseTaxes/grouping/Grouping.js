@@ -1,22 +1,22 @@
 import React, { useMemo } from "react";
 import { useUIContext } from "../UIContext";
 
-//ledgerType
-//LedgerType
+//purchaseTax
+//PurchaseTax
 
-export function LedgerTypesGrouping() {
-  // LedgerTypes UI Context
-  const ledgerTypesUIContext = useUIContext();
-  const ledgerTypesUIProps = useMemo(() => {
+export function PurchaseTaxesGrouping() {
+  // PurchaseTaxes UI Context
+  const purchaseTaxesUIContext = useUIContext();
+  const purchaseTaxesUIProps = useMemo(() => {
     return {
-      ids: ledgerTypesUIContext.ids,
-      setIds: ledgerTypesUIContext.setIds,
-      openDeleteLedgerTypesDialog: ledgerTypesUIContext.openDeleteLedgerTypesDialog,
-      openFetchLedgerTypesDialog: ledgerTypesUIContext.openFetchLedgerTypesDialog,
-      openUpdateLedgerTypesStatusDialog:
-        ledgerTypesUIContext.openUpdateLedgerTypesStatusDialog,
+      ids: purchaseTaxesUIContext.ids,
+      setIds: purchaseTaxesUIContext.setIds,
+      openDeletePurchaseTaxesDialog: purchaseTaxesUIContext.openDeletePurchaseTaxesDialog,
+      openFetchPurchaseTaxesDialog: purchaseTaxesUIContext.openFetchPurchaseTaxesDialog,
+      openUpdatePurchaseTaxesStatusDialog:
+        purchaseTaxesUIContext.openUpdatePurchaseTaxesStatusDialog,
     };
-  }, [ledgerTypesUIContext]);
+  }, [purchaseTaxesUIContext]);
 
   return (
     <div className="form">
@@ -26,7 +26,7 @@ export function LedgerTypesGrouping() {
             <div className="form-label form-label-no-wrap">
               <label className="font-bold font-danger">
                 <span>
-                  Selected records count: <b>{ledgerTypesUIProps.ids.length}</b>
+                  Selected records count: <b>{purchaseTaxesUIProps.ids.length}</b>
                 </span>
               </label>
             </div>
@@ -34,7 +34,7 @@ export function LedgerTypesGrouping() {
               <button
                 type="button"
                 className="btn btn-danger font-weight-bolder font-size-sm"
-                onClick={ledgerTypesUIProps.openDeleteLedgerTypesDialog}
+                onClick={purchaseTaxesUIProps.openDeletePurchaseTaxesDialog}
               >
                 <i className="fa fa-trash"></i> Delete All
               </button>
@@ -42,7 +42,7 @@ export function LedgerTypesGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={ledgerTypesUIProps.openFetchLedgerTypesDialog}
+                onClick={purchaseTaxesUIProps.openFetchPurchaseTaxesDialog}
               >
                 <i className="fa fa-stream"></i> Fetch Selected
               </button>
@@ -50,7 +50,7 @@ export function LedgerTypesGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={ledgerTypesUIProps.openUpdateLedgerTypesStatusDialog}
+                onClick={purchaseTaxesUIProps.openUpdatePurchaseTaxesStatusDialog}
               >
                 <i className="fa fa-sync-alt"></i> Update Status
               </button>

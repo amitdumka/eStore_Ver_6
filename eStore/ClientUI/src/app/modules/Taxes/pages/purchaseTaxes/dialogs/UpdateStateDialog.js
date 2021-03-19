@@ -1,69 +1,69 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/ledgerTypes/Actions";
+import * as actions from "../../../_redux/purchaseTaxes/Actions";
 import { useUIContext } from "../UIContext";
 
 
 
-//ledgerType
-//LedgerType
+//purchaseTax
+//PurchaseTax
 
 
-const selectedLedgerTypes = (entities, ids) => {
-  const _ledgerTypes = [];
+const selectedPurchaseTaxes = (entities, ids) => {
+  const _purchaseTaxes = [];
   ids.forEach((id) => {
-    const ledgerType = entities.find((el) => el.id === id);
-    if (ledgerType) {
-      _ledgerTypes.push(ledgerType);
+    const purchaseTax = entities.find((el) => el.id === id);
+    if (purchaseTax) {
+      _purchaseTaxes.push(purchaseTax);
     }
   });
-  return _ledgerTypes;
+  return _purchaseTaxes;
 };
 
 export function UpdateStateDialog({ show, onHide }) {
-  // LedgerTypes UI Context
-  const ledgerTypesUIContext = useUIContext();
-  const ledgerTypesUIProps = useMemo(() => {
+  // PurchaseTaxes UI Context
+  const purchaseTaxesUIContext = useUIContext();
+  const purchaseTaxesUIProps = useMemo(() => {
     return {
-      ids: ledgerTypesUIContext.ids,
-      setIds: ledgerTypesUIContext.setIds,
-      queryParams: ledgerTypesUIContext.queryParams,
+      ids: purchaseTaxesUIContext.ids,
+      setIds: purchaseTaxesUIContext.setIds,
+      queryParams: purchaseTaxesUIContext.queryParams,
     };
-  }, [ledgerTypesUIContext]);
+  }, [purchaseTaxesUIContext]);
 
-  // LedgerTypes Redux state
-  const { ledgerTypes, isLoading } = useSelector(
+  // PurchaseTaxes Redux state
+  const { purchaseTaxes, isLoading } = useSelector(
     (state) => ({
-      ledgerTypes: selectedLedgerTypes(
-        state.ledgerTypes.entities,
-        ledgerTypesUIProps.ids
+      purchaseTaxes: selectedPurchaseTaxes(
+        state.purchaseTaxes.entities,
+        purchaseTaxesUIProps.ids
       ),
-      isLoading: state.ledgerTypes.actionsLoading,
+      isLoading: state.purchaseTaxes.actionsLoading,
     }),
     shallowEqual
   );
 
   // if !id we should close modal
   useEffect(() => {
-    if (!ledgerTypesUIProps.ids || ledgerTypesUIProps.ids.length === 0) {
+    if (!purchaseTaxesUIProps.ids || purchaseTaxesUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ledgerTypesUIProps.ids]);
+  }, [purchaseTaxesUIProps.ids]);
 
   const [status, setStatus] = useState(0);
 
   const dispatch = useDispatch();
   const updateStatus = () => {
-    // server request for update ledgerTypes status by selected ids
-    dispatch(actions.updateLedgerTypesStatus(ledgerTypesUIProps.ids, status)).then(
+    // server request for update purchaseTaxes status by selected ids
+    dispatch(actions.updatePurchaseTaxesStatus(purchaseTaxesUIProps.ids, status)).then(
       () => {
         // refresh list after deletion
-        dispatch(actions.fetchLedgerTypes(ledgerTypesUIProps.queryParams)).then(
+        dispatch(actions.fetchPurchaseTaxes(purchaseTaxesUIProps.queryParams)).then(
           () => {
             // clear selections list
-            ledgerTypesUIProps.setIds([]);
+            purchaseTaxesUIProps.setIds([]);
             // closing delete modal
             onHide();
           }
@@ -80,7 +80,7 @@ export function UpdateStateDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Status has been updated for selected ledgerTypes
+          Status has been updated for selected purchaseTaxes
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="overlay overlay-block cursor-default">
@@ -100,13 +100,13 @@ export function UpdateStateDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {ledgerTypes.map((ledgerType) => (
-              <tr key={`id${ledgerType.id}`}>
-                <td>{ledgerType.id}</td>
+            {purchaseTaxes.map((purchaseTax) => (
+              <tr key={`id${purchaseTax.id}`}>
+                <td>{purchaseTax.id}</td>
                 
                 <td>
                   <span className="ml-3">
-                    {ledgerType.lastName}, {ledgerType.firstName}
+                    {purchaseTax.lastName}, {purchaseTax.firstName}
                   </span>
                 </td>
               </tr>

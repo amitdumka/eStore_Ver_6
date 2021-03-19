@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { LedgerTypesLoadingDialog } from "./dialogs/LoadingDialog";
+import { PurchaseTaxesLoadingDialog } from "./dialogs/LoadingDialog";
 import { EditDialog } from "./dialogs/EditDialog";
 
 import { DeleteDialog } from "./dialogs/DeleteDialog";
@@ -10,100 +10,100 @@ import { DeletesDialog } from "./dialogs/DeletesDialog";
 import { FetchDialog } from "./dialogs/FetchDialog";
 import { UpdateStateDialog } from "./dialogs/UpdateStateDialog";
 import { UIProvider } from "./UIContext";
-import { LedgerTypesCard } from "./LedgerTypesCard";
+import { PurchaseTaxesCard } from "./PurchaseTaxesCard";
 
-//ledgerType
-//LedgerType
+//purchaseTax
+//PurchaseTax
 
 
-export function LedgerTypesPage({ history }) {
-  const ledgerTypesUIEvents = {
-    newLedgerTypeButtonClick: () => {
-      history.push("/ledger/ledgerTypes/new");
+export function PurchaseTaxesPage({ history }) {
+  const purchaseTaxesUIEvents = {
+    newPurchaseTaxButtonClick: () => {
+      history.push("/ledger/purchaseTaxes/new");
     },
-    openEditLedgerTypeDialog: (id) => {
-      history.push(`/ledger/ledgerTypes/${id}/edit`);
+    openEditPurchaseTaxDialog: (id) => {
+      history.push(`/ledger/purchaseTaxes/${id}/edit`);
     },
-    openDeleteLedgerTypeDialog: (id) => {
-      history.push(`/ledger/ledgerTypes/${id}/delete`);
+    openDeletePurchaseTaxDialog: (id) => {
+      history.push(`/ledger/purchaseTaxes/${id}/delete`);
     },
-    openDeleteLedgerTypesDialog: () => {
-      history.push(`/ledger/ledgerTypes/deleteLedgerTypes`);
+    openDeletePurchaseTaxesDialog: () => {
+      history.push(`/ledger/purchaseTaxes/deletePurchaseTaxes`);
     },
-    openFetchLedgerTypesDialog: () => {
-      history.push(`/ledger/ledgerTypes/fetch`);
+    openFetchPurchaseTaxesDialog: () => {
+      history.push(`/ledger/purchaseTaxes/fetch`);
     },
-    openUpdateLedgerTypesStatusDialog: () => {
-      history.push("/ledger/ledgerTypes/updateStatus");
+    openUpdatePurchaseTaxesStatusDialog: () => {
+      history.push("/ledger/purchaseTaxes/updateStatus");
     }
   }
 
   return (
-    <UIProvider UIEvents={ledgerTypesUIEvents}>
-      <LedgerTypesLoadingDialog />
-      <Route path="/ledger/ledgerTypes/new">
+    <UIProvider UIEvents={purchaseTaxesUIEvents}>
+      <PurchaseTaxesLoadingDialog />
+      <Route path="/ledger/purchaseTaxes/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/ledger/ledgerTypes");
+              history.push("/ledger/purchaseTaxes");
             }}
           />
         )}
       </Route>
-      <Route path="/ledger/ledgerTypes/:id/edit">
+      <Route path="/ledger/purchaseTaxes/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/ledger/ledgerTypes");
+              history.push("/ledger/purchaseTaxes");
             }}
           />
         )}
       </Route>
-      <Route path="/ledger/ledgerTypes/deleteLedgerTypes">
+      <Route path="/ledger/purchaseTaxes/deletePurchaseTaxes">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/ledger/ledgerTypes");
+              history.push("/ledger/purchaseTaxes");
             }}
           />
         )}
       </Route>
-      <Route path="/ledger/ledgerTypes/:id/delete">
+      <Route path="/ledger/purchaseTaxes/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/ledger/ledgerTypes");
+              history.push("/ledger/purchaseTaxes");
             }}
           />
         )}
       </Route>
-      <Route path="/ledger/ledgerTypes/fetch">
+      <Route path="/ledger/purchaseTaxes/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/ledger/ledgerTypes");
+              history.push("/ledger/purchaseTaxes");
             }}
           />
         )}
       </Route>
-      <Route path="/ledger/ledgerTypes/updateStatus">
+      <Route path="/ledger/purchaseTaxes/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/ledger/ledgerTypes");
+              history.push("/ledger/purchaseTaxes");
             }}
           />
         )}
       </Route>
-      <LedgerTypesCard />
+      <PurchaseTaxesCard />
     </UIProvider>
   );
 }

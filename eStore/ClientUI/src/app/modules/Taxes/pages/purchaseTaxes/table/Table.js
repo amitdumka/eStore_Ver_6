@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/ledgerTypes/Actions";
+import * as actions from "../../../_redux/purchaseTaxes/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -22,45 +22,45 @@ import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 
-//ledgerType
-//LedgerType
+//purchaseTax
+//PurchaseTax
 
 
-export function LedgerTypesTable() {
-  // LedgerTypes UI Context
-  const ledgerTypesUIContext = useUIContext();
-  const ledgerTypesUIProps = useMemo(() => {
+export function PurchaseTaxesTable() {
+  // PurchaseTaxes UI Context
+  const purchaseTaxesUIContext = useUIContext();
+  const purchaseTaxesUIProps = useMemo(() => {
     return {
-      ids: ledgerTypesUIContext.ids,
-      setIds: ledgerTypesUIContext.setIds,
-      queryParams: ledgerTypesUIContext.queryParams,
-      setQueryParams: ledgerTypesUIContext.setQueryParams,
-      openEditLedgerTypeDialog: ledgerTypesUIContext.openEditLedgerTypeDialog,
-      openDeleteLedgerTypeDialog: ledgerTypesUIContext.openDeleteLedgerTypeDialog,
+      ids: purchaseTaxesUIContext.ids,
+      setIds: purchaseTaxesUIContext.setIds,
+      queryParams: purchaseTaxesUIContext.queryParams,
+      setQueryParams: purchaseTaxesUIContext.setQueryParams,
+      openEditPurchaseTaxDialog: purchaseTaxesUIContext.openEditPurchaseTaxDialog,
+      openDeletePurchaseTaxDialog: purchaseTaxesUIContext.openDeletePurchaseTaxDialog,
     };
-  }, [ledgerTypesUIContext]);
+  }, [purchaseTaxesUIContext]);
 
-  // Getting curret state of ledgerTypes list from store (Redux)
+  // Getting curret state of purchaseTaxes list from store (Redux)
   const { currentState ,ledgerCategory} = useSelector(
-    (state) => ({ currentState: state.ledgerTypes , ledgerCategory:state.ledgerTypes.ledgerTypes}),
+    (state) => ({ currentState: state.purchaseTaxes , ledgerCategory:state.purchaseTaxes.purchaseTaxes}),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
 
-  // LedgerTypes Redux state
+  // PurchaseTaxes Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    ledgerTypesUIProps.setIds([]);
+    purchaseTaxesUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchLedgerTypes(ledgerTypesUIProps.queryParams));
+    dispatch(actions.fetchPurchaseTaxes(purchaseTaxesUIProps.queryParams));
     dispatch(actions.fetchLedgerCategory());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ledgerTypesUIProps.queryParams, dispatch]);
+  }, [purchaseTaxesUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "ledgerTypeId",
+      dataField: "purchaseTaxId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
@@ -68,7 +68,7 @@ export function LedgerTypesTable() {
     },
     {
       dataField: "ledgerNameType",
-      text: "LedgerType Name",
+      text: "PurchaseTax Name",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -92,8 +92,8 @@ export function LedgerTypesTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditLedgerTypeDialog: ledgerTypesUIProps.openEditLedgerTypeDialog,
-        openDeleteLedgerTypeDialog: ledgerTypesUIProps.openDeleteLedgerTypeDialog,
+        openEditPurchaseTaxDialog: purchaseTaxesUIProps.openEditPurchaseTaxDialog,
+        openDeletePurchaseTaxDialog: purchaseTaxesUIProps.openDeletePurchaseTaxDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -107,8 +107,8 @@ export function LedgerTypesTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: ledgerTypesUIProps.queryParams.pageSize,
-    page: ledgerTypesUIProps.queryParams.pageNumber,
+    sizePerPage: purchaseTaxesUIProps.queryParams.pageSize,
+    page: purchaseTaxesUIProps.queryParams.pageNumber,
   };
 
   
@@ -128,19 +128,19 @@ export function LedgerTypesTable() {
                 bootstrap4
                 remote
                 noDataIndication="No Record Found now.."
-                keyField="ledgerTypeId"
+                keyField="purchaseTaxId"
                 data={entities === null ? []: totalCount ?entities:[]}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  ledgerTypesUIProps.setQueryParams
+                  purchaseTaxesUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: ledgerTypesUIProps.ids,
-                  setIds: ledgerTypesUIProps.setIds,
-                  idName:"ledgerTypeId",
+                  ids: purchaseTaxesUIProps.ids,
+                  setIds: purchaseTaxesUIProps.setIds,
+                  idName:"purchaseTaxId",
                 })}
                 {...paginationTableProps}
               >

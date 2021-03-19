@@ -1,53 +1,53 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/ledgerTypes/Actions";
+import * as actions from "../../../_redux/purchaseTaxes/Actions";
 import { useUIContext } from "../UIContext";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
 
 // Delete Selected Records
 
-//ledgerType
-//LedgerType
+//purchaseTax
+//PurchaseTax
 
 
 export function DeletesDialog({ show, onHide }) {
-  // LedgerTypes UI Context
-  const ledgerTypesUIContext = useUIContext();
-  const ledgerTypesUIProps = useMemo(() => {
+  // PurchaseTaxes UI Context
+  const purchaseTaxesUIContext = useUIContext();
+  const purchaseTaxesUIProps = useMemo(() => {
     return {
-      ids: ledgerTypesUIContext.ids,
-      setIds: ledgerTypesUIContext.setIds,
-      queryParams: ledgerTypesUIContext.queryParams,
+      ids: purchaseTaxesUIContext.ids,
+      setIds: purchaseTaxesUIContext.setIds,
+      queryParams: purchaseTaxesUIContext.queryParams,
     };
-  }, [ledgerTypesUIContext]);
+  }, [purchaseTaxesUIContext]);
 
-  // LedgerTypes Redux state
+  // PurchaseTaxes Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.ledgerTypes.actionsLoading }),
+    (state) => ({ isLoading: state.purchaseTaxes.actionsLoading }),
     shallowEqual
   );
 
-  // if ledgerTypes weren't selected we should close modal
+  // if purchaseTaxes weren't selected we should close modal
   useEffect(() => {
-    if (!ledgerTypesUIProps.ids || ledgerTypesUIProps.ids.length === 0) {
+    if (!purchaseTaxesUIProps.ids || purchaseTaxesUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ledgerTypesUIProps.ids]);
+  }, [purchaseTaxesUIProps.ids]);
 
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading, dispatch]);
 
-  const deleteLedgerTypes = () => {
-    // server request for deleting ledgerType by selected ids
-    dispatch(actions.deleteLedgerTypes(ledgerTypesUIProps.ids)).then(() => {
+  const deletePurchaseTaxes = () => {
+    // server request for deleting purchaseTax by selected ids
+    dispatch(actions.deletePurchaseTaxes(purchaseTaxesUIProps.ids)).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchLedgerTypes(ledgerTypesUIProps.queryParams)).then(
+      dispatch(actions.fetchPurchaseTaxes(purchaseTaxesUIProps.queryParams)).then(
         () => {
           // clear selections list
-          ledgerTypesUIProps.setIds([]);
+          purchaseTaxesUIProps.setIds([]);
           // closing delete modal
           onHide();
         }
@@ -66,14 +66,14 @@ export function DeletesDialog({ show, onHide }) {
       {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          LedgerTypes Delete
+          PurchaseTaxes Delete
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete selected ledgerTypes?</span>
+          <span>Are you sure to permanently delete selected purchaseTaxes?</span>
         )}
-        {isLoading && <span>LedgerType are deleting...</span>}
+        {isLoading && <span>PurchaseTax are deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -87,7 +87,7 @@ export function DeletesDialog({ show, onHide }) {
           <> </>
           <button
             type="button"
-            onClick={deleteLedgerTypes}
+            onClick={deletePurchaseTaxes}
             className="btn btn-primary btn-elevate"
           >
             Delete

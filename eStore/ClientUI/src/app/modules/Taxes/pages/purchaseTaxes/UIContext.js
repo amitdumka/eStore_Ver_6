@@ -8,8 +8,8 @@ export function useUIContext() {
   return useContext(UIContext);
 }
 
-//ledgerType
-//LedgerType
+//purchaseTax
+//PurchaseTax
 
 export const UIConsumer = UIContext.Consumer;
 
@@ -30,8 +30,8 @@ export function UIProvider({ UIEvents, children }) {
     });
   }, []);
 
-  const initLedgerType = {
-    ledgerTypeId: 0,
+  const initPurchaseTax = {
+    purchaseTaxId: 0,
     ledgerNameType: "",
     category: 0,
     remark: "",
@@ -43,14 +43,14 @@ export function UIProvider({ UIEvents, children }) {
     ids,
     setIds,
     setQueryParams,
-    initLedgerType,
-    newLedgerTypeButtonClick: UIEvents.newLedgerTypeButtonClick,
-    openEditLedgerTypeDialog: UIEvents.openEditLedgerTypeDialog,
-    openDeleteLedgerTypeDialog: UIEvents.openDeleteLedgerTypeDialog,
-    openDeleteLedgerTypesDialog: UIEvents.openDeleteLedgerTypesDialog,
-    openFetchLedgerTypesDialog: UIEvents.openFetchLedgerTypesDialog,
-    openUpdateLedgerTypesStatusDialog:
-      UIEvents.openUpdateLedgerTypesStatusDialog,
+    initPurchaseTax,
+    newPurchaseTaxButtonClick: UIEvents.newPurchaseTaxButtonClick,
+    openEditPurchaseTaxDialog: UIEvents.openEditPurchaseTaxDialog,
+    openDeletePurchaseTaxDialog: UIEvents.openDeletePurchaseTaxDialog,
+    openDeletePurchaseTaxesDialog: UIEvents.openDeletePurchaseTaxesDialog,
+    openFetchPurchaseTaxesDialog: UIEvents.openFetchPurchaseTaxesDialog,
+    openUpdatePurchaseTaxesStatusDialog:
+      UIEvents.openUpdatePurchaseTaxesStatusDialog,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

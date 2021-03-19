@@ -2,28 +2,28 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
-import * as actions from "../../../_redux/ledgerTypes/Actions";
+import * as actions from "../../../_redux/purchaseTaxes/Actions";
 import {useUIContext} from "../UIContext";
 
 
-//ledgerType
-//LedgerType
+//purchaseTax
+//PurchaseTax
 
 // Delete particular record.
 export function DeleteDialog({ id, show, onHide }) {
-  // LedgerTypes UI Context
-  const ledgerTypesUIContext = useUIContext();
-  const ledgerTypesUIProps = useMemo(() => {
+  // PurchaseTaxes UI Context
+  const purchaseTaxesUIContext = useUIContext();
+  const purchaseTaxesUIProps = useMemo(() => {
     return {
-      setIds: ledgerTypesUIContext.setIds,
-      queryParams: ledgerTypesUIContext.queryParams
+      setIds: purchaseTaxesUIContext.setIds,
+      queryParams: purchaseTaxesUIContext.queryParams
     };
-  }, [ledgerTypesUIContext]);
+  }, [purchaseTaxesUIContext]);
 
-  // LedgerTypes Redux state
+  // PurchaseTaxes Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.ledgerTypes.actionsLoading }),
+    (state) => ({ isLoading: state.purchaseTaxes.actionsLoading }),
     shallowEqual
   );
 
@@ -38,13 +38,13 @@ export function DeleteDialog({ id, show, onHide }) {
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading, dispatch]);
 
-  const deleteLedgerType = () => {
-    // server request for deleting ledgerType by id
-    dispatch(actions.deleteLedgerType(id)).then(() => {
+  const deletePurchaseTax = () => {
+    // server request for deleting purchaseTax by id
+    dispatch(actions.deletePurchaseTax(id)).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchLedgerTypes(ledgerTypesUIProps.queryParams));
+      dispatch(actions.fetchPurchaseTaxes(purchaseTaxesUIProps.queryParams));
       // clear selections list
-      ledgerTypesUIProps.setIds([]);
+      purchaseTaxesUIProps.setIds([]);
       // closing delete modal
       onHide();
     });
@@ -61,14 +61,14 @@ export function DeleteDialog({ id, show, onHide }) {
       {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          LedgerType Delete
+          PurchaseTax Delete
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete this ledgerType?</span>
+          <span>Are you sure to permanently delete this purchaseTax?</span>
         )}
-        {isLoading && <span>LedgerType is deleting...</span>}
+        {isLoading && <span>PurchaseTax is deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -82,7 +82,7 @@ export function DeleteDialog({ id, show, onHide }) {
           <> </>
           <button
             type="button"
-            onClick={deleteLedgerType}
+            onClick={deletePurchaseTax}
             className="btn btn-primary btn-elevate"
           >
             Delete

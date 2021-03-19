@@ -1,50 +1,50 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/ledgerTypes/Actions";
+import * as actions from "../../../_redux/purchaseTaxes/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
 
-//ledgerType
-//LedgerType
+//purchaseTax
+//PurchaseTax
 
 export function EditDialog({ id, show, onHide }) {
-  // LedgerTypes UI Context
-  const ledgerTypesUIContext = useUIContext();
-  const ledgerTypesUIProps = useMemo(() => {
+  // PurchaseTaxes UI Context
+  const purchaseTaxesUIContext = useUIContext();
+  const purchaseTaxesUIProps = useMemo(() => {
     return {
-      initLedgerType: ledgerTypesUIContext.initLedgerType,
+      initPurchaseTax: purchaseTaxesUIContext.initPurchaseTax,
     };
-  }, [ledgerTypesUIContext]);
+  }, [purchaseTaxesUIContext]);
 
-  // LedgerTypes Redux state
+  // PurchaseTaxes Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, ledgerTypeForEdit, ledgerCategory } = useSelector(
+  const { actionsLoading, purchaseTaxForEdit, ledgerCategory } = useSelector(
     (state) => ({
-      actionsLoading: state.ledgerTypes.actionsLoading,
-      ledgerTypeForEdit: state.ledgerTypes.ledgerTypeForEdit,
-      ledgerCategory: state.ledgerTypes.ledgerCategory,
+      actionsLoading: state.purchaseTaxes.actionsLoading,
+      purchaseTaxForEdit: state.purchaseTaxes.purchaseTaxForEdit,
+      ledgerCategory: state.purchaseTaxes.ledgerCategory,
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    // server call for getting LedgerType by id
-    dispatch(actions.fetchLedgerType(id));
+    // server call for getting PurchaseTax by id
+    dispatch(actions.fetchPurchaseTax(id));
     dispatch(actions.fetchLedgerCategory());
   }, [id, dispatch]);
 
-  // server request for saving ledgerType
-  const saveLedgerType = (ledgerType) => {
-    ledgerType.category = parseInt(ledgerType.category);
+  // server request for saving purchaseTax
+  const savePurchaseTax = (purchaseTax) => {
+    purchaseTax.category = parseInt(purchaseTax.category);
 
     if (!id) {
-      // server request for creating ledgerType
-      dispatch(actions.createLedgerType(ledgerType)).then(() => onHide());
+      // server request for creating purchaseTax
+      dispatch(actions.createPurchaseTax(purchaseTax)).then(() => onHide());
     } else {
-      // server request for updating ledgerType
-      dispatch(actions.updateLedgerType(ledgerType)).then(() => onHide());
+      // server request for updating purchaseTax
+      dispatch(actions.updatePurchaseTax(purchaseTax)).then(() => onHide());
     }
   };
 
@@ -57,9 +57,9 @@ export function EditDialog({ id, show, onHide }) {
     >
       <EditDialogHeader id={id} />
       <EditForm
-        saveLedgerType={saveLedgerType}
+        savePurchaseTax={savePurchaseTax}
         actionsLoading={actionsLoading}
-        ledgerType={ledgerTypeForEdit || ledgerTypesUIProps.initLedgerType}
+        purchaseTax={purchaseTaxForEdit || purchaseTaxesUIProps.initPurchaseTax}
         onHide={onHide}
         ledgerCategory={ledgerCategory}
       />

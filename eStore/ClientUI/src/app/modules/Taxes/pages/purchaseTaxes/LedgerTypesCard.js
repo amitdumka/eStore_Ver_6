@@ -5,40 +5,40 @@ import {
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../_metronic/_partials/controls";
-import { LedgerTypesFilter } from "./filter/Filter";
-import { LedgerTypesTable } from "./table/Table";
-import { LedgerTypesGrouping } from "./grouping/Grouping";
+import { PurchaseTaxesFilter } from "./filter/Filter";
+import { PurchaseTaxesTable } from "./table/Table";
+import { PurchaseTaxesGrouping } from "./grouping/Grouping";
 import { useUIContext } from "./UIContext";
 
-//ledgerType
-//LedgerType
+//purchaseTax
+//PurchaseTax
 
-export function LedgerTypesCard() {
-  const ledgerTypesUIContext = useUIContext();
-  const ledgerTypesUIProps = useMemo(() => {
+export function PurchaseTaxesCard() {
+  const purchaseTaxesUIContext = useUIContext();
+  const purchaseTaxesUIProps = useMemo(() => {
     return {
-      ids: ledgerTypesUIContext.ids,
-      newLedgerTypeButtonClick: ledgerTypesUIContext.newLedgerTypeButtonClick,
+      ids: purchaseTaxesUIContext.ids,
+      newPurchaseTaxButtonClick: purchaseTaxesUIContext.newPurchaseTaxButtonClick,
     };
-  }, [ledgerTypesUIContext]);
+  }, [purchaseTaxesUIContext]);
 
   return (
     <Card>
-      <CardHeader title="LedgerTypes list">
+      <CardHeader title="PurchaseTaxes list">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
-            onClick={ledgerTypesUIProps.newLedgerTypeButtonClick}
+            onClick={purchaseTaxesUIProps.newPurchaseTaxButtonClick}
           >
-            New LedgerType
+            New PurchaseTax
           </button>
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        <LedgerTypesFilter />
-        {ledgerTypesUIProps.ids.length > 0 && <LedgerTypesGrouping />}
-        <LedgerTypesTable />
+        <PurchaseTaxesFilter />
+        {purchaseTaxesUIProps.ids.length > 0 && <PurchaseTaxesGrouping />}
+        <PurchaseTaxesTable />
       </CardBody>
     </Card>
   );

@@ -12,11 +12,11 @@ import {
   DatePickerField,
 } from "../../../../../../_metronic/_partials/controls";
 
-//ledgerType
-//LedgerType
+//purchaseTax
+//PurchaseTax
 
 // Validation schema
-const LedgerTypeEditSchema = Yup.object().shape({
+const PurchaseTaxEditSchema = Yup.object().shape({
   ledgerNameType: Yup.string()
     .min(3, "Minimum 3 symbols")
     .max(50, "Maximum 50 symbols")
@@ -26,8 +26,8 @@ const LedgerTypeEditSchema = Yup.object().shape({
 });
 
 export function EditForm({
-  saveLedgerType,
-  ledgerType,
+  savePurchaseTax,
+  purchaseTax,
   actionsLoading,
   onHide,
   ledgerCategory,
@@ -36,10 +36,10 @@ export function EditForm({
     <>
       <Formik
         enableReinitialize={true}
-        initialValues={ledgerType}
-        validationSchema={LedgerTypeEditSchema}
+        initialValues={purchaseTax}
+        validationSchema={PurchaseTaxEditSchema}
         onSubmit={(values) => {
-          saveLedgerType(values);
+          savePurchaseTax(values);
         }}
       >
         {({ handleSubmit }) => (

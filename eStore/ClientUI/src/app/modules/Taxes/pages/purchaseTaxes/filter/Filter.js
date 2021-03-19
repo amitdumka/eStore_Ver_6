@@ -4,8 +4,8 @@ import { isEqual } from "lodash";
 import { useUIContext } from "../UIContext";
 
 
-//ledgerType
-//LedgerType
+//purchaseTax
+//PurchaseTax
 
 const prepareFilter = (queryParams, values) => {
   const { status, type, searchText } = values;
@@ -26,23 +26,23 @@ const prepareFilter = (queryParams, values) => {
   return newQueryParams;
 };
 
-export function LedgerTypesFilter({ listLoading }) {
-  // LedgerTypes UI Context
-  const ledgerTypesUIContext = useUIContext();
-  const ledgerTypesUIProps = useMemo(() => {
+export function PurchaseTaxesFilter({ listLoading }) {
+  // PurchaseTaxes UI Context
+  const purchaseTaxesUIContext = useUIContext();
+  const purchaseTaxesUIProps = useMemo(() => {
     return {
-      queryParams: ledgerTypesUIContext.queryParams,
-      setQueryParams: ledgerTypesUIContext.setQueryParams,
+      queryParams: purchaseTaxesUIContext.queryParams,
+      setQueryParams: purchaseTaxesUIContext.setQueryParams,
     };
-  }, [ledgerTypesUIContext]);
+  }, [purchaseTaxesUIContext]);
 
   // queryParams, setQueryParams,
   const applyFilter = (values) => {
-    const newQueryParams = prepareFilter(ledgerTypesUIProps.queryParams, values);
-    if (!isEqual(newQueryParams, ledgerTypesUIProps.queryParams)) {
+    const newQueryParams = prepareFilter(purchaseTaxesUIProps.queryParams, values);
+    if (!isEqual(newQueryParams, purchaseTaxesUIProps.queryParams)) {
       newQueryParams.pageNumber = 1;
       // update list by queryParams
-      ledgerTypesUIProps.setQueryParams(newQueryParams);
+      purchaseTaxesUIProps.setQueryParams(newQueryParams);
     }
   };
 

@@ -5,21 +5,21 @@ import React from "react";
 import SVG from "react-inlinesvg";
 import { toAbsoluteUrl } from "../../../../../../../_metronic/_helpers";
 
-//ledgerType
-//LedgerType
+//purchaseTax
+//PurchaseTax
 
 export function ActionsColumnFormatter(
   cellContent,
   row,
   rowIndex,
-  { openEditLedgerTypeDialog, openDeleteLedgerTypeDialog }
+  { openEditPurchaseTaxDialog, openDeletePurchaseTaxDialog }
 ) {
   return (
     <>
       <a
-        title="Edit ledgerType"
+        title="Edit purchaseTax"
         className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-        onClick={() => openEditLedgerTypeDialog(row.ledgerTypeId)}
+        onClick={() => openEditPurchaseTaxDialog(row.purchaseTaxId)}
       >
         <span className="svg-icon svg-icon-md svg-icon-primary">
           <SVG
@@ -30,9 +30,9 @@ export function ActionsColumnFormatter(
       <> </>
 
       <a
-        title="Delete ledgerType"
+        title="Delete purchaseTax"
         className="btn btn-icon btn-light btn-hover-danger btn-sm"
-        onClick={() => openDeleteLedgerTypeDialog(row.ledgerTypeId)}
+        onClick={() => openDeletePurchaseTaxDialog(row.purchaseTaxId)}
       >
         <span className="svg-icon svg-icon-md svg-icon-danger">
           <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />

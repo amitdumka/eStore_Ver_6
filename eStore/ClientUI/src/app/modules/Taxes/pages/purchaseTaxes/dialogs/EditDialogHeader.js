@@ -4,15 +4,15 @@ import { Modal } from "react-bootstrap";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
 
 
-//ledgerType
-//LedgerType
+//purchaseTax
+//PurchaseTax
 
 export function EditDialogHeader({ id }) {
-  // LedgerTypes Redux state
-  const { ledgerTypeForEdit, actionsLoading } = useSelector(
+  // PurchaseTaxes Redux state
+  const { purchaseTaxForEdit, actionsLoading } = useSelector(
     (state) => ({
-      ledgerTypeForEdit: state.ledgerTypes.ledgerTypeForEdit,
-      actionsLoading: state.ledgerTypes.actionsLoading,
+      purchaseTaxForEdit: state.purchaseTaxes.purchaseTaxForEdit,
+      actionsLoading: state.purchaseTaxes.actionsLoading,
     }),
     shallowEqual
   );
@@ -20,14 +20,14 @@ export function EditDialogHeader({ id }) {
   const [title, setTitle] = useState("");
   // Title couting
   useEffect(() => {
-    let _title = id ? "" : "New LedgerType";
-    if (ledgerTypeForEdit && id) {
-      _title = `Edit ledgerType '${ledgerTypeForEdit.ledgerTypeName}'`;
+    let _title = id ? "" : "New PurchaseTax";
+    if (purchaseTaxForEdit && id) {
+      _title = `Edit purchaseTax '${purchaseTaxForEdit.purchaseTaxName}'`;
     }
 
     setTitle(_title);
     // eslint-disable-next-line
-  }, [ledgerTypeForEdit, actionsLoading]);
+  }, [purchaseTaxForEdit, actionsLoading]);
 
   return (
     <>
