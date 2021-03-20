@@ -1,4 +1,4 @@
-export const defaultSorted = [{ dataField: "bankName", order: "asc" }];
+export const defaultSorted = [{ dataField: "rentedLocationName", order: "asc" }];
 export const sizePerPageList = [
   { text: "3", value: 3 },
   { text: "5", value: 5 },
@@ -6,7 +6,7 @@ export const sizePerPageList = [
 ];
 export const initialFilter = {
   filter: {
-    bankName: ""
+    rentedLocationName: ""
   },
   sortOrder: "asc", // asc||desc
   sortField: "id",

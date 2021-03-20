@@ -5,23 +5,23 @@ import {
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../_metronic/_partials/controls";
-import { BankAccountsFilter } from "./filter/Filter";
-import { BankAccountsTable } from "./table/Table";
-import { BankAccountsGrouping } from "./grouping/Grouping";
+import { RentsFilter } from "./filter/Filter";
+import { RentsTable } from "./table/Table";
+import { RentsGrouping } from "./grouping/Grouping";
 import { useUIContext } from "./UIContext";
 
-//BankAccount
-//bankAccount
+//Rent
+//rent
 
 
-export function BankAccountsCard() {
-  const BankAccountsUIContext = useUIContext();
-  const BankAccountsUIProps = useMemo(() => {
+export function RentsCard() {
+  const RentsUIContext = useUIContext();
+  const RentsUIProps = useMemo(() => {
     return {
-      ids: BankAccountsUIContext.ids,
-      newBankAccountButtonClick: BankAccountsUIContext.newBankAccountButtonClick,
+      ids: RentsUIContext.ids,
+      newRentButtonClick: RentsUIContext.newRentButtonClick,
     };
-  }, [BankAccountsUIContext]);
+  }, [RentsUIContext]);
 
   return (
     <Card>
@@ -30,16 +30,16 @@ export function BankAccountsCard() {
           <button
             type="button"
             className="btn btn-primary"
-            onClick={BankAccountsUIProps.newBankAccountButtonClick}
+            onClick={RentsUIProps.newRentButtonClick}
           >
             New Bank Account
           </button>
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        <BankAccountsFilter />
-        {BankAccountsUIProps.ids.length > 0 && <BankAccountsGrouping />}
-        <BankAccountsTable />
+        <RentsFilter />
+        {RentsUIProps.ids.length > 0 && <RentsGrouping />}
+        <RentsTable />
       </CardBody>
     </Card>
   );

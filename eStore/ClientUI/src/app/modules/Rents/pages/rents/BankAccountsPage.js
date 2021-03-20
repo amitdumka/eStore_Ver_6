@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { BankAccountsLoadingDialog } from "./dialogs/LoadingDialog";
+import { RentsLoadingDialog } from "./dialogs/LoadingDialog";
 import { EditDialog } from "./dialogs/EditDialog";
 
 import { DeleteDialog } from "./dialogs/DeleteDialog";
@@ -10,99 +10,99 @@ import { DeletesDialog } from "./dialogs/DeletesDialog";
 import { FetchDialog } from "./dialogs/FetchDialog";
 import { UpdateStateDialog } from "./dialogs/UpdateStateDialog";
 import { UIProvider } from "./UIContext";
-import { BankAccountsCard } from "./BankAccountsCard";
+import { RentsCard } from "./RentsCard";
 
-//BankAccount
-//bankAccount
+//Rent
+//rent
 
-export function BankAccountsPage({ history }) {
-  const bankAccountsUIEvents = {
-    newBankAccountButtonClick: () => {
-      history.push("/banking/bankAccounts/new");
+export function RentsPage({ history }) {
+  const rentsUIEvents = {
+    newRentButtonClick: () => {
+      history.push("/banking/rents/new");
     },
-    openEditBankAccountDialog: (id) => {
-      history.push(`/banking/bankAccounts/${id}/edit`);
+    openEditRentDialog: (id) => {
+      history.push(`/banking/rents/${id}/edit`);
     },
-    openDeleteBankAccountDialog: (id) => {
-      history.push(`/banking/bankAccounts/${id}/delete`);
+    openDeleteRentDialog: (id) => {
+      history.push(`/banking/rents/${id}/delete`);
     },
-    openDeleteBankAccountsDialog: () => {
-      history.push(`/banking/bankAccounts/deleteBankAccounts`);
+    openDeleteRentsDialog: () => {
+      history.push(`/banking/rents/deleteRents`);
     },
-    openFetchBankAccountsDialog: () => {
-      history.push(`/banking/bankAccounts/fetch`);
+    openFetchRentsDialog: () => {
+      history.push(`/banking/rents/fetch`);
     },
-    openUpdateBankAccountsStatusDialog: () => {
-      history.push("/banking/bankAccounts/updateStatus");
+    openUpdateRentsStatusDialog: () => {
+      history.push("/banking/rents/updateStatus");
     }
   }
 
   return (
-    <UIProvider UIEvents={bankAccountsUIEvents}>
-      <BankAccountsLoadingDialog />
-      <Route path="/banking/bankAccounts/new">
+    <UIProvider UIEvents={rentsUIEvents}>
+      <RentsLoadingDialog />
+      <Route path="/banking/rents/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/banking/bankAccounts");
+              history.push("/banking/rents");
             }}
           />
         )}
       </Route>
-      <Route path="/banking/bankAccounts/:id/edit">
+      <Route path="/banking/rents/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/banking/bankAccounts");
+              history.push("/banking/rents");
             }}
           />
         )}
       </Route>
-      <Route path="/banking/bankAccounts/deleteBankAccounts">
+      <Route path="/banking/rents/deleteRents">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/banking/bankAccounts");
+              history.push("/banking/rents");
             }}
           />
         )}
       </Route>
-      <Route path="/banking/bankAccounts/:id/delete">
+      <Route path="/banking/rents/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/banking/bankAccounts");
+              history.push("/banking/rents");
             }}
           />
         )}
       </Route>
-      <Route path="/banking/bankAccounts/fetch">
+      <Route path="/banking/rents/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/banking/bankAccounts");
+              history.push("/banking/rents");
             }}
           />
         )}
       </Route>
-      <Route path="/banking/bankAccounts/updateStatus">
+      <Route path="/banking/rents/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/banking/bankAccounts");
+              history.push("/banking/rents");
             }}
           />
         )}
       </Route>
-      <BankAccountsCard />
+      <RentsCard />
     </UIProvider>
   );
 }

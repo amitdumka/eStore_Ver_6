@@ -1,113 +1,113 @@
 import * as requestFromServer from "./Crud";
-import {banksSlice, callTypes} from "./Slice";
+import {rentedLocationsSlice, callTypes} from "./Slice";
 
-//Bank
-//bank
+//RentedLocation
+//rentedLocation
 
-const {actions} = banksSlice;
+const {actions} = rentedLocationsSlice;
 
-export const fetchBanks = queryParams => dispatch => {
+export const fetchRentedLocations = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findBanks(queryParams)
+    .findRentedLocations(queryParams)
     .then(response => {
       const  entities  = response.data;
       const totalCount = response.data.length;
       console.log(response);
       console.log(response.data.length);
-      dispatch(actions.banksFetched({ totalCount, entities }));
+      dispatch(actions.rentedLocationsFetched({ totalCount, entities }));
     })
     .catch(error => {
       console.log(error);
-      error.clientMessage = "Can't find banks";
+      error.clientMessage = "Can't find rentedLocations";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
-export const fetchBank = id => dispatch => {
+export const fetchRentedLocation = id => dispatch => {
   if (!id) {
-    return dispatch(actions.bankFetched({ bankForEdit: undefined }));
+    return dispatch(actions.rentedLocationFetched({ rentedLocationForEdit: undefined }));
   }
 
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .getBankById(id)
+    .getRentedLocationById(id)
     .then(response => {
-      const bank = response.data;
-      dispatch(actions.bankFetched({ bankForEdit: bank }));
+      const rentedLocation = response.data;
+      dispatch(actions.rentedLocationFetched({ rentedLocationForEdit: rentedLocation }));
     })
     .catch(error => {
-      error.clientMessage = "Can't find bank";
+      error.clientMessage = "Can't find rentedLocation";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteBank = id => dispatch => {
+export const deleteRentedLocation = id => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteBank(id)
+    .deleteRentedLocation(id)
     .then(response => {
-      dispatch(actions.bankDeleted({ id }));
+      dispatch(actions.rentedLocationDeleted({ id }));
     })
     .catch(error => {
       
       console.log("CD="+error);
-      error.clientMessage = "Can't delete bank";
+      error.clientMessage = "Can't delete rentedLocation";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const createBank = bankForCreation => dispatch => {
+export const createRentedLocation = rentedLocationForCreation => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .createBank(JSON.stringify( bankForCreation))
+    .createRentedLocation(JSON.stringify( rentedLocationForCreation))
     .then(response => {
-      const  bank  = response.data;
+      const  rentedLocation  = response.data;
      // console.log(response.data);
-      dispatch(actions.bankCreated({ bank }));
+      dispatch(actions.rentedLocationCreated({ rentedLocation }));
     })
     .catch(error => {
-      error.clientMessage = "Can't create bank";
+      error.clientMessage = "Can't create rentedLocation";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateBank = bank => dispatch => {
+export const updateRentedLocation = rentedLocation => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateBank(bank)
+    .updateRentedLocation(rentedLocation)
     .then(() => {
-      dispatch(actions.bankUpdated({ bank }));
+      dispatch(actions.rentedLocationUpdated({ rentedLocation }));
     })
     .catch(error => {
-      error.clientMessage = "Can't update bank";
+      error.clientMessage = "Can't update rentedLocation";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateBanksStatus = (ids, status) => dispatch => {
+export const updateRentedLocationsStatus = (ids, status) => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateStatusForBanks(ids, status)
+    .updateStatusForRentedLocations(ids, status)
     .then(() => {
-      dispatch(actions.banksStatusUpdated({ ids, status }));
+      dispatch(actions.rentedLocationsStatusUpdated({ ids, status }));
     })
     .catch(error => {
-      error.clientMessage = "Can't update banks status";
+      error.clientMessage = "Can't update rentedLocations status";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteBanks = ids => dispatch => {
+export const deleteRentedLocations = ids => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteBanks(ids)
+    .deleteRentedLocations(ids)
     .then(() => {
 
-      dispatch(actions.banksDeleted({ ids }));
+      dispatch(actions.rentedLocationsDeleted({ ids }));
     })
     .catch(error => {
-      error.clientMessage = "Can't delete banks";
+      error.clientMessage = "Can't delete rentedLocations";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };

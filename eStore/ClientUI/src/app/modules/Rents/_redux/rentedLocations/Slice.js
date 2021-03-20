@@ -1,14 +1,14 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-//Bank
-//bank
+//RentedLocation
+//rentedLocation
 
-const initialBanksState = {
+const initialRentedLocationsState = {
   listLoading: false,
   actionsLoading: false,
   totalCount: 0,
   entities: null,
-  bankForEdit: undefined,
+  rentedLocationForEdit: undefined,
   lastError: null
 };
 export const callTypes = {
@@ -16,9 +16,9 @@ export const callTypes = {
   action: "action"
 };
 
-export const banksSlice = createSlice({
-  name: "banks",
-  initialState: initialBanksState,
+export const rentedLocationsSlice = createSlice({
+  name: "rentedLocations",
+  initialState: initialRentedLocationsState,
   reducers: {
     catchError: (state, action) => {
       state.error = `${action.type}: ${action.payload.error}`;
@@ -36,58 +36,58 @@ export const banksSlice = createSlice({
         state.actionsLoading = true;
       }
     },
-    // getBankById
-    bankFetched: (state, action) => {
+    // getRentedLocationById
+    rentedLocationFetched: (state, action) => {
       state.actionsLoading = false;
-      state.bankForEdit = action.payload.bankForEdit;
+      state.rentedLocationForEdit = action.payload.rentedLocationForEdit;
       state.error = null;
     },
-    // findBanks
-    banksFetched: (state, action) => {
+    // findRentedLocations
+    rentedLocationsFetched: (state, action) => {
       const { totalCount, entities } = action.payload;
       state.listLoading = false;
       state.error = null;
       state.entities = entities;
       state.totalCount = totalCount;
     },
-    // createBank
-    bankCreated: (state, action) => {
+    // createRentedLocation
+    rentedLocationCreated: (state, action) => {
       state.ewactionsLoading = false;
       state.error = null;
-      state.entities.push(action.payload.bank);
+      state.entities.push(action.payload.rentedLocation);
     },
-    // updateBank
-    bankUpdated: (state, action) => {
+    // updateRentedLocation
+    rentedLocationUpdated: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.map(entity => {
-        if (entity.bankId === action.payload.bank.bankId) {
-          return action.payload.bank;
+        if (entity.rentedLocationId === action.payload.rentedLocation.rentedLocationId) {
+          return action.payload.rentedLocation;
         }
         return entity;
       });
     },
-    // deleteBank
-    bankDeleted: (state, action) => {
+    // deleteRentedLocation
+    rentedLocationDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(el => el.bankId !== action.payload.bankId);
+      state.entities = state.entities.filter(el => el.rentedLocationId !== action.payload.rentedLocationId);
     },
-    // deleteBanks
-    banksDeleted: (state, action) => {
+    // deleteRentedLocations
+    rentedLocationsDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        el => !action.payload.ids.includes(el.bankId)
+        el => !action.payload.ids.includes(el.rentedLocationId)
       );
     },
-    // banksUpdateState
-    banksStatusUpdated: (state, action) => {
+    // rentedLocationsUpdateState
+    rentedLocationsStatusUpdated: (state, action) => {
       state.actionsLoading = false;
       state.error = null;
       const { ids, status } = action.payload;
       state.entities = state.entities.map(entity => {
-        if (ids.findIndex(id => id === entity.bankId) > -1) {
+        if (ids.findIndex(id => id === entity.rentedLocationId) > -1) {
           entity.status = status;
         }
         return entity;

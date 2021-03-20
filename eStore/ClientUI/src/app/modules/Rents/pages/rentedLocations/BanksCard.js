@@ -5,41 +5,41 @@ import {
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../_metronic/_partials/controls";
-import { BanksFilter } from "./filter/Filter";
-import { BanksTable } from "./table/Table";
-import { BanksGrouping } from "./grouping/Grouping";
+import { RentedLocationsFilter } from "./filter/Filter";
+import { RentedLocationsTable } from "./table/Table";
+import { RentedLocationsGrouping } from "./grouping/Grouping";
 import { useUIContext } from "./UIContext";
 
 
-//Bank
-//bank
+//RentedLocation
+//rentedLocation
 
-export function BanksCard() {
-  const banksUIContext = useUIContext();
-  const banksUIProps = useMemo(() => {
+export function RentedLocationsCard() {
+  const rentedLocationsUIContext = useUIContext();
+  const rentedLocationsUIProps = useMemo(() => {
     return {
-      ids: banksUIContext.ids,
-      newBankButtonClick: banksUIContext.newBankButtonClick,
+      ids: rentedLocationsUIContext.ids,
+      newRentedLocationButtonClick: rentedLocationsUIContext.newRentedLocationButtonClick,
     };
-  }, [banksUIContext]);
+  }, [rentedLocationsUIContext]);
 
   return (
     <Card>
-      <CardHeader title="Banks list">
+      <CardHeader title="RentedLocations list">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
-            onClick={banksUIProps.newBankButtonClick}
+            onClick={rentedLocationsUIProps.newRentedLocationButtonClick}
           >
-            New Bank
+            New RentedLocation
           </button>
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        <BanksFilter />
-        {banksUIProps.ids.length > 0 && <BanksGrouping />}
-        <BanksTable />
+        <RentedLocationsFilter />
+        {rentedLocationsUIProps.ids.length > 0 && <RentedLocationsGrouping />}
+        <RentedLocationsTable />
       </CardBody>
     </Card>
   );

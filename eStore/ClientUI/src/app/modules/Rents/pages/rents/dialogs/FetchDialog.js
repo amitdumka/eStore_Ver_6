@@ -4,48 +4,48 @@ import { shallowEqual, useSelector } from "react-redux";
 
 import { useUIContext } from "../UIContext";
 
-//bankAccount
-//BankAccount
+//rent
+//Rent
 
 
-const selectedBankAccounts = (entities, ids) => {
-  const _bankAccounts = [];
+const selectedRents = (entities, ids) => {
+  const _rents = [];
   ids.forEach((id) => {
-    const bankAccount = entities.find((el) => el.id === id);
-    if (bankAccount) {
-      _bankAccounts.push(bankAccount);
+    const rent = entities.find((el) => el.id === id);
+    if (rent) {
+      _rents.push(rent);
     }
   });
-  return _bankAccounts;
+  return _rents;
 };
 
 export function FetchDialog({ show, onHide }) {
-  // BankAccounts UI Context
-  const bankAccountsUIContext = useUIContext();
-  const bankAccountsUIProps = useMemo(() => {
+  // Rents UI Context
+  const rentsUIContext = useUIContext();
+  const rentsUIProps = useMemo(() => {
     return {
-      ids: bankAccountsUIContext.ids,
+      ids: rentsUIContext.ids,
     };
-  }, [bankAccountsUIContext]);
+  }, [rentsUIContext]);
 
-  // BankAccounts Redux state
-  const { bankAccounts } = useSelector(
+  // Rents Redux state
+  const { rents } = useSelector(
     (state) => ({
-      bankAccounts: selectedBankAccounts(
-        state.bankAccounts.entities,
-        bankAccountsUIProps.ids
+      rents: selectedRents(
+        state.rents.entities,
+        rentsUIProps.ids
       ),
     }),
     shallowEqual
   );
 
-  // if bankAccounts weren't selected we should close modal
+  // if rents weren't selected we should close modal
   useEffect(() => {
-    if (!bankAccountsUIProps.ids || bankAccountsUIProps.ids.length === 0) {
+    if (!rentsUIProps.ids || rentsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bankAccountsUIProps.ids]);
+  }, [rentsUIProps.ids]);
 
   return (
     <Modal
@@ -68,12 +68,12 @@ export function FetchDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {bankAccounts.map((bankAccount) => (
-              <tr key={`id${bankAccount.id}`}>
-                <td>{bankAccount.id}</td>
+            {rents.map((rent) => (
+              <tr key={`id${rent.id}`}>
+                <td>{rent.id}</td>
                 <td>
                   <span className="ml-3">
-                    {bankAccount.lastName}, {bankAccount.firstName}
+                    {rent.lastName}, {rent.firstName}
                   </span>
                 </td>
               </tr>

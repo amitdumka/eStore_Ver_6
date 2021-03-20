@@ -3,8 +3,8 @@ import { Formik } from "formik";
 import { isEqual } from "lodash";
 import { useUIContext } from "../UIContext";
 
-//Bank
-//bank
+//RentedLocation
+//rentedLocation
 
 const prepareFilter = (queryParams, values) => {
   const { searchText } = values;
@@ -12,29 +12,29 @@ const prepareFilter = (queryParams, values) => {
   const filter = {};
   // Filter by all fields
   if (searchText) {
-    filter.bankName = searchText;
+    filter.rentedLocationName = searchText;
   }
   newQueryParams.filter = filter;
   return newQueryParams;
 };
 
-export function BanksFilter({ listLoading }) {
-  // Banks UI Context
-  const banksUIContext = useUIContext();
-  const banksUIProps = useMemo(() => {
+export function RentedLocationsFilter({ listLoading }) {
+  // RentedLocations UI Context
+  const rentedLocationsUIContext = useUIContext();
+  const rentedLocationsUIProps = useMemo(() => {
     return {
-      queryParams: banksUIContext.queryParams,
-      setQueryParams: banksUIContext.setQueryParams,
+      queryParams: rentedLocationsUIContext.queryParams,
+      setQueryParams: rentedLocationsUIContext.setQueryParams,
     };
-  }, [banksUIContext]);
+  }, [rentedLocationsUIContext]);
 
   // queryParams, setQueryParams,
   const applyFilter = (values) => {
-    const newQueryParams = prepareFilter(banksUIProps.queryParams, values);
-    if (!isEqual(newQueryParams, banksUIProps.queryParams)) {
+    const newQueryParams = prepareFilter(rentedLocationsUIProps.queryParams, values);
+    if (!isEqual(newQueryParams, rentedLocationsUIProps.queryParams)) {
       newQueryParams.pageNumber = 1;
       // update list by queryParams
-      banksUIProps.setQueryParams(newQueryParams);
+      rentedLocationsUIProps.setQueryParams(newQueryParams);
     }
   };
 

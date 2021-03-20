@@ -4,16 +4,16 @@ import { Modal } from "react-bootstrap";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
 
 
-//Bank
-//bank
+//RentedLocation
+//rentedLocation
 
 
 export function EditDialogHeader({ id }) {
-  // Banks Redux state
-  const { bankForEdit, actionsLoading } = useSelector(
+  // RentedLocations Redux state
+  const { rentedLocationForEdit, actionsLoading } = useSelector(
     (state) => ({
-      bankForEdit: state.banks.bankForEdit,
-      actionsLoading: state.banks.actionsLoading,
+      rentedLocationForEdit: state.rentedLocations.rentedLocationForEdit,
+      actionsLoading: state.rentedLocations.actionsLoading,
     }),
     shallowEqual
   );
@@ -21,14 +21,14 @@ export function EditDialogHeader({ id }) {
   const [title, setTitle] = useState("");
   // Title couting
   useEffect(() => {
-    let _title = id ? "" : "New Bank";
-    if (bankForEdit && id) {
-      _title = `Edit bank '${bankForEdit.firstName} ${bankForEdit.lastName}'`;
+    let _title = id ? "" : "New RentedLocation";
+    if (rentedLocationForEdit && id) {
+      _title = `Edit rentedLocation '${rentedLocationForEdit.firstName} ${rentedLocationForEdit.lastName}'`;
     }
 
     setTitle(_title);
     // eslint-disable-next-line
-  }, [bankForEdit, actionsLoading]);
+  }, [rentedLocationForEdit, actionsLoading]);
 
   return (
     <>

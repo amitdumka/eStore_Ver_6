@@ -1,23 +1,23 @@
 import React, { useMemo } from "react";
 import { useUIContext } from "../UIContext";
 
-//BankAccount
-//bankAccount
+//Rent
+//rent
 
 
-export function BankAccountsGrouping() {
-  // BankAccounts UI Context
-  const bankAccountsUIContext = useUIContext();
-  const bankAccountsUIProps = useMemo(() => {
+export function RentsGrouping() {
+  // Rents UI Context
+  const rentsUIContext = useUIContext();
+  const rentsUIProps = useMemo(() => {
     return {
-      ids: bankAccountsUIContext.ids,
-      setIds: bankAccountsUIContext.setIds,
-      openDeleteBankAccountsDialog: bankAccountsUIContext.openDeleteBankAccountsDialog,
-      openFetchBankAccountsDialog: bankAccountsUIContext.openFetchBankAccountsDialog,
-      openUpdateBankAccountsStatusDialog:
-        bankAccountsUIContext.openUpdateBankAccountsStatusDialog,
+      ids: rentsUIContext.ids,
+      setIds: rentsUIContext.setIds,
+      openDeleteRentsDialog: rentsUIContext.openDeleteRentsDialog,
+      openFetchRentsDialog: rentsUIContext.openFetchRentsDialog,
+      openUpdateRentsStatusDialog:
+        rentsUIContext.openUpdateRentsStatusDialog,
     };
-  }, [bankAccountsUIContext]);
+  }, [rentsUIContext]);
 
   return (
     <div className="form">
@@ -27,7 +27,7 @@ export function BankAccountsGrouping() {
             <div className="form-label form-label-no-wrap">
               <label className="font-bold font-danger">
                 <span>
-                  Selected records count: <b>{bankAccountsUIProps.ids.length}</b>
+                  Selected records count: <b>{rentsUIProps.ids.length}</b>
                 </span>
               </label>
             </div>
@@ -35,7 +35,7 @@ export function BankAccountsGrouping() {
               <button
                 type="button"
                 className="btn btn-danger font-weight-bolder font-size-sm"
-                onClick={bankAccountsUIProps.openDeleteBankAccountsDialog}
+                onClick={rentsUIProps.openDeleteRentsDialog}
               >
                 <i className="fa fa-trash"></i> Delete All
               </button>
@@ -43,7 +43,7 @@ export function BankAccountsGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={bankAccountsUIProps.openFetchBankAccountsDialog}
+                onClick={rentsUIProps.openFetchRentsDialog}
               >
                 <i className="fa fa-stream"></i> Fetch Selected
               </button>
@@ -51,7 +51,7 @@ export function BankAccountsGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={bankAccountsUIProps.openUpdateBankAccountsStatusDialog}
+                onClick={rentsUIProps.openUpdateRentsStatusDialog}
               >
                 <i className="fa fa-sync-alt"></i> Update Status
               </button>

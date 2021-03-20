@@ -1,50 +1,50 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/bankAccounts/Actions";
+import * as actions from "../../../_redux/rents/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
-//bankAccount
-//BankAccount
+//rent
+//Rent
 
 export function EditDialog({ id, show, onHide }) {
-  // BankAccounts UI Context
-  const bankAccountsUIContext = useUIContext();
-  const bankAccountsUIProps = useMemo(() => {
+  // Rents UI Context
+  const rentsUIContext = useUIContext();
+  const rentsUIProps = useMemo(() => {
     return {
-      initBankAccount: bankAccountsUIContext.initBankAccount,
+      initRent: rentsUIContext.initRent,
     };
-  }, [bankAccountsUIContext]);
+  }, [rentsUIContext]);
 
-  // BankAccounts Redux state
+  // Rents Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, bankAccountForEdit ,bankList} = useSelector(
+  const { actionsLoading, rentForEdit ,bankList} = useSelector(
     (state) => ({
-      actionsLoading: state.bankAccounts.actionsLoading,
-      bankAccountForEdit: state.bankAccounts.bankAccountForEdit,
-      bankList:state.bankAccounts.bankEntities
+      actionsLoading: state.rents.actionsLoading,
+      rentForEdit: state.rents.rentForEdit,
+      bankList:state.rents.bankEntities
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    // server call for getting BankAccount by id
-    dispatch(actions.fetchBankAccount(id));
+    // server call for getting Rent by id
+    dispatch(actions.fetchRent(id));
     dispatch(actions.fetchBanks());
   }, [id, dispatch]);
 
-  // server request for saving bankAccount
-  const saveBankAccount = (bankAccount) => {
+  // server request for saving rent
+  const saveRent = (rent) => {
     
-    bankAccount.accountType=parseInt(bankAccount.accountType);
+    rent.accountType=parseInt(rent.accountType);
 
     if (!id) {
-      // server request for creating bankAccount
-      dispatch(actions.createBankAccount(bankAccount)).then(() => onHide());
+      // server request for creating rent
+      dispatch(actions.createRent(rent)).then(() => onHide());
     } else {
-      // server request for updating bankAccount
-      dispatch(actions.updateBankAccount(bankAccount)).then(() => onHide());
+      // server request for updating rent
+      dispatch(actions.updateRent(rent)).then(() => onHide());
     }
   };
 
@@ -57,9 +57,9 @@ export function EditDialog({ id, show, onHide }) {
     >
       <EditDialogHeader id={id} />
       <EditForm
-        saveBankAccount={saveBankAccount}
+        saveRent={saveRent}
         actionsLoading={actionsLoading}
-        bankAccount={bankAccountForEdit || bankAccountsUIProps.initBankAccount}
+        rent={rentForEdit || rentsUIProps.initRent}
         onHide={onHide}
         bankList={bankList}
       />

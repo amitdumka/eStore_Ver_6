@@ -3,8 +3,8 @@ import { Formik } from "formik";
 import { isEqual } from "lodash";
 import { useUIContext } from "../UIContext";
 
-//BankAccount
-//bankAccount
+//Rent
+//rent
 
 
 
@@ -27,23 +27,23 @@ const prepareFilter = (queryParams, values) => {
   return newQueryParams;
 };
 
-export function BankAccountsFilter({ listLoading }) {
-  // BankAccounts UI Context
-  const bankAccountsUIContext = useUIContext();
-  const bankAccountsUIProps = useMemo(() => {
+export function RentsFilter({ listLoading }) {
+  // Rents UI Context
+  const rentsUIContext = useUIContext();
+  const rentsUIProps = useMemo(() => {
     return {
-      queryParams: bankAccountsUIContext.queryParams,
-      setQueryParams: bankAccountsUIContext.setQueryParams,
+      queryParams: rentsUIContext.queryParams,
+      setQueryParams: rentsUIContext.setQueryParams,
     };
-  }, [bankAccountsUIContext]);
+  }, [rentsUIContext]);
 
   // queryParams, setQueryParams,
   const applyFilter = (values) => {
-    const newQueryParams = prepareFilter(bankAccountsUIProps.queryParams, values);
-    if (!isEqual(newQueryParams, bankAccountsUIProps.queryParams)) {
+    const newQueryParams = prepareFilter(rentsUIProps.queryParams, values);
+    if (!isEqual(newQueryParams, rentsUIProps.queryParams)) {
       newQueryParams.pageNumber = 1;
       // update list by queryParams
-      bankAccountsUIProps.setQueryParams(newQueryParams);
+      rentsUIProps.setQueryParams(newQueryParams);
     }
   };
 

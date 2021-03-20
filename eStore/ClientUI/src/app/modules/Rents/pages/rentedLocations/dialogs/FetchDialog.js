@@ -2,54 +2,54 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useSelector } from "react-redux";
 // import {
-//   BankStatusCssClasses,
-//   BankStatusTitles,
+//   RentedLocationStatusCssClasses,
+//   RentedLocationStatusTitles,
 // } from "../UIHelpers";
 import { useUIContext } from "../UIContext";
 
 
-//Bank
-//bank
+//RentedLocation
+//rentedLocation
 
 
-const selectedBanks = (entities, ids) => {
-  const _banks = [];
+const selectedRentedLocations = (entities, ids) => {
+  const _rentedLocations = [];
   ids.forEach((id) => {
-    const bank = entities.find((el) => el.id === id);
-    if (bank) {
-      _banks.push(bank);
+    const rentedLocation = entities.find((el) => el.id === id);
+    if (rentedLocation) {
+      _rentedLocations.push(rentedLocation);
     }
   });
-  return _banks;
+  return _rentedLocations;
 };
 
 export function FetchDialog({ show, onHide }) {
-  // Banks UI Context
-  const banksUIContext = useUIContext();
-  const banksUIProps = useMemo(() => {
+  // RentedLocations UI Context
+  const rentedLocationsUIContext = useUIContext();
+  const rentedLocationsUIProps = useMemo(() => {
     return {
-      ids: banksUIContext.ids,
+      ids: rentedLocationsUIContext.ids,
     };
-  }, [banksUIContext]);
+  }, [rentedLocationsUIContext]);
 
-  // Banks Redux state
-  const { banks } = useSelector(
+  // RentedLocations Redux state
+  const { rentedLocations } = useSelector(
     (state) => ({
-      banks: selectedBanks(
-        state.banks.entities,
-        banksUIProps.ids
+      rentedLocations: selectedRentedLocations(
+        state.rentedLocations.entities,
+        rentedLocationsUIProps.ids
       ),
     }),
     shallowEqual
   );
 
-  // if banks weren't selected we should close modal
+  // if rentedLocations weren't selected we should close modal
   useEffect(() => {
-    if (!banksUIProps.ids || banksUIProps.ids.length === 0) {
+    if (!rentedLocationsUIProps.ids || rentedLocationsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [banksUIProps.ids]);
+  }, [rentedLocationsUIProps.ids]);
 
   return (
     <Modal
@@ -72,12 +72,12 @@ export function FetchDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {banks.map((bank) => (
-              <tr key={`id${bank.id}`}>
-                <td>{bank.id}</td>
+            {rentedLocations.map((rentedLocation) => (
+              <tr key={`id${rentedLocation.id}`}>
+                <td>{rentedLocation.id}</td>
                 <td>
                   <span className="ml-3">
-                    {bank.lastName}, {bank.firstName}
+                    {rentedLocation.lastName}, {rentedLocation.firstName}
                   </span>
                 </td>
               </tr>

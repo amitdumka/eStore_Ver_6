@@ -1,67 +1,67 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/banks/Actions";
+import * as actions from "../../../_redux/rentedLocations/Actions";
 import { useUIContext } from "../UIContext";
 
 
-//Bank
-//bank
+//RentedLocation
+//rentedLocation
 
-const selectedBanks = (entities, ids) => {
-  const _banks = [];
+const selectedRentedLocations = (entities, ids) => {
+  const _rentedLocations = [];
   ids.forEach((id) => {
-    const bank = entities.find((el) => el.id === id);
-    if (bank) {
-      _banks.push(bank);
+    const rentedLocation = entities.find((el) => el.id === id);
+    if (rentedLocation) {
+      _rentedLocations.push(rentedLocation);
     }
   });
-  return _banks;
+  return _rentedLocations;
 };
 
 export function UpdateStateDialog({ show, onHide }) {
-  // Banks UI Context
-  const banksUIContext = useUIContext();
-  const banksUIProps = useMemo(() => {
+  // RentedLocations UI Context
+  const rentedLocationsUIContext = useUIContext();
+  const rentedLocationsUIProps = useMemo(() => {
     return {
-      ids: banksUIContext.ids,
-      setIds: banksUIContext.setIds,
-      queryParams: banksUIContext.queryParams,
+      ids: rentedLocationsUIContext.ids,
+      setIds: rentedLocationsUIContext.setIds,
+      queryParams: rentedLocationsUIContext.queryParams,
     };
-  }, [banksUIContext]);
+  }, [rentedLocationsUIContext]);
 
-  // Banks Redux state
-  const { banks, isLoading } = useSelector(
+  // RentedLocations Redux state
+  const { rentedLocations, isLoading } = useSelector(
     (state) => ({
-      banks: selectedBanks(
-        state.banks.entities,
-        banksUIProps.ids
+      rentedLocations: selectedRentedLocations(
+        state.rentedLocations.entities,
+        rentedLocationsUIProps.ids
       ),
-      isLoading: state.banks.actionsLoading,
+      isLoading: state.rentedLocations.actionsLoading,
     }),
     shallowEqual
   );
 
   // if !id we should close modal
   useEffect(() => {
-    if (!banksUIProps.ids || banksUIProps.ids.length === 0) {
+    if (!rentedLocationsUIProps.ids || rentedLocationsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [banksUIProps.ids]);
+  }, [rentedLocationsUIProps.ids]);
 
   const [status, setStatus] = useState(0);
 
   const dispatch = useDispatch();
   const updateStatus = () => {
-    // server request for update banks status by selected ids
-    dispatch(actions.updateBanksStatus(banksUIProps.ids, status)).then(
+    // server request for update rentedLocations status by selected ids
+    dispatch(actions.updateRentedLocationsStatus(rentedLocationsUIProps.ids, status)).then(
       () => {
         // refresh list after deletion
-        dispatch(actions.fetchBanks(banksUIProps.queryParams)).then(
+        dispatch(actions.fetchRentedLocations(rentedLocationsUIProps.queryParams)).then(
           () => {
             // clear selections list
-            banksUIProps.setIds([]);
+            rentedLocationsUIProps.setIds([]);
             // closing delete modal
             onHide();
           }
@@ -78,7 +78,7 @@ export function UpdateStateDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Status has been updated for selected banks
+          Status has been updated for selected rentedLocations
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="overlay overlay-block cursor-default">
@@ -98,13 +98,13 @@ export function UpdateStateDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {banks.map((bank) => (
-              <tr key={`id${bank.id}`}>
-                <td>{bank.id}</td>
+            {rentedLocations.map((rentedLocation) => (
+              <tr key={`id${rentedLocation.id}`}>
+                <td>{rentedLocation.id}</td>
                 
                 <td>
                   <span className="ml-3">
-                    {bank.lastName}, {bank.firstName}
+                    {rentedLocation.lastName}, {rentedLocation.firstName}
                   </span>
                 </td>
               </tr>

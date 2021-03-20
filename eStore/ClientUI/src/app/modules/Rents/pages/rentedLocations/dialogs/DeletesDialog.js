@@ -1,52 +1,52 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/banks/Actions";
+import * as actions from "../../../_redux/rentedLocations/Actions";
 import { useUIContext } from "../UIContext";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
 
 // Delete Selected Records
 
-//Bank
-//bank
+//RentedLocation
+//rentedLocation
 
 export function DeletesDialog({ show, onHide }) {
-  // Banks UI Context
-  const banksUIContext = useUIContext();
-  const banksUIProps = useMemo(() => {
+  // RentedLocations UI Context
+  const rentedLocationsUIContext = useUIContext();
+  const rentedLocationsUIProps = useMemo(() => {
     return {
-      ids: banksUIContext.ids,
-      setIds: banksUIContext.setIds,
-      queryParams: banksUIContext.queryParams,
+      ids: rentedLocationsUIContext.ids,
+      setIds: rentedLocationsUIContext.setIds,
+      queryParams: rentedLocationsUIContext.queryParams,
     };
-  }, [banksUIContext]);
+  }, [rentedLocationsUIContext]);
 
-  // Banks Redux state
+  // RentedLocations Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.banks.actionsLoading }),
+    (state) => ({ isLoading: state.rentedLocations.actionsLoading }),
     shallowEqual
   );
 
-  // if banks weren't selected we should close modal
+  // if rentedLocations weren't selected we should close modal
   useEffect(() => {
-    if (!banksUIProps.ids || banksUIProps.ids.length === 0) {
+    if (!rentedLocationsUIProps.ids || rentedLocationsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [banksUIProps.ids]);
+  }, [rentedLocationsUIProps.ids]);
 
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading, dispatch]);
 
-  const deleteBanks = () => {
-    // server request for deleting bank by selected ids
-    dispatch(actions.deleteBanks(banksUIProps.ids)).then(() => {
+  const deleteRentedLocations = () => {
+    // server request for deleting rentedLocation by selected ids
+    dispatch(actions.deleteRentedLocations(rentedLocationsUIProps.ids)).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchBanks(banksUIProps.queryParams)).then(
+      dispatch(actions.fetchRentedLocations(rentedLocationsUIProps.queryParams)).then(
         () => {
           // clear selections list
-          banksUIProps.setIds([]);
+          rentedLocationsUIProps.setIds([]);
           // closing delete modal
           onHide();
         }
@@ -65,14 +65,14 @@ export function DeletesDialog({ show, onHide }) {
       {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Banks Delete
+          RentedLocations Delete
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete selected banks?</span>
+          <span>Are you sure to permanently delete selected rentedLocations?</span>
         )}
-        {isLoading && <span>Bank are deleting...</span>}
+        {isLoading && <span>RentedLocation are deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -86,7 +86,7 @@ export function DeletesDialog({ show, onHide }) {
           <> </>
           <button
             type="button"
-            onClick={deleteBanks}
+            onClick={deleteRentedLocations}
             className="btn btn-primary btn-elevate"
           >
             Delete

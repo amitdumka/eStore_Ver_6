@@ -12,23 +12,23 @@ import {
   DatePickerField,
 } from "../../../../../../_metronic/_partials/controls";
 
-//Bank
-//bank
+//RentedLocation
+//rentedLocation
 
 // Validation schema
-const BankEditSchema = Yup.object().shape({
-  bankName: Yup.string().required("Bank Name is required"),
+const RentedLocationEditSchema = Yup.object().shape({
+  rentedLocationName: Yup.string().required("RentedLocation Name is required"),
 });
 
-export function EditForm({ saveBank, bank, actionsLoading, onHide }) {
+export function EditForm({ saveRentedLocation, rentedLocation, actionsLoading, onHide }) {
   return (
     <>
       <Formik
         enableReinitialize={true}
-        initialValues={bank}
-        validationSchema={BankEditSchema}
+        initialValues={rentedLocation}
+        validationSchema={RentedLocationEditSchema}
         onSubmit={(values) => {
-          saveBank(values);
+          saveRentedLocation(values);
         }}
       >
         {({ handleSubmit }) => (
@@ -44,10 +44,10 @@ export function EditForm({ saveBank, bank, actionsLoading, onHide }) {
                   {/* Staff Name */}
                   <div className="col-lg-4">
                     <Field
-                      name="bankName"
+                      name="rentedLocationName"
                       component={Input}
-                      placeholder="Bank Name"
-                      label="Bank Name"
+                      placeholder="RentedLocation Name"
+                      label="RentedLocation Name"
                     />
                   </div>
                 </div>

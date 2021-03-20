@@ -2,16 +2,16 @@ import {createSlice} from "@reduxjs/toolkit";
 import { stubTrue } from "lodash-es";
 
 
-//BankAccount
-//bankAccount
+//Rent
+//rent
 
 
-const initialBankAccountsState = {
+const initialRentsState = {
   listLoading: false,
   actionsLoading: false,
   totalCount: 0,
   entities: null,
-  bankAccountForEdit: undefined,
+  rentForEdit: undefined,
   lastError: null, 
   bankEntities: null, 
   totalCountEmp:0
@@ -21,9 +21,9 @@ export const callTypes = {
   action: "action"
 };
 
-export const bankAccountsSlice = createSlice({
-  name: "bankAccounts",
-  initialState: initialBankAccountsState,
+export const rentsSlice = createSlice({
+  name: "rents",
+  initialState: initialRentsState,
   reducers: {
     catchError: (state, action) => {
       state.error = `${action.type}: ${action.payload.error}`;
@@ -51,60 +51,60 @@ export const bankAccountsSlice = createSlice({
      state.totalCountEmp=totalCount;
 
     },
-    // getBankAccountById
-    bankAccountFetched: (state, action) => {
+    // getRentById
+    rentFetched: (state, action) => {
       state.actionsLoading = false;
-      state.bankAccountForEdit = action.payload.bankAccountForEdit;
+      state.rentForEdit = action.payload.rentForEdit;
       state.error = null;
     },
-    // findBankAccounts
-    bankAccountsFetched: (state, action) => {
+    // findRents
+    rentsFetched: (state, action) => {
       const { totalCount, entities } = action.payload;
       state.listLoading = false;
       state.error = null;
       state.entities = entities;
       state.totalCount = totalCount;
     },
-    // createBankAccount
-    bankAccountCreated: (state, action) => {
+    // createRent
+    rentCreated: (state, action) => {
       state.ewactionsLoading = false;
       state.error = null;
-      state.entities.push(action.payload.bankAccount);
+      state.entities.push(action.payload.rent);
     },
-    // updateBankAccount
-    bankAccountUpdated: (state, action) => {
+    // updateRent
+    rentUpdated: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.map(entity => {
-        if (entity.bankAccountId === action.payload.bankAccount.bankAccountId) {
-          return action.payload.bankAccount;
+        if (entity.rentId === action.payload.rent.rentId) {
+          return action.payload.rent;
         }
         return entity;
       });
     },
-    // deleteBankAccount
-    bankAccountDeleted: (state, action) => {
+    // deleteRent
+    rentDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(el => el.bankAccountId !== action.payload.bankAccountId);
+      state.entities = state.entities.filter(el => el.rentId !== action.payload.rentId);
     },
-    // deleteBankAccounts
-    bankAccountsDeleted: (state, action) => {
+    // deleteRents
+    rentsDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        el => !action.payload.ids.includes(el.bankAccountId)
+        el => !action.payload.ids.includes(el.rentId)
       );
     },
 
     
-    // bankAccountsUpdateState
-    bankAccountsStatusUpdated: (state, action) => {
+    // rentsUpdateState
+    rentsStatusUpdated: (state, action) => {
       state.actionsLoading = false;
       state.error = null;
       const { ids, status } = action.payload;
       state.entities = state.entities.map(entity => {
-        if (ids.findIndex(id => id === entity.bankAccountId) > -1) {
+        if (ids.findIndex(id => id === entity.rentId) > -1) {
           entity.status = status;
         }
         return entity;

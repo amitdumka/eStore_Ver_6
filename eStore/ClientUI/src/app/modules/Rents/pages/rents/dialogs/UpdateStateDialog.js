@@ -1,65 +1,65 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/bankAccounts/Actions";
+import * as actions from "../../../_redux/rents/Actions";
 import { useUIContext } from "../UIContext";
-//bankAccount
-//BankAccount
+//rent
+//Rent
 
-const selectedBankAccounts = (entities, ids) => {
-  const _bankAccounts = [];
+const selectedRents = (entities, ids) => {
+  const _rents = [];
   ids.forEach((id) => {
-    const bankAccount = entities.find((el) => el.id === id);
-    if (bankAccount) {
-      _bankAccounts.push(bankAccount);
+    const rent = entities.find((el) => el.id === id);
+    if (rent) {
+      _rents.push(rent);
     }
   });
-  return _bankAccounts;
+  return _rents;
 };
 
 export function UpdateStateDialog({ show, onHide }) {
-  // BankAccounts UI Context
-  const bankAccountsUIContext = useUIContext();
-  const bankAccountsUIProps = useMemo(() => {
+  // Rents UI Context
+  const rentsUIContext = useUIContext();
+  const rentsUIProps = useMemo(() => {
     return {
-      ids: bankAccountsUIContext.ids,
-      setIds: bankAccountsUIContext.setIds,
-      queryParams: bankAccountsUIContext.queryParams,
+      ids: rentsUIContext.ids,
+      setIds: rentsUIContext.setIds,
+      queryParams: rentsUIContext.queryParams,
     };
-  }, [bankAccountsUIContext]);
+  }, [rentsUIContext]);
 
-  // BankAccounts Redux state
-  const { bankAccounts, isLoading } = useSelector(
+  // Rents Redux state
+  const { rents, isLoading } = useSelector(
     (state) => ({
-      bankAccounts: selectedBankAccounts(
-        state.bankAccounts.entities,
-        bankAccountsUIProps.ids
+      rents: selectedRents(
+        state.rents.entities,
+        rentsUIProps.ids
       ),
-      isLoading: state.bankAccounts.actionsLoading,
+      isLoading: state.rents.actionsLoading,
     }),
     shallowEqual
   );
 
   // if !id we should close modal
   useEffect(() => {
-    if (!bankAccountsUIProps.ids || bankAccountsUIProps.ids.length === 0) {
+    if (!rentsUIProps.ids || rentsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bankAccountsUIProps.ids]);
+  }, [rentsUIProps.ids]);
 
   const [status, setStatus] = useState(0);
 
   const dispatch = useDispatch();
   const updateStatus = () => {
-    // server request for update bankAccounts status by selected ids
-    dispatch(actions.updateBankAccountsStatus(bankAccountsUIProps.ids, status)).then(
+    // server request for update rents status by selected ids
+    dispatch(actions.updateRentsStatus(rentsUIProps.ids, status)).then(
       () => {
         // refresh list after deletion
-        dispatch(actions.fetchBankAccounts(bankAccountsUIProps.queryParams)).then(
+        dispatch(actions.fetchRents(rentsUIProps.queryParams)).then(
           () => {
             // clear selections list
-            bankAccountsUIProps.setIds([]);
+            rentsUIProps.setIds([]);
             // closing delete modal
             onHide();
           }
@@ -76,7 +76,7 @@ export function UpdateStateDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Status has been updated for selected bankAccounts
+          Status has been updated for selected rents
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="overlay overlay-block cursor-default">
@@ -96,13 +96,13 @@ export function UpdateStateDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {bankAccounts.map((bankAccount) => (
-              <tr key={`id${bankAccount.id}`}>
-                <td>{bankAccount.id}</td>
+            {rents.map((rent) => (
+              <tr key={`id${rent.id}`}>
+                <td>{rent.id}</td>
                 
                 <td>
                   <span className="ml-3">
-                    {bankAccount.lastName}, {bankAccount.firstName}
+                    {rent.lastName}, {rent.firstName}
                   </span>
                 </td>
               </tr>

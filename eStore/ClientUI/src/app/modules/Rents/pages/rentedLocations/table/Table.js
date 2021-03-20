@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/banks/Actions";
+import * as actions from "../../../_redux/rentedLocations/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -23,51 +23,51 @@ import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 
 
-//Bank
-//bank
+//RentedLocation
+//rentedLocation
 
-export function BanksTable() {
-  // Banks UI Context
-  const banksUIContext = useUIContext();
-  const banksUIProps = useMemo(() => {
+export function RentedLocationsTable() {
+  // RentedLocations UI Context
+  const rentedLocationsUIContext = useUIContext();
+  const rentedLocationsUIProps = useMemo(() => {
     return {
-      ids: banksUIContext.ids,
-      setIds: banksUIContext.setIds,
-      queryParams: banksUIContext.queryParams,
-      setQueryParams: banksUIContext.setQueryParams,
-      openEditBankDialog: banksUIContext.openEditBankDialog,
-      openDeleteBankDialog: banksUIContext.openDeleteBankDialog,
+      ids: rentedLocationsUIContext.ids,
+      setIds: rentedLocationsUIContext.setIds,
+      queryParams: rentedLocationsUIContext.queryParams,
+      setQueryParams: rentedLocationsUIContext.setQueryParams,
+      openEditRentedLocationDialog: rentedLocationsUIContext.openEditRentedLocationDialog,
+      openDeleteRentedLocationDialog: rentedLocationsUIContext.openDeleteRentedLocationDialog,
     };
-  }, [banksUIContext]);
+  }, [rentedLocationsUIContext]);
 
-  // Getting curret state of banks list from store (Redux)
+  // Getting curret state of rentedLocations list from store (Redux)
   const { currentState } = useSelector(
-    (state) => ({ currentState: state.banks }),
+    (state) => ({ currentState: state.rentedLocations }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
 
-  // Banks Redux state
+  // RentedLocations Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    banksUIProps.setIds([]);
+    rentedLocationsUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchBanks(banksUIProps.queryParams));
+    dispatch(actions.fetchRentedLocations(rentedLocationsUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [banksUIProps.queryParams, dispatch]);
+  }, [rentedLocationsUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "bankId",
+      dataField: "rentedLocationId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "bankName",
-      text: "Bank Name",
+      dataField: "rentedLocationName",
+      text: "RentedLocation Name",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -77,8 +77,8 @@ export function BanksTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditBankDialog: banksUIProps.openEditBankDialog,
-        openDeleteBankDialog: banksUIProps.openDeleteBankDialog,
+        openEditRentedLocationDialog: rentedLocationsUIProps.openEditRentedLocationDialog,
+        openDeleteRentedLocationDialog: rentedLocationsUIProps.openDeleteRentedLocationDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -92,8 +92,8 @@ export function BanksTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: banksUIProps.queryParams.pageSize,
-    page: banksUIProps.queryParams.pageNumber,
+    sizePerPage: rentedLocationsUIProps.queryParams.pageSize,
+    page: rentedLocationsUIProps.queryParams.pageNumber,
   };
 
   
@@ -113,19 +113,19 @@ export function BanksTable() {
                 bootstrap4
                 remote
                 noDataIndication="No Record Found now.."
-                keyField="bankId"
+                keyField="rentedLocationId"
                 data={entities === null ? []: totalCount ?entities:[]}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  banksUIProps.setQueryParams
+                  rentedLocationsUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: banksUIProps.ids,
-                  setIds: banksUIProps.setIds,
-                  idName:"bankId",
+                  ids: rentedLocationsUIProps.ids,
+                  setIds: rentedLocationsUIProps.setIds,
+                  idName:"rentedLocationId",
                 })}
                 {...paginationTableProps}
               >

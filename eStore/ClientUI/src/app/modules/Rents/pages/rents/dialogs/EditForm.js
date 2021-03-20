@@ -14,11 +14,11 @@ import {
 
 
 
-//bankAccount
-//BankAccount
+//rent
+//Rent
 
 // Validation schema
-const BankAccountEditSchema = Yup.object().shape({
+const RentEditSchema = Yup.object().shape({
   account: Yup.string().required("Account is required"),
   branchName: Yup.string().required("Branch Name is required"),
   bankId: Yup.number().required("Store is required"),
@@ -26,8 +26,8 @@ const BankAccountEditSchema = Yup.object().shape({
 });
 
 export function EditForm({
-  saveBankAccount,
-  bankAccount,
+  saveRent,
+  rent,
   actionsLoading,
   onHide,
   bankList,
@@ -36,10 +36,10 @@ export function EditForm({
     <>
       <Formik
         enableReinitialize={true}
-        initialValues={bankAccount}
-        validationSchema={BankAccountEditSchema}
+        initialValues={rent}
+        validationSchema={RentEditSchema}
         onSubmit={(values) => {
-          saveBankAccount(values);
+          saveRent(values);
         }}
       >
         {({ handleSubmit }) => (

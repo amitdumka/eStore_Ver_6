@@ -2,8 +2,8 @@ import React, { createContext, useContext, useState, useCallback } from "react";
 import { isEqual, isFunction } from "lodash";
 import { initialFilter } from "./UIHelpers";
 
-//Bank
-//bank
+//RentedLocation
+//rentedLocation
 
 const UIContext = createContext();
 
@@ -41,8 +41,8 @@ export function UIProvider({ UIEvents, children }) {
     });
   }, []);
 
-  const initBank = {
-    bankId: 0,
+  const initRentedLocation = {
+    rentedLocationId: 0,
     firstName: "Alok1",
     lastName: "Kumar1 ",
     staffName: "Alok Kumar1 ",
@@ -78,13 +78,13 @@ export function UIProvider({ UIEvents, children }) {
     ids,
     setIds,
     setQueryParams,
-    initBank,
-    newBankButtonClick: UIEvents.newBankButtonClick,
-    openEditBankDialog: UIEvents.openEditBankDialog,
-    openDeleteBankDialog: UIEvents.openDeleteBankDialog,
-    openDeleteBanksDialog: UIEvents.openDeleteBanksDialog,
-    openFetchBanksDialog: UIEvents.openFetchBanksDialog,
-    openUpdateBanksStatusDialog: UIEvents.openUpdateBanksStatusDialog,
+    initRentedLocation,
+    newRentedLocationButtonClick: UIEvents.newRentedLocationButtonClick,
+    openEditRentedLocationDialog: UIEvents.openEditRentedLocationDialog,
+    openDeleteRentedLocationDialog: UIEvents.openDeleteRentedLocationDialog,
+    openDeleteRentedLocationsDialog: UIEvents.openDeleteRentedLocationsDialog,
+    openFetchRentedLocationsDialog: UIEvents.openFetchRentedLocationsDialog,
+    openUpdateRentedLocationsStatusDialog: UIEvents.openUpdateRentedLocationsStatusDialog,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

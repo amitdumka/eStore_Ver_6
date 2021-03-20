@@ -1,47 +1,47 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/banks/Actions";
+import * as actions from "../../../_redux/rentedLocations/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
 
 
-//Bank
-//bank
+//RentedLocation
+//rentedLocation
 
 export function EditDialog({ id, show, onHide }) {
-  // Banks UI Context
-  const banksUIContext = useUIContext();
-  const banksUIProps = useMemo(() => {
+  // RentedLocations UI Context
+  const rentedLocationsUIContext = useUIContext();
+  const rentedLocationsUIProps = useMemo(() => {
     return {
-      initBank: banksUIContext.initBank,
+      initRentedLocation: rentedLocationsUIContext.initRentedLocation,
     };
-  }, [banksUIContext]);
+  }, [rentedLocationsUIContext]);
 
-  // Banks Redux state
+  // RentedLocations Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, bankForEdit } = useSelector(
+  const { actionsLoading, rentedLocationForEdit } = useSelector(
     (state) => ({
-      actionsLoading: state.banks.actionsLoading,
-      bankForEdit: state.banks.bankForEdit,
+      actionsLoading: state.rentedLocations.actionsLoading,
+      rentedLocationForEdit: state.rentedLocations.rentedLocationForEdit,
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    // server call for getting Bank by id
-    dispatch(actions.fetchBank(id));
+    // server call for getting RentedLocation by id
+    dispatch(actions.fetchRentedLocation(id));
   }, [id, dispatch]);
 
-  // server request for saving bank
-  const saveBank = (bank) => {
+  // server request for saving rentedLocation
+  const saveRentedLocation = (rentedLocation) => {
     if (!id) {
-      // server request for creating bank
-      dispatch(actions.createBank(bank)).then(() => onHide());
+      // server request for creating rentedLocation
+      dispatch(actions.createRentedLocation(rentedLocation)).then(() => onHide());
     } else {
-      // server request for updating bank
-      dispatch(actions.updateBank(bank)).then(() => onHide());
+      // server request for updating rentedLocation
+      dispatch(actions.updateRentedLocation(rentedLocation)).then(() => onHide());
     }
   };
 
@@ -54,9 +54,9 @@ export function EditDialog({ id, show, onHide }) {
     >
       <EditDialogHeader id={id} />
       <EditForm
-        saveBank={saveBank}
+        saveRentedLocation={saveRentedLocation}
         actionsLoading={actionsLoading}
-        bank={bankForEdit || banksUIProps.initBank}
+        rentedLocation={rentedLocationForEdit || rentedLocationsUIProps.initRentedLocation}
         onHide={onHide}
       />
     </Modal>

@@ -2,28 +2,28 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
-import * as actions from "../../../_redux/banks/Actions";
+import * as actions from "../../../_redux/rentedLocations/Actions";
 import {useUIContext} from "../UIContext";
 
 
-//Bank
-//bank
+//RentedLocation
+//rentedLocation
 
 // Delete particular record.
 export function DeleteDialog({ id, show, onHide }) {
-  // Banks UI Context
-  const banksUIContext = useUIContext();
-  const banksUIProps = useMemo(() => {
+  // RentedLocations UI Context
+  const rentedLocationsUIContext = useUIContext();
+  const rentedLocationsUIProps = useMemo(() => {
     return {
-      setIds: banksUIContext.setIds,
-      queryParams: banksUIContext.queryParams
+      setIds: rentedLocationsUIContext.setIds,
+      queryParams: rentedLocationsUIContext.queryParams
     };
-  }, [banksUIContext]);
+  }, [rentedLocationsUIContext]);
 
-  // Banks Redux state
+  // RentedLocations Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.banks.actionsLoading }),
+    (state) => ({ isLoading: state.rentedLocations.actionsLoading }),
     shallowEqual
   );
 
@@ -38,13 +38,13 @@ export function DeleteDialog({ id, show, onHide }) {
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading, dispatch]);
 
-  const deleteBank = () => {
-    // server request for deleting bank by id
-    dispatch(actions.deleteBank(id)).then(() => {
+  const deleteRentedLocation = () => {
+    // server request for deleting rentedLocation by id
+    dispatch(actions.deleteRentedLocation(id)).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchBanks(banksUIProps.queryParams));
+      dispatch(actions.fetchRentedLocations(rentedLocationsUIProps.queryParams));
       // clear selections list
-      banksUIProps.setIds([]);
+      rentedLocationsUIProps.setIds([]);
       // closing delete modal
       onHide();
     });
@@ -61,14 +61,14 @@ export function DeleteDialog({ id, show, onHide }) {
       {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Bank Delete
+          RentedLocation Delete
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete this bank?</span>
+          <span>Are you sure to permanently delete this rentedLocation?</span>
         )}
-        {isLoading && <span>Bank is deleting...</span>}
+        {isLoading && <span>RentedLocation is deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -82,7 +82,7 @@ export function DeleteDialog({ id, show, onHide }) {
           <> </>
           <button
             type="button"
-            onClick={deleteBank}
+            onClick={deleteRentedLocation}
             className="btn btn-primary btn-elevate"
           >
             Delete
