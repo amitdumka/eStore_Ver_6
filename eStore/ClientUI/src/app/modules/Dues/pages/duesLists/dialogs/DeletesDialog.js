@@ -1,52 +1,52 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/expenses/Actions";
+import * as actions from "../../../_redux/duesLists/Actions";
 import { useUIContext } from "../UIContext";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
 
 // Delete Selected Records
-//expense
-//Expense
+//duesList
+//DuesList
 
 
 export function DeletesDialog({ show, onHide }) {
-  // Expenses UI Context
-  const expensesUIContext = useUIContext();
-  const expensesUIProps = useMemo(() => {
+  // DuesLists UI Context
+  const duesListsUIContext = useUIContext();
+  const duesListsUIProps = useMemo(() => {
     return {
-      ids: expensesUIContext.ids,
-      setIds: expensesUIContext.setIds,
-      queryParams: expensesUIContext.queryParams,
+      ids: duesListsUIContext.ids,
+      setIds: duesListsUIContext.setIds,
+      queryParams: duesListsUIContext.queryParams,
     };
-  }, [expensesUIContext]);
+  }, [duesListsUIContext]);
 
-  // Expenses Redux state
+  // DuesLists Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.expenses.actionsLoading }),
+    (state) => ({ isLoading: state.duesLists.actionsLoading }),
     shallowEqual
   );
 
-  // if expenses weren't selected we should close modal
+  // if duesLists weren't selected we should close modal
   useEffect(() => {
-    if (!expensesUIProps.ids || expensesUIProps.ids.length === 0) {
+    if (!duesListsUIProps.ids || duesListsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [expensesUIProps.ids]);
+  }, [duesListsUIProps.ids]);
 
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading, dispatch]);
 
-  const deleteExpenses = () => {
-    // server request for deleting expense by selected ids
-    dispatch(actions.deleteExpenses(expensesUIProps.ids)).then(() => {
+  const deleteDuesLists = () => {
+    // server request for deleting duesList by selected ids
+    dispatch(actions.deleteDuesLists(duesListsUIProps.ids)).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchExpenses(expensesUIProps.queryParams)).then(
+      dispatch(actions.fetchDuesLists(duesListsUIProps.queryParams)).then(
         () => {
           // clear selections list
-          expensesUIProps.setIds([]);
+          duesListsUIProps.setIds([]);
           // closing delete modal
           onHide();
         }
@@ -65,14 +65,14 @@ export function DeletesDialog({ show, onHide }) {
       {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Expenses Delete
+          DuesLists Delete
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete selected expenses?</span>
+          <span>Are you sure to permanently delete selected duesLists?</span>
         )}
-        {isLoading && <span>Expense are deleting...</span>}
+        {isLoading && <span>DuesList are deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -86,7 +86,7 @@ export function DeletesDialog({ show, onHide }) {
           <> </>
           <button
             type="button"
-            onClick={deleteExpenses}
+            onClick={deleteDuesLists}
             className="btn btn-primary btn-elevate"
           >
             Delete

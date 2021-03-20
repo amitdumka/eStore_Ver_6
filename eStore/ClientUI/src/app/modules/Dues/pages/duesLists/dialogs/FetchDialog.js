@@ -4,48 +4,48 @@ import { shallowEqual, useSelector } from "react-redux";
 
 import { useUIContext } from "../UIContext";
 
-//expense
-//Expense
+//duesList
+//DuesList
 
 
-const selectedExpenses = (entities, ids) => {
-  const _expenses = [];
+const selectedDuesLists = (entities, ids) => {
+  const _duesLists = [];
   ids.forEach((id) => {
-    const expense = entities.find((el) => el.id === id);
-    if (expense) {
-      _expenses.push(expense);
+    const duesList = entities.find((el) => el.id === id);
+    if (duesList) {
+      _duesLists.push(duesList);
     }
   });
-  return _expenses;
+  return _duesLists;
 };
 
 export function FetchDialog({ show, onHide }) {
-  // Expenses UI Context
-  const expensesUIContext = useUIContext();
-  const expensesUIProps = useMemo(() => {
+  // DuesLists UI Context
+  const duesListsUIContext = useUIContext();
+  const duesListsUIProps = useMemo(() => {
     return {
-      ids: expensesUIContext.ids,
+      ids: duesListsUIContext.ids,
     };
-  }, [expensesUIContext]);
+  }, [duesListsUIContext]);
 
-  // Expenses Redux state
-  const { expenses } = useSelector(
+  // DuesLists Redux state
+  const { duesLists } = useSelector(
     (state) => ({
-      expenses: selectedExpenses(
-        state.expenses.entities,
-        expensesUIProps.ids
+      duesLists: selectedDuesLists(
+        state.duesLists.entities,
+        duesListsUIProps.ids
       ),
     }),
     shallowEqual
   );
 
-  // if expenses weren't selected we should close modal
+  // if duesLists weren't selected we should close modal
   useEffect(() => {
-    if (!expensesUIProps.ids || expensesUIProps.ids.length === 0) {
+    if (!duesListsUIProps.ids || duesListsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [expensesUIProps.ids]);
+  }, [duesListsUIProps.ids]);
 
   return (
     <Modal
@@ -68,12 +68,12 @@ export function FetchDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {expenses.map((expense) => (
-              <tr key={`id${expense.id}`}>
-                <td>{expense.id}</td>
+            {duesLists.map((duesList) => (
+              <tr key={`id${duesList.id}`}>
+                <td>{duesList.id}</td>
                 <td>
                   <span className="ml-3">
-                    {expense.lastName}, {expense.firstName}
+                    {duesList.lastName}, {duesList.firstName}
                   </span>
                 </td>
               </tr>

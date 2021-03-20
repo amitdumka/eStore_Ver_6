@@ -2,8 +2,8 @@ import React, { createContext, useContext, useState, useCallback } from "react";
 import { isEqual, isFunction } from "lodash";
 import { initialFilter } from "./UIHelpers";
 
-//Expense
-//expense
+//DuesList
+//duesList
 
 const UIContext = createContext();
 
@@ -41,8 +41,8 @@ export function UIProvider({ UIEvents, children }) {
     });
   }, []);
 
-  const initExpense = {
-    expenseId: 0,
+  const initDuesList = {
+    duesListId: 0,
     particulars: "",
     partyName: "",
     employeeId: 0,
@@ -74,13 +74,13 @@ export function UIProvider({ UIEvents, children }) {
     ids,
     setIds,
     setQueryParams,
-    initExpense,
-    newExpenseButtonClick: UIEvents.newExpenseButtonClick,
-    openEditExpenseDialog: UIEvents.openEditExpenseDialog,
-    openDeleteExpenseDialog: UIEvents.openDeleteExpenseDialog,
-    openDeleteExpensesDialog: UIEvents.openDeleteExpensesDialog,
-    openFetchExpensesDialog: UIEvents.openFetchExpensesDialog,
-    openUpdateExpensesStatusDialog: UIEvents.openUpdateExpensesStatusDialog,
+    initDuesList,
+    newDuesListButtonClick: UIEvents.newDuesListButtonClick,
+    openEditDuesListDialog: UIEvents.openEditDuesListDialog,
+    openDeleteDuesListDialog: UIEvents.openDeleteDuesListDialog,
+    openDeleteDuesListsDialog: UIEvents.openDeleteDuesListsDialog,
+    openFetchDuesListsDialog: UIEvents.openFetchDuesListsDialog,
+    openUpdateDuesListsStatusDialog: UIEvents.openUpdateDuesListsStatusDialog,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

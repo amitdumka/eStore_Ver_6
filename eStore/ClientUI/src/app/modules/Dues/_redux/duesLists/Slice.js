@@ -2,15 +2,15 @@ import {createSlice} from "@reduxjs/toolkit";
 import { stubTrue } from "lodash-es";
 
 
-//Expense
-//expense
+//duesList
+//duesList
 
-const initialExpensesState = {
+const initialDuesListsState = {
   listLoading: false,
   actionsLoading: false,
   totalCount: 0,
   entities: null,
-  expenseForEdit: undefined,
+  dueslistForEdit: undefined,
   lastError: null, 
   employeeEntities: null, 
   totalCountEmp:0,
@@ -24,9 +24,9 @@ export const callTypes = {
   action: "action"
 };
 
-export const expensesSlice = createSlice({
-  name: "expenses",
-  initialState: initialExpensesState,
+export const dueslistsSlice = createSlice({
+  name: "dueslists",
+  initialState: initialDuesListsState,
   reducers: {
     catchError: (state, action) => {
       state.error = `${action.type}: ${action.payload.error}`;
@@ -74,60 +74,60 @@ export const expensesSlice = createSlice({
      state.totalCountbankacc=totalCount;
 
     },
-    // getExpenseById
-    expenseFetched: (state, action) => {
+    // getDuesListById
+    dueslistFetched: (state, action) => {
       state.actionsLoading = false;
-      state.expenseForEdit = action.payload.expenseForEdit;
+      state.dueslistForEdit = action.payload.dueslistForEdit;
       state.error = null;
     },
-    // findExpenses
-    expensesFetched: (state, action) => {
+    // findDuesLists
+    dueslistsFetched: (state, action) => {
       const { totalCount, entities } = action.payload;
       state.listLoading = false;
       state.error = null;
       state.entities = entities;
       state.totalCount = totalCount;
     },
-    // createExpense
-    expenseCreated: (state, action) => {
+    // createDuesList
+    dueslistCreated: (state, action) => {
       state.ewactionsLoading = false;
       state.error = null;
-      state.entities.push(action.payload.expense);
+      state.entities.push(action.payload.duesList);
     },
-    // updateExpense
-    expenseUpdated: (state, action) => {
+    // updateDuesList
+    dueslistUpdated: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.map(entity => {
-        if (entity.expenseId === action.payload.expense.expenseId) {
-          return action.payload.expense;
+        if (entity.dueslistId === action.payload.duesList.dueslistId) {
+          return action.payload.duesList;
         }
         return entity;
       });
     },
-    // deleteExpense
-    expenseDeleted: (state, action) => {
+    // deleteDuesList
+    dueslistDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(el => el.expenseId !== action.payload.expenseId);
+      state.entities = state.entities.filter(el => el.dueslistId !== action.payload.dueslistId);
     },
-    // deleteExpenses
-    expensesDeleted: (state, action) => {
+    // deleteDuesLists
+    dueslistsDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        el => !action.payload.ids.includes(el.expenseId)
+        el => !action.payload.ids.includes(el.dueslistId)
       );
     },
 
     
-    // expensesUpdateState
-    expensesStatusUpdated: (state, action) => {
+    // dueslistsUpdateState
+    dueslistsStatusUpdated: (state, action) => {
       state.actionsLoading = false;
       state.error = null;
       const { ids, status } = action.payload;
       state.entities = state.entities.map(entity => {
-        if (ids.findIndex(id => id === entity.expenseId) > -1) {
+        if (ids.findIndex(id => id === entity.dueslistId) > -1) {
           entity.status = status;
         }
         return entity;

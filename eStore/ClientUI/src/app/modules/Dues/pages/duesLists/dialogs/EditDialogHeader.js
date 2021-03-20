@@ -3,15 +3,15 @@ import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
 
-//expense
-//Expense
+//duesList
+//DuesList
 
 export function EditDialogHeader({ id }) {
-  // Expenses Redux state
-  const { expenseForEdit, actionsLoading } = useSelector(
+  // DuesLists Redux state
+  const { duesListForEdit, actionsLoading } = useSelector(
     (state) => ({
-      expenseForEdit: state.expenses.expenseForEdit,
-      actionsLoading: state.expenses.actionsLoading,
+      duesListForEdit: state.duesLists.duesListForEdit,
+      actionsLoading: state.duesLists.actionsLoading,
     }),
     shallowEqual
   );
@@ -19,14 +19,14 @@ export function EditDialogHeader({ id }) {
   const [title, setTitle] = useState("");
   // Title couting
   useEffect(() => {
-    let _title = id ? "" : "New Expense";
-    if (expenseForEdit && id) {
-      _title = `Edit expense '${expenseForEdit.firstName} ${expenseForEdit.lastName}'`;
+    let _title = id ? "" : "New DuesList";
+    if (duesListForEdit && id) {
+      _title = `Edit duesList '${duesListForEdit.firstName} ${duesListForEdit.lastName}'`;
     }
 
     setTitle(_title);
     // eslint-disable-next-line
-  }, [expenseForEdit, actionsLoading]);
+  }, [duesListForEdit, actionsLoading]);
 
   return (
     <>

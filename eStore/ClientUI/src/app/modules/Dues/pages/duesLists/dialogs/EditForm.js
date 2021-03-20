@@ -12,24 +12,24 @@ import {
   DatePickerField,
 } from "../../../../../../_metronic/_partials/controls";
 
-//expense
-//Expense
+//duesList
+//DuesList
 
 // Validation schema
-const ExpenseEditSchema = Yup.object().shape({
+const DuesListEditSchema = Yup.object().shape({
   onDate: Yup.date().required("Date is required"),
   amount: Yup.number().integer().moreThan(0).positive().min(1).required("Amount is required"),
   employeeId: Yup.number().moreThan(0).required("Paid By is required"),
   particulars: Yup.string().required("Particulars Month is required"),
   payMode: Yup.number().required("Payment Mode is required"),
   partyName: Yup.string().required("Paid To is required"),
-  remarks: Yup.string().required("Expense details is required"),
+  remarks: Yup.string().required("DuesList details is required"),
   storeId: Yup.number().required("Select Store "),
 });
 
 export function EditForm({
-  saveExpense,
-  expense,
+  saveDuesList,
+  duesList,
   actionsLoading,
   onHide,
   employeeList, partiesList, bankAccountsList
@@ -38,10 +38,10 @@ export function EditForm({
     <>
       <Formik
         enableReinitialize={true}
-        initialValues={expense}
-        validationSchema={ExpenseEditSchema}
+        initialValues={duesList}
+        validationSchema={DuesListEditSchema}
         onSubmit={(values) => {
-          saveExpense(values);
+          saveDuesList(values);
         }}
       >
         {({ handleSubmit }) => (
@@ -95,7 +95,7 @@ export function EditForm({
                 </div>
                
                 <div className="form-group row">
-                  {/* Date of Expense */}
+                  {/* Date of DuesList */}
                   <div className="col-lg-4">
                     <DatePickerField
                       dateFormat="yyyy-MM-dd"

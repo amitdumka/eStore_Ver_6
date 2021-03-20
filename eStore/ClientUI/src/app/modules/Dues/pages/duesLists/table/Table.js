@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/expenses/Actions";
+import * as actions from "../../../_redux/duesLists/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -23,45 +23,45 @@ import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 import FieldDateFormater from "../../../../../../_estore/formaters/FieldDateFormater";
 
-//Expense
-//expense
+//DuesList
+//duesList
 
 
 
-export function ExpensesTable() {
-  // Expenses UI Context
-  const expensesUIContext = useUIContext();
-  const expensesUIProps = useMemo(() => {
+export function DuesListsTable() {
+  // DuesLists UI Context
+  const duesListsUIContext = useUIContext();
+  const duesListsUIProps = useMemo(() => {
     return {
-      ids: expensesUIContext.ids,
-      setIds: expensesUIContext.setIds,
-      queryParams: expensesUIContext.queryParams,
-      setQueryParams: expensesUIContext.setQueryParams,
-      openEditExpenseDialog: expensesUIContext.openEditExpenseDialog,
-      openDeleteExpenseDialog: expensesUIContext.openDeleteExpenseDialog,
+      ids: duesListsUIContext.ids,
+      setIds: duesListsUIContext.setIds,
+      queryParams: duesListsUIContext.queryParams,
+      setQueryParams: duesListsUIContext.setQueryParams,
+      openEditDuesListDialog: duesListsUIContext.openEditDuesListDialog,
+      openDeleteDuesListDialog: duesListsUIContext.openDeleteDuesListDialog,
     };
-  }, [expensesUIContext]);
+  }, [duesListsUIContext]);
 
-  // Getting curret state of expenses list from store (Redux)
+  // Getting curret state of duesLists list from store (Redux)
   const { currentState } = useSelector(
-    (state) => ({ currentState: state.expenses }),
+    (state) => ({ currentState: state.duesLists }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
 
-  // Expenses Redux state
+  // DuesLists Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    expensesUIProps.setIds([]);
+    duesListsUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchExpenses(expensesUIProps.queryParams));
+    dispatch(actions.fetchDuesLists(duesListsUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [expensesUIProps.queryParams, dispatch]);
+  }, [duesListsUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "expenseId",
+      dataField: "duesListId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
@@ -132,8 +132,8 @@ export function ExpensesTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditExpenseDialog: expensesUIProps.openEditExpenseDialog,
-        openDeleteExpenseDialog: expensesUIProps.openDeleteExpenseDialog,
+        openEditDuesListDialog: duesListsUIProps.openEditDuesListDialog,
+        openDeleteDuesListDialog: duesListsUIProps.openDeleteDuesListDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -147,8 +147,8 @@ export function ExpensesTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: expensesUIProps.queryParams.pageSize,
-    page: expensesUIProps.queryParams.pageNumber,
+    sizePerPage: duesListsUIProps.queryParams.pageSize,
+    page: duesListsUIProps.queryParams.pageNumber,
   };
 
   
@@ -169,19 +169,19 @@ export function ExpensesTable() {
                 bootstrap4
                 remote
                 noDataIndication="No Record Found now.."
-                keyField="expenseId"
+                keyField="duesListId"
                 data={entities === null ? []: totalCount ?entities:[]}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  expensesUIProps.setQueryParams
+                  duesListsUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: expensesUIProps.ids,
-                  setIds: expensesUIProps.setIds,
-                  idName:"expenseId",
+                  ids: duesListsUIProps.ids,
+                  setIds: duesListsUIProps.setIds,
+                  idName:"duesListId",
                 })}
                 {...paginationTableProps}
               >

@@ -3,8 +3,8 @@ import { Formik } from "formik";
 import { isEqual } from "lodash";
 import { useUIContext } from "../UIContext";
 
-//Expense
-//expense
+//DuesList
+//duesList
 
 
 const prepareFilter = (queryParams, values) => {
@@ -26,23 +26,23 @@ const prepareFilter = (queryParams, values) => {
   return newQueryParams;
 };
 
-export function ExpensesFilter({ listLoading }) {
-  // Expenses UI Context
-  const expensesUIContext = useUIContext();
-  const expensesUIProps = useMemo(() => {
+export function DuesListsFilter({ listLoading }) {
+  // DuesLists UI Context
+  const duesListsUIContext = useUIContext();
+  const duesListsUIProps = useMemo(() => {
     return {
-      queryParams: expensesUIContext.queryParams,
-      setQueryParams: expensesUIContext.setQueryParams,
+      queryParams: duesListsUIContext.queryParams,
+      setQueryParams: duesListsUIContext.setQueryParams,
     };
-  }, [expensesUIContext]);
+  }, [duesListsUIContext]);
 
   // queryParams, setQueryParams,
   const applyFilter = (values) => {
-    const newQueryParams = prepareFilter(expensesUIProps.queryParams, values);
-    if (!isEqual(newQueryParams, expensesUIProps.queryParams)) {
+    const newQueryParams = prepareFilter(duesListsUIProps.queryParams, values);
+    if (!isEqual(newQueryParams, duesListsUIProps.queryParams)) {
       newQueryParams.pageNumber = 1;
       // update list by queryParams
-      expensesUIProps.setQueryParams(newQueryParams);
+      duesListsUIProps.setQueryParams(newQueryParams);
     }
   };
 

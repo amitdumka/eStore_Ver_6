@@ -1,23 +1,23 @@
 import React, { useMemo } from "react";
 import { useUIContext } from "../UIContext";
 
-//Expense
-//expense
+//DuesList
+//duesList
 
 
-export function ExpensesGrouping() {
-  // Expenses UI Context
-  const expensesUIContext = useUIContext();
-  const expensesUIProps = useMemo(() => {
+export function DuesListsGrouping() {
+  // DuesLists UI Context
+  const duesListsUIContext = useUIContext();
+  const duesListsUIProps = useMemo(() => {
     return {
-      ids: expensesUIContext.ids,
-      setIds: expensesUIContext.setIds,
-      openDeleteExpensesDialog: expensesUIContext.openDeleteExpensesDialog,
-      openFetchExpensesDialog: expensesUIContext.openFetchExpensesDialog,
-      openUpdateExpensesStatusDialog:
-        expensesUIContext.openUpdateExpensesStatusDialog,
+      ids: duesListsUIContext.ids,
+      setIds: duesListsUIContext.setIds,
+      openDeleteDuesListsDialog: duesListsUIContext.openDeleteDuesListsDialog,
+      openFetchDuesListsDialog: duesListsUIContext.openFetchDuesListsDialog,
+      openUpdateDuesListsStatusDialog:
+        duesListsUIContext.openUpdateDuesListsStatusDialog,
     };
-  }, [expensesUIContext]);
+  }, [duesListsUIContext]);
 
   return (
     <div className="form">
@@ -27,7 +27,7 @@ export function ExpensesGrouping() {
             <div className="form-label form-label-no-wrap">
               <label className="font-bold font-danger">
                 <span>
-                  Selected records count: <b>{expensesUIProps.ids.length}</b>
+                  Selected records count: <b>{duesListsUIProps.ids.length}</b>
                 </span>
               </label>
             </div>
@@ -35,7 +35,7 @@ export function ExpensesGrouping() {
               <button
                 type="button"
                 className="btn btn-danger font-weight-bolder font-size-sm"
-                onClick={expensesUIProps.openDeleteExpensesDialog}
+                onClick={duesListsUIProps.openDeleteDuesListsDialog}
               >
                 <i className="fa fa-trash"></i> Delete All
               </button>
@@ -43,7 +43,7 @@ export function ExpensesGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={expensesUIProps.openFetchExpensesDialog}
+                onClick={duesListsUIProps.openFetchDuesListsDialog}
               >
                 <i className="fa fa-stream"></i> Fetch Selected
               </button>
@@ -51,7 +51,7 @@ export function ExpensesGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={expensesUIProps.openUpdateExpensesStatusDialog}
+                onClick={duesListsUIProps.openUpdateDuesListsStatusDialog}
               >
                 <i className="fa fa-sync-alt"></i> Update Status
               </button>

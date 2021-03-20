@@ -1,11 +1,11 @@
 import axios from "axios";
 
 
-//Expense
-//expense
+//duesList
+//duesList
 
 
-export const API_URL = "https://www.aprajitaretails.in/api/expenses";
+export const API_URL = "https://www.aprajitaretails.in/api/dueslists";
 
 export async function doLogin(){
   axios.post("https://www.aprajitaretails.in/api/login").then(
@@ -25,25 +25,25 @@ export async function verifyLogin(){
   ).catch(function (error){console.log(error)});
 
 }
-// CREATE =>  POST: add a new expense to the server
-export async function createExpense(expense) {
-  return await axios.post(API_URL,  expense,{
+// CREATE =>  POST: add a new duesList to the server
+export async function createDuesList(duesList) {
+  return await axios.post(API_URL,  duesList,{
     headers: {         'Content-Type' : 'application/json; charset=utf-8' }
 });
 }
 
 // READ
-export  function getAllExpenses() {
+export  function getAllDuesLists() {
   return  axios.get(API_URL);//.catch(function (error){console.log(error)});
 }
 
-export async function getExpenseById(expenseId) {
-  return await axios.get(`${API_URL}/${expenseId}`);
+export async function getDuesListById(dueslistId) {
+  return await axios.get(`${API_URL}/${dueslistId}`);
 }
 
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
 // items => filtered/sorted result
-export async function findExpenses(queryParams) {
+export async function findDuesLists(queryParams) {
   //verifyLogin();
   return await axios.get(`${API_URL}/dto`);//find`, { queryParams });
 }
@@ -62,27 +62,27 @@ export async function getAllBankAccount(){
 }
 
 
-// UPDATE => PUT: update the expense on the server
-export async function updateExpense(expense) {
-  return await axios.put(`${API_URL}/${expense.expenseId}`, JSON.stringify( expense ),{
+// UPDATE => PUT: update the duesList on the server
+export async function updateDuesList(duesList) {
+  return await axios.put(`${API_URL}/${duesList.dueslistId}`, JSON.stringify( duesList ),{
     headers: {         'Content-Type' : 'application/json; charset=utf-8' }
 });
 }
 
 // UPDATE Status
-export async function updateStatusForExpenses(ids, status) {
-  return await axios.post(`${API_URL}/updateStatusForExpenses`, {
+export async function updateStatusForDuesLists(ids, status) {
+  return await axios.post(`${API_URL}/updateStatusForDuesLists`, {
     ids,
     status
   });
 }
 
-// DELETE => delete the expense from the server
-export async function deleteExpense(expenseId) {
-  return await axios.delete(`${API_URL}/${expenseId}`);
+// DELETE => delete the duesList from the server
+export async function deleteDuesList(dueslistId) {
+  return await axios.delete(`${API_URL}/${dueslistId}`);
 }
 
-// DELETE Expenses by ids
-export async function deleteExpenses(ids) {
-  return await axios.post(`${API_URL}/deleteExpenses`, { ids });
+// DELETE DuesLists by ids
+export async function deleteDuesLists(ids) {
+  return await axios.post(`${API_URL}/deleteDuesLists`, { ids });
 }

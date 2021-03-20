@@ -1,53 +1,53 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/expenses/Actions";
+import * as actions from "../../../_redux/duesLists/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
 
-//expense
-//Expense
+//duesList
+//DuesList
 
 export function EditDialog({ id, show, onHide }) {
-  // Expenses UI Context
-  const expensesUIContext = useUIContext();
-  const expensesUIProps = useMemo(() => {
+  // DuesLists UI Context
+  const duesListsUIContext = useUIContext();
+  const duesListsUIProps = useMemo(() => {
     return {
-      initExpense: expensesUIContext.initExpense,
+      initDuesList: duesListsUIContext.initDuesList,
     };
-  }, [expensesUIContext]);
+  }, [duesListsUIContext]);
 
-  // Expenses Redux state
+  // DuesLists Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, expenseForEdit ,employeeList, partiesList, bankAccountsList} = useSelector(
+  const { actionsLoading, duesListForEdit ,employeeList, partiesList, bankAccountsList} = useSelector(
     (state) => ({
-      actionsLoading: state.expenses.actionsLoading,
-      expenseForEdit: state.expenses.expenseForEdit,
-      employeeList:state.expenses.employeeEntities,
-      partiesList:state.expenses.partiesEntities, 
-      bankAccountsList:state.expenses.bankaccEntities
+      actionsLoading: state.duesLists.actionsLoading,
+      duesListForEdit: state.duesLists.duesListForEdit,
+      employeeList:state.duesLists.employeeEntities,
+      partiesList:state.duesLists.partiesEntities, 
+      bankAccountsList:state.duesLists.bankaccEntities
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    // server call for getting Expense by id
-    dispatch(actions.fetchExpense(id));
+    // server call for getting DuesList by id
+    dispatch(actions.fetchDuesList(id));
     dispatch(actions.fetchParties());
     dispatch(actions.fetchBankAccounts());
     dispatch(actions.fetchEmployees());
   }, [id, dispatch]);
 
-  // server request for saving expense
-  const saveExpense = (expense) => {
-    expense.payMode=parseInt(expense.payMode);
+  // server request for saving duesList
+  const saveDuesList = (duesList) => {
+    duesList.payMode=parseInt(duesList.payMode);
     if (!id) {
-      // server request for creating expense
-      dispatch(actions.createExpense(expense)).then(() => onHide());
+      // server request for creating duesList
+      dispatch(actions.createDuesList(duesList)).then(() => onHide());
     } else {
-      // server request for updating expense
-      dispatch(actions.updateExpense(expense)).then(() => onHide());
+      // server request for updating duesList
+      dispatch(actions.updateDuesList(duesList)).then(() => onHide());
     }
   };
 
@@ -60,9 +60,9 @@ export function EditDialog({ id, show, onHide }) {
     >
       <EditDialogHeader id={id} />
       <EditForm
-        saveExpense={saveExpense}
+        saveDuesList={saveDuesList}
         actionsLoading={actionsLoading}
-        expense={expenseForEdit || expensesUIProps.initExpense}
+        duesList={duesListForEdit || duesListsUIProps.initDuesList}
         onHide={onHide}
         employeeList={employeeList}
         partiesList={partiesList}

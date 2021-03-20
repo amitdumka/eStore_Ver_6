@@ -2,27 +2,27 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
-import * as actions from "../../../_redux/expenses/Actions";
+import * as actions from "../../../_redux/duesLists/Actions";
 import { useUIContext } from "../UIContext";
 
-//expense
-//Expense
+//duesList
+//DuesList
 
 // Delete particular record.
 export function DeleteDialog({ id, show, onHide }) {
-  // Expenses UI Context
-  const expensesUIContext = useUIContext();
-  const expensesUIProps = useMemo(() => {
+  // DuesLists UI Context
+  const duesListsUIContext = useUIContext();
+  const duesListsUIProps = useMemo(() => {
     return {
-      setIds: expensesUIContext.setIds,
-      queryParams: expensesUIContext.queryParams,
+      setIds: duesListsUIContext.setIds,
+      queryParams: duesListsUIContext.queryParams,
     };
-  }, [expensesUIContext]);
+  }, [duesListsUIContext]);
 
-  // Expenses Redux state
+  // DuesLists Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.expenses.actionsLoading }),
+    (state) => ({ isLoading: state.duesLists.actionsLoading }),
     shallowEqual
   );
 
@@ -37,13 +37,13 @@ export function DeleteDialog({ id, show, onHide }) {
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading, dispatch]);
 
-  const deleteExpense = () => {
-    // server request for deleting expense by id
-    dispatch(actions.deleteExpense(id)).then(() => {
+  const deleteDuesList = () => {
+    // server request for deleting duesList by id
+    dispatch(actions.deleteDuesList(id)).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchExpenses(expensesUIProps.queryParams));
+      dispatch(actions.fetchDuesLists(duesListsUIProps.queryParams));
       // clear selections list
-      expensesUIProps.setIds([]);
+      duesListsUIProps.setIds([]);
       // closing delete modal
       onHide();
     });
@@ -60,14 +60,14 @@ export function DeleteDialog({ id, show, onHide }) {
       {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Expense Delete
+          DuesList Delete
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete this expense?</span>
+          <span>Are you sure to permanently delete this duesList?</span>
         )}
-        {isLoading && <span>Expense is deleting...</span>}
+        {isLoading && <span>DuesList is deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -81,7 +81,7 @@ export function DeleteDialog({ id, show, onHide }) {
           <> </>
           <button
             type="button"
-            onClick={deleteExpense}
+            onClick={deleteDuesList}
             className="btn btn-primary btn-elevate"
           >
             Delete

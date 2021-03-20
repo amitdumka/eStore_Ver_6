@@ -5,41 +5,41 @@ import {
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../_metronic/_partials/controls";
-import { ExpensesFilter } from "./filter/Filter";
-import { ExpensesTable } from "./table/Table";
-import { ExpensesGrouping } from "./grouping/Grouping";
+import { DuesListsFilter } from "./filter/Filter";
+import { DuesListsTable } from "./table/Table";
+import { DuesListsGrouping } from "./grouping/Grouping";
 import { useUIContext } from "./UIContext";
 
-//Expense
-//expense
+//DuesList
+//duesList
 
 
-export function ExpensesCard() {
-  const ExpensesUIContext = useUIContext();
-  const ExpensesUIProps = useMemo(() => {
+export function DuesListsCard() {
+  const DuesListsUIContext = useUIContext();
+  const DuesListsUIProps = useMemo(() => {
     return {
-      ids: ExpensesUIContext.ids,
-      newExpenseButtonClick: ExpensesUIContext.newExpenseButtonClick,
+      ids: DuesListsUIContext.ids,
+      newDuesListButtonClick: DuesListsUIContext.newDuesListButtonClick,
     };
-  }, [ExpensesUIContext]);
+  }, [DuesListsUIContext]);
 
   return (
     <Card>
-      <CardHeader title="Expense list">
+      <CardHeader title="DuesList list">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary btn-rounded"
-            onClick={ExpensesUIProps.newExpenseButtonClick}
+            onClick={DuesListsUIProps.newDuesListButtonClick}
           >
-            New Expense
+            New DuesList
           </button>
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-         <ExpensesFilter /> 
-        {ExpensesUIProps.ids.length > 0 && <ExpensesGrouping />}
-        <ExpensesTable />
+         <DuesListsFilter /> 
+        {DuesListsUIProps.ids.length > 0 && <DuesListsGrouping />}
+        <DuesListsTable />
       </CardBody>
     </Card>
   );

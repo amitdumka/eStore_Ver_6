@@ -1,10 +1,10 @@
 import * as requestFromServer from "./Crud";
-import { expensesSlice, callTypes } from "./Slice";
+import { dueslistsSlice, callTypes } from "./Slice";
 
-//Expense
-//expense
+//duesList
+//duesList
 
-const { actions } = expensesSlice;
+const { actions } = dueslistsSlice;
 
 export const fetchParties = (id) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
@@ -40,9 +40,6 @@ export const fetchBankAccounts = (id) => (dispatch) => {
       dispatch(actions.catchError({ error, callTypes: callTypes.list }));
     });
 };
-
-
-
 export const fetchEmployees = (id) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
 
@@ -61,106 +58,106 @@ export const fetchEmployees = (id) => (dispatch) => {
     });
 };
 
-export const fetchExpenses = (queryParams) => (dispatch) => {
+export const fetchDuesLists = (queryParams) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findExpenses(queryParams)
+    .findDuesLists(queryParams)
     .then((response) => {
       const entities = response.data;
       const totalCount = response.data.length;
-      dispatch(actions.expensesFetched({ totalCount, entities }));
+      dispatch(actions.dueslistsFetched({ totalCount, entities }));
     })
     .catch((error) => {
       console.log(error);
-      error.clientMessage = "Can't find expenses";
+      error.clientMessage = "Can't find dueslists";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
-export const fetchExpense = (id) => (dispatch) => {
+export const fetchDuesList = (id) => (dispatch) => {
   if (!id) {
-    return dispatch(actions.expenseFetched({ expenseForEdit: undefined }));
+    return dispatch(actions.dueslistFetched({ dueslistForEdit: undefined }));
   }
 
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .getExpenseById(id)
+    .getDuesListById(id)
     .then((response) => {
-      const expense = response.data;
-      dispatch(actions.expenseFetched({ expenseForEdit: expense }));
+      const duesList = response.data;
+      dispatch(actions.dueslistFetched({ dueslistForEdit: duesList }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't find expense";
+      error.clientMessage = "Can't find duesList";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteExpense = (id) => (dispatch) => {
+export const deleteDuesList = (id) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteExpense(id)
+    .deleteDuesList(id)
     .then((response) => {
-      dispatch(actions.expenseDeleted({ id }));
+      dispatch(actions.dueslistDeleted({ id }));
     })
     .catch((error) => {
       console.log("CD=" + error);
-      error.clientMessage = "Can't delete expense";
+      error.clientMessage = "Can't delete duesList";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const createExpense = (expenseForCreation) => (dispatch) => {
+export const createDuesList = (dueslistForCreation) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .createExpense(JSON.stringify(expenseForCreation))
+    .createDuesList(JSON.stringify(dueslistForCreation))
     .then((response) => {
-      const expense = response.data;
-      dispatch(actions.expenseCreated({ expense }));
+      const duesList = response.data;
+      dispatch(actions.dueslistCreated({ duesList }));
     })
     .catch((error) => {
       console.log(error);
-      error.clientMessage = "Can't create expense";
+      error.clientMessage = "Can't create duesList";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateExpense = (expense) => (dispatch) => {
+export const updateDuesList = (duesList) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateExpense(expense)
+    .updateDuesList(duesList)
     .then(() => {
-      console.log(expense);
-      dispatch(actions.expenseUpdated({ expense }));
+      console.log(duesList);
+      dispatch(actions.dueslistUpdated({ duesList }));
     })
     .catch((error) => {
       console.log(error);
-      error.clientMessage = "Can't update expense";
+      error.clientMessage = "Can't update duesList";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateExpensesStatus = (ids, status) => (dispatch) => {
+export const updateDuesListsStatus = (ids, status) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateStatusForExpenses(ids, status)
+    .updateStatusForDuesLists(ids, status)
     .then(() => {
-      dispatch(actions.expensesStatusUpdated({ ids, status }));
+      dispatch(actions.dueslistsStatusUpdated({ ids, status }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't update expenses status";
+      error.clientMessage = "Can't update dueslists status";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteExpenses = (ids) => (dispatch) => {
+export const deleteDuesLists = (ids) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteExpenses(ids)
+    .deleteDuesLists(ids)
     .then(() => {
-      dispatch(actions.expensesDeleted({ ids }));
+      dispatch(actions.dueslistsDeleted({ ids }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't delete expenses";
+      error.clientMessage = "Can't delete dueslists";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
