@@ -20,13 +20,19 @@ export function EditDialog({ id, show, onHide }) {
 
   // DueRecovereds Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, dueRecoveredForEdit ,employeeList, partiesList, bankAccountsList} = useSelector(
+  const {
+    actionsLoading,
+    dueRecoveredForEdit,
+    employeeList,
+    partiesList,
+    bankAccountsList,
+  } = useSelector(
     (state) => ({
       actionsLoading: state.dueRecovereds.actionsLoading,
       dueRecoveredForEdit: state.dueRecovereds.dueRecoveredForEdit,
-      employeeList:state.dueRecovereds.employeeEntities,
-      partiesList:state.dueRecovereds.partiesEntities, 
-      bankAccountsList:state.dueRecovereds.bankaccEntities
+      employeeList: state.dueRecovereds.employeeEntities,
+      partiesList: state.dueRecovereds.partiesEntities,
+      bankAccountsList: state.dueRecovereds.bankaccEntities,
     }),
     shallowEqual
   );
@@ -34,14 +40,14 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting DueRecovered by id
     dispatch(actions.fetchDueRecovered(id));
-    dispatch(actions.fetchParties());
-    dispatch(actions.fetchBankAccounts());
-    dispatch(actions.fetchEmployees());
+    // dispatch(actions.fetchParties());
+    // dispatch(actions.fetchBankAccounts());
+    //dispatch(actions.fetchEmployees());
   }, [id, dispatch]);
 
   // server request for saving dueRecovered
   const saveDueRecovered = (dueRecovered) => {
-    dueRecovered.payMode=parseInt(dueRecovered.payMode);
+    dueRecovered.payMode = parseInt(dueRecovered.payMode);
     if (!id) {
       // server request for creating dueRecovered
       dispatch(actions.createDueRecovered(dueRecovered)).then(() => onHide());
@@ -62,7 +68,9 @@ export function EditDialog({ id, show, onHide }) {
       <EditForm
         saveDueRecovered={saveDueRecovered}
         actionsLoading={actionsLoading}
-        dueRecovered={dueRecoveredForEdit || dueRecoveredsUIProps.initDueRecovered}
+        dueRecovered={
+          dueRecoveredForEdit || dueRecoveredsUIProps.initDueRecovered
+        }
         onHide={onHide}
         employeeList={employeeList}
         partiesList={partiesList}

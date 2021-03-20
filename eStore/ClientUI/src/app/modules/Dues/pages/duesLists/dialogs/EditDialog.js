@@ -34,9 +34,9 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting DuesList by id
     dispatch(actions.fetchDuesList(id));
-    dispatch(actions.fetchParties());
-    dispatch(actions.fetchBankAccounts());
-    dispatch(actions.fetchEmployees());
+   // dispatch(actions.fetchParties());
+    //dispatch(actions.fetchBankAccounts());
+    //dispatch(actions.fetchEmployees());
   }, [id, dispatch]);
 
   // server request for saving duesList

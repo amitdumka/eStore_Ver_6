@@ -10,7 +10,7 @@ const initialDuesListsState = {
   actionsLoading: false,
   totalCount: 0,
   entities: null,
-  dueslistForEdit: undefined,
+  duesListForEdit: undefined,
   lastError: null, 
   employeeEntities: null, 
   totalCountEmp:0,
@@ -75,9 +75,9 @@ export const duesListsSlice = createSlice({
 
     },
     // getDuesListById
-    dueslistFetched: (state, action) => {
+    duesListFetched: (state, action) => {
       state.actionsLoading = false;
-      state.dueslistForEdit = action.payload.dueslistForEdit;
+      state.duesListForEdit = action.payload.duesListForEdit;
       state.error = null;
     },
     // findDuesLists
@@ -89,34 +89,34 @@ export const duesListsSlice = createSlice({
       state.totalCount = totalCount;
     },
     // createDuesList
-    dueslistCreated: (state, action) => {
+    duesListCreated: (state, action) => {
       state.ewactionsLoading = false;
       state.error = null;
       state.entities.push(action.payload.duesList);
     },
     // updateDuesList
-    dueslistUpdated: (state, action) => {
+    duesListUpdated: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.map(entity => {
-        if (entity.dueslistId === action.payload.duesList.dueslistId) {
+        if (entity.duesListId === action.payload.duesList.duesListId) {
           return action.payload.duesList;
         }
         return entity;
       });
     },
     // deleteDuesList
-    dueslistDeleted: (state, action) => {
+    duesListDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(el => el.dueslistId !== action.payload.dueslistId);
+      state.entities = state.entities.filter(el => el.duesListId !== action.payload.duesListId);
     },
     // deleteDuesLists
     duesListsDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        el => !action.payload.ids.includes(el.dueslistId)
+        el => !action.payload.ids.includes(el.duesListId)
       );
     },
 
@@ -127,7 +127,7 @@ export const duesListsSlice = createSlice({
       state.error = null;
       const { ids, status } = action.payload;
       state.entities = state.entities.map(entity => {
-        if (ids.findIndex(id => id === entity.dueslistId) > -1) {
+        if (ids.findIndex(id => id === entity.duesListId) > -1) {
           entity.status = status;
         }
         return entity;

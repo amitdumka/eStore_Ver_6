@@ -28,7 +28,7 @@ export async function getDuesListById(dueslistId) {
 // items => filtered/sorted result
 export async function findDuesLists(queryParams) {
   //verifyLogin();
-  return await axios.get(`${API_URL}/dto`);//find`, { queryParams });
+  return await axios.get(`${API_URL}`);//find`, { queryParams });
 }
 
 // function to get all list of employees

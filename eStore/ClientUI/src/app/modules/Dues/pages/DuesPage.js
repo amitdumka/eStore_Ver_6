@@ -19,7 +19,7 @@ export default function DuesPage() {
           />
         }
         <ContentRoute path="/due/duelist" component={DuesListsPage}/>
-        <ContentRoute path="/due/dueRecovered" component={DueRecoveredsPage}/> 
+        <ContentRoute path="/due/recoverd" component={DueRecoveredsPage}/> 
         
       </Switch>
     </Suspense>

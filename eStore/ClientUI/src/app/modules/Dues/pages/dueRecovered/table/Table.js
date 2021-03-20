@@ -61,13 +61,13 @@ export function DueRecoveredsTable() {
   // Table columns
   const columns = [
     {
-      dataField: "dueRecoveredId",
+      dataField: "dueRecoverdId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     }, {
-      dataField: "onDate",
+      dataField: "paidDate",
       text: "Date",
       sort: true,
       type:      'date',
@@ -78,28 +78,29 @@ export function DueRecoveredsTable() {
     
    
     {
-      dataField: "dueRecoveredSlipNo",
-      text: "DueRecovered Slip No",
+      dataField: "duesListId",
+      text: "dues List",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "partyName",
-      text: "Party",
+      dataField: "amountPaid",
+      text: "amount Paid",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },   
     {
-      dataField: "amount",
-      text: "amount",
+      dataField: "isPartialPayment",
+      text: "Partial Payment",
+      formatter: columnFormatters.BooleanColumnFormatter,
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "payMode",
+      dataField: "modes",
       text: "Mode",
       sort: true,
       formatter: columnFormatters.PayModeColumnFormatter,
@@ -107,22 +108,15 @@ export function DueRecoveredsTable() {
       headerSortingClasses,
     },
     {
-      dataField: "dueRecoveredDetails",
-      text: "DueRecovered Details",
+      dataField: "remarks",
+      text: "remarks",
       //formatter: columnFormatters.SalaryComponentsColumnFormatter,
       sort: false,
       sortCaret: sortCaret,
     },
     {
-      dataField: "fromAccount.account",
-      text: "Account",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "party.partyName",
-      text: "Ledger",
+      dataField: "storeId",
+      text: "store",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,

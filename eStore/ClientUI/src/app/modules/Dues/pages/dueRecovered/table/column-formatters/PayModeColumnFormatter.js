@@ -11,12 +11,12 @@ export function PayModeColumnFormatter(cellContent, row) {
     <>
       <span
         className={`label label-dot label-${
-          PayModeCssClasses[row.payMode]
+          PayModeCssClasses[row.modes]
         } mr-2`}
       ></span>
       &nbsp;
-      <span className={`font-bold font-italic text-${PayModeCssClasses[row.payMode]}`}>
-        {PayModeTitles[row.payMode]}
+      <span className={`font-bold font-italic text-${PayModeCssClasses[row.modes]}`}>
+        {PayModeTitles[row.modes]}
       </span>
     </>
   );
