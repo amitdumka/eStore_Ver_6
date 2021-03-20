@@ -1,32 +1,32 @@
 import axios from "axios";
 
-//SaleTax
-//saleTax
-//SaleTaxes
-//saleTaxes
+//Delivery
+//delivery
+//Deliveries
+//deliveries
 
-export const API_URL = "https://www.aprajitaretails.in/api/saleTaxTypes";
+export const API_URL = "https://www.aprajitaretails.in/api/deliveryTypes";
 
 
-// CREATE =>  POST: add a new saleTax to the server
-export async function createSaleTax(saleTax) {
-  return await axios.post(API_URL, saleTax, {
+// CREATE =>  POST: add a new delivery to the server
+export async function createDelivery(delivery) {
+  return await axios.post(API_URL, delivery, {
     headers: { "Content-Type": "application/json; charset=utf-8" },
   });
 }
 
 // READ
-export function getAllSaleTaxes() {
+export function getAllDeliveries() {
   return axios.get(API_URL); //.catch(function (error){console.log(error)});
 }
 
-export async function getSaleTaxById(saleTaxId) {
-  return await axios.get(`${API_URL}/${saleTaxId}`);
+export async function getDeliveryById(deliveryId) {
+  return await axios.get(`${API_URL}/${deliveryId}`);
 }
 
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
 // items => filtered/sorted result
-export async function findSaleTaxes(queryParams) {
+export async function findDeliveries(queryParams) {
   //verifyLogin();
   return await axios.get(`${API_URL}`); //find`, { queryParams });
 }
@@ -36,11 +36,11 @@ export async function getAllTaxTypes() {
   return await axios.get("https://www.aprajitaretails.in/api/enumvalue/taxtype/all");
 }
 
-// UPDATE => PUT: update the saleTax on the server
-export async function updateSaleTax(saleTax) {
+// UPDATE => PUT: update the delivery on the server
+export async function updateDelivery(delivery) {
   return await axios.put(
-    `${API_URL}/${saleTax.saleTaxId}`,
-    JSON.stringify(saleTax),
+    `${API_URL}/${delivery.deliveryId}`,
+    JSON.stringify(delivery),
     {
       headers: { "Content-Type": "application/json; charset=utf-8" },
     }
@@ -48,19 +48,19 @@ export async function updateSaleTax(saleTax) {
 }
 
 // UPDATE Status
-export async function updateStatusForSaleTaxes(ids, status) {
-  return await axios.post(`${API_URL}/updateStatusForSaleTaxes`, {
+export async function updateStatusForDeliveries(ids, status) {
+  return await axios.post(`${API_URL}/updateStatusForDeliveries`, {
     ids,
     status,
   });
 }
 
-// DELETE => delete the saleTax from the server
-export async function deleteSaleTax(saleTaxId) {
-  return await axios.delete(`${API_URL}/${saleTaxId}`);
+// DELETE => delete the delivery from the server
+export async function deleteDelivery(deliveryId) {
+  return await axios.delete(`${API_URL}/${deliveryId}`);
 }
 
-// DELETE SaleTaxes by ids
-export async function deleteSaleTaxes(ids) {
-  return await axios.post(`${API_URL}/deleteSaleTaxes`, { ids });
+// DELETE Deliveries by ids
+export async function deleteDeliveries(ids) {
+  return await axios.post(`${API_URL}/deleteDeliveries`, { ids });
 }

@@ -1,12 +1,12 @@
 import * as requestFromServer from "./Crud";
-import { purchaseTaxesSlice, callTypes } from "./Slice";
+import { bookingsSlice, callTypes } from "./Slice";
 
-const { actions } = purchaseTaxesSlice;
+const { actions } = bookingsSlice;
 
-//purchaseTaxes
-//PurchaseTaxes
-//purchaseTax
-//PurchaseTax
+//bookings
+//Bookings
+//booking
+//Booking
 
 export const fetchTaxType = () => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
@@ -21,111 +21,111 @@ export const fetchTaxType = () => (dispatch) => {
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
-export const fetchPurchaseTaxes = (queryParams) => (dispatch) => {
+export const fetchBookings = (queryParams) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findPurchaseTaxes(queryParams)
+    .findBookings(queryParams)
     .then((response) => {
       const entities = response.data;
       const totalCount = response.data.length;
       console.log(response);
       console.log(response.data.length);
-      dispatch(actions.purchaseTaxesFetched({ totalCount, entities }));
+      dispatch(actions.bookingsFetched({ totalCount, entities }));
     })
     .catch((error) => {
       console.log(error);
-      error.clientMessage = "Can't find purchaseTaxes";
+      error.clientMessage = "Can't find bookings";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
-export const fetchPurchaseTax = (id) => (dispatch) => {
+export const fetchBooking = (id) => (dispatch) => {
   if (!id) {
     return dispatch(
-      actions.purchaseTaxFetched({ purchaseTaxForEdit: undefined })
+      actions.bookingFetched({ bookingForEdit: undefined })
     );
   }
 
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .getPurchaseTaxById(id)
+    .getBookingById(id)
     .then((response) => {
-      const purchaseTax = response.data;
-      dispatch(actions.purchaseTaxFetched({ purchaseTaxForEdit: purchaseTax }));
+      const booking = response.data;
+      dispatch(actions.bookingFetched({ bookingForEdit: booking }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't find purchaseTax";
+      error.clientMessage = "Can't find booking";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deletePurchaseTax = (id) => (dispatch) => {
+export const deleteBooking = (id) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deletePurchaseTax(id)
+    .deleteBooking(id)
     .then((response) => {
-      dispatch(actions.purchaseTaxDeleted({ id }));
+      dispatch(actions.bookingDeleted({ id }));
     })
     .catch((error) => {
       console.log("CD=" + error);
-      error.clientMessage = "Can't delete purchaseTax";
+      error.clientMessage = "Can't delete booking";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const createPurchaseTax = (purchaseTaxForCreation) => (dispatch) => {
+export const createBooking = (bookingForCreation) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .createPurchaseTax(JSON.stringify(purchaseTaxForCreation))
+    .createBooking(JSON.stringify(bookingForCreation))
     .then((response) => {
-      const purchaseTax = response.data;
+      const booking = response.data;
       // console.log(response.data);
-      dispatch(actions.purchaseTaxCreated({ purchaseTax }));
+      dispatch(actions.bookingCreated({ booking }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't create purchaseTax";
+      error.clientMessage = "Can't create booking";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updatePurchaseTax = (purchaseTax) => (dispatch) => {
-  console.log(purchaseTax);
+export const updateBooking = (booking) => (dispatch) => {
+  console.log(booking);
 
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updatePurchaseTax(purchaseTax)
+    .updateBooking(booking)
     .then(() => {
-      dispatch(actions.purchaseTaxUpdated({ purchaseTax }));
+      dispatch(actions.bookingUpdated({ booking }));
     })
     .catch((error) => {
       console.log(error);
-      error.clientMessage = "Can't update purchaseTax";
+      error.clientMessage = "Can't update booking";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updatePurchaseTaxesStatus = (ids, status) => (dispatch) => {
+export const updateBookingsStatus = (ids, status) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateStatusForPurchaseTaxes(ids, status)
+    .updateStatusForBookings(ids, status)
     .then(() => {
-      dispatch(actions.purchaseTaxesStatusUpdated({ ids, status }));
+      dispatch(actions.bookingsStatusUpdated({ ids, status }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't update purchaseTaxes status";
+      error.clientMessage = "Can't update bookings status";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deletePurchaseTaxes = (ids) => (dispatch) => {
+export const deleteBookings = (ids) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deletePurchaseTaxes(ids)
+    .deleteBookings(ids)
     .then(() => {
-      dispatch(actions.purchaseTaxesDeleted({ ids }));
+      dispatch(actions.bookingsDeleted({ ids }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't delete purchaseTaxes";
+      error.clientMessage = "Can't delete bookings";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };

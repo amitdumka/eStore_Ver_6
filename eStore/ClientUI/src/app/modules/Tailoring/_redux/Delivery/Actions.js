@@ -1,14 +1,14 @@
 import * as requestFromServer from "./Crud";
-import {saleTaxesSlice, callTypes} from "./Slice";
+import {deliveriesSlice, callTypes} from "./Slice";
 
 
-//SaleTax
-//saleTax
-//SaleTaxes
-//saleTaxes
+//Delivery
+//delivery
+//Deliveries
+//deliveries
 
 
-const {actions} = saleTaxesSlice;
+const {actions} = deliveriesSlice;
 
 export const fetchTaxTypes =id=>dispatch => {
   
@@ -29,114 +29,114 @@ export const fetchTaxTypes =id=>dispatch => {
   });
 }
 
-export const fetchSaleTaxes = queryParams => dispatch => {
+export const fetchDeliveries = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findSaleTaxes(queryParams)
+    .findDeliveries(queryParams)
     .then(response => {
       const  entities  = response.data;
       const totalCount = response.data.length;
       console.log(response);
       console.log(response.data.length);
-      dispatch(actions.saleTaxesFetched({ totalCount, entities }));
+      dispatch(actions.deliveriesFetched({ totalCount, entities }));
     })
     .catch(error => {
       console.log(error);
-      error.clientMessage = "Can't find saleTaxes";
+      error.clientMessage = "Can't find deliveries";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
-export const fetchSaleTax = id => dispatch => {
+export const fetchDelivery = id => dispatch => {
   if (!id) {
-    return dispatch(actions.saleTaxFetched({ saleTaxForEdit: undefined }));
+    return dispatch(actions.deliveryFetched({ deliveryForEdit: undefined }));
   }
 
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .getSaleTaxById(id)
+    .getDeliveryById(id)
     .then(response => {
-      const saleTax = response.data;
-      console.log(saleTax);
-      dispatch(actions.saleTaxFetched({ saleTaxForEdit: saleTax }));
+      const delivery = response.data;
+      console.log(delivery);
+      dispatch(actions.deliveryFetched({ deliveryForEdit: delivery }));
     })
     .catch(error => {
-      error.clientMessage = "Can't find saleTax";
+      error.clientMessage = "Can't find delivery";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteSaleTax = id => dispatch => {
+export const deleteDelivery = id => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteSaleTax(id)
+    .deleteDelivery(id)
     .then(response => {
-      dispatch(actions.saleTaxDeleted({ id }));
+      dispatch(actions.deliveryDeleted({ id }));
     })
     .catch(error => {
       
       console.log("CD="+error);
-      error.clientMessage = "Can't delete saleTax";
+      error.clientMessage = "Can't delete delivery";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const createSaleTax = saleTaxForCreation => dispatch => {
+export const createDelivery = deliveryForCreation => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-  console.log(saleTaxForCreation);
+  console.log(deliveryForCreation);
   return requestFromServer
-    .createSaleTax(JSON.stringify( saleTaxForCreation))
+    .createDelivery(JSON.stringify( deliveryForCreation))
     .then(response => {
-      const  saleTax  = response.data;
+      const  delivery  = response.data;
       console.log(response.data);
-      dispatch(actions.saleTaxCreated({ saleTax }));
+      dispatch(actions.deliveryCreated({ delivery }));
     })
     .catch(error => {
       console.log(error);
-      error.clientMessage = "Can't create saleTax";
+      error.clientMessage = "Can't create delivery";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateSaleTax = saleTax => dispatch => {
+export const updateDelivery = delivery => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-  console.log(saleTax);
+  console.log(delivery);
   return requestFromServer
-    .updateSaleTax(saleTax)
+    .updateDelivery(delivery)
     .then(() => {
-      console.log(saleTax);
-      dispatch(actions.saleTaxUpdated({ saleTax }));
+      console.log(delivery);
+      dispatch(actions.deliveryUpdated({ delivery }));
     })
     .catch(error => {
       console.log(error);
-      error.clientMessage = "Can't update saleTax";
+      error.clientMessage = "Can't update delivery";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateSaleTaxesStatus = (ids, status) => dispatch => {
+export const updateDeliveriesStatus = (ids, status) => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateStatusForSaleTaxes(ids, status)
+    .updateStatusForDeliveries(ids, status)
     .then(() => {
-      dispatch(actions.saleTaxesStatusUpdated({ ids, status }));
+      dispatch(actions.deliveriesStatusUpdated({ ids, status }));
     })
     .catch(error => {
-      error.clientMessage = "Can't update saleTaxes status";
+      error.clientMessage = "Can't update deliveries status";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteSaleTaxes = ids => dispatch => {
+export const deleteDeliveries = ids => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteSaleTaxes(ids)
+    .deleteDeliveries(ids)
     .then(() => {
 
-      dispatch(actions.saleTaxesDeleted({ ids }));
+      dispatch(actions.deliveriesDeleted({ ids }));
     })
     .catch(error => {
-      error.clientMessage = "Can't delete saleTaxes";
+      error.clientMessage = "Can't delete deliveries";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };

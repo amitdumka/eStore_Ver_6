@@ -1,18 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { stubTrue } from "lodash-es";
 
-//SaleTax
-//saleTax
+//Delivery
+//delivery
 
-//SaleTaxes
-//saleTaxes
+//Deliveries
+//deliveries
 
-const initialSaleTaxesState = {
+const initialDeliveriesState = {
   listLoading: false,
   actionsLoading: false,
   totalCount: 0,
   entities: null,
-  saleTaxForEdit: undefined,
+  deliveryForEdit: undefined,
   lastError: null,
   taxTypes: null,
 };
@@ -21,9 +21,9 @@ export const callTypes = {
   action: "action",
 };
 
-export const saleTaxesSlice = createSlice({
-  name: "saleTaxes",
-  initialState: initialSaleTaxesState,
+export const deliveriesSlice = createSlice({
+  name: "deliveries",
+  initialState: initialDeliveriesState,
   reducers: {
     catchError: (state, action) => {
       state.error = `${action.type}: ${action.payload.error}`;
@@ -49,61 +49,61 @@ export const saleTaxesSlice = createSlice({
       state.error = null;
       state.taxTypes = entities;
     },
-    // getSaleTaxById
-    saleTaxFetched: (state, action) => {
+    // getDeliveryById
+    deliveryFetched: (state, action) => {
       state.actionsLoading = false;
-      state.saleTaxForEdit = action.payload.saleTaxForEdit;
+      state.deliveryForEdit = action.payload.deliveryForEdit;
       state.error = null;
     },
-    // findSaleTaxes
-    saleTaxesFetched: (state, action) => {
+    // findDeliveries
+    deliveriesFetched: (state, action) => {
       const { totalCount, entities } = action.payload;
       state.listLoading = false;
       state.error = null;
       state.entities = entities;
       state.totalCount = totalCount;
     },
-    // createSaleTax
-    saleTaxCreated: (state, action) => {
+    // createDelivery
+    deliveryCreated: (state, action) => {
       state.ewactionsLoading = false;
       state.error = null;
-      state.entities.push(action.payload.saleTax);
+      state.entities.push(action.payload.delivery);
     },
-    // updateSaleTax
-    saleTaxUpdated: (state, action) => {
+    // updateDelivery
+    deliveryUpdated: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.map((entity) => {
-        if (entity.saleTaxId === action.payload.saleTax.saleTaxId) {
-          return action.payload.saleTax;
+        if (entity.deliveryId === action.payload.delivery.deliveryId) {
+          return action.payload.delivery;
         }
         return entity;
       });
     },
-    // deleteSaleTax
-    saleTaxDeleted: (state, action) => {
+    // deleteDelivery
+    deliveryDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        (el) => el.saleTaxId !== action.payload.saleTaxId
+        (el) => el.deliveryId !== action.payload.deliveryId
       );
     },
-    // deleteSaleTaxes
-    saleTaxesDeleted: (state, action) => {
+    // deleteDeliveries
+    deliveriesDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        (el) => !action.payload.ids.includes(el.saleTaxId)
+        (el) => !action.payload.ids.includes(el.deliveryId)
       );
     },
 
-    // saleTaxesUpdateState
-    saleTaxesStatusUpdated: (state, action) => {
+    // deliveriesUpdateState
+    deliveriesStatusUpdated: (state, action) => {
       state.actionsLoading = false;
       state.error = null;
       const { ids, status } = action.payload;
       state.entities = state.entities.map((entity) => {
-        if (ids.findIndex((id) => id === entity.saleTaxId) > -1) {
+        if (ids.findIndex((id) => id === entity.deliveryId) > -1) {
           entity.status = status;
         }
         return entity;

@@ -1,18 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-//purchaseTaxes
-//PurchaseTaxes
-//purchaseTax
-//PurchaseTax
+//bookings
+//Bookings
+//booking
+//Booking
 
 
 
-const initialPurchaseTaxesState = {
+const initialBookingsState = {
   listLoading: false,
   actionsLoading: false,
   totalCount: 0,
   entities: null,
-  purchaseTaxForEdit: undefined,
+  bookingForEdit: undefined,
   lastError: null,
   taxType: null,
 };
@@ -21,9 +21,9 @@ export const callTypes = {
   action: "action",
 };
 
-export const purchaseTaxesSlice = createSlice({
-  name: "purchaseTaxes",
-  initialState: initialPurchaseTaxesState,
+export const bookingsSlice = createSlice({
+  name: "bookings",
+  initialState: initialBookingsState,
   reducers: {
     catchError: (state, action) => {
       state.error = `${action.type}: ${action.payload.error}`;
@@ -41,14 +41,14 @@ export const purchaseTaxesSlice = createSlice({
         state.actionsLoading = true;
       }
     },
-    // getPurchaseTaxById
-    purchaseTaxFetched: (state, action) => {
+    // getBookingById
+    bookingFetched: (state, action) => {
       state.actionsLoading = false;
-      state.purchaseTaxForEdit = action.payload.purchaseTaxForEdit;
+      state.bookingForEdit = action.payload.bookingForEdit;
       state.error = null;
     },
-    // findPurchaseTaxes
-    purchaseTaxesFetched: (state, action) => {
+    // findBookings
+    bookingsFetched: (state, action) => {
       const { totalCount, entities } = action.payload;
       state.listLoading = false;
       state.error = null;
@@ -61,46 +61,46 @@ export const purchaseTaxesSlice = createSlice({
       state.error = null;
       state.taxTypes = entities;
     },
-    // createPurchaseTax
-    purchaseTaxCreated: (state, action) => {
+    // createBooking
+    bookingCreated: (state, action) => {
       state.ewactionsLoading = false;
       state.error = null;
-      state.entities.push(action.payload.purchaseTax);
+      state.entities.push(action.payload.booking);
     },
-    // updatePurchaseTax
-    purchaseTaxUpdated: (state, action) => {
+    // updateBooking
+    bookingUpdated: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.map((entity) => {
-        if (entity.purchaseTaxId === action.payload.purchaseTax.purchaseTaxId) {
-          return action.payload.purchaseTax;
+        if (entity.bookingId === action.payload.booking.bookingId) {
+          return action.payload.booking;
         }
         return entity;
       });
     },
-    // deletePurchaseTax
-    purchaseTaxDeleted: (state, action) => {
+    // deleteBooking
+    bookingDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        (el) => el.purchaseTaxId !== action.payload.purchaseTaxId
+        (el) => el.bookingId !== action.payload.bookingId
       );
     },
-    // deletePurchaseTaxes
-    purchaseTaxesDeleted: (state, action) => {
+    // deleteBookings
+    bookingsDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        (el) => !action.payload.ids.includes(el.purchaseTaxId)
+        (el) => !action.payload.ids.includes(el.bookingId)
       );
     },
-    // purchaseTaxesUpdateState
-    purchaseTaxesStatusUpdated: (state, action) => {
+    // bookingsUpdateState
+    bookingsStatusUpdated: (state, action) => {
       state.actionsLoading = false;
       state.error = null;
       const { ids, status } = action.payload;
       state.entities = state.entities.map((entity) => {
-        if (ids.findIndex((id) => id === entity.purchaseTaxId) > -1) {
+        if (ids.findIndex((id) => id === entity.bookingId) > -1) {
           entity.status = status;
         }
         return entity;
