@@ -5,7 +5,6 @@ import {PaymentsPage} from "./payments/PaymentsPage";
 import {ReceiptsPage} from "./receipts/ReceiptsPage";
 import {CashReceiptsPage} from "./cashReceipts/CashReceiptsPage";
 import {CashPaymentsPage} from "./cashPayments/CashPaymentsPage";
-import {BanksPage} from "../../Banking/pages/banks/BanksPage";
 
 import { LayoutSplashScreen, ContentRoute } from "../../../../_metronic/layout";
 
@@ -21,7 +20,6 @@ export default function AccountingPage() {
             to="/accounting/expense/expenses"
           />
         }
-        <ContentRoute path="/accounting/banking/banks" component={BanksPage}/>
         <ContentRoute path="/accounting/receipt/receipts" component={ReceiptsPage}/> 
         <ContentRoute path="/accounting/expense/expenses" component={ExpensesPage} />
         <ContentRoute path="/accounting/expense/payments" component={PaymentsPage} />
