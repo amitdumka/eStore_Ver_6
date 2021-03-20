@@ -33,10 +33,18 @@ export function UIProvider({ UIEvents, children }) {
   }, []);
 
   const initDelivery = {
-    deliveryTypeId: 0,
-    taxName: "",
-    taxType: 0,
-    compositeRate: 0.0,
+    talioringDeliveryId: 0,
+    deliveryDate: new Date(),
+    talioringBookingId: 0,
+    booking: null,
+    invNo: "",
+    amount: 0.0,
+    remarks: "",
+    storeId: 1,
+    store: null,
+    userId: "WebUI",
+    entryStatus: 0,
+    isReadOnly: false,
   };
 
   const value = {

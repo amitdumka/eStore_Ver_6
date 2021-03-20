@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/deliveries/Actions";
+import * as actions from "../../../_redux/Delivery/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -21,7 +21,7 @@ import * as uiHelpers from "../UIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
-
+import FieldDateFormater from "../../../../../../_estore/formaters/FieldDateFormater";
 //Deliveries
 //deliveries
 //Delivery
@@ -60,29 +60,51 @@ export function DeliveriesTable() {
   // Table columns
   const columns = [
     {
-      dataField: "deliveryTypeId",
+      dataField: "talioringDeliveryId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "taxName",
-      text: "Delivery",
+      dataField: "deliveryDate",
+      text: "Delivery Date",
+      sort: true,
+      formatter: FieldDateFormater,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "talioringBookingId",
+      text: "Booking No",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "taxType",
-      text: "Tax Type",
+      dataField: "invNo",
+      text: "Invoice No",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "compositeRate",
-      text: "Composite Rate",
+      dataField: "amount",
+      text: "Amount",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "remarks",
+      text: "Remarks",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "storeId",
+      text: "Store",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,

@@ -20,86 +20,86 @@ import { DeliveriesCard } from "./DeliveriesCard";
 export function DeliveriesPage({ history }) {
   const deliveriesUIEvents = {
     newDeliveryButtonClick: () => {
-      history.push("/taxes/delivery/new");
+      history.push("/tailoring/delivery/new");
     },
     openEditDeliveryDialog: (id) => {
-      history.push(`/taxes/delivery/${id}/edit`);
+      history.push(`/tailoring/delivery/${id}/edit`);
     },
     openDeleteDeliveryDialog: (id) => {
-      history.push(`/taxes/delivery/${id}/delete`);
+      history.push(`/tailoring/delivery/${id}/delete`);
     },
     openDeleteDeliveriesDialog: () => {
-      history.push(`/taxes/delivery/deleteDeliveries`);
+      history.push(`/tailoring/delivery/deleteDeliveries`);
     },
     openFetchDeliveriesDialog: () => {
-      history.push(`/taxes/delivery/fetch`);
+      history.push(`/tailoring/delivery/fetch`);
     },
     openUpdateDeliveriesStatusDialog: () => {
-      history.push("/taxes/delivery/updateStatus");
+      history.push("/tailoring/delivery/updateStatus");
     }
   }
 
   return (
     <UIProvider UIEvents={deliveriesUIEvents}>
       <DeliveriesLoadingDialog />
-      <Route path="/taxes/delivery/new">
+      <Route path="/tailoring/delivery/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/taxes/delivery");
+              history.push("/tailoring/delivery");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/delivery/:id/edit">
+      <Route path="/tailoring/delivery/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/taxes/delivery");
+              history.push("/tailoring/delivery");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/delivery/deleteDeliveries">
+      <Route path="/tailoring/delivery/deleteDeliveries">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/taxes/delivery");
+              history.push("/tailoring/delivery");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/delivery/:id/delete">
+      <Route path="/tailoring/delivery/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/taxes/delivery");
+              history.push("/tailoring/delivery");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/delivery/fetch">
+      <Route path="/tailoring/delivery/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/taxes/delivery");
+              history.push("/tailoring/delivery");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/delivery/updateStatus">
+      <Route path="/tailoring/delivery/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/taxes/delivery");
+              history.push("/tailoring/delivery");
             }}
           />
         )}

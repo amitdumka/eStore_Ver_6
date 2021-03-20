@@ -7,7 +7,7 @@ import axios from "axios";
 
 
 export const API_BASE_URL="https://www.aprajitaretails.in/api/";
-export const API_URL = "https://www.aprajitaretails.in/api/bookingTypes";
+export const API_URL = "https://www.aprajitaretails.in/api/tailoringbookings";
 // CREATE =>  POST: add a new booking to the server
 export async function createBooking(booking) {
   return await axios.post(API_URL, booking, {

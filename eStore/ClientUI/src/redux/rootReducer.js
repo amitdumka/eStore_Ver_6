@@ -25,6 +25,8 @@ import {purchaseTaxesSlice} from "../app/modules/Taxes/_redux/purchaseTaxes/Slic
 import {saleTaxesSlice} from "../app/modules/Taxes/_redux/saleTaxes/Slice";
 import {duesListsSlice} from "../app/modules/Dues/_redux/duesLists/Slice";
 import {dueRecoveredsSlice} from "../app/modules/Dues/_redux/dueRecovereds/Slice";
+import {bookingsSlice} from "../app/modules/Tailoring/_redux/Booking/Slice";
+import {deliveriesSlice} from "../app/modules/Tailoring/_redux/Delivery/Slice";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -48,6 +50,8 @@ export const rootReducer = combineReducers({
   purchaseTaxes: purchaseTaxesSlice.reducer, 
   duesLists: duesListsSlice.reducer,
   dueRecovereds: dueRecoveredsSlice.reducer,
+  bookings: bookingsSlice.reducer, 
+  deliveries: deliveriesSlice.reducer
 
 });
 

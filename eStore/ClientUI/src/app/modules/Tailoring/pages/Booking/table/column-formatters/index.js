@@ -3,3 +3,4 @@
 //export {StatusColumnFormatter} from "./StatusColumnFormatter";
 //export {TypeColumnFormatter} from "./TypeColumnFormatter";
 export {ActionsColumnFormatter} from "./ActionsColumnFormatter";
+export {BooleanColumnFormatter} from "./BooleanColumnFormatter";

@@ -19,86 +19,86 @@ import { BookingsCard } from "./BookingsCard";
 export function BookingsPage({ history }) {
   const bookingsUIEvents = {
     newBookingButtonClick: () => {
-      history.push("/taxes/booking/new");
+      history.push("/tailoring/booking/new");
     },
     openEditBookingDialog: (id) => {
-      history.push(`/taxes/booking/${id}/edit`);
+      history.push(`/tailoring/booking/${id}/edit`);
     },
     openDeleteBookingDialog: (id) => {
-      history.push(`/taxes/booking/${id}/delete`);
+      history.push(`/tailoring/booking/${id}/delete`);
     },
     openDeleteBookingsDialog: () => {
-      history.push(`/taxes/booking/deleteBookings`);
+      history.push(`/tailoring/booking/deleteBookings`);
     },
     openFetchBookingsDialog: () => {
-      history.push(`/taxes/booking/fetch`);
+      history.push(`/tailoring/booking/fetch`);
     },
     openUpdateBookingsStatusDialog: () => {
-      history.push("/taxes/booking/updateStatus");
+      history.push("/tailoring/booking/updateStatus");
     }
   }
 
   return (
     <UIProvider UIEvents={bookingsUIEvents}>
       <BookingsLoadingDialog />
-      <Route path="/taxes/booking/new">
+      <Route path="/tailoring/booking/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/taxes/booking");
+              history.push("/tailoring/booking");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/booking/:id/edit">
+      <Route path="/tailoring/booking/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/taxes/booking");
+              history.push("/tailoring/booking");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/booking/deleteBookings">
+      <Route path="/tailoring/booking/deleteBookings">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/taxes/booking");
+              history.push("/tailoring/booking");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/booking/:id/delete">
+      <Route path="/tailoring/booking/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/taxes/booking");
+              history.push("/tailoring/booking");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/booking/fetch">
+      <Route path="/tailoring/booking/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/taxes/booking");
+              history.push("/tailoring/booking");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/booking/updateStatus">
+      <Route path="/tailoring/booking/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/taxes/booking");
+              history.push("/tailoring/booking");
             }}
           />
         )}

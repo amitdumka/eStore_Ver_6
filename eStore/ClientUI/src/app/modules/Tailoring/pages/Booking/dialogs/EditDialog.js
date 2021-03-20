@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/bookings/Actions";
+import * as actions from "../../../_redux/Booking/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";

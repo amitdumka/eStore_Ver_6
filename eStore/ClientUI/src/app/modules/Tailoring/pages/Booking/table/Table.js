@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/bookings/Actions";
+import * as actions from "../../../_redux/Booking/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -21,10 +21,11 @@ import * as uiHelpers from "../UIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
+import FieldDateFormater from "../../../../../../_estore/formaters/FieldDateFormater";
+
 
 //booking
 //Booking
-
 
 export function BookingsTable() {
   // Bookings UI Context
@@ -41,8 +42,11 @@ export function BookingsTable() {
   }, [bookingsUIContext]);
 
   // Getting curret state of bookings list from store (Redux)
-  const { currentState ,taxTypes} = useSelector(
-    (state) => ({ currentState: state.bookings , taxTypes:state.bookings.bookings}),
+  const { currentState, taxTypes } = useSelector(
+    (state) => ({
+      currentState: state.bookings,
+      taxTypes: state.bookings.bookings,
+    }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
@@ -60,29 +64,77 @@ export function BookingsTable() {
   // Table columns
   const columns = [
     {
-      dataField: "bookingId",
+      dataField: "talioringBookingId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "ledgerNameType",
-      text: "Booking Name",
+      dataField: "bookingDate",
+      text: "Booking Date",
+      sort: true,
+      formatter: FieldDateFormater,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "custName",
+      text: "Customer",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "category",
-      text: "Category",
+      dataField: "deliveryDate",
+      text: "Delivery Date",
+      sort: true,
+      formatter: FieldDateFormater,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+
+    {
+      dataField: "tryDate",
+      text: "Try Date",
+      sort: true,
+      formatter: FieldDateFormater,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+
+    {
+      dataField: "bookingSlipNo",
+      text: "Slip No",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "remark",
-      text: "Remark",
+      dataField: "totalQty",
+      text: "Total Qty",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "totalAmount",
+      text: "Total Amount",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "isDelivered",
+      text: "Delivered",
+      sort: true,
+      formatter: columnFormatters.BooleanColumnFormatter,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "storeId",
+      text: "Store",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -111,16 +163,15 @@ export function BookingsTable() {
     page: bookingsUIProps.queryParams.pageNumber,
   };
 
-  
   return (
     <>
-       <PaginationProvider pagination={paginationFactory(paginationOptions)}>
+      <PaginationProvider pagination={paginationFactory(paginationOptions)}>
         {({ paginationProps, paginationTableProps }) => {
-          return ( 
-             <Pagination
+          return (
+            <Pagination
               isLoading={listLoading}
               paginationProps={paginationProps}
-            > 
+            >
               <BootstrapTable
                 wrapperClasses="table-responsive"
                 bordered={true}
@@ -129,7 +180,7 @@ export function BookingsTable() {
                 remote
                 noDataIndication="No Record Found now.."
                 keyField="bookingId"
-                data={entities === null ? []: totalCount ?entities:[]}
+                data={entities === null ? [] : totalCount ? entities : []}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
@@ -140,17 +191,17 @@ export function BookingsTable() {
                   entities,
                   ids: bookingsUIProps.ids,
                   setIds: bookingsUIProps.setIds,
-                  idName:"bookingId",
+                  idName: "bookingId",
                 })}
                 {...paginationTableProps}
               >
                 <PleaseWaitMessage entities={entities} />
                 <NoRecordsFoundMessage entities={entities} />
               </BootstrapTable>
-             </Pagination>
+            </Pagination>
           );
         }}
-      </PaginationProvider> 
+      </PaginationProvider>
     </>
   );
 }

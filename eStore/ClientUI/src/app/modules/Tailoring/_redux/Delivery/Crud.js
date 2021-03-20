@@ -5,7 +5,7 @@ import axios from "axios";
 //Deliveries
 //deliveries
 
-export const API_URL = "https://www.aprajitaretails.in/api/deliveryTypes";
+export const API_URL = "https://www.aprajitaretails.in/api/TalioringDeliverys";
 
 
 // CREATE =>  POST: add a new delivery to the server
