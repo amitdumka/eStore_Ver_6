@@ -4,15 +4,15 @@ import { Modal } from "react-bootstrap";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
 
 
-//purchaseTax
-//PurchaseTax
+//booking
+//Booking
 
 export function EditDialogHeader({ id }) {
-  // PurchaseTaxes Redux state
-  const { purchaseTaxForEdit, actionsLoading } = useSelector(
+  // Bookings Redux state
+  const { bookingForEdit, actionsLoading } = useSelector(
     (state) => ({
-      purchaseTaxForEdit: state.purchaseTaxes.purchaseTaxForEdit,
-      actionsLoading: state.purchaseTaxes.actionsLoading,
+      bookingForEdit: state.bookings.bookingForEdit,
+      actionsLoading: state.bookings.actionsLoading,
     }),
     shallowEqual
   );
@@ -20,14 +20,14 @@ export function EditDialogHeader({ id }) {
   const [title, setTitle] = useState("");
   // Title couting
   useEffect(() => {
-    let _title = id ? "" : "New PurchaseTax";
-    if (purchaseTaxForEdit && id) {
-      _title = `Edit purchaseTax '${purchaseTaxForEdit.purchaseTaxName}'`;
+    let _title = id ? "" : "New Booking";
+    if (bookingForEdit && id) {
+      _title = `Edit booking '${bookingForEdit.bookingName}'`;
     }
 
     setTitle(_title);
     // eslint-disable-next-line
-  }, [purchaseTaxForEdit, actionsLoading]);
+  }, [bookingForEdit, actionsLoading]);
 
   return (
     <>

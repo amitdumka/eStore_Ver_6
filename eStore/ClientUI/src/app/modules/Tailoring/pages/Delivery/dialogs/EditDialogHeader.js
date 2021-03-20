@@ -3,18 +3,18 @@ import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
 
-//SaleTaxes
-//saleTaxes
-//SaleTax
-//saleTax
+//Deliveries
+//deliveries
+//Delivery
+//delivery
 
 
 export function EditDialogHeader({ id }) {
-  // SaleTaxes Redux state
-  const { saleTaxForEdit, actionsLoading } = useSelector(
+  // Deliveries Redux state
+  const { deliveryForEdit, actionsLoading } = useSelector(
     (state) => ({
-      saleTaxForEdit: state.saleTaxes.saleTaxForEdit,
-      actionsLoading: state.saleTaxes.actionsLoading,
+      deliveryForEdit: state.deliveries.deliveryForEdit,
+      actionsLoading: state.deliveries.actionsLoading,
     }),
     shallowEqual
   );
@@ -22,14 +22,14 @@ export function EditDialogHeader({ id }) {
   const [title, setTitle] = useState("");
   // Title couting
   useEffect(() => {
-    let _title = id ? "" : "New SaleTax";
-    if (saleTaxForEdit && id) {
-      _title = `Edit saleTax '${saleTaxForEdit.saleTaxName}'`;
+    let _title = id ? "" : "New Delivery";
+    if (deliveryForEdit && id) {
+      _title = `Edit delivery '${deliveryForEdit.deliveryName}'`;
     }
 
     setTitle(_title);
     // eslint-disable-next-line
-  }, [saleTaxForEdit, actionsLoading]);
+  }, [deliveryForEdit, actionsLoading]);
 
   return (
     <>

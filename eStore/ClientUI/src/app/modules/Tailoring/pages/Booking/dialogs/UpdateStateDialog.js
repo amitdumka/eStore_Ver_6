@@ -1,69 +1,69 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/purchaseTaxes/Actions";
+import * as actions from "../../../_redux/bookings/Actions";
 import { useUIContext } from "../UIContext";
 
 
 
-//purchaseTax
-//PurchaseTax
+//booking
+//Booking
 
 
-const selectedPurchaseTaxes = (entities, ids) => {
-  const _purchaseTaxes = [];
+const selectedBookings = (entities, ids) => {
+  const _bookings = [];
   ids.forEach((id) => {
-    const purchaseTax = entities.find((el) => el.id === id);
-    if (purchaseTax) {
-      _purchaseTaxes.push(purchaseTax);
+    const booking = entities.find((el) => el.id === id);
+    if (booking) {
+      _bookings.push(booking);
     }
   });
-  return _purchaseTaxes;
+  return _bookings;
 };
 
 export function UpdateStateDialog({ show, onHide }) {
-  // PurchaseTaxes UI Context
-  const purchaseTaxesUIContext = useUIContext();
-  const purchaseTaxesUIProps = useMemo(() => {
+  // Bookings UI Context
+  const bookingsUIContext = useUIContext();
+  const bookingsUIProps = useMemo(() => {
     return {
-      ids: purchaseTaxesUIContext.ids,
-      setIds: purchaseTaxesUIContext.setIds,
-      queryParams: purchaseTaxesUIContext.queryParams,
+      ids: bookingsUIContext.ids,
+      setIds: bookingsUIContext.setIds,
+      queryParams: bookingsUIContext.queryParams,
     };
-  }, [purchaseTaxesUIContext]);
+  }, [bookingsUIContext]);
 
-  // PurchaseTaxes Redux state
-  const { purchaseTaxes, isLoading } = useSelector(
+  // Bookings Redux state
+  const { bookings, isLoading } = useSelector(
     (state) => ({
-      purchaseTaxes: selectedPurchaseTaxes(
-        state.purchaseTaxes.entities,
-        purchaseTaxesUIProps.ids
+      bookings: selectedBookings(
+        state.bookings.entities,
+        bookingsUIProps.ids
       ),
-      isLoading: state.purchaseTaxes.actionsLoading,
+      isLoading: state.bookings.actionsLoading,
     }),
     shallowEqual
   );
 
   // if !id we should close modal
   useEffect(() => {
-    if (!purchaseTaxesUIProps.ids || purchaseTaxesUIProps.ids.length === 0) {
+    if (!bookingsUIProps.ids || bookingsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [purchaseTaxesUIProps.ids]);
+  }, [bookingsUIProps.ids]);
 
   const [status, setStatus] = useState(0);
 
   const dispatch = useDispatch();
   const updateStatus = () => {
-    // server request for update purchaseTaxes status by selected ids
-    dispatch(actions.updatePurchaseTaxesStatus(purchaseTaxesUIProps.ids, status)).then(
+    // server request for update bookings status by selected ids
+    dispatch(actions.updateBookingsStatus(bookingsUIProps.ids, status)).then(
       () => {
         // refresh list after deletion
-        dispatch(actions.fetchPurchaseTaxes(purchaseTaxesUIProps.queryParams)).then(
+        dispatch(actions.fetchBookings(bookingsUIProps.queryParams)).then(
           () => {
             // clear selections list
-            purchaseTaxesUIProps.setIds([]);
+            bookingsUIProps.setIds([]);
             // closing delete modal
             onHide();
           }
@@ -80,7 +80,7 @@ export function UpdateStateDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Status has been updated for selected purchaseTaxes
+          Status has been updated for selected bookings
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="overlay overlay-block cursor-default">
@@ -100,13 +100,13 @@ export function UpdateStateDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {purchaseTaxes.map((purchaseTax) => (
-              <tr key={`id${purchaseTax.id}`}>
-                <td>{purchaseTax.id}</td>
+            {bookings.map((booking) => (
+              <tr key={`id${booking.id}`}>
+                <td>{booking.id}</td>
                 
                 <td>
                   <span className="ml-3">
-                    {purchaseTax.lastName}, {purchaseTax.firstName}
+                    {booking.lastName}, {booking.firstName}
                   </span>
                 </td>
               </tr>

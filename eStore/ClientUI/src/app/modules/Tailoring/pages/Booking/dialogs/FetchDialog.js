@@ -2,53 +2,53 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useSelector } from "react-redux";
 // import {
-//   PurchaseTaxestatusCssClasses,
-//   PurchaseTaxestatusTitles,
+//   BookingstatusCssClasses,
+//   BookingstatusTitles,
 // } from "../UIHelpers";
 import { useUIContext } from "../UIContext";
 
-//purchaseTax
-//PurchaseTax
+//booking
+//Booking
 
 
-const selectedPurchaseTaxes = (entities, ids) => {
-  const _purchaseTaxes = [];
+const selectedBookings = (entities, ids) => {
+  const _bookings = [];
   ids.forEach((id) => {
-    const purchaseTax = entities.find((el) => el.id === id);
-    if (purchaseTax) {
-      _purchaseTaxes.push(purchaseTax);
+    const booking = entities.find((el) => el.id === id);
+    if (booking) {
+      _bookings.push(booking);
     }
   });
-  return _purchaseTaxes;
+  return _bookings;
 };
 
 export function FetchDialog({ show, onHide }) {
-  // PurchaseTaxes UI Context
-  const purchaseTaxesUIContext = useUIContext();
-  const purchaseTaxesUIProps = useMemo(() => {
+  // Bookings UI Context
+  const bookingsUIContext = useUIContext();
+  const bookingsUIProps = useMemo(() => {
     return {
-      ids: purchaseTaxesUIContext.ids,
+      ids: bookingsUIContext.ids,
     };
-  }, [purchaseTaxesUIContext]);
+  }, [bookingsUIContext]);
 
-  // PurchaseTaxes Redux state
-  const { purchaseTaxes } = useSelector(
+  // Bookings Redux state
+  const { bookings } = useSelector(
     (state) => ({
-      purchaseTaxes: selectedPurchaseTaxes(
-        state.purchaseTaxes.entities,
-        purchaseTaxesUIProps.ids
+      bookings: selectedBookings(
+        state.bookings.entities,
+        bookingsUIProps.ids
       ),
     }),
     shallowEqual
   );
 
-  // if purchaseTaxes weren't selected we should close modal
+  // if bookings weren't selected we should close modal
   useEffect(() => {
-    if (!purchaseTaxesUIProps.ids || purchaseTaxesUIProps.ids.length === 0) {
+    if (!bookingsUIProps.ids || bookingsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [purchaseTaxesUIProps.ids]);
+  }, [bookingsUIProps.ids]);
 
   return (
     <Modal
@@ -71,12 +71,12 @@ export function FetchDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {purchaseTaxes.map((purchaseTax) => (
-              <tr key={`id${purchaseTax.id}`}>
-                <td>{purchaseTax.id}</td>
+            {bookings.map((booking) => (
+              <tr key={`id${booking.id}`}>
+                <td>{booking.id}</td>
                 <td>
                   <span className="ml-3">
-                    {purchaseTax.lastName}, {purchaseTax.firstName}
+                    {booking.lastName}, {booking.firstName}
                   </span>
                 </td>
               </tr>

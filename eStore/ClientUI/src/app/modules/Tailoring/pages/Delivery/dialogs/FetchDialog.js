@@ -4,51 +4,51 @@ import { shallowEqual, useSelector } from "react-redux";
 
 import { useUIContext } from "../UIContext";
 
-//SaleTaxes
-//saleTaxes
-//SaleTax
-//saleTax
+//Deliveries
+//deliveries
+//Delivery
+//delivery
 
 
 
-const selectedSaleTaxes = (entities, ids) => {
-  const _saleTaxes = [];
+const selectedDeliveries = (entities, ids) => {
+  const _deliveries = [];
   ids.forEach((id) => {
-    const saleTax = entities.find((el) => el.id === id);
-    if (saleTax) {
-      _saleTaxes.push(saleTax);
+    const delivery = entities.find((el) => el.id === id);
+    if (delivery) {
+      _deliveries.push(delivery);
     }
   });
-  return _saleTaxes;
+  return _deliveries;
 };
 
 export function FetchDialog({ show, onHide }) {
-  // SaleTaxes UI Context
-  const saleTaxesUIContext = useUIContext();
-  const saleTaxesUIProps = useMemo(() => {
+  // Deliveries UI Context
+  const deliveriesUIContext = useUIContext();
+  const deliveriesUIProps = useMemo(() => {
     return {
-      ids: saleTaxesUIContext.ids,
+      ids: deliveriesUIContext.ids,
     };
-  }, [saleTaxesUIContext]);
+  }, [deliveriesUIContext]);
 
-  // SaleTaxes Redux state
-  const { saleTaxes } = useSelector(
+  // Deliveries Redux state
+  const { deliveries } = useSelector(
     (state) => ({
-      saleTaxes: selectedSaleTaxes(
-        state.saleTaxes.entities,
-        saleTaxesUIProps.ids
+      deliveries: selectedDeliveries(
+        state.deliveries.entities,
+        deliveriesUIProps.ids
       ),
     }),
     shallowEqual
   );
 
-  // if saleTaxes weren't selected we should close modal
+  // if deliveries weren't selected we should close modal
   useEffect(() => {
-    if (!saleTaxesUIProps.ids || saleTaxesUIProps.ids.length === 0) {
+    if (!deliveriesUIProps.ids || deliveriesUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [saleTaxesUIProps.ids]);
+  }, [deliveriesUIProps.ids]);
 
   return (
     <Modal
@@ -71,12 +71,12 @@ export function FetchDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {saleTaxes.map((saleTax) => (
-              <tr key={`id${saleTax.id}`}>
-                <td>{saleTax.id}</td>
+            {deliveries.map((delivery) => (
+              <tr key={`id${delivery.id}`}>
+                <td>{delivery.id}</td>
                 <td>
                   <span className="ml-3">
-                    {saleTax.lastName}, {saleTax.firstName}
+                    {delivery.lastName}, {delivery.firstName}
                   </span>
                 </td>
               </tr>

@@ -1,22 +1,22 @@
 import React, { useMemo } from "react";
 import { useUIContext } from "../UIContext";
 
-//purchaseTax
-//PurchaseTax
+//booking
+//Booking
 
-export function PurchaseTaxesGrouping() {
-  // PurchaseTaxes UI Context
-  const purchaseTaxesUIContext = useUIContext();
-  const purchaseTaxesUIProps = useMemo(() => {
+export function BookingsGrouping() {
+  // Bookings UI Context
+  const bookingsUIContext = useUIContext();
+  const bookingsUIProps = useMemo(() => {
     return {
-      ids: purchaseTaxesUIContext.ids,
-      setIds: purchaseTaxesUIContext.setIds,
-      openDeletePurchaseTaxesDialog: purchaseTaxesUIContext.openDeletePurchaseTaxesDialog,
-      openFetchPurchaseTaxesDialog: purchaseTaxesUIContext.openFetchPurchaseTaxesDialog,
-      openUpdatePurchaseTaxesStatusDialog:
-        purchaseTaxesUIContext.openUpdatePurchaseTaxesStatusDialog,
+      ids: bookingsUIContext.ids,
+      setIds: bookingsUIContext.setIds,
+      openDeleteBookingsDialog: bookingsUIContext.openDeleteBookingsDialog,
+      openFetchBookingsDialog: bookingsUIContext.openFetchBookingsDialog,
+      openUpdateBookingsStatusDialog:
+        bookingsUIContext.openUpdateBookingsStatusDialog,
     };
-  }, [purchaseTaxesUIContext]);
+  }, [bookingsUIContext]);
 
   return (
     <div className="form">
@@ -26,7 +26,7 @@ export function PurchaseTaxesGrouping() {
             <div className="form-label form-label-no-wrap">
               <label className="font-bold font-danger">
                 <span>
-                  Selected records count: <b>{purchaseTaxesUIProps.ids.length}</b>
+                  Selected records count: <b>{bookingsUIProps.ids.length}</b>
                 </span>
               </label>
             </div>
@@ -34,7 +34,7 @@ export function PurchaseTaxesGrouping() {
               <button
                 type="button"
                 className="btn btn-danger font-weight-bolder font-size-sm"
-                onClick={purchaseTaxesUIProps.openDeletePurchaseTaxesDialog}
+                onClick={bookingsUIProps.openDeleteBookingsDialog}
               >
                 <i className="fa fa-trash"></i> Delete All
               </button>
@@ -42,7 +42,7 @@ export function PurchaseTaxesGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={purchaseTaxesUIProps.openFetchPurchaseTaxesDialog}
+                onClick={bookingsUIProps.openFetchBookingsDialog}
               >
                 <i className="fa fa-stream"></i> Fetch Selected
               </button>
@@ -50,7 +50,7 @@ export function PurchaseTaxesGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={purchaseTaxesUIProps.openUpdatePurchaseTaxesStatusDialog}
+                onClick={bookingsUIProps.openUpdateBookingsStatusDialog}
               >
                 <i className="fa fa-sync-alt"></i> Update Status
               </button>

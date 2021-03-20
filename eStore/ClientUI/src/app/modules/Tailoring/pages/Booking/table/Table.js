@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/purchaseTaxes/Actions";
+import * as actions from "../../../_redux/bookings/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -22,45 +22,45 @@ import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 
-//purchaseTax
-//PurchaseTax
+//booking
+//Booking
 
 
-export function PurchaseTaxesTable() {
-  // PurchaseTaxes UI Context
-  const purchaseTaxesUIContext = useUIContext();
-  const purchaseTaxesUIProps = useMemo(() => {
+export function BookingsTable() {
+  // Bookings UI Context
+  const bookingsUIContext = useUIContext();
+  const bookingsUIProps = useMemo(() => {
     return {
-      ids: purchaseTaxesUIContext.ids,
-      setIds: purchaseTaxesUIContext.setIds,
-      queryParams: purchaseTaxesUIContext.queryParams,
-      setQueryParams: purchaseTaxesUIContext.setQueryParams,
-      openEditPurchaseTaxDialog: purchaseTaxesUIContext.openEditPurchaseTaxDialog,
-      openDeletePurchaseTaxDialog: purchaseTaxesUIContext.openDeletePurchaseTaxDialog,
+      ids: bookingsUIContext.ids,
+      setIds: bookingsUIContext.setIds,
+      queryParams: bookingsUIContext.queryParams,
+      setQueryParams: bookingsUIContext.setQueryParams,
+      openEditBookingDialog: bookingsUIContext.openEditBookingDialog,
+      openDeleteBookingDialog: bookingsUIContext.openDeleteBookingDialog,
     };
-  }, [purchaseTaxesUIContext]);
+  }, [bookingsUIContext]);
 
-  // Getting curret state of purchaseTaxes list from store (Redux)
+  // Getting curret state of bookings list from store (Redux)
   const { currentState ,taxTypes} = useSelector(
-    (state) => ({ currentState: state.purchaseTaxes , taxTypes:state.purchaseTaxes.purchaseTaxes}),
+    (state) => ({ currentState: state.bookings , taxTypes:state.bookings.bookings}),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
 
-  // PurchaseTaxes Redux state
+  // Bookings Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    purchaseTaxesUIProps.setIds([]);
+    bookingsUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchPurchaseTaxes(purchaseTaxesUIProps.queryParams));
+    dispatch(actions.fetchBookings(bookingsUIProps.queryParams));
     dispatch(actions.fetchTaxType());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [purchaseTaxesUIProps.queryParams, dispatch]);
+  }, [bookingsUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "purchaseTaxId",
+      dataField: "bookingId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
@@ -68,7 +68,7 @@ export function PurchaseTaxesTable() {
     },
     {
       dataField: "ledgerNameType",
-      text: "PurchaseTax Name",
+      text: "Booking Name",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -92,8 +92,8 @@ export function PurchaseTaxesTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditPurchaseTaxDialog: purchaseTaxesUIProps.openEditPurchaseTaxDialog,
-        openDeletePurchaseTaxDialog: purchaseTaxesUIProps.openDeletePurchaseTaxDialog,
+        openEditBookingDialog: bookingsUIProps.openEditBookingDialog,
+        openDeleteBookingDialog: bookingsUIProps.openDeleteBookingDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -107,8 +107,8 @@ export function PurchaseTaxesTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: purchaseTaxesUIProps.queryParams.pageSize,
-    page: purchaseTaxesUIProps.queryParams.pageNumber,
+    sizePerPage: bookingsUIProps.queryParams.pageSize,
+    page: bookingsUIProps.queryParams.pageNumber,
   };
 
   
@@ -128,19 +128,19 @@ export function PurchaseTaxesTable() {
                 bootstrap4
                 remote
                 noDataIndication="No Record Found now.."
-                keyField="purchaseTaxId"
+                keyField="bookingId"
                 data={entities === null ? []: totalCount ?entities:[]}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  purchaseTaxesUIProps.setQueryParams
+                  bookingsUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: purchaseTaxesUIProps.ids,
-                  setIds: purchaseTaxesUIProps.setIds,
-                  idName:"purchaseTaxId",
+                  ids: bookingsUIProps.ids,
+                  setIds: bookingsUIProps.setIds,
+                  idName:"bookingId",
                 })}
                 {...paginationTableProps}
               >

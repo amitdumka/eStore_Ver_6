@@ -1,50 +1,50 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/purchaseTaxes/Actions";
+import * as actions from "../../../_redux/bookings/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
 
-//purchaseTax
-//PurchaseTax
+//booking
+//Booking
 
 export function EditDialog({ id, show, onHide }) {
-  // PurchaseTaxes UI Context
-  const purchaseTaxesUIContext = useUIContext();
-  const purchaseTaxesUIProps = useMemo(() => {
+  // Bookings UI Context
+  const bookingsUIContext = useUIContext();
+  const bookingsUIProps = useMemo(() => {
     return {
-      initPurchaseTax: purchaseTaxesUIContext.initPurchaseTax,
+      initBooking: bookingsUIContext.initBooking,
     };
-  }, [purchaseTaxesUIContext]);
+  }, [bookingsUIContext]);
 
-  // PurchaseTaxes Redux state
+  // Bookings Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, purchaseTaxForEdit, taxTypes } = useSelector(
+  const { actionsLoading, bookingForEdit, taxTypes } = useSelector(
     (state) => ({
-      actionsLoading: state.purchaseTaxes.actionsLoading,
-      purchaseTaxForEdit: state.purchaseTaxes.purchaseTaxForEdit,
-      taxTypes: state.purchaseTaxes.taxTypes,
+      actionsLoading: state.bookings.actionsLoading,
+      bookingForEdit: state.bookings.bookingForEdit,
+      taxTypes: state.bookings.taxTypes,
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    // server call for getting PurchaseTax by id
-    dispatch(actions.fetchPurchaseTax(id));
+    // server call for getting Booking by id
+    dispatch(actions.fetchBooking(id));
     dispatch(actions.fetchTaxType());
   }, [id, dispatch]);
 
-  // server request for saving purchaseTax
-  const savePurchaseTax = (purchaseTax) => {
-    purchaseTax.category = parseInt(purchaseTax.category);
+  // server request for saving booking
+  const saveBooking = (booking) => {
+    booking.category = parseInt(booking.category);
 
     if (!id) {
-      // server request for creating purchaseTax
-      dispatch(actions.createPurchaseTax(purchaseTax)).then(() => onHide());
+      // server request for creating booking
+      dispatch(actions.createBooking(booking)).then(() => onHide());
     } else {
-      // server request for updating purchaseTax
-      dispatch(actions.updatePurchaseTax(purchaseTax)).then(() => onHide());
+      // server request for updating booking
+      dispatch(actions.updateBooking(booking)).then(() => onHide());
     }
   };
 
@@ -57,9 +57,9 @@ export function EditDialog({ id, show, onHide }) {
     >
       <EditDialogHeader id={id} />
       <EditForm
-        savePurchaseTax={savePurchaseTax}
+        saveBooking={saveBooking}
         actionsLoading={actionsLoading}
-        purchaseTax={purchaseTaxForEdit || purchaseTaxesUIProps.initPurchaseTax}
+        booking={bookingForEdit || bookingsUIProps.initBooking}
         onHide={onHide}
         taxTypes={taxTypes}
       />

@@ -1,25 +1,25 @@
 import React, { useMemo } from "react";
 import { useUIContext } from "../UIContext";
 
-//SaleTaxes
-//saleTaxes
-//SaleTax
-//saleTax
+//Deliveries
+//deliveries
+//Delivery
+//delivery
 
 
-export function SaleTaxesGrouping() {
-  // SaleTaxes UI Context
-  const saleTaxesUIContext = useUIContext();
-  const saleTaxesUIProps = useMemo(() => {
+export function DeliveriesGrouping() {
+  // Deliveries UI Context
+  const deliveriesUIContext = useUIContext();
+  const deliveriesUIProps = useMemo(() => {
     return {
-      ids: saleTaxesUIContext.ids,
-      setIds: saleTaxesUIContext.setIds,
-      openDeleteSaleTaxesDialog: saleTaxesUIContext.openDeleteSaleTaxesDialog,
-      openFetchSaleTaxesDialog: saleTaxesUIContext.openFetchSaleTaxesDialog,
-      openUpdateSaleTaxesStatusDialog:
-        saleTaxesUIContext.openUpdateSaleTaxesStatusDialog,
+      ids: deliveriesUIContext.ids,
+      setIds: deliveriesUIContext.setIds,
+      openDeleteDeliveriesDialog: deliveriesUIContext.openDeleteDeliveriesDialog,
+      openFetchDeliveriesDialog: deliveriesUIContext.openFetchDeliveriesDialog,
+      openUpdateDeliveriesStatusDialog:
+        deliveriesUIContext.openUpdateDeliveriesStatusDialog,
     };
-  }, [saleTaxesUIContext]);
+  }, [deliveriesUIContext]);
 
   return (
     <div className="form">
@@ -29,7 +29,7 @@ export function SaleTaxesGrouping() {
             <div className="form-label form-label-no-wrap">
               <label className="font-bold font-danger">
                 <span>
-                  Selected records count: <b>{saleTaxesUIProps.ids.length}</b>
+                  Selected records count: <b>{deliveriesUIProps.ids.length}</b>
                 </span>
               </label>
             </div>
@@ -37,7 +37,7 @@ export function SaleTaxesGrouping() {
               <button
                 type="button"
                 className="btn btn-danger font-weight-bolder font-size-sm"
-                onClick={saleTaxesUIProps.openDeleteSaleTaxesDialog}
+                onClick={deliveriesUIProps.openDeleteDeliveriesDialog}
               >
                 <i className="fa fa-trash"></i> Delete All
               </button>
@@ -45,7 +45,7 @@ export function SaleTaxesGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={saleTaxesUIProps.openFetchSaleTaxesDialog}
+                onClick={deliveriesUIProps.openFetchDeliveriesDialog}
               >
                 <i className="fa fa-stream"></i> Fetch Selected
               </button>
@@ -53,7 +53,7 @@ export function SaleTaxesGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={saleTaxesUIProps.openUpdateSaleTaxesStatusDialog}
+                onClick={deliveriesUIProps.openUpdateDeliveriesStatusDialog}
               >
                 <i className="fa fa-sync-alt"></i> Update Status
               </button>

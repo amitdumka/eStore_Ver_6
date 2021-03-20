@@ -1,53 +1,53 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/saleTaxes/Actions";
+import * as actions from "../../../_redux/deliveries/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
 
-//SaleTaxes
-//saleTaxes
-//SaleTax
-//saleTax
+//Deliveries
+//deliveries
+//Delivery
+//delivery
 
 export function EditDialog({ id, show, onHide }) {
-  // SaleTaxes UI Context
-  const saleTaxesUIContext = useUIContext();
-  const saleTaxesUIProps = useMemo(() => {
+  // Deliveries UI Context
+  const deliveriesUIContext = useUIContext();
+  const deliveriesUIProps = useMemo(() => {
     return {
-      initSaleTax: saleTaxesUIContext.initSaleTax,
+      initDelivery: deliveriesUIContext.initDelivery,
     };
-  }, [saleTaxesUIContext]);
+  }, [deliveriesUIContext]);
 
-  // SaleTaxes Redux state
+  // Deliveries Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, saleTaxForEdit ,taxTypes} = useSelector(
+  const { actionsLoading, deliveryForEdit ,taxTypes} = useSelector(
     (state) => ({
-      actionsLoading: state.saleTaxes.actionsLoading,
-      saleTaxForEdit: state.saleTaxes.saleTaxForEdit,
-      taxTypes:state.saleTaxes.taxTypes
+      actionsLoading: state.deliveries.actionsLoading,
+      deliveryForEdit: state.deliveries.deliveryForEdit,
+      taxTypes:state.deliveries.taxTypes
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    // server call for getting SaleTax by id
-    dispatch(actions.fetchSaleTax(id));
+    // server call for getting Delivery by id
+    dispatch(actions.fetchDelivery(id));
     dispatch(actions.fetchTaxTypes());
   }, [id, dispatch]);
 
-  // server request for saving saleTax
-  const saveSaleTax = (saleTax) => {
+  // server request for saving delivery
+  const saveDelivery = (delivery) => {
     
-    saleTax.accountType=parseInt(saleTax.accountType);
+    delivery.accountType=parseInt(delivery.accountType);
 
     if (!id) {
-      // server request for creating saleTax
-      dispatch(actions.createSaleTax(saleTax)).then(() => onHide());
+      // server request for creating delivery
+      dispatch(actions.createDelivery(delivery)).then(() => onHide());
     } else {
-      // server request for updating saleTax
-      dispatch(actions.updateSaleTax(saleTax)).then(() => onHide());
+      // server request for updating delivery
+      dispatch(actions.updateDelivery(delivery)).then(() => onHide());
     }
   };
 
@@ -60,9 +60,9 @@ export function EditDialog({ id, show, onHide }) {
     >
       <EditDialogHeader id={id} />
       <EditForm
-        saveSaleTax={saveSaleTax}
+        saveDelivery={saveDelivery}
         actionsLoading={actionsLoading}
-        saleTax={saleTaxForEdit || saleTaxesUIProps.initSaleTax}
+        delivery={deliveryForEdit || deliveriesUIProps.initDelivery}
         onHide={onHide}
         taxTypes={taxTypes}
       />

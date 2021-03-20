@@ -12,19 +12,19 @@ import {
   DatePickerField,
 } from "../../../../../../_metronic/_partials/controls";
 
-//purchaseTax
-//PurchaseTax
+//booking
+//Booking
 
 // Validation schema
-const PurchaseTaxEditSchema = Yup.object().shape({
+const BookingEditSchema = Yup.object().shape({
   taxName: Yup.string().required("Tax Name is required"),
   taxType: Yup.number().required("Tax Type   is required"),
   compositeRate: Yup.number().moreThan(0).required("Composite Rate is required"),
 });
 
 export function EditForm({
-  savePurchaseTax,
-  purchaseTax,
+  saveBooking,
+  booking,
   actionsLoading,
   onHide,
   taxTypes,
@@ -33,10 +33,10 @@ export function EditForm({
     <>
       <Formik
         enableReinitialize={true}
-        initialValues={purchaseTax}
-        validationSchema={PurchaseTaxEditSchema}
+        initialValues={booking}
+        validationSchema={BookingEditSchema}
         onSubmit={(values) => {
-          savePurchaseTax(values);
+          saveBooking(values);
         }}
       >
         {({ handleSubmit }) => (

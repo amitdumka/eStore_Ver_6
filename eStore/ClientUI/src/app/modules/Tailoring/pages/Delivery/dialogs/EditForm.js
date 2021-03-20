@@ -12,13 +12,13 @@ import {
   DatePickerField,
 } from "../../../../../../_metronic/_partials/controls";
 
-//SaleTaxes
-//saleTaxes
-//SaleTax
-//saleTax
+//Deliveries
+//deliveries
+//Delivery
+//delivery
 
 // Validation schema
-const SaleTaxEditSchema = Yup.object().shape({
+const DeliveryEditSchema = Yup.object().shape({
   taxName: Yup.string().required("Tax Name is required"),
   taxType: Yup.number().required("Tax Type is required"),
   compositeRate: Yup.number()
@@ -27,8 +27,8 @@ const SaleTaxEditSchema = Yup.object().shape({
 });
 
 export function EditForm({
-  saveSaleTax,
-  saleTax,
+  saveDelivery,
+  delivery,
   actionsLoading,
   onHide,
   taxTypes,
@@ -37,10 +37,10 @@ export function EditForm({
     <>
       <Formik
         enableReinitialize={true}
-        initialValues={saleTax}
-        validationSchema={SaleTaxEditSchema}
+        initialValues={delivery}
+        validationSchema={DeliveryEditSchema}
         onSubmit={(values) => {
-          saveSaleTax(values);
+          saveDelivery(values);
         }}
       >
         {({ handleSubmit }) => (
@@ -76,8 +76,8 @@ export function EditForm({
                     <Field
                       name="taxName"
                       component={Input}
-                      placeholder="SaleTax Name"
-                      label="SaleTax Name"
+                      placeholder="Delivery Name"
+                      label="Delivery Name"
                     />
                   </div>
                 </div>

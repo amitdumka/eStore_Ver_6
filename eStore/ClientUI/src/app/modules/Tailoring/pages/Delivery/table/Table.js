@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/saleTaxes/Actions";
+import * as actions from "../../../_redux/deliveries/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -22,45 +22,45 @@ import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 
-//SaleTaxes
-//saleTaxes
-//SaleTax
-//saleTax
+//Deliveries
+//deliveries
+//Delivery
+//delivery
 
-export function SaleTaxesTable() {
-  // SaleTaxes UI Context
-  const saleTaxesUIContext = useUIContext();
-  const saleTaxesUIProps = useMemo(() => {
+export function DeliveriesTable() {
+  // Deliveries UI Context
+  const deliveriesUIContext = useUIContext();
+  const deliveriesUIProps = useMemo(() => {
     return {
-      ids: saleTaxesUIContext.ids,
-      setIds: saleTaxesUIContext.setIds,
-      queryParams: saleTaxesUIContext.queryParams,
-      setQueryParams: saleTaxesUIContext.setQueryParams,
-      openEditSaleTaxDialog: saleTaxesUIContext.openEditSaleTaxDialog,
-      openDeleteSaleTaxDialog: saleTaxesUIContext.openDeleteSaleTaxDialog,
+      ids: deliveriesUIContext.ids,
+      setIds: deliveriesUIContext.setIds,
+      queryParams: deliveriesUIContext.queryParams,
+      setQueryParams: deliveriesUIContext.setQueryParams,
+      openEditDeliveryDialog: deliveriesUIContext.openEditDeliveryDialog,
+      openDeleteDeliveryDialog: deliveriesUIContext.openDeleteDeliveryDialog,
     };
-  }, [saleTaxesUIContext]);
+  }, [deliveriesUIContext]);
 
-  // Getting current state of saleTaxes list from store (Redux)
+  // Getting current state of deliveries list from store (Redux)
   const { currentState } = useSelector(
-    (state) => ({ currentState: state.saleTaxes }),
+    (state) => ({ currentState: state.deliveries }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
 
-  // SaleTaxes Redux state
+  // Deliveries Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    saleTaxesUIProps.setIds([]);
+    deliveriesUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchSaleTaxes(saleTaxesUIProps.queryParams));
+    dispatch(actions.fetchDeliveries(deliveriesUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [saleTaxesUIProps.queryParams, dispatch]);
+  }, [deliveriesUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "saleTaxTypeId",
+      dataField: "deliveryTypeId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
@@ -68,7 +68,7 @@ export function SaleTaxesTable() {
     },
     {
       dataField: "taxName",
-      text: "SaleTax",
+      text: "Delivery",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -92,8 +92,8 @@ export function SaleTaxesTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditSaleTaxDialog: saleTaxesUIProps.openEditSaleTaxDialog,
-        openDeleteSaleTaxDialog: saleTaxesUIProps.openDeleteSaleTaxDialog,
+        openEditDeliveryDialog: deliveriesUIProps.openEditDeliveryDialog,
+        openDeleteDeliveryDialog: deliveriesUIProps.openDeleteDeliveryDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -107,8 +107,8 @@ export function SaleTaxesTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: saleTaxesUIProps.queryParams.pageSize,
-    page: saleTaxesUIProps.queryParams.pageNumber,
+    sizePerPage: deliveriesUIProps.queryParams.pageSize,
+    page: deliveriesUIProps.queryParams.pageNumber,
   };
 
   return (
@@ -127,19 +127,19 @@ export function SaleTaxesTable() {
                 bootstrap4
                 remote
                 noDataIndication="No Record Found now.."
-                keyField="saleTaxId"
+                keyField="deliveryId"
                 data={entities === null ? [] : totalCount ? entities : []}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  saleTaxesUIProps.setQueryParams
+                  deliveriesUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: saleTaxesUIProps.ids,
-                  setIds: saleTaxesUIProps.setIds,
-                  idName: "saleTaxId",
+                  ids: deliveriesUIProps.ids,
+                  setIds: deliveriesUIProps.setIds,
+                  idName: "deliveryId",
                 })}
                 {...paginationTableProps}
               >

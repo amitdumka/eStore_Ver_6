@@ -5,42 +5,42 @@ import {
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../_metronic/_partials/controls";
-import { SaleTaxesFilter } from "./filter/Filter";
-import { SaleTaxesTable } from "./table/Table";
-import { SaleTaxesGrouping } from "./grouping/Grouping";
+import { DeliveriesFilter } from "./filter/Filter";
+import { DeliveriesTable } from "./table/Table";
+import { DeliveriesGrouping } from "./grouping/Grouping";
 import { useUIContext } from "./UIContext";
 
-//SaleTaxes
-//saleTaxes
-//SaleTax
-//saleTax
+//Deliveries
+//deliveries
+//Delivery
+//delivery
 
-export function SaleTaxesCard() {
-  const SaleTaxesUIContext = useUIContext();
-  const SaleTaxesUIProps = useMemo(() => {
+export function DeliveriesCard() {
+  const DeliveriesUIContext = useUIContext();
+  const DeliveriesUIProps = useMemo(() => {
     return {
-      ids: SaleTaxesUIContext.ids,
-      newSaleTaxButtonClick: SaleTaxesUIContext.newSaleTaxButtonClick,
+      ids: DeliveriesUIContext.ids,
+      newDeliveryButtonClick: DeliveriesUIContext.newDeliveryButtonClick,
     };
-  }, [SaleTaxesUIContext]);
+  }, [DeliveriesUIContext]);
 
   return (
     <Card>
-      <CardHeader title="SaleTax list">
+      <CardHeader title="Delivery list">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
-            onClick={SaleTaxesUIProps.newSaleTaxButtonClick}
+            onClick={DeliveriesUIProps.newDeliveryButtonClick}
           >
-            New SaleTax
+            New Delivery
           </button>
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        <SaleTaxesFilter />
-        {SaleTaxesUIProps.ids.length > 0 && <SaleTaxesGrouping />}
-        <SaleTaxesTable />
+        <DeliveriesFilter />
+        {DeliveriesUIProps.ids.length > 0 && <DeliveriesGrouping />}
+        <DeliveriesTable />
       </CardBody>
     </Card>
   );

@@ -2,28 +2,28 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
-import * as actions from "../../../_redux/purchaseTaxes/Actions";
+import * as actions from "../../../_redux/bookings/Actions";
 import {useUIContext} from "../UIContext";
 
 
-//purchaseTax
-//PurchaseTax
+//booking
+//Booking
 
 // Delete particular record.
 export function DeleteDialog({ id, show, onHide }) {
-  // PurchaseTaxes UI Context
-  const purchaseTaxesUIContext = useUIContext();
-  const purchaseTaxesUIProps = useMemo(() => {
+  // Bookings UI Context
+  const bookingsUIContext = useUIContext();
+  const bookingsUIProps = useMemo(() => {
     return {
-      setIds: purchaseTaxesUIContext.setIds,
-      queryParams: purchaseTaxesUIContext.queryParams
+      setIds: bookingsUIContext.setIds,
+      queryParams: bookingsUIContext.queryParams
     };
-  }, [purchaseTaxesUIContext]);
+  }, [bookingsUIContext]);
 
-  // PurchaseTaxes Redux state
+  // Bookings Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.purchaseTaxes.actionsLoading }),
+    (state) => ({ isLoading: state.bookings.actionsLoading }),
     shallowEqual
   );
 
@@ -38,13 +38,13 @@ export function DeleteDialog({ id, show, onHide }) {
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading, dispatch]);
 
-  const deletePurchaseTax = () => {
-    // server request for deleting purchaseTax by id
-    dispatch(actions.deletePurchaseTax(id)).then(() => {
+  const deleteBooking = () => {
+    // server request for deleting booking by id
+    dispatch(actions.deleteBooking(id)).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchPurchaseTaxes(purchaseTaxesUIProps.queryParams));
+      dispatch(actions.fetchBookings(bookingsUIProps.queryParams));
       // clear selections list
-      purchaseTaxesUIProps.setIds([]);
+      bookingsUIProps.setIds([]);
       // closing delete modal
       onHide();
     });
@@ -61,14 +61,14 @@ export function DeleteDialog({ id, show, onHide }) {
       {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          PurchaseTax Delete
+          Booking Delete
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete this purchaseTax?</span>
+          <span>Are you sure to permanently delete this booking?</span>
         )}
-        {isLoading && <span>PurchaseTax is deleting...</span>}
+        {isLoading && <span>Booking is deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -82,7 +82,7 @@ export function DeleteDialog({ id, show, onHide }) {
           <> </>
           <button
             type="button"
-            onClick={deletePurchaseTax}
+            onClick={deleteBooking}
             className="btn btn-primary btn-elevate"
           >
             Delete

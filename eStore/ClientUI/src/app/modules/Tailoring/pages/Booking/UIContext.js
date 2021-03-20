@@ -8,8 +8,8 @@ export function useUIContext() {
   return useContext(UIContext);
 }
 
-//purchaseTax
-//PurchaseTax
+//booking
+//Booking
 
 export const UIConsumer = UIContext.Consumer;
 
@@ -30,7 +30,7 @@ export function UIProvider({ UIEvents, children }) {
     });
   }, []);
 
-  const initPurchaseTax = {
+  const initBooking = {
     purchaseItemId: 0,
     taxName: "",
     taxType: 0,
@@ -43,14 +43,14 @@ export function UIProvider({ UIEvents, children }) {
     ids,
     setIds,
     setQueryParams,
-    initPurchaseTax,
-    newPurchaseTaxButtonClick: UIEvents.newPurchaseTaxButtonClick,
-    openEditPurchaseTaxDialog: UIEvents.openEditPurchaseTaxDialog,
-    openDeletePurchaseTaxDialog: UIEvents.openDeletePurchaseTaxDialog,
-    openDeletePurchaseTaxesDialog: UIEvents.openDeletePurchaseTaxesDialog,
-    openFetchPurchaseTaxesDialog: UIEvents.openFetchPurchaseTaxesDialog,
-    openUpdatePurchaseTaxesStatusDialog:
-      UIEvents.openUpdatePurchaseTaxesStatusDialog,
+    initBooking,
+    newBookingButtonClick: UIEvents.newBookingButtonClick,
+    openEditBookingDialog: UIEvents.openEditBookingDialog,
+    openDeleteBookingDialog: UIEvents.openDeleteBookingDialog,
+    openDeleteBookingsDialog: UIEvents.openDeleteBookingsDialog,
+    openFetchBookingsDialog: UIEvents.openFetchBookingsDialog,
+    openUpdateBookingsStatusDialog:
+      UIEvents.openUpdateBookingsStatusDialog,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

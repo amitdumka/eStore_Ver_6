@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { SaleTaxesLoadingDialog } from "./dialogs/LoadingDialog";
+import { DeliveriesLoadingDialog } from "./dialogs/LoadingDialog";
 import { EditDialog } from "./dialogs/EditDialog";
 
 import { DeleteDialog } from "./dialogs/DeleteDialog";
@@ -10,101 +10,101 @@ import { DeletesDialog } from "./dialogs/DeletesDialog";
 import { FetchDialog } from "./dialogs/FetchDialog";
 import { UpdateStateDialog } from "./dialogs/UpdateStateDialog";
 import { UIProvider } from "./UIContext";
-import { SaleTaxesCard } from "./SaleTaxesCard";
+import { DeliveriesCard } from "./DeliveriesCard";
 
-//SaleTaxes
-//saleTax
-//SaleTax
-//saleTax
+//Deliveries
+//delivery
+//Delivery
+//delivery
 
-export function SaleTaxesPage({ history }) {
-  const saleTaxesUIEvents = {
-    newSaleTaxButtonClick: () => {
-      history.push("/taxes/saletax/new");
+export function DeliveriesPage({ history }) {
+  const deliveriesUIEvents = {
+    newDeliveryButtonClick: () => {
+      history.push("/taxes/delivery/new");
     },
-    openEditSaleTaxDialog: (id) => {
-      history.push(`/taxes/saletax/${id}/edit`);
+    openEditDeliveryDialog: (id) => {
+      history.push(`/taxes/delivery/${id}/edit`);
     },
-    openDeleteSaleTaxDialog: (id) => {
-      history.push(`/taxes/saletax/${id}/delete`);
+    openDeleteDeliveryDialog: (id) => {
+      history.push(`/taxes/delivery/${id}/delete`);
     },
-    openDeleteSaleTaxesDialog: () => {
-      history.push(`/taxes/saletax/deleteSaleTaxes`);
+    openDeleteDeliveriesDialog: () => {
+      history.push(`/taxes/delivery/deleteDeliveries`);
     },
-    openFetchSaleTaxesDialog: () => {
-      history.push(`/taxes/saletax/fetch`);
+    openFetchDeliveriesDialog: () => {
+      history.push(`/taxes/delivery/fetch`);
     },
-    openUpdateSaleTaxesStatusDialog: () => {
-      history.push("/taxes/saletax/updateStatus");
+    openUpdateDeliveriesStatusDialog: () => {
+      history.push("/taxes/delivery/updateStatus");
     }
   }
 
   return (
-    <UIProvider UIEvents={saleTaxesUIEvents}>
-      <SaleTaxesLoadingDialog />
-      <Route path="/taxes/saletax/new">
+    <UIProvider UIEvents={deliveriesUIEvents}>
+      <DeliveriesLoadingDialog />
+      <Route path="/taxes/delivery/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/taxes/saletax");
+              history.push("/taxes/delivery");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/saletax/:id/edit">
+      <Route path="/taxes/delivery/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/taxes/saletax");
+              history.push("/taxes/delivery");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/saletax/deleteSaleTaxes">
+      <Route path="/taxes/delivery/deleteDeliveries">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/taxes/saletax");
+              history.push("/taxes/delivery");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/saletax/:id/delete">
+      <Route path="/taxes/delivery/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/taxes/saletax");
+              history.push("/taxes/delivery");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/saletax/fetch">
+      <Route path="/taxes/delivery/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/taxes/saletax");
+              history.push("/taxes/delivery");
             }}
           />
         )}
       </Route>
-      <Route path="/taxes/saletax/updateStatus">
+      <Route path="/taxes/delivery/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/taxes/saletax");
+              history.push("/taxes/delivery");
             }}
           />
         )}
       </Route>
-      <SaleTaxesCard />
+      <DeliveriesCard />
     </UIProvider>
   );
 }

@@ -1,69 +1,69 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/saleTaxes/Actions";
+import * as actions from "../../../_redux/deliveries/Actions";
 import { useUIContext } from "../UIContext";
 
-//SaleTaxes
-//saleTaxes
-//SaleTax
-//saleTax
+//Deliveries
+//deliveries
+//Delivery
+//delivery
 
 
-const selectedSaleTaxes = (entities, ids) => {
-  const _saleTaxes = [];
+const selectedDeliveries = (entities, ids) => {
+  const _deliveries = [];
   ids.forEach((id) => {
-    const saleTax = entities.find((el) => el.id === id);
-    if (saleTax) {
-      _saleTaxes.push(saleTax);
+    const delivery = entities.find((el) => el.id === id);
+    if (delivery) {
+      _deliveries.push(delivery);
     }
   });
-  return _saleTaxes;
+  return _deliveries;
 };
 
 export function UpdateStateDialog({ show, onHide }) {
-  // SaleTaxes UI Context
-  const saleTaxesUIContext = useUIContext();
-  const saleTaxesUIProps = useMemo(() => {
+  // Deliveries UI Context
+  const deliveriesUIContext = useUIContext();
+  const deliveriesUIProps = useMemo(() => {
     return {
-      ids: saleTaxesUIContext.ids,
-      setIds: saleTaxesUIContext.setIds,
-      queryParams: saleTaxesUIContext.queryParams,
+      ids: deliveriesUIContext.ids,
+      setIds: deliveriesUIContext.setIds,
+      queryParams: deliveriesUIContext.queryParams,
     };
-  }, [saleTaxesUIContext]);
+  }, [deliveriesUIContext]);
 
-  // SaleTaxes Redux state
-  const { saleTaxes, isLoading } = useSelector(
+  // Deliveries Redux state
+  const { deliveries, isLoading } = useSelector(
     (state) => ({
-      saleTaxes: selectedSaleTaxes(
-        state.saleTaxes.entities,
-        saleTaxesUIProps.ids
+      deliveries: selectedDeliveries(
+        state.deliveries.entities,
+        deliveriesUIProps.ids
       ),
-      isLoading: state.saleTaxes.actionsLoading,
+      isLoading: state.deliveries.actionsLoading,
     }),
     shallowEqual
   );
 
   // if !id we should close modal
   useEffect(() => {
-    if (!saleTaxesUIProps.ids || saleTaxesUIProps.ids.length === 0) {
+    if (!deliveriesUIProps.ids || deliveriesUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [saleTaxesUIProps.ids]);
+  }, [deliveriesUIProps.ids]);
 
   const [status, setStatus] = useState(0);
 
   const dispatch = useDispatch();
   const updateStatus = () => {
-    // server request for update saleTaxes status by selected ids
-    dispatch(actions.updateSaleTaxesStatus(saleTaxesUIProps.ids, status)).then(
+    // server request for update deliveries status by selected ids
+    dispatch(actions.updateDeliveriesStatus(deliveriesUIProps.ids, status)).then(
       () => {
         // refresh list after deletion
-        dispatch(actions.fetchSaleTaxes(saleTaxesUIProps.queryParams)).then(
+        dispatch(actions.fetchDeliveries(deliveriesUIProps.queryParams)).then(
           () => {
             // clear selections list
-            saleTaxesUIProps.setIds([]);
+            deliveriesUIProps.setIds([]);
             // closing delete modal
             onHide();
           }
@@ -80,7 +80,7 @@ export function UpdateStateDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Status has been updated for selected saleTaxes
+          Status has been updated for selected deliveries
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="overlay overlay-block cursor-default">
@@ -100,13 +100,13 @@ export function UpdateStateDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {saleTaxes.map((saleTax) => (
-              <tr key={`id${saleTax.id}`}>
-                <td>{saleTax.id}</td>
+            {deliveries.map((delivery) => (
+              <tr key={`id${delivery.id}`}>
+                <td>{delivery.id}</td>
                 
                 <td>
                   <span className="ml-3">
-                    {saleTax.lastName}, {saleTax.firstName}
+                    {delivery.lastName}, {delivery.firstName}
                   </span>
                 </td>
               </tr>

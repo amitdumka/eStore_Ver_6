@@ -3,7 +3,7 @@
 //export const AccountTypeCssClasses = ["success", "primary", "danger","warning","info",""];
 //export const AccountTypeTitles = ["Saving", "Current", "CC","OD","Other",""];
 
-export const defaultSorted = [{ dataField: "saleTaxName", order: "asc" }];
+export const defaultSorted = [{ dataField: "deliveryName", order: "asc" }];
 export const sizePerPageList = [
   { text: "3", value: 3 },
   { text: "5", value: 5 },
@@ -11,7 +11,7 @@ export const sizePerPageList = [
 ];
 export const initialFilter = {
   filter: {
-    saleTaxName: ""
+    deliveryName: ""
   },
   sortOrder: "asc", // asc||desc
   sortField: "id",

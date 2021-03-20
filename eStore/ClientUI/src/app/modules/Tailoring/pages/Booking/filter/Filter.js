@@ -4,8 +4,8 @@ import { isEqual } from "lodash";
 import { useUIContext } from "../UIContext";
 
 
-//purchaseTax
-//PurchaseTax
+//booking
+//Booking
 
 const prepareFilter = (queryParams, values) => {
   const { status, type, searchText } = values;
@@ -26,23 +26,23 @@ const prepareFilter = (queryParams, values) => {
   return newQueryParams;
 };
 
-export function PurchaseTaxesFilter({ listLoading }) {
-  // PurchaseTaxes UI Context
-  const purchaseTaxesUIContext = useUIContext();
-  const purchaseTaxesUIProps = useMemo(() => {
+export function BookingsFilter({ listLoading }) {
+  // Bookings UI Context
+  const bookingsUIContext = useUIContext();
+  const bookingsUIProps = useMemo(() => {
     return {
-      queryParams: purchaseTaxesUIContext.queryParams,
-      setQueryParams: purchaseTaxesUIContext.setQueryParams,
+      queryParams: bookingsUIContext.queryParams,
+      setQueryParams: bookingsUIContext.setQueryParams,
     };
-  }, [purchaseTaxesUIContext]);
+  }, [bookingsUIContext]);
 
   // queryParams, setQueryParams,
   const applyFilter = (values) => {
-    const newQueryParams = prepareFilter(purchaseTaxesUIProps.queryParams, values);
-    if (!isEqual(newQueryParams, purchaseTaxesUIProps.queryParams)) {
+    const newQueryParams = prepareFilter(bookingsUIProps.queryParams, values);
+    if (!isEqual(newQueryParams, bookingsUIProps.queryParams)) {
       newQueryParams.pageNumber = 1;
       // update list by queryParams
-      purchaseTaxesUIProps.setQueryParams(newQueryParams);
+      bookingsUIProps.setQueryParams(newQueryParams);
     }
   };
 
