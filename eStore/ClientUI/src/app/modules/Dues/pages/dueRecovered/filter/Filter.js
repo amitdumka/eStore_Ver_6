@@ -3,8 +3,8 @@ import { Formik } from "formik";
 import { isEqual } from "lodash";
 import { useUIContext } from "../UIContext";
 
-//Payment
-//payment
+//DueRecovered
+//dueRecovered
 
 
 const prepareFilter = (queryParams, values) => {
@@ -26,23 +26,23 @@ const prepareFilter = (queryParams, values) => {
   return newQueryParams;
 };
 
-export function PaymentsFilter({ listLoading }) {
-  // Payments UI Context
-  const paymentsUIContext = useUIContext();
-  const paymentsUIProps = useMemo(() => {
+export function DueRecoveredsFilter({ listLoading }) {
+  // DueRecovereds UI Context
+  const dueRecoveredsUIContext = useUIContext();
+  const dueRecoveredsUIProps = useMemo(() => {
     return {
-      queryParams: paymentsUIContext.queryParams,
-      setQueryParams: paymentsUIContext.setQueryParams,
+      queryParams: dueRecoveredsUIContext.queryParams,
+      setQueryParams: dueRecoveredsUIContext.setQueryParams,
     };
-  }, [paymentsUIContext]);
+  }, [dueRecoveredsUIContext]);
 
   // queryParams, setQueryParams,
   const applyFilter = (values) => {
-    const newQueryParams = prepareFilter(paymentsUIProps.queryParams, values);
-    if (!isEqual(newQueryParams, paymentsUIProps.queryParams)) {
+    const newQueryParams = prepareFilter(dueRecoveredsUIProps.queryParams, values);
+    if (!isEqual(newQueryParams, dueRecoveredsUIProps.queryParams)) {
       newQueryParams.pageNumber = 1;
       // update list by queryParams
-      paymentsUIProps.setQueryParams(newQueryParams);
+      dueRecoveredsUIProps.setQueryParams(newQueryParams);
     }
   };
 

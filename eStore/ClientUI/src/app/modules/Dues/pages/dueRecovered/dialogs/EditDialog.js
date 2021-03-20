@@ -1,53 +1,53 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/payments/Actions";
+import * as actions from "../../../_redux/dueRecovereds/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
 
-//payment
-//Payment
+//dueRecovered
+//DueRecovered
 
 export function EditDialog({ id, show, onHide }) {
-  // Payments UI Context
-  const paymentsUIContext = useUIContext();
-  const paymentsUIProps = useMemo(() => {
+  // DueRecovereds UI Context
+  const dueRecoveredsUIContext = useUIContext();
+  const dueRecoveredsUIProps = useMemo(() => {
     return {
-      initPayment: paymentsUIContext.initPayment,
+      initDueRecovered: dueRecoveredsUIContext.initDueRecovered,
     };
-  }, [paymentsUIContext]);
+  }, [dueRecoveredsUIContext]);
 
-  // Payments Redux state
+  // DueRecovereds Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, paymentForEdit ,employeeList, partiesList, bankAccountsList} = useSelector(
+  const { actionsLoading, dueRecoveredForEdit ,employeeList, partiesList, bankAccountsList} = useSelector(
     (state) => ({
-      actionsLoading: state.payments.actionsLoading,
-      paymentForEdit: state.payments.paymentForEdit,
-      employeeList:state.payments.employeeEntities,
-      partiesList:state.payments.partiesEntities, 
-      bankAccountsList:state.payments.bankaccEntities
+      actionsLoading: state.dueRecovereds.actionsLoading,
+      dueRecoveredForEdit: state.dueRecovereds.dueRecoveredForEdit,
+      employeeList:state.dueRecovereds.employeeEntities,
+      partiesList:state.dueRecovereds.partiesEntities, 
+      bankAccountsList:state.dueRecovereds.bankaccEntities
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    // server call for getting Payment by id
-    dispatch(actions.fetchPayment(id));
+    // server call for getting DueRecovered by id
+    dispatch(actions.fetchDueRecovered(id));
     dispatch(actions.fetchParties());
     dispatch(actions.fetchBankAccounts());
     dispatch(actions.fetchEmployees());
   }, [id, dispatch]);
 
-  // server request for saving payment
-  const savePayment = (payment) => {
-    payment.payMode=parseInt(payment.payMode);
+  // server request for saving dueRecovered
+  const saveDueRecovered = (dueRecovered) => {
+    dueRecovered.payMode=parseInt(dueRecovered.payMode);
     if (!id) {
-      // server request for creating payment
-      dispatch(actions.createPayment(payment)).then(() => onHide());
+      // server request for creating dueRecovered
+      dispatch(actions.createDueRecovered(dueRecovered)).then(() => onHide());
     } else {
-      // server request for updating payment
-      dispatch(actions.updatePayment(payment)).then(() => onHide());
+      // server request for updating dueRecovered
+      dispatch(actions.updateDueRecovered(dueRecovered)).then(() => onHide());
     }
   };
 
@@ -60,9 +60,9 @@ export function EditDialog({ id, show, onHide }) {
     >
       <EditDialogHeader id={id} />
       <EditForm
-        savePayment={savePayment}
+        saveDueRecovered={saveDueRecovered}
         actionsLoading={actionsLoading}
-        payment={paymentForEdit || paymentsUIProps.initPayment}
+        dueRecovered={dueRecoveredForEdit || dueRecoveredsUIProps.initDueRecovered}
         onHide={onHide}
         employeeList={employeeList}
         partiesList={partiesList}

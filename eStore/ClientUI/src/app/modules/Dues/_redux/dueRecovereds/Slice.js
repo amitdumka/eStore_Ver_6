@@ -2,15 +2,15 @@ import {createSlice} from "@reduxjs/toolkit";
 import { stubTrue } from "lodash-es";
 
 
-//Payment
-//payment
+//DueRecovered
+//dueRecovered
 
-const initialPaymentsState = {
+const initialDueRecoveredsState = {
   listLoading: false,
   actionsLoading: false,
   totalCount: 0,
   entities: null,
-  paymentForEdit: undefined,
+  dueRecoveredForEdit: undefined,
   lastError: null, 
   employeeEntities: null, 
   totalCountEmp:0,
@@ -24,9 +24,9 @@ export const callTypes = {
   action: "action"
 };
 
-export const paymentsSlice = createSlice({
-  name: "payments",
-  initialState: initialPaymentsState,
+export const dueRecoveredsSlice = createSlice({
+  name: "dueRecovereds",
+  initialState: initialDueRecoveredsState,
   reducers: {
     catchError: (state, action) => {
       state.error = `${action.type}: ${action.payload.error}`;
@@ -74,60 +74,60 @@ export const paymentsSlice = createSlice({
      state.totalCountbankacc=totalCount;
 
     },
-    // getPaymentById
-    paymentFetched: (state, action) => {
+    // getDueRecoveredById
+    dueRecoveredFetched: (state, action) => {
       state.actionsLoading = false;
-      state.paymentForEdit = action.payload.paymentForEdit;
+      state.dueRecoveredForEdit = action.payload.dueRecoveredForEdit;
       state.error = null;
     },
-    // findPayments
-    paymentsFetched: (state, action) => {
+    // findDueRecovereds
+    dueRecoveredsFetched: (state, action) => {
       const { totalCount, entities } = action.payload;
       state.listLoading = false;
       state.error = null;
       state.entities = entities;
       state.totalCount = totalCount;
     },
-    // createPayment
-    paymentCreated: (state, action) => {
+    // createDueRecovered
+    dueRecoveredCreated: (state, action) => {
       state.ewactionsLoading = false;
       state.error = null;
-      state.entities.push(action.payload.payment);
+      state.entities.push(action.payload.dueRecovered);
     },
-    // updatePayment
-    paymentUpdated: (state, action) => {
+    // updateDueRecovered
+    dueRecoveredUpdated: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.map(entity => {
-        if (entity.paymentId === action.payload.payment.paymentId) {
-          return action.payload.payment;
+        if (entity.dueRecoveredId === action.payload.dueRecovered.dueRecoveredId) {
+          return action.payload.dueRecovered;
         }
         return entity;
       });
     },
-    // deletePayment
-    paymentDeleted: (state, action) => {
+    // deleteDueRecovered
+    dueRecoveredDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(el => el.paymentId !== action.payload.paymentId);
+      state.entities = state.entities.filter(el => el.dueRecoveredId !== action.payload.dueRecoveredId);
     },
-    // deletePayments
-    paymentsDeleted: (state, action) => {
+    // deleteDueRecovereds
+    dueRecoveredsDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        el => !action.payload.ids.includes(el.paymentId)
+        el => !action.payload.ids.includes(el.dueRecoveredId)
       );
     },
 
     
-    // paymentsUpdateState
-    paymentsStatusUpdated: (state, action) => {
+    // dueRecoveredsUpdateState
+    dueRecoveredsStatusUpdated: (state, action) => {
       state.actionsLoading = false;
       state.error = null;
       const { ids, status } = action.payload;
       state.entities = state.entities.map(entity => {
-        if (ids.findIndex(id => id === entity.paymentId) > -1) {
+        if (ids.findIndex(id => id === entity.dueRecoveredId) > -1) {
           entity.status = status;
         }
         return entity;

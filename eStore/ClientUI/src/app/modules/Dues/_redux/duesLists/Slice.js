@@ -24,8 +24,8 @@ export const callTypes = {
   action: "action"
 };
 
-export const dueslistsSlice = createSlice({
-  name: "dueslists",
+export const duesListsSlice = createSlice({
+  name: "duesLists",
   initialState: initialDuesListsState,
   reducers: {
     catchError: (state, action) => {
@@ -81,7 +81,7 @@ export const dueslistsSlice = createSlice({
       state.error = null;
     },
     // findDuesLists
-    dueslistsFetched: (state, action) => {
+    duesListsFetched: (state, action) => {
       const { totalCount, entities } = action.payload;
       state.listLoading = false;
       state.error = null;
@@ -112,7 +112,7 @@ export const dueslistsSlice = createSlice({
       state.entities = state.entities.filter(el => el.dueslistId !== action.payload.dueslistId);
     },
     // deleteDuesLists
-    dueslistsDeleted: (state, action) => {
+    duesListsDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
@@ -121,8 +121,8 @@ export const dueslistsSlice = createSlice({
     },
 
     
-    // dueslistsUpdateState
-    dueslistsStatusUpdated: (state, action) => {
+    // duesListsUpdateState
+    duesListsStatusUpdated: (state, action) => {
       state.actionsLoading = false;
       state.error = null;
       const { ids, status } = action.payload;

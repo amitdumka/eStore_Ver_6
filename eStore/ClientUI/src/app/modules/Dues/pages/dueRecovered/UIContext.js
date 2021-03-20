@@ -2,8 +2,8 @@ import React, { createContext, useContext, useState, useCallback } from "react";
 import { isEqual, isFunction } from "lodash";
 import { initialFilter } from "./UIHelpers";
 
-//Payment
-//payment
+//DueRecovered
+//dueRecovered
 
 const UIContext = createContext();
 
@@ -41,15 +41,15 @@ export function UIProvider({ UIEvents, children }) {
     });
   }, []);
 
-  const initPayment = {
-    paymentId: 0,
+  const initDueRecovered = {
+    dueRecoveredId: 0,
     partyName: "",
-    paymentSlipNo: "",
+    dueRecoveredSlipNo: "",
     onDate: new Date(),
     payMode: 0,
     bankAccountId: null,
     fromAccount: null,
-    paymentDetails: "",
+    dueRecoveredDetails: "",
     amount: 0.0,
     remarks: "",
     partyId: null,
@@ -72,13 +72,13 @@ export function UIProvider({ UIEvents, children }) {
     ids,
     setIds,
     setQueryParams,
-    initPayment,
-    newPaymentButtonClick: UIEvents.newPaymentButtonClick,
-    openEditPaymentDialog: UIEvents.openEditPaymentDialog,
-    openDeletePaymentDialog: UIEvents.openDeletePaymentDialog,
-    openDeletePaymentsDialog: UIEvents.openDeletePaymentsDialog,
-    openFetchPaymentsDialog: UIEvents.openFetchPaymentsDialog,
-    openUpdatePaymentsStatusDialog: UIEvents.openUpdatePaymentsStatusDialog,
+    initDueRecovered,
+    newDueRecoveredButtonClick: UIEvents.newDueRecoveredButtonClick,
+    openEditDueRecoveredDialog: UIEvents.openEditDueRecoveredDialog,
+    openDeleteDueRecoveredDialog: UIEvents.openDeleteDueRecoveredDialog,
+    openDeleteDueRecoveredsDialog: UIEvents.openDeleteDueRecoveredsDialog,
+    openFetchDueRecoveredsDialog: UIEvents.openFetchDueRecoveredsDialog,
+    openUpdateDueRecoveredsStatusDialog: UIEvents.openUpdateDueRecoveredsStatusDialog,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

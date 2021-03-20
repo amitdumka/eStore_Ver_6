@@ -1,66 +1,66 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/payments/Actions";
+import * as actions from "../../../_redux/dueRecovereds/Actions";
 import { useUIContext } from "../UIContext";
 
-//payment
-//Payment
+//dueRecovered
+//DueRecovered
 
-const selectedPayments = (entities, ids) => {
-  const _payments = [];
+const selectedDueRecovereds = (entities, ids) => {
+  const _dueRecovereds = [];
   ids.forEach((id) => {
-    const payment = entities.find((el) => el.id === id);
-    if (payment) {
-      _payments.push(payment);
+    const dueRecovered = entities.find((el) => el.id === id);
+    if (dueRecovered) {
+      _dueRecovereds.push(dueRecovered);
     }
   });
-  return _payments;
+  return _dueRecovereds;
 };
 
 export function UpdateStateDialog({ show, onHide }) {
-  // Payments UI Context
-  const paymentsUIContext = useUIContext();
-  const paymentsUIProps = useMemo(() => {
+  // DueRecovereds UI Context
+  const dueRecoveredsUIContext = useUIContext();
+  const dueRecoveredsUIProps = useMemo(() => {
     return {
-      ids: paymentsUIContext.ids,
-      setIds: paymentsUIContext.setIds,
-      queryParams: paymentsUIContext.queryParams,
+      ids: dueRecoveredsUIContext.ids,
+      setIds: dueRecoveredsUIContext.setIds,
+      queryParams: dueRecoveredsUIContext.queryParams,
     };
-  }, [paymentsUIContext]);
+  }, [dueRecoveredsUIContext]);
 
-  // Payments Redux state
-  const { payments, isLoading } = useSelector(
+  // DueRecovereds Redux state
+  const { dueRecovereds, isLoading } = useSelector(
     (state) => ({
-      payments: selectedPayments(
-        state.payments.entities,
-        paymentsUIProps.ids
+      dueRecovereds: selectedDueRecovereds(
+        state.dueRecovereds.entities,
+        dueRecoveredsUIProps.ids
       ),
-      isLoading: state.payments.actionsLoading,
+      isLoading: state.dueRecovereds.actionsLoading,
     }),
     shallowEqual
   );
 
   // if !id we should close modal
   useEffect(() => {
-    if (!paymentsUIProps.ids || paymentsUIProps.ids.length === 0) {
+    if (!dueRecoveredsUIProps.ids || dueRecoveredsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paymentsUIProps.ids]);
+  }, [dueRecoveredsUIProps.ids]);
 
   const [status, setStatus] = useState(0);
 
   const dispatch = useDispatch();
   const updateStatus = () => {
-    // server request for update payments status by selected ids
-    dispatch(actions.updatePaymentsStatus(paymentsUIProps.ids, status)).then(
+    // server request for update dueRecovereds status by selected ids
+    dispatch(actions.updateDueRecoveredsStatus(dueRecoveredsUIProps.ids, status)).then(
       () => {
         // refresh list after deletion
-        dispatch(actions.fetchPayments(paymentsUIProps.queryParams)).then(
+        dispatch(actions.fetchDueRecovereds(dueRecoveredsUIProps.queryParams)).then(
           () => {
             // clear selections list
-            paymentsUIProps.setIds([]);
+            dueRecoveredsUIProps.setIds([]);
             // closing delete modal
             onHide();
           }
@@ -77,7 +77,7 @@ export function UpdateStateDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Status has been updated for selected payments
+          Status has been updated for selected dueRecovereds
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="overlay overlay-block cursor-default">
@@ -97,13 +97,13 @@ export function UpdateStateDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {payments.map((payment) => (
-              <tr key={`id${payment.id}`}>
-                <td>{payment.id}</td>
+            {dueRecovereds.map((dueRecovered) => (
+              <tr key={`id${dueRecovered.id}`}>
+                <td>{dueRecovered.id}</td>
                 
                 <td>
                   <span className="ml-3">
-                    {payment.lastName}, {payment.firstName}
+                    {dueRecovered.lastName}, {dueRecovered.firstName}
                   </span>
                 </td>
               </tr>

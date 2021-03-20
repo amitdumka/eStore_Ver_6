@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { Redirect, Switch } from "react-router-dom";
 
 import { DuesListsPage } from "./duesLists/DuesListsPage";
-import {DueRecoveredPage} from "./dueRecovered/DueRecoveredPage";
+import {DueRecoveredsPage} from "./dueRecovered/DueRecoveredsPage";
 
 import { LayoutSplashScreen, ContentRoute } from "../../../../_metronic/layout";
 
@@ -15,11 +15,11 @@ export default function DuesPage() {
           <Redirect 
             exact={true}
             from="/due"
-            to="/due/duesLists"
+            to="/due/duelist"
           />
         }
-        <ContentRoute path="/due/duesLists" component={DuesListsPage}/>
-        <ContentRoute path="/due/dueRecovered" component={DueRecoveredPage}/> 
+        <ContentRoute path="/due/duelist" component={DuesListsPage}/>
+        <ContentRoute path="/due/dueRecovered" component={DueRecoveredsPage}/> 
         
       </Switch>
     </Suspense>

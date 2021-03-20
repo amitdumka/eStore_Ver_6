@@ -23,6 +23,8 @@ import {ledgerTypesSlice} from "../app/modules/legders/_redux/ledgerTypes/Slice"
 import {partiesSlice} from "../app/modules/legders/_redux/parties/Slice";
 import {purchaseTaxesSlice} from "../app/modules/Taxes/_redux/purchaseTaxes/Slice";
 import {saleTaxesSlice} from "../app/modules/Taxes/_redux/saleTaxes/Slice";
+import {duesListsSlice} from "../app/modules/Dues/_redux/duesLists/Slice";
+import {dueRecoveredsSlice} from "../app/modules/Dues/_redux/dueRecovered/Slice";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -43,7 +45,9 @@ export const rootReducer = combineReducers({
   bankWithdrawals: bankWithdrawalsSlice.reducer,
   parties: partiesSlice.reducer,
   saleTaxes: saleTaxesSlice.reducer,
-  purchaseTaxes: purchaseTaxesSlice.reducer
+  purchaseTaxes: purchaseTaxesSlice.reducer, 
+  duesLists: duesListsSlice.reducer,
+  dueRecovereds: dueRecoveredsSlice.reducer,
 
 });
 

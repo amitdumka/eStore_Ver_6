@@ -12,25 +12,25 @@ import {
   DatePickerField,
 } from "../../../../../../_metronic/_partials/controls";
 
-//payment
-//Payment
+//dueRecovered
+//DueRecovered
 
 // Validation schema
-const PaymentEditSchema = Yup.object().shape({
+const DueRecoveredEditSchema = Yup.object().shape({
   onDate: Yup.date().required("Date is required"),
   amount: Yup.number().integer().moreThan(0).positive().min(1).required("Amount is required"),
   employeeId: Yup.number().moreThan(0).required("Paid By is required"),
  // particulars: Yup.string().required("Particulars Month is required"),
-  payMode: Yup.number().required("Payment Mode is required"),
+  payMode: Yup.number().required("DueRecovered Mode is required"),
   partyName: Yup.string().required("Paid To is required"),
-  remarks: Yup.string().required("Payment details is required"),
+  remarks: Yup.string().required("DueRecovered details is required"),
   storeId: Yup.number().required("Select Store "),
-  paymentSlipNo:Yup.string().required("Payment Slip No is required"),
+  dueRecoveredSlipNo:Yup.string().required("DueRecovered Slip No is required"),
 });
 
 export function EditForm({
-  savePayment,
-  payment,
+  saveDueRecovered,
+  dueRecovered,
   actionsLoading,
   onHide,
   employeeList, partiesList, bankAccountsList
@@ -39,10 +39,10 @@ export function EditForm({
     <>
       <Formik
         enableReinitialize={true}
-        initialValues={payment}
-        validationSchema={PaymentEditSchema}
+        initialValues={dueRecovered}
+        validationSchema={DueRecoveredEditSchema}
         onSubmit={(values) => {
-          savePayment(values);
+          saveDueRecovered(values);
         }}
       >
         {({ handleSubmit }) => (
@@ -96,7 +96,7 @@ export function EditForm({
                 </div>
                
                 <div className="form-group row">
-                  {/* Date of Payment */}
+                  {/* Date of DueRecovered */}
                   <div className="col-lg-4">
                     <DatePickerField
                       dateFormat="yyyy-MM-dd"
@@ -107,10 +107,10 @@ export function EditForm({
                   {/*  State Name*/}
                  <div className="col-lg-4">
                     <Field
-                      name="paymentSlipNo"
+                      name="dueRecoveredSlipNo"
                       component={Input}
-                      placeholder="Payment SlipNo"
-                      label="Payment SlipNo"
+                      placeholder="DueRecovered SlipNo"
+                      label="DueRecovered SlipNo"
                     />
                   </div>
                    {/*  Paid To Name*/}
@@ -144,7 +144,7 @@ export function EditForm({
                   </div>
                    {/* PayMode */}
                    <div className="col-lg-4">
-                    <Select name="payMode" label="Payment Mode">
+                    <Select name="payMode" label="DueRecovered Mode">
                       <option value="0">Cash</option>
                       <option value="1">Card</option>
                     </Select>
@@ -165,10 +165,10 @@ export function EditForm({
                  {/*  State Name*/}
                  <div className="col-lg-4">
                     <Field
-                      name="paymentDetails"
+                      name="dueRecoveredDetails"
                       component={Input}
-                      placeholder="Payment Details"
-                      label="Payment Details"
+                      placeholder="DueRecovered Details"
+                      label="DueRecovered Details"
                     />
                   </div>
                   

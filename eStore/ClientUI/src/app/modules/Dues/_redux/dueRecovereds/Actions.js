@@ -1,10 +1,10 @@
 import * as requestFromServer from "./Crud";
-import { paymentsSlice, callTypes } from "./Slice";
+import { dueRecoveredsSlice, callTypes } from "./Slice";
 
-//Payment
-//payment
+//DueRecovered
+//dueRecovered
 
-const { actions } = paymentsSlice;
+const { actions } = dueRecoveredsSlice;
 
 export const fetchParties = (id) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
@@ -61,109 +61,109 @@ export const fetchEmployees = (id) => (dispatch) => {
     });
 };
 
-export const fetchPayments = (queryParams) => (dispatch) => {
+export const fetchDueRecovereds = (queryParams) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findPayments(queryParams)
+    .findDueRecovereds(queryParams)
     .then((response) => {
       const entities = response.data;
       const totalCount = response.data.length;
       console.log(response.data);
       
-      dispatch(actions.paymentsFetched({ totalCount, entities }));
+      dispatch(actions.dueRecoveredsFetched({ totalCount, entities }));
     })
     .catch((error) => {
       console.log(error);
-      error.clientMessage = "Can't find payments";
+      error.clientMessage = "Can't find dueRecovereds";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
-export const fetchPayment = (id) => (dispatch) => {
+export const fetchDueRecovered = (id) => (dispatch) => {
   if (!id) {
-    return dispatch(actions.paymentFetched({ paymentForEdit: undefined }));
+    return dispatch(actions.dueRecoveredFetched({ dueRecoveredForEdit: undefined }));
   }
 
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .getPaymentById(id)
+    .getDueRecoveredById(id)
     .then((response) => {
-      const payment = response.data;
-      dispatch(actions.paymentFetched({ paymentForEdit: payment }));
+      const dueRecovered = response.data;
+      dispatch(actions.dueRecoveredFetched({ dueRecoveredForEdit: dueRecovered }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't find payment";
+      error.clientMessage = "Can't find dueRecovered";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deletePayment = (id) => (dispatch) => {
+export const deleteDueRecovered = (id) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deletePayment(id)
+    .deleteDueRecovered(id)
     .then((response) => {
-      dispatch(actions.paymentDeleted({ id }));
+      dispatch(actions.dueRecoveredDeleted({ id }));
     })
     .catch((error) => {
       console.log("CD=" + error);
-      error.clientMessage = "Can't delete payment";
+      error.clientMessage = "Can't delete dueRecovered";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const createPayment = (paymentForCreation) => (dispatch) => {
-  console.log(paymentForCreation);
+export const createDueRecovered = (dueRecoveredForCreation) => (dispatch) => {
+  console.log(dueRecoveredForCreation);
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .createPayment(JSON.stringify(paymentForCreation))
+    .createDueRecovered(JSON.stringify(dueRecoveredForCreation))
     .then((response) => {
-      const payment = response.data;
-      dispatch(actions.paymentCreated({ payment }));
+      const dueRecovered = response.data;
+      dispatch(actions.dueRecoveredCreated({ dueRecovered }));
     })
     .catch((error) => {
       console.log(error);
-      error.clientMessage = "Can't create payment";
+      error.clientMessage = "Can't create dueRecovered";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updatePayment = (payment) => (dispatch) => {
+export const updateDueRecovered = (dueRecovered) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updatePayment(payment)
+    .updateDueRecovered(dueRecovered)
     .then(() => {
-      console.log(payment);
-      dispatch(actions.paymentUpdated({ payment }));
+      console.log(dueRecovered);
+      dispatch(actions.dueRecoveredUpdated({ dueRecovered }));
     })
     .catch((error) => {
       console.log(error);
-      error.clientMessage = "Can't update payment";
+      error.clientMessage = "Can't update dueRecovered";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updatePaymentsStatus = (ids, status) => (dispatch) => {
+export const updateDueRecoveredsStatus = (ids, status) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateStatusForPayments(ids, status)
+    .updateStatusForDueRecovereds(ids, status)
     .then(() => {
-      dispatch(actions.paymentsStatusUpdated({ ids, status }));
+      dispatch(actions.dueRecoveredsStatusUpdated({ ids, status }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't update payments status";
+      error.clientMessage = "Can't update dueRecovereds status";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deletePayments = (ids) => (dispatch) => {
+export const deleteDueRecovereds = (ids) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deletePayments(ids)
+    .deleteDueRecovereds(ids)
     .then(() => {
-      dispatch(actions.paymentsDeleted({ ids }));
+      dispatch(actions.dueRecoveredsDeleted({ ids }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't delete payments";
+      error.clientMessage = "Can't delete dueRecovereds";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };

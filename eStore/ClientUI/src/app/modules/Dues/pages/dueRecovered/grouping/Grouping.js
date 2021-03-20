@@ -1,23 +1,23 @@
 import React, { useMemo } from "react";
 import { useUIContext } from "../UIContext";
 
-//Payment
-//payment
+//DueRecovered
+//dueRecovered
 
 
-export function PaymentsGrouping() {
-  // Payments UI Context
-  const paymentsUIContext = useUIContext();
-  const paymentsUIProps = useMemo(() => {
+export function DueRecoveredsGrouping() {
+  // DueRecovereds UI Context
+  const dueRecoveredsUIContext = useUIContext();
+  const dueRecoveredsUIProps = useMemo(() => {
     return {
-      ids: paymentsUIContext.ids,
-      setIds: paymentsUIContext.setIds,
-      openDeletePaymentsDialog: paymentsUIContext.openDeletePaymentsDialog,
-      openFetchPaymentsDialog: paymentsUIContext.openFetchPaymentsDialog,
-      openUpdatePaymentsStatusDialog:
-        paymentsUIContext.openUpdatePaymentsStatusDialog,
+      ids: dueRecoveredsUIContext.ids,
+      setIds: dueRecoveredsUIContext.setIds,
+      openDeleteDueRecoveredsDialog: dueRecoveredsUIContext.openDeleteDueRecoveredsDialog,
+      openFetchDueRecoveredsDialog: dueRecoveredsUIContext.openFetchDueRecoveredsDialog,
+      openUpdateDueRecoveredsStatusDialog:
+        dueRecoveredsUIContext.openUpdateDueRecoveredsStatusDialog,
     };
-  }, [paymentsUIContext]);
+  }, [dueRecoveredsUIContext]);
 
   return (
     <div className="form">
@@ -27,7 +27,7 @@ export function PaymentsGrouping() {
             <div className="form-label form-label-no-wrap">
               <label className="font-bold font-danger">
                 <span>
-                  Selected records count: <b>{paymentsUIProps.ids.length}</b>
+                  Selected records count: <b>{dueRecoveredsUIProps.ids.length}</b>
                 </span>
               </label>
             </div>
@@ -35,7 +35,7 @@ export function PaymentsGrouping() {
               <button
                 type="button"
                 className="btn btn-danger font-weight-bolder font-size-sm"
-                onClick={paymentsUIProps.openDeletePaymentsDialog}
+                onClick={dueRecoveredsUIProps.openDeleteDueRecoveredsDialog}
               >
                 <i className="fa fa-trash"></i> Delete All
               </button>
@@ -43,7 +43,7 @@ export function PaymentsGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={paymentsUIProps.openFetchPaymentsDialog}
+                onClick={dueRecoveredsUIProps.openFetchDueRecoveredsDialog}
               >
                 <i className="fa fa-stream"></i> Fetch Selected
               </button>
@@ -51,7 +51,7 @@ export function PaymentsGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={paymentsUIProps.openUpdatePaymentsStatusDialog}
+                onClick={dueRecoveredsUIProps.openUpdateDueRecoveredsStatusDialog}
               >
                 <i className="fa fa-sync-alt"></i> Update Status
               </button>

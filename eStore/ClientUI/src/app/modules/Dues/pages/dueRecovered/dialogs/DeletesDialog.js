@@ -1,52 +1,52 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/payments/Actions";
+import * as actions from "../../../_redux/dueRecovereds/Actions";
 import { useUIContext } from "../UIContext";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
 
 // Delete Selected Records
-//payment
-//Payment
+//dueRecovered
+//DueRecovered
 
 
 export function DeletesDialog({ show, onHide }) {
-  // Payments UI Context
-  const paymentsUIContext = useUIContext();
-  const paymentsUIProps = useMemo(() => {
+  // DueRecovereds UI Context
+  const dueRecoveredsUIContext = useUIContext();
+  const dueRecoveredsUIProps = useMemo(() => {
     return {
-      ids: paymentsUIContext.ids,
-      setIds: paymentsUIContext.setIds,
-      queryParams: paymentsUIContext.queryParams,
+      ids: dueRecoveredsUIContext.ids,
+      setIds: dueRecoveredsUIContext.setIds,
+      queryParams: dueRecoveredsUIContext.queryParams,
     };
-  }, [paymentsUIContext]);
+  }, [dueRecoveredsUIContext]);
 
-  // Payments Redux state
+  // DueRecovereds Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.payments.actionsLoading }),
+    (state) => ({ isLoading: state.dueRecovereds.actionsLoading }),
     shallowEqual
   );
 
-  // if payments weren't selected we should close modal
+  // if dueRecovereds weren't selected we should close modal
   useEffect(() => {
-    if (!paymentsUIProps.ids || paymentsUIProps.ids.length === 0) {
+    if (!dueRecoveredsUIProps.ids || dueRecoveredsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paymentsUIProps.ids]);
+  }, [dueRecoveredsUIProps.ids]);
 
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading, dispatch]);
 
-  const deletePayments = () => {
-    // server request for deleting payment by selected ids
-    dispatch(actions.deletePayments(paymentsUIProps.ids)).then(() => {
+  const deleteDueRecovereds = () => {
+    // server request for deleting dueRecovered by selected ids
+    dispatch(actions.deleteDueRecovereds(dueRecoveredsUIProps.ids)).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchPayments(paymentsUIProps.queryParams)).then(
+      dispatch(actions.fetchDueRecovereds(dueRecoveredsUIProps.queryParams)).then(
         () => {
           // clear selections list
-          paymentsUIProps.setIds([]);
+          dueRecoveredsUIProps.setIds([]);
           // closing delete modal
           onHide();
         }
@@ -65,14 +65,14 @@ export function DeletesDialog({ show, onHide }) {
       {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Payments Delete
+          DueRecovereds Delete
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete selected payments?</span>
+          <span>Are you sure to permanently delete selected dueRecovereds?</span>
         )}
-        {isLoading && <span>Payment are deleting...</span>}
+        {isLoading && <span>DueRecovered are deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -86,7 +86,7 @@ export function DeletesDialog({ show, onHide }) {
           <> </>
           <button
             type="button"
-            onClick={deletePayments}
+            onClick={deleteDueRecovereds}
             className="btn btn-primary btn-elevate"
           >
             Delete

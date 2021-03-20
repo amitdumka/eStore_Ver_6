@@ -1,11 +1,11 @@
 import axios from "axios";
 
 
-//Payment
-//payment
+//DueRecovered
+//dueRecovered
 
 
-export const API_URL = "https://www.aprajitaretails.in/api/payments";
+export const API_URL = "https://www.aprajitaretails.in/api/dueRecovereds";
 export async function doLogin(){
   axios.post("https://www.aprajitaretails.in/api/login").then(
     res => {
@@ -23,25 +23,25 @@ export async function verifyLogin(){
   ).catch(function (error){console.log(error)});
 
 }
-// CREATE =>  POST: add a new payment to the server
-export async function createPayment(payment) {
-  return await axios.post(API_URL,  payment,{
+// CREATE =>  POST: add a new dueRecovered to the server
+export async function createDueRecovered(dueRecovered) {
+  return await axios.post(API_URL,  dueRecovered,{
     headers: {'Content-Type' : 'application/json; charset=utf-8' }
 });
 }
 
 // READ
-export  function getAllPayments() {
+export  function getAllDueRecovereds() {
   return  axios.get(API_URL);//.catch(function (error){console.log(error)});
 }
 
-export async function getPaymentById(paymentId) {
-  return await axios.get(`${API_URL}/${paymentId}`);
+export async function getDueRecoveredById(dueRecoveredId) {
+  return await axios.get(`${API_URL}/${dueRecoveredId}`);
 }
 
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
 // items => filtered/sorted result
-export async function findPayments(queryParams) {
+export async function findDueRecovereds(queryParams) {
   return await axios.get(`${API_URL}/dto`);//find`, { queryParams });
 }
 
@@ -59,27 +59,27 @@ export async function getAllBankAccount(){
 }
 
 
-// UPDATE => PUT: update the payment on the server
-export async function updatePayment(payment) {
-  return await axios.put(`${API_URL}/${payment.paymentId}`, JSON.stringify( payment ),{
+// UPDATE => PUT: update the dueRecovered on the server
+export async function updateDueRecovered(dueRecovered) {
+  return await axios.put(`${API_URL}/${dueRecovered.dueRecoveredId}`, JSON.stringify( dueRecovered ),{
     headers: {         'Content-Type' : 'application/json; charset=utf-8' }
 });
 }
 
 // UPDATE Status
-export async function updateStatusForPayments(ids, status) {
-  return await axios.post(`${API_URL}/updateStatusForPayments`, {
+export async function updateStatusForDueRecovereds(ids, status) {
+  return await axios.post(`${API_URL}/updateStatusForDueRecovereds`, {
     ids,
     status
   });
 }
 
-// DELETE => delete the payment from the server
-export async function deletePayment(paymentId) {
-  return await axios.delete(`${API_URL}/${paymentId}`);
+// DELETE => delete the dueRecovered from the server
+export async function deleteDueRecovered(dueRecoveredId) {
+  return await axios.delete(`${API_URL}/${dueRecoveredId}`);
 }
 
-// DELETE Payments by ids
-export async function deletePayments(ids) {
-  return await axios.post(`${API_URL}/deletePayments`, { ids });
+// DELETE DueRecovereds by ids
+export async function deleteDueRecovereds(ids) {
+  return await axios.post(`${API_URL}/deleteDueRecovereds`, { ids });
 }

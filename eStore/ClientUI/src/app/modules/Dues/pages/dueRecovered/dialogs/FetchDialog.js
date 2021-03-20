@@ -4,48 +4,48 @@ import { shallowEqual, useSelector } from "react-redux";
 
 import { useUIContext } from "../UIContext";
 
-//payment
-//Payment
+//dueRecovered
+//DueRecovered
 
 
-const selectedPayments = (entities, ids) => {
-  const _payments = [];
+const selectedDueRecovereds = (entities, ids) => {
+  const _dueRecovereds = [];
   ids.forEach((id) => {
-    const payment = entities.find((el) => el.id === id);
-    if (payment) {
-      _payments.push(payment);
+    const dueRecovered = entities.find((el) => el.id === id);
+    if (dueRecovered) {
+      _dueRecovereds.push(dueRecovered);
     }
   });
-  return _payments;
+  return _dueRecovereds;
 };
 
 export function FetchDialog({ show, onHide }) {
-  // Payments UI Context
-  const paymentsUIContext = useUIContext();
-  const paymentsUIProps = useMemo(() => {
+  // DueRecovereds UI Context
+  const dueRecoveredsUIContext = useUIContext();
+  const dueRecoveredsUIProps = useMemo(() => {
     return {
-      ids: paymentsUIContext.ids,
+      ids: dueRecoveredsUIContext.ids,
     };
-  }, [paymentsUIContext]);
+  }, [dueRecoveredsUIContext]);
 
-  // Payments Redux state
-  const { payments } = useSelector(
+  // DueRecovereds Redux state
+  const { dueRecovereds } = useSelector(
     (state) => ({
-      payments: selectedPayments(
-        state.payments.entities,
-        paymentsUIProps.ids
+      dueRecovereds: selectedDueRecovereds(
+        state.dueRecovereds.entities,
+        dueRecoveredsUIProps.ids
       ),
     }),
     shallowEqual
   );
 
-  // if payments weren't selected we should close modal
+  // if dueRecovereds weren't selected we should close modal
   useEffect(() => {
-    if (!paymentsUIProps.ids || paymentsUIProps.ids.length === 0) {
+    if (!dueRecoveredsUIProps.ids || dueRecoveredsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paymentsUIProps.ids]);
+  }, [dueRecoveredsUIProps.ids]);
 
   return (
     <Modal
@@ -68,12 +68,12 @@ export function FetchDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {payments.map((payment) => (
-              <tr key={`id${payment.id}`}>
-                <td>{payment.id}</td>
+            {dueRecovereds.map((dueRecovered) => (
+              <tr key={`id${dueRecovered.id}`}>
+                <td>{dueRecovered.id}</td>
                 <td>
                   <span className="ml-3">
-                    {payment.lastName}, {payment.firstName}
+                    {dueRecovered.lastName}, {dueRecovered.firstName}
                   </span>
                 </td>
               </tr>

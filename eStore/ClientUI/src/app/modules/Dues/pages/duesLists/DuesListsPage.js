@@ -18,86 +18,86 @@ import { DuesListsCard } from "./DuesListsCard";
 export function DuesListsPage({ history }) {
   const duesListsUIEvents = {
     newDuesListButtonClick: () => {
-      history.push("/accounting/duesList/duesLists/new");
+      history.push("/due/duelist/new");
     },
     openEditDuesListDialog: (id) => {
-      history.push(`/accounting/duesList/duesLists/${id}/edit`);
+      history.push(`/due/duelist/${id}/edit`);
     },
     openDeleteDuesListDialog: (id) => {
-      history.push(`/accounting/duesList/duesLists/${id}/delete`);
+      history.push(`/due/duelist/${id}/delete`);
     },
     openDeleteDuesListsDialog: () => {
-      history.push(`/accounting/duesList/duesLists/deleteDuesLists`);
+      history.push(`/due/duelist/deleteDuesLists`);
     },
     openFetchDuesListsDialog: () => {
-      history.push(`/accounting/duesList/duesLists/fetch`);
+      history.push(`/due/duelist/fetch`);
     },
     openUpdateDuesListsStatusDialog: () => {
-      history.push("/accounting/duesList/duesLists/updateStatus");
+      history.push("/due/duelist/updateStatus");
     }
   }
 
   return (
     <UIProvider UIEvents={duesListsUIEvents}>
       <DuesListsLoadingDialog />
-      <Route path="/accounting/duesList/duesLists/new">
+      <Route path="/due/duelist/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/accounting/duesList/duesLists");
+              history.push("/due/duelist");
             }}
           />
         )}
       </Route>
-      <Route path="/accounting/duesList/duesLists/:id/edit">
+      <Route path="/due/duelist/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/accounting/duesList/duesLists");
+              history.push("/due/duelist");
             }}
           />
         )}
       </Route>
-      <Route path="/accounting/duesList/duesLists/deleteDuesLists">
+      <Route path="/due/duelist/deleteDuesLists">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/accounting/duesList/duesLists");
+              history.push("/due/duelist");
             }}
           />
         )}
       </Route>
-      <Route path="/accounting/duesList/duesLists/:id/delete">
+      <Route path="/due/duelist/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/accounting/duesList/duesLists");
+              history.push("/due/duelist");
             }}
           />
         )}
       </Route>
-      <Route path="/accounting/duesList/duesLists/fetch">
+      <Route path="/due/duelist/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/accounting/duesList/duesLists");
+              history.push("/due/duelist");
             }}
           />
         )}
       </Route>
-      <Route path="/accounting/duesList/duesLists/updateStatus">
+      <Route path="/due/duelist/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/accounting/duesList/duesLists");
+              history.push("/due/duelist");
             }}
           />
         )}

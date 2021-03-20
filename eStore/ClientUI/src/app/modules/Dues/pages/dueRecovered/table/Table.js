@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/payments/Actions";
+import * as actions from "../../../_redux/dueRecovereds/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -23,45 +23,45 @@ import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 import FieldDateFormater from "../../../../../../_estore/formaters/FieldDateFormater";
 
-//Payment
-//payment
+//DueRecovered
+//dueRecovered
 
 
 
-export function PaymentsTable() {
-  // Payments UI Context
-  const paymentsUIContext = useUIContext();
-  const paymentsUIProps = useMemo(() => {
+export function DueRecoveredsTable() {
+  // DueRecovereds UI Context
+  const dueRecoveredsUIContext = useUIContext();
+  const dueRecoveredsUIProps = useMemo(() => {
     return {
-      ids: paymentsUIContext.ids,
-      setIds: paymentsUIContext.setIds,
-      queryParams: paymentsUIContext.queryParams,
-      setQueryParams: paymentsUIContext.setQueryParams,
-      openEditPaymentDialog: paymentsUIContext.openEditPaymentDialog,
-      openDeletePaymentDialog: paymentsUIContext.openDeletePaymentDialog,
+      ids: dueRecoveredsUIContext.ids,
+      setIds: dueRecoveredsUIContext.setIds,
+      queryParams: dueRecoveredsUIContext.queryParams,
+      setQueryParams: dueRecoveredsUIContext.setQueryParams,
+      openEditDueRecoveredDialog: dueRecoveredsUIContext.openEditDueRecoveredDialog,
+      openDeleteDueRecoveredDialog: dueRecoveredsUIContext.openDeleteDueRecoveredDialog,
     };
-  }, [paymentsUIContext]);
+  }, [dueRecoveredsUIContext]);
 
-  // Getting curret state of payments list from store (Redux)
+  // Getting curret state of dueRecovereds list from store (Redux)
   const { currentState } = useSelector(
-    (state) => ({ currentState: state.payments }),
+    (state) => ({ currentState: state.dueRecovereds }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
 
-  // Payments Redux state
+  // DueRecovereds Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    paymentsUIProps.setIds([]);
+    dueRecoveredsUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchPayments(paymentsUIProps.queryParams));
+    dispatch(actions.fetchDueRecovereds(dueRecoveredsUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paymentsUIProps.queryParams, dispatch]);
+  }, [dueRecoveredsUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "paymentId",
+      dataField: "dueRecoveredId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
@@ -78,8 +78,8 @@ export function PaymentsTable() {
     
    
     {
-      dataField: "paymentSlipNo",
-      text: "Payment Slip No",
+      dataField: "dueRecoveredSlipNo",
+      text: "DueRecovered Slip No",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -107,8 +107,8 @@ export function PaymentsTable() {
       headerSortingClasses,
     },
     {
-      dataField: "paymentDetails",
-      text: "Payment Details",
+      dataField: "dueRecoveredDetails",
+      text: "DueRecovered Details",
       //formatter: columnFormatters.SalaryComponentsColumnFormatter,
       sort: false,
       sortCaret: sortCaret,
@@ -132,8 +132,8 @@ export function PaymentsTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditPaymentDialog: paymentsUIProps.openEditPaymentDialog,
-        openDeletePaymentDialog: paymentsUIProps.openDeletePaymentDialog,
+        openEditDueRecoveredDialog: dueRecoveredsUIProps.openEditDueRecoveredDialog,
+        openDeleteDueRecoveredDialog: dueRecoveredsUIProps.openDeleteDueRecoveredDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -147,8 +147,8 @@ export function PaymentsTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: paymentsUIProps.queryParams.pageSize,
-    page: paymentsUIProps.queryParams.pageNumber,
+    sizePerPage: dueRecoveredsUIProps.queryParams.pageSize,
+    page: dueRecoveredsUIProps.queryParams.pageNumber,
   };
 
   
@@ -169,19 +169,19 @@ export function PaymentsTable() {
                 bootstrap4
                 remote
                 noDataIndication="No Record Found now.."
-                keyField="paymentId"
+                keyField="dueRecoveredId"
                 data={entities === null ? []: totalCount ?entities:[]}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  paymentsUIProps.setQueryParams
+                  dueRecoveredsUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: paymentsUIProps.ids,
-                  setIds: paymentsUIProps.setIds,
-                  idName:"paymentId",
+                  ids: dueRecoveredsUIProps.ids,
+                  setIds: dueRecoveredsUIProps.setIds,
+                  idName:"dueRecoveredId",
                 })}
                 {...paginationTableProps}
               >
