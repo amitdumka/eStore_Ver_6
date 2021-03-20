@@ -31,14 +31,20 @@ export function UIProvider({ UIEvents, children }) {
 
   const initRent = {
     rentId: 0,
-    bankId: 0,
-    account: "",
-    branchName: "",
-    accountType: 0,
-    bankTranscations:null,
-    bankDeposits:null,
-    bankWithdrawals:null,
-    banks:null
+    rentedLocationId: 0,
+    location: null,
+    rentType: 0,
+    onDate: new Date(),
+    period: "",
+    amount: 0.0,
+    mode: 0,
+    paymentDetails: "",
+    remarks: "",
+    storeId: 1,
+    store: null,
+    userId: "WebUI",
+    entryStatus: 0,
+    isReadOnly: false,
   };
 
   const value = {
@@ -53,8 +59,7 @@ export function UIProvider({ UIEvents, children }) {
     openDeleteRentDialog: UIEvents.openDeleteRentDialog,
     openDeleteRentsDialog: UIEvents.openDeleteRentsDialog,
     openFetchRentsDialog: UIEvents.openFetchRentsDialog,
-    openUpdateRentsStatusDialog:
-      UIEvents.openUpdateRentsStatusDialog,
+    openUpdateRentsStatusDialog: UIEvents.openUpdateRentsStatusDialog,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

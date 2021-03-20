@@ -25,14 +25,14 @@ export function RentsCard() {
 
   return (
     <Card>
-      <CardHeader title="Bank Accounts list">
+      <CardHeader title="Rent Payment list">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
             onClick={RentsUIProps.newRentButtonClick}
           >
-            New Bank Account
+            New Payment
           </button>
         </CardHeaderToolbar>
       </CardHeader>

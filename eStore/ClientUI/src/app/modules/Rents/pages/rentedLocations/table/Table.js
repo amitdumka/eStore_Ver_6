@@ -22,7 +22,6 @@ import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 
-
 //RentedLocation
 //rentedLocation
 
@@ -35,8 +34,10 @@ export function RentedLocationsTable() {
       setIds: rentedLocationsUIContext.setIds,
       queryParams: rentedLocationsUIContext.queryParams,
       setQueryParams: rentedLocationsUIContext.setQueryParams,
-      openEditRentedLocationDialog: rentedLocationsUIContext.openEditRentedLocationDialog,
-      openDeleteRentedLocationDialog: rentedLocationsUIContext.openDeleteRentedLocationDialog,
+      openEditRentedLocationDialog:
+        rentedLocationsUIContext.openEditRentedLocationDialog,
+      openDeleteRentedLocationDialog:
+        rentedLocationsUIContext.openDeleteRentedLocationDialog,
     };
   }, [rentedLocationsUIContext]);
 
@@ -66,8 +67,76 @@ export function RentedLocationsTable() {
       headerSortingClasses,
     },
     {
-      dataField: "rentedLocationName",
-      text: "RentedLocation Name",
+      dataField: "placeName",
+      text: "Place Name",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "address",
+      text: "Address",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "onDate",
+      text: "Date",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "vacatedDate",
+      text: "Vacated Date",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "city",
+      text: "City",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "ownerName",
+      text: "Owner Name",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "mobileNo",
+      text: "Mobile No",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "rentAmount",
+      text: "Rent Amount",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "advanceAmount",
+      text: "Advance Amount",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },{
+      dataField: "isRented",
+      text: "Occupied",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },{
+      dataField: "rentType",
+      text: "Rent Type",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -77,8 +146,10 @@ export function RentedLocationsTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditRentedLocationDialog: rentedLocationsUIProps.openEditRentedLocationDialog,
-        openDeleteRentedLocationDialog: rentedLocationsUIProps.openDeleteRentedLocationDialog,
+        openEditRentedLocationDialog:
+          rentedLocationsUIProps.openEditRentedLocationDialog,
+        openDeleteRentedLocationDialog:
+          rentedLocationsUIProps.openDeleteRentedLocationDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -96,16 +167,15 @@ export function RentedLocationsTable() {
     page: rentedLocationsUIProps.queryParams.pageNumber,
   };
 
-  
   return (
     <>
-       <PaginationProvider pagination={paginationFactory(paginationOptions)}>
+      <PaginationProvider pagination={paginationFactory(paginationOptions)}>
         {({ paginationProps, paginationTableProps }) => {
-          return ( 
-             <Pagination
+          return (
+            <Pagination
               isLoading={listLoading}
               paginationProps={paginationProps}
-            > 
+            >
               <BootstrapTable
                 wrapperClasses="table-responsive"
                 bordered={true}
@@ -114,7 +184,7 @@ export function RentedLocationsTable() {
                 remote
                 noDataIndication="No Record Found now.."
                 keyField="rentedLocationId"
-                data={entities === null ? []: totalCount ?entities:[]}
+                data={entities === null ? [] : totalCount ? entities : []}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
@@ -125,17 +195,17 @@ export function RentedLocationsTable() {
                   entities,
                   ids: rentedLocationsUIProps.ids,
                   setIds: rentedLocationsUIProps.setIds,
-                  idName:"rentedLocationId",
+                  idName: "rentedLocationId",
                 })}
                 {...paginationTableProps}
               >
                 <PleaseWaitMessage entities={entities} />
                 <NoRecordsFoundMessage entities={entities} />
               </BootstrapTable>
-             </Pagination>
+            </Pagination>
           );
         }}
-      </PaginationProvider> 
+      </PaginationProvider>
     </>
   );
 }

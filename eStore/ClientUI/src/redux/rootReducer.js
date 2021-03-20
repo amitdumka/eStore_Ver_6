@@ -28,6 +28,9 @@ import {dueRecoveredsSlice} from "../app/modules/Dues/_redux/dueRecovereds/Slice
 import {bookingsSlice} from "../app/modules/Tailoring/_redux/Booking/Slice";
 import {deliveriesSlice} from "../app/modules/Tailoring/_redux/Delivery/Slice";
 
+import {rentsSlice} from "../app/modules/Rents/_redux/rents/Slice";
+import{rentedLocationsSlice} from "../app/modules/Rents/_redux/rentedLocations/Slice";
+
 export const rootReducer = combineReducers({
   auth: auth.reducer,
   ledgerTypes: ledgerTypesSlice.reducer,
@@ -51,7 +54,9 @@ export const rootReducer = combineReducers({
   duesLists: duesListsSlice.reducer,
   dueRecovereds: dueRecoveredsSlice.reducer,
   bookings: bookingsSlice.reducer, 
-  deliveries: deliveriesSlice.reducer
+  deliveries: deliveriesSlice.reducer, 
+  rentedLocations: rentedLocationsSlice.reducer,
+  rents: rentsSlice.reducer
 
 });
 

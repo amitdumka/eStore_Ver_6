@@ -18,86 +18,86 @@ import { RentsCard } from "./RentsCard";
 export function RentsPage({ history }) {
   const rentsUIEvents = {
     newRentButtonClick: () => {
-      history.push("/banking/rents/new");
+      history.push("/renting/rents/new");
     },
     openEditRentDialog: (id) => {
-      history.push(`/banking/rents/${id}/edit`);
+      history.push(`/renting/rents/${id}/edit`);
     },
     openDeleteRentDialog: (id) => {
-      history.push(`/banking/rents/${id}/delete`);
+      history.push(`/renting/rents/${id}/delete`);
     },
     openDeleteRentsDialog: () => {
-      history.push(`/banking/rents/deleteRents`);
+      history.push(`/renting/rents/deleteRents`);
     },
     openFetchRentsDialog: () => {
-      history.push(`/banking/rents/fetch`);
+      history.push(`/renting/rents/fetch`);
     },
     openUpdateRentsStatusDialog: () => {
-      history.push("/banking/rents/updateStatus");
+      history.push("/renting/rents/updateStatus");
     }
   }
 
   return (
     <UIProvider UIEvents={rentsUIEvents}>
       <RentsLoadingDialog />
-      <Route path="/banking/rents/new">
+      <Route path="/renting/rents/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/banking/rents");
+              history.push("/renting/rents");
             }}
           />
         )}
       </Route>
-      <Route path="/banking/rents/:id/edit">
+      <Route path="/renting/rents/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/banking/rents");
+              history.push("/renting/rents");
             }}
           />
         )}
       </Route>
-      <Route path="/banking/rents/deleteRents">
+      <Route path="/renting/rents/deleteRents">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/banking/rents");
+              history.push("/renting/rents");
             }}
           />
         )}
       </Route>
-      <Route path="/banking/rents/:id/delete">
+      <Route path="/renting/rents/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/banking/rents");
+              history.push("/renting/rents");
             }}
           />
         )}
       </Route>
-      <Route path="/banking/rents/fetch">
+      <Route path="/renting/rents/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/banking/rents");
+              history.push("/renting/rents");
             }}
           />
         )}
       </Route>
-      <Route path="/banking/rents/updateStatus">
+      <Route path="/renting/rents/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/banking/rents");
+              history.push("/renting/rents");
             }}
           />
         )}

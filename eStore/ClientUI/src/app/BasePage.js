@@ -25,6 +25,7 @@ const LedgerPage=lazy(() =>import("./modules/legders/pages/LedgersPage"));
 const TaxesPage=lazy(() =>import("./modules/Taxes/pages/TaxesPage"));
 const DuesPage=lazy(() =>import("./modules/Dues/pages/DuesPage"));
 const TailoringPage=lazy(() =>import("./modules/Tailoring/pages/TailoringPage"));
+const RentMainPage=lazy(() =>import("./modules/Rents/pages/RentMainPage"));
 
 export default function BasePage() {
   // useEffect(() => {
@@ -54,6 +55,7 @@ export default function BasePage() {
         <Route path="/taxes" component={TaxesPage}/>
         <Route path="/due" component={DuesPage}/>
         <Route path="/tailoring" component={TailoringPage}/>
+        <Route path="/renting" component={RentMainPage}/>
         
         <Redirect to="error/error-v1" />
       </Switch>

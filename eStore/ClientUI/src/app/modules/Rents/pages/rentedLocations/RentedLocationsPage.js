@@ -18,86 +18,86 @@ import { RentedLocationsCard } from "./RentedLocationsCard";
 export function RentedLocationsPage({ history }) {
   const rentedLocationsUIEvents = {
     newRentedLocationButtonClick: () => {
-      history.push("/accounting/rentedLocationing/rentedLocations/new");
+      history.push("/renting/rentedLocations/new");
     },
     openEditRentedLocationDialog: (id) => {
-      history.push(`/accounting/rentedLocationing/rentedLocations/${id}/edit`);
+      history.push(`/renting/rentedLocations/${id}/edit`);
     },
     openDeleteRentedLocationDialog: (id) => {
-      history.push(`/accounting/rentedLocationing/rentedLocations/${id}/delete`);
+      history.push(`/renting/rentedLocations/${id}/delete`);
     },
     openDeleteRentedLocationsDialog: () => {
-      history.push(`/accounting/rentedLocationing/rentedLocations/deleteRentedLocations`);
+      history.push(`/renting/rentedLocations/deleteRentedLocations`);
     },
     openFetchRentedLocationsDialog: () => {
-      history.push(`/accounting/rentedLocationing/rentedLocations/fetch`);
+      history.push(`/renting/rentedLocations/fetch`);
     },
     openUpdateRentedLocationsStatusDialog: () => {
-      history.push("/accounting/rentedLocationing/rentedLocations/updateStatus");
+      history.push("/renting/rentedLocations/updateStatus");
     }
   }
 
   return (
     <UIProvider UIEvents={rentedLocationsUIEvents}>
       <RentedLocationsLoadingDialog />
-      <Route path="/accounting/rentedLocationing/rentedLocations/new">
+      <Route path="/renting/rentedLocations/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/accounting/rentedLocationing/rentedLocations");
+              history.push("/renting/rentedLocations");
             }}
           />
         )}
       </Route>
-      <Route path="/accounting/rentedLocationing/rentedLocations/:id/edit">
+      <Route path="/renting/rentedLocations/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/accounting/rentedLocationing/rentedLocations");
+              history.push("/renting/rentedLocations");
             }}
           />
         )}
       </Route>
-      <Route path="/accounting/rentedLocationing/rentedLocations/deleteRentedLocations">
+      <Route path="/renting/rentedLocations/deleteRentedLocations">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/accounting/rentedLocationing/rentedLocations");
+              history.push("/renting/rentedLocations");
             }}
           />
         )}
       </Route>
-      <Route path="/accounting/rentedLocationing/rentedLocations/:id/delete">
+      <Route path="/renting/rentedLocations/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/accounting/rentedLocationing/rentedLocations");
+              history.push("/renting/rentedLocations");
             }}
           />
         )}
       </Route>
-      <Route path="/accounting/rentedLocationing/rentedLocations/fetch">
+      <Route path="/renting/rentedLocations/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/accounting/rentedLocationing/rentedLocations");
+              history.push("/renting/rentedLocations");
             }}
           />
         )}
       </Route>
-      <Route path="/accounting/rentedLocationing/rentedLocations/updateStatus">
+      <Route path="/renting/rentedLocations/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/accounting/rentedLocationing/rentedLocations");
+              history.push("/renting/rentedLocations");
             }}
           />
         )}

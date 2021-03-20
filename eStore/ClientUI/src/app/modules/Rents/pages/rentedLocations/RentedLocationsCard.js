@@ -25,14 +25,14 @@ export function RentedLocationsCard() {
 
   return (
     <Card>
-      <CardHeader title="RentedLocations list">
+      <CardHeader title="Rented Locations list">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
             onClick={rentedLocationsUIProps.newRentedLocationButtonClick}
           >
-            New RentedLocation
+            New Rented Location
           </button>
         </CardHeaderToolbar>
       </CardHeader>

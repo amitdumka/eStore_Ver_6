@@ -1,8 +1,8 @@
 import React, { Suspense } from "react";
 import { Redirect, Switch } from "react-router-dom";
 
-import { BanksPage } from "./banks/BanksPage";
-import {BankAccountsPage} from "./bankAccounts/BankAccountsPage";
+import { RentsPage } from "./rents/RentsPage";
+import {RentedLocationsPage} from "./rentedLocations/RentedLocationsPage";
 
 
 import { LayoutSplashScreen, ContentRoute } from "../../../../_metronic/layout";
@@ -19,8 +19,8 @@ export default function RentMainPage() {
             to="/renting/rents"
           />
         }
-        <ContentRoute path="/renting/rents" component={BanksPage} />
-        <ContentRoute path="/renting/rentedLocations"  component={BankAccountsPage}/>
+        <ContentRoute path="/renting/rents" component={RentsPage} />
+        <ContentRoute path="/renting/rentedLocations"  component={RentedLocationsPage}/>
         
       </Switch>
     </Suspense>
