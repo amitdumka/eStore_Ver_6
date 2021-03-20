@@ -66,7 +66,7 @@ export function BankDepositsTable() {
       headerSortingClasses,
     },
     {
-      dataField: "bankAccountId",
+      dataField: "account.account",
       text: "AccountNo",
       sort: true,
       sortCaret: sortCaret,

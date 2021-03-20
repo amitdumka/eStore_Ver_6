@@ -26,8 +26,6 @@ import FieldDateFormater from "../../../../../../_estore/formaters/FieldDateForm
 //DuesList
 //duesList
 
-
-
 export function DuesListsTable() {
   // DuesLists UI Context
   const duesListsUIContext = useUIContext();
@@ -66,17 +64,27 @@ export function DuesListsTable() {
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
-    }, {
-      dataField: "recoveryDate",
+    },
+    {
+      dataField: "dailySale.saleDate",
       text: "Date",
       sort: true,
-      type:      'date',
+      type: "date",
       formatter: FieldDateFormater,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
-    
-   
+
+    {
+      dataField: "recoveryDate",
+      text: "Recovery Date",
+      sort: true,
+      type: "date",
+      formatter: FieldDateFormater,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+
     {
       dataField: "amount",
       text: "Amount",
@@ -86,21 +94,21 @@ export function DuesListsTable() {
     },
     {
       dataField: "isRecovered",
-      text: "isRecovered",
+      text: "Recovered",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
-    },   
+    },
     {
-      dataField: "dailySaleId",
-      text: "dailySaleId",
+      dataField: "dailySale.invNo",
+      text: "Invoice No",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
       dataField: "isPartialRecovery",
-      text: "isPartialRecovery",
+      text: "Partial Recovery",
       sort: true,
       //formatter: columnFormatters.PayModeColumnFormatter,
       sortCaret: sortCaret,
@@ -108,24 +116,10 @@ export function DuesListsTable() {
     },
     {
       dataField: "storeId",
-      text: "storeId",
+      text: "Store",
       //formatter: columnFormatters.SalaryComponentsColumnFormatter,
       sort: false,
       sortCaret: sortCaret,
-    },
-    {
-      dataField: "paidBy.staffName",
-      text: "PaidBy",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "party.partyName",
-      text: "Ledger",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
     },
     {
       dataField: "action",
@@ -151,18 +145,16 @@ export function DuesListsTable() {
     page: duesListsUIProps.queryParams.pageNumber,
   };
 
-  
   return (
     <>
-       <PaginationProvider pagination={paginationFactory(paginationOptions)}>
+      <PaginationProvider pagination={paginationFactory(paginationOptions)}>
         {({ paginationProps, paginationTableProps }) => {
-          return ( 
-             <Pagination
+          return (
+            <Pagination
               isLoading={listLoading}
               paginationProps={paginationProps}
-            > 
+            >
               <BootstrapTable
-             
                 wrapperClasses="table-responsive"
                 bordered={true}
                 classes="table table-head-custom table-vertical-center overflow-hidden"
@@ -170,7 +162,7 @@ export function DuesListsTable() {
                 remote
                 noDataIndication="No Record Found now.."
                 keyField="duesListId"
-                data={entities === null ? []: totalCount ?entities:[]}
+                data={entities === null ? [] : totalCount ? entities : []}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
@@ -181,17 +173,17 @@ export function DuesListsTable() {
                   entities,
                   ids: duesListsUIProps.ids,
                   setIds: duesListsUIProps.setIds,
-                  idName:"duesListId",
+                  idName: "duesListId",
                 })}
                 {...paginationTableProps}
               >
                 <PleaseWaitMessage entities={entities} />
                 <NoRecordsFoundMessage entities={entities} />
               </BootstrapTable>
-             </Pagination>
+            </Pagination>
           );
         }}
-      </PaginationProvider> 
+      </PaginationProvider>
     </>
   );
 }

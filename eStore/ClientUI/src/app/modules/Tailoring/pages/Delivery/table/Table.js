@@ -75,7 +75,7 @@ export function DeliveriesTable() {
       headerSortingClasses,
     },
     {
-      dataField: "talioringBookingId",
+      dataField: "booking.bookingSlipNo",
       text: "Booking No",
       sort: true,
       sortCaret: sortCaret,

@@ -78,15 +78,22 @@ export function DueRecoveredsTable() {
     
    
     {
-      dataField: "duesListId",
-      text: "dues List",
+      dataField: "duesList.dailySale.invNo",
+      text: "Invoice No",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "duesList.amount",
+      text: "Due Amount",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
       dataField: "amountPaid",
-      text: "amount Paid",
+      text: "Amount Paid",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -109,14 +116,14 @@ export function DueRecoveredsTable() {
     },
     {
       dataField: "remarks",
-      text: "remarks",
+      text: "Remarks",
       //formatter: columnFormatters.SalaryComponentsColumnFormatter,
       sort: false,
       sortCaret: sortCaret,
     },
     {
       dataField: "storeId",
-      text: "store",
+      text: "Store",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,

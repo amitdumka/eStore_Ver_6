@@ -67,7 +67,7 @@ export function RentsTable() {
       headerSortingClasses,
     },
     {
-      dataField: "rentedLocationId",
+      dataField: "location.placeName",
       text: "Rented Location",
       sort: true,
       sortCaret: sortCaret,

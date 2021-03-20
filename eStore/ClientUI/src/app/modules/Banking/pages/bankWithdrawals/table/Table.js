@@ -66,7 +66,7 @@ export function BankWithdrawalsTable() {
       headerSortingClasses,
     },
     {
-      dataField: "bankAccountId",
+      dataField: "account.account",
       text: "Account",
       sort: true,
       sortCaret: sortCaret,
