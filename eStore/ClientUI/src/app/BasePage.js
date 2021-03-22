@@ -5,15 +5,6 @@ import { BuilderPage } from "./pages/BuilderPage";
 import { MyPage } from "./pages/MyPage";
 import { DashboardPage } from "./pages/DashboardPage";
 
-//Okta
-import { oktaAuthConfig, oktaSignInConfig } from "../config";
-import { Security, SecureRoute, LoginCallback } from "@okta/okta-react";
-import { OktaAuth } from "@okta/okta-auth-js";
-import Login from "./modules/okta/Login";
-import { useOktaAuth } from "@okta/okta-react";
-
-const oktaAuthSys = new OktaAuth(oktaAuthConfig);
-
 const StoreMainPage = lazy(() =>
   import("./modules/Stores/pages/StoreMainPage")
 );
@@ -35,45 +26,30 @@ export default function BasePage() {
   //   console.log('Base page');
   // }, []) // [] - is required if you need only one call
   // https://reactjs.org/docs/hooks-reference.html#useeffect
-  //Okta Code
-  const { oktaAuth, authState } = useOktaAuth();
-  const history = useHistory();
-  const customAuthHandler = () => {
-    history.push("/login");
-  };
-  const logout = async () => oktaAuth.signOut();
+
   return (
     <Suspense fallback={<LayoutSplashScreen />}>
-      <Security oktaAuth={oktaAuthSys} onAuthRequired={customAuthHandler}>
-        <Switch>
-          {
-            /* Redirect from root URL to /dashboard. */
-            <Redirect exact from="/" to="/dashboard" />
-          }
-          {/**Okta Code */}
-          <Route
-            path="/login"
-            render={() => <Login config={oktaSignInConfig} />}
-          />
-          <Route path="/login/callback" component={LoginCallback} />
-          <Route path="/logout" component={Logout} />
+      <Switch>
+        {
+          /* Redirect from root URL to /dashboard. */
+          <Redirect exact from="/" to="/dashboard" />
+        }
 
-          <ContentRoute path="/dashboard" component={DashboardPage} />
-          <ContentRoute path="/builder" component={BuilderPage} />
-          <ContentRoute path="/my-page" component={MyPage} />
-          <Route path="/store" component={StoreMainPage} />
-          <Route path="/payroll" component={PayrollPage} />
-          <Route path="/accounting" component={AccountingPage} />
-          <Route path="/banking" component={BankingPage} />
-          <Route path="/ledger" component={LedgerPage} />
-          <Route path="/taxes" component={TaxesPage} />
-          <Route path="/due" component={DuesPage} />
-          <Route path="/tailoring" component={TailoringPage} />
-          <Route path="/renting" component={RentMainPage} />
+        <ContentRoute path="/dashboard" component={DashboardPage} />
+        <ContentRoute path="/builder" component={BuilderPage} />
+        <ContentRoute path="/my-page" component={MyPage} />
+        <Route path="/store" component={StoreMainPage} />
+        <Route path="/payroll" component={PayrollPage} />
+        <Route path="/accounting" component={AccountingPage} />
+        <Route path="/banking" component={BankingPage} />
+        <Route path="/ledger" component={LedgerPage} />
+        <Route path="/taxes" component={TaxesPage} />
+        <Route path="/due" component={DuesPage} />
+        <Route path="/tailoring" component={TailoringPage} />
+        <Route path="/renting" component={RentMainPage} />
 
-          <Redirect to="error/error-v1" />
-        </Switch>
-      </Security>
+        <Redirect to="error/error-v1" />
+      </Switch>
     </Suspense>
   );
 }
