@@ -6,7 +6,7 @@ import { MyPage } from "./pages/MyPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { Security, SecureRoute, LoginCallback } from '@okta/okta-react';
 import CustomLoginComponent from "./modules/okta/Login";
-
+import Messages from './modules/okta/Messages';
 
 const StoreMainPage = lazy(() =>
   import("./modules/Stores/pages/StoreMainPage")
@@ -41,6 +41,7 @@ export default function BasePage() {
         <ContentRoute path="/dashboard" component={DashboardPage} />
         <ContentRoute path="/builder" component={BuilderPage} />
         <ContentRoute path="/my-page" component={MyPage} />
+        <SecureRoute path="/messages" component={Messages} />
         <Route path="/store" component={StoreMainPage} />
         <Route path="/payroll" component={PayrollPage} />
         <Route path="/accounting" component={AccountingPage} />
