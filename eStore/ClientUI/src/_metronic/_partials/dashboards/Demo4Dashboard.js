@@ -8,6 +8,7 @@ import {
   ListsWidget1,
   AdvanceTablesWidget2,
   AdvanceTablesWidget4,
+  CashBookTableWidget,
   ListsWidget3,
   ListsWidget4,
   ListsWidget8,
@@ -20,7 +21,7 @@ import {
   TilesWidget12,
 } from "../widgets";
 
-export function Demo4Dashboard() {
+export function Demo4Dashboard({ totalCashBook, cashBook, masterReports }) {
   return (
     <>
       <div className="row">
@@ -61,7 +62,7 @@ export function Demo4Dashboard() {
               iconColor="success"
               widgetHeight="150px"
             />
-          </div>    
+          </div>
         </div>
       </div>
       {/* begin::Row */}
@@ -72,7 +73,14 @@ export function Demo4Dashboard() {
         <div className="col-lg-6">
           <ListsWidget11 className="card-stretch gutter-b" />
         </div>
-        
+      </div>
+      <div className="row">
+        <div className="col-xxl-8 order-2 order-xxl-1">
+          <CashBookTableWidget
+            className="card-stretch gutter-b"
+            cashBook={cashBook} totalCount={totalCashBook}
+          />
+        </div>
       </div>
       {/* end::Row */}
     </>

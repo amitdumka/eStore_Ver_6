@@ -30,6 +30,7 @@ import {deliveriesSlice} from "../app/modules/Tailoring/_redux/Delivery/Slice";
 
 import {rentsSlice} from "../app/modules/Rents/_redux/rents/Slice";
 import{rentedLocationsSlice} from "../app/modules/Rents/_redux/rentedLocations/Slice";
+import {dashboardSlice} from "./dashboard/Slice";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -56,7 +57,8 @@ export const rootReducer = combineReducers({
   bookings: bookingsSlice.reducer, 
   deliveries: deliveriesSlice.reducer, 
   rentedLocations: rentedLocationsSlice.reducer,
-  rents: rentsSlice.reducer
+  rents: rentsSlice.reducer, 
+  dashboard: dashboardSlice.reducer,
 
 });
 
