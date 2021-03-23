@@ -16,6 +16,9 @@ export { ListsWidget9 } from "./lists/ListsWidget9";
 export { ListsWidget10 } from "./lists/ListsWidget10";
 export { ListsWidget11 } from "./lists/ListsWidget11";
 export { ListsWidget14 } from "./lists/ListsWidget14";
+export { TailoringWidget } from "./lists/TailoringWidget";
+export { SaleListWidget } from "./lists/SaleListWidget";
+export {EmpInfoWidget} from "./lists/EmpInfoWidget";
 
 // Stats
 export { StatsWidget10 } from "./stats/StatsWidget10";
@@ -34,6 +37,7 @@ export { AdvanceTablesWidget4 } from "./advance-tables/AdvanceTablesWidget4";
 export { AdvanceTablesWidget7 } from "./advance-tables/AdvanceTablesWidget7";
 export { AdvanceTablesWidget9 } from "./advance-tables/AdvanceTablesWidget9";
 export { CashBookTableWidget } from "./advance-tables/CashBookTableWidget";
+export { CashBookTablePageWidget } from "./advance-tables/CashBookTableWidget";
 
 // Tiles
 export { TilesWidget1 } from "./tiles/TilesWidget1";
