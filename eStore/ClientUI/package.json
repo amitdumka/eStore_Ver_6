@@ -6,7 +6,7 @@
     "start_net": "rimraf ./build && react-scripts start",
     "start": "react-scripts start",
     "crossenv": "cross-env PORT=8080 react-app-rewired start",
-    "cross": "cross-env PORT=8080 react-scripts start",
+    "cross": "react-app-rewired start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

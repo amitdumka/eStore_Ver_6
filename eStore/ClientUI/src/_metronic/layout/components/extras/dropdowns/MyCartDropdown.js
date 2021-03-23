@@ -23,7 +23,7 @@ export function MyCartDropdown() {
       >
         <OverlayTrigger
           placement="left"
-          overlay={<Tooltip id="mycart-panel-tooltip">User Cart</Tooltip>}
+          overlay={<Tooltip id="mycart-panel-tooltip">User Cart[Pending]</Tooltip>}
         >
           <div className="btn btn-icon btn-clean btn-lg mr-1">
             <span className="svg-icon svg-icon-xl svg-icon-primary">

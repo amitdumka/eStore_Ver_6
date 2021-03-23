@@ -71,10 +71,11 @@ export function Layout({ children }) {
                 </div>
                 {/*end::Page*/}
             </div>
+            {/*  */}
             <QuickUser/>
-            {/* <QuickPanel/>
+            <QuickPanel/>
             <ScrollTop/>
-            <StickyToolbar/> */}
+            <StickyToolbar/> 
             {/*end::Main*/}
             <LayoutInit />
         </>

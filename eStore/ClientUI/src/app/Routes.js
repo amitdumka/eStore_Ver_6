@@ -10,7 +10,7 @@ import { Redirect, Switch, Route, useHistory, Link } from "react-router-dom";
 import { shallowEqual, useSelector } from "react-redux";
 import { Layout } from "../_metronic/layout";
 import BasePage from "./BasePage";
-import { Logout, AuthPage } from "./modules/Auth";
+//import { Logout, AuthPage } from "./modules/Auth";
 import ErrorsPage from "./modules/ErrorsExamples/ErrorsPage";
 import { useOktaAuth } from "@okta/okta-react";
 import CustomLoginComponent from "./modules/okta/Login";

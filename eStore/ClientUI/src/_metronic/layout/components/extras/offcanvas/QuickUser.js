@@ -9,15 +9,13 @@ import { toAbsoluteUrl } from "../../../../_helpers";
 export function QuickUser() {
   const history = useHistory();
   const user1 = useSelector((state) => state.auth.user, shallowEqual);
-  const user={
-    firstname :"Amit Kumar",
-    lastname :"Sah",
-    occupation:"CEO",
-    email:"amit@microsoft.com",
-    url:"",
-    
+  const user = {
+    firstname: "Amit Kumar",
+    lastname: "Shah",
+    occupation: "CEO",
+    email: "amit@microsoft.com",
+    url: "",
   };
-
 
   const logoutClick = () => {
     const toggle = document.getElementById("kt_quick_user_toggle");
@@ -50,9 +48,9 @@ export function QuickUser() {
           <div className="symbol symbol-100 mr-5">
             <div
               className="symbol-label"
-               style={{
+              style={{
                 backgroundImage: `url(${user.pic})`,
-               }}
+              }}
             />
             <i className="symbol-badge bg-success" />
           </div>
