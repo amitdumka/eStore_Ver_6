@@ -19,7 +19,7 @@ export function Dashboard() {
             )};
     }, [uiService]);
     return <>
-    {layoutProps.demo === 'demo1' && <Demo1Dashboard />}
+    {layoutProps.demo === 'demo1' && <Demo4Dashboard />}
         {/* 
         {layoutProps.demo === 'demo2' && <Demo2Dashboard />}
         {layoutProps.demo === 'demo3' && <Demo3Dashboard />}

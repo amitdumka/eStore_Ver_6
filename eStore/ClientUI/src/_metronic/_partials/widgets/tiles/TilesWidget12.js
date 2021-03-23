@@ -28,7 +28,7 @@ export function TilesWidget12({
             href="#"
             className="text-muted text-hover-primary font-weight-bold font-size-lg mt-1"
           >
-            New Customers
+            Tailoring Sales
           </a>
         </div>
       </div>
