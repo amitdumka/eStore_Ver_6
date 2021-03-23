@@ -13,7 +13,7 @@ export function UserProfileDropdown() {
   const { user1 } = useSelector((state) => state.auth);
   
   const user={
-    firstname :"AmitKr",
+    firstname :"Amit Kumar",
     lastname :"Sah",
     occupation:"CEO",
     email:"amit@microsoft.com",

@@ -15,11 +15,11 @@ import config from '../config';
 
 export default function App({ store, persistor, basename }) {
   //Okta Addition 
-  //const history = useHistory(); // example from react-router
+  const history = useHistory(); // example from react-router
 
   const customAuthHandler = () => {
     // Redirect to the /login page that has a CustomLoginComponent
-   // history.push('/login');
+    history.push('/login');
   };
   return (
     /* Provide Redux store */

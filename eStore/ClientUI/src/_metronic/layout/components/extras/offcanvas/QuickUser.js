@@ -9,10 +9,8 @@ import { toAbsoluteUrl } from "../../../../_helpers";
 export function QuickUser() {
   const history = useHistory();
   const user1 = useSelector((state) => state.auth.user, shallowEqual);
-  
-  
   const user={
-    firstname :"AmitKr",
+    firstname :"Amit Kumar",
     lastname :"Sah",
     occupation:"CEO",
     email:"amit@microsoft.com",
@@ -63,7 +61,7 @@ export function QuickUser() {
               href="#"
               className="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"
             >
-              {user.firstname} {user.lastname} 
+              {user.firstname} {user.lastname} ~
             </a>
             <div className="text-muted mt-1">{user.occupation}</div>
             <div className="navi mt-2">

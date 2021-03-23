@@ -51,10 +51,10 @@ export default function BasePage() {
         <Route path="/due" component={DuesPage} />
         <Route path="/tailoring" component={TailoringPage} />
         <Route path="/renting" component={RentMainPage} />
+
         <Route path="/implicit/callback" component={LoginCallback} />
         <Route path="/login" component={CustomLoginComponent} />
     
-
         <Redirect to="error/error-v1" />
       </Switch>
     </Suspense>

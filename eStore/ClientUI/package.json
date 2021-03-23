@@ -5,7 +5,8 @@
   "scripts": {
     "start_net": "rimraf ./build && react-scripts start",
     "start": "react-scripts start",
-    "crossenv": "cross-env PORT=8080 react-scripts start",
+    "crossenv": "cross-env PORT=8080 react-app-rewired start",
+    "cross": "cross-env PORT=8080 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -96,7 +97,7 @@
     "yup": "0.29.0"
   },
   "devDependencies": {
-    "@okta/okta-signin-widget": "^5.4.4",
+    "@okta/okta-signin-widget": "^4.5.0",
     "copyfiles": "2.1.1",
     "h": "^1.0.0",
     "prettier": "1.19.1",

@@ -14,9 +14,15 @@ import { Logout, AuthPage } from "./modules/Auth";
 import ErrorsPage from "./modules/ErrorsExamples/ErrorsPage";
 import { useOktaAuth } from "@okta/okta-react";
 import CustomLoginComponent from "./modules/okta/Login";
+import { Security, SecureRoute, LoginCallback } from "@okta/okta-react";
+//import CustomLoginComponent from "./modules/okta/Login";
+import Messages from "./modules/okta/Messages";
+
+
+
 
 export function Routes() {
-  const { authState, oktaAuth } = useOktaAuth();
+  const { authState, authService } = useOktaAuth();
   const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
@@ -24,18 +30,27 @@ export function Routes() {
       // When user isn't authenticated, forget any user info
       setUserInfo(null);
     } else {
-      oktaAuth.getUser().then((info) => {
+      authService.getUser().then((info) => {
         setUserInfo(info);
+        //console.log(info);
       });
     }
-  }, [authState, oktaAuth]); // Update if authState changes
+  }, [authState, authService]); // Update if authState changes
 
   const { isAuthorized } = useSelector(
     ({ auth }) => ({
       isAuthorized: authState.isAuthenticated, //auth.user != null,
+      userInfo:userInfo,
     }),
     shallowEqual
   );
+  const login = async () => {
+    authService.login("/");
+  };
+  const logout = async () => {
+    authService.logout("/");
+  };
+
   if (authState.isPending) {
     return <div>Loading...</div>;
   }
@@ -53,7 +68,9 @@ export function Routes() {
       )}
 
       <Route path="/error" component={ErrorsPage} />
-      <Route path="/logout" component={Logout} />
+      <Route path="/logout" component={logout} />
+      <Route path="/implicit/callback" component={LoginCallback} />
+      <Route path="/login" component={CustomLoginComponent} />
 
       {!isAuthorized ? (
         /*Redirect to `/auth` when user is not authorized*/
