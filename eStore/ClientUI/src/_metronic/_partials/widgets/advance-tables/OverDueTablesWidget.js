@@ -86,9 +86,9 @@ export function OverDueTablesWidget({ className, overDue }) {
                       )
                       .map((row) => (
                         <TableRow key={row.bookingId} className="text-left">
-                          <TableCell className="pl-0 py-8">
+                          <TableCell className="p-0">
                             <div className="d-flex align-items-center">
-                              <div className="symbol symbol-50 symbol-light mr-4">
+                              <div className="symbol symbol-25 symbol-light mr-4">
                                 <span className="symbol-label">
                                   <SVG
                                     className="h-75 align-self-end"
@@ -98,34 +98,30 @@ export function OverDueTablesWidget({ className, overDue }) {
                                   ></SVG>
                                 </span>
                               </div>
-                              <div>
-                                <a
-                                  href="#"
-                                  className="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"
-                                >
-                                  {row.customerName}
-                                </a>
-                                <span className="text-muted font-weight-bold d-block">
+                              <div className="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-sm">
+                                {row.customerName}
+
+                                <span className="text-success font-weight-bold d-block">
                                   {row.slipNo}
                                 </span>
                               </div>
                             </div>
                           </TableCell>
                           <TableCell style={{ minWidth: "50px" }}>
-                            <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                              {row.delveryDate}
+                            <span className="text-dark-75 font-weight-bolder d-block font-size-sm">
+                              { new Date(row.delveryDate).toLocaleDateString()}
                             </span>
-                            <span className="text-muted font-weight-bold">
-                              {row.bookingDate}
+                            <span className="text-info font-weight-bold">
+                              {new Date(row.bookingDate).toLocaleDateString()}
                             </span>
                           </TableCell>
                           <TableCell style={{ minWidth: "50px" }}>
-                            <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
+                            <span className="text-dark-75 font-weight-bolder d-block font-size-sm">
                               {row.quantity}
                             </span>
                           </TableCell>
                           <TableCell style={{ minWidth: "50px" }}>
-                            <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
+                            <span className="text-danger font-weight-bolder d-block font-size-sm">
                               {row.noDays}
                             </span>
                           </TableCell>
@@ -139,8 +135,9 @@ export function OverDueTablesWidget({ className, overDue }) {
                 </TableBody>
                 <TableFooter>
                   <TablePagination
-                    rowsPerPageOptions={[5, 7, 12]}
-                    component="div"
+                    colSpan={9}
+                    rowsPerPageOptions={[3, 5, 7]}
+                    
                     count={rCount}
                     rowsPerPage={rowsPerPage}
                     page={page}

@@ -281,7 +281,7 @@ export function CashBookTablePageWidget({ className, cashBook, totalCount }) {
                   .map((row) => (
                     <TableRow key={row.index}>
                       <TableCell >
-                      <span className="text-dark-75 font-weight-bolder d-block font-size-lg"> {row.eDate}</span>
+                      <span className="text-dark-75 font-weight-bolder d-block font-size-lg"> { new Date(row.eDate).toLocaleDateString()}</span>
                       </TableCell>
                       <TableCell>   <span className="text-dark-75 font-weight-bolder d-block font-size-lg">{row.particulars}</span></TableCell>
                       <TableCell align="center">   <span className="text-dark-75 font-weight-bolder d-block font-size-lg">{row.cashIn}</span></TableCell>
@@ -298,7 +298,7 @@ export function CashBookTablePageWidget({ className, cashBook, totalCount }) {
             <TableFooter>
               <TableRow>
                 <TablePagination
-                  rowsPerPageOptions={[3,5,7,10]}
+                  rowsPerPageOptions={[3,5,7]}
                   colSpan={6}
                   count={totalCount}
                   rowsPerPage={rowsPerPage}
@@ -309,7 +309,7 @@ export function CashBookTablePageWidget({ className, cashBook, totalCount }) {
                   }}
                   onChangePage={handleChangePage}
                   onChangeRowsPerPage={handleChangeRowsPerPage}
-                  ActionsComponent={TablePaginationActions}
+                  // ActionsComponent={TablePaginationActions}
                 />
               </TableRow>
             </TableFooter>

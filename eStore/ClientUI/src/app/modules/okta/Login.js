@@ -30,12 +30,16 @@ const Login = () => {
       baseUrl: issuer.split('/oauth2')[0],
       clientId,
       redirectUri,
-      logo: '/react.svg',
+      logo: '/media/logos/logo-dark_1.png',
       i18n: {
         en: {
-          'primaryauth.title': 'Sign in to eStore',
+          'primaryauth.title': 'Sign in to eStore: Aprajita Retails',
         },
       },
+      idps: [
+        { type: 'Google', id: '0oacxuywbxy2KK91Y5d6' }
+      ],
+      idpDisplay : "SECONDARY",
       authParams: {
         // To avoid redirect do not set "pkce" or "display" here. OKTA-335945
         issuer,
@@ -50,7 +54,11 @@ const Login = () => {
         const tokenManager = authService.getTokenManager();
         tokenManager.add('idToken', tokens.idToken);
         tokenManager.add('accessToken', tokens.accessToken);
-
+        config.idps= [
+          { type: 'Google', id: '0oacxuywbxy2KK91Y5d6' }
+        ];
+        config.idpDisplay = "SECONDARY";
+        
         // Return to the original URL (if auth was initiated from a secure route), falls back to the origin
         const fromUri = authService.getFromUri();
         window.location.assign(fromUri);

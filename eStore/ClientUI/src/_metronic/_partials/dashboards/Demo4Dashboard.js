@@ -111,7 +111,7 @@ export function Demo4Dashboard({ totalCashBook, cashBook, masterReports }) {
       {/* end::Row */}
       {/**Begin Row */}
       <div className="row">
-        <div className="col-xxl-6 order-2 order-xxl-1">
+        <div className="col-xxl-7 order-2 order-xxl-1">
          {masterReports && masterReports.bookingOverDues &&
           <OverDueTablesWidget
             className="card-stretch gutter-b"
