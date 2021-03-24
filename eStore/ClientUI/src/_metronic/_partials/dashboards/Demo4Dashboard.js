@@ -6,11 +6,18 @@ import {
   StatsWidget11,
   StatsWidget12,
   ListsWidget1,
+  AdvanceTablesWidget1,
   AdvanceTablesWidget2,
   AdvanceTablesWidget4,
-  CashBookTableWidget,CashBookTablePageWidget,SaleListWidget,
+  AdvanceTablesWidget7,
+  AdvanceTablesWidget9,
+  CashBookTableWidget,
+  CashBookTablePageWidget,OverDueTablesWidget,
+  SaleListWidget,
   ListsWidget3,
-  ListsWidget4,TailoringWidget,EmpInfoWidget,
+  ListsWidget4,
+  TailoringWidget,
+  EmpInfoWidget,
   ListsWidget8,
   MixedWidget6,
   ListsWidget10,
@@ -68,32 +75,51 @@ export function Demo4Dashboard({ totalCashBook, cashBook, masterReports }) {
       {/* begin::Row */}
       <div className="row">
         <div className="col-lg-6">
-          {masterReports && masterReports.empInfoList &&
-          <EmpInfoWidget className="card-stretch gutter-b" empInfo={masterReports.empInfoList} />}
+          {masterReports && masterReports.empInfoList && (
+            <EmpInfoWidget
+              className="card-stretch gutter-b"
+              empInfo={masterReports.empInfoList}
+            />
+          )}
         </div>
         <div className="col-lg-6">
-          {masterReports && masterReports.tailoringReport &&
-          <TailoringWidget className="card-stretch gutter-b"  tReport={masterReports.tailoringReport}/>}
+          {masterReports && masterReports.tailoringReport && (
+            <TailoringWidget
+              className="card-stretch gutter-b"
+              tReport={masterReports.tailoringReport}
+            />
+          )}
         </div>
       </div>
       <div className="row">
         <div className="col-xxl-8 order-2 order-xxl-1">
           <CashBookTablePageWidget
             className="card-stretch gutter-b"
-            cashBook={cashBook} totalCount={totalCashBook}
+            cashBook={cashBook}
+            totalCount={totalCashBook}
           />
         </div>
-        <div className="ccol-lg-6 col-xxl-4">
-          {masterReports && masterReports.saleReport &&
-          <SaleListWidget 
-          className="card-stretch gutter-b"
-          saleReport={masterReports.saleReport}
-        />
-          }
-          
+        <div className="col-lg-6 col-xxl-4">
+          {masterReports && masterReports.saleReport && (
+            <SaleListWidget
+              className="card-stretch gutter-b"
+              saleReport={masterReports.saleReport}
+            />
+          )}
         </div>
       </div>
       {/* end::Row */}
+      {/**Begin Row */}
+      <div className="row">
+        <div className="col-xxl-6 order-2 order-xxl-1">
+         {masterReports && masterReports.bookingOverDues &&
+          <OverDueTablesWidget
+            className="card-stretch gutter-b"
+            overDue={masterReports.bookingOverDues}
+          />}
+        </div>
+      </div>
+      {/**end Row */}
     </>
   );
 }

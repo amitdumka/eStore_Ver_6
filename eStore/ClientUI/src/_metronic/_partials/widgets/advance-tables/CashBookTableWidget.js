@@ -265,12 +265,14 @@ export function CashBookTablePageWidget({ className, cashBook, totalCount }) {
             className="table table-head-custom table-vertical-center"
             id="kt_advance_table_widget_1"
           >
-            <TableHead>
+            <TableHead >
+          
               <TableCell>Date</TableCell>
               <TableCell>Particulars</TableCell>
-              <TableCell align="right">cashIn</TableCell>
-              <TableCell align="right">cashOut</TableCell>
-              <TableCell align="right">Balance</TableCell>
+              <TableCell align="center">cashIn</TableCell>
+              <TableCell align="center">cashOut</TableCell>
+              <TableCell align="center">Balance</TableCell>
+              
             </TableHead>
             <TableBody>
               {cashBook &&
@@ -278,17 +280,17 @@ export function CashBookTablePageWidget({ className, cashBook, totalCount }) {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => (
                     <TableRow key={row.index}>
-                      <TableCell component="th" scope="row">
-                        {row.eDate}
+                      <TableCell >
+                      <span className="text-dark-75 font-weight-bolder d-block font-size-lg"> {row.eDate}</span>
                       </TableCell>
-                      <TableCell>{row.particulars}</TableCell>
-                      <TableCell align="right">{row.cashIn}</TableCell>
-                      <TableCell align="right">{row.cashOut}</TableCell>
-                      <TableCell align="right">{row.cashBalance}</TableCell>
+                      <TableCell>   <span className="text-dark-75 font-weight-bolder d-block font-size-lg">{row.particulars}</span></TableCell>
+                      <TableCell align="center">   <span className="text-dark-75 font-weight-bolder d-block font-size-lg">{row.cashIn}</span></TableCell>
+                      <TableCell align="center">   <span className="text-danger font-weight-bolder d-block font-size-lg">{row.cashOut}</span></TableCell>
+                      <TableCell align="center">   <span className="text-warning font-weight-bolder d-block font-size-lg">{row.cashBalance}</span></TableCell>
                     </TableRow>
                   ))}
               {emptyRows > 0 && (
-                <TableRow style={{ height: 48 * emptyRows }}>
+                <TableRow style={{ height: 38 * emptyRows }}>
                   <TableCell colSpan={0} />
                 </TableRow>
               )}
