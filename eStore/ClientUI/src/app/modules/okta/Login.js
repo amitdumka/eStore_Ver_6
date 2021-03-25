@@ -29,7 +29,7 @@ const Login = () => {
        */
       baseUrl: issuer.split('/oauth2')[0],
       clientId,
-      redirectUri,
+      redirectUri:window.location.href+redirectUri,
       logo: '/media/logos/logo-dark_1.png',
       i18n: {
         en: {
@@ -46,7 +46,9 @@ const Login = () => {
         scopes,
       },
     });
-
+    {config && console.log(config.redirectUri);}
+    console.log(window.location.href);
+    
     widget.renderEl(
       { el: '#sign-in-widget' },
       ({ tokens }) => {
@@ -69,8 +71,11 @@ const Login = () => {
     );
   }, [authService]);
 
+  
+
   return (
     <div>
+      {config && console.log(config.redirectUri)}
       <div id="sign-in-widget" />
     </div>
   );
