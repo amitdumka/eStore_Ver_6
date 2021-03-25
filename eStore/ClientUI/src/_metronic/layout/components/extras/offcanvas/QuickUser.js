@@ -2,13 +2,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SVG from "react-inlinesvg";
-import { shallowEqual, useSelector } from "react-redux";
+//import { shallowEqual, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { toAbsoluteUrl } from "../../../../_helpers";
 
 export function QuickUser() {
   const history = useHistory();
-  const user1 = useSelector((state) => state.auth.user, shallowEqual);
+  ////const user1 = useSelector((state) => state.auth.user, shallowEqual);
   const user = {
     firstname: "Amit Kumar",
     lastname: "Shah",

@@ -41,11 +41,10 @@ export function BookingsTable() {
     };
   }, [bookingsUIContext]);
 
-  // Getting curret state of bookings list from store (Redux)
-  const { currentState, taxTypes } = useSelector(
+  // Getting current state of bookings list from store (Redux)
+  const { currentState } = useSelector(
     (state) => ({
       currentState: state.bookings,
-      taxTypes: state.bookings.bookings,
     }),
     shallowEqual
   );

@@ -5,7 +5,6 @@ import {
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../_metronic/_partials/controls";
-import { SalaryPaymentsFilter } from "./filter/Filter";
 import { SalaryPaymentsTable } from "./table/Table";
 import { SalaryPaymentsGrouping } from "./grouping/Grouping";
 import { useUIContext } from "./UIContext";
@@ -13,13 +12,13 @@ import { useUIContext } from "./UIContext";
 //SalaryPayment
 //salaryPayment
 
-
 export function SalaryPaymentsCard() {
   const SalaryPaymentsUIContext = useUIContext();
   const SalaryPaymentsUIProps = useMemo(() => {
     return {
       ids: SalaryPaymentsUIContext.ids,
-      newSalaryPaymentButtonClick: SalaryPaymentsUIContext.newSalaryPaymentButtonClick,
+      newSalaryPaymentButtonClick:
+        SalaryPaymentsUIContext.newSalaryPaymentButtonClick,
     };
   }, [SalaryPaymentsUIContext]);
 

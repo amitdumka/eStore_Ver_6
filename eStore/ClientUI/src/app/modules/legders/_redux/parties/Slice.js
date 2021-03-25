@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 //Party
 //party
 
@@ -10,7 +9,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialPartiesState = {
   listLoading: false,
   actionsLoading: false,
-  totalCount: 0,
   entities: null,
   partyForEdit: undefined,
   lastError: null,
@@ -43,7 +41,7 @@ export const partiesSlice = createSlice({
     },
     // get All bank List
     ledgerTypesFetched: function(state, action) {
-      const { totalCount, entities } = action.payload;
+      const { entities } = action.payload;
       state.actionsLoading = false;
       state.listLoading = false;
       state.error = null;

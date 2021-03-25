@@ -5,36 +5,28 @@
  * components (e.g: `src/app/modules/Auth/pages/AuthPage`, `src/app/BasePage`).
  */
 
-import React, { useState, useEffect } from "react";
-import { Redirect, Switch, Route, useHistory, Link } from "react-router-dom";
+import React from "react";
+import { Redirect, Switch, Route} from "react-router-dom";
 import { shallowEqual, useSelector } from "react-redux";
 import { Layout } from "../_metronic/layout";
 import BasePage from "./BasePage";
 import { Logout, AuthPage } from "./modules/Auth";
 import ErrorsPage from "./modules/ErrorsExamples/ErrorsPage";
-//import { useOktaAuth } from "@okta/okta-react";
-//import CustomLoginComponent from "./modules/okta/Login";
-//import { Security, SecureRoute, LoginCallback } from "@okta/okta-react";
-//import CustomLoginComponent from "./modules/okta/Login";
-//import Messages from "./modules/okta/Messages";
-
-
-
 
 export function Routes() {
   const { isAuthorized } = useSelector(
     ({ auth }) => ({
-      isAuthorized: true
+      isAuthorized: true,
     }),
     shallowEqual
   );
- 
+
   return (
     <Switch>
       {!isAuthorized ? (
         /*Render auth page when user at `/auth` and not authorized.*/
         <Route>
-          <AuthPage/>
+          <AuthPage />
         </Route>
       ) : (
         /*Otherwise redirect to root page (`/`)*/

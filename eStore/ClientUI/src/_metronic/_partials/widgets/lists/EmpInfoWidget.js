@@ -1,7 +1,5 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React from "react";
-//import { Dropdown } from "react-bootstrap";
-//import { DropdownCustomToggler, DropdownMenu3 } from "../../dropdowns";
 
 export function EmpInfoWidget({ className, empInfo }) {
   return (
@@ -55,17 +53,17 @@ export function EmpInfoWidget({ className, empInfo }) {
                         )}
                       </span>
                     </div>
-                    {item.present == "Present" && (
+                    {item.present === "Present" && (
                       <span className="label label-lg label-light-primary label-inline font-weight-bold py-4">
                         {item.present}
                       </span>
                     )}
-                    {item.present == "Absent" && (
+                    {item.present === "Absent" && (
                       <span className="label label-lg label-light-danger label-inline font-weight-bold py-4">
                         {item.present}
                       </span>
                     )}
-                    {item.present == "Half Day Leave" && (
+                    {item.present === "Half Day Leave" && (
                       <span className="label label-lg label-light-warning label-inline font-weight-bold py-4">
                         {item.present}
                       </span>

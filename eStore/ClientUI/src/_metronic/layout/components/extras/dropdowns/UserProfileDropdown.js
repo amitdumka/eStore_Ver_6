@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 import objectPath from "object-path";
 import { useHtmlClassService } from "../../../_core/MetronicLayout";
 import { toAbsoluteUrl } from "../../../../_helpers";
@@ -13,7 +13,7 @@ import { DropdownTopbarItemToggler } from "../../../../_partials/dropdowns";
 
 
 export function UserProfileDropdown() {
-  const { user1 } = useSelector((state) => state.auth);
+  //const { user1 } = useSelector((state) => state.auth);
  
   // const { authState, authService } = useOktaAuth();
   // const [userInfo, setUserInfo] = useState(null);

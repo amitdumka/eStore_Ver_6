@@ -1,8 +1,8 @@
 import React from "react";
-import { useLocation } from "react-router";
+//import { useLocation } from "react-router";
 //import { NavLink } from "react-router-dom";
 //import SVG from "react-inlinesvg";
-import { checkIsActive } from "../../../../../../_helpers";
+//import { checkIsActive } from "../../../../../../_helpers";
 import BankingMenu from "./BankingMenuList";
 import ExpensesMenu from "./ExpensesMenu";
 import LedgerMenu from "./LedgerMenu";
@@ -11,13 +11,13 @@ import TaxMenu from "./TaxMenu";
 
 
 export default function AccoutingMenuList({ layoutProps }) {
-  const location = useLocation();
-  const getMenuItemActive = (url, hasSubmenu = false) => {
-    return checkIsActive(location, url)
-      ? ` ${!hasSubmenu &&
-          "menu-item-active"} menu-item-open menu-item-not-hightlighted`
-      : "";
-  };
+  //const location = useLocation();
+  // const getMenuItemActive = (url, hasSubmenu = false) => {
+  //   return checkIsActive(location, url)
+  //     ? ` ${!hasSubmenu &&
+  //         "menu-item-active"} menu-item-open menu-item-not-hightlighted`
+  //     : "";
+  // };
   return (
     <>
         <li className="menu-section ">

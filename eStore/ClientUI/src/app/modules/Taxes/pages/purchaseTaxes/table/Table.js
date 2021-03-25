@@ -25,7 +25,6 @@ import { useUIContext } from "../UIContext";
 //purchaseTax
 //PurchaseTax
 
-
 export function PurchaseTaxesTable() {
   // PurchaseTaxes UI Context
   const purchaseTaxesUIContext = useUIContext();
@@ -35,14 +34,19 @@ export function PurchaseTaxesTable() {
       setIds: purchaseTaxesUIContext.setIds,
       queryParams: purchaseTaxesUIContext.queryParams,
       setQueryParams: purchaseTaxesUIContext.setQueryParams,
-      openEditPurchaseTaxDialog: purchaseTaxesUIContext.openEditPurchaseTaxDialog,
-      openDeletePurchaseTaxDialog: purchaseTaxesUIContext.openDeletePurchaseTaxDialog,
+      openEditPurchaseTaxDialog:
+        purchaseTaxesUIContext.openEditPurchaseTaxDialog,
+      openDeletePurchaseTaxDialog:
+        purchaseTaxesUIContext.openDeletePurchaseTaxDialog,
     };
   }, [purchaseTaxesUIContext]);
 
-  // Getting curret state of purchaseTaxes list from store (Redux)
-  const { currentState ,taxTypes} = useSelector(
-    (state) => ({ currentState: state.purchaseTaxes , taxTypes:state.purchaseTaxes.purchaseTaxes}),
+  // Getting current state of purchaseTaxes list from store (Redux)
+  const { currentState } = useSelector(
+    (state) => ({
+      currentState: state.purchaseTaxes,
+      taxTypes: state.purchaseTaxes.purchaseTaxes,
+    }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
@@ -92,8 +96,10 @@ export function PurchaseTaxesTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditPurchaseTaxDialog: purchaseTaxesUIProps.openEditPurchaseTaxDialog,
-        openDeletePurchaseTaxDialog: purchaseTaxesUIProps.openDeletePurchaseTaxDialog,
+        openEditPurchaseTaxDialog:
+          purchaseTaxesUIProps.openEditPurchaseTaxDialog,
+        openDeletePurchaseTaxDialog:
+          purchaseTaxesUIProps.openDeletePurchaseTaxDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -111,16 +117,15 @@ export function PurchaseTaxesTable() {
     page: purchaseTaxesUIProps.queryParams.pageNumber,
   };
 
-  
   return (
     <>
-       <PaginationProvider pagination={paginationFactory(paginationOptions)}>
+      <PaginationProvider pagination={paginationFactory(paginationOptions)}>
         {({ paginationProps, paginationTableProps }) => {
-          return ( 
-             <Pagination
+          return (
+            <Pagination
               isLoading={listLoading}
               paginationProps={paginationProps}
-            > 
+            >
               <BootstrapTable
                 wrapperClasses="table-responsive"
                 bordered={true}
@@ -129,7 +134,7 @@ export function PurchaseTaxesTable() {
                 remote
                 noDataIndication="No Record Found now.."
                 keyField="purchaseTaxId"
-                data={entities === null ? []: totalCount ?entities:[]}
+                data={entities === null ? [] : totalCount ? entities : []}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
@@ -140,17 +145,17 @@ export function PurchaseTaxesTable() {
                   entities,
                   ids: purchaseTaxesUIProps.ids,
                   setIds: purchaseTaxesUIProps.setIds,
-                  idName:"purchaseTaxId",
+                  idName: "purchaseTaxId",
                 })}
                 {...paginationTableProps}
               >
                 <PleaseWaitMessage entities={entities} />
                 <NoRecordsFoundMessage entities={entities} />
               </BootstrapTable>
-             </Pagination>
+            </Pagination>
           );
         }}
-      </PaginationProvider> 
+      </PaginationProvider>
     </>
   );
 }

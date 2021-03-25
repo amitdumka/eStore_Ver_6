@@ -40,8 +40,8 @@ export function LedgerTypesTable() {
     };
   }, [ledgerTypesUIContext]);
 
-  // Getting curret state of ledgerTypes list from store (Redux)
-  const { currentState ,ledgerCategory} = useSelector(
+  // Getting current state of ledgerTypes list from store (Redux)
+  const { currentState } = useSelector(
     (state) => ({ currentState: state.ledgerTypes , ledgerCategory:state.ledgerTypes.ledgerTypes}),
     shallowEqual
   );

@@ -10,7 +10,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialDeliveriesState = {
   listLoading: false,
   actionsLoading: false,
-  totalCount: 0,
   entities: null,
   deliveryForEdit: undefined,
   lastError: null,
@@ -43,7 +42,7 @@ export const deliveriesSlice = createSlice({
     },
     // get All bank List
     taxTypesFetched: function(state, action) {
-      const { totalCount, entities } = action.payload;
+      const {  entities } = action.payload;
       state.actionsLoading = false;
       state.listLoading = false;
       state.error = null;

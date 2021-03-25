@@ -4,7 +4,6 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import {
   Input,
-  Select,
   DatePickerField,
 } from "../../../../../../_metronic/_partials/controls";
 
@@ -148,12 +147,8 @@ export function EditForm({ saveStore, store, actionsLoading, onHide }) {
                 <div className="form-group row">
                   {/* Date of Opening */}
                   <div className="col-lg-4">
-                    <DatePickerField
-                      name="openingDate"
-                      label="Opening Date"
-                    />
+                    <DatePickerField name="openingDate" label="Opening Date" />
                   </div>
-                 
                 </div>
               </Form>
             </Modal.Body>
