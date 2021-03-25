@@ -123,7 +123,7 @@ export function getInitLayoutConfig() {
     },
     aside: {
       self: {
-        theme: "dark", // light/dark
+        theme: "light", // light/dark
         display: true,
         fixed: true,
         minimize: {
