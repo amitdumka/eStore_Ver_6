@@ -35,10 +35,10 @@ export default function App({ store, persistor, basename }) {
               {/* Provide `react-intl` context synchronized with Redux state.  */}
               <I18nProvider>
                 {/** Okta Identity  */}
-                <Security {...config.oidc} onAuthRequired={customAuthHandler}>
+                {/* <Security {...config.oidc} onAuthRequired={customAuthHandler}> */}
                   {/* Render routes with provided `Layout`. */}
                   <Routes />
-                </Security>
+                {/* </Security> */}
               </I18nProvider>
             </MaterialThemeProvider>
           </BrowserRouter>
