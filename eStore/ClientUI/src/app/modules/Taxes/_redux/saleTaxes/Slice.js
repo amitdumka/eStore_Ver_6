@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { stubTrue } from "lodash-es";
 
 //SaleTax
 //saleTax
@@ -10,7 +9,6 @@ import { stubTrue } from "lodash-es";
 const initialSaleTaxesState = {
   listLoading: false,
   actionsLoading: false,
-  totalCount: 0,
   entities: null,
   saleTaxForEdit: undefined,
   lastError: null,
@@ -43,7 +41,7 @@ export const saleTaxesSlice = createSlice({
     },
     // get All bank List
     taxTypesFetched: function(state, action) {
-      const { totalCount, entities } = action.payload;
+      const {entities } = action.payload;
       state.actionsLoading = false;
       state.listLoading = false;
       state.error = null;

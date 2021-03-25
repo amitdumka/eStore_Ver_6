@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { stubTrue } from "lodash-es";
 
 //dashboard
 //Dashboard
@@ -7,12 +6,11 @@ import { stubTrue } from "lodash-es";
 const initialDashboardState = {
   listLoading: false,
   actionsLoading: false,
-  totalCount: 0,
   entities: null,
   masterReportEntities: null,
   lastError: null,
-  cashBookEntities:null,
-  totalCashBook:0,
+  cashBookEntities: null,
+  totalCashBook: 0,
 };
 export const callTypes = {
   list: "list",
@@ -22,37 +20,37 @@ export const callTypes = {
 export const dashboardSlice = createSlice({
   name: "dashboards",
   initialState: initialDashboardState,
-  reducers:{
+  reducers: {
     catchError: (state, action) => {
-        state.error = `${action.type}: ${action.payload.error}`;
-        if (action.payload.callType === callTypes.list) {
-          state.listLoading = false;
-        } else {
-          state.actionsLoading = false;
-        }
-      },
-      startCall: (state, action) => {
-        state.error = null;
-        if (action.payload.callType === callTypes.list) {
-          state.listLoading = true;
-        } else {
-          state.actionsLoading = true;
-        }
-      },
-      masterReportFetched:function(state,action){
-        const{entities}=action.payload;
-       state.actionsLoading=false;
-       state.listLoading =false;
-       state.error=null;
-       state.masterReportEntities=entities;
-      },
-      cashBookFetched:function(state,action){
-        const{entities, totalCount}=action.payload;
-       state.actionsLoading=false;
-       state.listLoading =false;
-       state.error=null;
-       state.cashBookEntities=entities;
-       state.totalCashBook=totalCount;
-      },
-  }
+      state.error = `${action.type}: ${action.payload.error}`;
+      if (action.payload.callType === callTypes.list) {
+        state.listLoading = false;
+      } else {
+        state.actionsLoading = false;
+      }
+    },
+    startCall: (state, action) => {
+      state.error = null;
+      if (action.payload.callType === callTypes.list) {
+        state.listLoading = true;
+      } else {
+        state.actionsLoading = true;
+      }
+    },
+    masterReportFetched: function(state, action) {
+      const { entities } = action.payload;
+      state.actionsLoading = false;
+      state.listLoading = false;
+      state.error = null;
+      state.masterReportEntities = entities;
+    },
+    cashBookFetched: function(state, action) {
+      const { entities, totalCount } = action.payload;
+      state.actionsLoading = false;
+      state.listLoading = false;
+      state.error = null;
+      state.cashBookEntities = entities;
+      state.totalCashBook = totalCount;
+    },
+  },
 });

@@ -6,7 +6,6 @@ import { toAbsoluteUrl } from "../../../_helpers";
 import { DropdownCustomToggler, DropdownMenu2 } from "../../dropdowns";
 
 export function SaleListWidget({ className, saleReport }) {
-  console.log(saleReport);
   return (
     <>
       <div className={`card card-custom ${className}`}>

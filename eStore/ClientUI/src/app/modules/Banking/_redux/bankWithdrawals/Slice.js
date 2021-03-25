@@ -1,10 +1,7 @@
-import {createSlice} from "@reduxjs/toolkit";
-import { stubTrue } from "lodash-es";
-
+import { createSlice } from "@reduxjs/toolkit";
 
 //BankWithdrawal
 //bankWithdrawal
-
 
 const initialBankWithdrawalsState = {
   listLoading: false,
@@ -12,14 +9,14 @@ const initialBankWithdrawalsState = {
   totalCount: 0,
   entities: null,
   bankWithdrawalForEdit: undefined,
-  lastError: null, 
-  bankEntities: null, 
-  totalCountEmp:0,
-  payModes:null
+  lastError: null,
+  bankEntities: null,
+  totalCountEmp: 0,
+  payModes: null,
 };
 export const callTypes = {
   list: "list",
-  action: "action"
+  action: "action",
 };
 
 export const bankWithdrawalsSlice = createSlice({
@@ -42,25 +39,23 @@ export const bankWithdrawalsSlice = createSlice({
         state.actionsLoading = true;
       }
     },
-    // get All bank List 
-    banksListFetched: function(state,action){
-      const{totalCount,entities}=action.payload;
-     state.actionsLoading=false;
-     state.listLoading =false;
-     state.error=null;
-     state.bankEntities=entities;
-     state.totalCountEmp=totalCount;
-
+    // get All bank List
+    banksListFetched: function(state, action) {
+      const { totalCount, entities } = action.payload;
+      state.actionsLoading = false;
+      state.listLoading = false;
+      state.error = null;
+      state.bankEntities = entities;
+      state.totalCountEmp = totalCount;
     },
-    // get All bank List 
-    payModeListFetched: function(state,action){
-      const{entities}=action.payload;
-     state.actionsLoading=false;
-     state.listLoading =false;
-     state.error=null;
-     state.payModes=entities;
-     //state.totalCountEmp=totalCount;
-
+    // get All bank List
+    payModeListFetched: function(state, action) {
+      const { entities } = action.payload;
+      state.actionsLoading = false;
+      state.listLoading = false;
+      state.error = null;
+      state.payModes = entities;
+      //state.totalCountEmp=totalCount;
     },
     // getBankWithdrawalById
     bankWithdrawalFetched: (state, action) => {
@@ -86,8 +81,11 @@ export const bankWithdrawalsSlice = createSlice({
     bankWithdrawalUpdated: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.map(entity => {
-        if (entity.bankWithdrawalId === action.payload.bankWithdrawal.bankWithdrawalId) {
+      state.entities = state.entities.map((entity) => {
+        if (
+          entity.bankWithdrawalId ===
+          action.payload.bankWithdrawal.bankWithdrawalId
+        ) {
           return action.payload.bankWithdrawal;
         }
         return entity;
@@ -97,29 +95,30 @@ export const bankWithdrawalsSlice = createSlice({
     bankWithdrawalDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(el => el.bankWithdrawalId !== action.payload.bankWithdrawalId);
+      state.entities = state.entities.filter(
+        (el) => el.bankWithdrawalId !== action.payload.bankWithdrawalId
+      );
     },
     // deleteBankWithdrawals
     bankWithdrawalsDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        el => !action.payload.ids.includes(el.bankWithdrawalId)
+        (el) => !action.payload.ids.includes(el.bankWithdrawalId)
       );
     },
 
-    
     // bankWithdrawalsUpdateState
     bankWithdrawalsStatusUpdated: (state, action) => {
       state.actionsLoading = false;
       state.error = null;
       const { ids, status } = action.payload;
-      state.entities = state.entities.map(entity => {
-        if (ids.findIndex(id => id === entity.bankWithdrawalId) > -1) {
+      state.entities = state.entities.map((entity) => {
+        if (ids.findIndex((id) => id === entity.bankWithdrawalId) > -1) {
           entity.status = status;
         }
         return entity;
       });
-    }
-  }
+    },
+  },
 });

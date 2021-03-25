@@ -6,11 +6,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import {
-  Input,
-  Select,
-  DatePickerField,
-} from "../../../../../../_metronic/_partials/controls";
+import { Input } from "../../../../../../_metronic/_partials/controls";
 
 //RentedLocation
 //rentedLocation
@@ -20,7 +16,12 @@ const RentedLocationEditSchema = Yup.object().shape({
   rentedLocationName: Yup.string().required("RentedLocation Name is required"),
 });
 
-export function EditForm({ saveRentedLocation, rentedLocation, actionsLoading, onHide }) {
+export function EditForm({
+  saveRentedLocation,
+  rentedLocation,
+  actionsLoading,
+  onHide,
+}) {
   return (
     <>
       <Formik

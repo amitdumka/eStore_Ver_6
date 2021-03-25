@@ -2,9 +2,6 @@
 // https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Work%20on%20Columns&selectedStory=Column%20Formatter&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
 import React from "react";
 
-//export const BooleanCssClasses = ["success", "danger",""];
-//export const BooleanTitles = ["true", "false",""];
-
 export function BooleanColumnFormatter(cellContent, row) {
   return (
     <>
@@ -20,5 +17,3 @@ export function BooleanColumnFormatter(cellContent, row) {
     </>
   );
 }
-{/* <span class="font-bold font-italic text-success">Cash</span> */}
-{/* <td><span class="label label-dot label-danger mr-2"></span>&nbsp;<span class="font-bold font-italic text-danger}">No</span></td> */}

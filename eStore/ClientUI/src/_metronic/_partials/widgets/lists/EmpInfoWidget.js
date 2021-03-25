@@ -1,7 +1,7 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Dropdown } from "react-bootstrap";
-import { DropdownCustomToggler, DropdownMenu3 } from "../../dropdowns";
+//import { Dropdown } from "react-bootstrap";
+//import { DropdownCustomToggler, DropdownMenu3 } from "../../dropdowns";
 
 export function EmpInfoWidget({ className, empInfo }) {
   return (
@@ -13,7 +13,7 @@ export function EmpInfoWidget({ className, empInfo }) {
             Employee(s)
           </h3>
 
-          <div className="card-toolbar">
+          {/* <div className="card-toolbar">
             <Dropdown className="dropdown-inline" alignRight>
               <Dropdown.Toggle
                 id="dropdown-toggle-top"
@@ -25,8 +25,8 @@ export function EmpInfoWidget({ className, empInfo }) {
                 <DropdownMenu3 />
               </Dropdown.Menu>
             </Dropdown>
-          </div>
-        </div>
+          </div>*/}
+        </div> 
 
         {/* Body */}
         <div className="card-body pt-0">
@@ -35,7 +35,7 @@ export function EmpInfoWidget({ className, empInfo }) {
               <div className="mb-6">
                 <div className="d-flex align-items-center flex-grow-1">
                   <div className="d-flex flex-wrap align-items-center justify-content-between w-100">
-                    <div className="d-flex flex-column align-items-cente py-2 w-75">
+                    <div className="d-flex flex-column align-items-right py-2 w-75">
                       <a
                         href="#"
                         className="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1"

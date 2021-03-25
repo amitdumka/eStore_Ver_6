@@ -6,13 +6,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import {
-  Input,
-  Select,
-  DatePickerField,
-} from "../../../../../../_metronic/_partials/controls";
-
-
+import { Input, Select } from "../../../../../../_metronic/_partials/controls";
 
 //rent
 //Rent
@@ -22,16 +16,10 @@ const RentEditSchema = Yup.object().shape({
   account: Yup.string().required("Account is required"),
   branchName: Yup.string().required("Branch Name is required"),
   bankId: Yup.number().required("Store is required"),
-  accountType: Yup.number().required("Account Type is required")
+  accountType: Yup.number().required("Account Type is required"),
 });
 
-export function EditForm({
-  saveRent,
-  rent,
-  actionsLoading,
-  onHide,
-  bankList,
-}) {
+export function EditForm({ saveRent, rent, actionsLoading, onHide, bankList }) {
   return (
     <>
       <Formik

@@ -68,14 +68,14 @@ export function OverDueTablesWidget({ className, overDue }) {
             <div className="table-responsive">
               <Table className="table table-head-custom table-vertical-center table-head-bg table-borderless">
                 <TableHead>
-                  <tr className="text-left">
-                    <th style={{ minWidth: "150px" }} className="pl-7">
+                  <TableRow className="text-left">
+                    <TableCell style={{ minWidth: "150px" }} className="pl-7">
                       <span className="text-dark-75">Customer</span>
-                    </th>
-                    <th style={{ minWidth: "50px" }}>Date</th>
-                    <th style={{ minWidth: "50px" }}>Quantity</th>
-                    <th style={{ minWidth: "50px" }}>Days</th>
-                  </tr>
+                    </TableCell>
+                    <TableCell style={{ minWidth: "50px" }}>Date</TableCell>
+                    <TableCell style={{ minWidth: "50px" }}>Quantity</TableCell>
+                    <TableCell style={{ minWidth: "50px" }}>Days</TableCell>
+                  </TableRow>
                 </TableHead>
                 <TableBody>
                   {overDue &&
@@ -134,16 +134,17 @@ export function OverDueTablesWidget({ className, overDue }) {
                   )}
                 </TableBody>
                 <TableFooter>
+                  <TableRow>
                   <TablePagination
                     colSpan={9}
-                    rowsPerPageOptions={[3, 5, 7]}
-                    
+                    rowsPerPageOptions={[3, 5, 7]}                   
                     count={rCount}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                   />
+                  </TableRow>
                 </TableFooter>
               </Table>
             </div>

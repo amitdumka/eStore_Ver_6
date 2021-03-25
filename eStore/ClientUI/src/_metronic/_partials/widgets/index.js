@@ -37,7 +37,7 @@ export { AdvanceTablesWidget4 } from "./advance-tables/AdvanceTablesWidget4";
 export { AdvanceTablesWidget7 } from "./advance-tables/AdvanceTablesWidget7";
 export { AdvanceTablesWidget9 } from "./advance-tables/AdvanceTablesWidget9";
 export { CashBookTableWidget } from "./advance-tables/CashBookTableWidget";
-export { CashBookTablePageWidget } from "./advance-tables/CashBookTableWidget";
+export { CashBookTablePageWidget } from "./advance-tables/CashBookTablePageWidget";
 export {OverDueTablesWidget} from "./advance-tables/OverDueTablesWidget";
 
 // Tiles

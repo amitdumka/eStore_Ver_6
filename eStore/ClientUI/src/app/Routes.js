@@ -22,59 +22,26 @@ import ErrorsPage from "./modules/ErrorsExamples/ErrorsPage";
 
 
 export function Routes() {
-
-  // const { authState, authService } = useOktaAuth();
-  // const [userInfo, setUserInfo] = useState(null);
-
-  // useEffect(() => {
-  //   if (!authState.isAuthenticated) {
-  //     // When user isn't authenticated, forget any user info
-  //     setUserInfo(null);
-  //   } else {
-  //     authService.getUser().then((info) => {
-  //       setUserInfo(info);
-  //       //console.log(info);
-  //     });
-  //   }
-  // }, [authState, authService]); // Update if authState changes
-
   const { isAuthorized } = useSelector(
     ({ auth }) => ({
-      isAuthorized: true//authState.isAuthenticated, //auth.user != null,
-      //userInfo:userInfo,
+      isAuthorized: true
     }),
     shallowEqual
   );
  
-  // const login = async () => {
-  //   authService.login("/");
-  // };
-  // const logout = async () => {
-  //   authService.logout("/");
-  // };
-
-  // if (authState.isPending) {
-  //   return <div>Loading...</div>;
-  // }
-
   return (
     <Switch>
       {!isAuthorized ? (
         /*Render auth page when user at `/auth` and not authorized.*/
         <Route>
-          {/* <CustomLoginComponent /> */}
           <AuthPage/>
         </Route>
       ) : (
         /*Otherwise redirect to root page (`/`)*/
         <Redirect from="/login" to="/" />
       )}
-
       <Route path="/error" component={ErrorsPage} />
       <Route path="/logout" component={Logout} />
-      {/* <Route path="/implicit/callback" component={LoginCallback} />
-      <Route path="/login" component={CustomLoginComponent} /> */}
-
       {!isAuthorized ? (
         /*Redirect to `/auth` when user is not authorized*/
         <Redirect to="/login" />

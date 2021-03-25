@@ -1,8 +1,8 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React from "react";
 import SVG from "react-inlinesvg";
-import { Dropdown } from "react-bootstrap";
-import { DropdownCustomToggler, DropdownMenu4 } from "../../dropdowns";
+//import { Dropdown } from "react-bootstrap";
+//import { DropdownCustomToggler, DropdownMenu4 } from "../../dropdowns";
 import { toAbsoluteUrl } from "../../../_helpers";
 
 export function TailoringWidget({ className , tReport}) {
@@ -13,7 +13,7 @@ export function TailoringWidget({ className , tReport}) {
         <div className="card-header border-0">
           <h3 className="card-title font-weight-bolder text-dark">Tailoring</h3>
 
-          <div className="card-toolbar">
+          {/* <div className="card-toolbar">
             <Dropdown className="dropdown-inline" alignRight>
               <Dropdown.Toggle
                 id="dropdown-toggle-top"
@@ -25,7 +25,7 @@ export function TailoringWidget({ className , tReport}) {
                 <DropdownMenu4 />
               </Dropdown.Menu>
             </Dropdown>
-          </div>
+          </div> */}
         </div>
 
         {/* Body */}

@@ -6,11 +6,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import {
-  Input,
-  Select,
-  DatePickerField,
-} from "../../../../../../_metronic/_partials/controls";
+import { Input, Select } from "../../../../../../_metronic/_partials/controls";
 
 //SaleTaxes
 //saleTaxes
@@ -62,10 +58,7 @@ export function EditForm({
                     >
                       <option value="">Select Tax Type </option>
                       {taxTypes.map((item) => (
-                        <option
-                          key={item.value}
-                          value={item.value}
-                        >
+                        <option key={item.value} value={item.value}>
                           {item.name}
                         </option>
                       ))}

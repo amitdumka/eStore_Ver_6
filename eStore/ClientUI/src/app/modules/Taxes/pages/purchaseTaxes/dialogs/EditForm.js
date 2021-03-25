@@ -6,11 +6,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import {
-  Input,
-  Select,
-  DatePickerField,
-} from "../../../../../../_metronic/_partials/controls";
+import { Input, Select } from "../../../../../../_metronic/_partials/controls";
 
 //purchaseTax
 //PurchaseTax
@@ -19,7 +15,9 @@ import {
 const PurchaseTaxEditSchema = Yup.object().shape({
   taxName: Yup.string().required("Tax Name is required"),
   taxType: Yup.number().required("Tax Type   is required"),
-  compositeRate: Yup.number().moreThan(0).required("Composite Rate is required"),
+  compositeRate: Yup.number()
+    .moreThan(0)
+    .required("Composite Rate is required"),
 });
 
 export function EditForm({
@@ -70,8 +68,8 @@ export function EditForm({
                   {/* Store */}
                   <div className="col-lg-4">
                     <Select name="taxType" label="Tax Type">
-                    <option >Select Tax Types</option>
-                    {taxTypes.map((item) => (
+                      <option>Select Tax Types</option>
+                      {taxTypes.map((item) => (
                         <option key={item.value} value={item.value}>
                           {item.name}
                         </option>

@@ -6,11 +6,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import {
-  Input,
-  Select,
-  DatePickerField,
-} from "../../../../../../_metronic/_partials/controls";
+import { Input, Select } from "../../../../../../_metronic/_partials/controls";
 
 //ledgerType
 //LedgerType
@@ -73,8 +69,8 @@ export function EditForm({
                   {/* Store */}
                   <div className="col-lg-4">
                     <Select name="category" label="Category">
-                    <option >Select Category</option>
-                    {ledgerCategory.map((item) => (
+                      <option>Select Category</option>
+                      {ledgerCategory.map((item) => (
                         <option key={item.value} value={item.value}>
                           {item.name}
                         </option>
