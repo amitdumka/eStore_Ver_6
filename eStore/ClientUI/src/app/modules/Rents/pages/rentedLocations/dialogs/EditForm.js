@@ -6,19 +6,31 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Input } from "../../../../../../_metronic/_partials/controls";
+import { Input, Select,DatePickerField} from "../../../../../../_metronic/_partials/controls";
 
 //RentedLocation
 //rentedLocation
 
 // Validation schema
 const RentedLocationEditSchema = Yup.object().shape({
-  rentedLocationName: Yup.string().required("RentedLocation Name is required"),
+  placeName: Yup.string().required("RentedLocation Name is required"),
+  address: Yup.string().required("Address is required"),
+  onDate: Yup.date().required("Date is required"),
+  vacatedDate:Yup.date().required("Date is required"),
+  city: Yup.string().required("City is required"),
+  rentType: Yup.number().required("Select Rent Type , is required"),
+  storeId: Yup.number().moreThan(0).required("Select Store Location , is required"),
+  rentAmount: Yup.number().moreThan(0).required("Amount is required"),
+  advanceAmount: Yup.number().moreThan(0).required("Amount is required"),
+  ownerName:Yup.string().required("Owner Name is required"), 
+  mobileNo: Yup.string().required("Mobile No Details is required")
 });
+
 
 export function EditForm({
   saveRentedLocation,
   rentedLocation,
+  rentTypes,
   actionsLoading,
   onHide,
 }) {
@@ -42,16 +54,115 @@ export function EditForm({
               )}
               <Form className="form form-label-right">
                 <div className="form-group row">
+                    {/* Store */}
+                    <div className="col-lg-4">
+                    <Select name="storeId" label="Store">
+                      <option value="1">Dumka</option>
+                      <option value="2">Jamshedpur</option>
+                    </Select>
+                  </div>
                   {/* Staff Name */}
                   <div className="col-lg-4">
                     <Field
-                      name="rentedLocationName"
+                      name="placeName"
                       component={Input}
-                      placeholder="RentedLocation Name"
-                      label="RentedLocation Name"
+                      placeholder="Location Name"
+                      label="Location Name"
                     />
                   </div>
+                  {/* Staff Name */}
+                  <div className="col-lg-4">
+                    <Field
+                      name="address"
+                      component={Input}
+                      placeholder="Address"
+                      label="Address"
+                    />
+                  </div>{/* Staff Name */}
+                 
                 </div>
+                <div className="form-group row">
+                <div className="col-lg-4">
+                    <Field
+                      name="city"
+                      component={Input}
+                      placeholder="City"
+                      label="City"
+                    />
+                  </div>
+                   {/* Date of BankDeposit */}
+                   <div className="col-lg-4">
+                    <DatePickerField
+                      dateFormat="yyyy-MM-dd"
+                      name="onDate"
+                      label="On Date"
+                    />
+                  </div>
+                   {/* Date of BankDeposit */}
+                   <div className="col-lg-4">
+                    <DatePickerField
+                      dateFormat="yyyy-MM-dd"
+                      name="vacatedDate"
+                      label="Vacate Date"
+                    />
+                  </div>
+
+                </div>
+                <div className="form-group row">
+                   {/* Staff Name */}
+                   <div className="col-lg-4">
+                    <Field
+                      name="ownerName"
+                      component={Input}
+                      placeholder="Owner Name"
+                      label="Owner Name"
+                    />
+                  </div>
+                   {/* Staff Name */}
+                   <div className="col-lg-4">
+                    <Field
+                      name="mobileNo"
+                      component={Input}
+                      placeholder="Contact No"
+                      label="Contact No"
+                    />
+                  </div>
+                  {/* Email */}
+                  <div className="col-lg-4">
+                    <Select name="rentType" placeholder="Rent Type" label="Rent Type">
+                      <option value="">Select Type</option>
+                      {rentTypes.map((item) => (
+                        <option key={item.value} value={item.value}>
+                          {item.name}
+                        </option>
+                      ))}
+                    </Select>
+                  </div>
+                </div>
+              <div className="form-group row">
+                 {/*  State Name*/}
+                 <div className="col-lg-4">
+                    <Field
+                      name="rentAmount"
+                      component={Input}
+                      placeholder="Amount"
+                      label="Rent Amount"
+                    />
+                  </div>
+                   {/*  State Name*/}
+                   <div className="col-lg-4">
+                    <Field
+                      name="advanceAmount"
+                      component={Input}
+                      placeholder="Advance Amount"
+                      label="Advance Amount"
+                    />
+                  </div>
+                   {/* isWorking */}
+                   <div className="col-lg-4">
+                    <Field name="isRented" type="checkbox" /> Occupied
+                  </div>
+              </div>
               </Form>
             </Modal.Body>
             <Modal.Footer>

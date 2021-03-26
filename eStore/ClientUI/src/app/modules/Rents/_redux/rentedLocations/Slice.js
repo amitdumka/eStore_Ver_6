@@ -8,6 +8,7 @@ const initialRentedLocationsState = {
   actionsLoading: false,
   totalCount: 0,
   entities: null,
+  rentTypes:null,
   rentedLocationForEdit: undefined,
   lastError: null
 };
@@ -49,6 +50,14 @@ export const rentedLocationsSlice = createSlice({
       state.error = null;
       state.entities = entities;
       state.totalCount = totalCount;
+    },
+    rentTypesFetched: function(state, action){
+      const{entities}=action.payload;
+     state.actionsLoading=false;
+     state.listLoading =false;
+     state.error=null;
+     state.rentTypes=entities;
+     
     },
     // createRentedLocation
     rentedLocationCreated: (state, action) => {

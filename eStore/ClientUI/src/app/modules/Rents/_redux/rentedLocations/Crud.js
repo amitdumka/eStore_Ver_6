@@ -5,24 +5,14 @@ import axios from "axios";
 
 export const API_URL = "https://www.aprajitaretails.in/api/rentedLocations";
 
-export async function doLogin(){
-  axios.post("https://www.aprajitaretails.in/api/login").then(
-    res => {
-      return res.data;  
-    }
-  ).catch(function (error){console.log(error)});
+export const APIBASE_URL = "https://www.aprajitaretails.in/api";
+
+
+export async function getRentTypes(){
+  return axios.get(APIBASE_URL+"/enumvalue/renttype/all");
 }
 
-export async function verifyLogin(){
 
-  axios.get("https://www.aprajitaretails.in/api/login").then(
-    res => {
-      const isLogin = res.data;
-      if(!isLogin)  return  doLogin();
-    }
-  ).catch(function (error){console.log(error)});
-
-}
 // CREATE =>  POST: add a new rentedLocation to the server
 export async function createRentedLocation(rentedLocation) {
   return await axios.post(API_URL,  rentedLocation,{

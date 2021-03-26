@@ -21,10 +21,11 @@ export function EditDialog({ id, show, onHide }) {
 
   // RentedLocations Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, rentedLocationForEdit } = useSelector(
+  const { actionsLoading, rentedLocationForEdit, rentTypes } = useSelector(
     (state) => ({
       actionsLoading: state.rentedLocations.actionsLoading,
       rentedLocationForEdit: state.rentedLocations.rentedLocationForEdit,
+      rentTypes: state.rentedLocations.rentTypes
     }),
     shallowEqual
   );
@@ -32,6 +33,7 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting RentedLocation by id
     dispatch(actions.fetchRentedLocation(id));
+    dispatch(actions.fetchRentTypes());
   }, [id, dispatch]);
 
   // server request for saving rentedLocation
@@ -58,6 +60,7 @@ export function EditDialog({ id, show, onHide }) {
         actionsLoading={actionsLoading}
         rentedLocation={rentedLocationForEdit || rentedLocationsUIProps.initRentedLocation}
         onHide={onHide}
+        rentTypes={rentTypes}
       />
     </Modal>
   );
