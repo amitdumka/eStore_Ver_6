@@ -14,17 +14,32 @@ import {
 
 //duesList
 //DuesList
-
+// {
+//   "duesListId": 1,
+//   "amount": 6824,
+//   "isRecovered": true,
+//   "recoveryDate": "2020-08-06T00:00:00",
+//   "dailySaleId": 550,
+//   "dailySale": null,
+//   "isPartialRecovery": false,
+//   "storeId": 1,
+//   "store": null,
+//   "userId": "Admin"
+// }
 // Validation schema
 const DuesListEditSchema = Yup.object().shape({
-  onDate: Yup.date().required("Date is required"),
-  amount: Yup.number().integer().moreThan(0).positive().min(1).required("Amount is required"),
-  employeeId: Yup.number().moreThan(0).required("Paid By is required"),
-  particulars: Yup.string().required("Particulars Month is required"),
-  payMode: Yup.number().required("Payment Mode is required"),
-  partyName: Yup.string().required("Paid To is required"),
-  remarks: Yup.string().required("DuesList details is required"),
-  storeId: Yup.number().required("Select Store "),
+  amount: Yup.number()
+    .integer()
+    .moreThan(0)
+    .positive()
+    .min(1)
+    .required("Amount is required"),
+  storeId: Yup.number()
+    .moreThan(0)
+    .required("Select Store "),
+  dailySaleId: Yup.number()
+    .moreThan(0)
+    .required("Select InvoiceNo "),
 });
 
 export function EditForm({
@@ -32,7 +47,7 @@ export function EditForm({
   duesList,
   actionsLoading,
   onHide,
-  employeeList, partiesList, bankAccountsList
+  saleList,
 }) {
   return (
     <>
@@ -54,76 +69,45 @@ export function EditForm({
               )}
               <Form className="form form-label-right">
                 <div className="form-group row">
-                  
-                   {/* Store */}
-                   <div className="col-lg-4">
+                  {/* Store */}
+                  <div className="col-lg-4">
                     <Select name="storeId" label="Store">
                       <option value="1">Dumka</option>
                       <option value="2">Jamshedpur</option>
                     </Select>
                   </div>
 
-                   {/* Paid By */}
-                   <div className="col-lg-4">
-                    <Select
-                      name="employeeId"
-                      placeholder="Paid By"
-                      label="Paid By"
-                    >
-                      <option value="">Select Employee</option>
-                      {employeeList.map((item) => (
-                        <option key={item.employeeId} value={item.employeeId}>
-                          {item.staffName}
-                        </option>
-                      ))}
-                    </Select>
-                  </div>
-                  
-                  {/* Party  */}
+                  {/* Paid By */}
                   <div className="col-lg-4">
-                    <Select name="partyId" label="Ledger">
-                      <option value={null} >Select Party</option>
-                      {partiesList.map((item) => (
-                        <option key={item.partyId} value={item.partyId}>
-                          {item.partyName}
+                    <Select
+                      name="dailySaleId"
+                      placeholder="Invoice"
+                      label="Invoice"
+                    >
+                      <option value="">Select Invoice</option>
+                      
+                      { saleList &&(
+                      saleList.map((item) => (
+                        <option key={item.dailySaleId} value={item.dailySaleId}>
+                          {item.invNo}
                         </option>
-                      ))}
+                      )))
+                      }
                     </Select>
                   </div>
-                  
-                 
-                </div>
-               
-                <div className="form-group row">
                   {/* Date of DuesList */}
                   <div className="col-lg-4">
                     <DatePickerField
                       dateFormat="yyyy-MM-dd"
-                      name="onDate"
+                      name="saleList.saleDate"
                       label="On Date"
-                    />
-                  </div>
-                  {/*  particulars Name*/}
-                  <div className="col-lg-4">
-                    <Field
-                      name="particulars"
-                      component={Input}
-                      placeholder="Particular(s)"
-                      label="Particular(s)"
-                    />
-                  </div>
-                   {/*  Paid To Name*/}
-                   <div className="col-lg-4">
-                    <Field
-                      name="partyName"
-                      component={Input}
-                      placeholder="Paid To"
-                      label="Paid To"
+                      disabled
                     />
                   </div>
                 </div>
+
                 <div className="form-group row">
-                  {/*  State Name*/}
+                  {/*  particulars Name*/}
                   <div className="col-lg-4">
                     <Field
                       name="amount"
@@ -132,46 +116,7 @@ export function EditForm({
                       label="Amount"
                     />
                   </div>
-                 {/*  State Name*/}
-                 <div className="col-lg-4">
-                    <Field
-                      name="remarks"
-                      component={Input}
-                      placeholder="Remarks"
-                      label="Remarks"
-                    />
-                  </div>
-                   {/* PayMode */}
-                   <div className="col-lg-4">
-                    <Select name="payMode" label="Payment Mode">
-                      <option value="0">Cash</option>
-                      <option value="1">Card</option>
-                    </Select>
-                  </div>
-                 </div>
-                 <div className="form-group row">
-                    {/* FROM aCCOUNT */}
-                    <div className="col-lg-4">
-                    <Select name="bankAccountId" label="From Account">
-                      <option value={null}>Select Bank Account</option>
-                      {bankAccountsList.map((item) => (
-                        <option key={item.bankAccountId} value={item.bankAccountId}>
-                          {item.account}
-                        </option>
-                      ))}
-                    </Select>
-                  </div>                  
-                 {/*  State Name*/}
-                 <div className="col-lg-4">
-                    <Field
-                      name="paymentDetails"
-                      component={Input}
-                      placeholder="Payment Details"
-                      label="Payment Details"
-                    />
-                  </div>
-                  
-                 </div> 
+                </div>
               </Form>
             </Modal.Body>
             <Modal.Footer>

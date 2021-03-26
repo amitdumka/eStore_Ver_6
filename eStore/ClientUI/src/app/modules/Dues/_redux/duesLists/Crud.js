@@ -32,17 +32,10 @@ export async function findDuesLists(queryParams) {
 }
 
 // function to get all list of employees
-export async function getAllEmployees(){
-  return await axios.get("https://www.aprajitaretails.in/api/employees") ; 
+export async function getSaleList(){
+  return await axios.get("https://www.aprajitaretails.in/api/dailySale") ; 
 }
 
-export async function getAllParty(){
-  return await axios.get("https://www.aprajitaretails.in/api/parties") ; 
-}
-
-export async function getAllBankAccount(){
-  return await axios.get("https://www.aprajitaretails.in/api/bankaccounts") ; 
-}
 
 
 // UPDATE => PUT: update the duesList on the server

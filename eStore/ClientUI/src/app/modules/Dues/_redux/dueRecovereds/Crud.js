@@ -6,23 +6,6 @@ import axios from "axios";
 
 
 export const API_URL = "https://www.aprajitaretails.in/api/dueRecovereds";
-export async function doLogin(){
-  axios.post("https://www.aprajitaretails.in/api/login").then(
-    res => {
-      return res.data;  
-    }
-  ).catch(function (error){console.log(error)});
-}
-export async function verifyLogin(){
-
-  axios.get("https://www.aprajitaretails.in/api/login").then(
-    res => {
-      const isLogin = res.data;
-      if(!isLogin)  return  doLogin();
-    }
-  ).catch(function (error){console.log(error)});
-
-}
 // CREATE =>  POST: add a new dueRecovered to the server
 export async function createDueRecovered(dueRecovered) {
   return await axios.post(API_URL,  dueRecovered,{

@@ -27,13 +27,13 @@ export function DuesListsCard() {
     <Card>
       <CardHeader title="DuesList list">
         <CardHeaderToolbar>
-          <button
+          {/* <button
             type="button"
             className="btn btn-primary btn-rounded"
             onClick={DuesListsUIProps.newDuesListButtonClick}
           >
             New DuesList
-          </button>
+          </button> */}
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
