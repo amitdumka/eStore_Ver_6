@@ -4,29 +4,20 @@ import axios from "axios";
 //rent
 
 export const API_URL = "https://www.aprajitaretails.in/api/rents";
+export const APIBASE_URL = "https://www.aprajitaretails.in/api";
 
-export async function doLogin() {
-  axios
-    .post("https://www.aprajitaretails.in/api/login")
-    .then((res) => {
-      return res.data;
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
+export async function getPayModes(){
+  return axios.get(APIBASE_URL+"/enumvalue/paymode/all"); 
+}
+export async function getRentTypes(){
+  return axios.get(APIBASE_URL+"/enumvalue/renttype/all");
+}
+export async function getRentedLocations(){
+  return axios.get(APIBASE_URL+"/rentedlocations");
 }
 
-export async function verifyLogin() {
-  axios
-    .get("https://www.aprajitaretails.in/api/login")
-    .then((res) => {
-      const isLogin = res.data;
-      if (!isLogin) return doLogin();
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-}
+
+
 // CREATE =>  POST: add a new rent to the server
 export async function createRent(rent) {
   return await axios.post(API_URL, rent, {

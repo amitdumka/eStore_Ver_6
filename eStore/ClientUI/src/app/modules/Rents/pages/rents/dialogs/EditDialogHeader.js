@@ -19,9 +19,9 @@ export function EditDialogHeader({ id }) {
   const [title, setTitle] = useState("");
   // Title couting
   useEffect(() => {
-    let _title = id ? "" : "New Bank Account";
+    let _title = id ? "" : "New Rent Payment";
     if (rentForEdit && id) {
-      _title = `Edit bank Account '${rentForEdit.account}'`;
+      _title = `Edit Rent Payment '${rentForEdit.account}'`;
     }
 
     setTitle(_title);

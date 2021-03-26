@@ -8,21 +8,59 @@ import {rentsSlice, callTypes} from "./Slice";
 
 const {actions} = rentsSlice;
 
-export const fetchBanks =id=>dispatch => {
+
+
+export const fetchPayModes =id=>dispatch => {
   
   dispatch(actions.startCall({callType:callTypes.list}));
 
   return requestFromServer
-  .getAllBanks()
+  .getPayModes()
   .then(response=>{
     const entities  = response.data; 
     const totalCount=response.data.length;
     console.log(entities);
-    dispatch(actions.banksListFetched({totalCount, entities}));
+    dispatch(actions.payModesFetched({totalCount, entities}));
   })
   .catch(error =>{
     console.log(error);
-    error.clientMessage="Can't load banks list"; 
+    error.clientMessage="Can't load paymode list"; 
+    dispatch(actions.catchError({error,callTypes:callTypes.list}));
+  });
+}
+export const fetchRentTypes =id=>dispatch => {
+  
+  dispatch(actions.startCall({callType:callTypes.list}));
+
+  return requestFromServer
+  .getRentTypes()
+  .then(response=>{
+    const entities  = response.data; 
+    const totalCount=response.data.length;
+    console.log(entities);
+    dispatch(actions.rentTypesFetched({totalCount, entities}));
+  })
+  .catch(error =>{
+    console.log(error);
+    error.clientMessage="Can't load rent type list"; 
+    dispatch(actions.catchError({error,callTypes:callTypes.list}));
+  });
+}
+export const fetchLocations =id=>dispatch => {
+  
+  dispatch(actions.startCall({callType:callTypes.list}));
+
+  return requestFromServer
+  .getRentedLocations()
+  .then(response=>{
+    const entities  = response.data; 
+    const totalCount=response.data.length;
+    console.log(entities);
+    dispatch(actions.rentedLocationsFetched({totalCount, entities}));
+  })
+  .catch(error =>{
+    console.log(error);
+    error.clientMessage="Can't load rent location list"; 
     dispatch(actions.catchError({error,callTypes:callTypes.list}));
   });
 }
