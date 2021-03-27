@@ -23,7 +23,24 @@ export const fetchRentedLocations = queryParams => dispatch => {
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
+export const fetchRentTypes =id=>dispatch => {
+  
+  dispatch(actions.startCall({callType:callTypes.list}));
 
+  return requestFromServer
+  .getRentTypes()
+  .then(response=>{
+    const entities  = response.data; 
+    const totalCount=response.data.length;
+    console.log(entities);
+    dispatch(actions.rentTypesFetched({totalCount, entities}));
+  })
+  .catch(error =>{
+    console.log(error);
+    error.clientMessage="Can't load rent type list"; 
+    dispatch(actions.catchError({error,callTypes:callTypes.list}));
+  });
+}
 export const fetchRentedLocation = id => dispatch => {
   if (!id) {
     return dispatch(actions.rentedLocationFetched({ rentedLocationForEdit: undefined }));

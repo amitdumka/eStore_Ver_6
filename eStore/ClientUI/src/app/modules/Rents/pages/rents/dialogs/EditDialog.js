@@ -19,11 +19,13 @@ export function EditDialog({ id, show, onHide }) {
 
   // Rents Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, rentForEdit ,bankList} = useSelector(
+  const { actionsLoading, rentForEdit ,payModes,rentTypes, rentedLocations} = useSelector(
     (state) => ({
       actionsLoading: state.rents.actionsLoading,
       rentForEdit: state.rents.rentForEdit,
-      bankList:state.rents.bankEntities
+      payModes:state.rents.payModes,
+      rentTypes:state.rents.rentTypes,
+      rentedLocations:state.rents.rentedLocations
     }),
     shallowEqual
   );
@@ -31,7 +33,10 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting Rent by id
     dispatch(actions.fetchRent(id));
-    dispatch(actions.fetchBanks());
+    dispatch(actions.fetchLocations());
+    dispatch(actions.fetchRentTypes());
+    dispatch(actions.fetchPayModes());
+
   }, [id, dispatch]);
 
   // server request for saving rent
@@ -61,7 +66,9 @@ export function EditDialog({ id, show, onHide }) {
         actionsLoading={actionsLoading}
         rent={rentForEdit || rentsUIProps.initRent}
         onHide={onHide}
-        bankList={bankList}
+        payModes={payModes}
+        rentTypes={rentTypes}
+        locationList={rentedLocations}
       />
     </Modal>
   );

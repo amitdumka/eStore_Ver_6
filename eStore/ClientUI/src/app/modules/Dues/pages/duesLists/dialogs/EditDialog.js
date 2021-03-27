@@ -20,13 +20,11 @@ export function EditDialog({ id, show, onHide }) {
 
   // DuesLists Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, duesListForEdit ,employeeList, partiesList, bankAccountsList} = useSelector(
+  const { actionsLoading, duesListForEdit ,saleList} = useSelector(
     (state) => ({
       actionsLoading: state.duesLists.actionsLoading,
       duesListForEdit: state.duesLists.duesListForEdit,
-      employeeList:state.duesLists.employeeEntities,
-      partiesList:state.duesLists.partiesEntities, 
-      bankAccountsList:state.duesLists.bankaccEntities
+      saleList:state.duesLists.saleList,
     }),
     shallowEqual
   );
@@ -34,14 +32,11 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting DuesList by id
     dispatch(actions.fetchDuesList(id));
-   // dispatch(actions.fetchParties());
-    //dispatch(actions.fetchBankAccounts());
-    //dispatch(actions.fetchEmployees());
+    dispatch(actions.fetchSaleList());
   }, [id, dispatch]);
 
   // server request for saving duesList
   const saveDuesList = (duesList) => {
-    duesList.payMode=parseInt(duesList.payMode);
     if (!id) {
       // server request for creating duesList
       dispatch(actions.createDuesList(duesList)).then(() => onHide());
@@ -64,9 +59,7 @@ export function EditDialog({ id, show, onHide }) {
         actionsLoading={actionsLoading}
         duesList={duesListForEdit || duesListsUIProps.initDuesList}
         onHide={onHide}
-        employeeList={employeeList}
-        partiesList={partiesList}
-        bankAccountsList={bankAccountsList}
+        saleList={saleList}
       />
     </Modal>
   );

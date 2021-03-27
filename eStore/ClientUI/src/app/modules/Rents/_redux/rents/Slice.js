@@ -13,8 +13,9 @@ const initialRentsState = {
   entities: null,
   rentForEdit: undefined,
   lastError: null, 
-  bankEntities: null, 
-  totalCountEmp:0
+  rentTypes:null, 
+  payModes:null, 
+  rentedLocations:null
 };
 export const callTypes = {
   list: "list",
@@ -41,15 +42,30 @@ export const rentsSlice = createSlice({
         state.actionsLoading = true;
       }
     },
-    // get All bank List 
-    banksListFetched: function(state,action){
-      const{totalCount,entities}=action.payload;
+    payModesFetched: function(state, action){
+      const{entities}=action.payload;
+      state.actionsLoading=false;
+      state.listLoading =false;
+      state.error=null;
+      state.payModes=entities;
+      
+    },
+    rentTypesFetched: function(state, action){
+      const{entities}=action.payload;
      state.actionsLoading=false;
      state.listLoading =false;
      state.error=null;
-     state.bankEntities=entities;
-     state.totalCountEmp=totalCount;
-
+     state.rentTypes=entities;
+     
+    },
+    // get All bank List 
+    rentedLocationsFetched: function(state,action){
+      const{entities}=action.payload;
+     state.actionsLoading=false;
+     state.listLoading =false;
+     state.error=null;
+     state.rentedLocations=entities;
+     
     },
     // getRentById
     rentFetched: (state, action) => {
@@ -96,7 +112,6 @@ export const rentsSlice = createSlice({
         el => !action.payload.ids.includes(el.rentId)
       );
     },
-
     
     // rentsUpdateState
     rentsStatusUpdated: (state, action) => {
