@@ -6,57 +6,36 @@ import { dueRecoveredsSlice, callTypes } from "./Slice";
 
 const { actions } = dueRecoveredsSlice;
 
-export const fetchParties = (id) => (dispatch) => {
+export const fetchPayModes = (id) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
 
   return requestFromServer
-    .getAllParty()
+    .getPayModes()
     .then((response) => {
       const entities = response.data;
-      const totalCount = response.data.length;
       console.log(entities);
-      dispatch(actions.partiesListFetched({ totalCount, entities }));
+      dispatch(actions.payModesFetched({ entities }));
     })
     .catch((error) => {
       console.log(error);
-      error.clientMessage = "Can't load parties/Ledger list";
+      error.clientMessage = "Can't load Payment mode list";
       dispatch(actions.catchError({ error, callTypes: callTypes.list }));
     });
 };
-export const fetchBankAccounts = (id) => (dispatch) => {
+export const fetchDueList = (id) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
 
   return requestFromServer
-    .getAllBankAccount()
+    .getDueList()
     .then((response) => {
       const entities = response.data;
-      const totalCount = response.data.length;
+
       console.log(entities);
-      dispatch(actions.bankAccountsListFetched({ totalCount, entities }));
+      dispatch(actions.dueListFetched({ entities }));
     })
     .catch((error) => {
       console.log(error);
-      error.clientMessage = "Can't load Bank Accounts list";
-      dispatch(actions.catchError({ error, callTypes: callTypes.list }));
-    });
-};
-
-
-
-export const fetchEmployees = (id) => (dispatch) => {
-  dispatch(actions.startCall({ callType: callTypes.list }));
-
-  return requestFromServer
-    .getAllEmployees()
-    .then((response) => {
-      const entities = response.data;
-      const totalCount = response.data.length;
-      console.log(entities);
-      dispatch(actions.employeesListFetched({ totalCount, entities }));
-    })
-    .catch((error) => {
-      console.log(error);
-      error.clientMessage = "Can't load employees list";
+      error.clientMessage = "Can't load Due list";
       dispatch(actions.catchError({ error, callTypes: callTypes.list }));
     });
 };
@@ -69,7 +48,7 @@ export const fetchDueRecovereds = (queryParams) => (dispatch) => {
       const entities = response.data;
       const totalCount = response.data.length;
       console.log(response.data);
-      
+
       dispatch(actions.dueRecoveredsFetched({ totalCount, entities }));
     })
     .catch((error) => {
@@ -81,7 +60,9 @@ export const fetchDueRecovereds = (queryParams) => (dispatch) => {
 
 export const fetchDueRecovered = (id) => (dispatch) => {
   if (!id) {
-    return dispatch(actions.dueRecoveredFetched({ dueRecoveredForEdit: undefined }));
+    return dispatch(
+      actions.dueRecoveredFetched({ dueRecoveredForEdit: undefined })
+    );
   }
 
   dispatch(actions.startCall({ callType: callTypes.action }));
@@ -89,7 +70,9 @@ export const fetchDueRecovered = (id) => (dispatch) => {
     .getDueRecoveredById(id)
     .then((response) => {
       const dueRecovered = response.data;
-      dispatch(actions.dueRecoveredFetched({ dueRecoveredForEdit: dueRecovered }));
+      dispatch(
+        actions.dueRecoveredFetched({ dueRecoveredForEdit: dueRecovered })
+      );
     })
     .catch((error) => {
       error.clientMessage = "Can't find dueRecovered";

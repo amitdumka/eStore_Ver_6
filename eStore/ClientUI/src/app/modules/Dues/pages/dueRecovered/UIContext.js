@@ -42,28 +42,17 @@ export function UIProvider({ UIEvents, children }) {
   }, []);
 
   const initDueRecovered = {
-    dueRecoveredId: 0,
-    partyName: "",
-    dueRecoveredSlipNo: "",
-    onDate: new Date(),
-    payMode: 0,
-    bankAccountId: null,
-    fromAccount: null,
-    dueRecoveredDetails: "",
-    amount: 0.0,
+    dueRecoverdId: 0,
+    paidDate: new Date(),
+    duesListId: 0,
+    duesList: null,
+    amountPaid: 0,
+    isPartialPayment: false,
+    modes: 0,
     remarks: "",
-    partyId: null,
-    ledgerEnteryId: null,
-    isCash: false,
-    isOn: false,
-    isDyn: false,
-    party: null,
-    ledgerEntry: null,
     storeId: 1,
     store: null,
     userId: "WebUI",
-    entryStatus: 0,
-    isReadOnly: false,
   };
 
   const value = {
@@ -78,7 +67,8 @@ export function UIProvider({ UIEvents, children }) {
     openDeleteDueRecoveredDialog: UIEvents.openDeleteDueRecoveredDialog,
     openDeleteDueRecoveredsDialog: UIEvents.openDeleteDueRecoveredsDialog,
     openFetchDueRecoveredsDialog: UIEvents.openFetchDueRecoveredsDialog,
-    openUpdateDueRecoveredsStatusDialog: UIEvents.openUpdateDueRecoveredsStatusDialog,
+    openUpdateDueRecoveredsStatusDialog:
+      UIEvents.openUpdateDueRecoveredsStatusDialog,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

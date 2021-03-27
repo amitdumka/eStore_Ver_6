@@ -28,7 +28,7 @@ export function EmpInfoWidget({ className, empInfo }) {
 
         {/* Body */}
         <div className="card-body pt-0">
-          {empInfo &&
+          {empInfo ?
             empInfo.map((item) => (
               <div className="mb-6">
                 <div className="d-flex align-items-center flex-grow-1">
@@ -71,7 +71,7 @@ export function EmpInfoWidget({ className, empInfo }) {
                   </div>
                 </div>
               </div>
-            ))}
+            )):(<div text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1>Today No Employees are present. </div>)}
         </div>
       </div>
     </>

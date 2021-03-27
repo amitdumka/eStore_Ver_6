@@ -12,12 +12,8 @@ const initialDueRecoveredsState = {
   entities: null,
   dueRecoveredForEdit: undefined,
   lastError: null, 
-  employeeEntities: null, 
-  totalCountEmp:0,
-  partiesEntities:null,
-  bankaccEntities:null,
-  totalCountbankacc:undefined, 
-  totalCountparty:undefined
+  dueList: null, 
+  payModes:null
 };
 export const callTypes = {
   list: "list",
@@ -45,33 +41,20 @@ export const dueRecoveredsSlice = createSlice({
       }
     },
     // get All employee List 
-    employeesListFetched: function(state,action){
-      const{totalCount,entities}=action.payload;
+    dueListFetched: function(state,action){
+      const{entities}=action.payload;
      state.actionsLoading=false;
      state.listLoading =false;
      state.error=null;
-     state.employeeEntities=entities;
-     state.totalCountEmp=totalCount;
-
+     state.dueList=entities;
     },
     // get All parties List 
-    partiesListFetched: function(state,action){
-      const{totalCount,entities}=action.payload;
+    payModesFetched: function(state,action){
+      const{entities}=action.payload;
      state.actionsLoading=false;
      state.listLoading =false;
      state.error=null;
-     state.partiesEntities=entities;
-     state.totalCountparty=totalCount;
-
-    },
-    // get All bank account List 
-    bankAccountsListFetched: function(state,action){
-      const{totalCount,entities}=action.payload;
-     state.actionsLoading=false;
-     state.listLoading =false;
-     state.error=null;
-     state.bankaccEntities=entities;
-     state.totalCountbankacc=totalCount;
+     state.payModes=entities;
 
     },
     // getDueRecoveredById

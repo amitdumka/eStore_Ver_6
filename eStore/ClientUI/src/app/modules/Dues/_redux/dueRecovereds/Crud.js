@@ -6,23 +6,6 @@ import axios from "axios";
 
 
 export const API_URL = "https://www.aprajitaretails.in/api/dueRecovereds";
-export async function doLogin(){
-  axios.post("https://www.aprajitaretails.in/api/login").then(
-    res => {
-      return res.data;  
-    }
-  ).catch(function (error){console.log(error)});
-}
-export async function verifyLogin(){
-
-  axios.get("https://www.aprajitaretails.in/api/login").then(
-    res => {
-      const isLogin = res.data;
-      if(!isLogin)  return  doLogin();
-    }
-  ).catch(function (error){console.log(error)});
-
-}
 // CREATE =>  POST: add a new dueRecovered to the server
 export async function createDueRecovered(dueRecovered) {
   return await axios.post(API_URL,  dueRecovered,{
@@ -46,18 +29,13 @@ export async function findDueRecovereds(queryParams) {
 }
 
 // function to get all list of employees
-export async function getAllEmployees(){
-  return await axios.get("https://www.aprajitaretails.in/api/employees") ; 
+export async function getPayModes(){
+  return await axios.get("https://www.aprajitaretails.in/api/enumvalue/paymode/all") ; 
 }
 
-export async function getAllParty(){
-  return await axios.get("https://www.aprajitaretails.in/api/parties") ; 
+export async function getDueList(){
+  return await axios.get("https://www.aprajitaretails.in/api/duesLists") ; 
 }
-
-export async function getAllBankAccount(){
-  return await axios.get("https://www.aprajitaretails.in/api/bankaccounts") ; 
-}
-
 
 // UPDATE => PUT: update the dueRecovered on the server
 export async function updateDueRecovered(dueRecovered) {

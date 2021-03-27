@@ -23,9 +23,7 @@ export function EditDialog({ id, show, onHide }) {
   const {
     actionsLoading,
     dueRecoveredForEdit,
-    employeeList,
-    partiesList,
-    bankAccountsList,
+    dueList, payModes,
   } = useSelector(
     (state) => ({
       actionsLoading: state.dueRecovereds.actionsLoading,
@@ -33,6 +31,8 @@ export function EditDialog({ id, show, onHide }) {
       employeeList: state.dueRecovereds.employeeEntities,
       partiesList: state.dueRecovereds.partiesEntities,
       bankAccountsList: state.dueRecovereds.bankaccEntities,
+      payModes: state.dueRecovereds.payModes, 
+      dueList: state.dueRecovereds.dueList
     }),
     shallowEqual
   );
@@ -40,8 +40,8 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting DueRecovered by id
     dispatch(actions.fetchDueRecovered(id));
-    // dispatch(actions.fetchParties());
-    // dispatch(actions.fetchBankAccounts());
+     dispatch(actions.fetchPayModes());
+     dispatch(actions.fetchDueList());
     //dispatch(actions.fetchEmployees());
   }, [id, dispatch]);
 
@@ -72,9 +72,8 @@ export function EditDialog({ id, show, onHide }) {
           dueRecoveredForEdit || dueRecoveredsUIProps.initDueRecovered
         }
         onHide={onHide}
-        employeeList={employeeList}
-        partiesList={partiesList}
-        bankAccountsList={bankAccountsList}
+        dueList={dueList}
+        payModes={payModes}
       />
     </Modal>
   );

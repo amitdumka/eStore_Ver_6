@@ -15,17 +15,34 @@ import {
 //dueRecovered
 //DueRecovered
 
+// {
+//   "dueRecoverdId": 1,
+//   "paidDate": "2020-01-14T00:00:00",
+//   "duesListId": 7,
+//   "duesList": null,
+//   "amountPaid": 499,
+//   "isPartialPayment": false,
+//   "modes": 0,
+//   "remarks": "manual bill no 387",
+//   "storeId": 1,
+//   "store": null,
+//   "userId": "AlokKumar"
+// }
 // Validation schema
 const DueRecoveredEditSchema = Yup.object().shape({
-  onDate: Yup.date().required("Date is required"),
-  amount: Yup.number().integer().moreThan(0).positive().min(1).required("Amount is required"),
-  employeeId: Yup.number().moreThan(0).required("Paid By is required"),
- // particulars: Yup.string().required("Particulars Month is required"),
-  payMode: Yup.number().required("DueRecovered Mode is required"),
-  partyName: Yup.string().required("Paid To is required"),
-  remarks: Yup.string().required("DueRecovered details is required"),
+  paidDate: Yup.date().required("Date is required"),
+  amountPaid: Yup.number()
+    .integer()
+    .moreThan(0)
+    .positive()
+    .min(1)
+    .required("Amount is required"),
+  duesListId: Yup.number()
+    .moreThan(0)
+    .required("Select Inv is required"),
+  modes: Yup.number().required("Payments Mode is required"),
+  remarks: Yup.string().required("Remarks/details is required"),
   storeId: Yup.number().required("Select Store "),
-  dueRecoveredSlipNo:Yup.string().required("DueRecovered Slip No is required"),
 });
 
 export function EditForm({
@@ -33,7 +50,8 @@ export function EditForm({
   dueRecovered,
   actionsLoading,
   onHide,
-  employeeList, partiesList, bankAccountsList
+  dueList,
+  payModes,
 }) {
   return (
     <>
@@ -55,86 +73,48 @@ export function EditForm({
               )}
               <Form className="form form-label-right">
                 <div className="form-group row">
-                  
-                   {/* Store */}
-                   <div className="col-lg-4">
+                  {/* Store */}
+                  <div className="col-lg-4">
                     <Select name="storeId" label="Store">
                       <option value="1">Dumka</option>
                       <option value="2">Jamshedpur</option>
                     </Select>
                   </div>
 
-                   {/* Paid By */}
-                   <div className="col-lg-4">
-                    <Select
-                      name="employeeId"
-                      placeholder="Paid By"
-                      label="Paid By"
-                    >
-                      <option value="">Select Employee</option>
-                      {employeeList.map((item) => (
-                        <option key={item.employeeId} value={item.employeeId}>
-                          {item.staffName}
-                        </option>
-                      ))}
-                    </Select>
-                  </div>
-                  
-                  {/* Party  */}
+                  {/* Invoice List */}
                   <div className="col-lg-4">
-                    <Select name="partyId" label="Ledger">
-                      <option value={null} >Select Party</option>
-                      {partiesList.map((item) => (
-                        <option key={item.partyId} value={item.partyId}>
-                          {item.partyName}
-                        </option>
-                      ))}
+                    <Select   name="duesListId" placeholder="Invoice No" label="Invoice" >
+                      <option value="">Select Invoice</option>
+                      {dueList &&
+                        dueList.map((item) => (
+                          <option key={item.duesListId} value={item.duesListId}>
+                            {item.dailySale.invNo}
+                          </option>
+                        ))}
                     </Select>
                   </div>
-                  
-                 
-                </div>
-               
-                <div className="form-group row">
-                  {/* Date of DueRecovered */}
+                  {/* Date of Payment */}
                   <div className="col-lg-4">
                     <DatePickerField
                       dateFormat="yyyy-MM-dd"
-                      name="onDate"
-                      label="On Date"
-                    />
-                  </div>
-                  {/*  State Name*/}
-                 <div className="col-lg-4">
-                    <Field
-                      name="dueRecoveredSlipNo"
-                      component={Input}
-                      placeholder="DueRecovered SlipNo"
-                      label="DueRecovered SlipNo"
-                    />
-                  </div>
-                   {/*  Paid To Name*/}
-                   <div className="col-lg-4">
-                    <Field
-                      name="partyName"
-                      component={Input}
-                      placeholder="Paid To"
-                      label="Paid To"
+                      name="paidDate"
+                      label="Date"
                     />
                   </div>
                 </div>
+
                 <div className="form-group row">
-                  {/*  State Name*/}
+                  {/*  Amount*/}
                   <div className="col-lg-4">
                     <Field
-                      name="amount"
+                      name="amountPaid"
                       component={Input}
-                      placeholder="Amount"
+                      placeholder="Paid Amount"
                       label="Amount"
                     />
                   </div>
-                 {/*  State Name*/}
-                 <div className="col-lg-4">
+                  {/*  Remarks*/}
+                  <div className="col-lg-4">
                     <Field
                       name="remarks"
                       component={Input}
@@ -142,38 +122,24 @@ export function EditForm({
                       label="Remarks"
                     />
                   </div>
-                   {/* PayMode */}
-                   <div className="col-lg-4">
-                    <Select name="payMode" label="DueRecovered Mode">
-                      <option value="0">Cash</option>
-                      <option value="1">Card</option>
+                  <div className="col-lg-4">
+                    <Field name="isPartialPayment" type="checkbox" />
+                    {} Partial Payment
+                  </div>
+                </div>
+                <div className="form-group row">
+                  {/* PayMode */}
+                  <div className="col-lg-4">
+                    <Select name="modes" label="Mode">
+                      {payModes &&
+                        payModes.map((item) => (
+                          <option key={item.value} value={item.value}>
+                            {item.name}
+                          </option>
+                        ))}
                     </Select>
                   </div>
-                 </div>
-                 <div className="form-group row">
-                    {/* FROM aCCOUNT */}
-                    <div className="col-lg-4">
-                    <Select name="bankAccountId" label="From Account">
-                      <option value={null}>Select Bank Account</option>
-                      {bankAccountsList.map((item) => (
-                        <option key={item.bankAccountId} value={item.bankAccountId}>
-                          {item.account}
-                        </option>
-                      ))}
-                    </Select>
-                  </div>                  
-                 {/*  State Name*/}
-                 <div className="col-lg-4">
-                    <Field
-                      name="dueRecoveredDetails"
-                      component={Input}
-                      placeholder="DueRecovered Details"
-                      label="DueRecovered Details"
-                    />
-                  </div>
-                  
-                  
-                 </div> 
+                </div>
               </Form>
             </Modal.Body>
             <Modal.Footer>
