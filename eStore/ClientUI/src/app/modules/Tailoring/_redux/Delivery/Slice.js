@@ -41,7 +41,7 @@ export const deliveriesSlice = createSlice({
       }
     },
     // get All bank List
-    bookingFetched: function(state, action) {
+    bookingsFetched: function(state, action) {
       const {  entities } = action.payload;
       state.actionsLoading = false;
       state.listLoading = false;

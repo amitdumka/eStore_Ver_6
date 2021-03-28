@@ -60,7 +60,7 @@ export function EditForm({
                   {/* storeId */}
                   <div className="col-lg-4">
                     <Select name="storeId" label="Store">
-                      {bookings.map((item) => (
+                      {stores.map((item) => (
                         <option key={item.storeId} value={item.storeId}>
                           {item.storeName}
                         </option>
@@ -71,7 +71,7 @@ export function EditForm({
                   <div className="col-lg-4">
                     <Select name="talioringBookingId" label="Booking">
                       <option>Select Booking</option>
-                      {stores.map((item) => (
+                      {bookings.map((item) => (
                         <option
                           key={item.talioringBookingId}
                           value={item.talioringBookingId}

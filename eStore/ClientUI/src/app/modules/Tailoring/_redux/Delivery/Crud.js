@@ -33,7 +33,7 @@ export async function findDeliveries(queryParams) {
 
 // function to get all list of banks
 export async function getAllBookings() {
-  return await axios.get("https://www.aprajitaretails.in/api/tailoringbookings");
+  return await axios.get("https://www.aprajitaretails.in/api/selectData/bookingList/false");
 }
 
 // UPDATE => PUT: update the delivery on the server

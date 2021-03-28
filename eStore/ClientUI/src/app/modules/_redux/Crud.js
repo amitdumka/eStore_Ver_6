@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "https://aprajitaretails.in/api";
+const BASE_URL = "https://www.aprajitaretails.in/api";
 const ENUMAPI = BASE_URL + "/enumvalue";
 
 export async function getEnumType(typeName) {

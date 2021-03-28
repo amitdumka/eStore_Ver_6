@@ -31,6 +31,7 @@ import {deliveriesSlice} from "../app/modules/Tailoring/_redux/Delivery/Slice";
 import {rentsSlice} from "../app/modules/Rents/_redux/rents/Slice";
 import{rentedLocationsSlice} from "../app/modules/Rents/_redux/rentedLocations/Slice";
 import {dashboardSlice} from "./dashboard/Slice";
+import {commonTypesSlice} from "../app/modules/_redux/Slice";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -59,6 +60,7 @@ export const rootReducer = combineReducers({
   rentedLocations: rentedLocationsSlice.reducer,
   rents: rentsSlice.reducer, 
   dashboard: dashboardSlice.reducer,
+  commonTypes: commonTypesSlice.reducer,
 
 });
 

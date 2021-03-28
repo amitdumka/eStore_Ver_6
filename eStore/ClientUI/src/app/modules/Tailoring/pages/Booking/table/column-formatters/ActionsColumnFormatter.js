@@ -19,7 +19,7 @@ export function ActionsColumnFormatter(
       <a
         title="Edit booking"
         className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-        onClick={() => openEditBookingDialog(row.bookingId)}
+        onClick={() => openEditBookingDialog(row.talioringBookingId)}
       >
         <span className="svg-icon svg-icon-md svg-icon-primary">
           <SVG
@@ -32,7 +32,7 @@ export function ActionsColumnFormatter(
       <a
         title="Delete booking"
         className="btn btn-icon btn-light btn-hover-danger btn-sm"
-        onClick={() => openDeleteBookingDialog(row.bookingId)}
+        onClick={() => openDeleteBookingDialog(row.talioringBookingId)}
       >
         <span className="svg-icon svg-icon-md svg-icon-danger">
           <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />

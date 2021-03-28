@@ -23,7 +23,7 @@ export function ActionsColumnFormatter(
       <a
         title="Edit delivery"
         className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-        onClick={() => openEditDeliveryDialog(row.deliveryId)}
+        onClick={() => openEditDeliveryDialog(row.talioringDeliveryId)}
       >
         <span className="svg-icon svg-icon-md svg-icon-primary">
           <SVG
@@ -36,7 +36,7 @@ export function ActionsColumnFormatter(
       <a
         title="Delete delivery"
         className="btn btn-icon btn-light btn-hover-danger btn-sm"
-        onClick={() => openDeleteDeliveryDialog(row.deliveryId)}
+        onClick={() => openDeleteDeliveryDialog(row.talioringDeliveryId)}
       >
         <span className="svg-icon svg-icon-md svg-icon-danger">
           <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />

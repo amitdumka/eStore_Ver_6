@@ -23,13 +23,13 @@ export function EditDialog({ id, show, onHide }) {
 
   // Deliveries Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, deliveryForEdit ,storeList, bookings} = useSelector(
+  const { actionsLoading, deliveryForEdit, storeList, bookings } = useSelector(
     (state) => ({
       actionsLoading: state.deliveries.actionsLoading,
       deliveryForEdit: state.deliveries.deliveryForEdit,
-      taxTypes:state.deliveries.taxTypes,
-      bookings:state.deliveries.bookings, 
-      storeList:state.deliveries.storeList
+      taxTypes: state.deliveries.taxTypes,
+      bookings: state.deliveries.bookings,
+      storeList: state.commonTypes.storeList,
     }),
     shallowEqual
   );
@@ -37,15 +37,13 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting Delivery by id
     dispatch(commonActions.fetchStores());
-    dispatch(actions.fetchDelivery(id));
     dispatch(actions.fetchBookings());
-   
+    dispatch(actions.fetchDelivery(id));
   }, [id, dispatch]);
 
   // server request for saving delivery
   const saveDelivery = (delivery) => {
-    
-    delivery.accountType=parseInt(delivery.accountType);
+    delivery.accountType = parseInt(delivery.accountType);
 
     if (!id) {
       // server request for creating delivery
@@ -55,7 +53,6 @@ export function EditDialog({ id, show, onHide }) {
       dispatch(actions.updateDelivery(delivery)).then(() => onHide());
     }
   };
-
   return (
     <Modal
       size="lg"
