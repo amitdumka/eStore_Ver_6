@@ -32,8 +32,8 @@ export async function findDeliveries(queryParams) {
 }
 
 // function to get all list of banks
-export async function getAllTaxTypes() {
-  return await axios.get("https://www.aprajitaretails.in/api/enumvalue/taxtype/all");
+export async function getAllBookings() {
+  return await axios.get("https://www.aprajitaretails.in/api/tailoringbookings");
 }
 
 // UPDATE => PUT: update the delivery on the server

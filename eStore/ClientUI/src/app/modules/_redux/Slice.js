@@ -155,7 +155,13 @@ export const commonTypesSlice = createSlice({
       state.error = null;
       state.loginRole = entities;
     },
-
+    storesFetched: function(state, action) {
+      const { entities } = action.payload;
+      state.actionsLoading = false;
+      state.listLoading = false;
+      state.error = null;
+      state.storeList = entities;
+    },
     enumValueFetched: function(state, action) {
       const {typeName, entities } = action.payload;
       state.actionsLoading = false;

@@ -13,7 +13,7 @@ const initialDeliveriesState = {
   entities: null,
   deliveryForEdit: undefined,
   lastError: null,
-  taxTypes: null,
+  bookings: null,
 };
 export const callTypes = {
   list: "list",
@@ -41,12 +41,12 @@ export const deliveriesSlice = createSlice({
       }
     },
     // get All bank List
-    taxTypesFetched: function(state, action) {
+    bookingFetched: function(state, action) {
       const {  entities } = action.payload;
       state.actionsLoading = false;
       state.listLoading = false;
       state.error = null;
-      state.taxTypes = entities;
+      state.bookings = entities;
     },
     // getDeliveryById
     deliveryFetched: (state, action) => {

@@ -10,21 +10,20 @@ import {deliveriesSlice, callTypes} from "./Slice";
 
 const {actions} = deliveriesSlice;
 
-export const fetchTaxTypes =id=>dispatch => {
+export const fetchBookings =id=>dispatch => {
   
   dispatch(actions.startCall({callType:callTypes.list}));
 
   return requestFromServer
-  .getAllTaxTypes()
+  .getAllBookings()
   .then(response=>{
     const entities  = response.data; 
-    const totalCount=response.data.length;
     console.log(entities);
-    dispatch(actions.taxTypesFetched({totalCount, entities}));
+    dispatch(actions.bookingsFetched({ entities}));
   })
   .catch(error =>{
     console.log(error);
-    error.clientMessage="Can't load Ledger Types"; 
+    error.clientMessage="Can't load Booking List"; 
     dispatch(actions.catchError({error,callTypes:callTypes.list}));
   });
 }

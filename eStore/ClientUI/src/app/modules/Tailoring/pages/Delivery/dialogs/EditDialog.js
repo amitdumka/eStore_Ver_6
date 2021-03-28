@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/Delivery/Actions";
+import * as commonActions from "../../../../_redux/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
@@ -22,19 +23,23 @@ export function EditDialog({ id, show, onHide }) {
 
   // Deliveries Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, deliveryForEdit ,taxTypes} = useSelector(
+  const { actionsLoading, deliveryForEdit ,storeList, bookings} = useSelector(
     (state) => ({
       actionsLoading: state.deliveries.actionsLoading,
       deliveryForEdit: state.deliveries.deliveryForEdit,
-      taxTypes:state.deliveries.taxTypes
+      taxTypes:state.deliveries.taxTypes,
+      bookings:state.deliveries.bookings, 
+      storeList:state.deliveries.storeList
     }),
     shallowEqual
   );
 
   useEffect(() => {
     // server call for getting Delivery by id
+    dispatch(commonActions.fetchStores());
     dispatch(actions.fetchDelivery(id));
-    dispatch(actions.fetchTaxTypes());
+    dispatch(actions.fetchBookings());
+   
   }, [id, dispatch]);
 
   // server request for saving delivery
@@ -64,7 +69,8 @@ export function EditDialog({ id, show, onHide }) {
         actionsLoading={actionsLoading}
         delivery={deliveryForEdit || deliveriesUIProps.initDelivery}
         onHide={onHide}
-        taxTypes={taxTypes}
+        bookings={bookings}
+        stores={storeList}
       />
     </Modal>
   );

@@ -13,11 +13,28 @@ export const fetchEnumValue = (enumName) => (dispatch) => {
       const entities = response.data;
       console.log("Enum Name:" + enumName);
       console.log(entities);
-      dispatch(actions.partiesListFetched({ enumName, entities }));
+      dispatch(actions.enumValueFetched({ enumName, entities }));
     })
     .catch((error) => {
       console.log(error);
       error.clientMessage = `$"Can't load {enumName} list"`;
+      dispatch(actions.catchError({ error, callTypes: callTypes.list }));
+    });
+};
+
+export const fetchStores = () => (dispatch) => {
+  dispatch(actions.startCall({ callType: callTypes.list }));
+const tName="stores";
+  return requestFromServer
+    .getStores()
+    .then((response) => {
+      const entities = response.data;
+      console.log(entities);
+      dispatch(actions.storesFetched({ tName,entities }));
+    })
+    .catch((error) => {
+      console.log(error);
+      error.clientMessage = `$"Can't load Store list"`;
       dispatch(actions.catchError({ error, callTypes: callTypes.list }));
     });
 };

@@ -6,7 +6,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Input, Select } from "../../../../../../_metronic/_partials/controls";
+import { Input, Select,DatePickerField } from "../../../../../../_metronic/_partials/controls";
 
 //Deliveries
 //deliveries
@@ -15,11 +15,18 @@ import { Input, Select } from "../../../../../../_metronic/_partials/controls";
 
 // Validation schema
 const DeliveryEditSchema = Yup.object().shape({
-  taxName: Yup.string().required("Tax Name is required"),
-  taxType: Yup.number().required("Tax Type is required"),
-  compositeRate: Yup.number()
+  remarks: Yup.string().required("Remarks is required"),
+  talioringBookingId: Yup.number()
     .moreThan(0)
-    .required("Composite Rate is required"),
+    .required("Tax Type is required"),
+  storeId: Yup.number()
+    .moreThan(0)
+    .required("Store is required"),
+  deliveryDate: Yup.date().required("Date is required"),
+  invNo: Yup.string().required("Invoice No is required"),
+  amount: Yup.number()
+    .moreThan(0)
+    .required("Amount is required"),
 });
 
 export function EditForm({
@@ -27,7 +34,8 @@ export function EditForm({
   delivery,
   actionsLoading,
   onHide,
-  taxTypes,
+  stores,
+  bookings,
 }) {
   return (
     <>
@@ -49,28 +57,37 @@ export function EditForm({
               )}
               <Form className="form form-label-right">
                 <div className="form-group row">
-                  {/* LedgerType */}
+                  {/* storeId */}
                   <div className="col-lg-4">
-                    <Select
-                      name="taxType"
-                      placeholder="Tax Type"
-                      label="Tax Type"
-                    >
-                      <option value="">Select Tax Type </option>
-                      {taxTypes.map((item) => (
-                        <option key={item.value} value={item.value}>
-                          {item.name}
+                    <Select name="storeId" label="Store">
+                      {bookings.map((item) => (
+                        <option key={item.storeId} value={item.storeId}>
+                          {item.storeName}
+                        </option>
+                      ))}
+                    </Select>
+                  </div>
+                  {/* storeId */}
+                  <div className="col-lg-4">
+                    <Select name="talioringBookingId" label="Booking">
+                      <option>Select Booking</option>
+                      {stores.map((item) => (
+                        <option
+                          key={item.talioringBookingId}
+                          value={item.talioringBookingId}
+                        >
+                          {item.bookingSlipNo}
                         </option>
                       ))}
                     </Select>
                   </div>
                   {/*  Father Name*/}
                   <div className="col-lg-4">
-                    <Field
-                      name="taxName"
-                      component={Input}
-                      placeholder="Delivery Name"
-                      label="Delivery Name"
+                    <DatePickerField
+                      name="deliveryDate"
+                      format="DD-MM-YYY"
+                      placeholder="Date"
+                      label="Date"
                     />
                   </div>
                 </div>
@@ -78,10 +95,28 @@ export function EditForm({
                   {/*  Father Name*/}
                   <div className="col-lg-4">
                     <Field
-                      name="compositeRate"
+                      name="invNo"
                       component={Input}
-                      placeholder="Composite Rate"
-                      label="Composite Rate"
+                      placeholder="Invoice No"
+                      label="Invoice No"
+                    />
+                  </div>
+                  {/*  Father Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="amount"
+                      component={Input}
+                      placeholder="Amount"
+                      label="Amount"
+                    />
+                  </div>
+                  {/*  Father Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="remarks"
+                      component={Input}
+                      placeholder="Remarks"
+                      label="Remarks"
                     />
                   </div>
                 </div>

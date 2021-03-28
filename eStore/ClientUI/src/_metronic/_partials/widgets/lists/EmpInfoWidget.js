@@ -28,7 +28,7 @@ export function EmpInfoWidget({ className, empInfo }) {
 
         {/* Body */}
         <div className="card-body pt-0">
-          {empInfo ?
+          {empInfo.length>0 ?
             empInfo.map((item) => (
               <div className="mb-6">
                 <div className="d-flex align-items-center flex-grow-1">
