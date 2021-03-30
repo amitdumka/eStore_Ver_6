@@ -2,7 +2,7 @@
 // Data validation is based on Yup
 // Please, be familiar with article first:
 // https://hackernoon.com/react-form-validation-with-formik-and-yup-8b76bda62e10
-import React ,{useState} from "react";
+import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
@@ -13,6 +13,7 @@ import {
   Checkbox,
 } from "../../../../../../_metronic/_partials/controls";
 import { DataGrid } from "@material-ui/data-grid";
+import { valueEventAriaMessage } from "react-select/src/accessibility";
 
 //booking
 //Booking
@@ -24,9 +25,15 @@ const BookingEditSchema = Yup.object().shape({
   compositeRate: Yup.number()
     .moreThan(0)
     .required("Composite Rate is required"),
-    sItem:Yup.number().moreThan(0).required("Item is required"), 
-    sQty: Yup.number().moreThan(0).required("Qty is required"),
-    sPrice: Yup.number().moreThan(0).required("Price is required")
+  sItem: Yup.number()
+    .moreThan(0)
+    .required("Item is required"),
+  sQty: Yup.number()
+    .moreThan(0)
+    .required("Qty is required"),
+  sPrice: Yup.number()
+    .moreThan(0)
+    .required("Price is required"),
 });
 
 export function EditForm({
@@ -36,36 +43,55 @@ export function EditForm({
   onHide,
   storeList,
 }) {
-  
-  // const {itemList:{sItem, sQty,sPrice}, setItemList}=useState([]);
+  const { sItem, setSItem } = useState("item");
+  const { sQty, setSQty } = useState("qty");
+  const { sPrice, setSPrice } = useState("price");
   
   const handleItemAdd = () => {
-  
+    switch(sItem){
+      case 1: break;
+      case 2: break;
+      case 3: break;
+      case 4: break;
+      default: console.log("Option Not Found");
+    }
   };
- const  handleInputChange=(event)=> {
-    // const target = event.target;
-    // const value = target.type === 'checkbox' ? target.checked : target.value;
-    // const name = target.name;
+  const handleInputChange = (event) => {
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
 
-    // setItemList({
-    //   [name]: value
-    // });
-    // console.log(name+":"+value);
+    switch (name) {
+      case "sQty":
+        setSQty(value);
+        break;
+      case "sPrice":
+        setSPrice(value);
+        break;
+      case "sItem":
+        setSItem(value);
+        break;
+      default:
+        break;
+    };
+
+   // console.log(name + ":" + value);
+    //console.log(sItem+" "+sQty+" "+sPrice+" ");
   };
   const columns = [
-    { field: 'id', headerName: 'SN', width: 60 },
-    { field: 'shirtQty', headerName: 'Shirt', type: 'number',width: 90 },
-    { field: 'shirtPrice', headerName: 'Price', type: 'number',width: 90 },
-    { field: 'pantQty',headerName: 'Pant',type: 'number',width: 90},
-    { field: 'pantPrice',headerName: 'Price',type: 'number',width: 90},
-    { field: 'coatQty', headerName: 'Coat',type: 'number', width: 90 },
-    { field: 'coatPrice', headerName: 'Price',type: 'number', width: 90 },
-    { field: 'bundiQty',headerName: 'Bundi ',type: 'number',width: 90},
-    { field: 'bundiPrice',headerName: 'Price',type: 'number',width: 90},
-    { field: 'kurtaQty', headerName: 'Kurta',type: 'number', width: 90 },
-    { field: 'kurtaPrice', headerName: 'Price',type: 'number', width: 90 },
-    { field: 'othersQty',headerName: 'Other',type: 'number',width: 90},
-    { field: 'othersPrice',headerName: 'Price',type: 'number',width: 90},  
+    { field: "id", headerName: "SN", width: 60 },
+    { field: "shirtQty", headerName: "Shirt", type: "number", width: 90 },
+    { field: "shirtPrice", headerName: "Price", type: "number", width: 90 },
+    { field: "pantQty", headerName: "Pant", type: "number", width: 90 },
+    { field: "pantPrice", headerName: "Price", type: "number", width: 90 },
+    { field: "coatQty", headerName: "Coat", type: "number", width: 90 },
+    { field: "coatPrice", headerName: "Price", type: "number", width: 90 },
+    { field: "bundiQty", headerName: "Bundi ", type: "number", width: 90 },
+    { field: "bundiPrice", headerName: "Price", type: "number", width: 90 },
+    { field: "kurtaQty", headerName: "Kurta", type: "number", width: 90 },
+    { field: "kurtaPrice", headerName: "Price", type: "number", width: 90 },
+    { field: "othersQty", headerName: "Other", type: "number", width: 90 },
+    { field: "othersPrice", headerName: "Price", type: "number", width: 90 },
   ];
   const rows = [
     {
@@ -81,11 +107,9 @@ export function EditForm({
       bundiQty: 0,
       bundiPrice: 0.0,
       othersQty: 0,
-      othersPrice: 0.0
-    }
-   
+      othersPrice: 0.0,
+    },
   ];
-  
 
   return (
     <>
@@ -135,7 +159,7 @@ export function EditForm({
                 <div className="form-group row">
                   {/* Store */}
                   <div className="col-lg-4">
-                    <Select name="storeId" label="Store" >
+                    <Select name="storeId" label="Store">
                       {storeList &&
                         storeList.map((item) => (
                           <option key={item.storeId} value={item.storeId}>
@@ -190,7 +214,11 @@ export function EditForm({
                 <div className="form-group row">
                   <label className="col-lg-12">Select/Add Tailoring Item</label>
                   <div className="col-lg-4">
-                    <Select name="sItem" label="Item" onChange={handleInputChange}>
+                    <Select
+                      name="sItem"
+                      label="Item"
+                      onChange={handleInputChange}
+                    >
                       <option>Select an Item</option>
                       <option value="1">Shirt</option>
                       <option value="2">Pant</option>
@@ -201,7 +229,8 @@ export function EditForm({
                     </Select>
                   </div>
                   <div className="col-lg-4">
-                    <Field onChange={handleInputChange}
+                    <Field
+                      onChange={handleInputChange}
                       name="sQty"
                       component={Input}
                       placeholder="Quantity"
@@ -209,7 +238,8 @@ export function EditForm({
                     />
                   </div>
                   <div className="col-lg-4">
-                    <Field onChange={handleInputChange}
+                    <Field
+                      onChange={handleInputChange}
                       name="sPrice"
                       component={Input}
                       placeholder="Amount"
@@ -226,7 +256,7 @@ export function EditForm({
                 </div>
 
                 <div style={{ height: 200, width: "100%" }}>
-                <DataGrid rows={rows} columns={columns}  />
+                  <DataGrid rows={rows} columns={columns} />
                 </div>
               </Form>
             </Modal.Body>
