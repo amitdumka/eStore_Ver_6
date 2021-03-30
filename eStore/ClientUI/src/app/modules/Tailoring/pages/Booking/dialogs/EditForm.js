@@ -13,7 +13,7 @@ import {
   Checkbox,
 } from "../../../../../../_metronic/_partials/controls";
 import { DataGrid } from "@material-ui/data-grid";
-
+import { List, ListItem, ListItemText } from "@material-ui/core";
 
 //booking
 //Booking
@@ -43,9 +43,10 @@ export function EditForm({
   onHide,
   storeList,
 }) {
-  const [ item, setItem ] = useState(0);
-  const [ qty, setQty ] = useState(0);
-  const [ price, setPrice ] = useState(0);
+  const [item, setItem] = useState(0);
+  const [qty, setQty] = useState(0);
+  const [price, setPrice] = useState(0);
+  const [itemData, setItemData] = useState(0);
   const columns = [
     { field: "id", headerName: "SN", width: 60 },
     { field: "shirtQty", headerName: "Shirt", type: "number", width: 90 },
@@ -78,66 +79,75 @@ export function EditForm({
       otherprice: 0.0,
     },
   ];
-const updateRowData=()=>{
 
-  rows[0].shirtPrice=booking.shirtPrice;
-  rows[0].pantPrice=booking.pantPrice;
-  rows[0].coatPrice=booking.coatPrice;
-  rows[0].kurtaPrice=booking.kurtaPrice;
-  rows[0].bundiPrice=booking.bundiPrice;
-  rows[0].othersPrice=booking.otherprice;
+  const updateItemData = () => {
+    const str = `Item Data \n Shirt [Price/Qty]  ${booking.shirtPrice } ${(booking.shirtQty)}
+  Pant [Price/Qty]  ${booking.pantPrice}/ ${( booking.pantQty)}
+  Suit [Price/Qty]  ${(booking.coatPrice)}/ ${(booking.coatQty)}
+  Kurta [Price/Qty]  ${(booking.kurtaPrice)}/ ${(booking.kurtaQty)}
+  Bundi  [Price/Qty] ${(booking.bundiPrice)} / ${(booking.bundiQty)}
+  Others [Price/Qty]  ${(booking.otherprice)} /${(booking.others)}`;
+    setItemData(str);
+  };
+  const updateRowData = () => {
+   updateItemData();
+    // rows[0].shirtPrice = booking.shirtPrice;
+    // rows[0].pantPrice = booking.pantPrice;
+    // rows[0].coatPrice = booking.coatPrice;
+    // rows[0].kurtaPrice = booking.kurtaPrice;
+    // rows[0].bundiPrice = booking.bundiPrice;
+    // rows[0].othersPrice = booking.otherprice;
 
-  rows[0].shirtQty=booking.shirtQty;
-  rows[0].pantQty=booking.pantQty;
-  rows[0].coatQty=booking.coatQty;
-  rows[0].kurtaQty=booking.kurtaQty;
-  rows[0].bundiQty=booking.bundiQty;
-  rows[0].othersqty=booking.others;
-  
-}
+    // rows[0].shirtQty = booking.shirtQty;
+    // rows[0].pantQty = booking.pantQty;
+    // rows[0].coatQty = booking.coatQty;
+    // rows[0].kurtaQty = booking.kurtaQty;
+    // rows[0].bundiQty = booking.bundiQty;
+    // rows[0].othersqty = booking.others;
+  };
   const handleItemAdd = () => {
-    console.log(item+" "+qty+" "+price+" ");
+    console.log(item + " " + qty + " " + price + " ");
     switch (item) {
       case "1":
         booking.shirtPrice = price;
         booking.shirtQty = qty;
-        booking.totalAmount=booking.totalAmount+price;
-        booking.totalQty=booking.totalQty+qty;
+        booking.totalAmount = booking.totalAmount + price;
+        booking.totalQty = booking.totalQty + qty;
         updateRowData();
         break;
       case "2":
         booking.pantPrice = price;
         booking.pantQty = qty;
-        booking.totalAmount=booking.totalAmount+price;
-        booking.totalQty=booking.totalQty+qty;
+        booking.totalAmount = booking.totalAmount + price;
+        booking.totalQty = booking.totalQty + qty;
         updateRowData();
         break;
       case "3":
         booking.coatPrice = price;
         booking.coatQty = qty;
-        booking.totalAmount=booking.totalAmount+price;
-        booking.totalQty=booking.totalQty+qty;
+        booking.totalAmount = booking.totalAmount + price;
+        booking.totalQty = booking.totalQty + qty;
         updateRowData();
         break;
       case "4":
         booking.bundiPrice = price;
         booking.bundiQty = qty;
-        booking.totalAmount=booking.totalAmount+price;
-        booking.totalQty=booking.totalQty+qty;
+        booking.totalAmount = booking.totalAmount + price;
+        booking.totalQty = booking.totalQty + qty;
         updateRowData();
         break;
       case "5":
         booking.kurtaPrice = price;
         booking.kurtaQty = qty;
-        booking.totalAmount=booking.totalAmount+price;
-        booking.totalQty=booking.totalQty+qty;
-       updateRowData();
+        booking.totalAmount = booking.totalAmount + price;
+        booking.totalQty = booking.totalQty + qty;
+        updateRowData();
         break;
       case "6":
         booking.othersPrice = price;
         booking.others = qty;
-        booking.totalAmount=booking.totalAmount+price;
-        booking.totalQty=booking.totalQty+qty;
+        booking.totalAmount = booking.totalAmount + price;
+        booking.totalQty = booking.totalQty + qty;
         updateRowData();
         break;
       default:
@@ -151,7 +161,7 @@ const updateRowData=()=>{
   //   const target = event.target;
   //   const value = target.type === "checkbox" ? target.checked : target.value;
   //   const name = target.name;
-   
+
   //   switch (name) {
   //     case "qty":
   //       setQty(value);
@@ -171,7 +181,7 @@ const updateRowData=()=>{
   //    console.log(name + ":" + value);
   //   console.log(item+" "+qty+" "+price+" ");
   // };
- 
+
   return (
     <>
       <Formik
@@ -278,7 +288,9 @@ const updateRowData=()=>{
                     <Select
                       name="item"
                       label="Item"
-                      onChange={e=>{setItem(e.target.value);}}
+                      onChange={(e) => {
+                        setItem(e.target.value);
+                      }}
                     >
                       <option>Select an Item</option>
                       <option value="1">Shirt</option>
@@ -291,7 +303,9 @@ const updateRowData=()=>{
                   </div>
                   <div className="col-lg-4">
                     <Field
-                      onChange={e=>{setQty(parseInt(e.target.value));}}
+                      onChange={(e) => {
+                        setQty(parseInt(e.target.value));
+                      }}
                       name="qty"
                       component={Input}
                       placeholder="Quantity"
@@ -301,7 +315,9 @@ const updateRowData=()=>{
                   </div>
                   <div className="col-lg-4">
                     <Field
-                      onChange={e=>{setPrice(parseInt(e.target.value));}}
+                      onChange={(e) => {
+                        setPrice(parseInt(e.target.value));
+                      }}
                       name="price"
                       component={Input}
                       type="number"
@@ -318,8 +334,8 @@ const updateRowData=()=>{
                   </div>
                 </div>
 
-                <div style={{ height: 200, width: "100%" }}>
-                  <DataGrid rows={rows} columns={columns} />
+                <div className="form-group row">
+                  <div className="col-lg-8">{itemData && itemData }</div>
                 </div>
               </Form>
             </Modal.Body>
