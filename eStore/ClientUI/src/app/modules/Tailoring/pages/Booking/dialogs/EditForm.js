@@ -13,7 +13,7 @@ import {
   Checkbox,
 } from "../../../../../../_metronic/_partials/controls";
 import { DataGrid } from "@material-ui/data-grid";
-import { valueEventAriaMessage } from "react-select/src/accessibility";
+
 
 //booking
 //Booking
@@ -25,13 +25,13 @@ const BookingEditSchema = Yup.object().shape({
   compositeRate: Yup.number()
     .moreThan(0)
     .required("Composite Rate is required"),
-  sItem: Yup.number()
+  item: Yup.number()
     .moreThan(0)
     .required("Item is required"),
-  sQty: Yup.number()
+  qty: Yup.number()
     .moreThan(0)
     .required("Qty is required"),
-  sPrice: Yup.number()
+  price: Yup.number()
     .moreThan(0)
     .required("Price is required"),
 });
@@ -43,41 +43,9 @@ export function EditForm({
   onHide,
   storeList,
 }) {
-  const { sItem, setSItem } = useState("item");
-  const { sQty, setSQty } = useState("qty");
-  const { sPrice, setSPrice } = useState("price");
-  
-  const handleItemAdd = () => {
-    switch(sItem){
-      case 1: break;
-      case 2: break;
-      case 3: break;
-      case 4: break;
-      default: console.log("Option Not Found");
-    }
-  };
-  const handleInputChange = (event) => {
-    const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
-
-    switch (name) {
-      case "sQty":
-        setSQty(value);
-        break;
-      case "sPrice":
-        setSPrice(value);
-        break;
-      case "sItem":
-        setSItem(value);
-        break;
-      default:
-        break;
-    };
-
-   // console.log(name + ":" + value);
-    //console.log(sItem+" "+sQty+" "+sPrice+" ");
-  };
+  const [ item, setItem ] = useState(0);
+  const [ qty, setQty ] = useState(0);
+  const [ price, setPrice ] = useState(0);
   const columns = [
     { field: "id", headerName: "SN", width: 60 },
     { field: "shirtQty", headerName: "Shirt", type: "number", width: 90 },
@@ -90,8 +58,8 @@ export function EditForm({
     { field: "bundiPrice", headerName: "Price", type: "number", width: 90 },
     { field: "kurtaQty", headerName: "Kurta", type: "number", width: 90 },
     { field: "kurtaPrice", headerName: "Price", type: "number", width: 90 },
-    { field: "othersQty", headerName: "Other", type: "number", width: 90 },
-    { field: "othersPrice", headerName: "Price", type: "number", width: 90 },
+    { field: "otherqty", headerName: "Other", type: "number", width: 90 },
+    { field: "otherprice", headerName: "Price", type: "number", width: 90 },
   ];
   const rows = [
     {
@@ -106,11 +74,104 @@ export function EditForm({
       kurtaPrice: 0.0,
       bundiQty: 0,
       bundiPrice: 0.0,
-      othersQty: 0,
-      othersPrice: 0.0,
+      otherqty: 0,
+      otherprice: 0.0,
     },
   ];
+const updateRowData=()=>{
 
+  rows[0].shirtPrice=booking.shirtPrice;
+  rows[0].pantPrice=booking.pantPrice;
+  rows[0].coatPrice=booking.coatPrice;
+  rows[0].kurtaPrice=booking.kurtaPrice;
+  rows[0].bundiPrice=booking.bundiPrice;
+  rows[0].othersPrice=booking.otherprice;
+
+  rows[0].shirtQty=booking.shirtQty;
+  rows[0].pantQty=booking.pantQty;
+  rows[0].coatQty=booking.coatQty;
+  rows[0].kurtaQty=booking.kurtaQty;
+  rows[0].bundiQty=booking.bundiQty;
+  rows[0].othersqty=booking.others;
+  
+}
+  const handleItemAdd = () => {
+    console.log(item+" "+qty+" "+price+" ");
+    switch (item) {
+      case "1":
+        booking.shirtPrice = price;
+        booking.shirtQty = qty;
+        booking.totalAmount=booking.totalAmount+price;
+        booking.totalQty=booking.totalQty+qty;
+        updateRowData();
+        break;
+      case "2":
+        booking.pantPrice = price;
+        booking.pantQty = qty;
+        booking.totalAmount=booking.totalAmount+price;
+        booking.totalQty=booking.totalQty+qty;
+        updateRowData();
+        break;
+      case "3":
+        booking.coatPrice = price;
+        booking.coatQty = qty;
+        booking.totalAmount=booking.totalAmount+price;
+        booking.totalQty=booking.totalQty+qty;
+        updateRowData();
+        break;
+      case "4":
+        booking.bundiPrice = price;
+        booking.bundiQty = qty;
+        booking.totalAmount=booking.totalAmount+price;
+        booking.totalQty=booking.totalQty+qty;
+        updateRowData();
+        break;
+      case "5":
+        booking.kurtaPrice = price;
+        booking.kurtaQty = qty;
+        booking.totalAmount=booking.totalAmount+price;
+        booking.totalQty=booking.totalQty+qty;
+       updateRowData();
+        break;
+      case "6":
+        booking.othersPrice = price;
+        booking.others = qty;
+        booking.totalAmount=booking.totalAmount+price;
+        booking.totalQty=booking.totalQty+qty;
+        updateRowData();
+        break;
+      default:
+        console.log("Option Not Found");
+    }
+    console.log("Booking");
+    console.log(booking);
+    console.log(rows[0]);
+  };
+  // const handleInputChange = (event) => {
+  //   const target = event.target;
+  //   const value = target.type === "checkbox" ? target.checked : target.value;
+  //   const name = target.name;
+   
+  //   switch (name) {
+  //     case "qty":
+  //       setQty(value);
+
+  //       break;
+  //     case "price":
+  //       setPrice(value);
+  //       break;
+  //     case "item":
+  //       setItem(value);
+  //       //setItem(value);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+
+  //    console.log(name + ":" + value);
+  //   console.log(item+" "+qty+" "+price+" ");
+  // };
+ 
   return (
     <>
       <Formik
@@ -215,9 +276,9 @@ export function EditForm({
                   <label className="col-lg-12">Select/Add Tailoring Item</label>
                   <div className="col-lg-4">
                     <Select
-                      name="sItem"
+                      name="item"
                       label="Item"
-                      onChange={handleInputChange}
+                      onChange={e=>{setItem(e.target.value);}}
                     >
                       <option>Select an Item</option>
                       <option value="1">Shirt</option>
@@ -230,18 +291,20 @@ export function EditForm({
                   </div>
                   <div className="col-lg-4">
                     <Field
-                      onChange={handleInputChange}
-                      name="sQty"
+                      onChange={e=>{setQty(parseInt(e.target.value));}}
+                      name="qty"
                       component={Input}
                       placeholder="Quantity"
                       label="Quantity"
+                      type="number"
                     />
                   </div>
                   <div className="col-lg-4">
                     <Field
-                      onChange={handleInputChange}
-                      name="sPrice"
+                      onChange={e=>{setPrice(parseInt(e.target.value));}}
+                      name="price"
                       component={Input}
+                      type="number"
                       placeholder="Amount"
                       label="Amount"
                     />
