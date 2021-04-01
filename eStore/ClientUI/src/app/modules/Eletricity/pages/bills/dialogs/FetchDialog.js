@@ -4,48 +4,48 @@ import { shallowEqual, useSelector } from "react-redux";
 
 import { useUIContext } from "../UIContext";
 
-//rent
-//Rent
+//bill
+//Bill
 
 
-const selectedRents = (entities, ids) => {
-  const _rents = [];
+const selectedBills = (entities, ids) => {
+  const _bills = [];
   ids.forEach((id) => {
-    const rent = entities.find((el) => el.id === id);
-    if (rent) {
-      _rents.push(rent);
+    const bill = entities.find((el) => el.id === id);
+    if (bill) {
+      _bills.push(bill);
     }
   });
-  return _rents;
+  return _bills;
 };
 
 export function FetchDialog({ show, onHide }) {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+  // Bills UI Context
+  const billsUIContext = useUIContext();
+  const billsUIProps = useMemo(() => {
     return {
-      ids: rentsUIContext.ids,
+      ids: billsUIContext.ids,
     };
-  }, [rentsUIContext]);
+  }, [billsUIContext]);
 
-  // Rents Redux state
-  const { rents } = useSelector(
+  // Bills Redux state
+  const { bills } = useSelector(
     (state) => ({
-      rents: selectedRents(
-        state.rents.entities,
-        rentsUIProps.ids
+      bills: selectedBills(
+        state.bills.entities,
+        billsUIProps.ids
       ),
     }),
     shallowEqual
   );
 
-  // if rents weren't selected we should close modal
+  // if bills weren't selected we should close modal
   useEffect(() => {
-    if (!rentsUIProps.ids || rentsUIProps.ids.length === 0) {
+    if (!billsUIProps.ids || billsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rentsUIProps.ids]);
+  }, [billsUIProps.ids]);
 
   return (
     <Modal
@@ -68,12 +68,12 @@ export function FetchDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {rents.map((rent) => (
-              <tr key={`id${rent.id}`}>
-                <td>{rent.id}</td>
+            {bills.map((bill) => (
+              <tr key={`id${bill.id}`}>
+                <td>{bill.id}</td>
                 <td>
                   <span className="ml-3">
-                    {rent.lastName}, {rent.firstName}
+                    {bill.lastName}, {bill.firstName}
                   </span>
                 </td>
               </tr>

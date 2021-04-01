@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rents/Actions";
+import * as actions from "../../../_redux/bills/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -22,45 +22,45 @@ import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 
-//Rent
-//rent
+//Bill
+//bill
 
-export function RentsTable() {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+export function BillsTable() {
+  // Bills UI Context
+  const billsUIContext = useUIContext();
+  const billsUIProps = useMemo(() => {
     return {
-      ids: rentsUIContext.ids,
-      setIds: rentsUIContext.setIds,
-      queryParams: rentsUIContext.queryParams,
-      setQueryParams: rentsUIContext.setQueryParams,
-      openEditRentDialog:
-        rentsUIContext.openEditRentDialog,
-      openDeleteRentDialog:
-        rentsUIContext.openDeleteRentDialog,
+      ids: billsUIContext.ids,
+      setIds: billsUIContext.setIds,
+      queryParams: billsUIContext.queryParams,
+      setQueryParams: billsUIContext.setQueryParams,
+      openEditBillDialog:
+        billsUIContext.openEditBillDialog,
+      openDeleteBillDialog:
+        billsUIContext.openDeleteBillDialog,
     };
-  }, [rentsUIContext]);
+  }, [billsUIContext]);
 
-  // Getting curret state of rents list from store (Redux)
-  const { currentState } = useSelector(
-    (state) => ({ currentState: state.rents }),
+  // Getting curret state of bills list from store (Redux)
+  const { curbillState } = useSelector(
+    (state) => ({ curbillState: state.bills }),
     shallowEqual
   );
-  const { totalCount, entities, listLoading } = currentState;
+  const { totalCount, entities, listLoading } = curbillState;
 
-  // Rents Redux state
+  // Bills Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    rentsUIProps.setIds([]);
+    billsUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchRents(rentsUIProps.queryParams));
+    dispatch(actions.fetchBills(billsUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rentsUIProps.queryParams, dispatch]);
+  }, [billsUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "rentId",
+      dataField: "billId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
@@ -68,14 +68,14 @@ export function RentsTable() {
     },
     {
       dataField: "location.placeName",
-      text: "Rented Location",
+      text: "Billed Location",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "rentType",
-      text: "Rent Type",
+      dataField: "billType",
+      text: "Bill Type",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -128,10 +128,10 @@ export function RentsTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditRentDialog:
-          rentsUIProps.openEditRentDialog,
-        openDeleteRentDialog:
-          rentsUIProps.openDeleteRentDialog,
+        openEditBillDialog:
+          billsUIProps.openEditBillDialog,
+        openDeleteBillDialog:
+          billsUIProps.openDeleteBillDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -145,8 +145,8 @@ export function RentsTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: rentsUIProps.queryParams.pageSize,
-    page: rentsUIProps.queryParams.pageNumber,
+    sizePerPage: billsUIProps.queryParams.pageSize,
+    page: billsUIProps.queryParams.pageNumber,
   };
 
   return (
@@ -165,19 +165,19 @@ export function RentsTable() {
                 bootstrap4
                 remote
                 noDataIndication="No Record Found now.."
-                keyField="rentId"
+                keyField="billId"
                 data={entities === null ? [] : totalCount ? entities : []}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  rentsUIProps.setQueryParams
+                  billsUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: rentsUIProps.ids,
-                  setIds: rentsUIProps.setIds,
-                  idName: "rentId",
+                  ids: billsUIProps.ids,
+                  setIds: billsUIProps.setIds,
+                  idName: "billId",
                 })}
                 {...paginationTableProps}
               >

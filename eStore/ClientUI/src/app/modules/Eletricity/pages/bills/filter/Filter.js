@@ -3,8 +3,8 @@ import { Formik } from "formik";
 import { isEqual } from "lodash";
 import { useUIContext } from "../UIContext";
 
-//Rent
-//rent
+//Bill
+//bill
 
 
 
@@ -27,23 +27,23 @@ const prepareFilter = (queryParams, values) => {
   return newQueryParams;
 };
 
-export function RentsFilter({ listLoading }) {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+export function BillsFilter({ listLoading }) {
+  // Bills UI Context
+  const billsUIContext = useUIContext();
+  const billsUIProps = useMemo(() => {
     return {
-      queryParams: rentsUIContext.queryParams,
-      setQueryParams: rentsUIContext.setQueryParams,
+      queryParams: billsUIContext.queryParams,
+      setQueryParams: billsUIContext.setQueryParams,
     };
-  }, [rentsUIContext]);
+  }, [billsUIContext]);
 
   // queryParams, setQueryParams,
   const applyFilter = (values) => {
-    const newQueryParams = prepareFilter(rentsUIProps.queryParams, values);
-    if (!isEqual(newQueryParams, rentsUIProps.queryParams)) {
+    const newQueryParams = prepareFilter(billsUIProps.queryParams, values);
+    if (!isEqual(newQueryParams, billsUIProps.queryParams)) {
       newQueryParams.pageNumber = 1;
       // update list by queryParams
-      rentsUIProps.setQueryParams(newQueryParams);
+      billsUIProps.setQueryParams(newQueryParams);
     }
   };
 

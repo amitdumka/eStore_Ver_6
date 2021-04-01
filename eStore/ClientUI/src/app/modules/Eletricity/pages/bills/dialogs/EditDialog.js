@@ -1,55 +1,55 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rents/Actions";
+import * as actions from "../../../_redux/bills/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
-//rent
-//Rent
+//bill
+//Bill
 
 export function EditDialog({ id, show, onHide }) {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+  // Bills UI Context
+  const billsUIContext = useUIContext();
+  const billsUIProps = useMemo(() => {
     return {
-      initRent: rentsUIContext.initRent,
+      initBill: billsUIContext.initBill,
     };
-  }, [rentsUIContext]);
+  }, [billsUIContext]);
 
-  // Rents Redux state
+  // Bills Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, rentForEdit ,payModes,rentTypes, rentedLocations} = useSelector(
+  const { actionsLoading, billForEdit ,payModes,billTypes, billedLocations} = useSelector(
     (state) => ({
-      actionsLoading: state.rents.actionsLoading,
-      rentForEdit: state.rents.rentForEdit,
-      payModes:state.rents.payModes,
-      rentTypes:state.rents.rentTypes,
-      rentedLocations:state.rents.rentedLocations
+      actionsLoading: state.bills.actionsLoading,
+      billForEdit: state.bills.billForEdit,
+      payModes:state.bills.payModes,
+      billTypes:state.bills.billTypes,
+      billedLocations:state.bills.billedLocations
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    // server call for getting Rent by id
-    dispatch(actions.fetchRent(id));
+    // server call for getting Bill by id
+    dispatch(actions.fetchBill(id));
     dispatch(actions.fetchLocations());
-    dispatch(actions.fetchRentTypes());
+    dispatch(actions.fetchBillTypes());
     dispatch(actions.fetchPayModes());
 
   }, [id, dispatch]);
 
-  // server request for saving rent
-  const saveRent = (rent) => {
+  // server request for saving bill
+  const saveBill = (bill) => {
     
-    rent.accountType=parseInt(rent.accountType);
+    bill.accountType=parseInt(bill.accountType);
 
     if (!id) {
-      // server request for creating rent
-      dispatch(actions.createRent(rent)).then(() => onHide());
+      // server request for creating bill
+      dispatch(actions.createBill(bill)).then(() => onHide());
     } else {
-      // server request for updating rent
-      dispatch(actions.updateRent(rent)).then(() => onHide());
+      // server request for updating bill
+      dispatch(actions.updateBill(bill)).then(() => onHide());
     }
   };
 
@@ -62,13 +62,13 @@ export function EditDialog({ id, show, onHide }) {
     >
       <EditDialogHeader id={id} />
       <EditForm
-        saveRent={saveRent}
+        saveBill={saveBill}
         actionsLoading={actionsLoading}
-        rent={rentForEdit || rentsUIProps.initRent}
+        bill={billForEdit || billsUIProps.initBill}
         onHide={onHide}
         payModes={payModes}
-        rentTypes={rentTypes}
-        locationList={rentedLocations}
+        billTypes={billTypes}
+        locationList={billedLocations}
       />
     </Modal>
   );

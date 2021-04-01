@@ -1,42 +1,42 @@
 import axios from "axios";
 
-//Rent
-//rent
+//Bill
+//bill
 
-export const API_URL = "https://www.aprajitaretails.in/api/rents";
+export const API_URL = "https://www.aprajitaretails.in/api/bills";
 export const APIBASE_URL = "https://www.aprajitaretails.in/api";
 
 export async function getPayModes(){
   return axios.get(APIBASE_URL+"/enumvalue/paymode/all"); 
 }
-export async function getRentTypes(){
-  return axios.get(APIBASE_URL+"/enumvalue/renttype/all");
+export async function getBillTypes(){
+  return axios.get(APIBASE_URL+"/enumvalue/billtype/all");
 }
-export async function getRentedLocations(){
-  return axios.get(APIBASE_URL+"/rentedlocations");
+export async function getBilledLocations(){
+  return axios.get(APIBASE_URL+"/billedlocations");
 }
 
 
 
-// CREATE =>  POST: add a new rent to the server
-export async function createRent(rent) {
-  return await axios.post(API_URL, rent, {
+// CREATE =>  POST: add a new bill to the server
+export async function createBill(bill) {
+  return await axios.post(API_URL, bill, {
     headers: { "Content-Type": "application/json; charset=utf-8" },
   });
 }
 
 // READ
-export function getAllRents() {
+export function getAllBills() {
   return axios.get(API_URL); //.catch(function (error){console.log(error)});
 }
 
-export async function getRentById(rentId) {
-  return await axios.get(`${API_URL}/${rentId}`);
+export async function getBillById(billId) {
+  return await axios.get(`${API_URL}/${billId}`);
 }
 
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
 // items => filtered/sorted result
-export async function findRents(queryParams) {
+export async function findBills(queryParams) {
   //verifyLogin();
   return await axios.get(`${API_URL}`); //find`, { queryParams });
 }
@@ -46,11 +46,11 @@ export async function getAllBanks() {
   return await axios.get("https://www.aprajitaretails.in/api/banks");
 }
 
-// UPDATE => PUT: update the rent on the server
-export async function updateRent(rent) {
+// UPDATE => PUT: update the bill on the server
+export async function updateBill(bill) {
   return await axios.put(
-    `${API_URL}/${rent.rentId}`,
-    JSON.stringify(rent),
+    `${API_URL}/${bill.billId}`,
+    JSON.stringify(bill),
     {
       headers: { "Content-Type": "application/json; charset=utf-8" },
     }
@@ -58,19 +58,19 @@ export async function updateRent(rent) {
 }
 
 // UPDATE Status
-export async function updateStatusForRents(ids, status) {
-  return await axios.post(`${API_URL}/updateStatusForRents`, {
+export async function updateStatusForBills(ids, status) {
+  return await axios.post(`${API_URL}/updateStatusForBills`, {
     ids,
     status,
   });
 }
 
-// DELETE => delete the rent from the server
-export async function deleteRent(rentId) {
-  return await axios.delete(`${API_URL}/${rentId}`);
+// DELETE => delete the bill from the server
+export async function deleteBill(billId) {
+  return await axios.delete(`${API_URL}/${billId}`);
 }
 
-// DELETE Rents by ids
-export async function deleteRents(ids) {
-  return await axios.post(`${API_URL}/deleteRents`, { ids });
+// DELETE Bills by ids
+export async function deleteBills(ids) {
+  return await axios.post(`${API_URL}/deleteBills`, { ids });
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { RentsLoadingDialog } from "./dialogs/LoadingDialog";
+import { BillsLoadingDialog } from "./dialogs/LoadingDialog";
 import { EditDialog } from "./dialogs/EditDialog";
 
 import { DeleteDialog } from "./dialogs/DeleteDialog";
@@ -10,99 +10,99 @@ import { DeletesDialog } from "./dialogs/DeletesDialog";
 import { FetchDialog } from "./dialogs/FetchDialog";
 import { UpdateStateDialog } from "./dialogs/UpdateStateDialog";
 import { UIProvider } from "./UIContext";
-import { RentsCard } from "./RentsCard";
+import { BillsCard } from "./BillsCard";
 
-//Rent
-//rent
+//Bill
+//bill
 
-export function RentsPage({ history }) {
-  const rentsUIEvents = {
-    newRentButtonClick: () => {
-      history.push("/renting/rents/new");
+export function BillsPage({ history }) {
+  const billsUIEvents = {
+    newBillButtonClick: () => {
+      history.push("/billing/bills/new");
     },
-    openEditRentDialog: (id) => {
-      history.push(`/renting/rents/${id}/edit`);
+    openEditBillDialog: (id) => {
+      history.push(`/billing/bills/${id}/edit`);
     },
-    openDeleteRentDialog: (id) => {
-      history.push(`/renting/rents/${id}/delete`);
+    openDeleteBillDialog: (id) => {
+      history.push(`/billing/bills/${id}/delete`);
     },
-    openDeleteRentsDialog: () => {
-      history.push(`/renting/rents/deleteRents`);
+    openDeleteBillsDialog: () => {
+      history.push(`/billing/bills/deleteBills`);
     },
-    openFetchRentsDialog: () => {
-      history.push(`/renting/rents/fetch`);
+    openFetchBillsDialog: () => {
+      history.push(`/billing/bills/fetch`);
     },
-    openUpdateRentsStatusDialog: () => {
-      history.push("/renting/rents/updateStatus");
+    openUpdateBillsStatusDialog: () => {
+      history.push("/billing/bills/updateStatus");
     }
   }
 
   return (
-    <UIProvider UIEvents={rentsUIEvents}>
-      <RentsLoadingDialog />
-      <Route path="/renting/rents/new">
+    <UIProvider UIEvents={billsUIEvents}>
+      <BillsLoadingDialog />
+      <Route path="/billing/bills/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/billing/bills");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/:id/edit">
+      <Route path="/billing/bills/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/billing/bills");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/deleteRents">
+      <Route path="/billing/bills/deleteBills">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/billing/bills");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/:id/delete">
+      <Route path="/billing/bills/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/billing/bills");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/fetch">
+      <Route path="/billing/bills/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/billing/bills");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/updateStatus">
+      <Route path="/billing/bills/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/billing/bills");
             }}
           />
         )}
       </Route>
-      <RentsCard />
+      <BillsCard />
     </UIProvider>
   );
 }

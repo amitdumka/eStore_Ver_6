@@ -1,65 +1,65 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rents/Actions";
+import * as actions from "../../../_redux/bills/Actions";
 import { useUIContext } from "../UIContext";
-//rent
-//Rent
+//bill
+//Bill
 
-const selectedRents = (entities, ids) => {
-  const _rents = [];
+const selectedBills = (entities, ids) => {
+  const _bills = [];
   ids.forEach((id) => {
-    const rent = entities.find((el) => el.id === id);
-    if (rent) {
-      _rents.push(rent);
+    const bill = entities.find((el) => el.id === id);
+    if (bill) {
+      _bills.push(bill);
     }
   });
-  return _rents;
+  return _bills;
 };
 
 export function UpdateStateDialog({ show, onHide }) {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+  // Bills UI Context
+  const billsUIContext = useUIContext();
+  const billsUIProps = useMemo(() => {
     return {
-      ids: rentsUIContext.ids,
-      setIds: rentsUIContext.setIds,
-      queryParams: rentsUIContext.queryParams,
+      ids: billsUIContext.ids,
+      setIds: billsUIContext.setIds,
+      queryParams: billsUIContext.queryParams,
     };
-  }, [rentsUIContext]);
+  }, [billsUIContext]);
 
-  // Rents Redux state
-  const { rents, isLoading } = useSelector(
+  // Bills Redux state
+  const { bills, isLoading } = useSelector(
     (state) => ({
-      rents: selectedRents(
-        state.rents.entities,
-        rentsUIProps.ids
+      bills: selectedBills(
+        state.bills.entities,
+        billsUIProps.ids
       ),
-      isLoading: state.rents.actionsLoading,
+      isLoading: state.bills.actionsLoading,
     }),
     shallowEqual
   );
 
   // if !id we should close modal
   useEffect(() => {
-    if (!rentsUIProps.ids || rentsUIProps.ids.length === 0) {
+    if (!billsUIProps.ids || billsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rentsUIProps.ids]);
+  }, [billsUIProps.ids]);
 
   const [status, setStatus] = useState(0);
 
   const dispatch = useDispatch();
   const updateStatus = () => {
-    // server request for update rents status by selected ids
-    dispatch(actions.updateRentsStatus(rentsUIProps.ids, status)).then(
+    // server request for update bills status by selected ids
+    dispatch(actions.updateBillsStatus(billsUIProps.ids, status)).then(
       () => {
         // refresh list after deletion
-        dispatch(actions.fetchRents(rentsUIProps.queryParams)).then(
+        dispatch(actions.fetchBills(billsUIProps.queryParams)).then(
           () => {
             // clear selections list
-            rentsUIProps.setIds([]);
+            billsUIProps.setIds([]);
             // closing delete modal
             onHide();
           }
@@ -76,7 +76,7 @@ export function UpdateStateDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Status has been updated for selected rents
+          Status has been updated for selected bills
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="overlay overlay-block cursor-default">
@@ -96,13 +96,13 @@ export function UpdateStateDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {rents.map((rent) => (
-              <tr key={`id${rent.id}`}>
-                <td>{rent.id}</td>
+            {bills.map((bill) => (
+              <tr key={`id${bill.id}`}>
+                <td>{bill.id}</td>
                 
                 <td>
                   <span className="ml-3">
-                    {rent.lastName}, {rent.firstName}
+                    {bill.lastName}, {bill.firstName}
                   </span>
                 </td>
               </tr>

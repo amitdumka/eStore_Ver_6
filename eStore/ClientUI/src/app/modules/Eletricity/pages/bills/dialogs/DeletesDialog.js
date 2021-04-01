@@ -1,52 +1,52 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rents/Actions";
+import * as actions from "../../../_redux/bills/Actions";
 import { useUIContext } from "../UIContext";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
 
 // Delete Selected Records
-//rent
-//Rent
+//bill
+//Bill
 
 
 export function DeletesDialog({ show, onHide }) {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+  // Bills UI Context
+  const billsUIContext = useUIContext();
+  const billsUIProps = useMemo(() => {
     return {
-      ids: rentsUIContext.ids,
-      setIds: rentsUIContext.setIds,
-      queryParams: rentsUIContext.queryParams,
+      ids: billsUIContext.ids,
+      setIds: billsUIContext.setIds,
+      queryParams: billsUIContext.queryParams,
     };
-  }, [rentsUIContext]);
+  }, [billsUIContext]);
 
-  // Rents Redux state
+  // Bills Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.rents.actionsLoading }),
+    (state) => ({ isLoading: state.bills.actionsLoading }),
     shallowEqual
   );
 
-  // if rents weren't selected we should close modal
+  // if bills weren't selected we should close modal
   useEffect(() => {
-    if (!rentsUIProps.ids || rentsUIProps.ids.length === 0) {
+    if (!billsUIProps.ids || billsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rentsUIProps.ids]);
+  }, [billsUIProps.ids]);
 
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading, dispatch]);
 
-  const deleteRents = () => {
-    // server request for deleting rent by selected ids
-    dispatch(actions.deleteRents(rentsUIProps.ids)).then(() => {
+  const deleteBills = () => {
+    // server request for deleting bill by selected ids
+    dispatch(actions.deleteBills(billsUIProps.ids)).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchRents(rentsUIProps.queryParams)).then(
+      dispatch(actions.fetchBills(billsUIProps.queryParams)).then(
         () => {
           // clear selections list
-          rentsUIProps.setIds([]);
+          billsUIProps.setIds([]);
           // closing delete modal
           onHide();
         }
@@ -65,14 +65,14 @@ export function DeletesDialog({ show, onHide }) {
       {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Rents Delete
+          Bills Delete
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete selected rents?</span>
+          <span>Are you sure to permanently delete selected bills?</span>
         )}
-        {isLoading && <span>Rent are deleting...</span>}
+        {isLoading && <span>Bill are deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -86,7 +86,7 @@ export function DeletesDialog({ show, onHide }) {
           <> </>
           <button
             type="button"
-            onClick={deleteRents}
+            onClick={deleteBills}
             className="btn btn-primary btn-elevate"
           >
             Delete

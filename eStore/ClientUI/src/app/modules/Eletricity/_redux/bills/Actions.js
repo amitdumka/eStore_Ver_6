@@ -1,12 +1,12 @@
 import * as requestFromServer from "./Crud";
-import {rentsSlice, callTypes} from "./Slice";
+import {billsSlice, callTypes} from "./Slice";
 
 
-//Rent
-//rent
+//Bill
+//bill
 
 
-const {actions} = rentsSlice;
+const {actions} = billsSlice;
 
 
 
@@ -28,21 +28,21 @@ export const fetchPayModes =id=>dispatch => {
     dispatch(actions.catchError({error,callTypes:callTypes.list}));
   });
 }
-export const fetchRentTypes =id=>dispatch => {
+export const fetchBillTypes =id=>dispatch => {
   
   dispatch(actions.startCall({callType:callTypes.list}));
 
   return requestFromServer
-  .getRentTypes()
+  .getBillTypes()
   .then(response=>{
     const entities  = response.data; 
     const totalCount=response.data.length;
     console.log(entities);
-    dispatch(actions.rentTypesFetched({totalCount, entities}));
+    dispatch(actions.billTypesFetched({totalCount, entities}));
   })
   .catch(error =>{
     console.log(error);
-    error.clientMessage="Can't load rent type list"; 
+    error.clientMessage="Can't load bill type list"; 
     dispatch(actions.catchError({error,callTypes:callTypes.list}));
   });
 }
@@ -51,128 +51,128 @@ export const fetchLocations =id=>dispatch => {
   dispatch(actions.startCall({callType:callTypes.list}));
 
   return requestFromServer
-  .getRentedLocations()
+  .getBilledLocations()
   .then(response=>{
     const entities  = response.data; 
     const totalCount=response.data.length;
     console.log(entities);
-    dispatch(actions.rentedLocationsFetched({totalCount, entities}));
+    dispatch(actions.billedLocationsFetched({totalCount, entities}));
   })
   .catch(error =>{
     console.log(error);
-    error.clientMessage="Can't load rent location list"; 
+    error.clientMessage="Can't load bill location list"; 
     dispatch(actions.catchError({error,callTypes:callTypes.list}));
   });
 }
 
-export const fetchRents = queryParams => dispatch => {
+export const fetchBills = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findRents(queryParams)
+    .findBills(queryParams)
     .then(response => {
       const  entities  = response.data;
       const totalCount = response.data.length;
       console.log(response);
       console.log(response.data.length);
-      dispatch(actions.rentsFetched({ totalCount, entities }));
+      dispatch(actions.billsFetched({ totalCount, entities }));
     })
     .catch(error => {
       console.log(error);
-      error.clientMessage = "Can't find rents";
+      error.clientMessage = "Can't find bills";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
-export const fetchRent = id => dispatch => {
+export const fetchBill = id => dispatch => {
   if (!id) {
-    return dispatch(actions.rentFetched({ rentForEdit: undefined }));
+    return dispatch(actions.billFetched({ billForEdit: undefined }));
   }
 
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .getRentById(id)
+    .getBillById(id)
     .then(response => {
-      const rent = response.data;
-      console.log(rent);
-      dispatch(actions.rentFetched({ rentForEdit: rent }));
+      const bill = response.data;
+      console.log(bill);
+      dispatch(actions.billFetched({ billForEdit: bill }));
     })
     .catch(error => {
-      error.clientMessage = "Can't find rent";
+      error.clientMessage = "Can't find bill";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteRent = id => dispatch => {
+export const deleteBill = id => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteRent(id)
+    .deleteBill(id)
     .then(response => {
-      dispatch(actions.rentDeleted({ id }));
+      dispatch(actions.billDeleted({ id }));
     })
     .catch(error => {
       
       console.log("CD="+error);
-      error.clientMessage = "Can't delete rent";
+      error.clientMessage = "Can't delete bill";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const createRent = rentForCreation => dispatch => {
+export const createBill = billForCreation => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-  console.log(rentForCreation);
+  console.log(billForCreation);
   return requestFromServer
-    .createRent(JSON.stringify( rentForCreation))
+    .createBill(JSON.stringify( billForCreation))
     .then(response => {
-      const  rent  = response.data;
+      const  bill  = response.data;
       console.log(response.data);
-      dispatch(actions.rentCreated({ rent }));
+      dispatch(actions.billCreated({ bill }));
     })
     .catch(error => {
       console.log(error);
-      error.clientMessage = "Can't create rent";
+      error.clientMessage = "Can't create bill";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateRent = rent => dispatch => {
+export const updateBill = bill => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-  console.log(rent);
+  console.log(bill);
   return requestFromServer
-    .updateRent(rent)
+    .updateBill(bill)
     .then(() => {
-      console.log(rent);
-      dispatch(actions.rentUpdated({ rent }));
+      console.log(bill);
+      dispatch(actions.billUpdated({ bill }));
     })
     .catch(error => {
       console.log(error);
-      error.clientMessage = "Can't update rent";
+      error.clientMessage = "Can't update bill";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateRentsStatus = (ids, status) => dispatch => {
+export const updateBillsStatus = (ids, status) => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateStatusForRents(ids, status)
+    .updateStatusForBills(ids, status)
     .then(() => {
-      dispatch(actions.rentsStatusUpdated({ ids, status }));
+      dispatch(actions.billsStatusUpdated({ ids, status }));
     })
     .catch(error => {
-      error.clientMessage = "Can't update rents status";
+      error.clientMessage = "Can't update bills status";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteRents = ids => dispatch => {
+export const deleteBills = ids => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteRents(ids)
+    .deleteBills(ids)
     .then(() => {
 
-      dispatch(actions.rentsDeleted({ ids }));
+      dispatch(actions.billsDeleted({ ids }));
     })
     .catch(error => {
-      error.clientMessage = "Can't delete rents";
+      error.clientMessage = "Can't delete bills";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
