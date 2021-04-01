@@ -12,7 +12,7 @@ import {
   DatePickerField,
   Checkbox,
 } from "../../../../../../_metronic/_partials/controls";
-import { DataGrid } from "@material-ui/data-grid";
+//import { DataGrid } from "@material-ui/data-grid";
 import { List, ListItem, ListItemText } from "@material-ui/core";
 
 //booking
@@ -47,63 +47,60 @@ export function EditForm({
   const [qty, setQty] = useState(0);
   const [price, setPrice] = useState(0);
   const [itemData, setItemData] = useState(0);
-  const columns = [
-    { field: "id", headerName: "SN", width: 60 },
-    { field: "shirtQty", headerName: "Shirt", type: "number", width: 90 },
-    { field: "shirtPrice", headerName: "Price", type: "number", width: 90 },
-    { field: "pantQty", headerName: "Pant", type: "number", width: 90 },
-    { field: "pantPrice", headerName: "Price", type: "number", width: 90 },
-    { field: "coatQty", headerName: "Coat", type: "number", width: 90 },
-    { field: "coatPrice", headerName: "Price", type: "number", width: 90 },
-    { field: "bundiQty", headerName: "Bundi ", type: "number", width: 90 },
-    { field: "bundiPrice", headerName: "Price", type: "number", width: 90 },
-    { field: "kurtaQty", headerName: "Kurta", type: "number", width: 90 },
-    { field: "kurtaPrice", headerName: "Price", type: "number", width: 90 },
-    { field: "otherqty", headerName: "Other", type: "number", width: 90 },
-    { field: "otherprice", headerName: "Price", type: "number", width: 90 },
-  ];
-  const rows = [
-    {
-      id: 1,
-      shirtQty: 0,
-      shirtPrice: 0.0,
-      pantQty: 0,
-      pantPrice: 0.0,
-      coatQty: 0,
-      coatPrice: 0.0,
-      kurtaQty: 0,
-      kurtaPrice: 0.0,
-      bundiQty: 0,
-      bundiPrice: 0.0,
-      otherqty: 0,
-      otherprice: 0.0,
-    },
-  ];
+ 
 
-  const updateItemData = () => {
-    const str = `Item Data \n Shirt [Price/Qty]  ${booking.shirtPrice } ${(booking.shirtQty)}
-  Pant [Price/Qty]  ${booking.pantPrice}/ ${( booking.pantQty)}
-  Suit [Price/Qty]  ${(booking.coatPrice)}/ ${(booking.coatQty)}
-  Kurta [Price/Qty]  ${(booking.kurtaPrice)}/ ${(booking.kurtaQty)}
-  Bundi  [Price/Qty] ${(booking.bundiPrice)} / ${(booking.bundiQty)}
-  Others [Price/Qty]  ${(booking.otherprice)} /${(booking.others)}`;
-    setItemData(str);
+  const ItemView = () => {
+    return (
+      <>
+        <h5 className="text-danger d-flex  justify-content-between align-items-center">Booked Item(s)[P/Q]<span className="badge badge-danger badge-pill ">{booking.totalAmount} / {booking.totalQty}</span> </h5>
+        <ul className="list-group">
+          <li  className="list-group-item  d-flex  justify-content-between align-items-center">
+            {" "}
+            Shirt [Price/Qty] <span className="badge badge-primary badge-pill ">{booking.shirtPrice} / {booking.shirtQty}</span>
+          </li>
+          <li className="list-group-item d-flex  justify-content-between align-items-center ">
+            {" "}
+            Pant [Price/Qty] <span className="badge badge-success badge-pill">{booking.pantPrice} / {booking.pantQty}</span>
+          </li>
+          <li className="list-group-item d-flex  justify-content-between align-items-center ">
+            {" "}
+            Suit [Price/Qty] <span className="badge badge-danger badge-pill">{booking.coatPrice} / {booking.coatQty}</span>
+          </li>
+          <li className="list-group-item d-flex  justify-content-between align-items-center ">
+            Kurta [Price/Qty] <span className="badge badge-warning badge-pill">{booking.kurtaPrice} / {booking.kurtaQty}</span>
+          </li>
+          <li className="list-group-item d-flex  justify-content-between align-items-center ">
+            {" "}
+            Bundi [Price/Qty] <span className="badge badge-info badge-pill">{booking.bundiPrice} / {booking.bundiQty}</span>
+          </li>
+          <li className="list-group-item d-flex  justify-content-between align-items-center ">
+            {" "}
+            Others [Price/Qty] <span className="badge badge-primary badge-pill">{booking.othersPrice} / {booking.others}</span>
+          </li>
+        </ul>
+      </>
+    );
   };
-  const updateRowData = () => {
-   updateItemData();
-    // rows[0].shirtPrice = booking.shirtPrice;
-    // rows[0].pantPrice = booking.pantPrice;
-    // rows[0].coatPrice = booking.coatPrice;
-    // rows[0].kurtaPrice = booking.kurtaPrice;
-    // rows[0].bundiPrice = booking.bundiPrice;
-    // rows[0].othersPrice = booking.otherprice;
 
-    // rows[0].shirtQty = booking.shirtQty;
-    // rows[0].pantQty = booking.pantQty;
-    // rows[0].coatQty = booking.coatQty;
-    // rows[0].kurtaQty = booking.kurtaQty;
-    // rows[0].bundiQty = booking.bundiQty;
-    // rows[0].othersqty = booking.others;
+  const updateTotals=()=>{
+
+    booking.totalAmount=booking.shirtPrice+booking.pantPrice+booking.coatPrice+booking.kurtaPrice+booking.bundiPrice+booking.othersPrice;
+    booking.totalQty=booking.shirtQty+booking.pantQty+booking.coatQty+booking.kurtaQty+booking.bundiQty+booking.others;
+
+
+  }
+
+ 
+  const updateRowData = () => {
+  const str = `Item Data  Shirt [Price/Qty]  ${booking.shirtPrice} ${booking.shirtQty}
+  Pant [Price/Qty]  ${booking.pantPrice}/ ${booking.pantQty}
+  Suit [Price/Qty]  ${booking.coatPrice}/ ${booking.coatQty}
+  Kurta [Price/Qty]  ${booking.kurtaPrice}/ ${booking.kurtaQty}
+  Bundi  [Price/Qty] ${booking.bundiPrice} / ${booking.bundiQty}
+  Others [Price/Qty]  ${booking.otherprice} /${booking.others}`;
+  updateTotals();  
+  setItemData(str);
+    
   };
   const handleItemAdd = () => {
     console.log(item + " " + qty + " " + price + " ");
@@ -111,51 +108,37 @@ export function EditForm({
       case "1":
         booking.shirtPrice = price;
         booking.shirtQty = qty;
-        booking.totalAmount = booking.totalAmount + price;
-        booking.totalQty = booking.totalQty + qty;
         updateRowData();
         break;
       case "2":
         booking.pantPrice = price;
         booking.pantQty = qty;
-        booking.totalAmount = booking.totalAmount + price;
-        booking.totalQty = booking.totalQty + qty;
         updateRowData();
         break;
       case "3":
         booking.coatPrice = price;
         booking.coatQty = qty;
-        booking.totalAmount = booking.totalAmount + price;
-        booking.totalQty = booking.totalQty + qty;
         updateRowData();
         break;
       case "4":
         booking.bundiPrice = price;
         booking.bundiQty = qty;
-        booking.totalAmount = booking.totalAmount + price;
-        booking.totalQty = booking.totalQty + qty;
         updateRowData();
         break;
       case "5":
         booking.kurtaPrice = price;
         booking.kurtaQty = qty;
-        booking.totalAmount = booking.totalAmount + price;
-        booking.totalQty = booking.totalQty + qty;
         updateRowData();
         break;
       case "6":
         booking.othersPrice = price;
         booking.others = qty;
-        booking.totalAmount = booking.totalAmount + price;
-        booking.totalQty = booking.totalQty + qty;
+        
         updateRowData();
         break;
       default:
         console.log("Option Not Found");
     }
-    console.log("Booking");
-    console.log(booking);
-    console.log(rows[0]);
   };
   // const handleInputChange = (event) => {
   //   const target = event.target;
@@ -335,7 +318,8 @@ export function EditForm({
                 </div>
 
                 <div className="form-group row">
-                  <div className="col-lg-8">{itemData && itemData }</div>
+                  {/* <div className="col-lg-8">{itemData && itemData}</div> */}
+                  <div className="col-lg-5"><ItemView/> </div>
                 </div>
               </Form>
             </Modal.Body>
