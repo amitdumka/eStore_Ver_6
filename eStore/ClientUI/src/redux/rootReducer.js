@@ -32,6 +32,9 @@ import {rentsSlice} from "../app/modules/Rents/_redux/rents/Slice";
 import{rentedLocationsSlice} from "../app/modules/Rents/_redux/rentedLocations/Slice";
 import {dashboardSlice} from "./dashboard/Slice";
 import {commonTypesSlice} from "../app/modules/_redux/Slice";
+import {connectionsSlice} from "../app/modules/Electricity/_redux/connections/Slice";
+import {billsSlice} from "../app/modules/Electricity/_redux/bills/Slice";
+import {billPaymentsSlice} from "../app/modules/Electricity/_redux/billPayments/Slice";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -61,6 +64,9 @@ export const rootReducer = combineReducers({
   rents: rentsSlice.reducer, 
   dashboard: dashboardSlice.reducer,
   commonTypes: commonTypesSlice.reducer,
+  connections: connectionsSlice.reducer,
+  bills: billsSlice.reducer,
+  billPayments: billPaymentsSlice.reducer,
 
 });
 
