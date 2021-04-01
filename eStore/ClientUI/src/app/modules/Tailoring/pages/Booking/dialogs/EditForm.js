@@ -20,20 +20,15 @@ import { List, ListItem, ListItemText } from "@material-ui/core";
 
 // Validation schema
 const BookingEditSchema = Yup.object().shape({
-  taxName: Yup.string().required("Tax Name is required"),
-  taxType: Yup.number().required("Tax Type   is required"),
-  compositeRate: Yup.number()
-    .moreThan(0)
-    .required("Composite Rate is required"),
-  item: Yup.number()
-    .moreThan(0)
-    .required("Item is required"),
-  qty: Yup.number()
-    .moreThan(0)
-    .required("Qty is required"),
-  price: Yup.number()
-    .moreThan(0)
-    .required("Price is required"),
+ bookingDate: Yup.date().required("Date is required"), 
+ deliveryDate: Yup.date().required("Date is required"), 
+ tryDate:Yup.date().required("Date is required"),
+ totalAmount: Yup.number().moreThan(0).required("Amount  is required"),
+ totalQty: Yup.number().moreThan(0).required("Total Qty is required"),
+ custName:Yup.string().required("Customer Name is required"), 
+ bookingSlipNo: Yup.string().required("Slip No is required")
+
+
 });
 
 export function EditForm({
@@ -140,31 +135,7 @@ export function EditForm({
         console.log("Option Not Found");
     }
   };
-  // const handleInputChange = (event) => {
-  //   const target = event.target;
-  //   const value = target.type === "checkbox" ? target.checked : target.value;
-  //   const name = target.name;
-
-  //   switch (name) {
-  //     case "qty":
-  //       setQty(value);
-
-  //       break;
-  //     case "price":
-  //       setPrice(value);
-  //       break;
-  //     case "item":
-  //       setItem(value);
-  //       //setItem(value);
-  //       break;
-  //     default:
-  //       break;
-  //   }
-
-  //    console.log(name + ":" + value);
-  //   console.log(item+" "+qty+" "+price+" ");
-  // };
-
+  
   return (
     <>
       <Formik
@@ -196,6 +167,7 @@ export function EditForm({
                   {/* Delivery Date Date*/}
                   <div className="col-lg-4">
                     <DatePickerField
+                    format="DD-mm-yyyy"
                       name="deliveryDate"
                       placeholder="Delivery Date"
                       label="Delivery Date"
@@ -249,6 +221,7 @@ export function EditForm({
                       component={Input}
                       placeholder="Total Amount"
                       label="Total Amount"
+                      disabled
                     />
                   </div>
                   {/* Last Name */}
@@ -258,6 +231,7 @@ export function EditForm({
                       component={Input}
                       placeholder="Total Quantity"
                       label="Total Quantity"
+                      disabled
                     />
                   </div>
                   <div className="col-lg-4">
@@ -320,6 +294,10 @@ export function EditForm({
                 <div className="form-group row">
                   {/* <div className="col-lg-8">{itemData && itemData}</div> */}
                   <div className="col-lg-5"><ItemView/> </div>
+                  <div className="col-lg-6 ml-2">
+                    <h5 className="text-primary">Note:</h5>
+                    <h6> <span className="text-danger text-italic ml-6"> First Enter Item details than enter any others, otherwise it will not be saved.</span></h6>
+                  </div>
                 </div>
               </Form>
             </Modal.Body>

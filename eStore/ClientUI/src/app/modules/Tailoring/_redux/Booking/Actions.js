@@ -8,16 +8,18 @@ const { actions } = bookingsSlice;
 //booking
 //Booking
 
-export const fetchTaxType = () => (dispatch) => {
+export const fetchPendingDelivery = () => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .getTaxType()
+    .getPendingDelivery()
     .then((response) => {
       const entities = response.data;
-      dispatch(actions.taxTypeFetched({ entities }));
+      const totalCount = response.data.length;
+      console.log(response.data);
+      dispatch(actions.pendingDeliveryFetched({ totalCount , entities }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't load Category";
+      error.clientMessage = "Can't load Pending Delivery";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
@@ -89,8 +91,7 @@ export const createBooking = (bookingForCreation) => (dispatch) => {
 };
 
 export const updateBooking = (booking) => (dispatch) => {
-  console.log(booking);
-
+  
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
     .updateBooking(booking)

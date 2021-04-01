@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/Booking/Actions";
+import * as actions from "../../_redux/Booking/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -16,30 +16,26 @@ import {
   PleaseWaitMessage,
   sortCaret,
   headerSortingClasses,
-} from "../../../../../../_metronic/_helpers";
-import * as uiHelpers from "../UIHelpers";
-import * as columnFormatters from "./column-formatters";
-import { Pagination } from "../../../../../../_metronic/_partials/controls";
-import { useUIContext } from "../UIContext";
-import FieldDateFormater from "../../../../../../_estore/formaters/FieldDateFormater";
+} from "../../../../../_metronic/_helpers";
+//import * as uiHelpers from "./UIHelpers";
+//import * as columnFormatters from "./column-formatters";
+import { Pagination } from "../../../../../_metronic/_partials/controls";
+import { useUIContext } from "./UIContext";
+import FieldDateFormater from "../../../../../_estore/formaters/FieldDateFormater";
 
 
 //booking
 //Booking
 
-export function BookingsTable() {
+export function PendingDeliveryTable() {
   // Bookings UI Context
-  const bookingsUIContext = useUIContext();
-  const bookingsUIProps = useMemo(() => {
+  const uiContext = useUIContext();
+  const uiProps = useMemo(() => {
     return {
-      ids: bookingsUIContext.ids,
-      setIds: bookingsUIContext.setIds,
-      queryParams: bookingsUIContext.queryParams,
-      setQueryParams: bookingsUIContext.setQueryParams,
-      openEditBookingDialog: bookingsUIContext.openEditBookingDialog,
-      openDeleteBookingDialog: bookingsUIContext.openDeleteBookingDialog,
+      ids: uiContext.ids,
+      setIds: uiContext.setIds,
     };
-  }, [bookingsUIContext]);
+  }, [uiContext]);
 
   // Getting current state of bookings list from store (Redux)
   const { currentState } = useSelector(
@@ -48,21 +44,22 @@ export function BookingsTable() {
     }),
     shallowEqual
   );
-  const { totalCount, entities, listLoading } = currentState;
+  const { totalCountPending, pendingDelivery, listLoading } = currentState;
 
   // Bookings Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    bookingsUIProps.setIds([]);
+    uiProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchBookings(bookingsUIProps.queryParams));
+    dispatch(actions.fetchBooking());
+    dispatch(actions.fetchPendingDelivery());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bookingsUIProps.queryParams, dispatch]);
+  }, [uiProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "talioringBookingId",
+      dataField: "bookingId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
@@ -77,14 +74,14 @@ export function BookingsTable() {
       headerSortingClasses,
     },
     {
-      dataField: "custName",
+      dataField: "customerName",
       text: "Customer",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "deliveryDate",
+      dataField: "delveryDate",
       text: "Delivery Date",
       sort: true,
       formatter: FieldDateFormater,
@@ -92,73 +89,50 @@ export function BookingsTable() {
       headerSortingClasses,
     },
 
-    {
-      dataField: "tryDate",
-      text: "Try Date",
-      sort: true,
-      formatter: FieldDateFormater,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
 
     {
-      dataField: "bookingSlipNo",
+      dataField: "slipNo",
       text: "Slip No",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "totalQty",
+      dataField: "quantity",
       text: "Total Qty",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "totalAmount",
-      text: "Total Amount",
+      dataField: "noDays",
+      text: "Over Due",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
-    {
-      dataField: "isDelivered",
-      text: "Delivered",
-      sort: true,
-      formatter: columnFormatters.BooleanColumnFormatter,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "storeId",
-      text: "Store",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "action",
-      text: "Actions",
-      formatter: columnFormatters.ActionsColumnFormatter,
-      formatExtraData: {
-        openEditBookingDialog: bookingsUIProps.openEditBookingDialog,
-        openDeleteBookingDialog: bookingsUIProps.openDeleteBookingDialog,
-      },
-      classes: "text-right pr-0",
-      headerClasses: "text-right pr-3",
-      style: {
-        minWidth: "100px",
-      },
-    },
+    // {
+    //   dataField: "action",
+    //   text: "Actions",
+    //   formatter: columnFormatters.ActionsColumnFormatter,
+    //   formatExtraData: {
+    //     openEditBookingDialog: uiProps.openEditBookingDialog,
+    //     openDeleteBookingDialog: uiProps.openDeleteBookingDialog,
+    //   },
+    //   classes: "text-right pr-0",
+    //   headerClasses: "text-right pr-3",
+    //   style: {
+    //     minWidth: "100px",
+    //   },
+    // },
   ];
   // Table pagination properties
   const paginationOptions = {
     custom: true,
-    totalSize: totalCount,
-    sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: bookingsUIProps.queryParams.pageSize,
-    page: bookingsUIProps.queryParams.pageNumber,
+    totalSize: totalCountPending,
+    sizePerPageList: [3,5,10],
+    sizePerPage: 10,
+    page: 1,
   };
 
   return (
@@ -178,23 +152,23 @@ export function BookingsTable() {
                 remote
                 noDataIndication="No Record Found now.."
                 keyField="bookingId"
-                data={entities === null ? [] : totalCount ? entities : []}
+                data={pendingDelivery === null ? [] : totalCountPending ? pendingDelivery : []}
                 //data={[]}
                 columns={columns}
-                defaultSorted={uiHelpers.defaultSorted}
+                //defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  bookingsUIProps.setQueryParams
+                  uiProps.setQueryParams
                 )}
-                selectRow={getSelectRow({
-                  entities,
-                  ids: bookingsUIProps.ids,
-                  setIds: bookingsUIProps.setIds,
-                  idName: "bookingId",
-                })}
+                // selectRow={getSelectRow({
+                //   pendingDelivery,
+                //   ids: uiProps.ids,
+                //   setIds: uiProps.setIds,
+                //   idName: "bookingId",
+                // })}
                 {...paginationTableProps}
               >
-                <PleaseWaitMessage entities={entities} />
-                <NoRecordsFoundMessage entities={entities} />
+                <PleaseWaitMessage entities={pendingDelivery} />
+                <NoRecordsFoundMessage entities={pendingDelivery} />
               </BootstrapTable>
             </Pagination>
           );

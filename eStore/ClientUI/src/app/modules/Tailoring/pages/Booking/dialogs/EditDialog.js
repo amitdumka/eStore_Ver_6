@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/Booking/Actions";
+import * as commonActions from "../../../../_redux/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
@@ -20,11 +21,11 @@ export function EditDialog({ id, show, onHide }) {
 
   // Bookings Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, bookingForEdit, taxTypes } = useSelector(
+  const { actionsLoading, bookingForEdit, storeList } = useSelector(
     (state) => ({
       actionsLoading: state.bookings.actionsLoading,
       bookingForEdit: state.bookings.bookingForEdit,
-      taxTypes: state.bookings.taxTypes,
+      storeList: state.commonTypes.storeList,
     }),
     shallowEqual
   );
@@ -32,13 +33,12 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting Booking by id
     dispatch(actions.fetchBooking(id));
-    dispatch(actions.fetchTaxType());
+    dispatch(commonActions.fetchStores());
   }, [id, dispatch]);
 
   // server request for saving booking
   const saveBooking = (booking) => {
-    booking.category = parseInt(booking.category);
-
+    //booking.storeId = parseInt(booking.storeId);
     if (!id) {
       // server request for creating booking
       dispatch(actions.createBooking(booking)).then(() => onHide());
@@ -61,7 +61,7 @@ export function EditDialog({ id, show, onHide }) {
         actionsLoading={actionsLoading}
         booking={bookingForEdit || bookingsUIProps.initBooking}
         onHide={onHide}
-        taxTypes={taxTypes}
+        storeList={storeList}
       />
     </Modal>
   );

@@ -22,7 +22,7 @@ export function EditDialogHeader({ id }) {
   useEffect(() => {
     let _title = id ? "" : "New Booking";
     if (bookingForEdit && id) {
-      _title = `Edit booking '${bookingForEdit.bookingName}'`;
+      _title = `Edit booking  No ${bookingForEdit.bookingSlipNo}`;
     }
 
     setTitle(_title);

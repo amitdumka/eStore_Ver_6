@@ -19,8 +19,8 @@ export async function createBooking(booking) {
 export function getAllBookings() {
   return axios.get(API_URL); //.catch(function (error){console.log(error)});
 }
-export async function getTaxType(){
-  return await axios.get(`${API_BASE_URL}EnumValue/taxtype/all`);
+export async function getPendingDelivery(){
+  return await axios.get(`${API_BASE_URL}masterReport/pendingdeliver`);
 }
 export async function getBookingById(bookingId) {
   return await axios.get(`${API_URL}/${bookingId}`);
@@ -35,9 +35,8 @@ export async function findBookings(queryParams) {
 
 // UPDATE => PUT: update the booking on the server
 export async function updateBooking(booking) {
-  console.error(booking);
   return await axios.put(
-    `${API_URL}/${booking.bookingId}`,
+    `${API_URL}/${booking.talioringBookingId}`,
     JSON.stringify(booking),
     {
       headers: { "Content-Type": "application/json; charset=utf-8" },
