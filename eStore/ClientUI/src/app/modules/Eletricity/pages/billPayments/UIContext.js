@@ -2,24 +2,12 @@ import React, { createContext, useContext, useState, useCallback } from "react";
 import { isEqual, isFunction } from "lodash";
 import { initialFilter } from "./UIHelpers";
 
-//RentedLocation
-//rentedLocation
-
+//rent
+//Rent
 const UIContext = createContext();
 
 export function useUIContext() {
   return useContext(UIContext);
-}
-
-export function getCurrentDate(separator = "") {
-  let newDate = new Date();
-  let date = newDate.getDate();
-  let month = newDate.getMonth() + 1;
-  let year = newDate.getFullYear();
-
-  return `${year}${separator}${
-    month < 10 ? `0${month}` : `${month}`
-  }${separator}0${date}T00:00:00`;
 }
 
 export const UIConsumer = UIContext.Consumer;
@@ -41,22 +29,21 @@ export function UIProvider({ UIEvents, children }) {
     });
   }, []);
 
-  const initRentedLocation = {
+  const initRent = {
+    rentId: 0,
     rentedLocationId: 0,
-    placeName: "",
-    address: "",
-    onDate: new Date(),
-    vacatedDate:"",
-    city: "",
-    ownerName: "",
-    mobileNo: "",
-    rentAmount: 0.0,
-    advanceAmount: 0.0,
-    isRented: false,
+    location: null,
     rentType: 0,
+    onDate: new Date(),
+    period: "",
+    amount: 0.0,
+    mode: 0,
+    paymentDetails: "",
+    remarks: "",
     storeId: 1,
     store: null,
     userId: "WebUI",
+    entryStatus: 0,
     isReadOnly: false,
   };
 
@@ -66,14 +53,13 @@ export function UIProvider({ UIEvents, children }) {
     ids,
     setIds,
     setQueryParams,
-    initRentedLocation,
-    newRentedLocationButtonClick: UIEvents.newRentedLocationButtonClick,
-    openEditRentedLocationDialog: UIEvents.openEditRentedLocationDialog,
-    openDeleteRentedLocationDialog: UIEvents.openDeleteRentedLocationDialog,
-    openDeleteRentedLocationsDialog: UIEvents.openDeleteRentedLocationsDialog,
-    openFetchRentedLocationsDialog: UIEvents.openFetchRentedLocationsDialog,
-    openUpdateRentedLocationsStatusDialog:
-      UIEvents.openUpdateRentedLocationsStatusDialog,
+    initRent,
+    newRentButtonClick: UIEvents.newRentButtonClick,
+    openEditRentDialog: UIEvents.openEditRentDialog,
+    openDeleteRentDialog: UIEvents.openDeleteRentDialog,
+    openDeleteRentsDialog: UIEvents.openDeleteRentsDialog,
+    openFetchRentsDialog: UIEvents.openFetchRentsDialog,
+    openUpdateRentsStatusDialog: UIEvents.openUpdateRentsStatusDialog,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;
