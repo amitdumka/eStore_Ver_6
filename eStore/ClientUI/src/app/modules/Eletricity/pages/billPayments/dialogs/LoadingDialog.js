@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import { LoadingDialog } from "../../../../../../_metronic/_partials/controls";
 
-//rent
-//Rent
+//billpayment
+//BillPayment
 
 
-export function RentsLoadingDialog() {
-  // Rents Redux state
+export function BillPaymentsLoadingDialog() {
+  // BillPayments Redux state
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.rents.listLoading }),
+    (state) => ({ isLoading: state.billpayments.listLoading }),
     shallowEqual
   );
   // looking for loading/dispatch

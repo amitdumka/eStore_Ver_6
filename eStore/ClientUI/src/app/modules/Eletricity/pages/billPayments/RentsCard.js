@@ -5,41 +5,41 @@ import {
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../_metronic/_partials/controls";
-import { RentsFilter } from "./filter/Filter";
-import { RentsTable } from "./table/Table";
-import { RentsGrouping } from "./grouping/Grouping";
+import { BillPaymentsFilter } from "./filter/Filter";
+import { BillPaymentsTable } from "./table/Table";
+import { BillPaymentsGrouping } from "./grouping/Grouping";
 import { useUIContext } from "./UIContext";
 
-//Rent
-//rent
+//BillPayment
+//billpayment
 
 
-export function RentsCard() {
-  const RentsUIContext = useUIContext();
-  const RentsUIProps = useMemo(() => {
+export function BillPaymentsCard() {
+  const BillPaymentsUIContext = useUIContext();
+  const BillPaymentsUIProps = useMemo(() => {
     return {
-      ids: RentsUIContext.ids,
-      newRentButtonClick: RentsUIContext.newRentButtonClick,
+      ids: BillPaymentsUIContext.ids,
+      newBillPaymentButtonClick: BillPaymentsUIContext.newBillPaymentButtonClick,
     };
-  }, [RentsUIContext]);
+  }, [BillPaymentsUIContext]);
 
   return (
     <Card>
-      <CardHeader title="Rent Payment list">
+      <CardHeader title="BillPayment Payment list">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
-            onClick={RentsUIProps.newRentButtonClick}
+            onClick={BillPaymentsUIProps.newBillPaymentButtonClick}
           >
             New Payment
           </button>
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        <RentsFilter />
-        {RentsUIProps.ids.length > 0 && <RentsGrouping />}
-        <RentsTable />
+        <BillPaymentsFilter />
+        {BillPaymentsUIProps.ids.length > 0 && <BillPaymentsGrouping />}
+        <BillPaymentsTable />
       </CardBody>
     </Card>
   );

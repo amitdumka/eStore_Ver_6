@@ -8,37 +8,37 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Input, Select,DatePickerField } from "../../../../../../_metronic/_partials/controls";
 
-//rent
-//Rent
+//billpayment
+//BillPayment
 
 // Validation schema
-const RentEditSchema = Yup.object().shape({
+const BillPaymentEditSchema = Yup.object().shape({
   onDate: Yup.date().required("Date is required"),
   period: Yup.string().required("Period is required"),
-  rentType: Yup.number().required("Select Rent Type , is required"),
-  rentedLocationId: Yup.number().moreThan(0).required("Select Rent Location , is required"),
+  billpaymentType: Yup.number().required("Select BillPayment Type , is required"),
+  billpaymentedLocationId: Yup.number().moreThan(0).required("Select BillPayment Location , is required"),
   mode:Yup.number().required("Select mode is required"),
   amount: Yup.number().moreThan(0).required("Amount is required"),
   remarks:Yup.string().required("Remarks is required"), 
   paymentDetails: Yup.string().required("Payment Details is required")
 });
 
-export function EditForm({ saveRent, rent, actionsLoading, onHide, locationList, rentTypes, payModes }) {
+export function EditForm({ saveBillPayment, billpayment, actionsLoading, onHide, locationList, billpaymentTypes, payModes }) {
   return (
     <>
       <Formik
         enableReinitialize={true}
-        initialValues={rent}
-        validationSchema={RentEditSchema}
+        initialValues={billpayment}
+        validationSchema={BillPaymentEditSchema}
         onSubmit={(values) => {
-          saveRent(values);
+          saveBillPayment(values);
         }}
       >
         {({ handleSubmit }) => (
           <>
             <Modal.Body className="overlay overlay-block cursor-default">
               {actionsLoading && (
-                <div className="overlay-layer bg-transparent">
+                <div className="overlay-layer bg-transpabillpayment">
                   <div className="spinner spinner-lg spinner-success" />
                 </div>
               )}
@@ -54,10 +54,10 @@ export function EditForm({ saveRent, rent, actionsLoading, onHide, locationList,
 
                   {/* Email */}
                   <div className="col-lg-4">
-                    <Select name="rentedLocationId" placeholder="Location" label="Location">
+                    <Select name="billpaymentedLocationId" placeholder="Location" label="Location">
                       <option value="">Select Location</option>
                       {locationList.map((item) => (
-                        <option key={item.rentedLocationId} value={item.rentedLocationId}>
+                        <option key={item.billpaymentedLocationId} value={item.billpaymentedLocationId}>
                           {item.placeName}
                         </option>
                       ))}
@@ -65,9 +65,9 @@ export function EditForm({ saveRent, rent, actionsLoading, onHide, locationList,
                   </div>
                   {/* Email */}
                   <div className="col-lg-4">
-                    <Select name="rentType" placeholder="Rent Type" label="Rent Type">
+                    <Select name="billpaymentType" placeholder="BillPayment Type" label="BillPayment Type">
                       <option value="">Select Type</option>
-                      {rentTypes.map((item) => (
+                      {billpaymentTypes.map((item) => (
                         <option key={item.value} value={item.value}>
                           {item.name}
                         </option>

@@ -4,48 +4,48 @@ import { shallowEqual, useSelector } from "react-redux";
 
 import { useUIContext } from "../UIContext";
 
-//rent
-//Rent
+//billpayment
+//BillPayment
 
 
-const selectedRents = (entities, ids) => {
-  const _rents = [];
+const selectedBillPayments = (entities, ids) => {
+  const _billpayments = [];
   ids.forEach((id) => {
-    const rent = entities.find((el) => el.id === id);
-    if (rent) {
-      _rents.push(rent);
+    const billpayment = entities.find((el) => el.id === id);
+    if (billpayment) {
+      _billpayments.push(billpayment);
     }
   });
-  return _rents;
+  return _billpayments;
 };
 
 export function FetchDialog({ show, onHide }) {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+  // BillPayments UI Context
+  const billpaymentsUIContext = useUIContext();
+  const billpaymentsUIProps = useMemo(() => {
     return {
-      ids: rentsUIContext.ids,
+      ids: billpaymentsUIContext.ids,
     };
-  }, [rentsUIContext]);
+  }, [billpaymentsUIContext]);
 
-  // Rents Redux state
-  const { rents } = useSelector(
+  // BillPayments Redux state
+  const { billpayments } = useSelector(
     (state) => ({
-      rents: selectedRents(
-        state.rents.entities,
-        rentsUIProps.ids
+      billpayments: selectedBillPayments(
+        state.billpayments.entities,
+        billpaymentsUIProps.ids
       ),
     }),
     shallowEqual
   );
 
-  // if rents weren't selected we should close modal
+  // if billpayments weren't selected we should close modal
   useEffect(() => {
-    if (!rentsUIProps.ids || rentsUIProps.ids.length === 0) {
+    if (!billpaymentsUIProps.ids || billpaymentsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rentsUIProps.ids]);
+  }, [billpaymentsUIProps.ids]);
 
   return (
     <Modal
@@ -68,12 +68,12 @@ export function FetchDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {rents.map((rent) => (
-              <tr key={`id${rent.id}`}>
-                <td>{rent.id}</td>
+            {billpayments.map((billpayment) => (
+              <tr key={`id${billpayment.id}`}>
+                <td>{billpayment.id}</td>
                 <td>
                   <span className="ml-3">
-                    {rent.lastName}, {rent.firstName}
+                    {billpayment.lastName}, {billpayment.firstName}
                   </span>
                 </td>
               </tr>
