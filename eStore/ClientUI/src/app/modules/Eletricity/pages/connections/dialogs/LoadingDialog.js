@@ -3,13 +3,13 @@ import { shallowEqual, useSelector } from "react-redux";
 import { LoadingDialog } from "../../../../../../_metronic/_partials/controls";
 
 
-//RentedLocation
-//rentedLocation
+//Connection
+//connection
 
-export function RentedLocationsLoadingDialog() {
-  // RentedLocations Redux state
+export function ConnectionsLoadingDialog() {
+  // Connections Redux state
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.rentedLocations.listLoading }),
+    (state) => ({ isLoading: state.connections.listLoading }),
     shallowEqual
   );
   // looking for loading/dispatch

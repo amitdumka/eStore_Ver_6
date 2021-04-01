@@ -1,15 +1,15 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-//RentedLocation
-//rentedLocation
+//Connection
+//connection
 
-const initialRentedLocationsState = {
+const initialConnectionsState = {
   listLoading: false,
   actionsLoading: false,
   totalCount: 0,
   entities: null,
   rentTypes:null,
-  rentedLocationForEdit: undefined,
+  connectionForEdit: undefined,
   lastError: null
 };
 export const callTypes = {
@@ -17,9 +17,9 @@ export const callTypes = {
   action: "action"
 };
 
-export const rentedLocationsSlice = createSlice({
-  name: "rentedLocations",
-  initialState: initialRentedLocationsState,
+export const connectionsSlice = createSlice({
+  name: "connections",
+  initialState: initialConnectionsState,
   reducers: {
     catchError: (state, action) => {
       state.error = `${action.type}: ${action.payload.error}`;
@@ -37,14 +37,14 @@ export const rentedLocationsSlice = createSlice({
         state.actionsLoading = true;
       }
     },
-    // getRentedLocationById
-    rentedLocationFetched: (state, action) => {
+    // getConnectionById
+    connectionFetched: (state, action) => {
       state.actionsLoading = false;
-      state.rentedLocationForEdit = action.payload.rentedLocationForEdit;
+      state.connectionForEdit = action.payload.connectionForEdit;
       state.error = null;
     },
-    // findRentedLocations
-    rentedLocationsFetched: (state, action) => {
+    // findConnections
+    connectionsFetched: (state, action) => {
       const { totalCount, entities } = action.payload;
       state.listLoading = false;
       state.error = null;
@@ -59,44 +59,44 @@ export const rentedLocationsSlice = createSlice({
      state.rentTypes=entities;
      
     },
-    // createRentedLocation
-    rentedLocationCreated: (state, action) => {
+    // createConnection
+    connectionCreated: (state, action) => {
       state.ewactionsLoading = false;
       state.error = null;
-      state.entities.push(action.payload.rentedLocation);
+      state.entities.push(action.payload.connection);
     },
-    // updateRentedLocation
-    rentedLocationUpdated: (state, action) => {
+    // updateConnection
+    connectionUpdated: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.map(entity => {
-        if (entity.rentedLocationId === action.payload.rentedLocation.rentedLocationId) {
-          return action.payload.rentedLocation;
+        if (entity.connectionId === action.payload.connection.connectionId) {
+          return action.payload.connection;
         }
         return entity;
       });
     },
-    // deleteRentedLocation
-    rentedLocationDeleted: (state, action) => {
+    // deleteConnection
+    connectionDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(el => el.rentedLocationId !== action.payload.rentedLocationId);
+      state.entities = state.entities.filter(el => el.connectionId !== action.payload.connectionId);
     },
-    // deleteRentedLocations
-    rentedLocationsDeleted: (state, action) => {
+    // deleteConnections
+    connectionsDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        el => !action.payload.ids.includes(el.rentedLocationId)
+        el => !action.payload.ids.includes(el.connectionId)
       );
     },
-    // rentedLocationsUpdateState
-    rentedLocationsStatusUpdated: (state, action) => {
+    // connectionsUpdateState
+    connectionsStatusUpdated: (state, action) => {
       state.actionsLoading = false;
       state.error = null;
       const { ids, status } = action.payload;
       state.entities = state.entities.map(entity => {
-        if (ids.findIndex(id => id === entity.rentedLocationId) > -1) {
+        if (ids.findIndex(id => id === entity.connectionId) > -1) {
           entity.status = status;
         }
         return entity;

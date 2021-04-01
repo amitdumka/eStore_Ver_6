@@ -2,28 +2,28 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
-import * as actions from "../../../_redux/rentedLocations/Actions";
+import * as actions from "../../../_redux/connections/Actions";
 import {useUIContext} from "../UIContext";
 
 
-//RentedLocation
-//rentedLocation
+//Connection
+//connection
 
 // Delete particular record.
 export function DeleteDialog({ id, show, onHide }) {
-  // RentedLocations UI Context
-  const rentedLocationsUIContext = useUIContext();
-  const rentedLocationsUIProps = useMemo(() => {
+  // Connections UI Context
+  const connectionsUIContext = useUIContext();
+  const connectionsUIProps = useMemo(() => {
     return {
-      setIds: rentedLocationsUIContext.setIds,
-      queryParams: rentedLocationsUIContext.queryParams
+      setIds: connectionsUIContext.setIds,
+      queryParams: connectionsUIContext.queryParams
     };
-  }, [rentedLocationsUIContext]);
+  }, [connectionsUIContext]);
 
-  // RentedLocations Redux state
+  // Connections Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.rentedLocations.actionsLoading }),
+    (state) => ({ isLoading: state.connections.actionsLoading }),
     shallowEqual
   );
 
@@ -38,13 +38,13 @@ export function DeleteDialog({ id, show, onHide }) {
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading, dispatch]);
 
-  const deleteRentedLocation = () => {
-    // server request for deleting rentedLocation by id
-    dispatch(actions.deleteRentedLocation(id)).then(() => {
+  const deleteConnection = () => {
+    // server request for deleting connection by id
+    dispatch(actions.deleteConnection(id)).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchRentedLocations(rentedLocationsUIProps.queryParams));
+      dispatch(actions.fetchConnections(connectionsUIProps.queryParams));
       // clear selections list
-      rentedLocationsUIProps.setIds([]);
+      connectionsUIProps.setIds([]);
       // closing delete modal
       onHide();
     });
@@ -61,14 +61,14 @@ export function DeleteDialog({ id, show, onHide }) {
       {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          RentedLocation Delete
+          Connection Delete
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete this rentedLocation?</span>
+          <span>Are you sure to permanently delete this connection?</span>
         )}
-        {isLoading && <span>RentedLocation is deleting...</span>}
+        {isLoading && <span>Connection is deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -82,7 +82,7 @@ export function DeleteDialog({ id, show, onHide }) {
           <> </>
           <button
             type="button"
-            onClick={deleteRentedLocation}
+            onClick={deleteConnection}
             className="btn btn-primary btn-elevate"
           >
             Delete

@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { RentedLocationsLoadingDialog } from "./dialogs/LoadingDialog";
+import { ConnectionsLoadingDialog } from "./dialogs/LoadingDialog";
 import { EditDialog } from "./dialogs/EditDialog";
 
 import { DeleteDialog } from "./dialogs/DeleteDialog";
@@ -10,99 +10,99 @@ import { DeletesDialog } from "./dialogs/DeletesDialog";
 import { FetchDialog } from "./dialogs/FetchDialog";
 import { UpdateStateDialog } from "./dialogs/UpdateStateDialog";
 import { UIProvider } from "./UIContext";
-import { RentedLocationsCard } from "./RentedLocationsCard";
+import { ConnectionsCard } from "./ConnectionsCard";
 
-//RentedLocation
-//rentedLocation
+//Connection
+//connection
 
-export function RentedLocationsPage({ history }) {
-  const rentedLocationsUIEvents = {
-    newRentedLocationButtonClick: () => {
-      history.push("/renting/rentedLocations/new");
+export function ConnectionsPage({ history }) {
+  const connectionsUIEvents = {
+    newConnectionButtonClick: () => {
+      history.push("/renting/connections/new");
     },
-    openEditRentedLocationDialog: (id) => {
-      history.push(`/renting/rentedLocations/${id}/edit`);
+    openEditConnectionDialog: (id) => {
+      history.push(`/renting/connections/${id}/edit`);
     },
-    openDeleteRentedLocationDialog: (id) => {
-      history.push(`/renting/rentedLocations/${id}/delete`);
+    openDeleteConnectionDialog: (id) => {
+      history.push(`/renting/connections/${id}/delete`);
     },
-    openDeleteRentedLocationsDialog: () => {
-      history.push(`/renting/rentedLocations/deleteRentedLocations`);
+    openDeleteConnectionsDialog: () => {
+      history.push(`/renting/connections/deleteConnections`);
     },
-    openFetchRentedLocationsDialog: () => {
-      history.push(`/renting/rentedLocations/fetch`);
+    openFetchConnectionsDialog: () => {
+      history.push(`/renting/connections/fetch`);
     },
-    openUpdateRentedLocationsStatusDialog: () => {
-      history.push("/renting/rentedLocations/updateStatus");
+    openUpdateConnectionsStatusDialog: () => {
+      history.push("/renting/connections/updateStatus");
     }
   }
 
   return (
-    <UIProvider UIEvents={rentedLocationsUIEvents}>
-      <RentedLocationsLoadingDialog />
-      <Route path="/renting/rentedLocations/new">
+    <UIProvider UIEvents={connectionsUIEvents}>
+      <ConnectionsLoadingDialog />
+      <Route path="/renting/connections/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rentedLocations");
+              history.push("/renting/connections");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rentedLocations/:id/edit">
+      <Route path="/renting/connections/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/renting/rentedLocations");
+              history.push("/renting/connections");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rentedLocations/deleteRentedLocations">
+      <Route path="/renting/connections/deleteConnections">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rentedLocations");
+              history.push("/renting/connections");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rentedLocations/:id/delete">
+      <Route path="/renting/connections/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/renting/rentedLocations");
+              history.push("/renting/connections");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rentedLocations/fetch">
+      <Route path="/renting/connections/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rentedLocations");
+              history.push("/renting/connections");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rentedLocations/updateStatus">
+      <Route path="/renting/connections/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rentedLocations");
+              history.push("/renting/connections");
             }}
           />
         )}
       </Route>
-      <RentedLocationsCard />
+      <ConnectionsCard />
     </UIProvider>
   );
 }

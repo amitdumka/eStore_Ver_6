@@ -1,49 +1,49 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rentedLocations/Actions";
+import * as actions from "../../../_redux/connections/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
 
 
-//RentedLocation
-//rentedLocation
+//Connection
+//connection
 
 export function EditDialog({ id, show, onHide }) {
-  // RentedLocations UI Context
-  const rentedLocationsUIContext = useUIContext();
-  const rentedLocationsUIProps = useMemo(() => {
+  // Connections UI Context
+  const connectionsUIContext = useUIContext();
+  const connectionsUIProps = useMemo(() => {
     return {
-      initRentedLocation: rentedLocationsUIContext.initRentedLocation,
+      initConnection: connectionsUIContext.initConnection,
     };
-  }, [rentedLocationsUIContext]);
+  }, [connectionsUIContext]);
 
-  // RentedLocations Redux state
+  // Connections Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, rentedLocationForEdit, rentTypes } = useSelector(
+  const { actionsLoading, connectionForEdit, rentTypes } = useSelector(
     (state) => ({
-      actionsLoading: state.rentedLocations.actionsLoading,
-      rentedLocationForEdit: state.rentedLocations.rentedLocationForEdit,
-      rentTypes: state.rentedLocations.rentTypes
+      actionsLoading: state.connections.actionsLoading,
+      connectionForEdit: state.connections.connectionForEdit,
+      rentTypes: state.connections.rentTypes
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    // server call for getting RentedLocation by id
-    dispatch(actions.fetchRentedLocation(id));
+    // server call for getting Connection by id
+    dispatch(actions.fetchConnection(id));
     dispatch(actions.fetchRentTypes());
   }, [id, dispatch]);
 
-  // server request for saving rentedLocation
-  const saveRentedLocation = (rentedLocation) => {
+  // server request for saving connection
+  const saveConnection = (connection) => {
     if (!id) {
-      // server request for creating rentedLocation
-      dispatch(actions.createRentedLocation(rentedLocation)).then(() => onHide());
+      // server request for creating connection
+      dispatch(actions.createConnection(connection)).then(() => onHide());
     } else {
-      // server request for updating rentedLocation
-      dispatch(actions.updateRentedLocation(rentedLocation)).then(() => onHide());
+      // server request for updating connection
+      dispatch(actions.updateConnection(connection)).then(() => onHide());
     }
   };
 
@@ -56,9 +56,9 @@ export function EditDialog({ id, show, onHide }) {
     >
       <EditDialogHeader id={id} />
       <EditForm
-        saveRentedLocation={saveRentedLocation}
+        saveConnection={saveConnection}
         actionsLoading={actionsLoading}
-        rentedLocation={rentedLocationForEdit || rentedLocationsUIProps.initRentedLocation}
+        connection={connectionForEdit || connectionsUIProps.initConnection}
         onHide={onHide}
         rentTypes={rentTypes}
       />

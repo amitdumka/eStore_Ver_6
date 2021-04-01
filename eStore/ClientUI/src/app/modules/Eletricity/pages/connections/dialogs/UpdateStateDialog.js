@@ -1,67 +1,67 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rentedLocations/Actions";
+import * as actions from "../../../_redux/connections/Actions";
 import { useUIContext } from "../UIContext";
 
 
-//RentedLocation
-//rentedLocation
+//Connection
+//connection
 
-const selectedRentedLocations = (entities, ids) => {
-  const _rentedLocations = [];
+const selectedConnections = (entities, ids) => {
+  const _connections = [];
   ids.forEach((id) => {
-    const rentedLocation = entities.find((el) => el.id === id);
-    if (rentedLocation) {
-      _rentedLocations.push(rentedLocation);
+    const connection = entities.find((el) => el.id === id);
+    if (connection) {
+      _connections.push(connection);
     }
   });
-  return _rentedLocations;
+  return _connections;
 };
 
 export function UpdateStateDialog({ show, onHide }) {
-  // RentedLocations UI Context
-  const rentedLocationsUIContext = useUIContext();
-  const rentedLocationsUIProps = useMemo(() => {
+  // Connections UI Context
+  const connectionsUIContext = useUIContext();
+  const connectionsUIProps = useMemo(() => {
     return {
-      ids: rentedLocationsUIContext.ids,
-      setIds: rentedLocationsUIContext.setIds,
-      queryParams: rentedLocationsUIContext.queryParams,
+      ids: connectionsUIContext.ids,
+      setIds: connectionsUIContext.setIds,
+      queryParams: connectionsUIContext.queryParams,
     };
-  }, [rentedLocationsUIContext]);
+  }, [connectionsUIContext]);
 
-  // RentedLocations Redux state
-  const { rentedLocations, isLoading } = useSelector(
+  // Connections Redux state
+  const { connections, isLoading } = useSelector(
     (state) => ({
-      rentedLocations: selectedRentedLocations(
-        state.rentedLocations.entities,
-        rentedLocationsUIProps.ids
+      connections: selectedConnections(
+        state.connections.entities,
+        connectionsUIProps.ids
       ),
-      isLoading: state.rentedLocations.actionsLoading,
+      isLoading: state.connections.actionsLoading,
     }),
     shallowEqual
   );
 
   // if !id we should close modal
   useEffect(() => {
-    if (!rentedLocationsUIProps.ids || rentedLocationsUIProps.ids.length === 0) {
+    if (!connectionsUIProps.ids || connectionsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rentedLocationsUIProps.ids]);
+  }, [connectionsUIProps.ids]);
 
   const [status, setStatus] = useState(0);
 
   const dispatch = useDispatch();
   const updateStatus = () => {
-    // server request for update rentedLocations status by selected ids
-    dispatch(actions.updateRentedLocationsStatus(rentedLocationsUIProps.ids, status)).then(
+    // server request for update connections status by selected ids
+    dispatch(actions.updateConnectionsStatus(connectionsUIProps.ids, status)).then(
       () => {
         // refresh list after deletion
-        dispatch(actions.fetchRentedLocations(rentedLocationsUIProps.queryParams)).then(
+        dispatch(actions.fetchConnections(connectionsUIProps.queryParams)).then(
           () => {
             // clear selections list
-            rentedLocationsUIProps.setIds([]);
+            connectionsUIProps.setIds([]);
             // closing delete modal
             onHide();
           }
@@ -78,7 +78,7 @@ export function UpdateStateDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Status has been updated for selected rentedLocations
+          Status has been updated for selected connections
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="overlay overlay-block cursor-default">
@@ -98,13 +98,13 @@ export function UpdateStateDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {rentedLocations.map((rentedLocation) => (
-              <tr key={`id${rentedLocation.id}`}>
-                <td>{rentedLocation.id}</td>
+            {connections.map((connection) => (
+              <tr key={`id${connection.id}`}>
+                <td>{connection.id}</td>
                 
                 <td>
                   <span className="ml-3">
-                    {rentedLocation.lastName}, {rentedLocation.firstName}
+                    {connection.lastName}, {connection.firstName}
                   </span>
                 </td>
               </tr>

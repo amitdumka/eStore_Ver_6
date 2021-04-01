@@ -5,23 +5,23 @@ import {
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../_metronic/_partials/controls";
-import { RentedLocationsFilter } from "./filter/Filter";
-import { RentedLocationsTable } from "./table/Table";
-import { RentedLocationsGrouping } from "./grouping/Grouping";
+import { ConnectionsFilter } from "./filter/Filter";
+import { ConnectionsTable } from "./table/Table";
+import { ConnectionsGrouping } from "./grouping/Grouping";
 import { useUIContext } from "./UIContext";
 
 
-//RentedLocation
-//rentedLocation
+//Connection
+//connection
 
-export function RentedLocationsCard() {
-  const rentedLocationsUIContext = useUIContext();
-  const rentedLocationsUIProps = useMemo(() => {
+export function ConnectionsCard() {
+  const connectionsUIContext = useUIContext();
+  const connectionsUIProps = useMemo(() => {
     return {
-      ids: rentedLocationsUIContext.ids,
-      newRentedLocationButtonClick: rentedLocationsUIContext.newRentedLocationButtonClick,
+      ids: connectionsUIContext.ids,
+      newConnectionButtonClick: connectionsUIContext.newConnectionButtonClick,
     };
-  }, [rentedLocationsUIContext]);
+  }, [connectionsUIContext]);
 
   return (
     <Card>
@@ -30,16 +30,16 @@ export function RentedLocationsCard() {
           <button
             type="button"
             className="btn btn-primary"
-            onClick={rentedLocationsUIProps.newRentedLocationButtonClick}
+            onClick={connectionsUIProps.newConnectionButtonClick}
           >
             New Rented Location
           </button>
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        <RentedLocationsFilter />
-        {rentedLocationsUIProps.ids.length > 0 && <RentedLocationsGrouping />}
-        <RentedLocationsTable />
+        <ConnectionsFilter />
+        {connectionsUIProps.ids.length > 0 && <ConnectionsGrouping />}
+        <ConnectionsTable />
       </CardBody>
     </Card>
   );

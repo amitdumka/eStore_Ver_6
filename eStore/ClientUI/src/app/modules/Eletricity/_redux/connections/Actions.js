@@ -1,25 +1,25 @@
 import * as requestFromServer from "./Crud";
-import {rentedLocationsSlice, callTypes} from "./Slice";
+import {connectionsSlice, callTypes} from "./Slice";
 
-//RentedLocation
-//rentedLocation
+//Connection
+//connection
 
-const {actions} = rentedLocationsSlice;
+const {actions} = connectionsSlice;
 
-export const fetchRentedLocations = queryParams => dispatch => {
+export const fetchConnections = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findRentedLocations(queryParams)
+    .findConnections(queryParams)
     .then(response => {
       const  entities  = response.data;
       const totalCount = response.data.length;
       console.log(response);
       console.log(response.data.length);
-      dispatch(actions.rentedLocationsFetched({ totalCount, entities }));
+      dispatch(actions.connectionsFetched({ totalCount, entities }));
     })
     .catch(error => {
       console.log(error);
-      error.clientMessage = "Can't find rentedLocations";
+      error.clientMessage = "Can't find connections";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
@@ -41,90 +41,90 @@ export const fetchRentTypes =id=>dispatch => {
     dispatch(actions.catchError({error,callTypes:callTypes.list}));
   });
 }
-export const fetchRentedLocation = id => dispatch => {
+export const fetchConnection = id => dispatch => {
   if (!id) {
-    return dispatch(actions.rentedLocationFetched({ rentedLocationForEdit: undefined }));
+    return dispatch(actions.connectionFetched({ connectionForEdit: undefined }));
   }
 
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .getRentedLocationById(id)
+    .getConnectionById(id)
     .then(response => {
-      const rentedLocation = response.data;
-      dispatch(actions.rentedLocationFetched({ rentedLocationForEdit: rentedLocation }));
+      const connection = response.data;
+      dispatch(actions.connectionFetched({ connectionForEdit: connection }));
     })
     .catch(error => {
-      error.clientMessage = "Can't find rentedLocation";
+      error.clientMessage = "Can't find connection";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteRentedLocation = id => dispatch => {
+export const deleteConnection = id => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteRentedLocation(id)
+    .deleteConnection(id)
     .then(response => {
-      dispatch(actions.rentedLocationDeleted({ id }));
+      dispatch(actions.connectionDeleted({ id }));
     })
     .catch(error => {
       
       console.log("CD="+error);
-      error.clientMessage = "Can't delete rentedLocation";
+      error.clientMessage = "Can't delete connection";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const createRentedLocation = rentedLocationForCreation => dispatch => {
+export const createConnection = connectionForCreation => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .createRentedLocation(JSON.stringify( rentedLocationForCreation))
+    .createConnection(JSON.stringify( connectionForCreation))
     .then(response => {
-      const  rentedLocation  = response.data;
+      const  connection  = response.data;
      // console.log(response.data);
-      dispatch(actions.rentedLocationCreated({ rentedLocation }));
+      dispatch(actions.connectionCreated({ connection }));
     })
     .catch(error => {
-      error.clientMessage = "Can't create rentedLocation";
+      error.clientMessage = "Can't create connection";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateRentedLocation = rentedLocation => dispatch => {
+export const updateConnection = connection => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateRentedLocation(rentedLocation)
+    .updateConnection(connection)
     .then(() => {
-      dispatch(actions.rentedLocationUpdated({ rentedLocation }));
+      dispatch(actions.connectionUpdated({ connection }));
     })
     .catch(error => {
-      error.clientMessage = "Can't update rentedLocation";
+      error.clientMessage = "Can't update connection";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateRentedLocationsStatus = (ids, status) => dispatch => {
+export const updateConnectionsStatus = (ids, status) => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateStatusForRentedLocations(ids, status)
+    .updateStatusForConnections(ids, status)
     .then(() => {
-      dispatch(actions.rentedLocationsStatusUpdated({ ids, status }));
+      dispatch(actions.connectionsStatusUpdated({ ids, status }));
     })
     .catch(error => {
-      error.clientMessage = "Can't update rentedLocations status";
+      error.clientMessage = "Can't update connections status";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteRentedLocations = ids => dispatch => {
+export const deleteConnections = ids => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteRentedLocations(ids)
+    .deleteConnections(ids)
     .then(() => {
 
-      dispatch(actions.rentedLocationsDeleted({ ids }));
+      dispatch(actions.connectionsDeleted({ ids }));
     })
     .catch(error => {
-      error.clientMessage = "Can't delete rentedLocations";
+      error.clientMessage = "Can't delete connections";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };

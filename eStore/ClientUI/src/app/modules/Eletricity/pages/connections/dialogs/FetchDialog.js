@@ -2,54 +2,54 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useSelector } from "react-redux";
 // import {
-//   RentedLocationStatusCssClasses,
-//   RentedLocationStatusTitles,
+//   ConnectionStatusCssClasses,
+//   ConnectionStatusTitles,
 // } from "../UIHelpers";
 import { useUIContext } from "../UIContext";
 
 
-//RentedLocation
-//rentedLocation
+//Connection
+//connection
 
 
-const selectedRentedLocations = (entities, ids) => {
-  const _rentedLocations = [];
+const selectedConnections = (entities, ids) => {
+  const _connections = [];
   ids.forEach((id) => {
-    const rentedLocation = entities.find((el) => el.id === id);
-    if (rentedLocation) {
-      _rentedLocations.push(rentedLocation);
+    const connection = entities.find((el) => el.id === id);
+    if (connection) {
+      _connections.push(connection);
     }
   });
-  return _rentedLocations;
+  return _connections;
 };
 
 export function FetchDialog({ show, onHide }) {
-  // RentedLocations UI Context
-  const rentedLocationsUIContext = useUIContext();
-  const rentedLocationsUIProps = useMemo(() => {
+  // Connections UI Context
+  const connectionsUIContext = useUIContext();
+  const connectionsUIProps = useMemo(() => {
     return {
-      ids: rentedLocationsUIContext.ids,
+      ids: connectionsUIContext.ids,
     };
-  }, [rentedLocationsUIContext]);
+  }, [connectionsUIContext]);
 
-  // RentedLocations Redux state
-  const { rentedLocations } = useSelector(
+  // Connections Redux state
+  const { connections } = useSelector(
     (state) => ({
-      rentedLocations: selectedRentedLocations(
-        state.rentedLocations.entities,
-        rentedLocationsUIProps.ids
+      connections: selectedConnections(
+        state.connections.entities,
+        connectionsUIProps.ids
       ),
     }),
     shallowEqual
   );
 
-  // if rentedLocations weren't selected we should close modal
+  // if connections weren't selected we should close modal
   useEffect(() => {
-    if (!rentedLocationsUIProps.ids || rentedLocationsUIProps.ids.length === 0) {
+    if (!connectionsUIProps.ids || connectionsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rentedLocationsUIProps.ids]);
+  }, [connectionsUIProps.ids]);
 
   return (
     <Modal
@@ -72,12 +72,12 @@ export function FetchDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {rentedLocations.map((rentedLocation) => (
-              <tr key={`id${rentedLocation.id}`}>
-                <td>{rentedLocation.id}</td>
+            {connections.map((connection) => (
+              <tr key={`id${connection.id}`}>
+                <td>{connection.id}</td>
                 <td>
                   <span className="ml-3">
-                    {rentedLocation.lastName}, {rentedLocation.firstName}
+                    {connection.lastName}, {connection.firstName}
                   </span>
                 </td>
               </tr>

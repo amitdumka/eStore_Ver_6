@@ -8,12 +8,12 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Input, Select,DatePickerField} from "../../../../../../_metronic/_partials/controls";
 
-//RentedLocation
-//rentedLocation
+//Connection
+//connection
 
 // Validation schema
-const RentedLocationEditSchema = Yup.object().shape({
-  placeName: Yup.string().required("RentedLocation Name is required"),
+const ConnectionEditSchema = Yup.object().shape({
+  placeName: Yup.string().required("Connection Name is required"),
   address: Yup.string().required("Address is required"),
   onDate: Yup.date().required("Date is required"),
   //vacatedDate:Yup.date().required("Date is required"),
@@ -28,8 +28,8 @@ const RentedLocationEditSchema = Yup.object().shape({
 
 
 export function EditForm({
-  saveRentedLocation,
-  rentedLocation,
+  saveConnection,
+  connection,
   rentTypes,
   actionsLoading,
   onHide,
@@ -38,10 +38,10 @@ export function EditForm({
     <>
       <Formik
         enableReinitialize={true}
-        initialValues={rentedLocation}
-        validationSchema={RentedLocationEditSchema}
+        initialValues={connection}
+        validationSchema={ConnectionEditSchema}
         onSubmit={(values) => {
-          saveRentedLocation(values);
+          saveConnection(values);
         }}
       >
         {({ handleSubmit }) => (

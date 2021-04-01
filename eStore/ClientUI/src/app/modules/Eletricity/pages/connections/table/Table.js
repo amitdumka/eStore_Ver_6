@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rentedLocations/Actions";
+import * as actions from "../../../_redux/connections/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -22,45 +22,45 @@ import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 
-//RentedLocation
-//rentedLocation
+//Connection
+//connection
 
-export function RentedLocationsTable() {
-  // RentedLocations UI Context
-  const rentedLocationsUIContext = useUIContext();
-  const rentedLocationsUIProps = useMemo(() => {
+export function ConnectionsTable() {
+  // Connections UI Context
+  const connectionsUIContext = useUIContext();
+  const connectionsUIProps = useMemo(() => {
     return {
-      ids: rentedLocationsUIContext.ids,
-      setIds: rentedLocationsUIContext.setIds,
-      queryParams: rentedLocationsUIContext.queryParams,
-      setQueryParams: rentedLocationsUIContext.setQueryParams,
-      openEditRentedLocationDialog:
-        rentedLocationsUIContext.openEditRentedLocationDialog,
-      openDeleteRentedLocationDialog:
-        rentedLocationsUIContext.openDeleteRentedLocationDialog,
+      ids: connectionsUIContext.ids,
+      setIds: connectionsUIContext.setIds,
+      queryParams: connectionsUIContext.queryParams,
+      setQueryParams: connectionsUIContext.setQueryParams,
+      openEditConnectionDialog:
+        connectionsUIContext.openEditConnectionDialog,
+      openDeleteConnectionDialog:
+        connectionsUIContext.openDeleteConnectionDialog,
     };
-  }, [rentedLocationsUIContext]);
+  }, [connectionsUIContext]);
 
-  // Getting curret state of rentedLocations list from store (Redux)
+  // Getting curret state of connections list from store (Redux)
   const { currentState } = useSelector(
-    (state) => ({ currentState: state.rentedLocations }),
+    (state) => ({ currentState: state.connections }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
 
-  // RentedLocations Redux state
+  // Connections Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    rentedLocationsUIProps.setIds([]);
+    connectionsUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchRentedLocations(rentedLocationsUIProps.queryParams));
+    dispatch(actions.fetchConnections(connectionsUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rentedLocationsUIProps.queryParams, dispatch]);
+  }, [connectionsUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "rentedLocationId",
+      dataField: "connectionId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
@@ -146,10 +146,10 @@ export function RentedLocationsTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditRentedLocationDialog:
-          rentedLocationsUIProps.openEditRentedLocationDialog,
-        openDeleteRentedLocationDialog:
-          rentedLocationsUIProps.openDeleteRentedLocationDialog,
+        openEditConnectionDialog:
+          connectionsUIProps.openEditConnectionDialog,
+        openDeleteConnectionDialog:
+          connectionsUIProps.openDeleteConnectionDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -163,8 +163,8 @@ export function RentedLocationsTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: rentedLocationsUIProps.queryParams.pageSize,
-    page: rentedLocationsUIProps.queryParams.pageNumber,
+    sizePerPage: connectionsUIProps.queryParams.pageSize,
+    page: connectionsUIProps.queryParams.pageNumber,
   };
 
   return (
@@ -183,19 +183,19 @@ export function RentedLocationsTable() {
                 bootstrap4
                 remote
                 noDataIndication="No Record Found now.."
-                keyField="rentedLocationId"
+                keyField="connectionId"
                 data={entities === null ? [] : totalCount ? entities : []}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  rentedLocationsUIProps.setQueryParams
+                  connectionsUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: rentedLocationsUIProps.ids,
-                  setIds: rentedLocationsUIProps.setIds,
-                  idName: "rentedLocationId",
+                  ids: connectionsUIProps.ids,
+                  setIds: connectionsUIProps.setIds,
+                  idName: "connectionId",
                 })}
                 {...paginationTableProps}
               >

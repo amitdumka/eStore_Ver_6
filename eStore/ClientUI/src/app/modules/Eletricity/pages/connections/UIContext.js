@@ -2,8 +2,8 @@ import React, { createContext, useContext, useState, useCallback } from "react";
 import { isEqual, isFunction } from "lodash";
 import { initialFilter } from "./UIHelpers";
 
-//RentedLocation
-//rentedLocation
+//Connection
+//connection
 
 const UIContext = createContext();
 
@@ -41,8 +41,8 @@ export function UIProvider({ UIEvents, children }) {
     });
   }, []);
 
-  const initRentedLocation = {
-    rentedLocationId: 0,
+  const initConnection = {
+    connectionId: 0,
     placeName: "",
     address: "",
     onDate: new Date(),
@@ -66,14 +66,14 @@ export function UIProvider({ UIEvents, children }) {
     ids,
     setIds,
     setQueryParams,
-    initRentedLocation,
-    newRentedLocationButtonClick: UIEvents.newRentedLocationButtonClick,
-    openEditRentedLocationDialog: UIEvents.openEditRentedLocationDialog,
-    openDeleteRentedLocationDialog: UIEvents.openDeleteRentedLocationDialog,
-    openDeleteRentedLocationsDialog: UIEvents.openDeleteRentedLocationsDialog,
-    openFetchRentedLocationsDialog: UIEvents.openFetchRentedLocationsDialog,
-    openUpdateRentedLocationsStatusDialog:
-      UIEvents.openUpdateRentedLocationsStatusDialog,
+    initConnection,
+    newConnectionButtonClick: UIEvents.newConnectionButtonClick,
+    openEditConnectionDialog: UIEvents.openEditConnectionDialog,
+    openDeleteConnectionDialog: UIEvents.openDeleteConnectionDialog,
+    openDeleteConnectionsDialog: UIEvents.openDeleteConnectionsDialog,
+    openFetchConnectionsDialog: UIEvents.openFetchConnectionsDialog,
+    openUpdateConnectionsStatusDialog:
+      UIEvents.openUpdateConnectionsStatusDialog,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;
