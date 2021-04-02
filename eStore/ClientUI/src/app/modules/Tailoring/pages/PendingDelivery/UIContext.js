@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useState, useCallback } from "react";
-import { isEqual, isFunction } from "lodash";
+import React, { createContext, useContext, useState } from "react";
 
 
 const UIContext = createContext();

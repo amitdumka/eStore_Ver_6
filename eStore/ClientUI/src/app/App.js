@@ -4,13 +4,13 @@
 
 import React from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter , Route, useHistory} from "react-router-dom";
+import { BrowserRouter , useHistory} from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { Routes } from "../app/Routes";
 import { I18nProvider } from "../_metronic/i18n";
 import { LayoutSplashScreen, MaterialThemeProvider } from "../_metronic/layout";
 //Okta Addition
-import { Security, SecureRoute, LoginCallback } from '@okta/okta-react';
+import { Security } from '@okta/okta-react';
 import config from '../config';
 export default function App({ store, persistor, basename }) {
  //Okta Addition 

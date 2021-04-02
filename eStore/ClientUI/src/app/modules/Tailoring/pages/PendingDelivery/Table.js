@@ -10,7 +10,7 @@ import paginationFactory, {
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../_redux/Booking/Actions";
 import {
-  getSelectRow,
+ 
   getHandlerTableChange,
   NoRecordsFoundMessage,
   PleaseWaitMessage,

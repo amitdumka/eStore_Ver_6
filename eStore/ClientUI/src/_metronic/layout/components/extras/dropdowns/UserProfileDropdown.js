@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import objectPath from "object-path";
 import { useHtmlClassService } from "../../../_core/MetronicLayout";
 import { toAbsoluteUrl } from "../../../../_helpers";
@@ -23,18 +23,18 @@ export function UserProfileDropdown() {
     } else {
       authService.getUser().then((info) => {
         setUserInfo(info);
-        console.log(info);
+        // console.log(info);
       });
     }
   }, [authState, authService]); // Update if authState changes
 
-  const user = {
-    firstname: "Amit Kr.",
-    lastname: "Shah",
-    occupation: "CEO",
-    email: "amit@microsoft.com",
-    url: "",
-  };
+  // const user = {
+  //   firstname: "Amit Kr.",
+  //   lastname: "Shah",
+  //   occupation: "CEO",
+  //   email: "amit@microsoft.com",
+  //   url: "",
+  // };
   // console.log(userInfo);
   const uiService = useHtmlClassService();
   const layoutProps = useMemo(() => {

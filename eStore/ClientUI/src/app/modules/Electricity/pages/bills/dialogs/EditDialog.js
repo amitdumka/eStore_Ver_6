@@ -19,7 +19,7 @@ export function EditDialog({ id, show, onHide }) {
 
   // Bills Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, billForEdit ,payModes,billTypes, connectionList} = useSelector(
+  const { actionsLoading, billForEdit , connectionList} = useSelector(
     (state) => ({
       actionsLoading: state.bills.actionsLoading,
       billForEdit: state.bills.billForEdit,

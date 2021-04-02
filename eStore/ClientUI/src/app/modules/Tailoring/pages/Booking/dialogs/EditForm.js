@@ -12,8 +12,7 @@ import {
   DatePickerField,
   Checkbox,
 } from "../../../../../../_metronic/_partials/controls";
-//import { DataGrid } from "@material-ui/data-grid";
-import { List, ListItem, ListItemText } from "@material-ui/core";
+
 
 //booking
 //Booking
@@ -41,7 +40,7 @@ export function EditForm({
   const [item, setItem] = useState(0);
   const [qty, setQty] = useState(0);
   const [price, setPrice] = useState(0);
-  const [itemData, setItemData] = useState(0);
+  // const [itemData, setItemData] = useState(0);
  
 
   const ItemView = () => {
@@ -94,7 +93,7 @@ export function EditForm({
   Bundi  [Price/Qty] ${booking.bundiPrice} / ${booking.bundiQty}
   Others [Price/Qty]  ${booking.otherprice} /${booking.others}`;
   updateTotals();  
-  setItemData(str);
+  // setItemData(str);
     
   };
   const handleItemAdd = () => {

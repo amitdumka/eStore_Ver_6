@@ -10,7 +10,7 @@ import { Redirect, Switch, Route } from "react-router-dom";
 import { shallowEqual, useSelector } from "react-redux";
 import { Layout } from "../_metronic/layout";
 import BasePage from "./BasePage";
-import { Logout, AuthPage } from "./modules/Auth";
+/////import { Logout, AuthPage } from "./modules/Auth";
 import ErrorsPage from "./modules/ErrorsExamples/ErrorsPage";
 import { useState, useEffect } from "react";
 
@@ -18,7 +18,7 @@ import { useOktaAuth } from "@okta/okta-react";
 import CustomLoginComponent from "./modules/okta/Login";
 import { Security, SecureRoute, LoginCallback } from "@okta/okta-react";
 
-import Messages from "./modules/okta/Messages";
+// import Messages from "./modules/okta/Messages";
 export function Routes() {
   const { authState, authService } = useOktaAuth();
   const [userInfo, setUserInfo] = useState(null);
@@ -42,9 +42,9 @@ export function Routes() {
     }),
     shallowEqual
   );
-  const login = async () => {
-    authService.login("/");
-  };
+  // const login = async () => {
+  //   authService.login("/");
+  // };
   const logout = async () => {
     authService.logout("/");
   };
