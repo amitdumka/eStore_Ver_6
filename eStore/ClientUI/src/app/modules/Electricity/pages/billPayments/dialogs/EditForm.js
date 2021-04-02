@@ -6,24 +6,39 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Input, Select,DatePickerField } from "../../../../../../_metronic/_partials/controls";
+import {
+  Input,
+  Select,
+  DatePickerField,
+} from "../../../../../../_metronic/_partials/controls";
+import { Checkbox } from "@material-ui/core";
 
 //billPayment
 //BillPayment
 
 // Validation schema
 const BillPaymentEditSchema = Yup.object().shape({
-  onDate: Yup.date().required("Date is required"),
-  period: Yup.string().required("Period is required"),
-  billPaymentType: Yup.number().required("Select BillPayment Type , is required"),
-  billPaymentedLocationId: Yup.number().moreThan(0).required("Select BillPayment Location , is required"),
-  mode:Yup.number().required("Select mode is required"),
-  amount: Yup.number().moreThan(0).required("Amount is required"),
-  remarks:Yup.string().required("Remarks is required"), 
-  paymentDetails: Yup.string().required("Payment Details is required")
+  paymentDate: Yup.date().required("Date is required"),
+  eletricityBillId: Yup.number()
+    .moreThan(0)
+    .required("Period is required"),
+  amount: Yup.number()
+    .moreThan(0)
+    .required("Select BillPayment Type , is required"),
+  mode: Yup.number().required("Select BillPayment Location , is required"),
+  remarks: Yup.string().required("Remarks is required"),
+  paymentDetails: Yup.string().required("Payment Details is required"),
 });
 
-export function EditForm({ saveBillPayment, billPayment, actionsLoading, onHide, connectionList, billList, payModes }) {
+export function EditForm({
+  saveBillPayment,
+  billPayment,
+  actionsLoading,
+  onHide,
+  connectionList,
+  billList,
+  payModes,
+}) {
   return (
     <>
       <Formik
@@ -54,50 +69,36 @@ export function EditForm({ saveBillPayment, billPayment, actionsLoading, onHide,
 
                   {/* Email */}
                   <div className="col-lg-4">
-                    <Select name="billPaymentedLocationId" placeholder="Location" label="Location">
-                      <option value="">Select Location</option>
-                      {connectionList && connectionList.map((item) => (
-                        <option key={item.billPaymentedLocationId} value={item.billPaymentedLocationId}>
-                          {item.placeName}
-                        </option>
-                      ))}
+                    <Select
+                      name="eletricityBillId"
+                      placeholder="Bill No"
+                      label="Bill No"
+                    >
+                      <option value="">Select Bill</option>
+                      {billList &&
+                        billList.map((item) => (
+                          <option
+                            key={item.eletricityBillId}
+                            value={item.eletricityBillId}
+                          >
+                            {item.billNumber}
+                          </option>
+                        ))}
                     </Select>
                   </div>
-                  {/* Email */}
+                  {/* Date of BankDeposit */}
                   <div className="col-lg-4">
-                    <Select name="billPaymentType" placeholder="BillPayment Type" label="BillPayment Type">
-                      <option value="">Select Type</option>
-                      {billList && billList.map((item) => (
-                        <option key={item.value} value={item.value}>
-                          {item.name}
-                        </option>
-                      ))}
-                    </Select>
-                  </div>
-                </div>
-               
-                <div className="form-group row">
-                  
-                   {/* Date of BankDeposit */}
-                   <div className="col-lg-4">
                     <DatePickerField
                       dateFormat="yyyy-MM-dd"
-                      name="onDate"
+                      name="paymentDate"
                       label="On Date"
                     />
                   </div>
+                </div>
 
+                <div className="form-group row">
                   {/*  Father Name*/}
                   <div className="col-lg-4">
-                    <Field
-                      name="period"
-                      component={Input}
-                      placeholder="Period"
-                      label="Period"
-                    />
-                  </div>
-                   {/*  State Name*/}
-                   <div className="col-lg-4">
                     <Field
                       name="amount"
                       component={Input}
@@ -105,22 +106,20 @@ export function EditForm({ saveBillPayment, billPayment, actionsLoading, onHide,
                       label="Amount"
                     />
                   </div>
-                </div>
-                <div className="form-group row">
-                 
                   {/* Email */}
                   <div className="col-lg-4">
                     <Select name="mode" placeholder="Mode" label="Mode">
                       <option value="">Select Mode</option>
-                      {payModes && payModes.map((item) => (
-                        <option key={item.value} value={item.value}>
-                          {item.name}
-                        </option>
-                      ))}
+                      {payModes &&
+                        payModes.map((item) => (
+                          <option key={item.value} value={item.value}>
+                            {item.name}
+                          </option>
+                        ))}
                     </Select>
                   </div>
-                   {/*  Father Name*/}
-                   <div className="col-lg-4">
+                  {/*  Father Name*/}
+                  <div className="col-lg-4">
                     <Field
                       name="paymentDetails"
                       component={Input}
@@ -128,8 +127,10 @@ export function EditForm({ saveBillPayment, billPayment, actionsLoading, onHide,
                       label="Payment Details"
                     />
                   </div>
-                   {/*  Father Name*/}
-                   <div className="col-lg-4">
+                </div>
+                <div className="form-group row">
+                  {/*  Father Name*/}
+                  <div className="col-lg-4">
                     <Field
                       name="remarks"
                       component={Input}
@@ -137,6 +138,8 @@ export function EditForm({ saveBillPayment, billPayment, actionsLoading, onHide,
                       label="Remarks"
                     />
                   </div>
+                  <div className="col-lg-4 text-info"><Field className="mr-2 ml-2" name="isPartialPayment" type="checkbox" />{ "  "} Partial Payment </div>
+                  <div className="col-lg-4 text-danger"><Field className="mr-2 ml-2 " name="isBillCleared" type="checkbox" />{"  "} Full Payment </div>
                 </div>
               </Form>
             </Modal.Body>

@@ -83,7 +83,7 @@ export const billPaymentsSlice = createSlice({
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.map(entity => {
-        if (entity.billPaymentId === action.payload.billPayment.billPaymentId) {
+        if (entity.eBillPaymentId === action.payload.billPayment.eBillPaymentId) {
           return action.payload.billPayment;
         }
         return entity;
@@ -93,14 +93,14 @@ export const billPaymentsSlice = createSlice({
     billPaymentDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(el => el.billPaymentId !== action.payload.billPaymentId);
+      state.entities = state.entities.filter(el => el.eBillPaymentId !== action.payload.eBillPaymentId);
     },
     // deleteBillPayments
     billPaymentsDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        el => !action.payload.ids.includes(el.billPaymentId)
+        el => !action.payload.ids.includes(el.eBillPaymentId)
       );
     },
     
@@ -110,7 +110,7 @@ export const billPaymentsSlice = createSlice({
       state.error = null;
       const { ids, status } = action.payload;
       state.entities = state.entities.map(entity => {
-        if (ids.findIndex(id => id === entity.billPaymentId) > -1) {
+        if (ids.findIndex(id => id === entity.eBillPaymentId) > -1) {
           entity.status = status;
         }
         return entity;

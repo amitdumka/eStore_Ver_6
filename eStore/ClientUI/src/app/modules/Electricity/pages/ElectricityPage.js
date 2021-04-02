@@ -20,7 +20,7 @@ export default function ElectricityPage() {
         }
         <ContentRoute path="/electricity/connections" component={ConnectionsPage} />
         <ContentRoute path="/electricity/bills" component={BillsPage} />
-        <ContentRoute path="/electricity/ebilPayments"  component={BillPaymentsPage} />
+        <ContentRoute path="/electricity/billPayments"  component={BillPaymentsPage} />
         
       </Switch>
     </Suspense>

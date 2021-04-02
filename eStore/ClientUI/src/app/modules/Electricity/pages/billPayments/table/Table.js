@@ -60,36 +60,36 @@ export function BillPaymentsTable() {
   // Table columns
   const columns = [
     {
-      dataField: "billPaymentId",
+      dataField: "eBillPaymentId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "location.placeName",
-      text: "BillPaymented Location",
+      dataField: "bill.billNumber",
+      text: "Bill Number",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "billPaymentType",
-      text: "BillPayment Type",
+      dataField: "bill.connection.consumerNumber",
+      text: "Consumer No",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "onDate",
+      dataField: "paymentDate",
       text: "Date",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "period",
-      text: "Period",
+      dataField: "isPartialPayment",
+      text: "Partial Payment",
       sort: false,
       
       sortCaret: sortCaret,
@@ -119,6 +119,13 @@ export function BillPaymentsTable() {
     {
       dataField: "remarks",
       text: "Remarks",
+      sort: false,
+      //formatter:columnFormatters.TypeColumnFormatter,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "storeId",
+      text: "Store",
       sort: false,
       //formatter:columnFormatters.TypeColumnFormatter,
       sortCaret: sortCaret,

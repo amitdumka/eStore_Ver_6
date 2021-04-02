@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/billPayments/Actions";
+import * as commonActions from "../../../../_redux/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
@@ -19,12 +20,13 @@ export function EditDialog({ id, show, onHide }) {
 
   // BillPayments Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, billPaymentForEdit ,billList, connectionList} = useSelector(
+  const { actionsLoading, billPaymentForEdit ,billList, connectionList, payModes} = useSelector(
     (state) => ({
       actionsLoading: state.billPayments.actionsLoading,
       billPaymentForEdit: state.billPayments.billPaymentForEdit,
       connectionList: state.billPayments.connectionList,
       billList:state.billPayments.billList,
+      payModes: state.commonTypes.payModes,
     }),
     shallowEqual
   );
@@ -34,6 +36,7 @@ export function EditDialog({ id, show, onHide }) {
     dispatch(actions.fetchBillPayment(id));
     dispatch(actions.fetchConnections());
     dispatch(actions.fetchBills());
+    dispatch(commonActions.fetchEnumValue("payModes"));
 
   }, [id, dispatch]);
 
@@ -66,6 +69,7 @@ export function EditDialog({ id, show, onHide }) {
         onHide={onHide}
         connectionList={connectionList}
         billList={billList}
+        payModes={payModes}
         
       />
     </Modal>

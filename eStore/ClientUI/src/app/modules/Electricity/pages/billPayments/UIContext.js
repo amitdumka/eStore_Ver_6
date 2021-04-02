@@ -30,16 +30,16 @@ export function UIProvider({ UIEvents, children }) {
   }, []);
 
   const initBillPayment = {
-    billPaymentId: 0,
-    billPaymentedLocationId: 0,
-    location: null,
-    billPaymentType: 0,
-    onDate: new Date(),
-    period: "",
-    amount: 0.0,
+    eBillPaymentId: 0,
+    eletricityBillId: 0,
+    bill: null,
+    paymentDate: new Date(),
+    amount: 0,
     mode: 0,
     paymentDetails: "",
     remarks: "",
+    isPartialPayment: false,
+    isBillCleared: false,
     storeId: 1,
     store: null,
     userId: "WebUI",
@@ -59,7 +59,8 @@ export function UIProvider({ UIEvents, children }) {
     openDeleteBillPaymentDialog: UIEvents.openDeleteBillPaymentDialog,
     openDeleteBillPaymentsDialog: UIEvents.openDeleteBillPaymentsDialog,
     openFetchBillPaymentsDialog: UIEvents.openFetchBillPaymentsDialog,
-    openUpdateBillPaymentsStatusDialog: UIEvents.openUpdateBillPaymentsStatusDialog,
+    openUpdateBillPaymentsStatusDialog:
+      UIEvents.openUpdateBillPaymentsStatusDialog,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

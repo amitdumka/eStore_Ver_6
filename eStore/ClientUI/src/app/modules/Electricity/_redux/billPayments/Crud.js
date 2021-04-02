@@ -44,7 +44,7 @@ export async function getAllBanks() {
 // UPDATE => PUT: update the billPayment on the server
 export async function updateBillPayment(billPayment) {
   return await axios.put(
-    `${API_URL}/${billPayment.billPaymentId}`,
+    `${API_URL}/${billPayment.eBillPaymentId}`,
     JSON.stringify(billPayment),
     {
       headers: { "Content-Type": "application/json; charset=utf-8" },

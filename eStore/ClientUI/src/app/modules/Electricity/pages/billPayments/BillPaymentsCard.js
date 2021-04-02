@@ -25,7 +25,7 @@ export function BillPaymentsCard() {
 
   return (
     <Card>
-      <CardHeader title="BillPayment Payment list">
+      <CardHeader title="Bill Payment list">
         <CardHeaderToolbar>
           <button
             type="button"
