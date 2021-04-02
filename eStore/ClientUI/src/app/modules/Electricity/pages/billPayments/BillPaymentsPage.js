@@ -18,86 +18,86 @@ import { BillPaymentsCard } from "./BillPaymentsCard";
 export function BillPaymentsPage({ history }) {
   const billPaymentsUIEvents = {
     newBillPaymentButtonClick: () => {
-      history.push("/electricity/billPayments/new");
+      history.push("/electricity/ebilPayments/new");
     },
     openEditBillPaymentDialog: (id) => {
-      history.push(`/electricity/billPayments/${id}/edit`);
+      history.push(`/electricity/ebilPayments/${id}/edit`);
     },
     openDeleteBillPaymentDialog: (id) => {
-      history.push(`/electricity/billPayments/${id}/delete`);
+      history.push(`/electricity/ebilPayments/${id}/delete`);
     },
     openDeleteBillPaymentsDialog: () => {
-      history.push(`/electricity/billPayments/deleteBillPayments`);
+      history.push(`/electricity/ebilPayments/deleteBillPayments`);
     },
     openFetchBillPaymentsDialog: () => {
-      history.push(`/electricity/billPayments/fetch`);
+      history.push(`/electricity/ebilPayments/fetch`);
     },
     openUpdateBillPaymentsStatusDialog: () => {
-      history.push("/electricity/billPayments/updateStatus");
+      history.push("/electricity/ebilPayments/updateStatus");
     }
   }
 
   return (
     <UIProvider UIEvents={billPaymentsUIEvents}>
       <BillPaymentsLoadingDialog />
-      <Route path="/electricity/billPayments/new">
+      <Route path="/electricity/ebilPayments/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/electricity/billPayments");
+              history.push("/electricity/ebilPayments");
             }}
           />
         )}
       </Route>
-      <Route path="/electricity/billPayments/:id/edit">
+      <Route path="/electricity/ebilPayments/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/electricity/billPayments");
+              history.push("/electricity/ebilPayments");
             }}
           />
         )}
       </Route>
-      <Route path="/electricity/billPayments/deleteBillPayments">
+      <Route path="/electricity/ebilPayments/deleteBillPayments">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/electricity/billPayments");
+              history.push("/electricity/ebilPayments");
             }}
           />
         )}
       </Route>
-      <Route path="/electricity/billPayments/:id/delete">
+      <Route path="/electricity/ebilPayments/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/electricity/billPayments");
+              history.push("/electricity/ebilPayments");
             }}
           />
         )}
       </Route>
-      <Route path="/electricity/billPayments/fetch">
+      <Route path="/electricity/ebilPayments/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/electricity/billPayments");
+              history.push("/electricity/ebilPayments");
             }}
           />
         )}
       </Route>
-      <Route path="/electricity/billPayments/updateStatus">
+      <Route path="/electricity/ebilPayments/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/electricity/billPayments");
+              history.push("/electricity/ebilPayments");
             }}
           />
         )}

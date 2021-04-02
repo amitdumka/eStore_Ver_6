@@ -20,11 +20,11 @@ export function EditDialog({ id, show, onHide }) {
 
   // BillPayments Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, billPaymentForEdit ,billList, connectionList, payModes} = useSelector(
+  const { actionsLoading, billPaymentForEdit ,billList,  payModes} = useSelector(
     (state) => ({
       actionsLoading: state.billPayments.actionsLoading,
       billPaymentForEdit: state.billPayments.billPaymentForEdit,
-      connectionList: state.billPayments.connectionList,
+     // connectionList: state.billPayments.connectionList,
       billList:state.billPayments.billList,
       payModes: state.commonTypes.payModes,
     }),
@@ -34,9 +34,9 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting BillPayment by id
     dispatch(actions.fetchBillPayment(id));
-    dispatch(actions.fetchConnections());
+   // dispatch(actions.fetchConnections());
     dispatch(actions.fetchBills());
-    dispatch(commonActions.fetchEnumValue("payModes"));
+    dispatch(commonActions.fetchEnumValue("payMode"));
 
   }, [id, dispatch]);
 
@@ -44,6 +44,7 @@ export function EditDialog({ id, show, onHide }) {
   const saveBillPayment = (billPayment) => {
     
     billPayment.accountType=parseInt(billPayment.accountType);
+    billPayment.modes=parseInt(billPayment.modes);
 
     if (!id) {
       // server request for creating billPayment
@@ -67,7 +68,7 @@ export function EditDialog({ id, show, onHide }) {
         actionsLoading={actionsLoading}
         billPayment={billPaymentForEdit || billPaymentsUIProps.initBillPayment}
         onHide={onHide}
-        connectionList={connectionList}
+       // connectionList={connectionList}
         billList={billList}
         payModes={payModes}
         

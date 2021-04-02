@@ -58,103 +58,6 @@ export const commonTypesSlice = createSlice({
         state.actionsLoading = true;
       }
     },
-    entryStatusFetched: (state, action) =>function(state, action) {
-        const { entities } = action.payload;
-        state.actionsLoading = false;
-        state.listLoading = false;
-        state.error = null;
-        state.entryStatus = entities;
-      },
-      // get All parties List
-      productCategoryFetched: function(state, action) {
-        const {  entities } = action.payload;
-        state.actionsLoading = false;
-        state.listLoading = false;
-        state.error = null;
-        state.productCategory = entities;
-       
-      },
-      // get All bank account List
-      sizesFetched: function(state, action) {
-        const { entities } = action.payload;
-        state.actionsLoading = false;
-        state.listLoading = false;
-        state.error = null;
-        state.sizes = entities;
-        
-      },
-   
-    vPayModesFetched: function(state, action) {
-      const { entities } = action.payload;
-      state.actionsLoading = false;
-      state.listLoading = false;
-      state.error = null;
-      state.vPayModes = entities;
-    },
-    // get All parties List
-    cardModeFetch: function(state, action) {
-      const { entities } = action.payload;
-      state.actionsLoading = false;
-      state.listLoading = false;
-      state.error = null;
-      state.cardMode = entities;
-    },
-    // get All bank account List
-    cardTypeFetch: function(state, action) {
-      const { entities } = action.payload;
-      state.actionsLoading = false;
-      state.listLoading = false;
-      state.error = null;
-      state.cardType = entities;
-    },
-
-    voucherTypeFetched: function(state, action) {
-      const { entities } = action.payload;
-      state.actionsLoading = false;
-      state.listLoading = false;
-      state.error = null;
-      state.voucherType = entities;
-    },
-    // get All parties List
-    bankPayModeFetched: function(state, action) {
-      const { entities } = action.payload;
-      state.actionsLoading = false;
-      state.listLoading = false;
-      state.error = null;
-      state.bankPayMode = entities;
-    },
-    // get All bank account List
-    salaryComponentFetched: function(state, action) {
-      const { entities } = action.payload;
-      state.actionsLoading = false;
-      state.listLoading = false;
-      state.error = null;
-      state.salaryComponet = entities;
-    },
-
-    payModesFetched: function(state, action) {
-      const { entities } = action.payload;
-      state.actionsLoading = false;
-      state.listLoading = false;
-      state.error = null;
-      state.payModes = entities;
-    },
-    // get All parties List
-    arvindAccountsFetched: function(state, action) {
-      const { entities } = action.payload;
-      state.actionsLoading = false;
-      state.listLoading = false;
-      state.error = null;
-      state.arvindAccounts = entities;
-    },
-    // get All bank account List
-    loginRoleFetched: function(state, action) {
-      const { entities } = action.payload;
-      state.actionsLoading = false;
-      state.listLoading = false;
-      state.error = null;
-      state.loginRole = entities;
-    },
     storesFetched: function(state, action) {
       const { entities } = action.payload;
       state.actionsLoading = false;
@@ -163,21 +66,120 @@ export const commonTypesSlice = createSlice({
       state.storeList = entities;
     },
     enumValueFetched: function(state, action) {
-      const {typeName, entities } = action.payload;
+      const {enumName, entities } = action.payload;
       state.actionsLoading = false;
       state.listLoading = false;
       state.error = null;
-      setEnumValue(state,typeName,entities);
+      setEnumValue(state,enumName,entities);
+     
     },
+    // entryStatusFetched: (state, action) =>function(state, action) {
+    //     const { entities } = action.payload;
+    //     state.actionsLoading = false;
+    //     state.listLoading = false;
+    //     state.error = null;
+    //     state.entryStatus = entities;
+    //   },
+    //   // get All parties List
+    //   productCategoryFetched: function(state, action) {
+    //     const {  entities } = action.payload;
+    //     state.actionsLoading = false;
+    //     state.listLoading = false;
+    //     state.error = null;
+    //     state.productCategory = entities;
+       
+    //   },
+    //   // get All bank account List
+    //   sizesFetched: function(state, action) {
+    //     const { entities } = action.payload;
+    //     state.actionsLoading = false;
+    //     state.listLoading = false;
+    //     state.error = null;
+    //     state.sizes = entities;
+        
+    //   },
+   
+    // vPayModesFetched: function(state, action) {
+    //   const { entities } = action.payload;
+    //   state.actionsLoading = false;
+    //   state.listLoading = false;
+    //   state.error = null;
+    //   state.vPayModes = entities;
+    // },
+    // // get All parties List
+    // cardModeFetch: function(state, action) {
+    //   const { entities } = action.payload;
+    //   state.actionsLoading = false;
+    //   state.listLoading = false;
+    //   state.error = null;
+    //   state.cardMode = entities;
+    // },
+    // // get All bank account List
+    // cardTypeFetch: function(state, action) {
+    //   const { entities } = action.payload;
+    //   state.actionsLoading = false;
+    //   state.listLoading = false;
+    //   state.error = null;
+    //   state.cardType = entities;
+    // },
+
+    // voucherTypeFetched: function(state, action) {
+    //   const { entities } = action.payload;
+    //   state.actionsLoading = false;
+    //   state.listLoading = false;
+    //   state.error = null;
+    //   state.voucherType = entities;
+    // },
+    // // get All parties List
+    // bankPayModeFetched: function(state, action) {
+    //   const { entities } = action.payload;
+    //   state.actionsLoading = false;
+    //   state.listLoading = false;
+    //   state.error = null;
+    //   state.bankPayMode = entities;
+    // },
+    // // get All bank account List
+    // salaryComponentFetched: function(state, action) {
+    //   const { entities } = action.payload;
+    //   state.actionsLoading = false;
+    //   state.listLoading = false;
+    //   state.error = null;
+    //   state.salaryComponet = entities;
+    // },
+
+    // payModesFetched: function(state, action) {
+    //   const { entities } = action.payload;
+    //   state.actionsLoading = false;
+    //   state.listLoading = false;
+    //   state.error = null;
+    //   state.payModes = entities;
+    // },
+    // // get All parties List
+    // arvindAccountsFetched: function(state, action) {
+    //   const { entities } = action.payload;
+    //   state.actionsLoading = false;
+    //   state.listLoading = false;
+    //   state.error = null;
+    //   state.arvindAccounts = entities;
+    // },
+    // // get All bank account List
+    // loginRoleFetched: function(state, action) {
+    //   const { entities } = action.payload;
+    //   state.actionsLoading = false;
+    //   state.listLoading = false;
+    //   state.error = null;
+    //   state.loginRole = entities;
+    // },
+   
   },
 });
 
 export function setEnumValue(state, actionName, entities) {
   switch (actionName) {
-    case "payModes":
+    case "payMode":
       state.payModes = entities;
       break;
-    case "rentTypes":
+    case "rentType":
       state.rentTypes = entities;
       break;
     case "accountType":
@@ -186,7 +188,7 @@ export function setEnumValue(state, actionName, entities) {
     case "paymentMode":
       state.paymentMode = entities;
       break;
-    case "attendanceUnits":
+    case "attendanceUnit":
       state.attendanceUnits = entities;
       break;
     case "employeeType":

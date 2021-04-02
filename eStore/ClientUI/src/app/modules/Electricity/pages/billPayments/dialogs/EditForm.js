@@ -35,7 +35,6 @@ export function EditForm({
   billPayment,
   actionsLoading,
   onHide,
-  connectionList,
   billList,
   payModes,
 }) {

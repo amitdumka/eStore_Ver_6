@@ -172,7 +172,7 @@ export function BillPaymentsTable() {
                 bootstrap4
                 remote
                 noDataIndication="No Record Found now.."
-                keyField="billPaymentId"
+                keyField="eBillPaymentId"
                 data={entities === null ? [] : totalCount ? entities : []}
                 //data={[]}
                 columns={columns}

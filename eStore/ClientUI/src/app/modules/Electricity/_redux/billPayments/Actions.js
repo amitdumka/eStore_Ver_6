@@ -18,7 +18,7 @@ export const fetchConnections =id=>dispatch => {
   .getConnections()
   .then(response=>{
     const entities  = response.data; 
-    console.log(entities);
+   
     dispatch(actions.connectionsFetched({ entities}));
   })
   .catch(error =>{
@@ -36,7 +36,7 @@ export const fetchBills =id=>dispatch => {
   .then(response=>{
     const entities  = response.data; 
     const totalCount=response.data.length;
-    console.log(entities);
+   
     dispatch(actions.billsFetched({totalCount, entities}));
   })
   .catch(error =>{
@@ -53,8 +53,7 @@ export const fetchBillPayments = queryParams => dispatch => {
     .then(response => {
       const  entities  = response.data;
       const totalCount = response.data.length;
-      console.log(response);
-      console.log(response.data.length);
+     
       dispatch(actions.billPaymentsFetched({ totalCount, entities }));
     })
     .catch(error => {
