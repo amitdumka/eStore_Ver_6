@@ -4,13 +4,24 @@
 
 import React from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter , Route, useHistory} from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { Routes } from "../app/Routes";
 import { I18nProvider } from "../_metronic/i18n";
 import { LayoutSplashScreen, MaterialThemeProvider } from "../_metronic/layout";
-
+//Okta Addition
+import { Security, SecureRoute, LoginCallback } from '@okta/okta-react';
+import config from '../config';
 export default function App({ store, persistor, basename }) {
+ //Okta Addition 
+ const history = useHistory(); // example from react-router
+
+ const customAuthHandler = () => {
+   // Redirect to the /login page that has a CustomLoginComponent
+   history.push('/login');
+ };
+
+
   return (
     /* Provide Redux store */
     <Provider store={store}>
@@ -25,7 +36,10 @@ export default function App({ store, persistor, basename }) {
               {/* Provide `react-intl` context synchronized with Redux state.  */}
               <I18nProvider>
                 {/* Render routes with provided `Layout`. */}
-                <Routes />
+                <Security {...config.oidc} onAuthRequired={customAuthHandler}>
+                  {/* Render routes with provided `Layout`. */}
+                  <Routes />
+                </Security>
               </I18nProvider>
             </MaterialThemeProvider>
           </BrowserRouter>

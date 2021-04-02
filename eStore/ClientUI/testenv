@@ -1,4 +1,2 @@
 ISSUER=https://dev-63318095.okta.com/oauth2/default
 CLIENT_ID=0oacfqtylAFNYrEex5d6
-BASE_URL=http://localhost:3000/implicit/callback
-Message_URL=http://localhost:8000/api/messages

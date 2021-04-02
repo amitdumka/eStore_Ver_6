@@ -30,7 +30,7 @@ const Login = () => {
       baseUrl: issuer.split('/oauth2')[0],
       clientId,
       redirectUri:window.location.href+redirectUri,
-      logo: '/media/logos/logo-dark_1.png',
+      logo: '/media/logos/logo-dark.png',
       i18n: {
         en: {
           'primaryauth.title': 'Sign in to eStore: Aprajita Retails',
@@ -46,8 +46,7 @@ const Login = () => {
         scopes,
       },
     });
-    {config && console.log(config.redirectUri);}
-    console.log(window.location.href);
+    
     
     widget.renderEl(
       { el: '#sign-in-widget' },
@@ -75,7 +74,7 @@ const Login = () => {
 
   return (
     <div>
-      {config && console.log(config.redirectUri)}
+     
       <div id="sign-in-widget" />
     </div>
   );
