@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/salaryPayments/Actions";
+import * as commonActions from "../../../../_redux/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
@@ -20,11 +21,13 @@ export function EditDialog({ id, show, onHide }) {
 
   // SalaryPayments Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, salaryPaymentForEdit ,employeeList} = useSelector(
+  const { actionsLoading, salaryPaymentForEdit ,employeeList,salaryComponet, payModes} = useSelector(
     (state) => ({
       actionsLoading: state.salaryPayments.actionsLoading,
       salaryPaymentForEdit: state.salaryPayments.salaryPaymentForEdit,
-      employeeList:state.salaryPayments.employeeEntities
+      employeeList:state.salaryPayments.employeeEntities, 
+      salaryComponet: state.commonTypes.salaryComponet,
+      payModes: state.commonTypes.payModes
     }),
     shallowEqual
   );
@@ -33,6 +36,8 @@ export function EditDialog({ id, show, onHide }) {
     // server call for getting SalaryPayment by id
     dispatch(actions.fetchSalaryPayment(id));
     dispatch(actions.fetchEmployees());
+    dispatch(commonActions.fetchEnumValue("salarycomponets"));
+    dispatch(commonActions.fetchEnumValue("payMode"));
   }, [id, dispatch]);
 
   // server request for saving salaryPayment
@@ -63,6 +68,8 @@ export function EditDialog({ id, show, onHide }) {
         salaryPayment={salaryPaymentForEdit || salaryPaymentsUIProps.initSalaryPayment}
         onHide={onHide}
         employeeList={employeeList}
+        salaryComponets={salaryComponet}
+        payModes={payModes}
       />
     </Modal>
   );

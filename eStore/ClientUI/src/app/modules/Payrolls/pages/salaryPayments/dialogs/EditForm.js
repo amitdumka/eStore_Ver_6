@@ -31,7 +31,7 @@ export function EditForm({
   salaryPayment,
   actionsLoading,
   onHide,
-  employeeList,
+  employeeList,payModes,salaryComponets
 }) {
   return (
     <>
@@ -65,8 +65,12 @@ export function EditForm({
                   {/* Salary Component */}
                   <div className="col-lg-4">
                     <Select name="salaryComponet" label="Salary Component">
-                      <option value="0">Net Salary</option>
-                      <option value="1">Last Pcs</option>
+                      <option >Select Payment Head</option>
+                      {salaryComponets && salaryComponets.map((item) => (
+                        <option key={item.value} value={item.value}>
+                          {item.name}
+                        </option>
+                      ))}
                     </Select>
                   </div>
                   
@@ -128,8 +132,12 @@ export function EditForm({
                    {/* PayMode */}
                    <div className="col-lg-4">
                     <Select name="payMode" label="Salary payMode">
-                      <option value="0">Cash</option>
-                      <option value="1">Card</option>
+                     
+                      {payModes && payModes.map((item) => (
+                        <option key={item.value} value={item.value}>
+                          {item.name}
+                        </option>
+                      ))}
                     </Select>
                   </div>
                  </div> 

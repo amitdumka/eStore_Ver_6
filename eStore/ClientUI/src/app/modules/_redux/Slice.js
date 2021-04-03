@@ -230,7 +230,7 @@ export function setEnumValue(state, actionName, entities) {
     case "vPayMode":
       state.vPayMode = entities;
       break;
-    case "salaryComponet":
+    case "salarycomponets":
       state.salaryComponet = entities;
       break;
     case "bankPayMode":

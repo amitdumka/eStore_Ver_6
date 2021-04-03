@@ -6,13 +6,13 @@ const initialStoreOperationsState = {
   lastError: null,
   totalOpens: 0,
   entitiesOpens: null,
-  opensForEdit: undefined,
+  openForEdit: undefined,
   totalCloses: 0,
   entitiesCloses: null,
-  closesForEdit: undefined,
+  closeForEdit: undefined,
   totalHoliday: 0,
   entitiesHolidays: null,
-  holidaysForEdit: undefined,
+  holidayForEdit: undefined,
 };
 export const callTypes = {
   list: "list",
@@ -39,5 +39,49 @@ export const storeOperationsSlice = createSlice({
         state.actionsLoading = true;
       }
     },
-  },
+
+    //storeOpensById
+    storeOpenFetched: (state, action) => {
+      state.actionsLoading = false;
+      state.openForEdit = action.payload.openForEdit;
+      state.error = null;
+    },
+    // findAttendances
+    storeOpensFetched: (state, action) => {
+      const { totalCount, entities } = action.payload;
+      state.listLoading = false;
+      state.error = null;
+      state.entitiesOpens = entities;
+      state.totalOpens = totalCount;
+    },
+    //storeOpensById
+    storeCloseFetched: (state, action) => {
+      state.actionsLoading = false;
+      state.closeForEdit = action.payload.closeForEdit;
+      state.error = null;
+    },
+    // findAttendances
+    storeClosesFetched: (state, action) => {
+      const { totalCount, entities } = action.payload;
+      state.listLoading = false;
+      state.error = null;
+      state.entitiesCloses = entities;
+      state.totalCloses = totalCount;
+    },
+    //storeOpensById
+    storeHolidayFetched: (state, action) => {
+        state.actionsLoading = false;
+        state.holidayForEdit = action.payload.holidayForEdit;
+        state.error = null;
+      },
+      // findAttendances
+      storeHolidaysFetched: (state, action) => {
+        const { totalCount, entities } = action.payload;
+        state.listLoading = false;
+        state.error = null;
+        state.entitiesHolidays = entities;
+        state.totalHolidays = totalCount;
+      },
+
+  }, //End of Reduers
 });
