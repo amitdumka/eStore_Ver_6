@@ -29,7 +29,7 @@ const Login = () => {
        */
       baseUrl: issuer.split('/oauth2')[0],
       clientId,
-      redirectUri:window.location.href+redirectUri,
+      redirectUri:window.location.origin+"/"+redirectUri,
       logo: '/media/logos/logo-dark.png',
       i18n: {
         en: {
