@@ -139,7 +139,7 @@ export function CashBookTablePageWidget({ className, cashBook, totalCount }) {
             </TableHead>
             <TableBody>
               {cashBook &&
-                Array.from(cashBook)
+                Array.from(cashBook).reverse()
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => (
                     <TableRow>
