@@ -9,6 +9,7 @@ import paginationFactory, {
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/connections/Actions";
+import * as cActions from "../../../../_redux/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -42,12 +43,15 @@ export function ConnectionsTable() {
   }, [connectionsUIContext]);
 
   // Getting curret state of connections list from store (Redux)
-  const { currentState } = useSelector(
-    (state) => ({ currentState: state.connections }),
+  const { currentState,commonState } = useSelector(
+    (state) => ({ currentState: state.connections, 
+      commonState: state.commonTypes, 
+      connectionType:state.commonTypes.connectionType,
+      storeList:state.commonTypes.storeList}),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
-
+ const {storeList, connectionType} =commonState;
   // Connections Redux state
   const dispatch = useDispatch();
   useEffect(() => {
@@ -55,6 +59,8 @@ export function ConnectionsTable() {
     connectionsUIProps.setIds([]);
     // server call by queryParams
     dispatch(actions.fetchConnections(connectionsUIProps.queryParams));
+    dispatch(cActions.fetchStores());
+    dispatch(cActions.fetchEnumValue("connectionType"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [connectionsUIProps.queryParams, dispatch]);
   // Table columns
@@ -128,12 +134,19 @@ export function ConnectionsTable() {
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
+      // formatter:(value,row)=>(
+      // <span> { connectionType ? connectionType[value].name : value} </span>
+      // ),
+      formatter:columnFormatters.EnumColumnFormatter, 
+      formatExtraData:{dataList:connectionType, n:-1} 
     },{
       dataField: "storeId",
       text: "Store",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
+      formatter:columnFormatters.StoreNameColumnFormatter, 
+      formatExtraData: storeList,
     },
     {
       dataField: "action",

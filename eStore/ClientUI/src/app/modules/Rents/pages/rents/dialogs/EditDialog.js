@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/rents/Actions";
+import * as commonActions from "../../../../_redux/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
@@ -19,13 +20,14 @@ export function EditDialog({ id, show, onHide }) {
 
   // Rents Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, rentForEdit ,payModes,rentTypes, rentedLocations} = useSelector(
+  const { actionsLoading, rentForEdit ,payModes,rentTypes, rentedLocations, storeList} = useSelector(
     (state) => ({
       actionsLoading: state.rents.actionsLoading,
       rentForEdit: state.rents.rentForEdit,
       payModes:state.rents.payModes,
       rentTypes:state.rents.rentTypes,
-      rentedLocations:state.rents.rentedLocations
+      rentedLocations:state.rents.rentedLocations, 
+      storeList: state.commonTypes.storeList
     }),
     shallowEqual
   );
@@ -36,13 +38,16 @@ export function EditDialog({ id, show, onHide }) {
     dispatch(actions.fetchLocations());
     dispatch(actions.fetchRentTypes());
     dispatch(actions.fetchPayModes());
+    dispatch(commonActions.fetchStores());
 
   }, [id, dispatch]);
 
   // server request for saving rent
   const saveRent = (rent) => {
-    
-    rent.accountType=parseInt(rent.accountType);
+    rent.storeId=parseInt(rent.storeId);
+    rent.rentedLocationId=parseInt(rent.rentedLocationId);
+    rent.rentType=parseInt(rent.rentType);
+    rent.mode=parseInt(rent.mode);
 
     if (!id) {
       // server request for creating rent
@@ -69,6 +74,7 @@ export function EditDialog({ id, show, onHide }) {
         payModes={payModes}
         rentTypes={rentTypes}
         locationList={rentedLocations}
+        storeList={storeList}
       />
     </Modal>
   );

@@ -23,7 +23,7 @@ const RentEditSchema = Yup.object().shape({
   paymentDetails: Yup.string().required("Payment Details is required")
 });
 
-export function EditForm({ saveRent, rent, actionsLoading, onHide, locationList, rentTypes, payModes }) {
+export function EditForm({ saveRent, rent, actionsLoading, onHide, locationList, rentTypes, payModes,storeList }) {
   return (
     <>
       <Formik
@@ -47,8 +47,11 @@ export function EditForm({ saveRent, rent, actionsLoading, onHide, locationList,
                   {/* Store */}
                   <div className="col-lg-4">
                     <Select name="storeId" label="Store">
-                      <option value="1">Dumka</option>
-                      <option value="2">Jamshedpur</option>
+                    {storeList && storeList.map((item) => (
+                        <option key={item.storeId} value={item.storeId}>
+                          {item.storeName}
+                        </option>
+                      ))}
                     </Select>
                   </div>
 
@@ -56,7 +59,7 @@ export function EditForm({ saveRent, rent, actionsLoading, onHide, locationList,
                   <div className="col-lg-4">
                     <Select name="rentedLocationId" placeholder="Location" label="Location">
                       <option value="">Select Location</option>
-                      {locationList.map((item) => (
+                      {locationList && locationList.map((item) => (
                         <option key={item.rentedLocationId} value={item.rentedLocationId}>
                           {item.placeName}
                         </option>
@@ -67,7 +70,7 @@ export function EditForm({ saveRent, rent, actionsLoading, onHide, locationList,
                   <div className="col-lg-4">
                     <Select name="rentType" placeholder="Rent Type" label="Rent Type">
                       <option value="">Select Type</option>
-                      {rentTypes.map((item) => (
+                      {rentTypes && rentTypes.map((item) => (
                         <option key={item.value} value={item.value}>
                           {item.name}
                         </option>
@@ -112,7 +115,7 @@ export function EditForm({ saveRent, rent, actionsLoading, onHide, locationList,
                   <div className="col-lg-4">
                     <Select name="mode" placeholder="Mode" label="Mode">
                       <option value="">Select Mode</option>
-                      {payModes.map((item) => (
+                      {payModes && payModes.map((item) => (
                         <option key={item.value} value={item.value}>
                           {item.name}
                         </option>

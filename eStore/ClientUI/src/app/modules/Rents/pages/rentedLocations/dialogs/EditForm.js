@@ -32,7 +32,7 @@ export function EditForm({
   rentedLocation,
   rentTypes,
   actionsLoading,
-  onHide,
+  onHide,storeList,
 }) {
   return (
     <>
@@ -57,8 +57,11 @@ export function EditForm({
                     {/* Store */}
                     <div className="col-lg-4">
                     <Select name="storeId" label="Store">
-                      <option value="1">Dumka</option>
-                      <option value="2">Jamshedpur</option>
+                    {storeList && storeList.map((item) => (
+                        <option key={item.storeId} value={item.storeId}>
+                          {item.storeName}
+                        </option>
+                      ))}
                     </Select>
                   </div>
                   {/* Staff Name */}
@@ -131,7 +134,7 @@ export function EditForm({
                   <div className="col-lg-4">
                     <Select name="rentType" placeholder="Rent Type" label="Rent Type">
                       <option value="">Select Type</option>
-                      {rentTypes.map((item) => (
+                      { rentTypes && rentTypes.map((item) => (
                         <option key={item.value} value={item.value}>
                           {item.name}
                         </option>
