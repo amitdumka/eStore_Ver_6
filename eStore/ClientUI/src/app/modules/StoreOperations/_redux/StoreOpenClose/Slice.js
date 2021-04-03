@@ -46,7 +46,7 @@ export const storeOperationsSlice = createSlice({
       state.openForEdit = action.payload.openForEdit;
       state.error = null;
     },
-    // findAttendances
+    // findstoreOpenss
     storeOpensFetched: (state, action) => {
       const { totalCount, entities } = action.payload;
       state.listLoading = false;
@@ -60,7 +60,7 @@ export const storeOperationsSlice = createSlice({
       state.closeForEdit = action.payload.closeForEdit;
       state.error = null;
     },
-    // findAttendances
+    // findstoreOpenss
     storeClosesFetched: (state, action) => {
       const { totalCount, entities } = action.payload;
       state.listLoading = false;
@@ -70,18 +70,120 @@ export const storeOperationsSlice = createSlice({
     },
     //storeOpensById
     storeHolidayFetched: (state, action) => {
-        state.actionsLoading = false;
-        state.holidayForEdit = action.payload.holidayForEdit;
-        state.error = null;
-      },
-      // findAttendances
-      storeHolidaysFetched: (state, action) => {
-        const { totalCount, entities } = action.payload;
-        state.listLoading = false;
-        state.error = null;
-        state.entitiesHolidays = entities;
-        state.totalHolidays = totalCount;
-      },
+      state.actionsLoading = false;
+      state.holidayForEdit = action.payload.holidayForEdit;
+      state.error = null;
+    },
+    // findstoreHolidayss
+    storeHolidaysFetched: (state, action) => {
+      const { totalCount, entities } = action.payload;
+      state.listLoading = false;
+      state.error = null;
+      state.entitiesHolidays = entities;
+      state.totalHolidays = totalCount;
+    },
 
+    // createstoreOpens
+    storeOpenCreated: (state, action) => {
+      state.ewactionsLoading = false;
+      state.error = null;
+      state.entities.push(action.payload.storeOpen);
+    },
+    // updatestoreOpens
+    storeOpenUpdated: (state, action) => {
+      state.error = null;
+      state.actionsLoading = false;
+      state.entities = state.entities.map((entity) => {
+        if (entity.storeOpenId === action.payload.storeOpen.storeOpenId) {
+          return action.payload.storeOpen;
+        }
+        return entity;
+      });
+    },
+    // deletestoreOpens
+    storeOpenDeleted: (state, action) => {
+      state.error = null;
+      state.actionsLoading = false;
+      state.entities = state.entities.filter(
+        (el) => el.storeOpenId !== action.payload.storeOpenId
+      );
+    },
+    // deletestoreOpenss
+    storeOpensDeleted: (state, action) => {
+      state.error = null;
+      state.actionsLoading = false;
+      state.entities = state.entities.filter(
+        (el) => !action.payload.ids.includes(el.storeOpenId)
+      );
+    },
+    // createstoreOpens
+    storeCloseCreated: (state, action) => {
+      state.ewactionsLoading = false;
+      state.error = null;
+      state.entities.push(action.payload.storeClose);
+    },
+    // updatestoreOpens
+    storeCloseUpdated: (state, action) => {
+      state.error = null;
+      state.actionsLoading = false;
+      state.entities = state.entities.map((entity) => {
+        if (entity.storeCloseId === action.payload.storeClose.storeCloseId) {
+          return action.payload.storeClose;
+        }
+        return entity;
+      });
+    },
+    // deletestoreOpens
+    storeCloseDeleted: (state, action) => {
+      state.error = null;
+      state.actionsLoading = false;
+      state.entities = state.entities.filter(
+        (el) => el.storeCloseId !== action.payload.storeCloseId
+      );
+    },
+    // deletestoreOpens
+    storeClosesDeleted: (state, action) => {
+      state.error = null;
+      state.actionsLoading = false;
+      state.entities = state.entities.filter(
+        (el) => !action.payload.ids.includes(el.storeCloseId)
+      );
+    },
+
+    // createstoreOpens
+    storeHolidayCreated: (state, action) => {
+      state.ewactionsLoading = false;
+      state.error = null;
+      state.entities.push(action.payload.storeHoliday);
+    },
+    // updatestoreOpens
+    sstoreHolidayUpdated: (state, action) => {
+      state.error = null;
+      state.actionsLoading = false;
+      state.entities = state.entities.map((entity) => {
+        if (
+          entity.storeHolidayId === action.payload.storeHoliday.storeHolidayId
+        ) {
+          return action.payload.storeHoliday;
+        }
+        return entity;
+      });
+    },
+    // deletestoreOpens
+    storeHolidayDeleted: (state, action) => {
+      state.error = null;
+      state.actionsLoading = false;
+      state.entities = state.entities.filter(
+        (el) => el.storeHolidayId !== action.payload.storeHolidayID
+      );
+    },
+    // deletestoreOpens
+    storeHolidaysDeleted: (state, action) => {
+      state.error = null;
+      state.actionsLoading = false;
+      state.entities = state.entities.filter(
+        (el) => !action.payload.ids.includes(el.storeHolidayId)
+      );
+    },
   }, //End of Reduers
 });
