@@ -1,7 +1,7 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React from "react";
 
-export function EmpInfoWidget({ className, empInfo }) {
+export function EmpInfoWidget({ className, empInfo,topSalesman }) {
   return (
     <>
       <div className={`card card-custom ${className}`}>
@@ -24,6 +24,10 @@ export function EmpInfoWidget({ className, empInfo }) {
               </Dropdown.Menu>
             </Dropdown>
           </div>*/}
+          <div className="card-toolbar">
+            <div className="text-danger font-weight-bold text-hover-primary font-size-lg mb-1">Top Salesman [Y/M/T]: 
+            <span className="text-success"> {topSalesman[0]} / {topSalesman[1]} / {topSalesman[2]}</span> </div>
+          </div>
         </div> 
 
         {/* Body */}

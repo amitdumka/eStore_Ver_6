@@ -58,6 +58,7 @@ export function EStoreDashboard({ totalCashBook, cashBook, masterReports }) {
             <EmpInfoWidget
               className="card-stretch gutter-b"
               empInfo={masterReports.empInfoList}
+              topSalesman={masterReports.leadingSalesman}
             />
           )}
         </div>
