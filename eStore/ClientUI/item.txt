@@ -1,3 +1,17 @@
+Employee Of Day , Month Year. 
+
+
+var data=db.DailySales.where(c=>c.SaleDate==DateTime.Today).select(c=>new {c.Amount, c.SalesmenId).orderby(c=>c.SalesmenId);
+data.GroupBy(c.salesmenId, c.Amount).sum(c.Amount);
+
+
+
+
+
+
+
+
+
 StoreOpens
 {
 storeId, OpenningTime, remarks
