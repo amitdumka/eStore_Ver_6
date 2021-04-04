@@ -19,7 +19,7 @@ import {
 // Validation schema
 const AttendanceEditSchema = Yup.object().shape({
   attDate: Yup.date().required("Date is required"),
-  status: Yup.number().moreThan(0).required("Status is required"),
+  status: Yup.number().required("Status is required"),
   storeId: Yup.number().moreThan(0).required("Store is required"),
   entryTime:Yup.string().required("Entry time is required"), 
   employeeId: Yup.number().moreThan(0).required("Employee is required"),
@@ -30,6 +30,8 @@ export function EditForm({
   attendance,
   actionsLoading,
   onHide,employeeList,
+  attendanceUnits,
+  storeList,
 }) {
 
   
@@ -56,8 +58,11 @@ export function EditForm({
                   {/* Store */}
                   <div className="col-lg-4">
                     <Select name="storeId" label="Store">
-                      <option value="1">Aprajita Retails</option>
-                      <option value="2">Aprajita Retails, Jamshedpur</option>
+                      {storeList && storeList.map((item) => (
+                        <option key={item.storeId} value={item.storeId}>
+                          {item.storeName}
+                        </option>
+                      ))}
                     </Select>
                   </div>
                   {/* Email */}
@@ -68,7 +73,7 @@ export function EditForm({
                       label="Employee"
                     >
                       <option value="">Select Employee</option>
-                      {employeeList.map((item) => (
+                      {employeeList && employeeList.map((item) => (
                         <option key={item.employeeId} value={item.employeeId}>
                           {item.staffName}
                         </option>
@@ -81,11 +86,11 @@ export function EditForm({
                       placeholder="Status"
                       label="Status"
                     >
-                      <option value="0">Select Status</option>
-                      <option value="0">Present</option>
-                      <option value="1">Absent</option>
-                      <option value="2">Sunday</option>
-                      <option value="3">SundayHoliday</option>
+                      {attendanceUnits&&attendanceUnits.map((item) => (
+                        <option key={item.value} value={item.value}>
+                          {item.name}
+                        </option>
+                      ))}
                     </Select>
                   </div>
                 </div>

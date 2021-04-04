@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/attendances/Actions";
+import * as cActions from "../../../../_redux/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
@@ -19,11 +20,13 @@ export function EditDialog({ id, show, onHide }) {
 
   // Attendances Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, attendanceForEdit ,employeeList} = useSelector(
+  const { actionsLoading, attendanceForEdit ,employeeList, attendanceUnits, storeList} = useSelector(
     (state) => ({
       actionsLoading: state.attendances.actionsLoading,
       attendanceForEdit: state.attendances.attendanceForEdit,
-      employeeList:state.attendances.employeeEntities
+      employeeList:state.attendances.employeeEntities,
+      attendanceUnits: state.commonTypes.attendanceUnits, 
+      storeList: state.commonTypes.storeList
     }),
     shallowEqual
   );
@@ -32,11 +35,17 @@ export function EditDialog({ id, show, onHide }) {
     // server call for getting Attendance by id
     dispatch(actions.fetchAttendance(id));
     dispatch(actions.fetchEmployees());
+    dispatch(cActions.fetchEnumValue("attendanceUnit"));
+    dispatch(cActions.fetchStores());
+    
+
   }, [id, dispatch]);
 
   // server request for saving attendance
   const saveAttendance = (attendance) => {
     attendance.status=parseInt(attendance.status);
+    attendance.storeId= parseInt(attendance.storeId);
+    attendance.employeeId= parseInt(attendance.employeeId);
     if (!id) {
       // server request for creating attendance
       dispatch(actions.createAttendance(attendance)).then(() => onHide());
@@ -60,6 +69,8 @@ export function EditDialog({ id, show, onHide }) {
         attendance={attendanceForEdit || attendancesUIProps.initAttendance}
         onHide={onHide}
         employeeList={employeeList}
+        attendanceUnits={attendanceUnits}
+        storeList={storeList}
       />
     </Modal>
   );

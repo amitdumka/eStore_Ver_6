@@ -22,6 +22,7 @@ import * as uiHelpers from "../UIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
+// import * as colEnumFormatters from "../../../../../../_estore/formaters/";
 
 //Connection
 //connection
