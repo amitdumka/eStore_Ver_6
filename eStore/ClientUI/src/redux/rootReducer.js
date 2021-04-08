@@ -35,6 +35,7 @@ import {commonTypesSlice} from "../app/modules/_redux/Slice";
 import {connectionsSlice} from "../app/modules/Electricity/_redux/connections/Slice";
 import {billsSlice} from "../app/modules/Electricity/_redux/bills/Slice";
 import {billPaymentsSlice} from "../app/modules/Electricity/_redux/billPayments/Slice";
+import {storeOperationsSlice} from "../app/modules/StoreOperations/_redux/StoreOperations/Slice";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -67,6 +68,7 @@ export const rootReducer = combineReducers({
   connections: connectionsSlice.reducer,
   bills: billsSlice.reducer,
   billPayments: billPaymentsSlice.reducer,
+  storeOperations: storeOperationsSlice.reducer,
 
 });
 

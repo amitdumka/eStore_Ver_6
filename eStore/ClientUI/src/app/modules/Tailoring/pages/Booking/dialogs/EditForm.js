@@ -92,7 +92,7 @@ export function EditForm({
   Kurta [Price/Qty]  ${booking.kurtaPrice}/ ${booking.kurtaQty}
   Bundi  [Price/Qty] ${booking.bundiPrice} / ${booking.bundiQty}
   Others [Price/Qty]  ${booking.otherprice} /${booking.others}`;
-  updateTotals();  
+  updateTotals(str);  
   // setItemData(str);
     
   };

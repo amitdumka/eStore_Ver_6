@@ -30,28 +30,28 @@ export async function getStoreHolidays(id) {
   return axios.get(APIBASE_URL + "storeHolidays/forStore/" + id);
 }
 
-export async function getStoreOpensById(id) {
+export async function getStoreOpenById(id) {
   return axios.get(APIBASE_URL + "storeOpens/" + id);
 }
 
-export async function getStoreClosesById(id) {
+export async function getStoreCloseById(id) {
   return axios.get(APIBASE_URL + "storeCloses/" + id);
 }
-export async function getStoreHolidaysById(id) {
+export async function getStoreHolidayById(id) {
   return axios.get(APIBASE_URL + "storeHolidays/" + id);
 }
 
-export async function createStoreOpens(storeOpens) {
+export async function createStoreOpen(storeOpens) {
   return await axios.post(APIBASE_URL + "storeOpens", storeOpens, {
     headers: { "Content-Type": "application/json; charset=utf-8" },
   });
 }
-export async function createStoreCloses(storeClose) {
+export async function createStoreClose(storeClose) {
   return await axios.post(APIBASE_URL + "storeCloses", storeClose, {
     headers: { "Content-Type": "application/json; charset=utf-8" },
   });
 }
-export async function createStoreHolidays(storeHoliday) {
+export async function createStoreHoliday(storeHoliday) {
   return await axios.post(APIBASE_URL + "storeHolidays", storeHoliday, {
     headers: { "Content-Type": "application/json; charset=utf-8" },
   });
@@ -60,7 +60,7 @@ export async function createStoreHolidays(storeHoliday) {
 //Update
 
 // UPDATE => PUT: update the attendance on the server
-export async function updateStoreOpens(obj) {
+export async function updateStoreOpen(obj) {
   return await axios.put(
     `${APIBASE_URL}storeOpens/${obj.storeOpenId}`,
     JSON.stringify(obj),
@@ -71,7 +71,7 @@ export async function updateStoreOpens(obj) {
 }
 
 // UPDATE => PUT: update the attendance on the server
-export async function updateStoreCloses(obj) {
+export async function updateStoreClose(obj) {
   return await axios.put(
     `${APIBASE_URL}storeCloses/${obj.storeCloseId}`,
     JSON.stringify(obj),
@@ -81,7 +81,7 @@ export async function updateStoreCloses(obj) {
   );
 }
 // UPDATE => PUT: update the attendance on the server
-export async function updateStoreHolidays(obj) {
+export async function updateStoreHoliday(obj) {
   return await axios.put(
     `${APIBASE_URL}storeHolidays/${obj.storeHolidayId}`,
     JSON.stringify(obj),
@@ -103,7 +103,7 @@ export async function deleteStoreOpens(ids) {
   return await axios.post(`${APIBASE_URL}/storeOpens/deleteSelected`, { ids });
 }
 // DELETE => delete the attendance from the server
-export async function deleteStoreClsoe(id) {
+export async function deleteStoreClose(id) {
   return await axios.delete(`${APIBASE_URL}storeCloses/${id}`);
 }
 

@@ -4,7 +4,7 @@ import { LayoutSplashScreen, ContentRoute } from "../_metronic/layout";
 import { BuilderPage } from "./pages/BuilderPage";
 import { MyPage } from "./pages/MyPage";
 import { DashboardPage } from "./pages/DashboardPage";
-import { Security, SecureRoute, LoginCallback } from "@okta/okta-react";
+import {  SecureRoute, LoginCallback } from "@okta/okta-react";
 import CustomLoginComponent from "./modules/okta/Login";
 import Messages from "./modules/okta/Messages";
 const StoreMainPage = lazy(() =>
@@ -25,6 +25,7 @@ const RentMainPage = lazy(() => import("./modules/Rents/pages/RentMainPage"));
 const ElectricityPage = lazy(() =>
   import("./modules/Electricity/pages/ElectricityPage")
 );
+ const StoreOperationsMainPage= lazy(() =>import("./modules/StoreOperations/pages/StoreOperationsMainPage"));
 
 export default function BasePage() {
   // useEffect(() => {
@@ -51,9 +52,10 @@ export default function BasePage() {
         <Route path="/due" component={DuesPage} />
         <Route path="/tailoring" component={TailoringPage} />
         <Route path="/renting" component={RentMainPage} />
-        <Route path="/electricity" component={ElectricityPage} />{" "}
+        <Route path="/electricity" component={ElectricityPage} />
         <Route path="/implicit/callback" component={LoginCallback} />
-        <Route path="/login" component={CustomLoginComponent} />{" "}
+        <Route path="/login" component={CustomLoginComponent} />
+        <Route path="/stores" component={StoreOperationsMainPage} />
         <SecureRoute path="/messages" component={Messages} />
         <Redirect to="error/error-v1" />
       </Switch>

@@ -23,7 +23,7 @@ export const fetchStoreOpens = (queryParams) => (dispatch) => {
 export const fetchStoreCloses = (queryParams) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .getAllStoreClose(queryParams)
+    .getAllStoreCloses(queryParams)
     .then((response) => {
       const entities = response.data;
       const totalCount = response.data.length;

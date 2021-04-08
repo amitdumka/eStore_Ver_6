@@ -58,12 +58,12 @@ const Messages = () => {
           console.error(err);
         });
     }
-  }, [authState]);
+  }, [authState, oktaAuth]);
 
-  const possibleErrors = [
-    'You\'ve downloaded one of our resource server examples, and it\'s running on port 8000.',
-    'Your resource server example is using the same Okta authorization server (issuer) that you have configured this React application to use.',
-  ];
+  // const possibleErrors = [
+  //   'You\'ve downloaded one of our resource server examples, and it\'s running on port 8000.',
+  //   'Your resource server example is using the same Okta authorization server (issuer) that you have configured this React application to use.',
+  // ];
 
   return (
     <div>

@@ -5,9 +5,10 @@ import {
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../_metronic/_partials/controls";
-import { RentsFilter } from "./filter/Filter";
-import { RentsTable } from "./table/Table";
-import { RentsGrouping } from "./grouping/Grouping";
+import { DataListView } from "./DataListView";
+// import { RentsFilter } from "./filter/Filter";
+// import { RentsTable } from "./table/Table";
+// import { RentsGrouping } from "./grouping/Grouping";
 import { useUIContext } from "./UIContext";
 
 //Rent
@@ -21,21 +22,21 @@ export function DataCard() {
       newButtonClick: uiContext.newButtonClick,
     };
   }, [uiContext]);
-  const title = "Opens";
+  const title = "Operation";
   return (
     <Card>
-      <CardHeader title="Store Operation Time list">
+      <CardHeader title="Store Operating Time">
         <CardHeaderToolbar>
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary mr-2"
             onClick={uiProps.newButtonClick}
           >
-            New {title}
+            Add {title}
           </button>
           <button
             type="button"
-            className="btn btn-success"
+            className="btn btn-success ml-2"
             onClick={uiProps.newButtonClick}
           >
             Add Holiday
@@ -43,9 +44,10 @@ export function DataCard() {
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        <DataFilter />
-        {uiProps.ids.length > 0 && <DataGrouping />}
-        <DataTable />
+        {/* <DataFilter />
+        {uiProps.ids.length > 0 && <DataGrouping />} */}
+        {/* <DataTable /> */}
+        <DataListView/>
       </CardBody>
     </Card>
   );

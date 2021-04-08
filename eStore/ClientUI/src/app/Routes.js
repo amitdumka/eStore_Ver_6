@@ -16,7 +16,7 @@ import { useState, useEffect } from "react";
 
 import { useOktaAuth } from "@okta/okta-react";
 import CustomLoginComponent from "./modules/okta/Login";
-import { Security, SecureRoute, LoginCallback } from "@okta/okta-react";
+import {  LoginCallback } from "@okta/okta-react";
 
 // import Messages from "./modules/okta/Messages";
 export function Routes() {

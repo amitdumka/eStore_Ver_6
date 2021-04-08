@@ -4,7 +4,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rents/Actions";
+import * as actions from "../../_redux/StoreOperations/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -12,11 +12,11 @@ import {
   PleaseWaitMessage,
   sortCaret,
   headerSortingClasses,
-} from "../../../../../../_metronic/_helpers";
-import * as uiHelpers from "../UIHelpers";
+} from "../../../../../_metronic/_helpers";
+import * as uiHelpers from "./UIHelpers";
 import * as columnFormatters from "./column-formatters";
-import { Pagination } from "../../../../../../_metronic/_partials/controls";
-import { useUIContext } from "../UIContext";
+import { Pagination } from "../../../../../_metronic/_partials/controls";
+import { useUIContext } from "./UIContext";
 import { Tab } from "@material-ui/core";
 
 export function DataListView() {
@@ -40,7 +40,7 @@ export function DataListView() {
   const {
     totalOpens,
     totalCloses,
-    totdalHoliday,
+    totalHolidays,
     entitiesOpens,
     entitiesCloses,
     entitiesHolidays,
@@ -53,9 +53,9 @@ export function DataListView() {
     // clear selections list
     uiProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchOpens(uiProps.queryParams));
-    dispatch(actions.fetchCloses(uiProps.queryParams));
-    dispatch(actions.fetchHolidays(uiProps.queryParams));
+    dispatch(actions.fetchStoreOpens(uiProps.queryParams));
+    dispatch(actions.fetchStoreCloses(uiProps.queryParams));
+    dispatch(actions.fetchStoreHolidays(uiProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uiProps.queryParams, dispatch]);
 
@@ -160,8 +160,15 @@ export function DataListView() {
       headerSortingClasses,
     },
     {
-      dataField: "closingDate",
+      dataField: "onDate",
       text: "Time",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "reason",
+      text: "Reason",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -169,6 +176,13 @@ export function DataListView() {
     {
       dataField: "remarks",
       text: "Remarks",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "approvedBy",
+      text: "Approved By",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -198,21 +212,24 @@ export function DataListView() {
   ];
   return (
       <>
-      <Tab defaultActiveKey="daily" id="storeOperationsTab">
+      <Tab  id="storeOperationsTab">
           <Tab eventKey="daily" title="Daily Ops">
-              <DisplayTable  listLoading={listLoading} uiHelpers={uiHelpers} uiProps={uiProps}
+            <div>First Page</div>
+              {/* <DisplayTable  listLoading={listLoading} uiHelpers={uiHelpers} uiProps={uiProps}
               idFieldName="storeOpenId" totalCount={totalOpens} entities={entitiesOpens} columns={columnOpens}
-              />
+              /> */}
           </Tab>
           <Tab eventKey="close" title="Closes">
-          <DisplayTable listLoading={listLoading} uiHelpers={uiHelpers} uiProps={uiProps}
+          {/* <DisplayTable listLoading={listLoading} uiHelpers={uiHelpers} uiProps={uiProps}
               idFieldName="storeCloseId" totalCount={totalCloses} entities={entitiesCloses} columns={columnCloses}
-              />
+              /> */}
+              <div>Second Page</div>
           </Tab>
           <Tab eventKey="holiday" title="Holiday">
-          <DisplayTable  listLoading={listLoading} uiHelpers={uiHelpers} uiProps={uiProps}
-              idFieldName="storeHolidayId" totalCount={totalHolidays} entities={entitiesHolidays} columns={columnCloses}
-              />
+          {/* <DisplayTable  listLoading={listLoading} uiHelpers={uiHelpers} uiProps={uiProps}
+              idFieldName="storeHolidayId" totalCount={totalHolidays} entities={entitiesHolidays} columns={columnHolidays}
+              /> */}
+              <div>Third Page</div>
           </Tab>
 
       </Tab>

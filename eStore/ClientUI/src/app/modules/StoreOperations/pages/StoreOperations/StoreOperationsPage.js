@@ -10,7 +10,7 @@ import { Route } from "react-router-dom";
 // import { FetchDialog } from "./dialogs/FetchDialog";
 // import { UpdateStateDialog } from "./dialogs/UpdateStateDialog";
 import { UIProvider } from "./UIContext";
-// import { RentsCard } from "./RentsCard";
+ import { DataCard } from "./DataCard";
 
 //Rent
 //rent
@@ -39,8 +39,8 @@ export function StoreOperationsPage({ history }) {
 
   return (
     <UIProvider UIEvents={rentsUIEvents}>
-      <DataLoadingDialog />
-      <Route path="/storeOperations/open/new">
+      {/* <DataLoadingDialog /> */}
+      {/* <Route path="/storeOperations/open/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
@@ -101,7 +101,7 @@ export function StoreOperationsPage({ history }) {
             }}
           />
         )}
-      </Route>
+      </Route> */}
       <DataCard />
     </UIProvider>
   );

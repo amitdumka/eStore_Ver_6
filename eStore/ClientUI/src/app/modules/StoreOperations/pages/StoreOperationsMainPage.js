@@ -11,11 +11,11 @@ export default function StoreOperationsMainPage() {
           /* Redirect from payroll root URL to /employees */
           <Redirect
             exact={true}
-            from="/storeOperations"
-            to="/storeOperations/opens"
+            from="/stores"
+            to="/stores/operations"
           />
         }
-        <ContentRoute path="/storeOperations/open" component={StoreOperationsPage} />
+        <ContentRoute path="/stores/operations" component={StoreOperationsPage} />
         
       </Switch>
     </Suspense>

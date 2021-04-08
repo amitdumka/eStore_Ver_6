@@ -19,17 +19,17 @@ export default function StoreSubMenuList({ layoutProps }) {
       {/*begin::1 Level*/}
       <li
         className={`menu-item menu-item-submenu ${getMenuItemActive(
-          "/react-bootstrap",
+          "/stores",
           true
         )}`}
         aria-haspopup="true"
         data-menu-toggle="hover"
       >
-        <NavLink className="menu-link menu-toggle" to="/react-bootstrap">
+        <NavLink className="menu-link menu-toggle" to="/stores">
           <span className="svg-icon menu-icon">
             <SVG src={toAbsoluteUrl("/media/svg/icons/Shopping/Box2.svg")} />
           </span>
-          <span className="menu-text">Store Opertaions</span>
+          <span className="menu-text">Store Operations</span>
           <i className="menu-arrow" />
         </NavLink>
         <div className="menu-submenu ">
@@ -44,15 +44,15 @@ export default function StoreSubMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/react-bootstrap/alert"
+                  "/stores/operations"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/react-bootstrap/alert">
+                <NavLink className="menu-link" to="/stores/operations">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
-                  <span className="menu-text">Openning</span>
+                  <span className="menu-text">Daily Operations</span>
                 </NavLink>
               </li>
               {/*end::2 Level*/}
@@ -60,11 +60,11 @@ export default function StoreSubMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/react-bootstrap/badge"
+                  "/stores/badge"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/react-bootstrap/badge">
+                <NavLink className="menu-link" to="/stores/badge">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -76,11 +76,11 @@ export default function StoreSubMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/react-bootstrap/breadcrumb"
+                  "/stores/breadcrumb"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/react-bootstrap/breadcrumb">
+                <NavLink className="menu-link" to="/stores/breadcrumb">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -92,11 +92,11 @@ export default function StoreSubMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/react-bootstrap/buttons"
+                  "/stores/buttons"
                 )}`}
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/react-bootstrap/buttons">
+                <NavLink className="menu-link" to="/stores/buttons">
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
                   </i>
@@ -108,13 +108,13 @@ export default function StoreSubMenuList({ layoutProps }) {
               {/*begin::2 Level*/}
               <li
                 className={`menu-item ${getMenuItemActive(
-                  "/react-bootstrap/button-group"
+                  "/stores/button-group"
                 )}`}
                 aria-haspopup="true"
               >
                 <NavLink
                   className="menu-link"
-                  to="/react-bootstrap/button-group"
+                  to="/stores/button-group"
                 >
                   <i className="menu-bullet menu-bullet-dot">
                     <span />
