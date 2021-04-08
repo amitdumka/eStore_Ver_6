@@ -17,7 +17,8 @@ import * as uiHelpers from "./UIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../_metronic/_partials/controls";
 import { useUIContext } from "./UIContext";
-import { Tab } from "@material-ui/core";
+//import { Tab } from "@material-ui/core";
+import { Tab, Tabs } from "react-bootstrap";
 
 export function DataListView() {
   const uiContext = useUIContext();
@@ -59,7 +60,6 @@ export function DataListView() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uiProps.queryParams, dispatch]);
 
-  
   const columnOpens = [
     {
       dataField: "storeOpenId",
@@ -211,80 +211,100 @@ export function DataListView() {
     },
   ];
   return (
-      <>
-      <Tab  id="storeOperationsTab">
-          <Tab eventKey="daily" title="Daily Ops">
-            <div>First Page</div>
-              {/* <DisplayTable  listLoading={listLoading} uiHelpers={uiHelpers} uiProps={uiProps}
-              idFieldName="storeOpenId" totalCount={totalOpens} entities={entitiesOpens} columns={columnOpens}
-              /> */}
-          </Tab>
-          <Tab eventKey="close" title="Closes">
+    <>
+      <Tabs defaultActiveKey="daily" id="storeOperationsTab">
+        <Tab eventKey="daily" title="Daily Ops" label="Daily">
+          <DisplayTable
+            listLoading={listLoading}
+            uiHelper={uiHelpers}
+            uiProps={uiProps}
+            idFieldName="storeOpenId"
+            totalCount={totalCount}
+            entities={entitiesOpens}
+            columns={columnOpens}
+          />
+        </Tab>
+        <Tab eventKey="close" title="Closes" label="Closes">
           {/* <DisplayTable listLoading={listLoading} uiHelpers={uiHelpers} uiProps={uiProps}
               idFieldName="storeCloseId" totalCount={totalCloses} entities={entitiesCloses} columns={columnCloses}
               /> */}
-              <div>Second Page</div>
-          </Tab>
-          <Tab eventKey="holiday" title="Holiday">
+          <div>Second Page</div>
+        </Tab>
+        <Tab eventKey="holiday" title="Holiday" label="Holiday">
           {/* <DisplayTable  listLoading={listLoading} uiHelpers={uiHelpers} uiProps={uiProps}
               idFieldName="storeHolidayId" totalCount={totalHolidays} entities={entitiesHolidays} columns={columnHolidays}
               /> */}
-              <div>Third Page</div>
-          </Tab>
-
-      </Tab>
-      </>
+          <div>Third Page</div>
+        </Tab>
+      </Tabs>
+    </>
   );
-
-
 }
 
-export function DisplayTable( listLoading,  entities, totalCount, columns,uiHelpers,uiProps, idFieldName) {
-// Table pagination properties
-const paginationOptions = {
+export function DisplayTable(
+  listLoading,
+  entities,
+  totalCount,
+  columns,
+  idFieldName
+) {
+  const uiContext = useUIContext();
+  const uiProps = useMemo(() => {
+    return {
+      ids: uiContext.ids,
+      setIds: uiContext.setIds,
+      queryParams: uiContext.queryParams,
+      setQueryParams: uiContext.setQueryParams,
+      openEditDialog: uiContext.openEditDialog,
+      openDeleteDialog: uiContext.openDeleteDialog,
+    };
+  }, [uiContext]);
+
+  // Table pagination properties
+  const paginationOptions = {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: uiProps.queryParams.pageSize,
+    sizePerPage: uiProps.queryParams.sizePage,
     page: uiProps.queryParams.pageNumber,
   };
-return (<>
-    <PaginationProvider pagination={paginationFactory(paginationOptions)}>
-    {({ paginationProps, paginationTableProps }) => {
-      return (
-        <Pagination
-          isLoading={listLoading}
-          paginationProps={paginationProps}
-        >
-          <BootstrapTable
-            wrapperClasses="table-responsive"
-            bordered={true}
-            classes="table table-head-custom table-vertical-center overflow-hidden"
-            bootstrap4
-            remote
-            noDataIndication="No Record Found now.."
-            keyField={idFieldName}
-            data={entities === null ? [] : totalCount ? entities : []}
-            columns={columns}
-            defaultSorted={uiHelpers.defaultSorted}
-            onTableChange={getHandlerTableChange(uiProps.setQueryParams)}
-            selectRow={getSelectRow({
-              entities,
-              ids: uiProps.ids,
-              setIds: uiProps.setIds,
-              idName: idFieldName,
-            })}
-            {...paginationTableProps}
-          >
-            <PleaseWaitMessage entities={entities} />
-            <NoRecordsFoundMessage entities={entities} />
-          </BootstrapTable>
-        </Pagination>
-      );
-    }}
-  </PaginationProvider>
-</>
-);
 
-
+  return (
+    <>
+      <PaginationProvider pagination={paginationFactory(paginationOptions)}>
+        {({ paginationProps, paginationTableProps }) => {
+          return (
+            <Pagination
+              isLoading={listLoading}
+              paginationProps={paginationProps}
+            >
+              <BootstrapTable
+                wrapperClasses="table-responsive"
+                bordered={false}
+                classes="table table-head-custom table-vertical-center overflow-hidden"
+                bootstrap4
+                remote
+                noDataIndication="No Record Found now.."
+                keyField={idFieldName}
+                data={entities === null ? [] : totalCount ? entities : []}
+                columns={columns}
+                defaultSorted={uiHelpers.defaultSorted}
+                onTableChange={getHandlerTableChange(uiProps.setQueryParams)}
+                selectRow={getSelectRow({
+                  entities,
+                  ids: uiProps.ids,
+                  setIds: uiProps.setIds,
+                  idName: idFieldName,
+                })}
+                {...paginationTableProps}
+              >
+                <PleaseWaitMessage entities={entities} />
+                <NoRecordsFoundMessage entities={entities} />
+              </BootstrapTable>
+            </Pagination>
+          );
+        }}
+      </PaginationProvider>
+    </>
+  );
 }
