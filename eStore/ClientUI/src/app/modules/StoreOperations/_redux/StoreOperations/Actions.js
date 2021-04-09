@@ -3,6 +3,23 @@ import { storeOperationsSlice, callTypes } from "./Slice";
 
 const { actions } = storeOperationsSlice;
 
+export const fetchStoreOperations = (queryParams) => (dispatch) => {
+  dispatch(actions.startCall({ callType: callTypes.list }));
+  return requestFromServer
+    .getStoreOperations(queryParams)
+    .then((response) => {
+      const entities = response.data;
+      const totalCount = response.data.length;
+      //console.log(response.data);
+      //console.log(response.data.length);
+      dispatch(actions.storeOperationsFetched({ totalCount, entities }));
+    })
+    .catch((error) => {
+      console.error(error);
+      error.clientMessage = "Can't find Store Operations";
+      dispatch(actions.catchError({ error, callType: callTypes.list }));
+    });
+};
 export const fetchStoreOpens = (queryParams) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
@@ -10,12 +27,12 @@ export const fetchStoreOpens = (queryParams) => (dispatch) => {
     .then((response) => {
       const entities = response.data;
       const totalCount = response.data.length;
-      console.log(response);
-      console.log(response.data.length);
+      //console.log(response);
+      //console.log(response.data.length);
       dispatch(actions.storeOpensFetched({ totalCount, entities }));
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       error.clientMessage = "Can't find StoreOpen";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
@@ -27,12 +44,12 @@ export const fetchStoreCloses = (queryParams) => (dispatch) => {
     .then((response) => {
       const entities = response.data;
       const totalCount = response.data.length;
-      console.log(response);
-      console.log(response.data.length);
+      //console.log(response);
+      //console.log(response.data.length);
       dispatch(actions.storeClosesFetched({ totalCount, entities }));
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       error.clientMessage = "Can't find Store Close";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
@@ -44,12 +61,12 @@ export const fetchStoreHolidays = (queryParams) => (dispatch) => {
     .then((response) => {
       const entities = response.data;
       const totalCount = response.data.length;
-      console.log(response);
-      console.log(response.data.length);
+     // console.log(response);
+      //console.log(response.data.length);
       dispatch(actions.storeHolidaysFetched({ totalCount, entities }));
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       error.clientMessage = "Can't find StoreOpen";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
@@ -117,7 +134,7 @@ export const deleteStoreOpen = (id) => (dispatch) => {
       dispatch(actions.storeOpenDeleted({ id }));
     })
     .catch((error) => {
-      console.log("CD=" + error);
+      //console.log("CD=" + error);
       error.clientMessage = "Can't delete Store Open";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
@@ -130,7 +147,7 @@ export const deleteStoreClose = (id) => (dispatch) => {
       dispatch(actions.storeCloseDeleted({ id }));
     })
     .catch((error) => {
-      console.log("CD=" + error);
+      //console.log("CD=" + error);
       error.clientMessage = "Can't delete Store Close";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
@@ -144,7 +161,7 @@ export const deleteStoreHoliday = (id) => (dispatch) => {
       dispatch(actions.storeHolidayDeleted({ id }));
     })
     .catch((error) => {
-      console.log("CD=" + error);
+      //console.log("CD=" + error);
       error.clientMessage = "Can't delete Store Holiday";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
@@ -156,7 +173,7 @@ export const createStoreOpen = (openForCreation) => (dispatch) => {
     .createStoreOpen(JSON.stringify(openForCreation))
     .then((response) => {
       const storeOpen = response.data;
-      console.log(response.data);
+      //console.log(response.data);
       dispatch(actions.storeOpenCreated({ storeOpen }));
     })
     .catch((error) => {
@@ -171,7 +188,7 @@ export const createStoreClose = (closeForCreation) => (dispatch) => {
     .createStoreClose(JSON.stringify(closeForCreation))
     .then((response) => {
       const storeClose = response.data;
-      console.log(response.data);
+      //console.log(response.data);
       dispatch(actions.storeOpenCreated({ storeClose }));
     })
     .catch((error) => {
@@ -186,7 +203,7 @@ export const createStoreHoliday = (holidayForCreation) => (dispatch) => {
     .createStoreHoliday(JSON.stringify(holidayForCreation))
     .then((response) => {
       const storeHoliday = response.data;
-      console.log(response.data);
+      //console.log(response.data);
       dispatch(actions.storeHolidayCreated({ storeHoliday }));
     })
     .catch((error) => {
@@ -200,11 +217,11 @@ export const updateStoreOpen = (storeOpen) => (dispatch) => {
   return requestFromServer
     .updateStoreOpen(storeOpen)
     .then(() => {
-      console.log(storeOpen);
+      //console.log(storeOpen);
       dispatch(actions.storeOpenUpdated({ storeOpen }));
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       error.clientMessage = "Can't update Store open";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
@@ -215,11 +232,11 @@ export const updateStoreClose = (storeClose) => (dispatch) => {
   return requestFromServer
     .updateStoreClose(storeClose)
     .then(() => {
-      console.log(storeClose);
+      //console.log(storeClose);
       dispatch(actions.storeCloseUpdated({ storeClose }));
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       error.clientMessage = "Can't update Store Close";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
@@ -230,11 +247,11 @@ export const updateStoreHoliday = (storeHoliday) => (dispatch) => {
   return requestFromServer
     .updateStoreHoliday(storeHoliday)
     .then(() => {
-      console.log(storeHoliday);
+      //console.log(storeHoliday);
       dispatch(actions.storeHolidayUpdated({ storeHoliday }));
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       error.clientMessage = "Can't update Store Holiday";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });

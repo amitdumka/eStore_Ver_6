@@ -11,12 +11,12 @@ export const fetchEnumValue = (enumName) => (dispatch) => {
     .getEnumType(enumName)
     .then((response) => {
       const entities = response.data;
-      console.log("Enum Name:" + enumName);
-      console.log(entities);
+      //console.log("Enum Name:" + enumName);
+      //console.log(entities);
       dispatch(actions.enumValueFetched({ enumName, entities }));
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       error.clientMessage = `$"Can't load {enumName} list"`;
       dispatch(actions.catchError({ error, callTypes: callTypes.list }));
     });
@@ -29,11 +29,11 @@ const tName="stores";
     .getStores()
     .then((response) => {
       const entities = response.data;
-      console.log(entities);
+      //console.log(entities);
       dispatch(actions.storesFetched({ tName,entities }));
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       error.clientMessage = `$"Can't load Store list"`;
       dispatch(actions.catchError({ error, callTypes: callTypes.list }));
     });

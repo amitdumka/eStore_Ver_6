@@ -15,6 +15,7 @@ export const UIConsumer = UIContext.Consumer;
 export function UIProvider({ UIEvents, children }) {
   const [queryParams, setQueryParamsBase] = useState(initialFilter);
   const [ids, setIds] = useState([]);
+  const [idHs, setIdHs] = useState([]);
   const setQueryParams = useCallback((nextQueryParams) => {
     setQueryParamsBase((prevQueryParams) => {
       if (isFunction(nextQueryParams)) {
@@ -31,8 +32,8 @@ export function UIProvider({ UIEvents, children }) {
 
   const initOpen = {
     storeOpenId: 0,
-    storeId: 0,
-    remarks: null,
+    storeId: 1,
+    remarks: "",
     OpenningTime: new Date(),
     store: null,
     userId: "WebUI",
@@ -40,8 +41,8 @@ export function UIProvider({ UIEvents, children }) {
   };
   const initClose = {
     storeCloseId: 0,
-    storeId: 0,
-    remarks: null,
+    storeId: 1,
+    remarks: "",
     closingDate: new Date(),
     store: null,
     userId: "WebUI",
@@ -50,12 +51,13 @@ export function UIProvider({ UIEvents, children }) {
 
   const initHoliday = {
     storeHolidayId: 0,
-    storeId: 0,
+    userId: "WebUI",
+    storeId: 1,
     store: null,
     entryStatus: 0,
     isReadOnly: false,
     onDate: new Date(),
-    reason: "",
+    reason: 0,
     remark: "",
     approvedBY: "",
   };
@@ -65,16 +67,32 @@ export function UIProvider({ UIEvents, children }) {
     setQueryParamsBase,
     ids,
     setIds,
+    idHs,
+    setIdHs,
     setQueryParams,
     initOpen,
     initClose,
     initHoliday,
-    newButtonClick: UIEvents.newButtonClick,
-    openEditDialog: UIEvents.openEditDialog,
-    openDeleteDialog: UIEvents.openDeleteDialog,
-    openDeleteDialog: UIEvents.openDeleteDialog,
-    openFetchDialog: UIEvents.openFetchDialog,
-    openUpdateStatusDialog: UIEvents.openUpdateStatusDialog,
+    newButtonOpenClick: UIEvents.newButtonOpenClick,
+    openEditOpenDialog: UIEvents.openEditOpenDialog,
+    openDeleteOpenDialog: UIEvents.openDeleteOpenDialog,
+    openDeleteOpensDialog: UIEvents.openDeleteOpensDialog,
+    openFetchOpenDialog: UIEvents.openFetchOpenDialog,
+    openUpdateOpenStatusDialog: UIEvents.openUpdateOpenStatusDialog,
+
+    newButtonCloseClick: UIEvents.newButtonCloseClick,
+    openEditCloseDialog: UIEvents.openEditCloseDialog,
+    openDeleteCloseDialog: UIEvents.openDeleteCloseDialog,
+    openDeleteClosesDialog: UIEvents.openDeleteClosesDialog,
+    openFetchCloseDialog: UIEvents.openFetchCloseDialog,
+    openUpdateCloseStatusDialog: UIEvents.openUpdateCloseStatusDialog,
+    
+    newButtonHolidayClick: UIEvents.newButtonHolidayClick,
+    openEditHolidayDialog: UIEvents.openEditHolidayDialog,
+    openDeleteHolidayDialog: UIEvents.openDeleteHolidayDialog,
+    openDeleteHolidaysDialog: UIEvents.openDeleteHolidaysDialog,
+    openFetchHolidayDialog: UIEvents.openFetchHolidayDialog,
+    openUpdateHolidayStatusDialog: UIEvents.openUpdateHolidayStatusDialog,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

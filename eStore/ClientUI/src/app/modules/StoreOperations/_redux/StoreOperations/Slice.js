@@ -10,9 +10,12 @@ const initialStoreOperationsState = {
   totalCloses: 0,
   entitiesCloses: null,
   closeForEdit: undefined,
-  totalHoliday: 0,
+  totalHolidays: 0,
   entitiesHolidays: null,
   holidayForEdit: undefined,
+  entitiesStoreOperations: undefined,
+  storeOperationForEdit: undefined,
+  totalSO: 0,
 };
 export const callTypes = {
   list: "list",
@@ -38,6 +41,14 @@ export const storeOperationsSlice = createSlice({
       } else {
         state.actionsLoading = true;
       }
+    },
+    // findStoreOpens
+    storeOperationsFetched: (state, action) => {
+      const { totalCount, entities } = action.payload;
+      state.listLoading = false;
+      state.error = null;
+      state.entitiesStoreOperations = entities;
+      state.totalSO = totalCount;
     },
 
     //storeOpensById

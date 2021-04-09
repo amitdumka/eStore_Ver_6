@@ -3,23 +3,23 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React from "react";
 import SVG from "react-inlinesvg";
-import { toAbsoluteUrl } from "../../../../../../_metronic/_helpers";
+import { toAbsoluteUrl } from "../../../../../../../_metronic/_helpers";
 
 //ledgerType
-//LedgerType
+//
 
 export function ActionsColumnFormatter(
   cellContent,
   row,
   rowIndex,
-  { openEditLedgerTypeDialog, openDeleteLedgerTypeDialog }
+  { openEditDialog, openDeleteDialog , idValue}
 ) {
   return (
     <>
       <a
         title="Edit ledgerType"
         className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-        onClick={() => openEditLedgerTypeDialog(row.ledgerTypeId)}
+        onClick={() => openEditDialog(idValue)}
       >
         <span className="svg-icon svg-icon-md svg-icon-primary">
           <SVG
@@ -32,7 +32,7 @@ export function ActionsColumnFormatter(
       <a
         title="Delete ledgerType"
         className="btn btn-icon btn-light btn-hover-danger btn-sm"
-        onClick={() => openDeleteLedgerTypeDialog(row.ledgerTypeId)}
+        onClick={() => openDeleteDialog(idValue)}
       >
         <span className="svg-icon svg-icon-md svg-icon-danger">
           <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />

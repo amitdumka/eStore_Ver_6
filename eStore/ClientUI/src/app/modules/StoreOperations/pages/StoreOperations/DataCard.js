@@ -5,39 +5,48 @@ import {
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../_metronic/_partials/controls";
-import { DataListView } from "./DataListView";
+//import { DataListView } from "./DataListView";
 // import { RentsFilter } from "./filter/Filter";
 // import { RentsTable } from "./table/Table";
 // import { RentsGrouping } from "./grouping/Grouping";
 import { useUIContext } from "./UIContext";
+import {OperationTable, HolidayTable} from "./table/DataTable";
 
-//Rent
-//rent
-
+import {Tabs, Tab} from "react-bootstrap";
+ 
 export function DataCard() {
   const uiContext = useUIContext();
   const uiProps = useMemo(() => {
     return {
       ids: uiContext.ids,
-      newButtonClick: uiContext.newButtonClick,
+      newButtonOpenClick: uiContext.newButtonOpenClick,
+      newButtonCloseClick: uiContext.newButtonCloseClick,
+      newButtonHolidayClick: uiContext.newButtonHolidayClick,
     };
   }, [uiContext]);
-  const title = "Operation";
+  
   return (
     <Card>
       <CardHeader title="Store Operating Time">
-        <CardHeaderToolbar>
+        <CardHeaderToolbar className="btn-group">
           <button
             type="button"
-            className="btn btn-primary mr-2"
-            onClick={uiProps.newButtonClick}
+            className="btn btn-sm btn-primary "
+            onClick={uiProps.newButtonOpenClick}
           >
-            Add {title}
+            Add Open
           </button>
           <button
             type="button"
-            className="btn btn-success ml-2"
-            onClick={uiProps.newButtonClick}
+            className="btn btn-sm btn-warning "
+            onClick={uiProps.newButtonCloseClick}
+          >
+            Add Close
+          </button>
+          <button
+            type="button"
+            className="btn btn-sm btn-success "
+            onClick={uiProps.newButtonHolidayClick}
           >
             Add Holiday
           </button>
@@ -46,8 +55,13 @@ export function DataCard() {
       <CardBody>
         {/* <DataFilter />
         {uiProps.ids.length > 0 && <DataGrouping />} */}
-        {/* <DataTable /> */}
-        <DataListView/>
+       
+        <Tabs defaultActiveKey="daily" id="tabStoreOps">
+          <Tab title="Daily Ops"  eventKey="daily" ><OperationTable/></Tab>
+          <Tab  title="Holiday" eventKey="holiday" ><HolidayTable/></Tab>
+        </Tabs>
+       
+        
       </CardBody>
     </Card>
   );

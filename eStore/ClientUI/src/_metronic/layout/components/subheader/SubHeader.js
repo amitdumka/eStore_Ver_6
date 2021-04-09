@@ -45,7 +45,7 @@ export function SubHeader() {
     curTime= new Date().toLocaleTimeString();
     document.getElementById("kt_dashboard_daterangepicker_time").innerHTML = curTime;
   }
-  setInterval(tick, 1000);
+  //setInterval(tick, 1000);
   return (
       <div
           id="kt_subheader"

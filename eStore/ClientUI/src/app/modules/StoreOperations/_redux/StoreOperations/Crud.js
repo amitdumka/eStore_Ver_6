@@ -5,6 +5,9 @@ export const APIBASE_URL = "https://www.aprajitaretails.in/api/";
 export async function getStoreStatus(storeId, onDate) {
   return axios.get(APIBASE_URL + "StoreOperations/storestatus");
 }
+export async function getStoreOperations(storeId, onDate) {
+  return axios.get(APIBASE_URL + "storeOperations");
+}
 
 export async function getAllStoreOpens() {
   return axios.get(APIBASE_URL + "storeOpens");
@@ -47,6 +50,7 @@ export async function createStoreOpen(storeOpens) {
   });
 }
 export async function createStoreClose(storeClose) {
+  console.log(storeClose);
   return await axios.post(APIBASE_URL + "storeCloses", storeClose, {
     headers: { "Content-Type": "application/json; charset=utf-8" },
   });
