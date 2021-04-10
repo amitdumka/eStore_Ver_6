@@ -51,6 +51,13 @@ export const storeOperationsSlice = createSlice({
       state.totalSO = totalCount;
     },
 
+    storeStatusFetched:(state, action)=>{
+      const { entities } = action.payload;
+      state.listLoading = false;
+      state.error = null;
+      state.storeStatus = entities;
+      
+    },
     //storeOpensById
     storeOpenFetched: (state, action) => {
       state.actionsLoading = false;

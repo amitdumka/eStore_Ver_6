@@ -1,18 +1,15 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { EditDialog } from "./dialogs/EditDialog";
-
-// import { DeleteDialog } from "./dialogs/DeleteDialog";
-
-// import { DeletesDialog } from "./dialogs/DeletesDialog";
-
-// import { FetchDialog } from "./dialogs/FetchDialog";
-// import { UpdateStateDialog } from "./dialogs/UpdateStateDialog";
+import { EditDialog } from "./Dialogs/EditDialog";
 import { UIProvider } from "./UIContext";
 import { DataCard } from "./DataCard";
+// import { DeleteDialog } from "./dialogs/DeleteDialog";
+// import { DeletesDialog } from "./dialogs/DeletesDialog";
+// import { FetchDialog } from "./dialogs/FetchDialog";
+// import { UpdateStateDialog } from "./dialogs/UpdateStateDialog";
 
-//Rent
-//rent
+//StoreOperation
+//storeOperation
 
 export function StoreOperationsPage({ history }) {
   const rentsUIEvents = {
