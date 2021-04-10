@@ -2,8 +2,8 @@ import axios from "axios";
 
 export const APIBASE_URL = "https://www.aprajitaretails.in/api/";
 
-export async function getStoreStatus(storeId, onDate) {
-  return axios.get(APIBASE_URL + "StoreOperations/storestatus");
+export async function getStoreStatus(storeId) {
+  return axios.get(APIBASE_URL + "StoreOperations/storestatus/"+storeId);
 }
 export async function getStoreOperations(storeId, onDate) {
   return axios.get(APIBASE_URL + "storeOperations");

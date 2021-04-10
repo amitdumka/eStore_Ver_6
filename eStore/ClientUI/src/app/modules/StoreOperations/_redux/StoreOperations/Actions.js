@@ -3,6 +3,24 @@ import { storeOperationsSlice, callTypes } from "./Slice";
 
 const { actions } = storeOperationsSlice;
 
+export const fetchStoreStatus = (id) => (dispatch) => {
+  if (!id) {
+    //return dispatch(actions.storeOpenFetched({ openForEdit: undefined }));
+    id=0;
+  }
+
+  dispatch(actions.startCall({ callType: callTypes.list }));
+  return requestFromServer
+    .getStoreStatus(id)
+    .then((response) => {
+      const storeStatus = response.data;
+      dispatch(actions.storeStatusFetched({ entities: storeStatus }));
+    })
+    .catch((error) => {
+      error.clientMessage = "Can't find store Status";
+      dispatch(actions.catchError({ error, callType: callTypes.action }));
+    });
+};
 export const fetchStoreOperations = (queryParams) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer

@@ -25,7 +25,7 @@ import { useUIContext } from "../UIContext";
 
 //Store Operation Table
 
-export function OperationTable() {
+export function OperationTable({enableButtons}) {
   // Rents UI Context
   const uiContext = useUIContext();
   const uiProps = useMemo(() => {
@@ -47,7 +47,7 @@ export function OperationTable() {
     }),
     shallowEqual
   );
-  const { totalSO, entitiesStoreOperations, listLoading } = currentState;
+  const { totalSO, entitiesStoreOperations, listLoading , storeStatus} = currentState;
 
   // Store Operation Redux state
   const dispatch = useDispatch();
@@ -56,6 +56,7 @@ export function OperationTable() {
     uiProps.setIds([]);
     // server call by queryParams
     dispatch(actions.fetchStoreOperations(uiProps.queryParams));
+    dispatch(actions.fetchStoreStatus(0));
     dispatch(cActions.fetchStores());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uiProps.queryParams, dispatch]);
@@ -141,6 +142,10 @@ export function OperationTable() {
     sizePerPage: uiProps.queryParams.pageSize,
     page: uiProps.queryParams.pageNumber,
   };
+
+ storeStatus && storeStatus ? enableButtons(false,false): enableButtons(true,true);
+  //storeStatus ? setCloseButton(true): setCloseButton(false);
+  console.log(storeStatus);
 
   return (
     <>

@@ -16,6 +16,7 @@ const initialStoreOperationsState = {
   entitiesStoreOperations: undefined,
   storeOperationForEdit: undefined,
   totalSO: 0,
+  storeStatus:null
 };
 export const callTypes = {
   list: "list",

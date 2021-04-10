@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import {
   Card,
   CardBody,
@@ -10,10 +10,10 @@ import {
 // import { RentsTable } from "./table/Table";
 // import { RentsGrouping } from "./grouping/Grouping";
 import { useUIContext } from "./UIContext";
-import {OperationTable, HolidayTable} from "./table/DataTable";
+import { OperationTable, HolidayTable } from "./table/DataTable";
 
-import {Tabs, Tab} from "react-bootstrap";
- 
+import { Tabs, Tab } from "react-bootstrap";
+
 export function DataCard() {
   const uiContext = useUIContext();
   const uiProps = useMemo(() => {
@@ -24,7 +24,14 @@ export function DataCard() {
       newButtonHolidayClick: uiContext.newButtonHolidayClick,
     };
   }, [uiContext]);
-  
+  const [openButton, setOpenButton] = useState(false);
+  const [closeButton, setCloseButton] = useState(true);
+
+  const enableButtons = (oButton,cButton) => {
+    setOpenButton(oButton);
+    setCloseButton(cButton);
+  };
+
   return (
     <Card>
       <CardHeader title="Store Operating Time">
@@ -33,6 +40,7 @@ export function DataCard() {
             type="button"
             className="btn btn-sm btn-primary "
             onClick={uiProps.newButtonOpenClick}
+            disabled={openButton}
           >
             Add Open
           </button>
@@ -40,6 +48,7 @@ export function DataCard() {
             type="button"
             className="btn btn-sm btn-warning "
             onClick={uiProps.newButtonCloseClick}
+            disabled={closeButton}
           >
             Add Close
           </button>
@@ -55,13 +64,15 @@ export function DataCard() {
       <CardBody>
         {/* <DataFilter />
         {uiProps.ids.length > 0 && <DataGrouping />} */}
-       
+
         <Tabs defaultActiveKey="daily" id="tabStoreOps">
-          <Tab title="Daily Ops"  eventKey="daily" ><OperationTable/></Tab>
-          <Tab  title="Holiday" eventKey="holiday" ><HolidayTable/></Tab>
+          <Tab title="Daily Ops" eventKey="daily">
+            <OperationTable enableButtons={enableButtons} />
+          </Tab>
+          <Tab title="Holiday" eventKey="holiday">
+            <HolidayTable />
+          </Tab>
         </Tabs>
-       
-        
       </CardBody>
     </Card>
   );
