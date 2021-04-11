@@ -34,6 +34,7 @@ export function EditForm({
   storeList,user,
 }) {
 
+  user ? attendance.userId=user.name: attendance.userId="WebUI_NOTAuth";
   
   return (
     <>
@@ -42,6 +43,7 @@ export function EditForm({
         initialValues={attendance}
         validationSchema={AttendanceEditSchema}
         onSubmit={(values) => {
+          console.log(values);
           saveAttendance(values);
         }}
       >
@@ -75,6 +77,7 @@ export function EditForm({
                     >
                       <option value="">Select Employee</option>
                       {employeeList && employeeList.map((item) => (
+                        item.isWorking &&
                         <option key={item.employeeId} value={item.employeeId}>
                           {item.staffName}
                         </option>
@@ -131,7 +134,8 @@ export function EditForm({
                   </div>
                 </div>
                 <div className="form-group row">
-                  <Field name="userId" type="hidden" value={user.given_name}/>
+                  {/* <Field name="userId" type="hidden" value={user.given_name}  component={Input}  /> */}
+
                   {/* <input type="hidden" name="userId" id="userId" value= {user.given_name}/> */}
                 </div>
               </Form>

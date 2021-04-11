@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { EditDialog } from "./Dialogs/EditDialog";
+import { EditDialog } from "./dialogs/EditDialog";
 import { UIProvider } from "./UIContext";
 import { DataCard } from "./DataCard";
 // import { DeleteDialog } from "./dialogs/DeleteDialog";
