@@ -19,7 +19,7 @@ export const fetchledgerTypes =id=>dispatch => {
   .then(response=>{
     const entities  = response.data; 
     const totalCount=response.data.length;
-    console.log(entities);
+    //console.log(entities);
     dispatch(actions.ledgerTypesFetched({totalCount, entities}));
   })
   .catch(error =>{
@@ -36,8 +36,8 @@ export const fetchParties = queryParams => dispatch => {
     .then(response => {
       const  entities  = response.data;
       const totalCount = response.data.length;
-      console.log(response);
-      console.log(response.data.length);
+      //console.log(response);
+      //console.log(response.data.length);
       dispatch(actions.partiesFetched({ totalCount, entities }));
     })
     .catch(error => {
@@ -57,7 +57,7 @@ export const fetchParty = id => dispatch => {
     .getPartyById(id)
     .then(response => {
       const party = response.data;
-      console.log(party);
+      //console.log(party);
       dispatch(actions.partyFetched({ partyForEdit: party }));
     })
     .catch(error => {
@@ -88,7 +88,7 @@ export const createParty = partyForCreation => dispatch => {
     .createParty(JSON.stringify( partyForCreation))
     .then(response => {
       const  party  = response.data;
-      console.log(response.data);
+      //console.log(response.data);
       dispatch(actions.partyCreated({ party }));
     })
     .catch(error => {

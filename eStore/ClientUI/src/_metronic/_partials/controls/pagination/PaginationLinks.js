@@ -11,7 +11,8 @@ export function PaginationLinks({ paginationProps }) {
   };
 
   const handlePrevPage = ({ page, onPageChange }) => {
-    onPageChange(page - 1);
+    if(page>1)
+     onPageChange(page - 1);
   };
 
   const handleNextPage = ({ page, onPageChange }) => {

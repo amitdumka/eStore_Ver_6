@@ -27,7 +27,6 @@ import { useUIContext } from "../UIContext";
 //Party
 //party
 
-
 export function PartiesTable() {
   // Parties UI Context
   const partiesUIContext = useUIContext();
@@ -37,10 +36,8 @@ export function PartiesTable() {
       setIds: partiesUIContext.setIds,
       queryParams: partiesUIContext.queryParams,
       setQueryParams: partiesUIContext.setQueryParams,
-      openEditPartyDialog:
-        partiesUIContext.openEditPartyDialog,
-      openDeletePartyDialog:
-        partiesUIContext.openDeletePartyDialog,
+      openEditPartyDialog: partiesUIContext.openEditPartyDialog,
+      openDeletePartyDialog: partiesUIContext.openDeletePartyDialog,
     };
   }, [partiesUIContext]);
 
@@ -123,10 +120,8 @@ export function PartiesTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditPartyDialog:
-          partiesUIProps.openEditPartyDialog,
-        openDeletePartyDialog:
-          partiesUIProps.openDeletePartyDialog,
+        openEditPartyDialog: partiesUIProps.openEditPartyDialog,
+        openDeletePartyDialog: partiesUIProps.openDeletePartyDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -155,10 +150,10 @@ export function PartiesTable() {
             >
               <BootstrapTable
                 wrapperClasses="table-responsive"
-                bordered={true}
+                bordered={false}
                 classes="table table-head-custom table-vertical-center overflow-hidden"
                 bootstrap4
-                remote
+                //remote
                 noDataIndication="No Record Found now.."
                 keyField="partyId"
                 data={entities === null ? [] : totalCount ? entities : []}

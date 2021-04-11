@@ -2,50 +2,17 @@
 // This JS will be help to export data to excel file and download at client site
 // Author: Amit Kumar
 
-import { push } from "object-path";
 import React from "react";
 import ReactExport from "react-data-export";
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
-const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 const today = new Date().toLocaleDateString();
 
-const multiDataSet1 = [
-  {
-    columns: [
-      { title: "" }, //pixels width
-      { title: "" }, //char width
-      { title: "" },
-    ],
-    data: [
-      [{ value: "" }, { value: "Aprajita Retails" }],
-
-      [{ value: "" }, { value: "Dumka" }, { value: "Jharkhand" }],
-      [{ vale: "Date:" }, { value: today }, { value: "by web" }],
-    ],
-  },
-  {
-    xSteps: 1, // Will start putting cell with 1 empty cell on left most
-    ySteps: 3, //will put space of 5 rows,
-    columns: [
-      { title: "Employee" }, //pixels width
-      { title: "Status" },
-    ],
-    data: [
-      ["Johnson", "Finance"],
-      ["Monika", "IT"],
-      ["Konstantina", "IT Billing"],
-      ["John", "HR"],
-      ["Josef", "Testing"],
-    ],
-  },
-];
-
 export default function ExportToExcel() {
-    const mDS= ToMultiPart();
-    const dataD = {
+  const mDS = ToMultiPart();
+  const dataD = {
     columns: [
       { title: "" }, //pixels width
       { title: "" }, //char width
@@ -91,7 +58,6 @@ export default function ExportToExcel() {
     mDS,
   ];
 
-  console.log(multiDataSet);
   return (
     <div>
       <ExcelFile
@@ -106,7 +72,7 @@ export default function ExportToExcel() {
   );
 }
 
-export  function ToMultiPart() {
+export function ToMultiPart() {
   const dData = [
     { name: "amit", age: 12 },
     { name: "kumar", age: 12 },
@@ -114,9 +80,9 @@ export  function ToMultiPart() {
   ];
   const dC = dData.map((item) => [{ value: item.name }, { value: item.age }]);
 
-  const colName = Object.keys(dData[0]).map((key, i) => ({ title: key }) );
+  const colName = Object.keys(dData[0]).map((key, i) => ({ title: key }));
 
   const mData = { columns: colName, data: dC };
-  console.log(mData); 
-  return(mData);
+
+  return mData;
 }

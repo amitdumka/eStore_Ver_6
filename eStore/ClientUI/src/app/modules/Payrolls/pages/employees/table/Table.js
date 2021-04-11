@@ -143,7 +143,7 @@ export function EmployeesTable() {
                 bordered={true}
                 classes="table table-head-custom table-vertical-center overflow-hidden"
                 bootstrap4
-                remote
+                //remote
                 noDataIndication="No Record Found now.."
                 keyField="employeeId"
                 data={entities === null ? []: totalCount ?entities:[]}

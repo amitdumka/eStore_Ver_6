@@ -153,7 +153,7 @@ const columns = [
                 bordered={true}
                 classes="table table-head-custom table-vertical-center overflow-hidden"
                 bootstrap4
-                remote
+                //remote
                 noDataIndication="No Record Found now.."
                 keyField="storeId"
                 data={entities === null ? []: entities}

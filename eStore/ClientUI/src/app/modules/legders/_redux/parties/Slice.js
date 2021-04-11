@@ -13,6 +13,7 @@ const initialPartiesState = {
   partyForEdit: undefined,
   lastError: null,
   ledgerTypes: null,
+  totalCount:0
 };
 export const callTypes = {
   list: "list",

@@ -72,7 +72,7 @@ export function PartiesFilter({ listLoading }) {
                 <select
                   className="form-control"
                   name="status"
-                  placeholder="Filter by Status"
+                  placeholder="Filter by Ledger Type"
                   // TODO: Change this code
                   onChange={(e) => {
                     setFieldValue("status", e.target.value);
@@ -82,18 +82,18 @@ export function PartiesFilter({ listLoading }) {
                   value={values.status}
                 >
                   <option value="">All</option>
-                  <option value="0">Susspended</option>
-                  <option value="1">Active</option>
-                  <option value="2">Pending</option>
+                  <option value="0">Suspense</option>
+                  <option value="1">Expenses</option>
+                  <option value="2">Income</option>
                 </select>
                 <small className="form-text text-muted">
-                  <b>Filter</b> by Status
+                  <b>Filter</b> by Ledger Type
                 </small>
               </div>
               <div className="col-lg-2">
                 <select
                   className="form-control"
-                  placeholder="Filter by Type"
+                  placeholder="Filter by Client"
                   name="type"
                   onBlur={handleBlur}
                   onChange={(e) => {
@@ -103,11 +103,11 @@ export function PartiesFilter({ listLoading }) {
                   value={values.type}
                 >
                   <option value="">All</option>
-                  <option value="0">Business</option>
-                  <option value="1">Individual</option>
+                  <option value="0">Has PAN</option>
+                  <option value="1">Has GSTIN</option>
                 </select>
                 <small className="form-text text-muted">
-                  <b>Filter</b> by Type
+                  <b>Filter</b> by Party Type
                 </small>
               </div>
               <div className="col-lg-2">
