@@ -40,16 +40,16 @@ export function UIProvider({ UIEvents, children }) {
 
   const initAttendance = {
     attendanceId: 0,
-    employeeId: 1,
+    employeeId: 0,
     employee: null,
     attDate: new Date(),
     entryTime: "",
     status: 0,
-    remarks: "Testing",
+    remarks: "",
     isTailoring: false,
     storeId: 1,
     store: null,
-    userId: "AlokKumar",
+    userId: "WebUI",
     entryStatus: 0,
     isReadOnly: false,
   };

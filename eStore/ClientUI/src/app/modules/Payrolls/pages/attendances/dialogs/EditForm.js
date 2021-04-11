@@ -31,7 +31,7 @@ export function EditForm({
   actionsLoading,
   onHide,employeeList,
   attendanceUnits,
-  storeList,
+  storeList,user,
 }) {
 
   
@@ -54,6 +54,7 @@ export function EditForm({
                 </div>
               )}
               <Form className="form form-label-right">
+
                 <div className="form-group row">
                   {/* Store */}
                   <div className="col-lg-4">
@@ -128,6 +129,10 @@ export function EditForm({
                     <Field name="isTailoring" type="checkbox" />
                     {} Tailoring Division
                   </div>
+                </div>
+                <div className="form-group row">
+                  <Field name="userId" type="hidden" value={user.given_name}/>
+                  {/* <input type="hidden" name="userId" id="userId" value= {user.given_name}/> */}
                 </div>
               </Form>
             </Modal.Body>

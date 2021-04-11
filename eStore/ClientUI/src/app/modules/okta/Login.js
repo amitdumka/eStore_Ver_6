@@ -9,12 +9,12 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
-import React, { useEffect } from 'react';
-import { useOktaAuth } from '@okta/okta-react';
-import * as OktaSignIn from '@okta/okta-signin-widget';
-import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
+import React, { useEffect } from "react";
+import { useOktaAuth } from "@okta/okta-react";
+import * as OktaSignIn from "@okta/okta-signin-widget";
+import "@okta/okta-signin-widget/dist/css/okta-sign-in.min.css";
 
-import config from '../../../config';
+import config from "../../../config";
 
 const Login = () => {
   const { authService } = useOktaAuth();
@@ -27,54 +27,46 @@ const Login = () => {
        * needs to be configured with the base URL for your Okta Org. Here
        * we derive it from the given issuer for convenience.
        */
-      baseUrl: issuer.split('/oauth2')[0],
+      baseUrl: issuer.split("/oauth2")[0],
       clientId,
-      redirectUri:window.location.origin+"/"+redirectUri,
-      logo: '/media/logos/logo-dark.png',
+      redirectUri: window.location.origin + "/" + redirectUri,
+      logo: "/media/logos/logo-dark.png",
       i18n: {
         en: {
-          'primaryauth.title': 'Sign in to eStore: Aprajita Retails',
+          "primaryauth.title": "Sign in to eStore: Aprajita Retails",
         },
       },
-      idps: [
-        { type: 'Google', id: '0oacxuywbxy2KK91Y5d6' }
-      ],
-      idpDisplay : "SECONDARY",
+      idps: [{ type: "Google", id: "0oacxuywbxy2KK91Y5d6" }],
+      idpDisplay: "SECONDARY",
       authParams: {
         // To avoid redirect do not set "pkce" or "display" here. OKTA-335945
         issuer,
         scopes,
       },
     });
-    
-    
+
     widget.renderEl(
-      { el: '#sign-in-widget' },
+      { el: "#sign-in-widget" },
       ({ tokens }) => {
         // Add tokens to storage
         const tokenManager = authService.getTokenManager();
-        tokenManager.add('idToken', tokens.idToken);
-        tokenManager.add('accessToken', tokens.accessToken);
-        config.idps= [
-          { type: 'Google', id: '0oacxuywbxy2KK91Y5d6' }
-        ];
+        tokenManager.add("idToken", tokens.idToken);
+        tokenManager.add("accessToken", tokens.accessToken);
+        config.idps = [{ type: "Google", id: "0oacxuywbxy2KK91Y5d6" }];
         config.idpDisplay = "SECONDARY";
-        
+
         // Return to the original URL (if auth was initiated from a secure route), falls back to the origin
         const fromUri = authService.getFromUri();
         window.location.assign(fromUri);
       },
       (err) => {
         throw err;
-      },
+      }
     );
   }, [authService]);
 
-  
-
   return (
     <div>
-     
       <div id="sign-in-widget" />
     </div>
   );

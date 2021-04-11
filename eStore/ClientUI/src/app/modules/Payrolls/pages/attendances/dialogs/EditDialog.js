@@ -20,12 +20,13 @@ export function EditDialog({ id, show, onHide }) {
 
   // Attendances Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, attendanceForEdit ,employeeList, attendanceUnits, storeList} = useSelector(
+  const { actionsLoading, attendanceForEdit ,employeeList, attendanceUnits, storeList, user} = useSelector(
     (state) => ({
       actionsLoading: state.attendances.actionsLoading,
       attendanceForEdit: state.attendances.attendanceForEdit,
       employeeList:state.attendances.employeeEntities,
       attendanceUnits: state.commonTypes.attendanceUnits, 
+      user:state.auth.user,
       storeList: state.commonTypes.storeList
     }),
     shallowEqual
@@ -71,6 +72,7 @@ export function EditDialog({ id, show, onHide }) {
         employeeList={employeeList}
         attendanceUnits={attendanceUnits}
         storeList={storeList}
+        user={user}
       />
     </Modal>
   );
