@@ -106,13 +106,13 @@ export const storeOperationsSlice = createSlice({
     storeOpenCreated: (state, action) => {
       state.ewactionsLoading = false;
       state.error = null;
-      state.entities.push(action.payload.storeOpen);
+      state.entitiesOpens.push(action.payload.storeOpen);
     },
     // updatestoreOpens
     storeOpenUpdated: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.map((entity) => {
+      state.entitiesOpens = state.entitiesOpens.map((entity) => {
         if (entity.storeOpenId === action.payload.storeOpen.storeOpenId) {
           return action.payload.storeOpen;
         }
@@ -123,7 +123,7 @@ export const storeOperationsSlice = createSlice({
     storeOpenDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(
+      state.entitiesOpens = state.entitiesOpens.filter(
         (el) => el.storeOpenId !== action.payload.storeOpenId
       );
     },
@@ -131,7 +131,7 @@ export const storeOperationsSlice = createSlice({
     storeOpensDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(
+      state.entitiesOpens = state.entitiesOpens.filter(
         (el) => !action.payload.ids.includes(el.storeOpenId)
       );
     },
@@ -139,13 +139,13 @@ export const storeOperationsSlice = createSlice({
     storeCloseCreated: (state, action) => {
       state.ewactionsLoading = false;
       state.error = null;
-      state.entities.push(action.payload.storeClose);
+      state.entitiesCloses.push(action.payload.storeClose);
     },
     // updatestoreOpens
     storeCloseUpdated: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.map((entity) => {
+      state.entitiesCloses = state.entitiesCloses.map((entity) => {
         if (entity.storeCloseId === action.payload.storeClose.storeCloseId) {
           return action.payload.storeClose;
         }
@@ -156,7 +156,7 @@ export const storeOperationsSlice = createSlice({
     storeCloseDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(
+      state.entitiesCloses = state.entitiesCloses.filter(
         (el) => el.storeCloseId !== action.payload.storeCloseId
       );
     },
@@ -164,7 +164,7 @@ export const storeOperationsSlice = createSlice({
     storeClosesDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(
+      state.entitiesCloses = state.entitiesCloses.filter(
         (el) => !action.payload.ids.includes(el.storeCloseId)
       );
     },
@@ -173,13 +173,13 @@ export const storeOperationsSlice = createSlice({
     storeHolidayCreated: (state, action) => {
       state.ewactionsLoading = false;
       state.error = null;
-      state.entities.push(action.payload.storeHoliday);
+      state.entitiesHolidays.push(action.payload.storeHoliday);
     },
     // updatestoreOpens
-    sstoreHolidayUpdated: (state, action) => {
+    storeHolidayUpdated: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.map((entity) => {
+      state.entitiesHolidays = state.entitiesHolidays.map((entity) => {
         if (
           entity.storeHolidayId === action.payload.storeHoliday.storeHolidayId
         ) {
@@ -192,7 +192,7 @@ export const storeOperationsSlice = createSlice({
     storeHolidayDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(
+      state.entitiesHolidays = state.entitiesHolidays.filter(
         (el) => el.storeHolidayId !== action.payload.storeHolidayID
       );
     },
@@ -200,7 +200,7 @@ export const storeOperationsSlice = createSlice({
     storeHolidaysDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(
+      state.entitiesHolidays = state.entitiesHolidays.filter(
         (el) => !action.payload.ids.includes(el.storeHolidayId)
       );
     },

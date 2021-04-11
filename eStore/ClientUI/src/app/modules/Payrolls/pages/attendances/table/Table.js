@@ -37,7 +37,7 @@ export function AttendancesTable() {
     };
   }, [attendancesUIContext]);
 
-  // Getting curret state of attendances list from store (Redux)
+  // Getting current state of attendances list from store (Redux)
   const { currentState } = useSelector(
     (state) => ({ currentState: state.attendances }),
     shallowEqual
