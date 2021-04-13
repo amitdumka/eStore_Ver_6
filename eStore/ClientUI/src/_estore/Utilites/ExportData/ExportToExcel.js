@@ -9,6 +9,38 @@ const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 
 const today = new Date().toLocaleDateString();
+export function ToMultiPart() {
+  const dData = [
+    { name: "amit", age: 12 },
+    { name: "kumar", age: 12 },
+    { name: "shalini", age: 21 },
+  ];
+  const dC = dData.map((item) => [{ value: item.name }, { value: item.age }]);
+
+  const colName = Object.keys(dData[0]).map((key, i) => ({ title: key }));
+
+  const mData = { columns: colName, data: dC };
+
+  return mData;
+}
+
+export function JsonToDataSet(jsonData) {
+  //Getting Columns names
+  if (jsonData !== null) {
+    const columnNames = Object.keys(jsonData[0]).map((key, i) => ({
+      title: key,
+    }));
+
+    const rows = jsonData.map((item) => [
+      // eslint-disable-next-line no-labels
+      item.map((col) => {value: col.toString() }),
+    ]);
+    //TODO: Either get data by name or colIndex value.
+
+    const mData={ columns:columnNames, data:rows};
+    return mData;
+  } else return {};
+}
 
 export default function ExportToExcel() {
   const mDS = ToMultiPart();
@@ -72,17 +104,39 @@ export default function ExportToExcel() {
   );
 }
 
-export function ToMultiPart() {
-  const dData = [
-    { name: "amit", age: 12 },
-    { name: "kumar", age: 12 },
-    { name: "shalini", age: 21 },
+export function ToExcel(sheetName, formatedData, reportName) {
+  const sName = "" + sheetName;
+  const filename = "" + reportName;
+  const dataSet = [
+    {
+      columns: [{ title: "" }, { title: "" }, { title: "" }, { title: "" }],
+      data: [
+        [{ value: "" }, { value: "" }, { value: "Aprajita Retails" }],
+        [
+          { value: "" },
+          { value: "Dumka" },
+          { value: "Jharkhand" },
+          { value: "814101" },
+        ],
+        [{ vale: "Date:" }, { value: today }, { value: "" }],
+        [{ value: "" }],
+        [{ value: "" }, { value: "Report" }, { value: reportName }],
+      ],
+    },
+    { ySteps: 3 },
+    formatedData,
   ];
-  const dC = dData.map((item) => [{ value: item.name }, { value: item.age }]);
 
-  const colName = Object.keys(dData[0]).map((key, i) => ({ title: key }));
-
-  const mData = { columns: colName, data: dC };
-
-  return mData;
+  return (
+    <div>
+      <ExcelFile
+        filename={filename}
+        element={
+          <button className="btn btn-warning btn-sm">Export Excel</button>
+        }
+      >
+        <ExcelSheet dataSet={dataSet} name={sName}></ExcelSheet>
+      </ExcelFile>
+    </div>
+  );
 }
