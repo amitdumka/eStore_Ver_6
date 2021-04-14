@@ -9,7 +9,8 @@ import { PartiesFilter } from "./filter/Filter";
 import { PartiesTable } from "./table/Table";
 import { PartiesGrouping } from "./grouping/Grouping";
 import { useUIContext } from "./UIContext";
-import  ExportToExcel from "../../../../../app/Utilites/ExportData/ExportToExcel";
+import ExportToExcel from "../../../../../_estore/Utilites/ExportData/ExportToExcel";
+
 //Parties
 //parties
 //Party
@@ -28,7 +29,7 @@ export function PartiesCard() {
     <Card>
       <CardHeader title="Party list">
         <CardHeaderToolbar>
-        <ExportToExcel/>
+          <ExportToExcel />
           <button
             type="button"
             className="btn btn-primary btn-sm mr-2 ml-2"

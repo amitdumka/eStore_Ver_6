@@ -103,7 +103,8 @@
     "source-map-loader": "^0.2.4",
     "webpack-cli": "3.3.11",
     "webpack-messages": "2.0.4",
-    "webpack-rtl-plugin": "2.0.0"
+    "webpack-rtl-plugin": "2.0.0",
+    "xlsx": "^0.16.9"
   },
   "jest": {
     "moduleNameMapper": {

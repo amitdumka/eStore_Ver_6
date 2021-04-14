@@ -68,7 +68,7 @@ export function StoreOperationsPage({ history }) {
       history.push("/stores/operations/holiday/updateStatus");
     },
   };
-  
+
   return (
     <UIProvider UIEvents={rentsUIEvents}>
       {/* <DataLoadingDialog /> */}
