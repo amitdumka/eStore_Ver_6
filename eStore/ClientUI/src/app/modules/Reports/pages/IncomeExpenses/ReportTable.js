@@ -1,63 +1,136 @@
-
 import React, { useEffect, useMemo } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../_redux/Actions";
 
-export  function ReportTable() {
-
-    // Getting curret state of rents list from store (Redux)
+export function ReportTable() {
+  // Getting curret state of rents list from store (Redux)
   const { currentState } = useSelector(
     (state) => ({ currentState: state.rents }),
     shallowEqual
   );
-  const { totalCount, incomeExpensesEntities, listLoading } = currentState;
+  const { incomeExpensesEntities, listLoading } = currentState;
 
   // Report Redux state
   const dispatch = useDispatch();
   useEffect(() => {
-    // server call 
-    dispatch(actions.fetchIncomeExpenses());
+    // server call
+    dispatch(actions.fetchIncomeExpenses(new Date()));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ dispatch]);
+  }, [dispatch]);
 
-  const IEReport=(data)=>{
-      const title=data.title;
-      return (<>
-      <h4> {title} Report</h4>
-      <div className="col-6">
-      <table className="table table table-head-custom table-vertical-center overflow-hidden">
-        {/* Income Part */}
-        <tr><td>Income</td><td></td></tr>
-        <tr><td>TotalSale</td><td></td></tr>
-        <tr><td>TotalManualSale</td><td></td></tr>
-        <tr><td>TotalTailoringSale</td><td></td></tr>
-        <tr><td>TotalCashRecipts</td><td></td></tr>
-        <tr><td>TotalRecipts</td><td></td></tr>
-        <tr><td>TotalOtherIncome</td><td></td></tr>
-        
-         {/* Expenses */}
-         <tr><td>Expenses</td><td></td></tr>
-        <tr><td>TotalExpenses</td><td></td></tr>
-        <tr><td>TotalOthersExpenses</td><td></td></tr>
-        <tr><td>TotalPayments</td><td></td></tr>
-        <tr><td>TotalStaffPayments</td><td></td></tr>
-        <tr><td>TotalCashPayments</td><td></td></tr>
-        <tr><td>TotalHomeExpenses</td><td></td></tr>
-        {/* Dues */}
-        <tr><td>Dues</td><td></td></tr>
-        <tr><td>TotalDues</td><td></td></tr>
-        <tr><td>TotalRecovery</td><td></td></tr>
-        {/** Footer */}
-        <tr><td></td><td></td></tr>
-        <tr><td></td><td></td></tr>
-      </table>
-      </div>
-      </>);
+  const IEReport = (data) => {
+    const  title = data && data.title && data.title;
+    return (
+      <>
+        <h4> {title ? title : "Income Expenses"} Report</h4>
+        <div className="col-6">
+          <table className="table table table-head-custom table-vertical-center overflow-hidden">
+            {/* Income Part */}
+            <tr>
+              <td className="text-success">Income</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>TotalSale</td>
+              <td>{data.totalSale}</td>
+            </tr>
+            <tr>
+              <td>TotalManualSale</td>
+              <td>{data.totalManualSale}</td>
+            </tr>
+            <tr>
+              <td>TotalTailoringSale</td>
+              <td>{data.totalTailoringSale}</td>
+            </tr>
+            <tr>
+              <td>TotalCashRecipts</td>
+              <td>{data.totalCashRecipts}</td>
+            </tr>
+            <tr>
+              <td>TotalRecipts</td>
+              <td>{data.totalRecipts}</td>
+            </tr>
+            <tr>
+              <td>TotalOtherIncome</td>
+              <td>{data.totalOtherIncome}</td>
+            </tr>
+            <tr>
+              <td className="text-danger">Total Income</td>
+              <td>{data.totalIncome}</td>
+            </tr>
+
+            {/* Expenses */}
+            <tr>
+              <td className="text-warning">Expenses</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>TotalExpenses</td>
+              <td>{data.totalExpenses}</td>
+            </tr>
+            <tr>
+              <td>TotalOthersExpenses</td>
+              <td>{data.totalOthersExpenses}</td>
+            </tr>
+            <tr>
+              <td>TotalPayments</td>
+              <td>{data.totalPayments}</td>
+            </tr>
+            <tr>
+              <td>TotalStaffPayments</td>
+              <td>{data.totalStaffPayments}</td>
+            </tr>
+            <tr>
+              <td>TotalCashPayments</td>
+              <td>{data.totalCashPayments}</td>
+            </tr>
+            <tr>
+              <td>TotalHomeExpenses</td>
+              <td>{data.totalHomeExpenses}</td>
+            </tr>
+            <tr>
+              <td>All Expenses</td>
+              <td>{data.totalAllExpenses}</td>
+            </tr>
+            {/* Dues */}
+            <tr>
+              <td>Dues</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>TotalDues</td>
+              <td>{data.totalDues}</td>
+            </tr>
+            <tr>
+              <td>TotalRecovery</td>
+              <td>{data.totalRecovery}</td>
+            </tr>
+            <tr>
+              <td>Pending</td>
+              <td>{data.totalPendingDues}</td>
+            </tr>
+            {/** Footer */}
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+      </>
+    );
   };
 
-    return (
-      <div>
-      {incomeExpensesEntities ? incomeExpensesEntities.map((item)=><IEReport data={item}/>):<h3 className="text-warning"> No Data Avialable </h3>}
-       </div>
-    )
+  return (
+    <div>
+      {incomeExpensesEntities ? (
+        incomeExpensesEntities.map((item) => <IEReport data={item} />)
+      ) : (
+        <h3 className="text-warning"> No Data Avialable </h3>
+      )}
+    </div>
+  );
 }

@@ -37,22 +37,29 @@ export const reportsSlice = createSlice({
         state.actionsLoading = true;
       }
     },
-    // getReportById
-    reportFetched: (state, action) => {
-      state.actionsLoading = false;
-      state.reportForEdit = action.payload.reportForEdit;
-      state.error = null;
-    },
-    // findReports
-    reportsFetched: (state, action) => {
-      const { totalCount, entities } = action.payload;
+
+    incomeExpensesFetched:(state, action)=>{
+      const { entities } = action.payload;
       state.listLoading = false;
       state.error = null;
-      state.entities = entities;
-      state.totalCount = totalCount;
+      state.incomeExpensesEntities = entities;
     },
+    // // getReportById
+    // reportFetched: (state, action) => {
+    //   state.actionsLoading = false;
+    //   state.reportForEdit = action.payload.reportForEdit;
+    //   state.error = null;
+    // },
+    // // findReports
+    // reportsFetched: (state, action) => {
+    //   const { totalCount, entities } = action.payload;
+    //   state.listLoading = false;
+    //   state.error = null;
+    //   state.entities = entities;
+    //   state.totalCount = totalCount;
+    // },
     
-    incomeExpensesFetched:(state, action)=>{},
+    
     
   }
 });
