@@ -7,6 +7,7 @@ import { DashboardPage } from "./pages/DashboardPage";
 import {  SecureRoute, LoginCallback } from "@okta/okta-react";
 import CustomLoginComponent from "./modules/okta/Login";
 import Messages from "./modules/okta/Messages";
+import { Report } from "@material-ui/icons";
 const StoreMainPage = lazy(() =>
   import("./modules/Stores/pages/StoreMainPage")
 );
@@ -18,6 +19,7 @@ const BankingPage = lazy(() => import("./modules/Banking/pages/BankingPage"));
 const LedgerPage = lazy(() => import("./modules/legders/pages/LedgersPage"));
 const TaxesPage = lazy(() => import("./modules/Taxes/pages/TaxesPage"));
 const DuesPage = lazy(() => import("./modules/Dues/pages/DuesPage"));
+const ReportsPage = lazy(() =>import("./modules/Reports/pages/ReportsPage"));
 const TailoringPage = lazy(() =>
   import("./modules/Tailoring/pages/TailoringPage")
 );
@@ -56,6 +58,7 @@ export default function BasePage() {
         <Route path="/implicit/callback" component={LoginCallback} />
         <Route path="/login" component={CustomLoginComponent} />
         <Route path="/stores" component={StoreOperationsMainPage} />
+        <Route path="/reports" component={ReportsPage}/>
         <SecureRoute path="/messages" component={Messages} />
         <Redirect to="error/error-v1" />
       </Switch>

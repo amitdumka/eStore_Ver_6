@@ -1,7 +1,6 @@
 import React , { useEffect }from "react";
 import { Route } from "react-router-dom";
-import { RentsLoadingDialog } from "./dialogs/LoadingDialog";
-import { UIProvider } from "./UIContext";
+//import { UIProvider } from "./UIContext";
 import { shallowEqual, useSelector } from "react-redux";
 import { LoadingDialog } from "../../../../../_metronic/_partials/controls";
 import {ReportCard} from "./ReportCard";
@@ -34,7 +33,9 @@ export function IncomeExpensesPage({ history }) {
     shallowEqual
   );
   return (
-    <UIProvider UIEvents={rentsUIEvents}>
+    <>
+     {/** <UIProvider UIEvents={rentsUIEvents}> */}
+     
       <LoadingDialog isLoading={isLoading} text="Loading ..." />
       {/* <Route path="/renting/rents/new">
         {({ history, match }) => (
@@ -99,6 +100,8 @@ export function IncomeExpensesPage({ history }) {
         )}
       </Route>*/}
       <ReportCard />
-    </UIProvider>
+      {/**   </UIProvider>*/}
+      </>
+    
   );
 }

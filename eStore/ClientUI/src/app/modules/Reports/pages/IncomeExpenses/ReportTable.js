@@ -1,7 +1,7 @@
 
 import React, { useEffect, useMemo } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rents/Actions";
+import * as actions from "../../_redux/Actions";
 
 export  function ReportTable() {
 
@@ -56,8 +56,8 @@ export  function ReportTable() {
   };
 
     return (
-        <div>
-            {incomeExpensesEntities.map((item)=><IEReport data={item}/>)}
-        </div>
+      <div>
+      {incomeExpensesEntities ? incomeExpensesEntities.map((item)=><IEReport data={item}/>):<h3 className="text-warning"> No Data Avialable </h3>}
+       </div>
     )
 }

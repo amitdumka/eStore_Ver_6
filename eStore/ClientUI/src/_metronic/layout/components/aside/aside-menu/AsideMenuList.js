@@ -10,6 +10,7 @@ import TailoringMenu from "./eStore/Tailoring/TailoringMenu";
 import PayrollMenu from "./eStore/Payroll/PayrollMenu";
 import StoreMenu from "./eStore/Stores/StoreMenu";
 import ExpenseMenu from "./eStore/Accounting/Accouting-menu";
+import ReportsMenuList from "./eStore/Reports/ReportsMenu";
 
 export function AsideMenuList({ layoutProps }) {
   const location = useLocation();
@@ -54,6 +55,7 @@ export function AsideMenuList({ layoutProps }) {
         {/**Start of eStore Menu  */}
         <ExpenseMenu/>
         <TailoringMenu/>
+        <ReportsMenuList/>
         <PayrollMenu />
         <StoreMenu/>
         {/**end of eStore Menu*/}
