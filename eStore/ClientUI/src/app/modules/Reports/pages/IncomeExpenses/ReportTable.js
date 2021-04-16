@@ -2,6 +2,16 @@ import React, { useEffect, useMemo } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../_redux/Actions";
 
+
+export function todayDate(separator='/'){
+  
+  let newDate = new Date()
+  let date = newDate.getDate();
+  let month = newDate.getMonth() + 1;
+  let year = newDate.getFullYear();  
+  return `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
+}
+
 export function ReportTable() {
   // Getting curret state of rents list from store (Redux)
   const { currentState } = useSelector(
@@ -9,12 +19,12 @@ export function ReportTable() {
     shallowEqual
   );
   const { incomeExpensesEntities, listLoading } = currentState;
-
+ // const todayDate = new Date().format({template:"dd/mm/yyyy"});
   // Report Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // server call
-    dispatch(actions.fetchIncomeExpenses(new Date()));
+    dispatch(actions.fetchIncomeExpenses( todayDate()));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
@@ -126,11 +136,13 @@ export function ReportTable() {
 
   return (
     <div>
-      {incomeExpensesEntities ? (
+      {/* {incomeExpensesEntities && incomeExpensesEntities ? (
         incomeExpensesEntities.map((item) => <IEReport data={item} />)
       ) : (
         <h3 className="text-warning"> No Data Avialable </h3>
-      )}
+      )} */}
+      { incomeExpensesEntities && console.log( incomeExpensesEntities)}
+      { incomeExpensesEntities && incomeExpensesEntities.map((item) => <IEReport data={item} />)}
     </div>
   );
 }
