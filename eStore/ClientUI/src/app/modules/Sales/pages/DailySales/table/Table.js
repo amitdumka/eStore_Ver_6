@@ -14,11 +14,9 @@ import {
   getHandlerTableChange,
   NoRecordsFoundMessage,
   PleaseWaitMessage,
-  sortCaret,
-  headerSortingClasses,
 } from "../../../../../../_metronic/_helpers";
 import * as uiHelpers from "../UIHelpers";
-import * as columnFormatters from "../column-formatters";
+//import * as columnFormatters from "../column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 
@@ -76,7 +74,7 @@ export function DataTable(keyFieldName) {
             >
               <BootstrapTable
                 wrapperClasses="table-responsive"
-                bordered={true}
+                bordered={false}
                 classes="table table-head-custom table-vertical-center overflow-hidden"
                 bootstrap4
                 //remote

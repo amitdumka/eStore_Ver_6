@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../_redux/Actions";
 
@@ -18,6 +18,7 @@ export function ReportTable() {
     (state) => ({ currentState: state.rents }),
     shallowEqual
   );
+  // eslint-disable-next-line no-unused-vars
   const { incomeExpensesEntities, listLoading } = currentState;
  // const todayDate = new Date().format({template:"dd/mm/yyyy"});
   // Report Redux state

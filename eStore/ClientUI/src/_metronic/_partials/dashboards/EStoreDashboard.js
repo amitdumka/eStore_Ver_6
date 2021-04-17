@@ -3,10 +3,10 @@ import {
   CashBookTablePageWidget,OverDueTablesWidget,
   SaleListWidget,
   TailoringWidget,
-  EmpInfoWidget,
+  EmpInfoWidget,DailySaleTableWidget
 } from "../widgets";
 
-export function EStoreDashboard({ totalCashBook, cashBook, masterReports }) {
+export function EStoreDashboard({ totalCashBook, cashBook, masterReports, totalDailySale,dailySaleList  }) {
   return (
     <>
       {/* <div className="row">
@@ -91,12 +91,20 @@ export function EStoreDashboard({ totalCashBook, cashBook, masterReports }) {
       {/* end::Row */}
       {/**Begin Row */}
       <div className="row">
-        <div className="col-xxl-7 order-2 order-xxl-1">
+        <div className="col-xxl-6 order-2 order-xxl-1">
          {masterReports && masterReports.bookingOverDues &&
           <OverDueTablesWidget
             className="card-stretch gutter-b"
             overDue={masterReports.bookingOverDues}
           />}
+        </div>
+
+        <div className="col-xxl-6 order-2 order-xxl-1">
+          <DailySaleTableWidget
+            className="card-stretch gutter-b"
+            dailySaleList={dailySaleList}
+            totalCount={totalDailySale}
+          />
         </div>
       </div>
       {/**end Row */}

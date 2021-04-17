@@ -33,7 +33,8 @@ export function JsonToDataSet(jsonData) {
 
     const rows = jsonData.map((item) => [
       // eslint-disable-next-line no-labels
-      item.map((col) => {value: col.toString() }),
+      // eslint-disable-next-line array-callback-return
+      item.map((col) => {col.toString() }),
     ]);
     //TODO: Either get data by name or colIndex value.
 

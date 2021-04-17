@@ -7,7 +7,7 @@ import { DashboardPage } from "./pages/DashboardPage";
 import {  SecureRoute, LoginCallback } from "@okta/okta-react";
 import CustomLoginComponent from "./modules/okta/Login";
 import Messages from "./modules/okta/Messages";
-import { Report } from "@material-ui/icons";
+//import { Report } from "@material-ui/icons";
 const StoreMainPage = lazy(() =>
   import("./modules/Stores/pages/StoreMainPage")
 );

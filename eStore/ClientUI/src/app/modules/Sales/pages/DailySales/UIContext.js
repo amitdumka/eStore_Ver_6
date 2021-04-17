@@ -6,6 +6,7 @@ import {
   headerSortingClasses,
 } from "../../../../../_metronic/_helpers";
 import * as columnFormatters from "./column-formatters";
+import FieldDateFormater from "../../../../../_estore/formaters/FieldDateFormater";
 const UIContext = createContext();
 
 export function useUIContext() {
@@ -79,6 +80,7 @@ export function UIProvider({ UIEvents, children }) {
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
+      formatter:FieldDateFormater// (cellContent,row)=>{ new Date(row.saleDate).toLocaleDateString();}
     },
     {
       dataField: "invNo",

@@ -1,34 +1,34 @@
 import React from "react";
 import {
   MixedWidget1,
-  MixedWidget14,
+  //MixedWidget14,
   ListsWidget9,
-  StatsWidget11,
-  StatsWidget12,
-  ListsWidget1,
-  AdvanceTablesWidget1,
-  AdvanceTablesWidget2,
-  AdvanceTablesWidget4,
-  AdvanceTablesWidget7,
-  AdvanceTablesWidget9,
-  CashBookTableWidget,
+  //StatsWidget11,
+ // StatsWidget12,
+ // ListsWidget1,
+  DailySaleTableWidget,
+  // AdvanceTablesWidget2,
+  // AdvanceTablesWidget4,
+  // AdvanceTablesWidget7,
+  // AdvanceTablesWidget9,
+  // CashBookTableWidget,
   CashBookTablePageWidget,OverDueTablesWidget,
   SaleListWidget,
-  ListsWidget3,
+ // ListsWidget3,
   ListsWidget4,
   TailoringWidget,
   EmpInfoWidget,
-  ListsWidget8,
-  MixedWidget6,
-  ListsWidget10,
-  ListsWidget11,
-  TilesWidget1,
-  TilesWidget13,
-  TilesWidget11,
-  TilesWidget12,
+  // ListsWidget8,
+  // MixedWidget6,
+  // ListsWidget10,
+  // ListsWidget11,
+  // TilesWidget1,
+  // TilesWidget13,
+  // TilesWidget11,
+  // TilesWidget12,
 } from "../widgets";
 
-export function Demo4Dashboard({ totalCashBook, cashBook, masterReports }) {
+export function Demo4Dashboard({ totalCashBook, cashBook, masterReports, totalDailySale,dailySaleList }) {
   return (
     <>
       <div className="row">
@@ -117,6 +117,14 @@ export function Demo4Dashboard({ totalCashBook, cashBook, masterReports }) {
             className="card-stretch gutter-b"
             overDue={masterReports.bookingOverDues}
           />}
+        </div>
+       
+        <div className="col-xxl-4 order-2 order-xxl-1">
+          <DailySaleTableWidget
+            className="card-stretch gutter-b"
+            dailySaleList={dailySaleList}
+            totalCount={totalDailySale}
+          />
         </div>
       </div>
       {/**end Row */}

@@ -11,6 +11,8 @@ const initialDashboardState = {
   lastError: null,
   cashBookEntities: null,
   totalCashBook: 0,
+  dailySaleEntities:null, 
+  totalDailySale:0
 };
 export const callTypes = {
   list: "list",
@@ -51,6 +53,14 @@ export const dashboardSlice = createSlice({
       state.error = null;
       state.cashBookEntities = entities;
       state.totalCashBook = totalCount;
+    },
+    dailySaleFetched: function(state, action) {
+      const { entities, totalCount } = action.payload;
+      state.actionsLoading = false;
+      state.listLoading = false;
+      state.error = null;
+      state.dailySaleEntities = entities;
+      state.totalDailySale = totalCount;
     },
   },
 });

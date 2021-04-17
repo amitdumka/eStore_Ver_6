@@ -33,8 +33,8 @@ export function EmpInfoWidget({ className, empInfo,topSalesman }) {
         {/* Body */}
         <div className="card-body pt-0">
           {empInfo.length>0 ?
-            empInfo.map((item) => (
-              <div className="mb-6">
+            empInfo.map((item,index) => (
+              <div className="mb-6" key={index}>
                 <div className="d-flex align-items-center flex-grow-1">
                   <div className="d-flex flex-wrap align-items-center justify-content-between w-100">
                     <div className="d-flex flex-column align-items-right py-2 w-75">

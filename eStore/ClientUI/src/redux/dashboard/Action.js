@@ -35,3 +35,20 @@ export const fetchCashBook = () => (dispatch) => {
       dispatch(actions.catchError({ error, callTypes: callTypes.list }));
     });
 };
+
+export const fetchDailySales = (mode) => (dispatch) => {
+  dispatch(actions.startCall({ callType: callTypes.list }));
+
+  return requestFromServer
+    .getWeeklySale(mode)
+    .then((response) => {
+      const entities = response.data;
+      const totalCount = response.data.length;
+      dispatch(actions.dailySaleFetched({ entities, totalCount }));
+    })
+    .catch((error) => {
+      console.log(error);
+      error.clientMessage = "Can't get Daily Sale from server...";
+      dispatch(actions.catchError({ error, callTypes: callTypes.list }));
+    });
+};

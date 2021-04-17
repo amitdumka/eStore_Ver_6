@@ -1,5 +1,5 @@
-import React , { useEffect }from "react";
-import { Route } from "react-router-dom";
+import React from "react";
+//import { Route } from "react-router-dom";
 //import { UIProvider } from "./UIContext";
 import { shallowEqual, useSelector } from "react-redux";
 import { LoadingDialog } from "../../../../../_metronic/_partials/controls";
@@ -8,7 +8,8 @@ import {ReportCard} from "./ReportCard";
 
 
 export function IncomeExpensesPage({ history }) {
-  const rentsUIEvents = {
+  // eslint-disable-next-line no-unused-vars
+  const uiEvents = {
     newRentButtonClick: () => {
       history.push("/renting/rents/new");
     },

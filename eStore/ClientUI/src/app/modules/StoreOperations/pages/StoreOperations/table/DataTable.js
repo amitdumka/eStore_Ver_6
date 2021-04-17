@@ -11,7 +11,7 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/StoreOperations/Actions";
 import * as cActions from "../../../../_redux/Actions";
 import {
-  getSelectRow,
+  
   getHandlerTableChange,
   NoRecordsFoundMessage,
   PleaseWaitMessage,
@@ -19,7 +19,7 @@ import {
   headerSortingClasses,
 } from "../../../../../../_metronic/_helpers";
 import * as uiHelpers from "../UIHelpers";
-import * as columnFormatters from "./column-formatters";
+//import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 

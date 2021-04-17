@@ -18,7 +18,7 @@ export function Dashboard() {
   const {
     totalCashBook,
     cashBookEntities,
-    masterReportEntities
+    masterReportEntities,dailySaleEntities,totalDailySale,
   } = currentState;
 
   // CashPayments Redux state
@@ -26,6 +26,7 @@ export function Dashboard() {
   useEffect(() => {
     dispatch(actions.fetchMasterReport());
     dispatch(actions.fetchCashBook());
+    dispatch(actions.fetchDailySales(7));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [null, dispatch]);
 
@@ -36,6 +37,8 @@ export function Dashboard() {
           totalCashBook={totalCashBook}
           masterReports={masterReportEntities}
           cashBook={cashBookEntities}
+          dailySaleList={dailySaleEntities}
+          totalDailySale={totalDailySale}
         />
       {/* {layoutProps.demo === "demo1" && ()} */}
     </>

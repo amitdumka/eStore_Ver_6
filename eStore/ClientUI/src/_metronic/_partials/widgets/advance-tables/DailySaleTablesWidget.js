@@ -75,7 +75,7 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-export function CashBookTablePageWidget({ className, cashBook, totalCount }) {
+export function DailySaleTableWidget({ className, dailySaleList, totalCount }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -90,32 +90,36 @@ export function CashBookTablePageWidget({ className, cashBook, totalCount }) {
     setRowsPerPage(parseInt(event.target.value, 10));
   }
 
+  let totalSaleAmount= 0;
+  // eslint-disable-next-line array-callback-return
+  dailySaleList && dailySaleList.map((item)=>{totalSaleAmount=totalSaleAmount+item.amount});
+
   return (
     <div className={`card card-custom ${className}`}>
       {/* begin::Header */}
       <div className="card-header border-0 py-5">
         <h3 className="card-title align-items-start flex-column">
           <span className="card-label font-weight-bolder text-dark">
-            Cash Book(s)
+            Sale(s)
           </span>
           <span className="text-muted mt-3 font-weight-bold font-size-sm">
-            Total:{totalCount}
+            Bill Count(s):{totalCount}, <span className="text-primary ml-3 font-weight-bold font-size-sm">Sale Amount: {totalSaleAmount}</span>
           </span>
         </h3>
         <div className="card-toolbar">
           <a
-            href="#"
+            href="/sales/dailySales/new"
             className="btn btn-success font-weight-bolder font-size-sm"
           >
             <span className="svg-icon svg-icon-md svg-icon-white">
               <SVG
                 src={toAbsoluteUrl(
-                  "/media/svg/icons/Communication/Add-user.svg"
+                  "/media/svg/icons/Shopping/Cart1.svg"
                 )}
                 className="h-50 align-self-center"
               ></SVG>
             </span>
-            Today
+            Add Sale
           </a>
         </div>
       </div>
@@ -125,52 +129,52 @@ export function CashBookTablePageWidget({ className, cashBook, totalCount }) {
         {/* begin::Table */}
         <div className={{ overflowX: "auto" }}>
           <Table
-            className="table table-head-custom table-vertical-center"
+            className="table table-head-custom table-vertical-center table-head-bg table-borderless"
             id="kt_advance_table_widget_1"
           >
             <TableHead>
               <TableRow>
                 <TableCell>Date</TableCell>
-                <TableCell>Particulars</TableCell>
-                <TableCell align="center">cashIn</TableCell>
-                <TableCell align="center">cashOut</TableCell>
-                <TableCell align="center">Balance</TableCell>
+                <TableCell>Invoice No</TableCell>
+                <TableCell align="center">Amount</TableCell>
+                <TableCell align="center">Pay Mode</TableCell>
+                <TableCell align="center">Salesman</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {cashBook &&
-                Array.from(cashBook).reverse()
+              {dailySaleList &&
+                Array.from(dailySaleList).reverse()
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row,index) => (
                     <TableRow key={index}>
                       <TableCell>
                         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
                           {" "}
-                          {new Date(row.eDate).toLocaleDateString()}
+                          {new Date(row.saleDate).toLocaleDateString()}
                         </span>
                       </TableCell>
                       <TableCell>
                         {" "}
                         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                          {row.particulars}
+                          {row.invNo}
                         </span>
                       </TableCell>
                       <TableCell align="center">
                         {" "}
                         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                          {row.cashIn}
+                          {row.amount}
                         </span>
                       </TableCell>
                       <TableCell align="center">
                         {" "}
                         <span className="text-danger font-weight-bolder d-block font-size-lg">
-                          {row.cashOut}
+                          {row.payMode}
                         </span>
                       </TableCell>
                       <TableCell align="center">
                         {" "}
                         <span className="text-warning font-weight-bolder d-block font-size-lg">
-                          {row.cashBalance}
+                          {row.salesman.salesmanName}
                         </span>
                       </TableCell>
                     </TableRow>

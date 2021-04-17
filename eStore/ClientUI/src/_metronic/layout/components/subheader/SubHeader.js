@@ -41,6 +41,7 @@ export function SubHeader() {
   const MonthName=["Jan","Feb","Mar","Apr","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const curDate =""+MonthName[ new Date().getMonth()+1]+", "+ new Date().getDate();
   var curTime= new Date().toLocaleTimeString();
+  // eslint-disable-next-line no-unused-vars
   function tick(){
     curTime= new Date().toLocaleTimeString();
     document.getElementById("kt_dashboard_daterangepicker_time").innerHTML = curTime;

@@ -1,9 +1,9 @@
 import React from "react";
-import { Route } from "react-router-dom";
+//import { Route } from "react-router-dom";
 
 import { DataLoadingDialog } from "./dialogs/LoadingDailog";
-import { EditDialog } from "./dialogs/EditDialog";
-import { DeleteDialog } from "./dialogs/DeleteDialog";
+//import { EditDialog } from "./dialogs/EditDialog";/
+//import { DeleteDialog } from "./dialogs/DeleteDialog";
 //import { DeletesDialog } from "./dialogs/DeletesDialog";
 //import { FetchDialog } from "./dialogs/FetchDialog";
 //import { UpdateStateDialog } from "./dialogs/UpdateStateDialog";

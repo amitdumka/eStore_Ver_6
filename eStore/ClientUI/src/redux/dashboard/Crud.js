@@ -1,7 +1,7 @@
 //Axios Api Call for Dashboard Api's
 // 1. MasterReport
 // 2. CashBook
-// 3.
+// 3. DailySale/Weekly Sale
 
 import axios from "axios";
 
@@ -15,4 +15,9 @@ export function getMasterReport() {
 
 export async function getCashBook() {
   return await axios.get(`${BASE_URL}cashbook`);
+}
+
+export async function getWeeklySale(mode) {
+  mode = mode ? mode : 1;
+  return await axios.get(`${BASE_URL}dailySale/find?mode=${mode}`);
 }
