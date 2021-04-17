@@ -4,7 +4,7 @@ import { initialFilter } from "./UIHelpers";
 import {
   sortCaret,
   headerSortingClasses,
-} from "../../../../../../_metronic/_helpers";
+} from "../../../../../_metronic/_helpers";
 import * as columnFormatters from "./column-formatters";
 const UIContext = createContext();
 
@@ -33,15 +33,25 @@ export function UIProvider({ UIEvents, children }) {
 
   const initData = {
     dailySaleId: 0,
+    saleDate: new Date(),
     invNo: "",
-    onDate: new Date(),
     amount: 0,
-    cashAmount: 0,
-    cardAmount: 0,
     payMode: 0,
-    salesmenId: 0,
-    salesmen: null,
+    cashAmount: 0,
+    salesmanId: 0,
+    salesman: null,
+    isDue: false,
+    isManualBill: false,
+    isTailoringBill: false,
+    isSaleReturn: false,
     remarks: "",
+    isMatchedWithVOy: false,
+    edcTranscationId: null,
+    edcTranscation: null,
+    mixAndCouponPaymentId: null,
+    mixAndCouponPayment: null,
+    couponPayment: null,
+    pointRedeemed: null,
     storeId: 1,
     store: null,
     userId: "WebUI",
@@ -57,7 +67,14 @@ export function UIProvider({ UIEvents, children }) {
       headerSortingClasses,
     },
     {
-      dataField: "onDate",
+      dataField: "store.storeId",
+      text: "Store",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "saleDate",
       text: "Date",
       sort: true,
       sortCaret: sortCaret,
@@ -78,21 +95,21 @@ export function UIProvider({ UIEvents, children }) {
       headerSortingClasses,
     },
     {
-      dataField: "mode",
+      dataField: "payMode",
       text: "Payment Mode",
       sort: false,
 
       sortCaret: sortCaret,
     },
     {
-      dataField: "salesmen.salesmenId",
+      dataField: "salesman.salesmanId",
       text: "Salesman",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "isManual",
+      dataField: "isManualBill",
       text: "Manual Bill",
       sort: true,
       //formatter:columnFormatters.TypeColumnFormatter,
@@ -100,21 +117,21 @@ export function UIProvider({ UIEvents, children }) {
       headerSortingClasses,
     },
     {
-      dataField: "isSalesReturn",
+      dataField: "isSaleReturn",
       text: "SalesReturn",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "isTailoring",
+      dataField: "isTailoringBill",
       text: "Tailoring",
       sort: false,
       //formatter:columnFormatters.TypeColumnFormatter,
       sortCaret: sortCaret,
     },
     {
-      dataField: "isDues",
+      dataField: "isDue",
       text: "Dues",
       sort: false,
       //formatter:columnFormatters.TypeColumnFormatter,

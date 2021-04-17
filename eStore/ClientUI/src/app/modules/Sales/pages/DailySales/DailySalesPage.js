@@ -1,12 +1,12 @@
 import React from "react";
 import { Route } from "react-router-dom";
 
-import { DataLoadingDialog } from "./dialogs/LoadingDialog";
+import { DataLoadingDialog } from "./dialogs/LoadingDailog";
 import { EditDialog } from "./dialogs/EditDialog";
 import { DeleteDialog } from "./dialogs/DeleteDialog";
-import { DeletesDialog } from "./dialogs/DeletesDialog";
-import { FetchDialog } from "./dialogs/FetchDialog";
-import { UpdateStateDialog } from "./dialogs/UpdateStateDialog";
+//import { DeletesDialog } from "./dialogs/DeletesDialog";
+//import { FetchDialog } from "./dialogs/FetchDialog";
+//import { UpdateStateDialog } from "./dialogs/UpdateStateDialog";
 import { UIProvider } from "./UIContext";
 import { ViewCard } from "./ViewCard";
 
@@ -38,7 +38,7 @@ export function DailySalesPage({ history }) {
   return (
     <UIProvider UIEvents={uiEvents}>
       <DataLoadingDialog />
-      <Route path={`${path}new`}>
+      {/* <Route path={`${path}new`}>
         {({ history, match }) => (
           <EditDialog
             show={match != null}
@@ -48,7 +48,7 @@ export function DailySalesPage({ history }) {
           />
         )}
       </Route>
-      <Route path={`${path}:id/edit`}>
+      <Route path={`${path}:id/edit`}> 
         {({ history, match }) => (
           <EditDialog
             show={match != null}
@@ -68,8 +68,8 @@ export function DailySalesPage({ history }) {
             }}
           />
         )}
-      </Route>
-      <Route path={`${path}:id/delete`}>
+      </Route> */}
+      {/* <Route path={`${path}:id/delete`}>
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
@@ -79,8 +79,8 @@ export function DailySalesPage({ history }) {
             }}
           />
         )}
-      </Route>
-      <Route path={`${path}fetch`}>
+      </Route> */}
+      {/* <Route path={`${path}fetch`}>
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
@@ -89,8 +89,8 @@ export function DailySalesPage({ history }) {
             }}
           />
         )}
-      </Route>
-      <Route path={`${path}updateStatus`}>
+      </Route> */}
+      {/* <Route path={`${path}updateStatus`}>
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
@@ -99,8 +99,8 @@ export function DailySalesPage({ history }) {
             }}
           />
         )}
-      </Route>
-      <ViewCard titleName="Daily Sale" />
+      </Route> */}
+      <ViewCard  />
     </UIProvider>
   );
 }

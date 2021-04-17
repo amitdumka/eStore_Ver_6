@@ -28,6 +28,7 @@ const ElectricityPage = lazy(() =>
   import("./modules/Electricity/pages/ElectricityPage")
 );
  const StoreOperationsMainPage= lazy(() =>import("./modules/StoreOperations/pages/StoreOperationsMainPage"));
+ const SalesPage = lazy(() =>import("./modules/Sales/pages/SalesPage"));
 
 export default function BasePage() {
   // useEffect(() => {
@@ -59,6 +60,8 @@ export default function BasePage() {
         <Route path="/login" component={CustomLoginComponent} />
         <Route path="/stores" component={StoreOperationsMainPage} />
         <Route path="/reports" component={ReportsPage}/>
+        <Route path="/sales" component={SalesPage}/>
+        
         <SecureRoute path="/messages" component={Messages} />
         <Redirect to="error/error-v1" />
       </Switch>

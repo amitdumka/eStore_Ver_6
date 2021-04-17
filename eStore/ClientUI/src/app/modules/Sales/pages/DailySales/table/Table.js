@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/s/Actions";
+import * as actions from "../../../_redux/DailySales/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -18,7 +18,7 @@ import {
   headerSortingClasses,
 } from "../../../../../../_metronic/_helpers";
 import * as uiHelpers from "../UIHelpers";
-import * as columnFormatters from "./column-formatters";
+import * as columnFormatters from "../column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 
@@ -65,7 +65,7 @@ export function DataTable(keyFieldName) {
       headerSortingClasses,
     },
     {
-      dataField: "onDate",
+      dataField: "saleDate",
       text: "Date",
       sort: true,
       sortCaret: sortCaret,
@@ -86,21 +86,21 @@ export function DataTable(keyFieldName) {
       headerSortingClasses,
     },
     {
-      dataField: "mode",
+      dataField: "payMode",
       text: "Payment Mode",
       sort: false,
 
       sortCaret: sortCaret,
     },
     {
-      dataField: "salesmen.salesmenId",
+      dataField: "salesman.salesmanId",
       text: "Salesman",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "isManual",
+      dataField: "isManualBill",
       text: "Manual Bill",
       sort: true,
       //formatter:columnFormatters.TypeColumnFormatter,
@@ -108,21 +108,21 @@ export function DataTable(keyFieldName) {
       headerSortingClasses,
     },
     {
-      dataField: "isSalesReturn",
+      dataField: "isSaleReturn",
       text: "SalesReturn",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "isTailoring",
+      dataField: "isTailoringBill",
       text: "Tailoring",
       sort: false,
       //formatter:columnFormatters.TypeColumnFormatter,
       sortCaret: sortCaret,
     },
     {
-      dataField: "isDues",
+      dataField: "isDue",
       text: "Dues",
       sort: false,
       //formatter:columnFormatters.TypeColumnFormatter,
@@ -135,6 +135,7 @@ export function DataTable(keyFieldName) {
       formatExtraData: {
         openEditDialog: uiProps.openEditDialog,
         openDeleteDialog: uiProps.openDeleteDialog,
+        keyFieldValue: null,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -171,15 +172,15 @@ export function DataTable(keyFieldName) {
                 keyField={keyFieldName}
                 data={entities === null ? [] : totalCount ? entities : []}
                 //data={[]}
-                columns={uiProps.columns}
+                columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(uiProps.setQueryParams)}
-                selectRow={getSelectRow({
-                  entities,
-                  ids: uiProps.ids,
-                  setIds: uiProps.setIds,
-                  idName: { keyFieldName },
-                })}
+                // selectRow={getSelectRow({
+                //   entities,
+                //   ids: uiProps.ids,
+                //   setIds: uiProps.setIds,
+                //   idName: { keyFieldName },
+                // })}
                 {...paginationTableProps}
               >
                 <PleaseWaitMessage entities={entities} />

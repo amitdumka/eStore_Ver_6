@@ -5,16 +5,17 @@ import {
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../_metronic/_partials/controls";
-import { DailySalesFilter } from "./filter/Filter";
-import { DailySalesTable } from "./table/Table";
-import { DailySalesGrouping } from "./grouping/Grouping";
+//import { DailySalesFilter } from "./filter/Filter";
+import { DataTable } from "./table/Table";
+//import { DailySalesGrouping } from "./grouping/Grouping";
 import { useUIContext } from "./UIContext";
 
 //DailySale
 //dailySale
 
 
-export function ViewCard(titleName) {  
+export function ViewCard() {
+  const titleName="Daily Sale";  
   const uiContext = useUIContext();
   const uiProps = useMemo(() => {
     return {
@@ -25,7 +26,7 @@ export function ViewCard(titleName) {
 
   return (
     <Card>
-      <CardHeader title="{titleName} list">
+      <CardHeader title={`${titleName} list`}>
         <CardHeaderToolbar>
           <button
             type="button"
@@ -37,9 +38,9 @@ export function ViewCard(titleName) {
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        <DailySalesFilter />
-        {uiProps.ids.length > 0 && <DailySalesGrouping />}
-        <DailySalesTable />
+        {/* <DailySalesFilter />
+        {uiProps.ids.length > 0 && <DailySalesGrouping />} */}
+        <DataTable />
       </CardBody>
     </Card>
   );
