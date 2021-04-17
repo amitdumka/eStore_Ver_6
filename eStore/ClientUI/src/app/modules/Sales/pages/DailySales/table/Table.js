@@ -55,95 +55,7 @@ export function DataTable(keyFieldName) {
     dispatch(actions.fetchDailySales(uiProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uiProps.queryParams, dispatch]);
-  // Table columns
-  const columns = [
-    {
-      dataField: "dailySaleId",
-      text: "ID",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "saleDate",
-      text: "Date",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "invNo",
-      text: "Invoice No",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "amount",
-      text: "Amount",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "payMode",
-      text: "Payment Mode",
-      sort: false,
-
-      sortCaret: sortCaret,
-    },
-    {
-      dataField: "salesman.salesmanId",
-      text: "Salesman",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "isManualBill",
-      text: "Manual Bill",
-      sort: true,
-      //formatter:columnFormatters.TypeColumnFormatter,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "isSaleReturn",
-      text: "SalesReturn",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "isTailoringBill",
-      text: "Tailoring",
-      sort: false,
-      //formatter:columnFormatters.TypeColumnFormatter,
-      sortCaret: sortCaret,
-    },
-    {
-      dataField: "isDue",
-      text: "Dues",
-      sort: false,
-      //formatter:columnFormatters.TypeColumnFormatter,
-      sortCaret: sortCaret,
-    },
-    {
-      dataField: "action",
-      text: "Actions",
-      formatter: columnFormatters.ActionsColumnFormatter,
-      formatExtraData: {
-        openEditDialog: uiProps.openEditDialog,
-        openDeleteDialog: uiProps.openDeleteDialog,
-        keyFieldValue: null,
-      },
-      classes: "text-right pr-0",
-      headerClasses: "text-right pr-3",
-      style: {
-        minWidth: "100px",
-      },
-    },
-  ];
+  
   // Table pagination properties
   const paginationOptions = {
     custom: true,
@@ -152,9 +64,9 @@ export function DataTable(keyFieldName) {
     sizePerPage: uiProps.queryParams.pageSize,
     page: uiProps.queryParams.pageNumber,
   };
-
   return (
     <>
+    {uiProps.columns &&
       <PaginationProvider pagination={paginationFactory(paginationOptions)}>
         {({ paginationProps, paginationTableProps }) => {
           return (
@@ -172,15 +84,15 @@ export function DataTable(keyFieldName) {
                 keyField={keyFieldName}
                 data={entities === null ? [] : totalCount ? entities : []}
                 //data={[]}
-                columns={columns}
+                columns={uiProps.columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(uiProps.setQueryParams)}
-                // selectRow={getSelectRow({
-                //   entities,
-                //   ids: uiProps.ids,
-                //   setIds: uiProps.setIds,
-                //   idName: { keyFieldName },
-                // })}
+                selectRow={getSelectRow({
+                  entities,
+                  ids: uiProps.ids,
+                  setIds: uiProps.setIds,
+                  idName: { keyFieldName },
+                })}
                 {...paginationTableProps}
               >
                 <PleaseWaitMessage entities={entities} />
@@ -190,6 +102,7 @@ export function DataTable(keyFieldName) {
           );
         }}
       </PaginationProvider>
-    </>
+    }
+</>
   );
 }

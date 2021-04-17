@@ -67,7 +67,7 @@ export function UIProvider({ UIEvents, children }) {
       headerSortingClasses,
     },
     {
-      dataField: "store.storeId",
+      dataField: "storeId",
       text: "Store",
       sort: true,
       sortCaret: sortCaret,
@@ -102,7 +102,7 @@ export function UIProvider({ UIEvents, children }) {
       sortCaret: sortCaret,
     },
     {
-      dataField: "salesman.salesmanId",
+      dataField: "salesman.salesmanName",
       text: "Salesman",
       sort: true,
       sortCaret: sortCaret,
@@ -160,6 +160,7 @@ export function UIProvider({ UIEvents, children }) {
     setIds,
     setQueryParams,
     initData,
+    columns,
     newButtonClick: UIEvents.newButtonClick,
     openEditDialog: UIEvents.openEditDialog,
     openDeleteDialog: UIEvents.openDeleteDialog,
