@@ -5,41 +5,41 @@ import {
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../_metronic/_partials/controls";
-import { RentsFilter } from "./filter/Filter";
-import { RentsTable } from "./table/Table";
-import { RentsGrouping } from "./grouping/Grouping";
+import { EndOfDaysFilter } from "./filter/Filter";
+import { EndOfDaysTable } from "./table/Table";
+import { EndOfDaysGrouping } from "./grouping/Grouping";
 import { useUIContext } from "./UIContext";
 
-//Rent
-//rent
+//EndOfDay
+//endOfDay
 
 
-export function RentsCard() {
-  const RentsUIContext = useUIContext();
-  const RentsUIProps = useMemo(() => {
+export function EndOfDaysCard() {
+  const EndOfDaysUIContext = useUIContext();
+  const EndOfDaysUIProps = useMemo(() => {
     return {
-      ids: RentsUIContext.ids,
-      newRentButtonClick: RentsUIContext.newRentButtonClick,
+      ids: EndOfDaysUIContext.ids,
+      newEndOfDayButtonClick: EndOfDaysUIContext.newEndOfDayButtonClick,
     };
-  }, [RentsUIContext]);
+  }, [EndOfDaysUIContext]);
 
   return (
     <Card>
-      <CardHeader title="Rent Payment list">
+      <CardHeader title="EndOfDay Payment list">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
-            onClick={RentsUIProps.newRentButtonClick}
+            onClick={EndOfDaysUIProps.newEndOfDayButtonClick}
           >
             New Payment
           </button>
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        <RentsFilter />
-        {RentsUIProps.ids.length > 0 && <RentsGrouping />}
-        <RentsTable />
+        <EndOfDaysFilter />
+        {EndOfDaysUIProps.ids.length > 0 && <EndOfDaysGrouping />}
+        <EndOfDaysTable />
       </CardBody>
     </Card>
   );

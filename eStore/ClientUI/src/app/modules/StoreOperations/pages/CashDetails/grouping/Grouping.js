@@ -1,23 +1,23 @@
 import React, { useMemo } from "react";
 import { useUIContext } from "../UIContext";
 
-//Rent
-//rent
+//CashDetail
+//cashDetail
 
 
-export function RentsGrouping() {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+export function CashDetailsGrouping() {
+  // CashDetails UI Context
+  const cashDetailsUIContext = useUIContext();
+  const cashDetailsUIProps = useMemo(() => {
     return {
-      ids: rentsUIContext.ids,
-      setIds: rentsUIContext.setIds,
-      openDeleteRentsDialog: rentsUIContext.openDeleteRentsDialog,
-      openFetchRentsDialog: rentsUIContext.openFetchRentsDialog,
-      openUpdateRentsStatusDialog:
-        rentsUIContext.openUpdateRentsStatusDialog,
+      ids: cashDetailsUIContext.ids,
+      setIds: cashDetailsUIContext.setIds,
+      openDeleteCashDetailsDialog: cashDetailsUIContext.openDeleteCashDetailsDialog,
+      openFetchCashDetailsDialog: cashDetailsUIContext.openFetchCashDetailsDialog,
+      openUpdateCashDetailsStatusDialog:
+        cashDetailsUIContext.openUpdateCashDetailsStatusDialog,
     };
-  }, [rentsUIContext]);
+  }, [cashDetailsUIContext]);
 
   return (
     <div className="form">
@@ -27,7 +27,7 @@ export function RentsGrouping() {
             <div className="form-label form-label-no-wrap">
               <label className="font-bold font-danger">
                 <span>
-                  Selected records count: <b>{rentsUIProps.ids.length}</b>
+                  Selected records count: <b>{cashDetailsUIProps.ids.length}</b>
                 </span>
               </label>
             </div>
@@ -35,7 +35,7 @@ export function RentsGrouping() {
               <button
                 type="button"
                 className="btn btn-danger font-weight-bolder font-size-sm"
-                onClick={rentsUIProps.openDeleteRentsDialog}
+                onClick={cashDetailsUIProps.openDeleteCashDetailsDialog}
               >
                 <i className="fa fa-trash"></i> Delete All
               </button>
@@ -43,7 +43,7 @@ export function RentsGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={rentsUIProps.openFetchRentsDialog}
+                onClick={cashDetailsUIProps.openFetchCashDetailsDialog}
               >
                 <i className="fa fa-stream"></i> Fetch Selected
               </button>
@@ -51,7 +51,7 @@ export function RentsGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={rentsUIProps.openUpdateRentsStatusDialog}
+                onClick={cashDetailsUIProps.openUpdateCashDetailsStatusDialog}
               >
                 <i className="fa fa-sync-alt"></i> Update Status
               </button>

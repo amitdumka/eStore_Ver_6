@@ -1,65 +1,65 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rents/Actions";
+import * as actions from "../../../_redux/cashDetails/Actions";
 import { useUIContext } from "../UIContext";
-//rent
-//Rent
+//cashDetail
+//CashDetail
 
-const selectedRents = (entities, ids) => {
-  const _rents = [];
+const selectedCashDetails = (entities, ids) => {
+  const _cashDetails = [];
   ids.forEach((id) => {
-    const rent = entities.find((el) => el.id === id);
-    if (rent) {
-      _rents.push(rent);
+    const cashDetail = entities.find((el) => el.id === id);
+    if (cashDetail) {
+      _cashDetails.push(cashDetail);
     }
   });
-  return _rents;
+  return _cashDetails;
 };
 
 export function UpdateStateDialog({ show, onHide }) {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+  // CashDetails UI Context
+  const cashDetailsUIContext = useUIContext();
+  const cashDetailsUIProps = useMemo(() => {
     return {
-      ids: rentsUIContext.ids,
-      setIds: rentsUIContext.setIds,
-      queryParams: rentsUIContext.queryParams,
+      ids: cashDetailsUIContext.ids,
+      setIds: cashDetailsUIContext.setIds,
+      queryParams: cashDetailsUIContext.queryParams,
     };
-  }, [rentsUIContext]);
+  }, [cashDetailsUIContext]);
 
-  // Rents Redux state
-  const { rents, isLoading } = useSelector(
+  // CashDetails Redux state
+  const { cashDetails, isLoading } = useSelector(
     (state) => ({
-      rents: selectedRents(
-        state.rents.entities,
-        rentsUIProps.ids
+      cashDetails: selectedCashDetails(
+        state.cashDetails.entities,
+        cashDetailsUIProps.ids
       ),
-      isLoading: state.rents.actionsLoading,
+      isLoading: state.cashDetails.actionsLoading,
     }),
     shallowEqual
   );
 
   // if !id we should close modal
   useEffect(() => {
-    if (!rentsUIProps.ids || rentsUIProps.ids.length === 0) {
+    if (!cashDetailsUIProps.ids || cashDetailsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rentsUIProps.ids]);
+  }, [cashDetailsUIProps.ids]);
 
   const [status, setStatus] = useState(0);
 
   const dispatch = useDispatch();
   const updateStatus = () => {
-    // server request for update rents status by selected ids
-    dispatch(actions.updateRentsStatus(rentsUIProps.ids, status)).then(
+    // server request for update cashDetails status by selected ids
+    dispatch(actions.updateCashDetailsStatus(cashDetailsUIProps.ids, status)).then(
       () => {
         // refresh list after deletion
-        dispatch(actions.fetchRents(rentsUIProps.queryParams)).then(
+        dispatch(actions.fetchCashDetails(cashDetailsUIProps.queryParams)).then(
           () => {
             // clear selections list
-            rentsUIProps.setIds([]);
+            cashDetailsUIProps.setIds([]);
             // closing delete modal
             onHide();
           }
@@ -76,7 +76,7 @@ export function UpdateStateDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Status has been updated for selected rents
+          Status has been updated for selected cashDetails
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="overlay overlay-block cursor-default">
@@ -96,13 +96,13 @@ export function UpdateStateDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {rents.map((rent) => (
-              <tr key={`id${rent.id}`}>
-                <td>{rent.id}</td>
+            {cashDetails.map((cashDetail) => (
+              <tr key={`id${cashDetail.id}`}>
+                <td>{cashDetail.id}</td>
                 
                 <td>
                   <span className="ml-3">
-                    {rent.lastName}, {rent.firstName}
+                    {cashDetail.lastName}, {cashDetail.firstName}
                   </span>
                 </td>
               </tr>

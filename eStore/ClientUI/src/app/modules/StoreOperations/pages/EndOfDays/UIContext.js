@@ -2,8 +2,8 @@ import React, { createContext, useContext, useState, useCallback } from "react";
 import { isEqual, isFunction } from "lodash";
 import { initialFilter } from "./UIHelpers";
 
-//rent
-//Rent
+//endOfDay
+//EndOfDay
 const UIContext = createContext();
 
 export function useUIContext() {
@@ -29,11 +29,11 @@ export function UIProvider({ UIEvents, children }) {
     });
   }, []);
 
-  const initRent = {
-    rentId: 0,
-    rentedLocationId: 0,
+  const initEndOfDay = {
+    endOfDayId: 0,
+    endOfDayedLocationId: 0,
     location: null,
-    rentType: 0,
+    endOfDayType: 0,
     onDate: new Date(),
     period: "",
     amount: 0.0,
@@ -53,13 +53,13 @@ export function UIProvider({ UIEvents, children }) {
     ids,
     setIds,
     setQueryParams,
-    initRent,
-    newRentButtonClick: UIEvents.newRentButtonClick,
-    openEditRentDialog: UIEvents.openEditRentDialog,
-    openDeleteRentDialog: UIEvents.openDeleteRentDialog,
-    openDeleteRentsDialog: UIEvents.openDeleteRentsDialog,
-    openFetchRentsDialog: UIEvents.openFetchRentsDialog,
-    openUpdateRentsStatusDialog: UIEvents.openUpdateRentsStatusDialog,
+    initEndOfDay,
+    newEndOfDayButtonClick: UIEvents.newEndOfDayButtonClick,
+    openEditEndOfDayDialog: UIEvents.openEditEndOfDayDialog,
+    openDeleteEndOfDayDialog: UIEvents.openDeleteEndOfDayDialog,
+    openDeleteEndOfDaysDialog: UIEvents.openDeleteEndOfDaysDialog,
+    openFetchEndOfDaysDialog: UIEvents.openFetchEndOfDaysDialog,
+    openUpdateEndOfDaysStatusDialog: UIEvents.openUpdateEndOfDaysStatusDialog,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

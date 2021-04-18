@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rents/Actions";
+import * as actions from "../../../_redux/pettyCashBooks/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -22,45 +22,45 @@ import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 
-//Rent
-//rent
+//PettyCashBook
+//pettyCashBook
 
-export function RentsTable() {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+export function PettyCashBooksTable() {
+  // PettyCashBooks UI Context
+  const pettyCashBooksUIContext = useUIContext();
+  const pettyCashBooksUIProps = useMemo(() => {
     return {
-      ids: rentsUIContext.ids,
-      setIds: rentsUIContext.setIds,
-      queryParams: rentsUIContext.queryParams,
-      setQueryParams: rentsUIContext.setQueryParams,
-      openEditRentDialog:
-        rentsUIContext.openEditRentDialog,
-      openDeleteRentDialog:
-        rentsUIContext.openDeleteRentDialog,
+      ids: pettyCashBooksUIContext.ids,
+      setIds: pettyCashBooksUIContext.setIds,
+      queryParams: pettyCashBooksUIContext.queryParams,
+      setQueryParams: pettyCashBooksUIContext.setQueryParams,
+      openEditPettyCashBookDialog:
+        pettyCashBooksUIContext.openEditPettyCashBookDialog,
+      openDeletePettyCashBookDialog:
+        pettyCashBooksUIContext.openDeletePettyCashBookDialog,
     };
-  }, [rentsUIContext]);
+  }, [pettyCashBooksUIContext]);
 
-  // Getting curret state of rents list from store (Redux)
-  const { currentState } = useSelector(
-    (state) => ({ currentState: state.rents }),
+  // Getting curret state of pettyCashBooks list from store (Redux)
+  const { curpettyCashBookState } = useSelector(
+    (state) => ({ curpettyCashBookState: state.pettyCashBooks }),
     shallowEqual
   );
-  const { totalCount, entities, listLoading } = currentState;
+  const { totalCount, entities, listLoading } = curpettyCashBookState;
 
-  // Rents Redux state
+  // PettyCashBooks Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    rentsUIProps.setIds([]);
+    pettyCashBooksUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchRents(rentsUIProps.queryParams));
+    dispatch(actions.fetchPettyCashBooks(pettyCashBooksUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rentsUIProps.queryParams, dispatch]);
+  }, [pettyCashBooksUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "rentId",
+      dataField: "pettyCashBookId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
@@ -68,14 +68,14 @@ export function RentsTable() {
     },
     {
       dataField: "location.placeName",
-      text: "Rented Location",
+      text: "PettyCashBooked Location",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "rentType",
-      text: "Rent Type",
+      dataField: "pettyCashBookType",
+      text: "PettyCashBook Type",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -128,10 +128,10 @@ export function RentsTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditRentDialog:
-          rentsUIProps.openEditRentDialog,
-        openDeleteRentDialog:
-          rentsUIProps.openDeleteRentDialog,
+        openEditPettyCashBookDialog:
+          pettyCashBooksUIProps.openEditPettyCashBookDialog,
+        openDeletePettyCashBookDialog:
+          pettyCashBooksUIProps.openDeletePettyCashBookDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -145,8 +145,8 @@ export function RentsTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: rentsUIProps.queryParams.pageSize,
-    page: rentsUIProps.queryParams.pageNumber,
+    sizePerPage: pettyCashBooksUIProps.queryParams.pageSize,
+    page: pettyCashBooksUIProps.queryParams.pageNumber,
   };
 
   return (
@@ -165,19 +165,19 @@ export function RentsTable() {
                 bootstrap4
                 //remote
                 noDataIndication="No Record Found now.."
-                keyField="rentId"
+                keyField="pettyCashBookId"
                 data={entities === null ? [] : totalCount ? entities : []}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  rentsUIProps.setQueryParams
+                  pettyCashBooksUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: rentsUIProps.ids,
-                  setIds: rentsUIProps.setIds,
-                  idName: "rentId",
+                  ids: pettyCashBooksUIProps.ids,
+                  setIds: pettyCashBooksUIProps.setIds,
+                  idName: "pettyCashBookId",
                 })}
                 {...paginationTableProps}
               >

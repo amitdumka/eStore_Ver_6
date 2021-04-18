@@ -2,29 +2,29 @@ import {createSlice} from "@reduxjs/toolkit";
 
 
 
-//Rent
-//rent
+//EndOfDay
+//endOfDay
 
 
-const initialRentsState = {
+const initialEndOfDaysState = {
   listLoading: false,
   actionsLoading: false,
   totalCount: 0,
   entities: null,
-  rentForEdit: undefined,
+  endOfDayForEdit: undefined,
   lastError: null, 
-  rentTypes:null, 
+  endOfDayTypes:null, 
   payModes:null, 
-  rentedLocations:null
+  endOfDayedLocations:null
 };
 export const callTypes = {
   list: "list",
   action: "action"
 };
 
-export const rentsSlice = createSlice({
-  name: "rents",
-  initialState: initialRentsState,
+export const endOfDaysSlice = createSlice({
+  name: "endOfDays",
+  initialState: initialEndOfDaysState,
   reducers: {
     catchError: (state, action) => {
       state.error = `${action.type}: ${action.payload.error}`;
@@ -50,76 +50,76 @@ export const rentsSlice = createSlice({
       state.payModes=entities;
       
     },
-    rentTypesFetched: function(state, action){
+    endOfDayTypesFetched: function(state, action){
       const{entities}=action.payload;
      state.actionsLoading=false;
      state.listLoading =false;
      state.error=null;
-     state.rentTypes=entities;
+     state.endOfDayTypes=entities;
      
     },
     // get All bank List 
-    rentedLocationsFetched: function(state,action){
+    endOfDayedLocationsFetched: function(state,action){
       const{entities}=action.payload;
      state.actionsLoading=false;
      state.listLoading =false;
      state.error=null;
-     state.rentedLocations=entities;
+     state.endOfDayedLocations=entities;
      
     },
-    // getRentById
-    rentFetched: (state, action) => {
+    // getEndOfDayById
+    endOfDayFetched: (state, action) => {
       state.actionsLoading = false;
-      state.rentForEdit = action.payload.rentForEdit;
+      state.endOfDayForEdit = action.payload.endOfDayForEdit;
       state.error = null;
     },
-    // findRents
-    rentsFetched: (state, action) => {
+    // findEndOfDays
+    endOfDaysFetched: (state, action) => {
       const { totalCount, entities } = action.payload;
       state.listLoading = false;
       state.error = null;
       state.entities = entities;
       state.totalCount = totalCount;
     },
-    // createRent
-    rentCreated: (state, action) => {
+    // createEndOfDay
+    endOfDayCreated: (state, action) => {
       state.ewactionsLoading = false;
       state.error = null;
-      state.entities.push(action.payload.rent);
+      state.entities.push(action.payload.endOfDay);
     },
-    // updateRent
-    rentUpdated: (state, action) => {
+    // updateEndOfDay
+    endOfDayUpdated: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.map(entity => {
-        if (entity.rentId === action.payload.rent.rentId) {
-          return action.payload.rent;
+        if (entity.endOfDayId === action.payload.endOfDay.endOfDayId) {
+          return action.payload.endOfDay;
         }
         return entity;
       });
     },
-    // deleteRent
-    rentDeleted: (state, action) => {
+    // deleteEndOfDay
+    endOfDayDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(el => el.rentId !== action.payload.rentId);
+      state.entities = state.entities.filter(el => el.endOfDayId !== action.payload.endOfDayId);
     },
-    // deleteRents
-    rentsDeleted: (state, action) => {
+    // deleteEndOfDays
+    endOfDaysDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        el => !action.payload.ids.includes(el.rentId)
+        el => !action.payload.ids.includes(el.endOfDayId)
       );
     },
     
-    // rentsUpdateState
-    rentsStatusUpdated: (state, action) => {
+    // endOfDaysUpdateState
+    endOfDaysStatusUpdated: (state, action) => {
       state.actionsLoading = false;
       state.error = null;
       const { ids, status } = action.payload;
       state.entities = state.entities.map(entity => {
-        if (ids.findIndex(id => id === entity.rentId) > -1) {
+        if (ids.findIndex(id => id === entity.endOfDayId) > -1) {
           entity.status = status;
         }
         return entity;

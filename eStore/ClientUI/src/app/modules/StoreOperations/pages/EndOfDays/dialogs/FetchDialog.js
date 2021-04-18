@@ -4,48 +4,48 @@ import { shallowEqual, useSelector } from "react-redux";
 
 import { useUIContext } from "../UIContext";
 
-//rent
-//Rent
+//endOfDay
+//EndOfDay
 
 
-const selectedRents = (entities, ids) => {
-  const _rents = [];
+const selectedEndOfDays = (entities, ids) => {
+  const _endOfDays = [];
   ids.forEach((id) => {
-    const rent = entities.find((el) => el.id === id);
-    if (rent) {
-      _rents.push(rent);
+    const endOfDay = entities.find((el) => el.id === id);
+    if (endOfDay) {
+      _endOfDays.push(endOfDay);
     }
   });
-  return _rents;
+  return _endOfDays;
 };
 
 export function FetchDialog({ show, onHide }) {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+  // EndOfDays UI Context
+  const endOfDaysUIContext = useUIContext();
+  const endOfDaysUIProps = useMemo(() => {
     return {
-      ids: rentsUIContext.ids,
+      ids: endOfDaysUIContext.ids,
     };
-  }, [rentsUIContext]);
+  }, [endOfDaysUIContext]);
 
-  // Rents Redux state
-  const { rents } = useSelector(
+  // EndOfDays Redux state
+  const { endOfDays } = useSelector(
     (state) => ({
-      rents: selectedRents(
-        state.rents.entities,
-        rentsUIProps.ids
+      endOfDays: selectedEndOfDays(
+        state.endOfDays.entities,
+        endOfDaysUIProps.ids
       ),
     }),
     shallowEqual
   );
 
-  // if rents weren't selected we should close modal
+  // if endOfDays weren't selected we should close modal
   useEffect(() => {
-    if (!rentsUIProps.ids || rentsUIProps.ids.length === 0) {
+    if (!endOfDaysUIProps.ids || endOfDaysUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rentsUIProps.ids]);
+  }, [endOfDaysUIProps.ids]);
 
   return (
     <Modal
@@ -68,12 +68,12 @@ export function FetchDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {rents.map((rent) => (
-              <tr key={`id${rent.id}`}>
-                <td>{rent.id}</td>
+            {endOfDays.map((endOfDay) => (
+              <tr key={`id${endOfDay.id}`}>
+                <td>{endOfDay.id}</td>
                 <td>
                   <span className="ml-3">
-                    {rent.lastName}, {rent.firstName}
+                    {endOfDay.lastName}, {endOfDay.firstName}
                   </span>
                 </td>
               </tr>

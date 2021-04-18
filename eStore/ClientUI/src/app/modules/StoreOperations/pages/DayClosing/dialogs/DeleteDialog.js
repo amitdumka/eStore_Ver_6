@@ -2,27 +2,27 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
-import * as actions from "../../../_redux/rents/Actions";
+import * as actions from "../../../_redux/dayClosings/Actions";
 import {useUIContext} from "../UIContext";
 
-//rent
-//Rent
+//dayClosing
+//DayClosing
 
 // Delete particular record.
 export function DeleteDialog({ id, show, onHide }) {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+  // DayClosings UI Context
+  const dayClosingsUIContext = useUIContext();
+  const dayClosingsUIProps = useMemo(() => {
     return {
-      setIds: rentsUIContext.setIds,
-      queryParams: rentsUIContext.queryParams
+      setIds: dayClosingsUIContext.setIds,
+      queryParams: dayClosingsUIContext.queryParams
     };
-  }, [rentsUIContext]);
+  }, [dayClosingsUIContext]);
 
-  // Rents Redux state
+  // DayClosings Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.rents.actionsLoading }),
+    (state) => ({ isLoading: state.dayClosings.actionsLoading }),
     shallowEqual
   );
 
@@ -37,13 +37,13 @@ export function DeleteDialog({ id, show, onHide }) {
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading, dispatch]);
 
-  const deleteRent = () => {
-    // server request for deleting rent by id
-    dispatch(actions.deleteRent(id)).then(() => {
+  const deleteDayClosing = () => {
+    // server request for deleting dayClosing by id
+    dispatch(actions.deleteDayClosing(id)).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchRents(rentsUIProps.queryParams));
+      dispatch(actions.fetchDayClosings(dayClosingsUIProps.queryParams));
       // clear selections list
-      rentsUIProps.setIds([]);
+      dayClosingsUIProps.setIds([]);
       // closing delete modal
       onHide();
     });
@@ -60,14 +60,14 @@ export function DeleteDialog({ id, show, onHide }) {
       {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Rent Delete
+          DayClosing Delete
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete this rent?</span>
+          <span>Are you sure to permanently delete this dayClosing?</span>
         )}
-        {isLoading && <span>Rent is deleting...</span>}
+        {isLoading && <span>DayClosing is deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -81,7 +81,7 @@ export function DeleteDialog({ id, show, onHide }) {
           <> </>
           <button
             type="button"
-            onClick={deleteRent}
+            onClick={deleteDayClosing}
             className="btn btn-primary btn-elevate"
           >
             Delete

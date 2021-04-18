@@ -3,8 +3,8 @@ import { Formik } from "formik";
 import { isEqual } from "lodash";
 import { useUIContext } from "../UIContext";
 
-//Rent
-//rent
+//PettyCashBook
+//pettyCashBook
 
 
 
@@ -27,23 +27,23 @@ const prepareFilter = (queryParams, values) => {
   return newQueryParams;
 };
 
-export function RentsFilter({ listLoading }) {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+export function PettyCashBooksFilter({ listLoading }) {
+  // PettyCashBooks UI Context
+  const pettyCashBooksUIContext = useUIContext();
+  const pettyCashBooksUIProps = useMemo(() => {
     return {
-      queryParams: rentsUIContext.queryParams,
-      setQueryParams: rentsUIContext.setQueryParams,
+      queryParams: pettyCashBooksUIContext.queryParams,
+      setQueryParams: pettyCashBooksUIContext.setQueryParams,
     };
-  }, [rentsUIContext]);
+  }, [pettyCashBooksUIContext]);
 
   // queryParams, setQueryParams,
   const applyFilter = (values) => {
-    const newQueryParams = prepareFilter(rentsUIProps.queryParams, values);
-    if (!isEqual(newQueryParams, rentsUIProps.queryParams)) {
+    const newQueryParams = prepareFilter(pettyCashBooksUIProps.queryParams, values);
+    if (!isEqual(newQueryParams, pettyCashBooksUIProps.queryParams)) {
       newQueryParams.pageNumber = 1;
       // update list by queryParams
-      rentsUIProps.setQueryParams(newQueryParams);
+      pettyCashBooksUIProps.setQueryParams(newQueryParams);
     }
   };
 

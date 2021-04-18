@@ -1,60 +1,60 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rents/Actions";
+import * as actions from "../../../_redux/pettyCashBooks/Actions";
 import * as commonActions from "../../../../_redux/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
-//rent
-//Rent
+//pettyCashBook
+//PettyCashBook
 
 export function EditDialog({ id, show, onHide }) {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+  // PettyCashBooks UI Context
+  const pettyCashBooksUIContext = useUIContext();
+  const pettyCashBooksUIProps = useMemo(() => {
     return {
-      initRent: rentsUIContext.initRent,
+      initPettyCashBook: pettyCashBooksUIContext.initPettyCashBook,
     };
-  }, [rentsUIContext]);
+  }, [pettyCashBooksUIContext]);
 
-  // Rents Redux state
+  // PettyCashBooks Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, rentForEdit ,payModes,rentTypes, rentedLocations, storeList} = useSelector(
+  const { actionsLoading, pettyCashBookForEdit ,payModes,pettyCashBookTypes, pettyCashBookedLocations, storeList} = useSelector(
     (state) => ({
-      actionsLoading: state.rents.actionsLoading,
-      rentForEdit: state.rents.rentForEdit,
-      payModes:state.rents.payModes,
-      rentTypes:state.rents.rentTypes,
-      rentedLocations:state.rents.rentedLocations, 
+      actionsLoading: state.pettyCashBooks.actionsLoading,
+      pettyCashBookForEdit: state.pettyCashBooks.pettyCashBookForEdit,
+      payModes:state.pettyCashBooks.payModes,
+      pettyCashBookTypes:state.pettyCashBooks.pettyCashBookTypes,
+      pettyCashBookedLocations:state.pettyCashBooks.pettyCashBookedLocations, 
       storeList: state.commonTypes.storeList
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    // server call for getting Rent by id
-    dispatch(actions.fetchRent(id));
+    // server call for getting PettyCashBook by id
+    dispatch(actions.fetchPettyCashBook(id));
     dispatch(actions.fetchLocations());
-    dispatch(actions.fetchRentTypes());
+    dispatch(actions.fetchPettyCashBookTypes());
     dispatch(actions.fetchPayModes());
     dispatch(commonActions.fetchStores());
 
   }, [id, dispatch]);
 
-  // server request for saving rent
-  const saveRent = (rent) => {
-    rent.storeId=parseInt(rent.storeId);
-    rent.rentedLocationId=parseInt(rent.rentedLocationId);
-    rent.rentType=parseInt(rent.rentType);
-    rent.mode=parseInt(rent.mode);
+  // server request for saving pettyCashBook
+  const savePettyCashBook = (pettyCashBook) => {
+    pettyCashBook.storeId=parseInt(pettyCashBook.storeId);
+    pettyCashBook.pettyCashBookedLocationId=parseInt(pettyCashBook.pettyCashBookedLocationId);
+    pettyCashBook.pettyCashBookType=parseInt(pettyCashBook.pettyCashBookType);
+    pettyCashBook.mode=parseInt(pettyCashBook.mode);
 
     if (!id) {
-      // server request for creating rent
-      dispatch(actions.createRent(rent)).then(() => onHide());
+      // server request for creating pettyCashBook
+      dispatch(actions.createPettyCashBook(pettyCashBook)).then(() => onHide());
     } else {
-      // server request for updating rent
-      dispatch(actions.updateRent(rent)).then(() => onHide());
+      // server request for updating pettyCashBook
+      dispatch(actions.updatePettyCashBook(pettyCashBook)).then(() => onHide());
     }
   };
 
@@ -67,13 +67,13 @@ export function EditDialog({ id, show, onHide }) {
     >
       <EditDialogHeader id={id} />
       <EditForm
-        saveRent={saveRent}
+        savePettyCashBook={savePettyCashBook}
         actionsLoading={actionsLoading}
-        rent={rentForEdit || rentsUIProps.initRent}
+        pettyCashBook={pettyCashBookForEdit || pettyCashBooksUIProps.initPettyCashBook}
         onHide={onHide}
         payModes={payModes}
-        rentTypes={rentTypes}
-        locationList={rentedLocations}
+        pettyCashBookTypes={pettyCashBookTypes}
+        locationList={pettyCashBookedLocations}
         storeList={storeList}
       />
     </Modal>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { RentsLoadingDialog } from "./dialogs/LoadingDialog";
+import { PettyCashBooksLoadingDialog } from "./dialogs/LoadingDialog";
 import { EditDialog } from "./dialogs/EditDialog";
 
 import { DeleteDialog } from "./dialogs/DeleteDialog";
@@ -10,99 +10,99 @@ import { DeletesDialog } from "./dialogs/DeletesDialog";
 import { FetchDialog } from "./dialogs/FetchDialog";
 import { UpdateStateDialog } from "./dialogs/UpdateStateDialog";
 import { UIProvider } from "./UIContext";
-import { RentsCard } from "./RentsCard";
+import { PettyCashBooksCard } from "./PettyCashBooksCard";
 
-//Rent
-//rent
+//PettyCashBook
+//pettyCashBook
 
-export function RentsPage({ history }) {
-  const rentsUIEvents = {
-    newRentButtonClick: () => {
-      history.push("/renting/rents/new");
+export function PettyCashBooksPage({ history }) {
+  const pettyCashBooksUIEvents = {
+    newPettyCashBookButtonClick: () => {
+      history.push("/pettyCashBooking/pettyCashBooks/new");
     },
-    openEditRentDialog: (id) => {
-      history.push(`/renting/rents/${id}/edit`);
+    openEditPettyCashBookDialog: (id) => {
+      history.push(`/pettyCashBooking/pettyCashBooks/${id}/edit`);
     },
-    openDeleteRentDialog: (id) => {
-      history.push(`/renting/rents/${id}/delete`);
+    openDeletePettyCashBookDialog: (id) => {
+      history.push(`/pettyCashBooking/pettyCashBooks/${id}/delete`);
     },
-    openDeleteRentsDialog: () => {
-      history.push(`/renting/rents/deleteRents`);
+    openDeletePettyCashBooksDialog: () => {
+      history.push(`/pettyCashBooking/pettyCashBooks/deletePettyCashBooks`);
     },
-    openFetchRentsDialog: () => {
-      history.push(`/renting/rents/fetch`);
+    openFetchPettyCashBooksDialog: () => {
+      history.push(`/pettyCashBooking/pettyCashBooks/fetch`);
     },
-    openUpdateRentsStatusDialog: () => {
-      history.push("/renting/rents/updateStatus");
+    openUpdatePettyCashBooksStatusDialog: () => {
+      history.push("/pettyCashBooking/pettyCashBooks/updateStatus");
     }
   }
 
   return (
-    <UIProvider UIEvents={rentsUIEvents}>
-      <RentsLoadingDialog />
-      <Route path="/renting/rents/new">
+    <UIProvider UIEvents={pettyCashBooksUIEvents}>
+      <PettyCashBooksLoadingDialog />
+      <Route path="/pettyCashBooking/pettyCashBooks/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/pettyCashBooking/pettyCashBooks");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/:id/edit">
+      <Route path="/pettyCashBooking/pettyCashBooks/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/pettyCashBooking/pettyCashBooks");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/deleteRents">
+      <Route path="/pettyCashBooking/pettyCashBooks/deletePettyCashBooks">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/pettyCashBooking/pettyCashBooks");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/:id/delete">
+      <Route path="/pettyCashBooking/pettyCashBooks/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/pettyCashBooking/pettyCashBooks");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/fetch">
+      <Route path="/pettyCashBooking/pettyCashBooks/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/pettyCashBooking/pettyCashBooks");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/updateStatus">
+      <Route path="/pettyCashBooking/pettyCashBooks/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/pettyCashBooking/pettyCashBooks");
             }}
           />
         )}
       </Route>
-      <RentsCard />
+      <PettyCashBooksCard />
     </UIProvider>
   );
 }

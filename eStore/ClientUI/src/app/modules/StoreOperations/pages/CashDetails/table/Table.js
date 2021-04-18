@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rents/Actions";
+import * as actions from "../../../_redux/cashDetails/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -22,45 +22,45 @@ import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 
-//Rent
-//rent
+//CashDetail
+//cashDetail
 
-export function RentsTable() {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+export function CashDetailsTable() {
+  // CashDetails UI Context
+  const cashDetailsUIContext = useUIContext();
+  const cashDetailsUIProps = useMemo(() => {
     return {
-      ids: rentsUIContext.ids,
-      setIds: rentsUIContext.setIds,
-      queryParams: rentsUIContext.queryParams,
-      setQueryParams: rentsUIContext.setQueryParams,
-      openEditRentDialog:
-        rentsUIContext.openEditRentDialog,
-      openDeleteRentDialog:
-        rentsUIContext.openDeleteRentDialog,
+      ids: cashDetailsUIContext.ids,
+      setIds: cashDetailsUIContext.setIds,
+      queryParams: cashDetailsUIContext.queryParams,
+      setQueryParams: cashDetailsUIContext.setQueryParams,
+      openEditCashDetailDialog:
+        cashDetailsUIContext.openEditCashDetailDialog,
+      openDeleteCashDetailDialog:
+        cashDetailsUIContext.openDeleteCashDetailDialog,
     };
-  }, [rentsUIContext]);
+  }, [cashDetailsUIContext]);
 
-  // Getting curret state of rents list from store (Redux)
-  const { currentState } = useSelector(
-    (state) => ({ currentState: state.rents }),
+  // Getting curret state of cashDetails list from store (Redux)
+  const { curcashDetailState } = useSelector(
+    (state) => ({ curcashDetailState: state.cashDetails }),
     shallowEqual
   );
-  const { totalCount, entities, listLoading } = currentState;
+  const { totalCount, entities, listLoading } = curcashDetailState;
 
-  // Rents Redux state
+  // CashDetails Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    rentsUIProps.setIds([]);
+    cashDetailsUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchRents(rentsUIProps.queryParams));
+    dispatch(actions.fetchCashDetails(cashDetailsUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rentsUIProps.queryParams, dispatch]);
+  }, [cashDetailsUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "rentId",
+      dataField: "cashDetailId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
@@ -68,14 +68,14 @@ export function RentsTable() {
     },
     {
       dataField: "location.placeName",
-      text: "Rented Location",
+      text: "CashDetailed Location",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "rentType",
-      text: "Rent Type",
+      dataField: "cashDetailType",
+      text: "CashDetail Type",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -128,10 +128,10 @@ export function RentsTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditRentDialog:
-          rentsUIProps.openEditRentDialog,
-        openDeleteRentDialog:
-          rentsUIProps.openDeleteRentDialog,
+        openEditCashDetailDialog:
+          cashDetailsUIProps.openEditCashDetailDialog,
+        openDeleteCashDetailDialog:
+          cashDetailsUIProps.openDeleteCashDetailDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -145,8 +145,8 @@ export function RentsTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: rentsUIProps.queryParams.pageSize,
-    page: rentsUIProps.queryParams.pageNumber,
+    sizePerPage: cashDetailsUIProps.queryParams.pageSize,
+    page: cashDetailsUIProps.queryParams.pageNumber,
   };
 
   return (
@@ -165,19 +165,19 @@ export function RentsTable() {
                 bootstrap4
                 //remote
                 noDataIndication="No Record Found now.."
-                keyField="rentId"
+                keyField="cashDetailId"
                 data={entities === null ? [] : totalCount ? entities : []}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  rentsUIProps.setQueryParams
+                  cashDetailsUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: rentsUIProps.ids,
-                  setIds: rentsUIProps.setIds,
-                  idName: "rentId",
+                  ids: cashDetailsUIProps.ids,
+                  setIds: cashDetailsUIProps.setIds,
+                  idName: "cashDetailId",
                 })}
                 {...paginationTableProps}
               >

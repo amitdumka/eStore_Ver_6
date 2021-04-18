@@ -2,8 +2,8 @@ import React, { createContext, useContext, useState, useCallback } from "react";
 import { isEqual, isFunction } from "lodash";
 import { initialFilter } from "./UIHelpers";
 
-//rent
-//Rent
+//cashDetail
+//CashDetail
 const UIContext = createContext();
 
 export function useUIContext() {
@@ -29,11 +29,11 @@ export function UIProvider({ UIEvents, children }) {
     });
   }, []);
 
-  const initRent = {
-    rentId: 0,
-    rentedLocationId: 0,
+  const initCashDetail = {
+    cashDetailId: 0,
+    cashDetailedLocationId: 0,
     location: null,
-    rentType: 0,
+    cashDetailType: 0,
     onDate: new Date(),
     period: "",
     amount: 0.0,
@@ -53,13 +53,13 @@ export function UIProvider({ UIEvents, children }) {
     ids,
     setIds,
     setQueryParams,
-    initRent,
-    newRentButtonClick: UIEvents.newRentButtonClick,
-    openEditRentDialog: UIEvents.openEditRentDialog,
-    openDeleteRentDialog: UIEvents.openDeleteRentDialog,
-    openDeleteRentsDialog: UIEvents.openDeleteRentsDialog,
-    openFetchRentsDialog: UIEvents.openFetchRentsDialog,
-    openUpdateRentsStatusDialog: UIEvents.openUpdateRentsStatusDialog,
+    initCashDetail,
+    newCashDetailButtonClick: UIEvents.newCashDetailButtonClick,
+    openEditCashDetailDialog: UIEvents.openEditCashDetailDialog,
+    openDeleteCashDetailDialog: UIEvents.openDeleteCashDetailDialog,
+    openDeleteCashDetailsDialog: UIEvents.openDeleteCashDetailsDialog,
+    openFetchCashDetailsDialog: UIEvents.openFetchCashDetailsDialog,
+    openUpdateCashDetailsStatusDialog: UIEvents.openUpdateCashDetailsStatusDialog,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

@@ -1,7 +1,7 @@
 export const StatusCssClasses = ["success","danger", "warning","info",""];
 export const StatusTitles = ["Present", "Absent", "HalfDay","Sunday" ,""];
 export const AccountTypeCssClasses = ["success", "primary", "danger","warning","info",""];
-export const AccountTypeTitles = ["Saving", "Current", "CC","OD","Other",""];
+export const AccountTypeTitles = ["Saving", "CurdayClosing", "CC","OD","Other",""];
 export const defaultSorted = [{ dataField: "bankName", order: "asc" }];
 export const sizePerPageList = [
   { text: "3", value: 3 },

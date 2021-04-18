@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { RentsLoadingDialog } from "./dialogs/LoadingDialog";
+import { EndOfDaysLoadingDialog } from "./dialogs/LoadingDialog";
 import { EditDialog } from "./dialogs/EditDialog";
 
 import { DeleteDialog } from "./dialogs/DeleteDialog";
@@ -10,99 +10,99 @@ import { DeletesDialog } from "./dialogs/DeletesDialog";
 import { FetchDialog } from "./dialogs/FetchDialog";
 import { UpdateStateDialog } from "./dialogs/UpdateStateDialog";
 import { UIProvider } from "./UIContext";
-import { RentsCard } from "./RentsCard";
+import { EndOfDaysCard } from "./EndOfDaysCard";
 
-//Rent
-//rent
+//EndOfDay
+//endOfDay
 
-export function RentsPage({ history }) {
-  const rentsUIEvents = {
-    newRentButtonClick: () => {
-      history.push("/renting/rents/new");
+export function EndOfDaysPage({ history }) {
+  const endOfDaysUIEvents = {
+    newEndOfDayButtonClick: () => {
+      history.push("/endOfDaying/endOfDays/new");
     },
-    openEditRentDialog: (id) => {
-      history.push(`/renting/rents/${id}/edit`);
+    openEditEndOfDayDialog: (id) => {
+      history.push(`/endOfDaying/endOfDays/${id}/edit`);
     },
-    openDeleteRentDialog: (id) => {
-      history.push(`/renting/rents/${id}/delete`);
+    openDeleteEndOfDayDialog: (id) => {
+      history.push(`/endOfDaying/endOfDays/${id}/delete`);
     },
-    openDeleteRentsDialog: () => {
-      history.push(`/renting/rents/deleteRents`);
+    openDeleteEndOfDaysDialog: () => {
+      history.push(`/endOfDaying/endOfDays/deleteEndOfDays`);
     },
-    openFetchRentsDialog: () => {
-      history.push(`/renting/rents/fetch`);
+    openFetchEndOfDaysDialog: () => {
+      history.push(`/endOfDaying/endOfDays/fetch`);
     },
-    openUpdateRentsStatusDialog: () => {
-      history.push("/renting/rents/updateStatus");
+    openUpdateEndOfDaysStatusDialog: () => {
+      history.push("/endOfDaying/endOfDays/updateStatus");
     }
   }
 
   return (
-    <UIProvider UIEvents={rentsUIEvents}>
-      <RentsLoadingDialog />
-      <Route path="/renting/rents/new">
+    <UIProvider UIEvents={endOfDaysUIEvents}>
+      <EndOfDaysLoadingDialog />
+      <Route path="/endOfDaying/endOfDays/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/endOfDaying/endOfDays");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/:id/edit">
+      <Route path="/endOfDaying/endOfDays/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/endOfDaying/endOfDays");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/deleteRents">
+      <Route path="/endOfDaying/endOfDays/deleteEndOfDays">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/endOfDaying/endOfDays");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/:id/delete">
+      <Route path="/endOfDaying/endOfDays/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/endOfDaying/endOfDays");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/fetch">
+      <Route path="/endOfDaying/endOfDays/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/endOfDaying/endOfDays");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/updateStatus">
+      <Route path="/endOfDaying/endOfDays/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/endOfDaying/endOfDays");
             }}
           />
         )}
       </Route>
-      <RentsCard />
+      <EndOfDaysCard />
     </UIProvider>
   );
 }

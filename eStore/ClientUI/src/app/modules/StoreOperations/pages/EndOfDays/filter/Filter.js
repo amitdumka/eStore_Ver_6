@@ -3,8 +3,8 @@ import { Formik } from "formik";
 import { isEqual } from "lodash";
 import { useUIContext } from "../UIContext";
 
-//Rent
-//rent
+//EndOfDay
+//endOfDay
 
 
 
@@ -27,23 +27,23 @@ const prepareFilter = (queryParams, values) => {
   return newQueryParams;
 };
 
-export function RentsFilter({ listLoading }) {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+export function EndOfDaysFilter({ listLoading }) {
+  // EndOfDays UI Context
+  const endOfDaysUIContext = useUIContext();
+  const endOfDaysUIProps = useMemo(() => {
     return {
-      queryParams: rentsUIContext.queryParams,
-      setQueryParams: rentsUIContext.setQueryParams,
+      queryParams: endOfDaysUIContext.queryParams,
+      setQueryParams: endOfDaysUIContext.setQueryParams,
     };
-  }, [rentsUIContext]);
+  }, [endOfDaysUIContext]);
 
   // queryParams, setQueryParams,
   const applyFilter = (values) => {
-    const newQueryParams = prepareFilter(rentsUIProps.queryParams, values);
-    if (!isEqual(newQueryParams, rentsUIProps.queryParams)) {
+    const newQueryParams = prepareFilter(endOfDaysUIProps.queryParams, values);
+    if (!isEqual(newQueryParams, endOfDaysUIProps.queryParams)) {
       newQueryParams.pageNumber = 1;
       // update list by queryParams
-      rentsUIProps.setQueryParams(newQueryParams);
+      endOfDaysUIProps.setQueryParams(newQueryParams);
     }
   };
 

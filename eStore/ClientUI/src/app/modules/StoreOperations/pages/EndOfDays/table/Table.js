@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rents/Actions";
+import * as actions from "../../../_redux/endOfDays/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -22,45 +22,45 @@ import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 
-//Rent
-//rent
+//EndOfDay
+//endOfDay
 
-export function RentsTable() {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+export function EndOfDaysTable() {
+  // EndOfDays UI Context
+  const endOfDaysUIContext = useUIContext();
+  const endOfDaysUIProps = useMemo(() => {
     return {
-      ids: rentsUIContext.ids,
-      setIds: rentsUIContext.setIds,
-      queryParams: rentsUIContext.queryParams,
-      setQueryParams: rentsUIContext.setQueryParams,
-      openEditRentDialog:
-        rentsUIContext.openEditRentDialog,
-      openDeleteRentDialog:
-        rentsUIContext.openDeleteRentDialog,
+      ids: endOfDaysUIContext.ids,
+      setIds: endOfDaysUIContext.setIds,
+      queryParams: endOfDaysUIContext.queryParams,
+      setQueryParams: endOfDaysUIContext.setQueryParams,
+      openEditEndOfDayDialog:
+        endOfDaysUIContext.openEditEndOfDayDialog,
+      openDeleteEndOfDayDialog:
+        endOfDaysUIContext.openDeleteEndOfDayDialog,
     };
-  }, [rentsUIContext]);
+  }, [endOfDaysUIContext]);
 
-  // Getting curret state of rents list from store (Redux)
-  const { currentState } = useSelector(
-    (state) => ({ currentState: state.rents }),
+  // Getting curret state of endOfDays list from store (Redux)
+  const { curendOfDayState } = useSelector(
+    (state) => ({ curendOfDayState: state.endOfDays }),
     shallowEqual
   );
-  const { totalCount, entities, listLoading } = currentState;
+  const { totalCount, entities, listLoading } = curendOfDayState;
 
-  // Rents Redux state
+  // EndOfDays Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    rentsUIProps.setIds([]);
+    endOfDaysUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchRents(rentsUIProps.queryParams));
+    dispatch(actions.fetchEndOfDays(endOfDaysUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rentsUIProps.queryParams, dispatch]);
+  }, [endOfDaysUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "rentId",
+      dataField: "endOfDayId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
@@ -68,14 +68,14 @@ export function RentsTable() {
     },
     {
       dataField: "location.placeName",
-      text: "Rented Location",
+      text: "EndOfDayed Location",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "rentType",
-      text: "Rent Type",
+      dataField: "endOfDayType",
+      text: "EndOfDay Type",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -128,10 +128,10 @@ export function RentsTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditRentDialog:
-          rentsUIProps.openEditRentDialog,
-        openDeleteRentDialog:
-          rentsUIProps.openDeleteRentDialog,
+        openEditEndOfDayDialog:
+          endOfDaysUIProps.openEditEndOfDayDialog,
+        openDeleteEndOfDayDialog:
+          endOfDaysUIProps.openDeleteEndOfDayDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -145,8 +145,8 @@ export function RentsTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: rentsUIProps.queryParams.pageSize,
-    page: rentsUIProps.queryParams.pageNumber,
+    sizePerPage: endOfDaysUIProps.queryParams.pageSize,
+    page: endOfDaysUIProps.queryParams.pageNumber,
   };
 
   return (
@@ -165,19 +165,19 @@ export function RentsTable() {
                 bootstrap4
                 //remote
                 noDataIndication="No Record Found now.."
-                keyField="rentId"
+                keyField="endOfDayId"
                 data={entities === null ? [] : totalCount ? entities : []}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  rentsUIProps.setQueryParams
+                  endOfDaysUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: rentsUIProps.ids,
-                  setIds: rentsUIProps.setIds,
-                  idName: "rentId",
+                  ids: endOfDaysUIProps.ids,
+                  setIds: endOfDaysUIProps.setIds,
+                  idName: "endOfDayId",
                 })}
                 {...paginationTableProps}
               >

@@ -1,60 +1,60 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rents/Actions";
+import * as actions from "../../../_redux/cashDetails/Actions";
 import * as commonActions from "../../../../_redux/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
-//rent
-//Rent
+//cashDetail
+//CashDetail
 
 export function EditDialog({ id, show, onHide }) {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+  // CashDetails UI Context
+  const cashDetailsUIContext = useUIContext();
+  const cashDetailsUIProps = useMemo(() => {
     return {
-      initRent: rentsUIContext.initRent,
+      initCashDetail: cashDetailsUIContext.initCashDetail,
     };
-  }, [rentsUIContext]);
+  }, [cashDetailsUIContext]);
 
-  // Rents Redux state
+  // CashDetails Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, rentForEdit ,payModes,rentTypes, rentedLocations, storeList} = useSelector(
+  const { actionsLoading, cashDetailForEdit ,payModes,cashDetailTypes, cashDetailedLocations, storeList} = useSelector(
     (state) => ({
-      actionsLoading: state.rents.actionsLoading,
-      rentForEdit: state.rents.rentForEdit,
-      payModes:state.rents.payModes,
-      rentTypes:state.rents.rentTypes,
-      rentedLocations:state.rents.rentedLocations, 
+      actionsLoading: state.cashDetails.actionsLoading,
+      cashDetailForEdit: state.cashDetails.cashDetailForEdit,
+      payModes:state.cashDetails.payModes,
+      cashDetailTypes:state.cashDetails.cashDetailTypes,
+      cashDetailedLocations:state.cashDetails.cashDetailedLocations, 
       storeList: state.commonTypes.storeList
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    // server call for getting Rent by id
-    dispatch(actions.fetchRent(id));
+    // server call for getting CashDetail by id
+    dispatch(actions.fetchCashDetail(id));
     dispatch(actions.fetchLocations());
-    dispatch(actions.fetchRentTypes());
+    dispatch(actions.fetchCashDetailTypes());
     dispatch(actions.fetchPayModes());
     dispatch(commonActions.fetchStores());
 
   }, [id, dispatch]);
 
-  // server request for saving rent
-  const saveRent = (rent) => {
-    rent.storeId=parseInt(rent.storeId);
-    rent.rentedLocationId=parseInt(rent.rentedLocationId);
-    rent.rentType=parseInt(rent.rentType);
-    rent.mode=parseInt(rent.mode);
+  // server request for saving cashDetail
+  const saveCashDetail = (cashDetail) => {
+    cashDetail.storeId=parseInt(cashDetail.storeId);
+    cashDetail.cashDetailedLocationId=parseInt(cashDetail.cashDetailedLocationId);
+    cashDetail.cashDetailType=parseInt(cashDetail.cashDetailType);
+    cashDetail.mode=parseInt(cashDetail.mode);
 
     if (!id) {
-      // server request for creating rent
-      dispatch(actions.createRent(rent)).then(() => onHide());
+      // server request for creating cashDetail
+      dispatch(actions.createCashDetail(cashDetail)).then(() => onHide());
     } else {
-      // server request for updating rent
-      dispatch(actions.updateRent(rent)).then(() => onHide());
+      // server request for updating cashDetail
+      dispatch(actions.updateCashDetail(cashDetail)).then(() => onHide());
     }
   };
 
@@ -67,13 +67,13 @@ export function EditDialog({ id, show, onHide }) {
     >
       <EditDialogHeader id={id} />
       <EditForm
-        saveRent={saveRent}
+        saveCashDetail={saveCashDetail}
         actionsLoading={actionsLoading}
-        rent={rentForEdit || rentsUIProps.initRent}
+        cashDetail={cashDetailForEdit || cashDetailsUIProps.initCashDetail}
         onHide={onHide}
         payModes={payModes}
-        rentTypes={rentTypes}
-        locationList={rentedLocations}
+        cashDetailTypes={cashDetailTypes}
+        locationList={cashDetailedLocations}
         storeList={storeList}
       />
     </Modal>

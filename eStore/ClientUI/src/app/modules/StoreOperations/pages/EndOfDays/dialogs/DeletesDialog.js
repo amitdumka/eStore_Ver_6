@@ -1,52 +1,52 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rents/Actions";
+import * as actions from "../../../_redux/endOfDays/Actions";
 import { useUIContext } from "../UIContext";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
 
 // Delete Selected Records
-//rent
-//Rent
+//endOfDay
+//EndOfDay
 
 
 export function DeletesDialog({ show, onHide }) {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+  // EndOfDays UI Context
+  const endOfDaysUIContext = useUIContext();
+  const endOfDaysUIProps = useMemo(() => {
     return {
-      ids: rentsUIContext.ids,
-      setIds: rentsUIContext.setIds,
-      queryParams: rentsUIContext.queryParams,
+      ids: endOfDaysUIContext.ids,
+      setIds: endOfDaysUIContext.setIds,
+      queryParams: endOfDaysUIContext.queryParams,
     };
-  }, [rentsUIContext]);
+  }, [endOfDaysUIContext]);
 
-  // Rents Redux state
+  // EndOfDays Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.rents.actionsLoading }),
+    (state) => ({ isLoading: state.endOfDays.actionsLoading }),
     shallowEqual
   );
 
-  // if rents weren't selected we should close modal
+  // if endOfDays weren't selected we should close modal
   useEffect(() => {
-    if (!rentsUIProps.ids || rentsUIProps.ids.length === 0) {
+    if (!endOfDaysUIProps.ids || endOfDaysUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rentsUIProps.ids]);
+  }, [endOfDaysUIProps.ids]);
 
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading, dispatch]);
 
-  const deleteRents = () => {
-    // server request for deleting rent by selected ids
-    dispatch(actions.deleteRents(rentsUIProps.ids)).then(() => {
+  const deleteEndOfDays = () => {
+    // server request for deleting endOfDay by selected ids
+    dispatch(actions.deleteEndOfDays(endOfDaysUIProps.ids)).then(() => {
       // refresh list after deletion
-      dispatch(actions.fetchRents(rentsUIProps.queryParams)).then(
+      dispatch(actions.fetchEndOfDays(endOfDaysUIProps.queryParams)).then(
         () => {
           // clear selections list
-          rentsUIProps.setIds([]);
+          endOfDaysUIProps.setIds([]);
           // closing delete modal
           onHide();
         }
@@ -65,14 +65,14 @@ export function DeletesDialog({ show, onHide }) {
       {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Rents Delete
+          EndOfDays Delete
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete selected rents?</span>
+          <span>Are you sure to permanently delete selected endOfDays?</span>
         )}
-        {isLoading && <span>Rent are deleting...</span>}
+        {isLoading && <span>EndOfDay are deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -86,7 +86,7 @@ export function DeletesDialog({ show, onHide }) {
           <> </>
           <button
             type="button"
-            onClick={deleteRents}
+            onClick={deleteEndOfDays}
             className="btn btn-primary btn-elevate"
           >
             Delete

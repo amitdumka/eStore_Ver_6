@@ -2,8 +2,8 @@ import React, { createContext, useContext, useState, useCallback } from "react";
 import { isEqual, isFunction } from "lodash";
 import { initialFilter } from "./UIHelpers";
 
-//rent
-//Rent
+//dayClosing
+//DayClosing
 const UIContext = createContext();
 
 export function useUIContext() {
@@ -29,11 +29,11 @@ export function UIProvider({ UIEvents, children }) {
     });
   }, []);
 
-  const initRent = {
-    rentId: 0,
-    rentedLocationId: 0,
+  const initDayClosing = {
+    dayClosingId: 0,
+    dayClosingedLocationId: 0,
     location: null,
-    rentType: 0,
+    dayClosingType: 0,
     onDate: new Date(),
     period: "",
     amount: 0.0,
@@ -53,13 +53,13 @@ export function UIProvider({ UIEvents, children }) {
     ids,
     setIds,
     setQueryParams,
-    initRent,
-    newRentButtonClick: UIEvents.newRentButtonClick,
-    openEditRentDialog: UIEvents.openEditRentDialog,
-    openDeleteRentDialog: UIEvents.openDeleteRentDialog,
-    openDeleteRentsDialog: UIEvents.openDeleteRentsDialog,
-    openFetchRentsDialog: UIEvents.openFetchRentsDialog,
-    openUpdateRentsStatusDialog: UIEvents.openUpdateRentsStatusDialog,
+    initDayClosing,
+    newDayClosingButtonClick: UIEvents.newDayClosingButtonClick,
+    openEditDayClosingDialog: UIEvents.openEditDayClosingDialog,
+    openDeleteDayClosingDialog: UIEvents.openDeleteDayClosingDialog,
+    openDeleteDayClosingsDialog: UIEvents.openDeleteDayClosingsDialog,
+    openFetchDayClosingsDialog: UIEvents.openFetchDayClosingsDialog,
+    openUpdateDayClosingsStatusDialog: UIEvents.openUpdateDayClosingsStatusDialog,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

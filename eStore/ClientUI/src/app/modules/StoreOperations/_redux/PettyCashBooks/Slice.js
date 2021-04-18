@@ -2,29 +2,29 @@ import {createSlice} from "@reduxjs/toolkit";
 
 
 
-//Rent
-//rent
+//PettyCashBook
+//pettyCashBook
 
 
-const initialRentsState = {
+const initialPettyCashBooksState = {
   listLoading: false,
   actionsLoading: false,
   totalCount: 0,
   entities: null,
-  rentForEdit: undefined,
+  pettyCashBookForEdit: undefined,
   lastError: null, 
-  rentTypes:null, 
+  pettyCashBookTypes:null, 
   payModes:null, 
-  rentedLocations:null
+  pettyCashBookedLocations:null
 };
 export const callTypes = {
   list: "list",
   action: "action"
 };
 
-export const rentsSlice = createSlice({
-  name: "rents",
-  initialState: initialRentsState,
+export const pettyCashBooksSlice = createSlice({
+  name: "pettyCashBooks",
+  initialState: initialPettyCashBooksState,
   reducers: {
     catchError: (state, action) => {
       state.error = `${action.type}: ${action.payload.error}`;
@@ -50,76 +50,76 @@ export const rentsSlice = createSlice({
       state.payModes=entities;
       
     },
-    rentTypesFetched: function(state, action){
+    pettyCashBookTypesFetched: function(state, action){
       const{entities}=action.payload;
      state.actionsLoading=false;
      state.listLoading =false;
      state.error=null;
-     state.rentTypes=entities;
+     state.pettyCashBookTypes=entities;
      
     },
     // get All bank List 
-    rentedLocationsFetched: function(state,action){
+    pettyCashBookedLocationsFetched: function(state,action){
       const{entities}=action.payload;
      state.actionsLoading=false;
      state.listLoading =false;
      state.error=null;
-     state.rentedLocations=entities;
+     state.pettyCashBookedLocations=entities;
      
     },
-    // getRentById
-    rentFetched: (state, action) => {
+    // getPettyCashBookById
+    pettyCashBookFetched: (state, action) => {
       state.actionsLoading = false;
-      state.rentForEdit = action.payload.rentForEdit;
+      state.pettyCashBookForEdit = action.payload.pettyCashBookForEdit;
       state.error = null;
     },
-    // findRents
-    rentsFetched: (state, action) => {
+    // findPettyCashBooks
+    pettyCashBooksFetched: (state, action) => {
       const { totalCount, entities } = action.payload;
       state.listLoading = false;
       state.error = null;
       state.entities = entities;
       state.totalCount = totalCount;
     },
-    // createRent
-    rentCreated: (state, action) => {
+    // createPettyCashBook
+    pettyCashBookCreated: (state, action) => {
       state.ewactionsLoading = false;
       state.error = null;
-      state.entities.push(action.payload.rent);
+      state.entities.push(action.payload.pettyCashBook);
     },
-    // updateRent
-    rentUpdated: (state, action) => {
+    // updatePettyCashBook
+    pettyCashBookUpdated: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.map(entity => {
-        if (entity.rentId === action.payload.rent.rentId) {
-          return action.payload.rent;
+        if (entity.pettyCashBookId === action.payload.pettyCashBook.pettyCashBookId) {
+          return action.payload.pettyCashBook;
         }
         return entity;
       });
     },
-    // deleteRent
-    rentDeleted: (state, action) => {
+    // deletePettyCashBook
+    pettyCashBookDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(el => el.rentId !== action.payload.rentId);
+      state.entities = state.entities.filter(el => el.pettyCashBookId !== action.payload.pettyCashBookId);
     },
-    // deleteRents
-    rentsDeleted: (state, action) => {
+    // deletePettyCashBooks
+    pettyCashBooksDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        el => !action.payload.ids.includes(el.rentId)
+        el => !action.payload.ids.includes(el.pettyCashBookId)
       );
     },
     
-    // rentsUpdateState
-    rentsStatusUpdated: (state, action) => {
+    // pettyCashBooksUpdateState
+    pettyCashBooksStatusUpdated: (state, action) => {
       state.actionsLoading = false;
       state.error = null;
       const { ids, status } = action.payload;
       state.entities = state.entities.map(entity => {
-        if (ids.findIndex(id => id === entity.rentId) > -1) {
+        if (ids.findIndex(id => id === entity.pettyCashBookId) > -1) {
           entity.status = status;
         }
         return entity;

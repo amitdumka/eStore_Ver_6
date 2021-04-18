@@ -2,29 +2,29 @@ import {createSlice} from "@reduxjs/toolkit";
 
 
 
-//Rent
-//rent
+//CashDetail
+//cashDetail
 
 
-const initialRentsState = {
+const initialCashDetailsState = {
   listLoading: false,
   actionsLoading: false,
   totalCount: 0,
   entities: null,
-  rentForEdit: undefined,
+  cashDetailForEdit: undefined,
   lastError: null, 
-  rentTypes:null, 
+  cashDetailTypes:null, 
   payModes:null, 
-  rentedLocations:null
+  cashDetailedLocations:null
 };
 export const callTypes = {
   list: "list",
   action: "action"
 };
 
-export const rentsSlice = createSlice({
-  name: "rents",
-  initialState: initialRentsState,
+export const cashDetailsSlice = createSlice({
+  name: "cashDetails",
+  initialState: initialCashDetailsState,
   reducers: {
     catchError: (state, action) => {
       state.error = `${action.type}: ${action.payload.error}`;
@@ -50,76 +50,76 @@ export const rentsSlice = createSlice({
       state.payModes=entities;
       
     },
-    rentTypesFetched: function(state, action){
+    cashDetailTypesFetched: function(state, action){
       const{entities}=action.payload;
      state.actionsLoading=false;
      state.listLoading =false;
      state.error=null;
-     state.rentTypes=entities;
+     state.cashDetailTypes=entities;
      
     },
     // get All bank List 
-    rentedLocationsFetched: function(state,action){
+    cashDetailedLocationsFetched: function(state,action){
       const{entities}=action.payload;
      state.actionsLoading=false;
      state.listLoading =false;
      state.error=null;
-     state.rentedLocations=entities;
+     state.cashDetailedLocations=entities;
      
     },
-    // getRentById
-    rentFetched: (state, action) => {
+    // getCashDetailById
+    cashDetailFetched: (state, action) => {
       state.actionsLoading = false;
-      state.rentForEdit = action.payload.rentForEdit;
+      state.cashDetailForEdit = action.payload.cashDetailForEdit;
       state.error = null;
     },
-    // findRents
-    rentsFetched: (state, action) => {
+    // findCashDetails
+    cashDetailsFetched: (state, action) => {
       const { totalCount, entities } = action.payload;
       state.listLoading = false;
       state.error = null;
       state.entities = entities;
       state.totalCount = totalCount;
     },
-    // createRent
-    rentCreated: (state, action) => {
+    // createCashDetail
+    cashDetailCreated: (state, action) => {
       state.ewactionsLoading = false;
       state.error = null;
-      state.entities.push(action.payload.rent);
+      state.entities.push(action.payload.cashDetail);
     },
-    // updateRent
-    rentUpdated: (state, action) => {
+    // updateCashDetail
+    cashDetailUpdated: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.map(entity => {
-        if (entity.rentId === action.payload.rent.rentId) {
-          return action.payload.rent;
+        if (entity.cashDetailId === action.payload.cashDetail.cashDetailId) {
+          return action.payload.cashDetail;
         }
         return entity;
       });
     },
-    // deleteRent
-    rentDeleted: (state, action) => {
+    // deleteCashDetail
+    cashDetailDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(el => el.rentId !== action.payload.rentId);
+      state.entities = state.entities.filter(el => el.cashDetailId !== action.payload.cashDetailId);
     },
-    // deleteRents
-    rentsDeleted: (state, action) => {
+    // deleteCashDetails
+    cashDetailsDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        el => !action.payload.ids.includes(el.rentId)
+        el => !action.payload.ids.includes(el.cashDetailId)
       );
     },
     
-    // rentsUpdateState
-    rentsStatusUpdated: (state, action) => {
+    // cashDetailsUpdateState
+    cashDetailsStatusUpdated: (state, action) => {
       state.actionsLoading = false;
       state.error = null;
       const { ids, status } = action.payload;
       state.entities = state.entities.map(entity => {
-        if (ids.findIndex(id => id === entity.rentId) > -1) {
+        if (ids.findIndex(id => id === entity.cashDetailId) > -1) {
           entity.status = status;
         }
         return entity;

@@ -1,60 +1,60 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rents/Actions";
+import * as actions from "../../../_redux/dayClosings/Actions";
 import * as commonActions from "../../../../_redux/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
-//rent
-//Rent
+//dayClosing
+//DayClosing
 
 export function EditDialog({ id, show, onHide }) {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+  // DayClosings UI Context
+  const dayClosingsUIContext = useUIContext();
+  const dayClosingsUIProps = useMemo(() => {
     return {
-      initRent: rentsUIContext.initRent,
+      initDayClosing: dayClosingsUIContext.initDayClosing,
     };
-  }, [rentsUIContext]);
+  }, [dayClosingsUIContext]);
 
-  // Rents Redux state
+  // DayClosings Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, rentForEdit ,payModes,rentTypes, rentedLocations, storeList} = useSelector(
+  const { actionsLoading, dayClosingForEdit ,payModes,dayClosingTypes, dayClosingedLocations, storeList} = useSelector(
     (state) => ({
-      actionsLoading: state.rents.actionsLoading,
-      rentForEdit: state.rents.rentForEdit,
-      payModes:state.rents.payModes,
-      rentTypes:state.rents.rentTypes,
-      rentedLocations:state.rents.rentedLocations, 
+      actionsLoading: state.dayClosings.actionsLoading,
+      dayClosingForEdit: state.dayClosings.dayClosingForEdit,
+      payModes:state.dayClosings.payModes,
+      dayClosingTypes:state.dayClosings.dayClosingTypes,
+      dayClosingedLocations:state.dayClosings.dayClosingedLocations, 
       storeList: state.commonTypes.storeList
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    // server call for getting Rent by id
-    dispatch(actions.fetchRent(id));
+    // server call for getting DayClosing by id
+    dispatch(actions.fetchDayClosing(id));
     dispatch(actions.fetchLocations());
-    dispatch(actions.fetchRentTypes());
+    dispatch(actions.fetchDayClosingTypes());
     dispatch(actions.fetchPayModes());
     dispatch(commonActions.fetchStores());
 
   }, [id, dispatch]);
 
-  // server request for saving rent
-  const saveRent = (rent) => {
-    rent.storeId=parseInt(rent.storeId);
-    rent.rentedLocationId=parseInt(rent.rentedLocationId);
-    rent.rentType=parseInt(rent.rentType);
-    rent.mode=parseInt(rent.mode);
+  // server request for saving dayClosing
+  const saveDayClosing = (dayClosing) => {
+    dayClosing.storeId=parseInt(dayClosing.storeId);
+    dayClosing.dayClosingedLocationId=parseInt(dayClosing.dayClosingedLocationId);
+    dayClosing.dayClosingType=parseInt(dayClosing.dayClosingType);
+    dayClosing.mode=parseInt(dayClosing.mode);
 
     if (!id) {
-      // server request for creating rent
-      dispatch(actions.createRent(rent)).then(() => onHide());
+      // server request for creating dayClosing
+      dispatch(actions.createDayClosing(dayClosing)).then(() => onHide());
     } else {
-      // server request for updating rent
-      dispatch(actions.updateRent(rent)).then(() => onHide());
+      // server request for updating dayClosing
+      dispatch(actions.updateDayClosing(dayClosing)).then(() => onHide());
     }
   };
 
@@ -67,13 +67,13 @@ export function EditDialog({ id, show, onHide }) {
     >
       <EditDialogHeader id={id} />
       <EditForm
-        saveRent={saveRent}
+        saveDayClosing={saveDayClosing}
         actionsLoading={actionsLoading}
-        rent={rentForEdit || rentsUIProps.initRent}
+        dayClosing={dayClosingForEdit || dayClosingsUIProps.initDayClosing}
         onHide={onHide}
         payModes={payModes}
-        rentTypes={rentTypes}
-        locationList={rentedLocations}
+        dayClosingTypes={dayClosingTypes}
+        locationList={dayClosingedLocations}
         storeList={storeList}
       />
     </Modal>

@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rents/Actions";
+import * as actions from "../../../_redux/dayClosings/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -22,45 +22,45 @@ import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useUIContext } from "../UIContext";
 
-//Rent
-//rent
+//DayClosing
+//dayClosing
 
-export function RentsTable() {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+export function DayClosingsTable() {
+  // DayClosings UI Context
+  const dayClosingsUIContext = useUIContext();
+  const dayClosingsUIProps = useMemo(() => {
     return {
-      ids: rentsUIContext.ids,
-      setIds: rentsUIContext.setIds,
-      queryParams: rentsUIContext.queryParams,
-      setQueryParams: rentsUIContext.setQueryParams,
-      openEditRentDialog:
-        rentsUIContext.openEditRentDialog,
-      openDeleteRentDialog:
-        rentsUIContext.openDeleteRentDialog,
+      ids: dayClosingsUIContext.ids,
+      setIds: dayClosingsUIContext.setIds,
+      queryParams: dayClosingsUIContext.queryParams,
+      setQueryParams: dayClosingsUIContext.setQueryParams,
+      openEditDayClosingDialog:
+        dayClosingsUIContext.openEditDayClosingDialog,
+      openDeleteDayClosingDialog:
+        dayClosingsUIContext.openDeleteDayClosingDialog,
     };
-  }, [rentsUIContext]);
+  }, [dayClosingsUIContext]);
 
-  // Getting curret state of rents list from store (Redux)
-  const { currentState } = useSelector(
-    (state) => ({ currentState: state.rents }),
+  // Getting curret state of dayClosings list from store (Redux)
+  const { curdayClosingState } = useSelector(
+    (state) => ({ curdayClosingState: state.dayClosings }),
     shallowEqual
   );
-  const { totalCount, entities, listLoading } = currentState;
+  const { totalCount, entities, listLoading } = curdayClosingState;
 
-  // Rents Redux state
+  // DayClosings Redux state
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    rentsUIProps.setIds([]);
+    dayClosingsUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchRents(rentsUIProps.queryParams));
+    dispatch(actions.fetchDayClosings(dayClosingsUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rentsUIProps.queryParams, dispatch]);
+  }, [dayClosingsUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
-      dataField: "rentId",
+      dataField: "dayClosingId",
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
@@ -68,14 +68,14 @@ export function RentsTable() {
     },
     {
       dataField: "location.placeName",
-      text: "Rented Location",
+      text: "DayClosinged Location",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "rentType",
-      text: "Rent Type",
+      dataField: "dayClosingType",
+      text: "DayClosing Type",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -128,10 +128,10 @@ export function RentsTable() {
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditRentDialog:
-          rentsUIProps.openEditRentDialog,
-        openDeleteRentDialog:
-          rentsUIProps.openDeleteRentDialog,
+        openEditDayClosingDialog:
+          dayClosingsUIProps.openEditDayClosingDialog,
+        openDeleteDayClosingDialog:
+          dayClosingsUIProps.openDeleteDayClosingDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -145,8 +145,8 @@ export function RentsTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: rentsUIProps.queryParams.pageSize,
-    page: rentsUIProps.queryParams.pageNumber,
+    sizePerPage: dayClosingsUIProps.queryParams.pageSize,
+    page: dayClosingsUIProps.queryParams.pageNumber,
   };
 
   return (
@@ -165,19 +165,19 @@ export function RentsTable() {
                 bootstrap4
                 //remote
                 noDataIndication="No Record Found now.."
-                keyField="rentId"
+                keyField="dayClosingId"
                 data={entities === null ? [] : totalCount ? entities : []}
                 //data={[]}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  rentsUIProps.setQueryParams
+                  dayClosingsUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: rentsUIProps.ids,
-                  setIds: rentsUIProps.setIds,
-                  idName: "rentId",
+                  ids: dayClosingsUIProps.ids,
+                  setIds: dayClosingsUIProps.setIds,
+                  idName: "dayClosingId",
                 })}
                 {...paginationTableProps}
               >

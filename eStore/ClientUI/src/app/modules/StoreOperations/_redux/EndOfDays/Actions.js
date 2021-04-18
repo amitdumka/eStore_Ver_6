@@ -1,12 +1,12 @@
 import * as requestFromServer from "./Crud";
-import {rentsSlice, callTypes} from "./Slice";
+import {endOfDaysSlice, callTypes} from "./Slice";
 
 
-//Rent
-//rent
+//EndOfDay
+//endOfDay
 
 
-const {actions} = rentsSlice;
+const {actions} = endOfDaysSlice;
 
 
 
@@ -28,21 +28,21 @@ export const fetchPayModes =id=>dispatch => {
     dispatch(actions.catchError({error,callTypes:callTypes.list}));
   });
 }
-export const fetchRentTypes =id=>dispatch => {
+export const fetchEndOfDayTypes =id=>dispatch => {
   
   dispatch(actions.startCall({callType:callTypes.list}));
 
   return requestFromServer
-  .getRentTypes()
+  .getEndOfDayTypes()
   .then(response=>{
     const entities  = response.data; 
     const totalCount=response.data.length;
     console.log(entities);
-    dispatch(actions.rentTypesFetched({totalCount, entities}));
+    dispatch(actions.endOfDayTypesFetched({totalCount, entities}));
   })
   .catch(error =>{
     console.log(error);
-    error.clientMessage="Can't load rent type list"; 
+    error.clientMessage="Can't load endOfDay type list"; 
     dispatch(actions.catchError({error,callTypes:callTypes.list}));
   });
 }
@@ -51,128 +51,128 @@ export const fetchLocations =id=>dispatch => {
   dispatch(actions.startCall({callType:callTypes.list}));
 
   return requestFromServer
-  .getRentedLocations()
+  .getEndOfDayedLocations()
   .then(response=>{
     const entities  = response.data; 
     const totalCount=response.data.length;
     console.log(entities);
-    dispatch(actions.rentedLocationsFetched({totalCount, entities}));
+    dispatch(actions.endOfDayedLocationsFetched({totalCount, entities}));
   })
   .catch(error =>{
     console.log(error);
-    error.clientMessage="Can't load rent location list"; 
+    error.clientMessage="Can't load endOfDay location list"; 
     dispatch(actions.catchError({error,callTypes:callTypes.list}));
   });
 }
 
-export const fetchRents = queryParams => dispatch => {
+export const fetchEndOfDays = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findRents(queryParams)
+    .findEndOfDays(queryParams)
     .then(response => {
       const  entities  = response.data;
       const totalCount = response.data.length;
       console.log(response);
       console.log(response.data.length);
-      dispatch(actions.rentsFetched({ totalCount, entities }));
+      dispatch(actions.endOfDaysFetched({ totalCount, entities }));
     })
     .catch(error => {
       console.log(error);
-      error.clientMessage = "Can't find rents";
+      error.clientMessage = "Can't find endOfDays";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
-export const fetchRent = id => dispatch => {
+export const fetchEndOfDay = id => dispatch => {
   if (!id) {
-    return dispatch(actions.rentFetched({ rentForEdit: undefined }));
+    return dispatch(actions.endOfDayFetched({ endOfDayForEdit: undefined }));
   }
 
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .getRentById(id)
+    .getEndOfDayById(id)
     .then(response => {
-      const rent = response.data;
-      console.log(rent);
-      dispatch(actions.rentFetched({ rentForEdit: rent }));
+      const endOfDay = response.data;
+      console.log(endOfDay);
+      dispatch(actions.endOfDayFetched({ endOfDayForEdit: endOfDay }));
     })
     .catch(error => {
-      error.clientMessage = "Can't find rent";
+      error.clientMessage = "Can't find endOfDay";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteRent = id => dispatch => {
+export const deleteEndOfDay = id => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteRent(id)
+    .deleteEndOfDay(id)
     .then(response => {
-      dispatch(actions.rentDeleted({ id }));
+      dispatch(actions.endOfDayDeleted({ id }));
     })
     .catch(error => {
       
       console.log("CD="+error);
-      error.clientMessage = "Can't delete rent";
+      error.clientMessage = "Can't delete endOfDay";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const createRent = rentForCreation => dispatch => {
+export const createEndOfDay = endOfDayForCreation => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-  console.log(rentForCreation);
+  console.log(endOfDayForCreation);
   return requestFromServer
-    .createRent(JSON.stringify( rentForCreation))
+    .createEndOfDay(JSON.stringify( endOfDayForCreation))
     .then(response => {
-      const  rent  = response.data;
+      const  endOfDay  = response.data;
       console.log(response.data);
-      dispatch(actions.rentCreated({ rent }));
+      dispatch(actions.endOfDayCreated({ endOfDay }));
     })
     .catch(error => {
       console.log(error);
-      error.clientMessage = "Can't create rent";
+      error.clientMessage = "Can't create endOfDay";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateRent = rent => dispatch => {
+export const updateEndOfDay = endOfDay => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-  console.log(rent);
+  console.log(endOfDay);
   return requestFromServer
-    .updateRent(rent)
+    .updateEndOfDay(endOfDay)
     .then(() => {
-      console.log(rent);
-      dispatch(actions.rentUpdated({ rent }));
+      console.log(endOfDay);
+      dispatch(actions.endOfDayUpdated({ endOfDay }));
     })
     .catch(error => {
       console.log(error);
-      error.clientMessage = "Can't update rent";
+      error.clientMessage = "Can't update endOfDay";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateRentsStatus = (ids, status) => dispatch => {
+export const updateEndOfDaysStatus = (ids, status) => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateStatusForRents(ids, status)
+    .updateStatusForEndOfDays(ids, status)
     .then(() => {
-      dispatch(actions.rentsStatusUpdated({ ids, status }));
+      dispatch(actions.endOfDaysStatusUpdated({ ids, status }));
     })
     .catch(error => {
-      error.clientMessage = "Can't update rents status";
+      error.clientMessage = "Can't update endOfDays status";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteRents = ids => dispatch => {
+export const deleteEndOfDays = ids => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteRents(ids)
+    .deleteEndOfDays(ids)
     .then(() => {
 
-      dispatch(actions.rentsDeleted({ ids }));
+      dispatch(actions.endOfDaysDeleted({ ids }));
     })
     .catch(error => {
-      error.clientMessage = "Can't delete rents";
+      error.clientMessage = "Can't delete endOfDays";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };

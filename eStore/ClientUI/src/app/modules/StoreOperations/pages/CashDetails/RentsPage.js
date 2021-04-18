@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { RentsLoadingDialog } from "./dialogs/LoadingDialog";
+import { CashDetailsLoadingDialog } from "./dialogs/LoadingDialog";
 import { EditDialog } from "./dialogs/EditDialog";
 
 import { DeleteDialog } from "./dialogs/DeleteDialog";
@@ -10,99 +10,99 @@ import { DeletesDialog } from "./dialogs/DeletesDialog";
 import { FetchDialog } from "./dialogs/FetchDialog";
 import { UpdateStateDialog } from "./dialogs/UpdateStateDialog";
 import { UIProvider } from "./UIContext";
-import { RentsCard } from "./RentsCard";
+import { CashDetailsCard } from "./CashDetailsCard";
 
-//Rent
-//rent
+//CashDetail
+//cashDetail
 
-export function RentsPage({ history }) {
-  const rentsUIEvents = {
-    newRentButtonClick: () => {
-      history.push("/renting/rents/new");
+export function CashDetailsPage({ history }) {
+  const cashDetailsUIEvents = {
+    newCashDetailButtonClick: () => {
+      history.push("/cashDetailing/cashDetails/new");
     },
-    openEditRentDialog: (id) => {
-      history.push(`/renting/rents/${id}/edit`);
+    openEditCashDetailDialog: (id) => {
+      history.push(`/cashDetailing/cashDetails/${id}/edit`);
     },
-    openDeleteRentDialog: (id) => {
-      history.push(`/renting/rents/${id}/delete`);
+    openDeleteCashDetailDialog: (id) => {
+      history.push(`/cashDetailing/cashDetails/${id}/delete`);
     },
-    openDeleteRentsDialog: () => {
-      history.push(`/renting/rents/deleteRents`);
+    openDeleteCashDetailsDialog: () => {
+      history.push(`/cashDetailing/cashDetails/deleteCashDetails`);
     },
-    openFetchRentsDialog: () => {
-      history.push(`/renting/rents/fetch`);
+    openFetchCashDetailsDialog: () => {
+      history.push(`/cashDetailing/cashDetails/fetch`);
     },
-    openUpdateRentsStatusDialog: () => {
-      history.push("/renting/rents/updateStatus");
+    openUpdateCashDetailsStatusDialog: () => {
+      history.push("/cashDetailing/cashDetails/updateStatus");
     }
   }
 
   return (
-    <UIProvider UIEvents={rentsUIEvents}>
-      <RentsLoadingDialog />
-      <Route path="/renting/rents/new">
+    <UIProvider UIEvents={cashDetailsUIEvents}>
+      <CashDetailsLoadingDialog />
+      <Route path="/cashDetailing/cashDetails/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/cashDetailing/cashDetails");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/:id/edit">
+      <Route path="/cashDetailing/cashDetails/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/cashDetailing/cashDetails");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/deleteRents">
+      <Route path="/cashDetailing/cashDetails/deleteCashDetails">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/cashDetailing/cashDetails");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/:id/delete">
+      <Route path="/cashDetailing/cashDetails/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/cashDetailing/cashDetails");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/fetch">
+      <Route path="/cashDetailing/cashDetails/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/cashDetailing/cashDetails");
             }}
           />
         )}
       </Route>
-      <Route path="/renting/rents/updateStatus">
+      <Route path="/cashDetailing/cashDetails/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/renting/rents");
+              history.push("/cashDetailing/cashDetails");
             }}
           />
         )}
       </Route>
-      <RentsCard />
+      <CashDetailsCard />
     </UIProvider>
   );
 }

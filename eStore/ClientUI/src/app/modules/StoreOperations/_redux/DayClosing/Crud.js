@@ -1,42 +1,42 @@
 import axios from "axios";
 
-//Rent
-//rent
+//DayClosing
+//dayClosing
 
-export const API_URL = "https://www.aprajitaretails.in/api/rents";
+export const API_URL = "https://www.aprajitaretails.in/api/dayClosings";
 export const APIBASE_URL = "https://www.aprajitaretails.in/api";
 
 export async function getPayModes(){
   return axios.get(APIBASE_URL+"/enumvalue/paymode/all"); 
 }
-export async function getRentTypes(){
-  return axios.get(APIBASE_URL+"/enumvalue/renttype/all");
+export async function getDayClosingTypes(){
+  return axios.get(APIBASE_URL+"/enumvalue/dayClosingtype/all");
 }
-export async function getRentedLocations(){
-  return axios.get(APIBASE_URL+"/rentedlocations");
+export async function getDayClosingedLocations(){
+  return axios.get(APIBASE_URL+"/dayClosingedlocations");
 }
 
 
 
-// CREATE =>  POST: add a new rent to the server
-export async function createRent(rent) {
-  return await axios.post(API_URL, rent, {
+// CREATE =>  POST: add a new dayClosing to the server
+export async function createDayClosing(dayClosing) {
+  return await axios.post(API_URL, dayClosing, {
     headers: { "Content-Type": "application/json; charset=utf-8" },
   });
 }
 
 // READ
-export function getAllRents() {
+export function getAllDayClosings() {
   return axios.get(API_URL); //.catch(function (error){console.log(error)});
 }
 
-export async function getRentById(rentId) {
-  return await axios.get(`${API_URL}/${rentId}`);
+export async function getDayClosingById(dayClosingId) {
+  return await axios.get(`${API_URL}/${dayClosingId}`);
 }
 
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
 // items => filtered/sorted result
-export async function findRents(queryParams) {
+export async function findDayClosings(queryParams) {
   //verifyLogin();
   return await axios.get(`${API_URL}`); //find`, { queryParams });
 }
@@ -46,11 +46,11 @@ export async function getAllBanks() {
   return await axios.get("https://www.aprajitaretails.in/api/banks");
 }
 
-// UPDATE => PUT: update the rent on the server
-export async function updateRent(rent) {
+// UPDATE => PUT: update the dayClosing on the server
+export async function updateDayClosing(dayClosing) {
   return await axios.put(
-    `${API_URL}/${rent.rentId}`,
-    JSON.stringify(rent),
+    `${API_URL}/${dayClosing.dayClosingId}`,
+    JSON.stringify(dayClosing),
     {
       headers: { "Content-Type": "application/json; charset=utf-8" },
     }
@@ -58,19 +58,19 @@ export async function updateRent(rent) {
 }
 
 // UPDATE Status
-export async function updateStatusForRents(ids, status) {
-  return await axios.post(`${API_URL}/updateStatusForRents`, {
+export async function updateStatusForDayClosings(ids, status) {
+  return await axios.post(`${API_URL}/updateStatusForDayClosings`, {
     ids,
     status,
   });
 }
 
-// DELETE => delete the rent from the server
-export async function deleteRent(rentId) {
-  return await axios.delete(`${API_URL}/${rentId}`);
+// DELETE => delete the dayClosing from the server
+export async function deleteDayClosing(dayClosingId) {
+  return await axios.delete(`${API_URL}/${dayClosingId}`);
 }
 
-// DELETE Rents by ids
-export async function deleteRents(ids) {
-  return await axios.post(`${API_URL}/deleteRents`, { ids });
+// DELETE DayClosings by ids
+export async function deleteDayClosings(ids) {
+  return await axios.post(`${API_URL}/deleteDayClosings`, { ids });
 }

@@ -1,12 +1,12 @@
 import * as requestFromServer from "./Crud";
-import {rentsSlice, callTypes} from "./Slice";
+import {pettyCashBooksSlice, callTypes} from "./Slice";
 
 
-//Rent
-//rent
+//PettyCashBook
+//pettyCashBook
 
 
-const {actions} = rentsSlice;
+const {actions} = pettyCashBooksSlice;
 
 
 
@@ -28,21 +28,21 @@ export const fetchPayModes =id=>dispatch => {
     dispatch(actions.catchError({error,callTypes:callTypes.list}));
   });
 }
-export const fetchRentTypes =id=>dispatch => {
+export const fetchPettyCashBookTypes =id=>dispatch => {
   
   dispatch(actions.startCall({callType:callTypes.list}));
 
   return requestFromServer
-  .getRentTypes()
+  .getPettyCashBookTypes()
   .then(response=>{
     const entities  = response.data; 
     const totalCount=response.data.length;
     console.log(entities);
-    dispatch(actions.rentTypesFetched({totalCount, entities}));
+    dispatch(actions.pettyCashBookTypesFetched({totalCount, entities}));
   })
   .catch(error =>{
     console.log(error);
-    error.clientMessage="Can't load rent type list"; 
+    error.clientMessage="Can't load pettyCashBook type list"; 
     dispatch(actions.catchError({error,callTypes:callTypes.list}));
   });
 }
@@ -51,128 +51,128 @@ export const fetchLocations =id=>dispatch => {
   dispatch(actions.startCall({callType:callTypes.list}));
 
   return requestFromServer
-  .getRentedLocations()
+  .getPettyCashBookedLocations()
   .then(response=>{
     const entities  = response.data; 
     const totalCount=response.data.length;
     console.log(entities);
-    dispatch(actions.rentedLocationsFetched({totalCount, entities}));
+    dispatch(actions.pettyCashBookedLocationsFetched({totalCount, entities}));
   })
   .catch(error =>{
     console.log(error);
-    error.clientMessage="Can't load rent location list"; 
+    error.clientMessage="Can't load pettyCashBook location list"; 
     dispatch(actions.catchError({error,callTypes:callTypes.list}));
   });
 }
 
-export const fetchRents = queryParams => dispatch => {
+export const fetchPettyCashBooks = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findRents(queryParams)
+    .findPettyCashBooks(queryParams)
     .then(response => {
       const  entities  = response.data;
       const totalCount = response.data.length;
       console.log(response);
       console.log(response.data.length);
-      dispatch(actions.rentsFetched({ totalCount, entities }));
+      dispatch(actions.pettyCashBooksFetched({ totalCount, entities }));
     })
     .catch(error => {
       console.log(error);
-      error.clientMessage = "Can't find rents";
+      error.clientMessage = "Can't find pettyCashBooks";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
-export const fetchRent = id => dispatch => {
+export const fetchPettyCashBook = id => dispatch => {
   if (!id) {
-    return dispatch(actions.rentFetched({ rentForEdit: undefined }));
+    return dispatch(actions.pettyCashBookFetched({ pettyCashBookForEdit: undefined }));
   }
 
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .getRentById(id)
+    .getPettyCashBookById(id)
     .then(response => {
-      const rent = response.data;
-      console.log(rent);
-      dispatch(actions.rentFetched({ rentForEdit: rent }));
+      const pettyCashBook = response.data;
+      console.log(pettyCashBook);
+      dispatch(actions.pettyCashBookFetched({ pettyCashBookForEdit: pettyCashBook }));
     })
     .catch(error => {
-      error.clientMessage = "Can't find rent";
+      error.clientMessage = "Can't find pettyCashBook";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteRent = id => dispatch => {
+export const deletePettyCashBook = id => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteRent(id)
+    .deletePettyCashBook(id)
     .then(response => {
-      dispatch(actions.rentDeleted({ id }));
+      dispatch(actions.pettyCashBookDeleted({ id }));
     })
     .catch(error => {
       
       console.log("CD="+error);
-      error.clientMessage = "Can't delete rent";
+      error.clientMessage = "Can't delete pettyCashBook";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const createRent = rentForCreation => dispatch => {
+export const createPettyCashBook = pettyCashBookForCreation => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-  console.log(rentForCreation);
+  console.log(pettyCashBookForCreation);
   return requestFromServer
-    .createRent(JSON.stringify( rentForCreation))
+    .createPettyCashBook(JSON.stringify( pettyCashBookForCreation))
     .then(response => {
-      const  rent  = response.data;
+      const  pettyCashBook  = response.data;
       console.log(response.data);
-      dispatch(actions.rentCreated({ rent }));
+      dispatch(actions.pettyCashBookCreated({ pettyCashBook }));
     })
     .catch(error => {
       console.log(error);
-      error.clientMessage = "Can't create rent";
+      error.clientMessage = "Can't create pettyCashBook";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateRent = rent => dispatch => {
+export const updatePettyCashBook = pettyCashBook => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-  console.log(rent);
+  console.log(pettyCashBook);
   return requestFromServer
-    .updateRent(rent)
+    .updatePettyCashBook(pettyCashBook)
     .then(() => {
-      console.log(rent);
-      dispatch(actions.rentUpdated({ rent }));
+      console.log(pettyCashBook);
+      dispatch(actions.pettyCashBookUpdated({ pettyCashBook }));
     })
     .catch(error => {
       console.log(error);
-      error.clientMessage = "Can't update rent";
+      error.clientMessage = "Can't update pettyCashBook";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updateRentsStatus = (ids, status) => dispatch => {
+export const updatePettyCashBooksStatus = (ids, status) => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateStatusForRents(ids, status)
+    .updateStatusForPettyCashBooks(ids, status)
     .then(() => {
-      dispatch(actions.rentsStatusUpdated({ ids, status }));
+      dispatch(actions.pettyCashBooksStatusUpdated({ ids, status }));
     })
     .catch(error => {
-      error.clientMessage = "Can't update rents status";
+      error.clientMessage = "Can't update pettyCashBooks status";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deleteRents = ids => dispatch => {
+export const deletePettyCashBooks = ids => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deleteRents(ids)
+    .deletePettyCashBooks(ids)
     .then(() => {
 
-      dispatch(actions.rentsDeleted({ ids }));
+      dispatch(actions.pettyCashBooksDeleted({ ids }));
     })
     .catch(error => {
-      error.clientMessage = "Can't delete rents";
+      error.clientMessage = "Can't delete pettyCashBooks";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };

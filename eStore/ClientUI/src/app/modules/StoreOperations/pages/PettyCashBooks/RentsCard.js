@@ -5,41 +5,41 @@ import {
   CardHeader,
   CardHeaderToolbar,
 } from "../../../../../_metronic/_partials/controls";
-import { RentsFilter } from "./filter/Filter";
-import { RentsTable } from "./table/Table";
-import { RentsGrouping } from "./grouping/Grouping";
+import { PettyCashBooksFilter } from "./filter/Filter";
+import { PettyCashBooksTable } from "./table/Table";
+import { PettyCashBooksGrouping } from "./grouping/Grouping";
 import { useUIContext } from "./UIContext";
 
-//Rent
-//rent
+//PettyCashBook
+//pettyCashBook
 
 
-export function RentsCard() {
-  const RentsUIContext = useUIContext();
-  const RentsUIProps = useMemo(() => {
+export function PettyCashBooksCard() {
+  const PettyCashBooksUIContext = useUIContext();
+  const PettyCashBooksUIProps = useMemo(() => {
     return {
-      ids: RentsUIContext.ids,
-      newRentButtonClick: RentsUIContext.newRentButtonClick,
+      ids: PettyCashBooksUIContext.ids,
+      newPettyCashBookButtonClick: PettyCashBooksUIContext.newPettyCashBookButtonClick,
     };
-  }, [RentsUIContext]);
+  }, [PettyCashBooksUIContext]);
 
   return (
     <Card>
-      <CardHeader title="Rent Payment list">
+      <CardHeader title="PettyCashBook Payment list">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
-            onClick={RentsUIProps.newRentButtonClick}
+            onClick={PettyCashBooksUIProps.newPettyCashBookButtonClick}
           >
             New Payment
           </button>
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        <RentsFilter />
-        {RentsUIProps.ids.length > 0 && <RentsGrouping />}
-        <RentsTable />
+        <PettyCashBooksFilter />
+        {PettyCashBooksUIProps.ids.length > 0 && <PettyCashBooksGrouping />}
+        <PettyCashBooksTable />
       </CardBody>
     </Card>
   );

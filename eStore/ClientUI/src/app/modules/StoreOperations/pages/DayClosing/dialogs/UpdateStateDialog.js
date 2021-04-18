@@ -1,65 +1,65 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/rents/Actions";
+import * as actions from "../../../_redux/dayClosings/Actions";
 import { useUIContext } from "../UIContext";
-//rent
-//Rent
+//dayClosing
+//DayClosing
 
-const selectedRents = (entities, ids) => {
-  const _rents = [];
+const selectedDayClosings = (entities, ids) => {
+  const _dayClosings = [];
   ids.forEach((id) => {
-    const rent = entities.find((el) => el.id === id);
-    if (rent) {
-      _rents.push(rent);
+    const dayClosing = entities.find((el) => el.id === id);
+    if (dayClosing) {
+      _dayClosings.push(dayClosing);
     }
   });
-  return _rents;
+  return _dayClosings;
 };
 
 export function UpdateStateDialog({ show, onHide }) {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+  // DayClosings UI Context
+  const dayClosingsUIContext = useUIContext();
+  const dayClosingsUIProps = useMemo(() => {
     return {
-      ids: rentsUIContext.ids,
-      setIds: rentsUIContext.setIds,
-      queryParams: rentsUIContext.queryParams,
+      ids: dayClosingsUIContext.ids,
+      setIds: dayClosingsUIContext.setIds,
+      queryParams: dayClosingsUIContext.queryParams,
     };
-  }, [rentsUIContext]);
+  }, [dayClosingsUIContext]);
 
-  // Rents Redux state
-  const { rents, isLoading } = useSelector(
+  // DayClosings Redux state
+  const { dayClosings, isLoading } = useSelector(
     (state) => ({
-      rents: selectedRents(
-        state.rents.entities,
-        rentsUIProps.ids
+      dayClosings: selectedDayClosings(
+        state.dayClosings.entities,
+        dayClosingsUIProps.ids
       ),
-      isLoading: state.rents.actionsLoading,
+      isLoading: state.dayClosings.actionsLoading,
     }),
     shallowEqual
   );
 
   // if !id we should close modal
   useEffect(() => {
-    if (!rentsUIProps.ids || rentsUIProps.ids.length === 0) {
+    if (!dayClosingsUIProps.ids || dayClosingsUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rentsUIProps.ids]);
+  }, [dayClosingsUIProps.ids]);
 
   const [status, setStatus] = useState(0);
 
   const dispatch = useDispatch();
   const updateStatus = () => {
-    // server request for update rents status by selected ids
-    dispatch(actions.updateRentsStatus(rentsUIProps.ids, status)).then(
+    // server request for update dayClosings status by selected ids
+    dispatch(actions.updateDayClosingsStatus(dayClosingsUIProps.ids, status)).then(
       () => {
         // refresh list after deletion
-        dispatch(actions.fetchRents(rentsUIProps.queryParams)).then(
+        dispatch(actions.fetchDayClosings(dayClosingsUIProps.queryParams)).then(
           () => {
             // clear selections list
-            rentsUIProps.setIds([]);
+            dayClosingsUIProps.setIds([]);
             // closing delete modal
             onHide();
           }
@@ -76,7 +76,7 @@ export function UpdateStateDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Status has been updated for selected rents
+          Status has been updated for selected dayClosings
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="overlay overlay-block cursor-default">
@@ -96,13 +96,13 @@ export function UpdateStateDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {rents.map((rent) => (
-              <tr key={`id${rent.id}`}>
-                <td>{rent.id}</td>
+            {dayClosings.map((dayClosing) => (
+              <tr key={`id${dayClosing.id}`}>
+                <td>{dayClosing.id}</td>
                 
                 <td>
                   <span className="ml-3">
-                    {rent.lastName}, {rent.firstName}
+                    {dayClosing.lastName}, {dayClosing.firstName}
                   </span>
                 </td>
               </tr>

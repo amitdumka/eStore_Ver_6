@@ -4,48 +4,48 @@ import { shallowEqual, useSelector } from "react-redux";
 
 import { useUIContext } from "../UIContext";
 
-//rent
-//Rent
+//pettyCashBook
+//PettyCashBook
 
 
-const selectedRents = (entities, ids) => {
-  const _rents = [];
+const selectedPettyCashBooks = (entities, ids) => {
+  const _pettyCashBooks = [];
   ids.forEach((id) => {
-    const rent = entities.find((el) => el.id === id);
-    if (rent) {
-      _rents.push(rent);
+    const pettyCashBook = entities.find((el) => el.id === id);
+    if (pettyCashBook) {
+      _pettyCashBooks.push(pettyCashBook);
     }
   });
-  return _rents;
+  return _pettyCashBooks;
 };
 
 export function FetchDialog({ show, onHide }) {
-  // Rents UI Context
-  const rentsUIContext = useUIContext();
-  const rentsUIProps = useMemo(() => {
+  // PettyCashBooks UI Context
+  const pettyCashBooksUIContext = useUIContext();
+  const pettyCashBooksUIProps = useMemo(() => {
     return {
-      ids: rentsUIContext.ids,
+      ids: pettyCashBooksUIContext.ids,
     };
-  }, [rentsUIContext]);
+  }, [pettyCashBooksUIContext]);
 
-  // Rents Redux state
-  const { rents } = useSelector(
+  // PettyCashBooks Redux state
+  const { pettyCashBooks } = useSelector(
     (state) => ({
-      rents: selectedRents(
-        state.rents.entities,
-        rentsUIProps.ids
+      pettyCashBooks: selectedPettyCashBooks(
+        state.pettyCashBooks.entities,
+        pettyCashBooksUIProps.ids
       ),
     }),
     shallowEqual
   );
 
-  // if rents weren't selected we should close modal
+  // if pettyCashBooks weren't selected we should close modal
   useEffect(() => {
-    if (!rentsUIProps.ids || rentsUIProps.ids.length === 0) {
+    if (!pettyCashBooksUIProps.ids || pettyCashBooksUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rentsUIProps.ids]);
+  }, [pettyCashBooksUIProps.ids]);
 
   return (
     <Modal
@@ -68,12 +68,12 @@ export function FetchDialog({ show, onHide }) {
             </tr>
           </thead>
           <tbody>
-            {rents.map((rent) => (
-              <tr key={`id${rent.id}`}>
-                <td>{rent.id}</td>
+            {pettyCashBooks.map((pettyCashBook) => (
+              <tr key={`id${pettyCashBook.id}`}>
+                <td>{pettyCashBook.id}</td>
                 <td>
                   <span className="ml-3">
-                    {rent.lastName}, {rent.firstName}
+                    {pettyCashBook.lastName}, {pettyCashBook.firstName}
                   </span>
                 </td>
               </tr>
