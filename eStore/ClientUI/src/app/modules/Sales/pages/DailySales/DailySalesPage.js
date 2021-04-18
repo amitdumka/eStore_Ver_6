@@ -1,8 +1,8 @@
 import React from "react";
-//import { Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 import { DataLoadingDialog } from "./dialogs/LoadingDailog";
-//import { EditDialog } from "./dialogs/EditDialog";/
+import { EditDialog } from "./dialogs/EditDialog";
 //import { DeleteDialog } from "./dialogs/DeleteDialog";
 //import { DeletesDialog } from "./dialogs/DeletesDialog";
 //import { FetchDialog } from "./dialogs/FetchDialog";
@@ -38,7 +38,7 @@ export function DailySalesPage({ history }) {
   return (
     <UIProvider UIEvents={uiEvents}>
       <DataLoadingDialog />
-      {/* <Route path={`${path}new`}>
+       <Route path={`${path}new`}>
         {({ history, match }) => (
           <EditDialog
             show={match != null}
@@ -59,7 +59,7 @@ export function DailySalesPage({ history }) {
           />
         )}
       </Route>
-      <Route path={`${path}deleteSelected`}>
+      {/*<Route path={`${path}deleteSelected`}>
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}

@@ -14,7 +14,7 @@ export function EditDialog({ id, show, onHide }) {
   const dailySalesUIContext = useUIContext();
   const dailySalesUIProps = useMemo(() => {
     return {
-      initDailySale: dailySalesUIContext.initDailySale,
+      initDailySale: dailySalesUIContext.initData,
     };
   }, [dailySalesUIContext]);
 
