@@ -25,14 +25,14 @@ export function PettyCashBooksCard() {
 
   return (
     <Card>
-      <CardHeader title="PettyCashBook Payment list">
+      <CardHeader title="Petty Cash Book  list">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
             onClick={PettyCashBooksUIProps.newPettyCashBookButtonClick}
           >
-            New Payment
+            New Slip
           </button>
         </CardHeaderToolbar>
       </CardHeader>

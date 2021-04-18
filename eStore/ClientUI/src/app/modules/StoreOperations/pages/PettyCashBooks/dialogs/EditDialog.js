@@ -20,14 +20,15 @@ export function EditDialog({ id, show, onHide }) {
 
   // PettyCashBooks Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, pettyCashBookForEdit ,payModes,pettyCashBookTypes, pettyCashBookedLocations, storeList} = useSelector(
+  const { actionsLoading, pettyCashBookForEdit ,payModes,pettyCashBookTypes, pettyCashBookedLocations, storeList, PettyCashSlip} = useSelector(
     (state) => ({
       actionsLoading: state.pettyCashBooks.actionsLoading,
       pettyCashBookForEdit: state.pettyCashBooks.pettyCashBookForEdit,
-      payModes:state.pettyCashBooks.payModes,
-      pettyCashBookTypes:state.pettyCashBooks.pettyCashBookTypes,
-      pettyCashBookedLocations:state.pettyCashBooks.pettyCashBookedLocations, 
-      storeList: state.commonTypes.storeList
+      // payModes:state.pettyCashBooks.payModes,
+      // pettyCashBookTypes:state.pettyCashBooks.pettyCashBookTypes,
+      // pettyCashBookedLocations:state.pettyCashBooks.pettyCashBookedLocations, 
+      storeList: state.commonTypes.storeList,
+      PettyCashSlip:state.pettyCashBook.sysGenPettyCashSlip,
     }),
     shallowEqual
   );
@@ -35,9 +36,10 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting PettyCashBook by id
     dispatch(actions.fetchPettyCashBook(id));
-    dispatch(actions.fetchLocations());
-    dispatch(actions.fetchPettyCashBookTypes());
-    dispatch(actions.fetchPayModes());
+    // dispatch(actions.fetchLocations());
+    // dispatch(actions.fetchPettyCashBookTypes());
+    // dispatch(actions.fetchPayModes());
+    dispatch(actions.fetchSysGenPettyCashSlip());
     dispatch(commonActions.fetchStores());
 
   }, [id, dispatch]);
@@ -71,10 +73,11 @@ export function EditDialog({ id, show, onHide }) {
         actionsLoading={actionsLoading}
         pettyCashBook={pettyCashBookForEdit || pettyCashBooksUIProps.initPettyCashBook}
         onHide={onHide}
-        payModes={payModes}
-        pettyCashBookTypes={pettyCashBookTypes}
-        locationList={pettyCashBookedLocations}
+        // payModes={payModes}
+        // pettyCashBookTypes={pettyCashBookTypes}
+        // locationList={pettyCashBookedLocations}
         storeList={storeList}
+        PettyCashSlip={PettyCashSlip}
       />
     </Modal>
   );

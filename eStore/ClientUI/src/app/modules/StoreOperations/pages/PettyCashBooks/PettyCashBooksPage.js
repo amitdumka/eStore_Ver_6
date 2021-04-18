@@ -18,86 +18,86 @@ import { PettyCashBooksCard } from "./PettyCashBooksCard";
 export function PettyCashBooksPage({ history }) {
   const pettyCashBooksUIEvents = {
     newPettyCashBookButtonClick: () => {
-      history.push("/pettyCashBooking/pettyCashBooks/new");
+      history.push("/stores/pettyCashBooks/new");
     },
     openEditPettyCashBookDialog: (id) => {
-      history.push(`/pettyCashBooking/pettyCashBooks/${id}/edit`);
+      history.push(`/stores/pettyCashBooks/${id}/edit`);
     },
     openDeletePettyCashBookDialog: (id) => {
-      history.push(`/pettyCashBooking/pettyCashBooks/${id}/delete`);
+      history.push(`/stores/pettyCashBooks/${id}/delete`);
     },
     openDeletePettyCashBooksDialog: () => {
-      history.push(`/pettyCashBooking/pettyCashBooks/deletePettyCashBooks`);
+      history.push(`/stores/pettyCashBooks/deletePettyCashBooks`);
     },
     openFetchPettyCashBooksDialog: () => {
-      history.push(`/pettyCashBooking/pettyCashBooks/fetch`);
+      history.push(`/stores/pettyCashBooks/fetch`);
     },
     openUpdatePettyCashBooksStatusDialog: () => {
-      history.push("/pettyCashBooking/pettyCashBooks/updateStatus");
+      history.push("/stores/pettyCashBooks/updateStatus");
     }
   }
 
   return (
     <UIProvider UIEvents={pettyCashBooksUIEvents}>
       <PettyCashBooksLoadingDialog />
-      <Route path="/pettyCashBooking/pettyCashBooks/new">
+      <Route path="/stores/pettyCashBooks/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/pettyCashBooking/pettyCashBooks");
+              history.push("/stores/pettyCashBooks");
             }}
           />
         )}
       </Route>
-      <Route path="/pettyCashBooking/pettyCashBooks/:id/edit">
+      <Route path="/stores/pettyCashBooks/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/pettyCashBooking/pettyCashBooks");
+              history.push("/stores/pettyCashBooks");
             }}
           />
         )}
       </Route>
-      <Route path="/pettyCashBooking/pettyCashBooks/deletePettyCashBooks">
+      <Route path="/stores/pettyCashBooks/deletePettyCashBooks">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/pettyCashBooking/pettyCashBooks");
+              history.push("/stores/pettyCashBooks");
             }}
           />
         )}
       </Route>
-      <Route path="/pettyCashBooking/pettyCashBooks/:id/delete">
+      <Route path="/stores/pettyCashBooks/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/pettyCashBooking/pettyCashBooks");
+              history.push("/stores/pettyCashBooks");
             }}
           />
         )}
       </Route>
-      <Route path="/pettyCashBooking/pettyCashBooks/fetch">
+      <Route path="/stores/pettyCashBooks/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/pettyCashBooking/pettyCashBooks");
+              history.push("/stores/pettyCashBooks");
             }}
           />
         )}
       </Route>
-      <Route path="/pettyCashBooking/pettyCashBooks/updateStatus">
+      <Route path="/stores/pettyCashBooks/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/pettyCashBooking/pettyCashBooks");
+              history.push("/stores/pettyCashBooks");
             }}
           />
         )}

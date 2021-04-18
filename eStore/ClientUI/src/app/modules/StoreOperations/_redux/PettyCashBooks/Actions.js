@@ -83,6 +83,21 @@ export const fetchPettyCashBooks = queryParams => dispatch => {
     });
 };
 
+export const fetchSysGenPettyCashSlip =onDate=> dispatch=>{
+  dispatch(actions.startCall({ callType: callTypes.action }));
+  return requestFromServer
+  .getGeneratedPettyCashBook()
+  .then(response => {
+    const sysGenPettyCashSlip = response.data;
+    console.log(sysGenPettyCashSlip);
+    dispatch(actions.pettyCashBookSysGenFetched({ sysGenPettyCashSlip: sysGenPettyCashSlip }));
+  })
+  .catch(error => {
+    error.clientMessage = "Can't able to generate Petty Cash Slip";
+    dispatch(actions.catchError({ error, callType: callTypes.action }));
+  });
+};
+
 export const fetchPettyCashBook = id => dispatch => {
   if (!id) {
     return dispatch(actions.pettyCashBookFetched({ pettyCashBookForEdit: undefined }));

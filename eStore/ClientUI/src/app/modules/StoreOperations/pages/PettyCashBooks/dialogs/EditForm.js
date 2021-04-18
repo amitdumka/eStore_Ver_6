@@ -6,7 +6,11 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Input, Select,DatePickerField } from "../../../../../../_metronic/_partials/controls";
+import {
+  Input,
+  Select,
+  DatePickerField,
+} from "../../../../../../_metronic/_partials/controls";
 
 //pettyCashBook
 //PettyCashBook
@@ -15,15 +19,29 @@ import { Input, Select,DatePickerField } from "../../../../../../_metronic/_part
 const PettyCashBookEditSchema = Yup.object().shape({
   onDate: Yup.date().required("Date is required"),
   period: Yup.string().required("Period is required"),
-  pettyCashBookType: Yup.number().required("Select PettyCashBook Type , is required"),
-  pettyCashBookedLocationId: Yup.number().moreThan(0).required("Select PettyCashBook Location , is required"),
-  mode:Yup.number().required("Select mode is required"),
-  amount: Yup.number().moreThan(0).required("Amount is required"),
-  remarks:Yup.string().required("Remarks is required"), 
-  paymentDetails: Yup.string().required("Payment Details is required")
+  pettyCashBookType: Yup.number().required(
+    "Select PettyCashBook Type , is required"
+  ),
+  pettyCashBookedLocationId: Yup.number()
+    .moreThan(0)
+    .required("Select PettyCashBook Location , is required"),
+  mode: Yup.number().required("Select mode is required"),
+  amount: Yup.number()
+    .moreThan(0)
+    .required("Amount is required"),
+  remarks: Yup.string().required("Remarks is required"),
+  paymentDetails: Yup.string().required("Payment Details is required"),
 });
 
-export function EditForm({ savePettyCashBook, pettyCashBook, actionsLoading, onHide, locationList, pettyCashBookTypes, payModes,storeList }) {
+export function EditForm({
+  savePettyCashBook,
+  pettyCashBook,
+  actionsLoading,
+  onHide,
+  storeList,
+  PettyCashSlip,
+}) {
+  pettyCashBook = PettyCashSlip && PettyCashSlip;
   return (
     <>
       <Formik
@@ -47,42 +65,19 @@ export function EditForm({ savePettyCashBook, pettyCashBook, actionsLoading, onH
                   {/* Store */}
                   <div className="col-lg-4">
                     <Select name="storeId" label="Store">
-                    {storeList && storeList.map((item) => (
-                        <option key={item.storeId} value={item.storeId}>
-                          {item.storeName}
-                        </option>
-                      ))}
-                    </Select>
-                  </div>
-
-                  {/* Email */}
-                  <div className="col-lg-4">
-                    <Select name="pettyCashBookedLocationId" placeholder="Location" label="Location">
-                      <option value="">Select Location</option>
-                      {locationList && locationList.map((item) => (
-                        <option key={item.pettyCashBookedLocationId} value={item.pettyCashBookedLocationId}>
-                          {item.placeName}
-                        </option>
-                      ))}
-                    </Select>
-                  </div>
-                  {/* Email */}
-                  <div className="col-lg-4">
-                    <Select name="pettyCashBookType" placeholder="PettyCashBook Type" label="PettyCashBook Type">
-                      <option value="">Select Type</option>
-                      {pettyCashBookTypes && pettyCashBookTypes.map((item) => (
-                        <option key={item.value} value={item.value}>
-                          {item.name}
-                        </option>
-                      ))}
+                      {storeList &&
+                        storeList.map((item) => (
+                          <option key={item.storeId} value={item.storeId}>
+                            {item.storeName}
+                          </option>
+                        ))}
                     </Select>
                   </div>
                 </div>
-               
+
                 <div className="form-group row">
-                  
-                   {/* Date of BankDeposit */}
-                   <div className="col-lg-4">
+                  {/* Date of BankDeposit */}
+                  <div className="col-lg-4">
                     <DatePickerField
                       dateFormat="yyyy-MM-dd"
                       name="onDate"
@@ -99,8 +94,8 @@ export function EditForm({ savePettyCashBook, pettyCashBook, actionsLoading, onH
                       label="Period"
                     />
                   </div>
-                   {/*  State Name*/}
-                   <div className="col-lg-4">
+                  {/*  State Name*/}
+                  <div className="col-lg-4">
                     <Field
                       name="amount"
                       component={Input}
@@ -110,20 +105,8 @@ export function EditForm({ savePettyCashBook, pettyCashBook, actionsLoading, onH
                   </div>
                 </div>
                 <div className="form-group row">
-                 
-                  {/* Email */}
+                  {/*  Father Name*/}
                   <div className="col-lg-4">
-                    <Select name="mode" placeholder="Mode" label="Mode">
-                      <option value="">Select Mode</option>
-                      {payModes && payModes.map((item) => (
-                        <option key={item.value} value={item.value}>
-                          {item.name}
-                        </option>
-                      ))}
-                    </Select>
-                  </div>
-                   {/*  Father Name*/}
-                   <div className="col-lg-4">
                     <Field
                       name="paymentDetails"
                       component={Input}
@@ -131,8 +114,8 @@ export function EditForm({ savePettyCashBook, pettyCashBook, actionsLoading, onH
                       label="Payment Details"
                     />
                   </div>
-                   {/*  Father Name*/}
-                   <div className="col-lg-4">
+                  {/*  Father Name*/}
+                  <div className="col-lg-4">
                     <Field
                       name="remarks"
                       component={Input}

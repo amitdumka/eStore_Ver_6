@@ -6,6 +6,11 @@ import axios from "axios";
 export const API_URL = "https://www.aprajitaretails.in/api/pettyCashBooks";
 export const APIBASE_URL = "https://www.aprajitaretails.in/api";
 
+
+export async function  getGeneratedPettyCashBook(){
+  return axios.get(APIBASE_URL+"/DayClosing/GeneratePettyCashSlip"); 
+}
+
 export async function getPayModes(){
   return axios.get(APIBASE_URL+"/enumvalue/paymode/all"); 
 }

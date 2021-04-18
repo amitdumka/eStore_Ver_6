@@ -2,7 +2,7 @@ export const StatusCssClasses = ["success","danger", "warning","info",""];
 export const StatusTitles = ["Present", "Absent", "HalfDay","Sunday" ,""];
 export const AccountTypeCssClasses = ["success", "primary", "danger","warning","info",""];
 export const AccountTypeTitles = ["Saving", "CurpettyCashBook", "CC","OD","Other",""];
-export const defaultSorted = [{ dataField: "bankName", order: "asc" }];
+export const defaultSorted = [{ dataField: "onDate", order: "asc" }];
 export const sizePerPageList = [
   { text: "3", value: 3 },
   { text: "5", value: 5 },
@@ -10,10 +10,8 @@ export const sizePerPageList = [
 ];
 export const initialFilter = {
   filter: {
-    account: "",
-    branchName: "",
-    bankName: "",
-    accountType: ""
+    onDate: "",
+    storeId: "",
   },
   sortOrder: "asc", // asc||desc
   sortField: "id",

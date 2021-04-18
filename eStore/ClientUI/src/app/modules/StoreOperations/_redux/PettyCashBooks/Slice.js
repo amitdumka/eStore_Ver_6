@@ -15,7 +15,8 @@ const initialPettyCashBooksState = {
   lastError: null, 
   pettyCashBookTypes:null, 
   payModes:null, 
-  pettyCashBookedLocations:null
+  pettyCashBookedLocations:null, 
+  sysGenPettyCashSlip:null,
 };
 export const callTypes = {
   list: "list",
@@ -71,6 +72,11 @@ export const pettyCashBooksSlice = createSlice({
     pettyCashBookFetched: (state, action) => {
       state.actionsLoading = false;
       state.pettyCashBookForEdit = action.payload.pettyCashBookForEdit;
+      state.error = null;
+    },
+    pettyCashBookSysGenFetched: (state, action) => {
+      state.actionsLoading = false;
+      state.sysGenPettyCashSlip = action.payload.sysGenPettyCashSlip;
       state.error = null;
     },
     // findPettyCashBooks
