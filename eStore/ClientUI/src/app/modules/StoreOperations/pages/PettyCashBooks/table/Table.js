@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/pettyCashBooks/Actions";
+import * as actions from "../../../_redux/PettyCashBooks/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,

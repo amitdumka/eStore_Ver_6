@@ -18,19 +18,19 @@ import {
 // Validation schema
 const PettyCashBookEditSchema = Yup.object().shape({
   onDate: Yup.date().required("Date is required"),
-  period: Yup.string().required("Period is required"),
-  pettyCashBookType: Yup.number().required(
-    "Select PettyCashBook Type , is required"
-  ),
-  pettyCashBookedLocationId: Yup.number()
-    .moreThan(0)
-    .required("Select PettyCashBook Location , is required"),
-  mode: Yup.number().required("Select mode is required"),
-  amount: Yup.number()
-    .moreThan(0)
-    .required("Amount is required"),
-  remarks: Yup.string().required("Remarks is required"),
-  paymentDetails: Yup.string().required("Payment Details is required"),
+  openingCash: Yup.number().required("Amount is required"),
+  closingCash: Yup.number().required("Amount is required"),
+  systemSale: Yup.number().required("Amount is required"),
+  tailoringSale: Yup.number().required("Amount is required"),
+  manualSale: Yup.number().required("Amount is required"),
+  cardSwipe: Yup.number().required("Amount is required"),
+  bankDeposit: Yup.number().required("Amount is required"),
+  totalExpenses: Yup.number().required("Amount is required"),
+  totalPayments: Yup.number().required("Amount is required"),
+  totalDues: Yup.number().required("Amount is required"),
+  cashReciepts: Yup.number().required("Amount is required"),
+  ohterReceipts: Yup.number().required("Amount is required"),
+  storeId: Yup.number().moreThan(0).required("Select Store is required"),
 });
 
 export function EditForm({
@@ -73,9 +73,6 @@ export function EditForm({
                         ))}
                     </Select>
                   </div>
-                </div>
-
-                <div className="form-group row">
                   {/* Date of BankDeposit */}
                   <div className="col-lg-4">
                     <DatePickerField
@@ -84,23 +81,53 @@ export function EditForm({
                       label="On Date"
                     />
                   </div>
-
+                </div>
+                <div className="form-group row">
                   {/*  Father Name*/}
                   <div className="col-lg-4">
                     <Field
-                      name="period"
+                      name="openingCash"
                       component={Input}
-                      placeholder="Period"
-                      label="Period"
+                      placeholder="Opening Cash"
+                      label="Opening Cash"
+                    />
+                  </div>
+                  {/*  Father Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="closingCash"
+                      component={Input}
+                      placeholder="Cash In Hand"
+                      label="Cash In Hand"
+                    />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  {/*  State Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="systemSale"
+                      component={Input}
+                      placeholder="System Sale"
+                      label="System Sale"
                     />
                   </div>
                   {/*  State Name*/}
                   <div className="col-lg-4">
                     <Field
-                      name="amount"
+                      name="manualSale"
                       component={Input}
-                      placeholder="Amount"
+                      placeholder="Manual Sale"
                       label="Amount"
+                    />
+                  </div>
+                  {/*  State Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="tailoringSale"
+                      component={Input}
+                      placeholder="Tailoring Sale"
+                      label="Tailoring Sale"
                     />
                   </div>
                 </div>
@@ -108,19 +135,88 @@ export function EditForm({
                   {/*  Father Name*/}
                   <div className="col-lg-4">
                     <Field
-                      name="paymentDetails"
+                      name="cashReciepts"
                       component={Input}
-                      placeholder="Payment Details"
-                      label="Payment Details"
+                      placeholder="Cash Reciepts"
+                      label="Cash Reciepts"
                     />
                   </div>
                   {/*  Father Name*/}
                   <div className="col-lg-4">
                     <Field
-                      name="remarks"
+                      name="ohterReceipts"
                       component={Input}
-                      placeholder="Remarks"
-                      label="Remarks"
+                      placeholder="Other Receipts"
+                      label="Other Receipts"
+                    />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  {/*  State Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="cardSwipe"
+                      component={Input}
+                      placeholder="Card/Others"
+                      label="NON Cash Sale"
+                    />
+                  </div>
+                  {/*  State Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="bankDeposit"
+                      component={Input}
+                      placeholder="Bank Deposit"
+                      label="Bank Deposit"
+                    />
+                  </div>
+                  {/*  State Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="totalExpenses"
+                      component={Input}
+                      placeholder="Total Expense"
+                      label="Total Expense"
+                    />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  {/*  State Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="totalPayments"
+                      component={Input}
+                      placeholder="Total Payment"
+                      label="Total Payments"
+                    />
+                  </div>
+                  {/*  State Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="paymentRemarks"
+                      component={Input}
+                      placeholder="Payment Remarks"
+                      label="Payment Remarks"
+                    />
+                  </div>
+                  {/*  State Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="totalDues"
+                      component={Input}
+                      placeholder="Total Dues"
+                      label="Total Dues"
+                    />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  {/*  State Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="customerDuesNames"
+                      component={Input}
+                      placeholder="Dues List"
+                      label="Dues Info"
                     />
                   </div>
                 </div>

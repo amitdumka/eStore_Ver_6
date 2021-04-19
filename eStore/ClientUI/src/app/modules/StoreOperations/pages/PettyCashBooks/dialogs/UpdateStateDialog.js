@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/pettyCashBooks/Actions";
+import * as actions from "../../../_redux/PettyCashBooks/Actions";
 import { useUIContext } from "../UIContext";
 //pettyCashBook
 //PettyCashBook

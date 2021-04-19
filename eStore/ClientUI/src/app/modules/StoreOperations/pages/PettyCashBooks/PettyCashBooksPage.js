@@ -10,7 +10,7 @@ import { DeletesDialog } from "./dialogs/DeletesDialog";
 import { FetchDialog } from "./dialogs/FetchDialog";
 import { UpdateStateDialog } from "./dialogs/UpdateStateDialog";
 import { UIProvider } from "./UIContext";
-import { PettyCashBooksCard } from "./PettyCashBooksCard";
+import { PettyCashBookCard } from "./PettyCashBookCard";
 
 //PettyCashBook
 //pettyCashBook
@@ -102,7 +102,7 @@ export function PettyCashBooksPage({ history }) {
           />
         )}
       </Route>
-      <PettyCashBooksCard />
+      <PettyCashBookCard />
     </UIProvider>
   );
 }

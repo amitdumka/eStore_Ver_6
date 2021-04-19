@@ -134,12 +134,10 @@ export const deletePettyCashBook = id => dispatch => {
 
 export const createPettyCashBook = pettyCashBookForCreation => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-  console.log(pettyCashBookForCreation);
   return requestFromServer
     .createPettyCashBook(JSON.stringify( pettyCashBookForCreation))
     .then(response => {
       const  pettyCashBook  = response.data;
-      console.log(response.data);
       dispatch(actions.pettyCashBookCreated({ pettyCashBook }));
     })
     .catch(error => {

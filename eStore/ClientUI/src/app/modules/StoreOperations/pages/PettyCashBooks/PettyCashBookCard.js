@@ -14,7 +14,7 @@ import { useUIContext } from "./UIContext";
 //pettyCashBook
 
 
-export function PettyCashBooksCard() {
+export function PettyCashBookCard() {
   const PettyCashBooksUIContext = useUIContext();
   const PettyCashBooksUIProps = useMemo(() => {
     return {
