@@ -31,10 +31,8 @@ export function EditForm({
   actionsLoading,
   onHide,employeeList,
   attendanceUnits,
-  storeList,user,
+  storeList
 }) {
-
-  user ? attendance.userId=user.name: attendance.userId="WebUI_NOTAuth";
   
   return (
     <>
@@ -47,6 +45,7 @@ export function EditForm({
           saveAttendance(values);
         }}
       >
+        
         {({ handleSubmit }) => (
           <>
             <Modal.Body className="overlay overlay-block cursor-default">
@@ -90,7 +89,7 @@ export function EditForm({
                       placeholder="Status"
                       label="Status"
                     >
-                      {attendanceUnits&&attendanceUnits.map((item) => (
+                      {attendanceUnits && attendanceUnits.map((item) => (
                         <option key={item.value} value={item.value}>
                           {item.name}
                         </option>

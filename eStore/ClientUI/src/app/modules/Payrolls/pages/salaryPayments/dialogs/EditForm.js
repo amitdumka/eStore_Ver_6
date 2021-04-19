@@ -31,7 +31,7 @@ export function EditForm({
   salaryPayment,
   actionsLoading,
   onHide,
-  employeeList,payModes,salaryComponets
+  employeeList,payModes,salaryComponets,storeList
 }) {
   return (
     <>
@@ -55,10 +55,14 @@ export function EditForm({
                 <div className="form-group row">
                   
                    {/* Store */}
-                   <div className="col-lg-4">
+                    {/* Store */}
+                    <div className="col-lg-4">
                     <Select name="storeId" label="Store">
-                      <option value="1">Dumka</option>
-                      <option value="2">Jamshedpur</option>
+                      {storeList && storeList.map((item) => (
+                        <option key={item.storeId} value={item.storeId}>
+                          {item.storeName}
+                        </option>
+                      ))}
                     </Select>
                   </div>
                   
@@ -82,7 +86,7 @@ export function EditForm({
                       label="Employee"
                     >
                       <option value="">Select Employee</option>
-                      {employeeList.map((item) => (
+                      {employeeList && employeeList.map((item) => (
                         <option key={item.employeeId} value={item.employeeId}>
                           {item.staffName}
                         </option>

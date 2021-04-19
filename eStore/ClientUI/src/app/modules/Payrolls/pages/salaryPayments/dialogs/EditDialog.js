@@ -21,13 +21,14 @@ export function EditDialog({ id, show, onHide }) {
 
   // SalaryPayments Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, salaryPaymentForEdit ,employeeList,salaryComponet, payModes} = useSelector(
+  const { actionsLoading, salaryPaymentForEdit ,employeeList,salaryComponet, payModes,storeList} = useSelector(
     (state) => ({
       actionsLoading: state.salaryPayments.actionsLoading,
       salaryPaymentForEdit: state.salaryPayments.salaryPaymentForEdit,
       employeeList:state.salaryPayments.employeeEntities, 
       salaryComponet: state.commonTypes.salaryComponet,
-      payModes: state.commonTypes.payModes
+      payModes: state.commonTypes.payModes,
+      storeList: state.commonTypes.storeList
     }),
     shallowEqual
   );
@@ -70,6 +71,7 @@ export function EditDialog({ id, show, onHide }) {
         employeeList={employeeList}
         salaryComponets={salaryComponet}
         payModes={payModes}
+        storeList={storeList}
       />
     </Modal>
   );

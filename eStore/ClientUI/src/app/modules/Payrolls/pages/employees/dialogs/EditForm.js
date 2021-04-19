@@ -103,7 +103,7 @@ export function EditForm({ saveEmployee, employee, actionsLoading, onHide }) {
                   {/* Date of birth */}
                   <div className="col-lg-4">
                     <DatePickerField
-                      dateFormat="yyyy-mm-ddT00:00:00"
+                      dateFormat="yyyy-mm-dd"
                       name="dateOfBirth"
                       label="Date of Birth"
                     />
@@ -130,7 +130,7 @@ export function EditForm({ saveEmployee, employee, actionsLoading, onHide }) {
                   {/* Date of Joining */}
                   <div className="col-lg-4">
                     <DatePickerField
-                      dateFormat="yyyy-mm-ddT00:00:00"
+                      dateFormat="yyyy-mm-dd"
                       name="joiningDate"
                       label="Joining Date"
                     />
@@ -138,7 +138,7 @@ export function EditForm({ saveEmployee, employee, actionsLoading, onHide }) {
                   {/* Date of Leaving */}
                   <div className="col-lg-4">
                     <DatePickerField
-                      dateFormat="yyyy-mm-ddT00:00:00"
+                      dateFormat="yyyy-mm-dd"
                       name="leavingDate"
                       label="Leaving Date"
                     />

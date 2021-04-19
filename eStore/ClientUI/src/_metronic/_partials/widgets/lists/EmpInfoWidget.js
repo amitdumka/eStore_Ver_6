@@ -1,7 +1,9 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React from "react";
-
-export function EmpInfoWidget({ className, empInfo,topSalesman }) {
+import { Dropdown } from "react-bootstrap";
+//import { toAbsoluteUrl } from "../../../_helpers";
+import { DropdownCustomToggler, DropdownEmpMenu } from "../../dropdowns";
+export function EmpInfoWidget({ className, empInfo, topSalesman }) {
   return (
     <>
       <div className={`card card-custom ${className}`}>
@@ -11,7 +13,16 @@ export function EmpInfoWidget({ className, empInfo,topSalesman }) {
             Employee(s)
           </h3>
 
-          {/* <div className="card-toolbar">
+          <div className="card-toolbar">
+            <div className="text-danger font-weight-bold text-hover-primary font-size-lg mb-1">
+              Top Salesman [Y/M/T]:
+              <span className="text-success">
+                {" "}
+                {topSalesman[0]} / {topSalesman[1]} / {topSalesman[2]}
+              </span>{" "}
+            </div>
+          </div>
+          <div className="card-toolbar">
             <Dropdown className="dropdown-inline" alignRight>
               <Dropdown.Toggle
                 id="dropdown-toggle-top"
@@ -20,20 +31,16 @@ export function EmpInfoWidget({ className, empInfo,topSalesman }) {
                 <i className="ki ki-bold-more-ver" />
               </Dropdown.Toggle>
               <Dropdown.Menu className="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                <DropdownMenu3 />
+                <DropdownEmpMenu />
               </Dropdown.Menu>
             </Dropdown>
-          </div>*/}
-          <div className="card-toolbar">
-            <div className="text-danger font-weight-bold text-hover-primary font-size-lg mb-1">Top Salesman [Y/M/T]: 
-            <span className="text-success"> {topSalesman[0]} / {topSalesman[1]} / {topSalesman[2]}</span> </div>
           </div>
-        </div> 
+        </div>
 
         {/* Body */}
         <div className="card-body pt-0">
-          {empInfo.length>0 ?
-            empInfo.map((item,index) => (
+          {empInfo.length > 0 ? (
+            empInfo.map((item, index) => (
               <div className="mb-6" key={index}>
                 <div className="d-flex align-items-center flex-grow-1">
                   <div className="d-flex flex-wrap align-items-center justify-content-between w-100">
@@ -47,13 +54,13 @@ export function EmpInfoWidget({ className, empInfo,topSalesman }) {
 
                       <span className="text-primary font-weight-bold font-size-lg">
                         Present/Absent : {item.presentDays} {}/ {}{" "}
-                        {item.absentDays}{ "  "}
+                        {item.absentDays}
+                        {"  "}
                         {item.isSalesman && (
                           <span className="text-success font-weight-bold">
-                            Sale/Bill : {item.totalSale} {}/ {} {item.noOfBills}   
-                            {"  "} Ratio : {item.ratio}                        
+                            Sale/Bill : {item.totalSale} {}/ {} {item.noOfBills}
+                            {"  "} Ratio : {item.ratio}
                           </span>
-                          
                         )}
                       </span>
                     </div>
@@ -75,7 +82,18 @@ export function EmpInfoWidget({ className, empInfo,topSalesman }) {
                   </div>
                 </div>
               </div>
-            )):(<div text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1>Today No Employees are present. </div>)}
+            ))
+          ) : (
+            <div
+              text-dark-75
+              font-weight-bold
+              text-hover-primary
+              font-size-lg
+              mb-1
+            >
+              Today No Employees are present.{" "}
+            </div>
+          )}
         </div>
       </div>
     </>
