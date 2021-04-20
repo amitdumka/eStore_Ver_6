@@ -15,7 +15,7 @@ export function Brand() {
           uiService.config,
           "aside.self.minimize.toggle"
       ),
-      headerLogo: uiService.getLogo(),
+      headerLogo: uiService.getARLogo(),
       headerStickyLogo: uiService.getStickyLogo()
     };
   }, [uiService]);

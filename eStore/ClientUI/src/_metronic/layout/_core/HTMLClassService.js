@@ -93,6 +93,9 @@ export class HtmlClassService {
     return [];
   }
 
+  getARLogo(){
+    return toAbsoluteUrl("/media/estore/arlogo.png");
+  }
   getLogo() {
     const brandSkin = objectPath.get(this.config, "brand.self.theme");
     if (brandSkin === "light") {

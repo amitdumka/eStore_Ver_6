@@ -24,7 +24,7 @@ export function Aside() {
       <>
         {/* begin::Aside */}
         <div id="kt_aside"
-             className={`aside aside-left  ${layoutProps.asideClassesFromConfig} d-flex flex-column flex-row-auto`}>
+             className={`aside aside-left   ${layoutProps.asideClassesFromConfig} d-flex flex-column flex-row-auto`}>
           <Brand/>
 
           {/* begin::Aside Menu */}

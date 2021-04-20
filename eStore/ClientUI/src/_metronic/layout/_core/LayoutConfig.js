@@ -118,7 +118,7 @@ export function getInitLayoutConfig() {
     },
     brand: {
       self: {
-        theme: "dark", // light/dark
+        theme: "light", // light/dark
       },
     },
     aside: {
@@ -135,9 +135,11 @@ export function getInitLayoutConfig() {
       footer: {
         self: {
           display: true,
+          theme: "light", // light/dark
         },
       },
       menu: {
+        theme: "light", // light/dark
         dropdown: false, // ok
         scroll: true, // ok
         "icon-style": "duotone", // duotone, line, bold, solid

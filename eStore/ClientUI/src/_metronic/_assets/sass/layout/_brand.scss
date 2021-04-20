@@ -8,7 +8,7 @@
 	align-items: center;
 	flex-direction: row;
 	padding: 0 get($page-padding, desktop);
-	height: get($header-config, desktop, default, height);
+	height: 65;//get($header-config, desktop, default, height);
 
 	// Logo
 	.brand-logo {
