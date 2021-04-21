@@ -2,9 +2,8 @@ import React, { Suspense } from "react";
 import { Redirect, Switch } from "react-router-dom";
 import { CustomersPage } from "./customers/CustomersPage";
 import {StoresPage} from "./stores/StoresPage";
-//import { ProductsPage } from "./products/ProductsPage";
-//import { ProductEdit } from "./products/product-edit/ProductEdit";
 import { LayoutSplashScreen, ContentRoute } from "../../../../_metronic/layout";
+import {ContactsPage} from "./Contacts/ContactsPage";
 
 export default function StoreMainPage() {
   return (
@@ -20,6 +19,7 @@ export default function StoreMainPage() {
         }
         <ContentRoute path="/store/stores" component={StoresPage}/>
         <ContentRoute path="/store/customers" component={CustomersPage} />
+        <ContentRoute path="/store/contacts" component={ContactsPage} />
       </Switch>
     </Suspense>
   );

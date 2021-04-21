@@ -43,10 +43,25 @@ export default function StoreMenuList({ layoutProps }) {
         <NavLink className="menu-link" to="/store/customers">
           <span className="svg-icon menu-icon">
             <SVG
-              src={toAbsoluteUrl("/media/svg/icons/Communication/Add-user.svg")}
+              src={toAbsoluteUrl("/media/svg/humans/custom-13.svg")}
             />
           </span>
           <span className="menu-text">Customers</span>
+        </NavLink>
+      </li>
+      {/*end::1 Level*/}
+      {/*begin::1 Level*/}
+      <li
+        className={`menu-item ${getMenuItemActive("/store/contacts", false)}`}
+        aria-haspopup="true"
+      >
+        <NavLink className="menu-link" to="/store/contacts">
+          <span className="svg-icon menu-icon">
+            <SVG
+              src={toAbsoluteUrl("/media/svg/icons/Communication/Adress-book1.svg")}
+            />
+          </span>
+          <span className="menu-text">Contacts</span>
         </NavLink>
       </li>
       {/*end::1 Level*/}

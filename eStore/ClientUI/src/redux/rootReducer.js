@@ -41,6 +41,7 @@ import { pettyCashBooksSlice } from "../app/modules/StoreOperations/_redux/Petty
 import { cashDetailsSlice } from "../app/modules/StoreOperations/_redux/CashDetails/Slice";
 import {  endOfDaysSlice} from "../app/modules/StoreOperations/_redux/EndOfDays/Slice";
 import { dayClosingsSlice } from "../app/modules/StoreOperations/_redux/DayClosing/Slice";
+import {contactsSlice} from "../app/modules/Stores/_redux/Contacts/Slice";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -79,6 +80,7 @@ export const rootReducer = combineReducers({
   cashDetails: cashDetailsSlice.reducer,
   endOfDays: endOfDaysSlice.reducer,
   dayClosings: dayClosingsSlice.reducer,
+  contacts:contactsSlice.reducer,
 });
 
 export function* rootSaga() {
