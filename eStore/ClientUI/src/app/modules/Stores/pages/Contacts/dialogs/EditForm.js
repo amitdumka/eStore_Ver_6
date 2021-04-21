@@ -6,21 +6,15 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Input, Select,DatePickerField } from "../../../../../../_metronic/_partials/controls";
+import { Input } from "../../../../../../_metronic/_partials/controls";
 
 //contact
 //Contact
 
 // Validation schema
 const ContactEditSchema = Yup.object().shape({
-  onDate: Yup.date().required("Date is required"),
-  period: Yup.string().required("Period is required"),
-  contactType: Yup.number().required("Select Contact Type , is required"),
-  contactedLocationId: Yup.number().moreThan(0).required("Select Contact Location , is required"),
-  mode:Yup.number().required("Select mode is required"),
-  amount: Yup.number().moreThan(0).required("Amount is required"),
-  remarks:Yup.string().required("Remarks is required"), 
-  paymentDetails: Yup.string().required("Payment Details is required")
+  firstName: Yup.string().required("First Name is required"),
+  mobileNo:Yup.string().required("Mobile No is required"), 
 });
 
 export function EditForm({ saveContact, contact, actionsLoading, onHide, locationList, contactTypes, payModes,storeList }) {
@@ -43,92 +37,53 @@ export function EditForm({ saveContact, contact, actionsLoading, onHide, locatio
                 </div>
               )}
               <Form className="form form-label-right">
+                
                 <div className="form-group row">
-                  {/* Store */}
-                  <div className="col-lg-4">
-                    <Select name="storeId" label="Store">
-                    {storeList && storeList.map((item) => (
-                        <option key={item.storeId} value={item.storeId}>
-                          {item.storeName}
-                        </option>
-                      ))}
-                    </Select>
-                  </div>
-
-                  {/* Email */}
-                  <div className="col-lg-4">
-                    <Select name="contactedLocationId" placeholder="Location" label="Location">
-                      <option value="">Select Location</option>
-                      {locationList && locationList.map((item) => (
-                        <option key={item.contactedLocationId} value={item.contactedLocationId}>
-                          {item.placeName}
-                        </option>
-                      ))}
-                    </Select>
-                  </div>
-                  {/* Email */}
-                  <div className="col-lg-4">
-                    <Select name="contactType" placeholder="Contact Type" label="Contact Type">
-                      <option value="">Select Type</option>
-                      {contactTypes && contactTypes.map((item) => (
-                        <option key={item.value} value={item.value}>
-                          {item.name}
-                        </option>
-                      ))}
-                    </Select>
-                  </div>
-                </div>
-               
-                <div className="form-group row">
-                  
-                   {/* Date of BankDeposit */}
-                   <div className="col-lg-4">
-                    <DatePickerField
-                      dateFormat="yyyy-MM-dd"
-                      name="onDate"
-                      label="On Date"
-                    />
-                  </div>
-
-                  {/*  Father Name*/}
+                  {/*   Name*/}
                   <div className="col-lg-4">
                     <Field
-                      name="period"
+                      name="firstName"
                       component={Input}
-                      placeholder="Period"
-                      label="Period"
+                      placeholder="FistName"
+                      label="FirstName"
+                    />
+                  </div>
+                   {/*   Name*/}
+                   <div className="col-lg-4">
+                    <Field
+                      name="lastName"
+                      component={Input}
+                      placeholder="LastName"
+                      label="LastName"
                     />
                   </div>
                    {/*  State Name*/}
                    <div className="col-lg-4">
                     <Field
-                      name="amount"
+                      name="mobileNo"
                       component={Input}
-                      placeholder="Amount"
-                      label="Amount"
+                      placeholder="Mobile No"
+                      label="Mobile No"
                     />
                   </div>
                 </div>
                 <div className="form-group row">
-                 
-                  {/* Email */}
-                  <div className="col-lg-4">
-                    <Select name="mode" placeholder="Mode" label="Mode">
-                      <option value="">Select Mode</option>
-                      {payModes && payModes.map((item) => (
-                        <option key={item.value} value={item.value}>
-                          {item.name}
-                        </option>
-                      ))}
-                    </Select>
+                   {/*  State Name*/}
+                   <div className="col-lg-4">
+                    <Field
+                      name="phoneNo"
+                      component={Input}
+                      placeholder="Phone No"
+                      label="Phone No"
+                    />
                   </div>
                    {/*  Father Name*/}
                    <div className="col-lg-4">
                     <Field
-                      name="paymentDetails"
+                      name="eMailAddress"
                       component={Input}
-                      placeholder="Payment Details"
-                      label="Payment Details"
+                      placeholder="Email"
+                      label="eMail"
                     />
                   </div>
                    {/*  Father Name*/}

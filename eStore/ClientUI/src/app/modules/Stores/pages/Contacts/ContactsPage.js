@@ -18,86 +18,86 @@ import { ContactsCard } from "./ContactsCard";
 export function ContactsPage({ history }) {
   const contactsUIEvents = {
     newContactButtonClick: () => {
-      history.push("/contacting/contacts/new");
+      history.push("/store/contacts/new");
     },
     openEditContactDialog: (id) => {
-      history.push(`/contacting/contacts/${id}/edit`);
+      history.push(`/store/contacts/${id}/edit`);
     },
     openDeleteContactDialog: (id) => {
-      history.push(`/contacting/contacts/${id}/delete`);
+      history.push(`/store/contacts/${id}/delete`);
     },
     openDeleteContactsDialog: () => {
-      history.push(`/contacting/contacts/deleteContacts`);
+      history.push(`/store/contacts/deleteContacts`);
     },
     openFetchContactsDialog: () => {
-      history.push(`/contacting/contacts/fetch`);
+      history.push(`/store/contacts/fetch`);
     },
     openUpdateContactsStatusDialog: () => {
-      history.push("/contacting/contacts/updateStatus");
+      history.push("/store/contacts/updateStatus");
     }
   }
 
   return (
     <UIProvider UIEvents={contactsUIEvents}>
       <ContactsLoadingDialog />
-      <Route path="/contacting/contacts/new">
+      <Route path="/store/contacts/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             onHide={() => {
-              history.push("/contacting/contacts");
+              history.push("/store/contacts");
             }}
           />
         )}
       </Route>
-      <Route path="/contacting/contacts/:id/edit">
+      <Route path="/store/contacts/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/contacting/contacts");
+              history.push("/store/contacts");
             }}
           />
         )}
       </Route>
-      <Route path="/contacting/contacts/deleteContacts">
+      <Route path="/store/contacts/deleteContacts">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
             onHide={() => {
-              history.push("/contacting/contacts");
+              history.push("/store/contacts");
             }}
           />
         )}
       </Route>
-      <Route path="/contacting/contacts/:id/delete">
+      <Route path="/store/contacts/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/contacting/contacts");
+              history.push("/store/contacts");
             }}
           />
         )}
       </Route>
-      <Route path="/contacting/contacts/fetch">
+      <Route path="/store/contacts/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/contacting/contacts");
+              history.push("/store/contacts");
             }}
           />
         )}
       </Route>
-      <Route path="/contacting/contacts/updateStatus">
+      <Route path="/store/contacts/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}
             onHide={() => {
-              history.push("/contacting/contacts");
+              history.push("/store/contacts");
             }}
           />
         )}

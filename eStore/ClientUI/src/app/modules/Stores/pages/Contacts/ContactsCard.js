@@ -25,14 +25,14 @@ export function ContactsCard() {
 
   return (
     <Card>
-      <CardHeader title="Contact Payment list">
+      <CardHeader title="Address Book">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary"
             onClick={ContactsUIProps.newContactButtonClick}
           >
-            New Payment
+            New Contact
           </button>
         </CardHeaderToolbar>
       </CardHeader>

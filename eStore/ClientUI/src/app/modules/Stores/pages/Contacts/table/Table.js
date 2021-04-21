@@ -57,6 +57,14 @@ export function ContactsTable() {
     dispatch(actions.fetchContacts(contactsUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contactsUIProps.queryParams, dispatch]);
+
+// contactId: 1
+// eMailAddress: ""
+// firstName: "AJAM"
+// lastName: "MASTER"
+// mobileNo: "9973599123"
+// phoneNo: ""
+// remarks: ""
   // Table columns
   const columns = [
     {
@@ -67,61 +75,39 @@ export function ContactsTable() {
       headerSortingClasses,
     },
     {
-      dataField: "location.placeName",
-      text: "Contacted Location",
+      dataField: "firstName",
+      text: "First Name",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "contactType",
-      text: "Contact Type",
+      dataField: "lastName",
+      text: "Last Name",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "onDate",
-      text: "Date",
+      dataField: "mobileNo",
+      text: "Contact No",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: "period",
-      text: "Period",
+      dataField: "phoneNo",
+      text: "Phone No",
       sort: false,
       
       sortCaret: sortCaret,
     },
     {
-      dataField: "amount",
-      text: "Amount",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "mode",
-      text: "Mode",
-      sort: true,
-      //formatter:columnFormatters.TypeColumnFormatter,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "paymentDetails",
-      text: "Payment Details",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
       dataField: "remarks",
       text: "Remarks",
-      sort: false,
-      //formatter:columnFormatters.TypeColumnFormatter,
+      sort: true,
       sortCaret: sortCaret,
+      headerSortingClasses,
     },
     {
       dataField: "action",

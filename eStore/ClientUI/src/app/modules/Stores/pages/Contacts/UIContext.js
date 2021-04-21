@@ -31,20 +31,12 @@ export function UIProvider({ UIEvents, children }) {
 
   const initContact = {
     contactId: 0,
-    contactedLocationId: 0,
-    location: null,
-    contactType: 0,
-    onDate: new Date(),
-    period: "",
-    amount: 0.0,
-    mode: 0,
-    paymentDetails: "",
+    firstName: "",
+    lastName: "",
+    mobileNo: "",
+    phoneNo: null,
+    eMailAddress: null,
     remarks: "",
-    storeId: 1,
-    store: null,
-    userId: "WebUI",
-    entryStatus: 0,
-    isReadOnly: false,
   };
 
   const value = {

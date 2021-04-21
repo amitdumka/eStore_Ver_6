@@ -35,8 +35,6 @@ export function EditDialog({ id, show, onHide }) {
 
   // server request for saving contact
   const saveContact = (contact) => {
-    contact.storeId=parseInt(contact.storeId);
-
     if (!id) {
       // server request for creating contact
       dispatch(actions.createContact(contact)).then(() => onHide());
