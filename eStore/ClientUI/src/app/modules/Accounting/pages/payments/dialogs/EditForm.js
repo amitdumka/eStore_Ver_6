@@ -19,7 +19,7 @@ import {
 const PaymentEditSchema = Yup.object().shape({
   onDate: Yup.date().required("Date is required"),
   amount: Yup.number().integer().moreThan(0).positive().min(1).required("Amount is required"),
-  employeeId: Yup.number().moreThan(0).required("Paid By is required"),
+ // employeeId: Yup.number().moreThan(0).required("Paid By is required"),
  // particulars: Yup.string().required("Particulars Month is required"),
   payMode: Yup.number().required("Payment Mode is required"),
   partyName: Yup.string().required("Paid To is required"),
@@ -33,7 +33,7 @@ export function EditForm({
   payment,
   actionsLoading,
   onHide,
-  employeeList, partiesList, bankAccountsList
+   partiesList, bankAccountsList
 }) {
   return (
     <>
@@ -64,7 +64,7 @@ export function EditForm({
                     </Select>
                   </div>
 
-                   {/* Paid By */}
+                   {/* Paid By
                    <div className="col-lg-4">
                     <Select
                       name="employeeId"
@@ -78,7 +78,7 @@ export function EditForm({
                         </option>
                       ))}
                     </Select>
-                  </div>
+                  </div> */}
                   
                   {/* Party  */}
                   <div className="col-lg-4">

@@ -78,19 +78,20 @@ export function PaymentsTable() {
     
    
     {
-      dataField: "paymentSlipNo",
-      text: "Payment Slip No",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
       dataField: "partyName",
       text: "Party",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
     },   
+    
+    {
+      dataField: "paymentSlipNo",
+      text: "Payment Slip No",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
     {
       dataField: "amount",
       text: "amount",
