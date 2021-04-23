@@ -60,7 +60,18 @@ export async function createStoreHoliday(storeHoliday) {
     headers: { "Content-Type": "application/json; charset=utf-8" },
   });
 }
-
+export async function createStoreClosed(storeHoliday) {
+  ///api/StoreOperations/storeClosed
+  return await axios.post(APIBASE_URL + "/StoreOperations/storeClosed", storeHoliday, {
+    headers: { "Content-Type": "application/json; charset=utf-8" },
+  });
+}
+export async function createStoreClosedForNDays(storeHoliday) {
+  ///api/StoreOperations/storeClosedNDays
+  return await axios.post(APIBASE_URL + "StoreOperations/storeClosedNDays", storeHoliday, {
+    headers: { "Content-Type": "application/json; charset=utf-8" },
+  });
+}
 //Update
 
 // UPDATE => PUT: update the attendance on the server

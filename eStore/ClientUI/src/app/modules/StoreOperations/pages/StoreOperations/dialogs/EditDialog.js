@@ -4,22 +4,27 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/StoreOperations/Actions";
 import * as cActions from "../../../../_redux/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
-import { EditCloseForm, EditHolidayForm, EditOpenForm } from "./EditForm";
+import { EditCloseForm, EditHolidayForm, EditOpenForm,EditStoreClosedForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
+
 
 //storeOperation
 //StoreOperation
 
 export function EditDialog({ id, show, onHide, windowName }) {
   // StoreOperations UI Context
-  const storeOperationsUIContext = useUIContext();
-  const storeOperationsUIProps = useMemo(() => {
+  const uiContext = useUIContext();
+  const uiProps = useMemo(() => {
     return {
-      initOpen: storeOperationsUIContext.initOpen,
-      initClose: storeOperationsUIContext.initClose,
-      initHoliday: storeOperationsUIContext.initHoliday,
+      initOpen: uiContext.initOpen,
+      initClose: uiContext.initClose,
+      initHoliday: uiContext.initHoliday,
+
+      initData: uiContext.initData,
+      initNHoliday: uiContext.initNHoliday,
+      initStoreClosed: uiContext.initStoreClosed,
     };
-  }, [storeOperationsUIContext]);
+  }, [uiContext]);
 
   // StoreOperations Redux state
   const dispatch = useDispatch();
@@ -29,6 +34,7 @@ export function EditDialog({ id, show, onHide, windowName }) {
     storeCloseForEdit,
     holidayForEdit,
     storeList,
+    holidayReasons,
   } = useSelector(
     (state) => ({
       actionsLoading: state.storeOperations.actionsLoading,
@@ -36,6 +42,7 @@ export function EditDialog({ id, show, onHide, windowName }) {
       storeCloseForEdit: state.storeOperations.storeCloseForEdit,
       holidayForEdit: state.storeOperations.holidayForEdit,
       storeList: state.commonTypes.storeList,
+      holidayReasons:state.commonTypes.holidayReasons,
     }),
     shallowEqual
   );
@@ -56,8 +63,9 @@ export function EditDialog({ id, show, onHide, windowName }) {
         dispatch(actions.fetchStoreHoliday(id));
         break;
     }
-    
+
     dispatch(cActions.fetchStores());
+    dispatch(cActions.fetchEnumValue("holidayReasons"));
   }, [id, dispatch, windowName]);
 
   // server request for saving storeOpen
@@ -98,11 +106,29 @@ export function EditDialog({ id, show, onHide, windowName }) {
     }
   };
 
-  
+  // server request for saving pettyCashBook
+  const saveStoreClosed = (CurData) => {
+    let holiday = uiProps.initStoreClosed;
+    holiday.onDate = CurData.onDate;
+    holiday.reason = CurData.reason;
+    holiday.remarks = CurData.remarks;
+    holiday.approvedBy = CurData.approvedBy;
+
+    const isNday = CurData.nDays;
+    if (isNday) {
+      // Multiple Days
+      let data = uiProps.initNHoliday;
+      data.holiday = holiday;
+      data.endDate = CurData.endDate;
+      dispatch(actions.createNDaysHoliday(data)).then(() => onHide());
+    } else {
+      //Single Days
+      dispatch(actions.createStoreHolidayWithAttendance(holiday)).then(() => onHide());
+    }
+  };
 
   const ShowEditForm = (winName) => {
-    console.log(winName);
-
+    
     switch (winName.winName) {
       default:
         break;
@@ -113,9 +139,7 @@ export function EditDialog({ id, show, onHide, windowName }) {
             <EditOpenForm
               saveStoreOpen={saveStoreOpen}
               actionsLoading={actionsLoading}
-              storeOpen={
-                storeOpenForEdit || storeOperationsUIProps.initOpen
-              }
+              storeOpen={storeOpenForEdit || uiProps.initOpen}
               onHide={onHide}
               storeList={storeList}
             />
@@ -128,9 +152,7 @@ export function EditDialog({ id, show, onHide, windowName }) {
             <EditCloseForm
               saveStoreClose={saveStoreClose}
               actionsLoading={actionsLoading}
-              storeClose={
-                storeCloseForEdit || storeOperationsUIProps.initClose
-              }
+              storeClose={storeCloseForEdit || uiProps.initClose}
               onHide={onHide}
               storeList={storeList}
             />
@@ -143,9 +165,23 @@ export function EditDialog({ id, show, onHide, windowName }) {
             <EditHolidayForm
               saveHoliday={saveHoliday}
               actionsLoading={actionsLoading}
-              holiday={holidayForEdit || storeOperationsUIProps.initHoliday}
+              holiday={holidayForEdit || uiProps.initHoliday}
               onHide={onHide}
               storeList={storeList}
+            />
+          </>
+        );
+        case "sClosed":
+        return (
+          <>
+            <EditDialogHeader id={id} titleName="Store Closed" />
+            <EditStoreClosedForm
+              saveData={saveStoreClosed}
+              actionsLoading={actionsLoading}
+              initData={uiProps.initData}
+              onHide={onHide}
+              storeList={storeList}
+              holidayReasons={holidayReasons}
             />
           </>
         );
@@ -164,7 +200,7 @@ export function EditDialog({ id, show, onHide, windowName }) {
         saveStoreOpen={saveStoreOperation}
         actionsLoading={actionsLoading}
         storeOperation={
-          storeOpenForEdit || storeOperationsUIProps.initStoreOpen
+          storeOpenForEdit || uiProps.initStoreOpen
         }
         onHide={onHide}
         storeList={storeList}

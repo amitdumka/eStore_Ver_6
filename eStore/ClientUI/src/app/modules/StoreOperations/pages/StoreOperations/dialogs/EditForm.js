@@ -9,9 +9,9 @@ import * as Yup from "yup";
 import {
   Input,
   Select,
-  DatePickerField, 
+  DatePickerField,
 } from "../../../../../../_metronic/_partials/controls";
-
+import { Checkbox } from "@material-ui/core";
 //attendance
 //Attendance
 
@@ -34,7 +34,14 @@ const HolidayEditSchema = Yup.object().shape({
     .required("Store is required"),
   remarks: Yup.string().required("Remarks is required"),
   approvedBy: Yup.string().required("Approved By is required"),
- 
+});
+const StoreClosedEditSchema = Yup.object().shape({
+  onDate: Yup.date().required("Date is required"),
+  storeId: Yup.number()
+    .moreThan(0)
+    .required("Store is required"),
+  remarks: Yup.string().required("Remarks is required"),
+  approvedBy: Yup.string().required("Approved By is required"),
 });
 const StoreOperationEditSchema = Yup.object().shape({
   storeId: Yup.number()
@@ -203,7 +210,6 @@ export function EditOpenForm({
                 </div>
               )}
               <Form className="form form-label-right">
-               
                 <div className="form-group row">
                   {/* Store */}
                   <div className="col-lg-4">
@@ -362,8 +368,8 @@ export function EditHolidayForm({
                         ))}
                     </Select>
                   </div>
-                   {/* Date of on Date */}
-                   <div className="col-lg-4">
+                  {/* Date of on Date */}
+                  <div className="col-lg-4">
                     <DatePickerField
                       dateFormat="yyyy-MM-dd"
                       name="onDate"
@@ -396,6 +402,132 @@ export function EditHolidayForm({
                       placeholder="Remarks"
                       label="Remarks"
                     />
+                  </div>
+                </div>
+              </Form>
+            </Modal.Body>
+            <Modal.Footer>
+              <button
+                type="button"
+                onClick={onHide}
+                className="btn btn-light btn-elevate"
+              >
+                Cancel
+              </button>
+              <> </>
+              <button
+                type="submit"
+                onClick={() => handleSubmit()}
+                className="btn btn-primary btn-elevate"
+              >
+                Save
+              </button>
+            </Modal.Footer>
+          </>
+        )}
+      </Formik>
+    </>
+  );
+}
+
+export function EditStoreClosedForm({
+  saveData,
+  initData,
+  actionsLoading,
+  onHide,
+  storeList,
+  holidayReasons,
+}) {
+  return (
+    <>
+      <Formik
+        enableReinitialize={true}
+        initialValues={initData}
+        validationSchema={StoreClosedEditSchema}
+        onSubmit={(values) => {
+          saveData(values);
+        }}
+      >
+        {({ handleSubmit }) => (
+          <>
+            <Modal.Body className="overlay overlay-block cursor-default">
+              {actionsLoading && (
+                <div className="overlay-layer bg-transpapettyCashBook">
+                  <div className="spinner spinner-lg spinner-success" />
+                </div>
+              )}
+              <Form className="form form-label-right">
+                <div className="form-group row">
+                  {/* Store */}
+                  <div className="col-lg-4">
+                    <Select name="storeId" label="Store">
+                      {storeList &&
+                        storeList.map((item) => (
+                          <option key={item.storeId} value={item.storeId}>
+                            {item.storeName}
+                          </option>
+                        ))}
+                    </Select>
+                  </div>
+                  {/* Date of onDate */}
+                  <div className="col-lg-4">
+                    <DatePickerField
+                      dateFormat="yyyy-MM-dd"
+                      name="onDate"
+                      label="Closing Date"
+                    />
+                  </div>
+                  {/*  Reason*/}
+                  <div className="col-lg-4">
+                  <Select name="reasons" label="Reasons">
+                      {holidayReasons &&
+                        holidayReasons.map((item) => (
+                          <option key={item.value} value={item.value}>
+                            {item.name}
+                          </option>
+                        ))}
+                    </Select>
+                  </div>
+                </div>
+
+                <div className="form-group row">
+                  {/*  Father Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="remarks"
+                      component={Input}
+                      placeholder="Remarks"
+                      label="Remarks"
+                    />
+                  </div>
+                  {/*  State Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="approvedBy"
+                      component={Input}
+                      placeholder="Approved By"
+                      label="Approved By"
+                    />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  {/*  State Name*/}
+                  {/* Date of onDate */}
+                  <div className="col-lg-4">
+                    <DatePickerField
+                      dateFormat="yyyy-MM-dd"
+                      name="endDate"
+                      label="End Date"
+                    />
+                  </div>
+                  <div className="col-lg-4">
+                    <Field
+                      name="nDays"
+                      component={Checkbox}
+                      placeholder="Multiple Days"
+                      label="Multiple Days"
+                    />{" "}
+                    {"  "} Multiple Days
                   </div>
                 </div>
               </Form>

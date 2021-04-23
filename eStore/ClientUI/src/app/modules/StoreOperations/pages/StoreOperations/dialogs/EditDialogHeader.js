@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
+import InformSnackbars from "../../../../../../_estore/_uis/Inform";
 
 //attendance
 //Attendance
@@ -26,6 +27,7 @@ export function EditDialogHeader({ id ,titleName}) {
 
   return (
     <>
+
       {actionsLoading && <ModalProgressBar />}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">{title}</Modal.Title>

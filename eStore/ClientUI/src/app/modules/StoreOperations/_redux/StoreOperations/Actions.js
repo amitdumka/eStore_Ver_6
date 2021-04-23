@@ -1,13 +1,15 @@
 import * as requestFromServer from "./Crud";
 import { storeOperationsSlice, callTypes } from "./Slice";
+import ToastMe from "../../../../../_estore/_uis/ToastMe";
 
 const { actions } = storeOperationsSlice;
 
+
+
+
+
 export const fetchStoreStatus = (id) => (dispatch) => {
-  if (!id) {
-    //return dispatch(actions.storeOpenFetched({ openForEdit: undefined }));
-    id=0;
-  }
+ 
 
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
@@ -183,6 +185,50 @@ export const deleteStoreHoliday = (id) => (dispatch) => {
       error.clientMessage = "Can't delete Store Holiday";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
+};
+
+export const createNDaysHoliday=(openForCreation)=> (dispatch) => {
+  dispatch(actions.startCall({ callType: callTypes.action }));
+  return requestFromServer
+    .createStoreClosedForNDays(JSON.stringify(openForCreation))
+    .then((response) => {
+      const nDays = response.data;
+      console.log(response.data);
+      if(nDays){
+         
+      }else {
+
+      }
+      dispatch(actions.storeClosedNDaysCreated({ nDays }));
+    })
+    .catch((error) => {
+      error.clientMessage = "Can't create Store Open";
+      dispatch(actions.catchError({ error, callType: callTypes.action }));
+    });
+
+};
+export const createStoreHolidayWithAttendance=(openForCreation)=> (dispatch) => {
+  dispatch(actions.startCall({ callType: callTypes.action }));
+  return requestFromServer
+    .createStoreClosed(JSON.stringify(openForCreation))
+    .then((response) => {
+      const attendances = response.data;
+      console.log(response.data);
+      dispatch(actions.storeClosedCreated({ attendances }));
+
+      if(response.data.length>0){
+
+      }else{
+        
+      }
+
+
+    })
+    .catch((error) => {
+      error.clientMessage = "Can't create Store Open";
+      dispatch(actions.catchError({ error, callType: callTypes.action }));
+    });
+
 };
 
 export const createStoreOpen = (openForCreation) => (dispatch) => {

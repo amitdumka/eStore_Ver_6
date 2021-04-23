@@ -62,6 +62,36 @@ export function UIProvider({ UIEvents, children }) {
     approvedBY: "",
   };
 
+  const initData = {
+    storeHolidayId: 0,
+    userId: "WebUI",
+    entryStatus: 0,
+    isReadOnly: false,
+    storeId: 1,
+    onDate: new Date(),
+    reason: 0,
+    remarks: "",
+    approvedBy: "",
+    endDate: null,
+    nDays: false,
+  };
+
+  const initStoreClosed = {
+    storeHolidayId: 0,
+    userId: "WebUI",
+    entryStatus: 0,
+    isReadOnly: false,
+    storeId: 1,
+    onDate: new Date(),
+    reason: 0,
+    remarks: "",
+    approvedBy: "",
+  };
+
+  const initNHolidays = {
+    holiday: null,
+    endDate: null,
+  };
   const value = {
     queryParams,
     setQueryParamsBase,
@@ -70,6 +100,9 @@ export function UIProvider({ UIEvents, children }) {
     idHs,
     setIdHs,
     setQueryParams,
+    initNHolidays,
+    initStoreClosed,
+    initData,
     initOpen,
     initClose,
     initHoliday,
@@ -86,13 +119,15 @@ export function UIProvider({ UIEvents, children }) {
     openDeleteClosesDialog: UIEvents.openDeleteClosesDialog,
     openFetchCloseDialog: UIEvents.openFetchCloseDialog,
     openUpdateCloseStatusDialog: UIEvents.openUpdateCloseStatusDialog,
-    
+
     newButtonHolidayClick: UIEvents.newButtonHolidayClick,
     openEditHolidayDialog: UIEvents.openEditHolidayDialog,
     openDeleteHolidayDialog: UIEvents.openDeleteHolidayDialog,
     openDeleteHolidaysDialog: UIEvents.openDeleteHolidaysDialog,
     openFetchHolidayDialog: UIEvents.openFetchHolidayDialog,
     openUpdateHolidayStatusDialog: UIEvents.openUpdateHolidayStatusDialog,
+
+    newButtonStoreClosedClick: UIEvents.newButtonStoreClosedClick,
   };
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

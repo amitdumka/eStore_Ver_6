@@ -29,6 +29,7 @@ const initialState = {
   loginRole: null,
   arvindAccounts: null,
   storeList: null,
+  holidayReasons: null,
 };
 export const callTypes = {
   list: "list",
@@ -176,6 +177,7 @@ export const commonTypesSlice = createSlice({
 
 export function setEnumValue(state, actionName, entities) {
   switch (actionName) {
+    case "holidayReasons": state.holidayReasons = entities; break;
     case "payMode":
       state.payModes = entities;
       break;

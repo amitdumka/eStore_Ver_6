@@ -16,7 +16,9 @@ const initialStoreOperationsState = {
   entitiesStoreOperations: undefined,
   storeOperationForEdit: undefined,
   totalSO: 0,
-  storeStatus:null
+  storeStatus:null, 
+  storeNDays:false,
+  attendances:null,
 };
 export const callTypes = {
   list: "list",
@@ -174,6 +176,18 @@ export const storeOperationsSlice = createSlice({
       state.ewactionsLoading = false;
       state.error = null;
       state.entitiesHolidays.push(action.payload.storeHoliday);
+    },
+     // createstoreOpens
+     storeClosedCreated: (state, action) => {
+      state.ewactionsLoading = false;
+      state.error = null;
+      state.attendances =action.payload.attendances;
+    },
+     // createstoreOpens
+     storeClosedNDaysCreated: (state, action) => {
+      state.ewactionsLoading = false;
+      state.error = null;
+      state.storeNDays=action.payload.nDays;
     },
     // updatestoreOpens
     storeHolidayUpdated: (state, action) => {

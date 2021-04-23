@@ -145,7 +145,7 @@ export function OperationTable({enableButtons}) {
 
  storeStatus && storeStatus ? enableButtons(false,false): enableButtons(true,true);
   //storeStatus ? setCloseButton(true): setCloseButton(false);
-  console.log(storeStatus);
+ // console.log(storeStatus);
 
   return (
     <>

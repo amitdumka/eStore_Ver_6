@@ -13,6 +13,9 @@ import { DataCard } from "./DataCard";
 
 export function StoreOperationsPage({ history }) {
   const rentsUIEvents = {
+    newButtonStoreClosedClick: () => {
+      history.push("/stores/operations/StoreClosed/new");
+    },
     newButtonOpenClick: () => {
       history.push("/stores/operations/open/new");
     },
@@ -72,6 +75,17 @@ export function StoreOperationsPage({ history }) {
   return (
     <UIProvider UIEvents={rentsUIEvents}>
       {/* <DataLoadingDialog /> */}
+      <Route path="/stores/operations/storeClosed/new">
+        {({ history, match }) => (
+          <EditDialog
+            windowName="sClosed"
+            show={match != null}
+            onHide={() => {
+              history.push("/stores/operations");
+            }}
+          />
+        )}
+      </Route>
       <Route path="/stores/operations/open/new">
         {({ history, match }) => (
           <EditDialog

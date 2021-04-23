@@ -4,7 +4,7 @@ const ENUMAPI = BASE_URL + "/enumvalue/";
 
 export async function getEnumType(typeName) {
  
-  return axios.get(ENUMAPI + typeName+"/all");
+  return axios.get(ENUMAPI + typeName);
 }
 export async function getStores() {
   return axios.get(BASE_URL+"/stores");
