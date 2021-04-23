@@ -168,6 +168,7 @@ export function EditDialog({ id, show, onHide, windowName }) {
               holiday={holidayForEdit || uiProps.initHoliday}
               onHide={onHide}
               storeList={storeList}
+              holidayReasons={holidayReasons}
             />
           </>
         );

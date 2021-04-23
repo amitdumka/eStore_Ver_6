@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import WarningIcon from '@material-ui/icons/Warning';
+import WarningIcon from "@material-ui/icons/Warning";
 import {
   Snackbar,
   SnackbarContent,
@@ -12,7 +12,11 @@ import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ErrorIcon from "@material-ui/icons/Error";
 import InfoIcon from "@material-ui/icons/Info";
 import CloseIcon from "@material-ui/icons/Close";
-import { amber, green } from '@material-ui/core/colors';
+// eslint-disable-next-line no-restricted-imports
+import { colors } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+import { SnackbarProvider, useSnackbar } from "notistack";
+
 //const Modes=["success", "warning", "error", "info", ""];
 const variantIcon = {
   success: CheckCircleIcon,
@@ -23,7 +27,7 @@ const variantIcon = {
 
 const useStyles1 = makeStyles((theme) => ({
   success: {
-    backgroundColor: green[600],
+    backgroundColor: colors.green[600],
   },
   error: {
     backgroundColor: theme.palette.error.dark,
@@ -32,7 +36,7 @@ const useStyles1 = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
   },
   warning: {
-    backgroundColor: amber[700],
+    backgroundColor: colors.amber[700],
   },
   icon: {
     fontSize: 20,
@@ -90,7 +94,7 @@ const useStyles2 = makeStyles((theme) => ({
   },
 }));
 
-export default function InformSnackbars({message, mode}) {
+export default function InformSnackbars({ message, mode }) {
   const classes = useStyles2();
   const [open, setOpen] = React.useState(true);
 
@@ -99,27 +103,48 @@ export default function InformSnackbars({message, mode}) {
       return;
     }
     setOpen(false);
-    
   }
   return (
     <div>
-      {message &&
-      <Snackbar
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "center",
-        }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-      >
-        <MySnackbarContentWrapper
+      {message && (
+        <Snackbar
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center",
+          }}
+          open={open}
+          autoHideDuration={6000}
           onClose={handleClose}
-          variant={mode}
-          message={message}
-        />
-      </Snackbar>
-      }
+        >
+          <MySnackbarContentWrapper
+            onClose={handleClose}
+            variant={mode}
+            message={message}
+          />
+        </Snackbar>
+      )}
     </div>
   );
+}
+
+export function ESMessage({message,mode}) {
+  const { enqueueSnackbar } = useSnackbar();
+
+  // const handleClick = () => {
+  //   enqueueSnackbar(message);
+  // };
+
+ // const handleClickVariant = (variant) => () => {
+    // variant could be success, error, warning, info, or default
+    enqueueSnackbar({message}, { mode });
+ // };
+
+  // return (
+  //   <React.Fragment>
+  //     <Button onClick={handleClick}>Show snackbar</Button>
+  //     <Button onClick={handleClickVariant("success")}>
+  //       Show success snackbar
+  //     </Button>
+  //   </React.Fragment>
+  // );
 }

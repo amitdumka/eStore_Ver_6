@@ -1,6 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { EditDialog } from "./dialogs/EditDialog";
+
+import { ShowData } from "./dialogs/ShowData";
 import { UIProvider } from "./UIContext";
 import { DataCard } from "./DataCard";
 // import { DeleteDialog } from "./dialogs/DeleteDialog";
@@ -75,6 +77,17 @@ export function StoreOperationsPage({ history }) {
   return (
     <UIProvider UIEvents={rentsUIEvents}>
       {/* <DataLoadingDialog /> */}
+      <Route path="/stores/operations/attendanceShow">
+        {({ history, match }) => (
+          <ShowData
+            show={match != null}
+            onHide={() => {
+              history.push("/stores/operations");
+            }}
+          />
+        )}
+      </Route>
+
       <Route path="/stores/operations/storeClosed/new">
         {({ history, match }) => (
           <EditDialog

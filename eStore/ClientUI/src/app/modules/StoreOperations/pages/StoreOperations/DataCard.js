@@ -9,6 +9,7 @@ import { useUIContext } from "./UIContext";
 import { OperationTable, HolidayTable } from "./table/DataTable";
 
 import { Tabs, Tab } from "react-bootstrap";
+import {ESMessage} from "../../../../../_estore/_uis/Inform";
 
 export function DataCard() {
   const uiContext = useUIContext();
@@ -28,7 +29,7 @@ export function DataCard() {
     setOpenButton(oButton);
     setCloseButton(cButton);
   };
-
+ // ESMessage("Data Card is loading...","info");
   return (
     <Card>
       <CardHeader title="Store Operating Time">

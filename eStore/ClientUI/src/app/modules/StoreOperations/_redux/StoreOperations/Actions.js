@@ -1,16 +1,14 @@
 import * as requestFromServer from "./Crud";
 import { storeOperationsSlice, callTypes } from "./Slice";
-import ToastMe from "../../../../../_estore/_uis/ToastMe";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useHistory } from "react-router";
 const { actions } = storeOperationsSlice;
 
-
-
-
+toast.configure();
 
 export const fetchStoreStatus = (id) => (dispatch) => {
- 
-
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
     .getStoreStatus(id)
@@ -30,8 +28,6 @@ export const fetchStoreOperations = (queryParams) => (dispatch) => {
     .then((response) => {
       const entities = response.data;
       const totalCount = response.data.length;
-      //console.log(response.data);
-      //console.log(response.data.length);
       dispatch(actions.storeOperationsFetched({ totalCount, entities }));
     })
     .catch((error) => {
@@ -81,7 +77,7 @@ export const fetchStoreHolidays = (queryParams) => (dispatch) => {
     .then((response) => {
       const entities = response.data;
       const totalCount = response.data.length;
-     // console.log(response);
+      // console.log(response);
       //console.log(response.data.length);
       dispatch(actions.storeHolidaysFetched({ totalCount, entities }));
     })
@@ -187,17 +183,23 @@ export const deleteStoreHoliday = (id) => (dispatch) => {
     });
 };
 
-export const createNDaysHoliday=(openForCreation)=> (dispatch) => {
+export const createNDaysHoliday = (openForCreation) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
     .createStoreClosedForNDays(JSON.stringify(openForCreation))
     .then((response) => {
       const nDays = response.data;
       console.log(response.data);
-      if(nDays){
-         
-      }else {
-
+      if (nDays) {
+        toast.success(
+          "Successfully save Store Holidays/Closed and marked Attendance for all Employees, Check Attendance Page for Details!",
+          { position: toast.POSITION.TOP_CENTER }
+        );
+      } else {
+        toast.error(
+          "It fails to add store close and marked attendance, Kindly check store Holiday and Attendances Pages",
+          { position: toast.POSITION.TOP_CENTER }
+        );
       }
       dispatch(actions.storeClosedNDaysCreated({ nDays }));
     })
@@ -205,9 +207,10 @@ export const createNDaysHoliday=(openForCreation)=> (dispatch) => {
       error.clientMessage = "Can't create Store Open";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
-
 };
-export const createStoreHolidayWithAttendance=(openForCreation)=> (dispatch) => {
+export const createStoreHolidayWithAttendance = (openForCreation) => (
+  dispatch
+) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
     .createStoreClosed(JSON.stringify(openForCreation))
@@ -216,19 +219,24 @@ export const createStoreHolidayWithAttendance=(openForCreation)=> (dispatch) => 
       console.log(response.data);
       dispatch(actions.storeClosedCreated({ attendances }));
 
-      if(response.data.length>0){
-
-      }else{
-        
+      if (response.data.length > 0) {
+        toast.success(
+          "Successfully save Store Holidays/Closed and marked Attendance for all Employees, Check Attendance Page for Details!",
+          { position: toast.POSITION.TOP_CENTER }
+        );
+        ShowAttendances();
+        //TODO: Show  All Employee Marked Attendance in Modal
+      } else {
+        toast.error(
+          "It fails to add store close and marked attendance, Kindly check store Holiday and Attendances Pages",
+          { position: toast.POSITION.TOP_CENTER }
+        );
       }
-
-
     })
     .catch((error) => {
       error.clientMessage = "Can't create Store Open";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
-
 };
 
 export const createStoreOpen = (openForCreation) => (dispatch) => {
@@ -335,27 +343,32 @@ export const deleteStoreOpens = (ids) => (dispatch) => {
 };
 
 export const deleteStoreCloses = (ids) => (dispatch) => {
-    dispatch(actions.startCall({ callType: callTypes.action }));
-    return requestFromServer
-      .deleteStoreCloses(ids)
-      .then(() => {
-        dispatch(actions.storeClosesDeleted({ ids }));
-      })
-      .catch((error) => {
-        error.clientMessage = "Can't delete Store Closes";
-        dispatch(actions.catchError({ error, callType: callTypes.action }));
-      });
-  };
+  dispatch(actions.startCall({ callType: callTypes.action }));
+  return requestFromServer
+    .deleteStoreCloses(ids)
+    .then(() => {
+      dispatch(actions.storeClosesDeleted({ ids }));
+    })
+    .catch((error) => {
+      error.clientMessage = "Can't delete Store Closes";
+      dispatch(actions.catchError({ error, callType: callTypes.action }));
+    });
+};
 
-  export const deleteStoreHolidays = (ids) => (dispatch) => {
-    dispatch(actions.startCall({ callType: callTypes.action }));
-    return requestFromServer
-      .deleteStoreHolidays(ids)
-      .then(() => {
-        dispatch(actions.storeHolidaysDeleted({ ids }));
-      })
-      .catch((error) => {
-        error.clientMessage = "Can't delete Store Holidays";
-        dispatch(actions.catchError({ error, callType: callTypes.action }));
-      });
-  };
+export const deleteStoreHolidays = (ids) => (dispatch) => {
+  dispatch(actions.startCall({ callType: callTypes.action }));
+  return requestFromServer
+    .deleteStoreHolidays(ids)
+    .then(() => {
+      dispatch(actions.storeHolidaysDeleted({ ids }));
+    })
+    .catch((error) => {
+      error.clientMessage = "Can't delete Store Holidays";
+      dispatch(actions.catchError({ error, callType: callTypes.action }));
+    });
+};
+
+export const ShowAttendances = () => {
+  const history = useHistory();
+  history.pushState("/stores/operations/attendanceShow");
+};

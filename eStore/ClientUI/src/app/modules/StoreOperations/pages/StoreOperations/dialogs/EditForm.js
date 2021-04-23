@@ -336,6 +336,7 @@ export function EditHolidayForm({
   actionsLoading,
   onHide,
   storeList,
+  holidayReasons,
 }) {
   return (
     <>
@@ -376,14 +377,16 @@ export function EditHolidayForm({
                       label="Date"
                     />
                   </div>
-                  {/*  Remarks*/}
+                  {/*  Reason*/}
                   <div className="col-lg-4">
-                    <Field
-                      name="reason"
-                      component={Input}
-                      placeholder="Reason"
-                      label="Reason"
-                    />
+                    <Select name="reasons" label="Reasons">
+                      {holidayReasons &&
+                        holidayReasons.map((item) => (
+                          <option key={item.value} value={item.value}>
+                            {item.name}
+                          </option>
+                        ))}
+                    </Select>
                   </div>
                   {/*  Remarks*/}
                   <div className="col-lg-4">
@@ -479,7 +482,7 @@ export function EditStoreClosedForm({
                   </div>
                   {/*  Reason*/}
                   <div className="col-lg-4">
-                  <Select name="reasons" label="Reasons">
+                    <Select name="reasons" label="Reasons">
                       {holidayReasons &&
                         holidayReasons.map((item) => (
                           <option key={item.value} value={item.value}>
