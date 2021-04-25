@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
+import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
 import * as actions from "../../../_redux/PettyCashBooks/Actions";
-import {useUIContext} from "../UIContext";
+import { useUIContext } from "../UIContext";
 
 //pettyCashBook
 //PettyCashBook
@@ -15,7 +15,7 @@ export function DeleteDialog({ id, show, onHide }) {
   const pettyCashBooksUIProps = useMemo(() => {
     return {
       setIds: pettyCashBooksUIContext.setIds,
-      queryParams: pettyCashBooksUIContext.queryParams
+      queryParams: pettyCashBooksUIContext.queryParams,
     };
   }, [pettyCashBooksUIContext]);
 
@@ -65,9 +65,9 @@ export function DeleteDialog({ id, show, onHide }) {
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete this pettyCashBook?</span>
+          <span>Are you sure to permanently delete this Petty Cash Slip?</span>
         )}
-        {isLoading && <span>PettyCashBook is deleting...</span>}
+        {isLoading && <span>Petty Cash Slip is deleting...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
