@@ -4,9 +4,13 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/StoreOperations/Actions";
 import * as cActions from "../../../../_redux/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
-import { EditCloseForm, EditHolidayForm, EditOpenForm,EditStoreClosedForm } from "./EditForm";
+import {
+  EditCloseForm,
+  EditHolidayForm,
+  EditOpenForm,
+  EditStoreClosedForm,
+} from "./EditForm";
 import { useUIContext } from "../UIContext";
-
 
 //storeOperation
 //StoreOperation
@@ -21,7 +25,7 @@ export function EditDialog({ id, show, onHide, windowName }) {
       initHoliday: uiContext.initHoliday,
 
       initData: uiContext.initData,
-      initNHoliday: uiContext.initNHoliday,
+      initNHoliday: uiContext.initNHolidays,
       initStoreClosed: uiContext.initStoreClosed,
     };
   }, [uiContext]);
@@ -42,7 +46,7 @@ export function EditDialog({ id, show, onHide, windowName }) {
       storeCloseForEdit: state.storeOperations.storeCloseForEdit,
       holidayForEdit: state.storeOperations.holidayForEdit,
       storeList: state.commonTypes.storeList,
-      holidayReasons:state.commonTypes.holidayReasons,
+      holidayReasons: state.commonTypes.holidayReasons,
     }),
     shallowEqual
   );
@@ -110,12 +114,12 @@ export function EditDialog({ id, show, onHide, windowName }) {
   const saveStoreClosed = (CurData) => {
     let holiday = uiProps.initStoreClosed;
     holiday.onDate = CurData.onDate;
-    holiday.reason = CurData.reason;
+    holiday.reason = parseInt(CurData.reason);
     holiday.remarks = CurData.remarks;
     holiday.approvedBy = CurData.approvedBy;
 
     const isNday = CurData.nDays;
-    if (isNday) {
+    if (isNday == true) {
       // Multiple Days
       let data = uiProps.initNHoliday;
       data.holiday = holiday;
@@ -124,11 +128,11 @@ export function EditDialog({ id, show, onHide, windowName }) {
     } else {
       //Single Days
       dispatch(actions.createStoreHolidayWithAttendance(holiday)).then(() => onHide());
+
     }
   };
 
   const ShowEditForm = (winName) => {
-    
     switch (winName.winName) {
       default:
         break;
@@ -172,7 +176,7 @@ export function EditDialog({ id, show, onHide, windowName }) {
             />
           </>
         );
-        case "sClosed":
+      case "sClosed":
         return (
           <>
             <EditDialogHeader id={id} titleName="Store Closed" />

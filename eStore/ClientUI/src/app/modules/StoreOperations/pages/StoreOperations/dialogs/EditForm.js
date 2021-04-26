@@ -524,13 +524,7 @@ export function EditStoreClosedForm({
                     />
                   </div>
                   <div className="col-lg-4">
-                    <Field
-                      name="nDays"
-                      component={Checkbox}
-                      placeholder="Multiple Days"
-                      label="Multiple Days"
-                    />{" "}
-                    {"  "} Multiple Days
+                    <Field name="nDays" type="checkbox" /> {"  "} Multiple Days
                   </div>
                 </div>
               </Form>
