@@ -192,17 +192,17 @@ return requestFromServer
       console.log(response.data);
       console.log(response);
       dispatch(actions.storeClosedNDaysCreated({ nDays }));
-      // if (nDays==true) {
-      //   toast.success(
-      //     "Successfully save Store Holidays/Closed and marked Attendance for all Employees, Check Attendance Page for Details!",
-      //     { position: toast.POSITION.TOP_CENTER }
-      //   );
-      // } else {
-      //   toast.error(
-      //     "It fails to add store close and marked attendance, Kindly check store Holiday and Attendances Pages",
-      //     { position: toast.POSITION.TOP_CENTER }
-      //   );
-      // }      
+      if (nDays==true) {
+        toast.success(
+          "Successfully save Store Holidays/Closed and marked Attendance for all Employees, Check Attendance Page for Details!",
+          { position: toast.POSITION.TOP_CENTER }
+        );
+      } else {
+        toast.error(
+          "It fails to add store close and marked attendance, Kindly check store Holiday and Attendances Pages",
+          { position: toast.POSITION.TOP_CENTER }
+        );
+      }      
     })
     .catch((error) => {
       error.clientMessage = "Can't create Store Open";
