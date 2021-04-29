@@ -3,16 +3,16 @@ import objectPath from "object-path";
 // LayoutContext
 import { useHtmlClassService } from "../_core/AksLayout";
 // Import Layout components
-// import { Header } from "./header/Header";
+ import { Header } from "./header/Header";
 // import { HeaderMobile } from "./header-mobile/HeaderMobile";
 // import { Aside } from "./aside/Aside";
 // import { Footer } from "./footer/Footer";
 import { LayoutInit } from "./LayoutInit";
-// import { SubHeader } from "./subheader/SubHeader";
+ import { SubHeader } from "./subheader/SubHeader";
 // import { QuickPanel } from "./extras/offcanvas/QuickPanel";
 // import { QuickUser } from "./extras/offcanvas/QuickUser";
 // import { ScrollTop } from "./extras/ScrollTop";
-// import { StickyToolbar } from "./extras/StickyToolbar";
+ import { StickyToolbar } from "./extras/StickyToolbar";
 
 export function Layout({ children }) {
   const uiService = useHtmlClassService();
@@ -46,13 +46,13 @@ export function Layout({ children }) {
             className="d-flex flex-column flex-row-fluid wrapper"
             id="kt_wrapper"
           >
-            {/* <Header /> */}
+            <Header />
             {/*begin::Content*/}
             <div
               id="kt_content"
               className={`content ${layoutProps.contentCssClasses} d-flex flex-column flex-column-fluid`}
             >
-              {/* {layoutProps.subheaderDisplay && <SubHeader />} */}
+              {layoutProps.subheaderDisplay && <SubHeader />}
               {/*begin::Entry*/}
               {!layoutProps.contentExtended && (
                 <div className="d-flex flex-column-fluid">
@@ -78,7 +78,8 @@ export function Layout({ children }) {
       {/* <QuickUser />
       <QuickPanel />
       <ScrollTop />
-      <StickyToolbar /> */}
+       */}
+       <StickyToolbar />
       {/*end::Main*/}
       <LayoutInit />
     </>

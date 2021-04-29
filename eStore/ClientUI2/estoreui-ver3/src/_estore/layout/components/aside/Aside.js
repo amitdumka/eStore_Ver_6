@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import objectPath from "object-path";
 import {Brand} from "../brand/Brand";
 import {AsideMenu} from "./aside-menu/AsideMenu";
-import {useHtmlClassService} from "../../_core/MetronicLayout";
+import {useHtmlClassService} from "../../_core/AksLayout";
 
 export function Aside() {
   const uiService = useHtmlClassService();

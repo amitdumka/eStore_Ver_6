@@ -5,7 +5,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import SVG from "react-inlinesvg";
 import objectPath from "object-path";
-import { useHtmlClassService } from "../../../_core/MetronicLayout";
+import { useHtmlClassService } from "../../../_core/AksLayout";
 import { toAbsoluteUrl } from "../../../../_helpers";
 import { DropdownTopbarItemToggler } from "../../../../_partials/dropdowns";
 

@@ -4,8 +4,8 @@ import objectPath from "object-path";
 import {useLocation} from "react-router-dom";
 import {QuickActions} from "./components/QuickActions";
 import {BreadCrumbs} from "./components/BreadCrumbs";
-import {getBreadcrumbsAndTitle, useSubheader} from "../../_core/MetronicSubheader";
-import {useHtmlClassService} from "../../_core/MetronicLayout"
+import {getBreadcrumbsAndTitle, useSubheader} from "../../_core/AksSubheader";
+import {useHtmlClassService} from "../../_core/AksLayout"
 
 export function SubHeader() {
   const uiService = useHtmlClassService();

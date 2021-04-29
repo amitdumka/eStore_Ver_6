@@ -2,7 +2,7 @@ import React, {useMemo} from "react";
 import objectPath from "object-path";
 import {Link} from "react-router-dom";
 import {toAbsoluteUrl} from "../../../../_helpers";
-import {useHtmlClassService} from "../../../_core/MetronicLayout";
+import {useHtmlClassService} from "../../../_core/AksLayout";
 import {HeaderMenu} from "./HeaderMenu";
 
 export function HeaderMenuWrapper() {

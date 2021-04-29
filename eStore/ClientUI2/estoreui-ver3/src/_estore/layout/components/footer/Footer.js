@@ -1,5 +1,5 @@
 import React, {useMemo} from "react";
-import {useHtmlClassService} from "../../_core/MetronicLayout";
+import {useHtmlClassService} from "../../_core/AksLayout";
 
 export function Footer() {
   const today = new Date().getFullYear();
