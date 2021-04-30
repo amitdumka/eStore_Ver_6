@@ -146,6 +146,7 @@ export function UIProvider({ UIEvents, children }) {
       formatExtraData: {
         openEditDialog: UIEvents.openEditDialog,
         openDeleteDialog: UIEvents.openDeleteDialog,
+        openPaymentDialog:UIEvents.openPaymentDialog,
         keyFieldValue: null,
       },
       classes: "text-right pr-0",

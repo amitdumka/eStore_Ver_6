@@ -25,7 +25,7 @@ export async function getDailySaleById(dailySaleId) {
 // items => filtered/sorted result
 export async function findDailySales(queryParams) {
   //verifyLogin();
-  return await axios.get(`${API_URL}/find?mode=7`); //find`, { queryParams });
+  return await axios.get(`${API_URL}/find?mode=30`); //find`, { queryParams });
 }
 
 // function to get all list of employees

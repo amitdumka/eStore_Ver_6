@@ -15,6 +15,9 @@ import { ViewCard } from "./ViewCard";
 export function DailySalesPage({ history }) {
   const path = "/sales/dailySales/";
   const uiEvents = {
+    openPaymentDialog: (props) => {
+      history.push(path + `${props.keyFieldValue}/payments/${props.payMode}`);
+    },
     newButtonClick: () => {
       history.push(path + "new");
     },
@@ -38,7 +41,7 @@ export function DailySalesPage({ history }) {
   return (
     <UIProvider UIEvents={uiEvents}>
       <DataLoadingDialog />
-       <Route path={`${path}new`}>
+      <Route path={`${path}new`}>
         {({ history, match }) => (
           <EditDialog
             show={match != null}
@@ -48,11 +51,23 @@ export function DailySalesPage({ history }) {
           />
         )}
       </Route>
-      <Route path={`${path}:id/edit`}> 
+      <Route path={`${path}:id/edit`}>
         {({ history, match }) => (
           <EditDialog
             show={match != null}
             id={match && match.params.id}
+            onHide={() => {
+              history.push(path);
+            }}
+          />
+        )}
+      </Route>
+      {/** Here make changes to open Payment Dialog */}
+      <Route path={`${path}:keyFieldValue/payments/:payMode`}>
+        {({ history, match }) => (
+          <EditDialog
+            show={match != null}
+            id={match && match.params.keyFieldValue}
             onHide={() => {
               history.push(path);
             }}
@@ -100,7 +115,7 @@ export function DailySalesPage({ history }) {
           />
         )}
       </Route> */}
-      <ViewCard  />
+      <ViewCard />
     </UIProvider>
   );
 }

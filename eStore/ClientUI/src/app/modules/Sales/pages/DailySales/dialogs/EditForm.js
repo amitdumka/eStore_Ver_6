@@ -44,7 +44,7 @@ export function EditForm({
   dailySale,
   actionsLoading,
   onHide,
-  employeeList,
+  salesmanList,payModes,storeList
 }) {
   return (
     <>
@@ -69,8 +69,12 @@ export function EditForm({
                   {/* Store */}
                   <div className="col-lg-4">
                     <Select name="storeId" label="Store">
-                      <option value="1">Dumka</option>
-                      <option value="2">Jamshedpur</option>
+                    {storeList &&
+                        storeList.map((item) => (
+                          <option key={item.storeId} value={item.storeId}>
+                            {item.storeName}
+                          </option>
+                        ))}
                     </Select>
                   </div>
                   {/* Date of DailySale */}
@@ -89,8 +93,8 @@ export function EditForm({
                       label="Salesman"
                     >
                       <option value="">Select Salesman</option>
-                      {employeeList &&
-                        employeeList.map((item) => (
+                      {salesmanList &&
+                        salesmanList.map((item) => (
                           <option key={item.salesmanId} value={item.salesmanId}>
                             {item.salesmanName}
                           </option>
@@ -120,8 +124,12 @@ export function EditForm({
                   {/* PayMode */}
                   <div className="col-lg-4">
                     <Select name="payMode" label="Payment Mode">
-                      <option value="0">Cash</option>
-                      <option value="1">Card</option>
+                    {payModes &&
+                        payModes.map((item) => (
+                          <option key={item.value} value={item.value}>
+                            {item.name}
+                          </option>
+                        ))}
                     </Select>
                   </div>
                 </div>

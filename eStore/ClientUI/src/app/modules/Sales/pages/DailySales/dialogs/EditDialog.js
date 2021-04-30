@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/DailySales/Actions";
+import * as cActions from "../../../../_redux/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
@@ -23,12 +24,14 @@ export function EditDialog({ id, show, onHide }) {
   const {
     actionsLoading,
     dailySaleForEdit,
-    employeeList,
+    salesmanList,payModes,storeList
   } = useSelector(
     (state) => ({
       actionsLoading: state.dailySales.actionsLoading,
       dailySaleForEdit: state.dailySales.dailySaleForEdit,
-      employeeList: state.dailySales.employeeEntities,
+      salesmanList: state.dailySales.employeeEntities,
+      payModes: state.commonTypes.payModes,
+      storeList: state.commonTypes.storeList
     }),
     shallowEqual
   );
@@ -37,6 +40,9 @@ export function EditDialog({ id, show, onHide }) {
     // server call for getting DailySale by id
     dispatch(actions.fetchDailySale(id));
     dispatch(actions.fetchEmployees());
+    dispatch(cActions.fetchEnumValue("payMode"));
+    dispatch(cActions.fetchStores());
+    
   }, [id, dispatch]);
 
   // server request for saving dailySale
@@ -64,7 +70,9 @@ export function EditDialog({ id, show, onHide }) {
         actionsLoading={actionsLoading}
         dailySale={dailySaleForEdit || dailySalesUIProps.initDailySale}
         onHide={onHide}
-        employeeList={employeeList}
+        salesmanList={salesmanList}
+        payModes={payModes}
+        storeList={storeList}
       />
     </Modal>
   );

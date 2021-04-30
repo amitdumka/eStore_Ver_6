@@ -11,10 +11,11 @@ export function ActionsColumnFormatter(
   cellContent,
   row,
   rowIndex,
-  { openEditDialog, openDeleteDialog, keyFieldValue }
+  { openEditDialog, openDeleteDialog, openPaymentDialog, keyFieldValue }
 ) {
   keyFieldValue =
     keyFieldValue && keyFieldValue ? keyFieldValue : row.dailySaleId;
+   const payMode= row.payMode;  
   return (
     <>
       <a
@@ -39,6 +40,18 @@ export function ActionsColumnFormatter(
           <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
         </span>
       </a>
+      <> </>
+    {payMode!=0 &&
+      <a
+        title="Payment "
+        className="btn btn-icon btn-light btn-hover-danger btn-sm"
+        onClick={() => openPaymentDialog({keyFieldValue,payMode})}
+      >
+        <span className="svg-icon svg-icon-md svg-icon-success">
+          <SVG src={toAbsoluteUrl("/media/svg/icons/Shopping/Money.svg")} />
+        </span>
+      </a>
+      }
     </>
   );
 }
