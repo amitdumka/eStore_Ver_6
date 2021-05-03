@@ -11,8 +11,8 @@ import {
   Select,
   DatePickerField,
 } from "../../../../../../_metronic/_partials/controls";
-import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
-
+import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
+import { Button } from "@material-ui/core";
 
 export default function PaymentsDialog({ id, show, onHide, payMode }) {
   const uiContext = useUIContext();
@@ -49,29 +49,99 @@ export default function PaymentsDialog({ id, show, onHide, payMode }) {
   }, [id, dispatch]);
 
   dailySaleForEdit && setCurPayMode(dailySaleForEdit.payMode);
-  
-  const ShowEditForm=(payMode)=>{
-//{ Cash, Card, RTGS, NEFT, IMPS, Wallets, Cheques, DemandDraft, Points, Others, Coupons, MixPayments, UPI }
+
+  const ShowEditForm = (payMode) => {
+    //{ Cash, Card, RTGS, NEFT, IMPS, Wallets, Cheques, DemandDraft, Points, Others, Coupons, MixPayments, UPI }
     switch (payMode) {
-      case 1:break; //card
-      case 2:break; //rtgs
-      case 3:break; //rtgs neft
-      case 4:break; //rtgs imps
-      case 6:break; //cheques
-      case 7:break; // dd
-      case 8:break; //points
-      case 9:break; //others
-      case 10:break; //Coupons
-      case 11:break; //MixPayments
-      case 5: break; //wallets
-      case 12:break; //UPI
+      case 1:
+        return (
+          <>
+            <CardPaymentForm
+              actionsLoading={actionsLoading}
+              onHide={onHide}
+              dailySale={dailySaleForEdit}
+              edcList=""
+              cardModes=""
+              saveData="saveDataFunction"
+              payment={paymentForEdit || intitCard}
+              payModes={payModes}
+            />
+          </>
+        ); //card
+      case 2:
+      //rtgs
+      case 3:
+      //rtgs neft
+      case 4:
+      //rtgs imps
+      case 6:
+      //cheques
+      // eslint-disable-next-line no-fallthrough
+      case 7:
+        return (
+          <>
+            <BankPaymentForm
+              actionsLoading={actionsLoading}
+              onHide={onHide}
+              dailySale={dailySaleForEdit}
+              saveData="saveDataFunction"
+              payment={paymentForEdit || initBank}
+              payModes={payModes}
+            />
+          </>
+        ); // dd
+      case 8:
+        return (
+          <>
+            <PointRedeemedForm
+              actionsLoading={actionsLoading}
+              onHide={onHide}
+              dailySale={dailySaleForEdit}
+              saveData="saveDataFunction"
+              payment={paymentForEdit || initBank}
+              payModes={payModes}
+            />
+          </>
+        ); //points
+      case 9:
+        break; //others
+      case 10:
+        return (
+          <>
+            <CouponPaymentForm
+              actionsLoading={actionsLoading}
+              onHide={onHide}
+              dailySale={dailySaleForEdit}
+              saveData="saveDataFunction"
+              payment={paymentForEdit || initBank}
+              payModes={payModes}
+            />
+          </>
+        ); //Coupons
+      case 11:
+        break; //MixPayments
+      case 5:
+      //wallets
+      // eslint-disable-next-line no-fallthrough
+      case 12:
+        return (
+          <>
+            <WalletPaymentForm
+              actionsLoading={actionsLoading}
+              onHide={onHide}
+              dailySale={dailySaleForEdit}
+              saveData="saveDataFunction"
+              payment={paymentForEdit || initBank}
+              payModes={payModes}
+            />
+          </>
+        ); //UPI
 
       default:
         break;
-    }  
+    }
   };
   return (
-    
     <Modal
       size="lg"
       show={show}
@@ -84,7 +154,7 @@ export default function PaymentsDialog({ id, show, onHide, payMode }) {
         onHide={onHide}
         payModes={payModes}
       /> */}
-        <ShowEditForm payMode={curPayMode} />
+      <ShowEditForm payMode={curPayMode} />
     </Modal>
   );
 }
@@ -114,9 +184,6 @@ export function DialogHeader({ id }) {
     setTitle(_title);
     // eslint-disable-next-line
   }, [dailySaleForEdit, actionsLoading, paymentForEdit]);
-
-
-  
 
   return (
     <>
@@ -156,7 +223,6 @@ export function EditForm({
       .min(1)
       .required("Cash Amount is required"),
     remarks: Yup.string().required("DailySale details is required"),
-   
   });
 
   return (
@@ -298,7 +364,6 @@ export function BankPaymentForm({
       .required("Amount is required"),
     remarks: Yup.string().required("DailySale details is required"),
     referenceNumber: Yup.string().required("Reference Number  is required"),
-   
   });
   return (
     <>
@@ -420,7 +485,6 @@ export function CouponPaymentForm({
       .required("Amount is required"),
     remarks: Yup.string().required("DailySale details is required"),
     couponNumber: Yup.string().required("Coupon Number is required"),
-   
   });
   return (
     <>
@@ -544,7 +608,6 @@ export function PointRedeemedForm({
     customerMobileNumber: Yup.string().required(
       "Customer Mobile Number  is required"
     ),
-   
   });
   return (
     <>
@@ -668,7 +731,6 @@ export function WalletPaymentForm({
     customerMobileNoRef: Yup.string().required(
       "Customer Mobile Number with ref is  is required"
     ),
-   
   });
   return (
     <>
@@ -780,7 +842,9 @@ export function CardPaymentForm({
   onHide,
   payModes,
   saveData,
-  edcList,cardModes
+  edcList,
+  cardModes,
+  dailySale,
 }) {
   const PaymentEditSchema = Yup.object().shape({
     amount: Yup.number()
@@ -789,11 +853,18 @@ export function CardPaymentForm({
       .positive()
       .min(1)
       .required("Amount is required"),
-   eDCId: Yup.number().integer().moreThan(0).positive().required("Select EDC") , 
-   cardTypes: Yup.number().positive().required("Select Card Types"), 
-   onDate:Yup.date().required("Date is required"),
-   cardEndingNumber:Yup.number().positive().required("Card Last Digit is required"),
-
+    eDCId: Yup.number()
+      .integer()
+      .moreThan(0)
+      .positive()
+      .required("Select EDC"),
+    cardTypes: Yup.number()
+      .positive()
+      .required("Select Card Types"),
+    onDate: Yup.date().required("Date is required"),
+    cardEndingNumber: Yup.number()
+      .positive()
+      .required("Card Last Digit is required"),
   });
   return (
     <>
@@ -883,8 +954,8 @@ export function CardPaymentForm({
                         ))}
                     </Select>
                   </div>
-                   {/*  particulars Name*/}
-                   <div className="col-lg-4">
+                  {/*  particulars Name*/}
+                  <div className="col-lg-4">
                     <Field
                       name="cardEndingNumber"
                       component={Input}
@@ -920,6 +991,117 @@ export function CardPaymentForm({
   );
 }
 
+export function MixPayments({actionsLoading,
+  payment,
+  onHide,
+  payModes,
+  saveData,
+  edcList,
+  cardModes,
+  dailySale,}){
+    const [selectedPayMode,setSelectedPayMode]= useState(0);
+    const ShowSelectForm=(payMode)=>{
+//{ Cash, Card, RTGS, NEFT, IMPS, Wallets, Cheques, DemandDraft, Points, Others, Coupons, MixPayments, UPI }
+switch (payMode) {
+  case 1:
+    return (
+      <>
+        <CardPaymentForm
+          actionsLoading={actionsLoading}
+          onHide={onHide}
+          dailySale={dailySale}
+          edcList=""
+          cardModes=""
+          saveData="saveDataFunction"
+          payment={payment || intitCard}
+          payModes={payModes}
+        />
+      </>
+    ); //card
+  case 2:
+  //rtgs
+  case 3:
+  //rtgs neft
+  case 4:
+  //rtgs imps
+  case 6:
+  //cheques
+  // eslint-disable-next-line no-fallthrough
+  case 7:
+    return (
+      <>
+        <BankPaymentForm
+          actionsLoading={actionsLoading}
+          onHide={onHide}
+          dailySale={dailySale}
+          saveData="saveDataFunction"
+          payment={payment || initBank}
+          payModes={payModes}
+        />
+      </>
+    ); // dd
+  case 8:
+    return (
+      <>
+        <PointRedeemedForm
+          actionsLoading={actionsLoading}
+          onHide={onHide}
+          dailySale={dailySale}
+          saveData="saveDataFunction"
+          payment={payment || initBank}
+          payModes={payModes}
+        />
+      </>
+    ); //points
+  case 9:
+    break; //others
+  case 10:
+    return (
+      <>
+        <CouponPaymentForm
+          actionsLoading={actionsLoading}
+          onHide={onHide}
+          dailySale={dailySale}
+          saveData="saveDataFunction"
+          payment={payment || initBank}
+          payModes={payModes}
+        />
+      </>
+    ); //Coupons
+  case 5:
+  //wallets
+  // eslint-disable-next-line no-fallthrough
+  case 12:
+    return (
+      <>
+        <WalletPaymentForm
+          actionsLoading={actionsLoading}
+          onHide={onHide}
+          dailySale={dailySale}
+          saveData="saveDataFunction"
+          payment={payment || initBank}
+          payModes={payModes}
+        />
+      </>
+    ); //UPI
+
+  default:
+    break;
+}
+    };
+    return (
+      <>
+      <Select name="selectedPayMode" onSelect={(value)=>{setSelectedPayMode(value)}}>
+        {payModes && payModes.map((item)=>(
+          <option value={item.value} key={item.value}>{item.name}</option>
+        ))}
+      </Select>
+      <Button className="btn btn-primary btn-sm" onClick={()=>{ShowSelectForm(selectedPayMode)}}>Add Payment</Button>
+      </>
+      
+    );
+
+}
 
 // public int EDCTranscationId { get; set; }
 // public int EDCId { get; set; }
@@ -945,74 +1127,79 @@ export function CardPaymentForm({
 // public string UserId { get; set; }
 // public bool IsReadOnly { get; set; }
 
-const intitCard={
-  eDCTranscationId:0, 
-  eDCId:0, 
-  eDC:null, 
-  amount:0.0, 
-  onDate: new Date(), 
-  cardEndingNumber:"",
-  cardTypes:0, 
-  invoiceNumber:"", 
-  storeId:1, 
+const intitCard = {
+  eDCTranscationId: 0,
+  eDCId: 0,
+  eDC: null,
+  amount: 0.0,
+  onDate: new Date(),
+  cardEndingNumber: "",
+  cardTypes: 0,
+  invoiceNumber: "",
+  storeId: 1,
   store: null,
-  userId:"webUI", 
-  isReadOnly: false,
-
-}; 
-
-const initBank={
-  bankPaymentId:0,
-  dailySaleId:0, 
-  dailySale:null,
-  invoiceNumber:null, 
-  onDate: new Date(), 
-  amount:0.0, remarks:null, mode:0,
-  referenceNumber:null,
-  storeId:1, 
-  store: null,
-  userId:"webUI", 
-  isReadOnly: false,
- 
-  
-}; 
-const intitPoint={
-  pointRedeemedId:0,
-  dailySaleId:0, 
-  dailySale:null,
-  invoiceNumber:null, 
-  onDate: new Date(), 
-  amount:0.0, remarks:null, mode:0,
-  customerMobileNumber:null,
-  storeId:1, 
-  store: null,
-  userId:"webUI", 
+  userId: "webUI",
   isReadOnly: false,
 };
-const initWallet={
-  walletPaymentId:0,
-  dailySaleId:0, 
-  dailySale:null,
-  invoiceNumber:null, 
-  onDate: new Date(), 
-  amount:0.0, remarks:null, mode:0,
-  customerMobileNoRef:null,
-  walletType:0,
-  storeId:1, 
+
+const initBank = {
+  bankPaymentId: 0,
+  dailySaleId: 0,
+  dailySale: null,
+  invoiceNumber: null,
+  onDate: new Date(),
+  amount: 0.0,
+  remarks: null,
+  mode: 0,
+  referenceNumber: null,
+  storeId: 1,
   store: null,
-  userId:"webUI", 
+  userId: "webUI",
   isReadOnly: false,
-}; 
-const initCoupon={
-  couponPaymentId:0,
-  dailySaleId:0, 
-  dailySale:null,
-  invoiceNumber:null, 
-  onDate: new Date(), 
-  amount:0.0, remarks:null, mode:0,
-  couponNumber:null,
-  storeId:1, 
+};
+const intitPoint = {
+  pointRedeemedId: 0,
+  dailySaleId: 0,
+  dailySale: null,
+  invoiceNumber: null,
+  onDate: new Date(),
+  amount: 0.0,
+  remarks: null,
+  mode: 0,
+  customerMobileNumber: null,
+  storeId: 1,
   store: null,
-  userId:"webUI", 
+  userId: "webUI",
   isReadOnly: false,
-}; 
+};
+const initWallet = {
+  walletPaymentId: 0,
+  dailySaleId: 0,
+  dailySale: null,
+  invoiceNumber: null,
+  onDate: new Date(),
+  amount: 0.0,
+  remarks: null,
+  mode: 0,
+  customerMobileNoRef: null,
+  walletType: 0,
+  storeId: 1,
+  store: null,
+  userId: "webUI",
+  isReadOnly: false,
+};
+const initCoupon = {
+  couponPaymentId: 0,
+  dailySaleId: 0,
+  dailySale: null,
+  invoiceNumber: null,
+  onDate: new Date(),
+  amount: 0.0,
+  remarks: null,
+  mode: 0,
+  couponNumber: null,
+  storeId: 1,
+  store: null,
+  userId: "webUI",
+  isReadOnly: false,
+};
