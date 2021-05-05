@@ -56,6 +56,7 @@ export const dailySalesSlice = createSlice({
       state.actionsLoading = false;
       state.dailySaleForEdit = action.payload.dailySaleForEdit;
       state.error = null;
+  //    console.log(state.dailySaleForEdit);
     },
     // findDailySales
     dailySalesFetched: (state, action) => {

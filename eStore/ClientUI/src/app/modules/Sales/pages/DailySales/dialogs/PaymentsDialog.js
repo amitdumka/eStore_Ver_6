@@ -48,11 +48,16 @@ export default function PaymentsDialog({ id, show, onHide, payMode }) {
     dispatch(cActions.fetchEnumValue("payMode"));
   }, [id, dispatch]);
 
-  dailySaleForEdit && setCurPayMode(dailySaleForEdit.payMode);
-
-  const ShowEditForm = (payMode) => {
+  //dailySaleForEdit && setCurPayMode(dailySaleForEdit.payMode);
+  //payMode  && console.log("PayMode= "+payMode);
+  console.log(`iD=${id} \t Mode=${payMode}`);
+  console.log(onHide);
+  
+  const ShowEditForm = ({payMode}) => {
     //{ Cash, Card, RTGS, NEFT, IMPS, Wallets, Cheques, DemandDraft, Points, Others, Coupons, MixPayments, UPI }
-    switch (payMode) {
+    // console.log("ShowEditForm: "+payMode); 
+    const mode=parseInt(payMode);
+    switch (mode) {
       case 1:
         return (
           <>
@@ -136,9 +141,10 @@ export default function PaymentsDialog({ id, show, onHide, payMode }) {
             />
           </>
         ); //UPI
-
+          break;
       default:
-        break;
+        console.log("PayMode= "+payMode);
+        //return (<></>);
     }
   };
   return (
@@ -148,18 +154,14 @@ export default function PaymentsDialog({ id, show, onHide, payMode }) {
       onHide={onHide}
       aria-labelledby="example-modal-sizes-title-lg"
     >
-      {/* <DialogHeader id={id} />
-      <EditForm
-        actionsLoading={actionsLoading}
-        onHide={onHide}
-        payModes={payModes}
-      /> */}
-      <ShowEditForm payMode={curPayMode} />
+      <DialogHeader id={id}/>
+      <ShowEditForm payMode={payMode} />
+      
     </Modal>
   );
 }
 
-export function DialogHeader({ id }) {
+export function DialogHeader({ id, paymentId }) {
   // DailySales Redux state
   const { dailySaleForEdit, actionsLoading, paymentForEdit } = useSelector(
     (state) => ({
@@ -173,11 +175,12 @@ export function DialogHeader({ id }) {
   const [title, setTitle] = useState("");
   // Title
   useEffect(() => {
-    let _title = id ? "" : "New Payment";
+    let _title = paymentId ? "" : "New Payment";
+
     if (dailySaleForEdit && _title == "New Payment") {
       _title = _title + `  For Sale Inv: ${dailySaleForEdit.invNo}`;
     }
-    if (dailySaleForEdit && paymentForEdit && id) {
+    if (dailySaleForEdit && paymentForEdit && paymentId) {
       _title = `Payment for Sale '${dailySaleForEdit.invNo}'`;
     }
 
@@ -888,30 +891,19 @@ export function CardPaymentForm({
                 <div className="form-group row">
                   {/* Date of DailySale */}
                   <div className="col-lg-4">
-                    <label className="">On Date {payment.saleDate}</label>
+                    <label className="text-info">On Date {dailySale && dailySale.saleDate}</label>
                   </div>
                   {/* Invoice No */}
                   <div className="col-lg-4">
-                    <label className="">Invoice No {payment.invNo}</label>
+                    <label className="text-danger">Invoice No {dailySale && dailySale.invNo}</label>
                   </div>
                   {/* Payment Mode */}
                   <div className="col-lg-4">
-                    <label className="">Payment Mode {payment.payMode}</label>
+                    <label className="text-success">Payment Mode {dailySale && payModes[ dailySale.payMode].name}</label>
                   </div>
                 </div>
 
-                <div className="form-group row">
-                  {/* PayMode */}
-                  <div className="col-lg-4">
-                    <Select name="payMode" label="Payment Mode">
-                      {payModes &&
-                        payModes.map((item) => (
-                          <option key={item.value} value={item.value}>
-                            {item.name}
-                          </option>
-                        ))}
-                    </Select>
-                  </div>
+                <div className="form-group row">                 
                   {/*  particulars Name*/}
                   <div className="col-lg-4">
                     <Field
@@ -930,8 +922,6 @@ export function CardPaymentForm({
                       label="Payment Date"
                     />
                   </div>
-                </div>
-                <div className="form-group row">
                   {/* PayMode */}
                   <div className="col-lg-4">
                     <Select name="EDCId" label="EDC">
@@ -943,6 +933,9 @@ export function CardPaymentForm({
                         ))}
                     </Select>
                   </div>
+                </div>
+                <div className="form-group row">
+                  
                   {/* PayMode */}
                   <div className="col-lg-4">
                     <Select name="cardTypes" label="Card Types">
@@ -961,6 +954,16 @@ export function CardPaymentForm({
                       component={Input}
                       placeholder="Card Ending Number"
                       label="Card Ending Number"
+                      disabled={true}
+                    />
+                  </div>
+                  {/*  particulars Name*/}
+                  <div className="col-lg-4">
+                    <Field
+                      name="authCode"
+                      component={Input}
+                      placeholder="Auth Code"
+                      label="Auth Code"
                       disabled={true}
                     />
                   </div>
@@ -1136,6 +1139,7 @@ const intitCard = {
   cardEndingNumber: "",
   cardTypes: 0,
   invoiceNumber: "",
+  authCode:0,
   storeId: 1,
   store: null,
   userId: "webUI",
