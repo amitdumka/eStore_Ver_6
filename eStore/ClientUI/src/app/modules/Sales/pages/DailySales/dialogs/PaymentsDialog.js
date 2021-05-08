@@ -24,7 +24,7 @@ export default function PaymentsDialog({ id, show, onHide, payMode }) {
 
   // DailySales Redux state
   const dispatch = useDispatch();
-  const [curPayMode, setCurPayMode] = useState(0);
+  //const [curPayMode, setCurPayMode] = useState(0);
 
   const {
     actionsLoading,
@@ -52,11 +52,11 @@ export default function PaymentsDialog({ id, show, onHide, payMode }) {
   //payMode  && console.log("PayMode= "+payMode);
   console.log(`iD=${id} \t Mode=${payMode}`);
   console.log(onHide);
-  
-  const ShowEditForm = ({payMode}) => {
+
+  const ShowEditForm = ({ payMode }) => {
     //{ Cash, Card, RTGS, NEFT, IMPS, Wallets, Cheques, DemandDraft, Points, Others, Coupons, MixPayments, UPI }
-    // console.log("ShowEditForm: "+payMode); 
-    const mode=parseInt(payMode);
+    // console.log("ShowEditForm: "+payMode);
+    const mode = parseInt(payMode);
     switch (mode) {
       case 1:
         return (
@@ -141,10 +141,10 @@ export default function PaymentsDialog({ id, show, onHide, payMode }) {
             />
           </>
         ); //UPI
-          break;
+        break;
       default:
-        console.log("PayMode= "+payMode);
-        //return (<></>);
+        console.log("PayMode= " + payMode);
+      //return (<></>);
     }
   };
   return (
@@ -154,9 +154,8 @@ export default function PaymentsDialog({ id, show, onHide, payMode }) {
       onHide={onHide}
       aria-labelledby="example-modal-sizes-title-lg"
     >
-      <DialogHeader id={id}/>
+      <DialogHeader id={id} />
       <ShowEditForm payMode={payMode} />
-      
     </Modal>
   );
 }
@@ -357,6 +356,7 @@ export function BankPaymentForm({
   onHide,
   payModes,
   saveData,
+  dailySale,
 }) {
   const PaymentEditSchema = Yup.object().shape({
     amount: Yup.number()
@@ -368,6 +368,9 @@ export function BankPaymentForm({
     remarks: Yup.string().required("DailySale details is required"),
     referenceNumber: Yup.string().required("Reference Number  is required"),
   });
+
+  payment.payMode = dailySale ? dailySale.payMode : 6;
+
   return (
     <>
       <Formik
@@ -390,15 +393,22 @@ export function BankPaymentForm({
                 <div className="form-group row">
                   {/* Date of DailySale */}
                   <div className="col-lg-4">
-                    <label className="">On Date {payment.saleDate}</label>
+                    <label className="text-primary">
+                      On Date : {dailySale && dailySale.saleDate}
+                    </label>
                   </div>
                   {/* Invoice No */}
                   <div className="col-lg-4">
-                    <label className="">Invoice No {payment.invNo}</label>
+                    <label className="text-success">
+                      Invoice No : {dailySale && dailySale.invNo}
+                    </label>
                   </div>
                   {/* Payment Mode */}
                   <div className="col-lg-4">
-                    <label className="">Payment Mode {payment.payMode}</label>
+                    <label className="text-info">
+                      Payment Mode :{" "}
+                      {dailySale && payModes[dailySale.payMode].name}
+                    </label>
                   </div>
                 </div>
 
@@ -599,6 +609,7 @@ export function PointRedeemedForm({
   onHide,
   payModes,
   saveData,
+  dailySale,
 }) {
   const PaymentEditSchema = Yup.object().shape({
     amount: Yup.number()
@@ -634,21 +645,28 @@ export function PointRedeemedForm({
                 <div className="form-group row">
                   {/* Date of DailySale */}
                   <div className="col-lg-4">
-                    <label className="">On Date {payment.saleDate}</label>
+                    <label className="text-primary">
+                      On Date : {dailySale && dailySale.saleDate}
+                    </label>
                   </div>
                   {/* Invoice No */}
                   <div className="col-lg-4">
-                    <label className="">Invoice No {payment.invNo}</label>
+                    <label className="text-success">
+                      Invoice No : {dailySale && dailySale.invNo}
+                    </label>
                   </div>
                   {/* Payment Mode */}
                   <div className="col-lg-4">
-                    <label className="">Payment Mode {payment.payMode}</label>
+                    <label className="text-info">
+                      Payment Mode{" : "}
+                      {dailySale && payModes[dailySale.payMode].name}
+                    </label>
                   </div>
                 </div>
 
                 <div className="form-group row">
                   {/* PayMode */}
-                  <div className="col-lg-4">
+                  {/* <div className="col-lg-4">
                     <Select name="payMode" label="Payment Mode">
                       {payModes &&
                         payModes.map((item) => (
@@ -657,7 +675,7 @@ export function PointRedeemedForm({
                           </option>
                         ))}
                     </Select>
-                  </div>
+                  </div> */}
                   {/*  particulars Name*/}
                   <div className="col-lg-4">
                     <Field
@@ -721,6 +739,7 @@ export function WalletPaymentForm({
   onHide,
   payModes,
   saveData,
+  dailySale,
 }) {
   const PaymentEditSchema = Yup.object().shape({
     walletType: Yup.number().required("Wallet Type is required"),
@@ -735,6 +754,8 @@ export function WalletPaymentForm({
       "Customer Mobile Number with ref is  is required"
     ),
   });
+  payment.payMode = dailySale ? dailySale.payMode : 9;
+
   return (
     <>
       <Formik
@@ -757,15 +778,22 @@ export function WalletPaymentForm({
                 <div className="form-group row">
                   {/* Date of DailySale */}
                   <div className="col-lg-4">
-                    <label className="">On Date {payment.saleDate}</label>
+                    <label className="text-props">
+                      On Date {dailySale && dailySale.saleDate}
+                    </label>
                   </div>
                   {/* Invoice No */}
                   <div className="col-lg-4">
-                    <label className="">Invoice No {payment.invNo}</label>
+                    <label className="text-success">
+                      Invoice No {dailySale && dailySale.invNo}
+                    </label>
                   </div>
                   {/* Payment Mode */}
                   <div className="col-lg-4">
-                    <label className="">Payment Mode {payment.payMode}</label>
+                    <label className="text-info">
+                      Payment Mode{" "}
+                      {dailySale && payModes[dailySale.payMode].name}
+                    </label>
                   </div>
                 </div>
 
@@ -891,19 +919,26 @@ export function CardPaymentForm({
                 <div className="form-group row">
                   {/* Date of DailySale */}
                   <div className="col-lg-4">
-                    <label className="text-info">On Date {dailySale && dailySale.saleDate}</label>
+                    <label className="text-info">
+                      On Date {dailySale && dailySale.saleDate}
+                    </label>
                   </div>
                   {/* Invoice No */}
                   <div className="col-lg-4">
-                    <label className="text-danger">Invoice No {dailySale && dailySale.invNo}</label>
+                    <label className="text-danger">
+                      Invoice No {dailySale && dailySale.invNo}
+                    </label>
                   </div>
                   {/* Payment Mode */}
                   <div className="col-lg-4">
-                    <label className="text-success">Payment Mode {dailySale && payModes[ dailySale.payMode].name}</label>
+                    <label className="text-success">
+                      Payment Mode{" "}
+                      {dailySale && payModes[dailySale.payMode].name}
+                    </label>
                   </div>
                 </div>
 
-                <div className="form-group row">                 
+                <div className="form-group row">
                   {/*  particulars Name*/}
                   <div className="col-lg-4">
                     <Field
@@ -935,7 +970,6 @@ export function CardPaymentForm({
                   </div>
                 </div>
                 <div className="form-group row">
-                  
                   {/* PayMode */}
                   <div className="col-lg-4">
                     <Select name="cardTypes" label="Card Types">
@@ -994,116 +1028,131 @@ export function CardPaymentForm({
   );
 }
 
-export function MixPayments({actionsLoading,
+export function MixPayments({
+  actionsLoading,
   payment,
   onHide,
   payModes,
   saveData,
   edcList,
   cardModes,
-  dailySale,}){
-    const [selectedPayMode,setSelectedPayMode]= useState(0);
-    const ShowSelectForm=(payMode)=>{
-//{ Cash, Card, RTGS, NEFT, IMPS, Wallets, Cheques, DemandDraft, Points, Others, Coupons, MixPayments, UPI }
-switch (payMode) {
-  case 1:
-    return (
-      <>
-        <CardPaymentForm
-          actionsLoading={actionsLoading}
-          onHide={onHide}
-          dailySale={dailySale}
-          edcList=""
-          cardModes=""
-          saveData="saveDataFunction"
-          payment={payment || intitCard}
-          payModes={payModes}
-        />
-      </>
-    ); //card
-  case 2:
-  //rtgs
-  case 3:
-  //rtgs neft
-  case 4:
-  //rtgs imps
-  case 6:
-  //cheques
-  // eslint-disable-next-line no-fallthrough
-  case 7:
-    return (
-      <>
-        <BankPaymentForm
-          actionsLoading={actionsLoading}
-          onHide={onHide}
-          dailySale={dailySale}
-          saveData="saveDataFunction"
-          payment={payment || initBank}
-          payModes={payModes}
-        />
-      </>
-    ); // dd
-  case 8:
-    return (
-      <>
-        <PointRedeemedForm
-          actionsLoading={actionsLoading}
-          onHide={onHide}
-          dailySale={dailySale}
-          saveData="saveDataFunction"
-          payment={payment || initBank}
-          payModes={payModes}
-        />
-      </>
-    ); //points
-  case 9:
-    break; //others
-  case 10:
-    return (
-      <>
-        <CouponPaymentForm
-          actionsLoading={actionsLoading}
-          onHide={onHide}
-          dailySale={dailySale}
-          saveData="saveDataFunction"
-          payment={payment || initBank}
-          payModes={payModes}
-        />
-      </>
-    ); //Coupons
-  case 5:
-  //wallets
-  // eslint-disable-next-line no-fallthrough
-  case 12:
-    return (
-      <>
-        <WalletPaymentForm
-          actionsLoading={actionsLoading}
-          onHide={onHide}
-          dailySale={dailySale}
-          saveData="saveDataFunction"
-          payment={payment || initBank}
-          payModes={payModes}
-        />
-      </>
-    ); //UPI
+  dailySale,
+}) {
+  const [selectedPayMode, setSelectedPayMode] = useState(0);
+  const ShowSelectForm = (payMode) => {
+    //{ Cash, Card, RTGS, NEFT, IMPS, Wallets, Cheques, DemandDraft, Points, Others, Coupons, MixPayments, UPI }
+    switch (payMode) {
+      case 1:
+        return (
+          <>
+            <CardPaymentForm
+              actionsLoading={actionsLoading}
+              onHide={onHide}
+              dailySale={dailySale}
+              edcList=""
+              cardModes=""
+              saveData="saveDataFunction"
+              payment={payment || intitCard}
+              payModes={payModes}
+            />
+          </>
+        ); //card
+      case 2:
+      //rtgs
+      case 3:
+      //rtgs neft
+      case 4:
+      //rtgs imps
+      case 6:
+      //cheques
+      // eslint-disable-next-line no-fallthrough
+      case 7:
+        return (
+          <>
+            <BankPaymentForm
+              actionsLoading={actionsLoading}
+              onHide={onHide}
+              dailySale={dailySale}
+              saveData="saveDataFunction"
+              payment={payment || initBank}
+              payModes={payModes}
+            />
+          </>
+        ); // dd
+      case 8:
+        return (
+          <>
+            <PointRedeemedForm
+              actionsLoading={actionsLoading}
+              onHide={onHide}
+              dailySale={dailySale}
+              saveData="saveDataFunction"
+              payment={payment || initBank}
+              payModes={payModes}
+            />
+          </>
+        ); //points
+      case 9:
+        break; //others
+      case 10:
+        return (
+          <>
+            <CouponPaymentForm
+              actionsLoading={actionsLoading}
+              onHide={onHide}
+              dailySale={dailySale}
+              saveData="saveDataFunction"
+              payment={payment || initBank}
+              payModes={payModes}
+            />
+          </>
+        ); //Coupons
+      case 5:
+      //wallets
+      // eslint-disable-next-line no-fallthrough
+      case 12:
+        return (
+          <>
+            <WalletPaymentForm
+              actionsLoading={actionsLoading}
+              onHide={onHide}
+              dailySale={dailySale}
+              saveData="saveDataFunction"
+              payment={payment || initBank}
+              payModes={payModes}
+            />
+          </>
+        ); //UPI
 
-  default:
-    break;
-}
-    };
-    return (
-      <>
-      <Select name="selectedPayMode" onSelect={(value)=>{setSelectedPayMode(value)}}>
-        {payModes && payModes.map((item)=>(
-          <option value={item.value} key={item.value}>{item.name}</option>
-        ))}
+      default:
+        break;
+    }
+  };
+  return (
+    <>
+      <Select
+        name="selectedPayMode"
+        onSelect={(value) => {
+          setSelectedPayMode(value);
+        }}
+      >
+        {payModes &&
+          payModes.map((item) => (
+            <option value={item.value} key={item.value}>
+              {item.name}
+            </option>
+          ))}
       </Select>
-      <Button className="btn btn-primary btn-sm" onClick={()=>{ShowSelectForm(selectedPayMode)}}>Add Payment</Button>
-      </>
-      
-    );
-
+      <Button
+        className="btn btn-primary btn-sm"
+        onClick={() => {
+          ShowSelectForm(selectedPayMode);
+        }}
+      >
+        Add Payment
+      </Button>
+    </>
+  );
 }
 
 // public int EDCTranscationId { get; set; }
@@ -1139,7 +1188,7 @@ const intitCard = {
   cardEndingNumber: "",
   cardTypes: 0,
   invoiceNumber: "",
-  authCode:0,
+  authCode: 0,
   storeId: 1,
   store: null,
   userId: "webUI",

@@ -119,7 +119,7 @@ export function EditDialog({ id, show, onHide, windowName }) {
     holiday.approvedBy = CurData.approvedBy;
 
     const isNday = CurData.nDays;
-    if (isNday == true) {
+    if (isNday === true) {
       // Multiple Days
       let data = uiProps.initNHoliday;
       data.holiday = holiday;

@@ -185,14 +185,14 @@ export const deleteStoreHoliday = (id) => (dispatch) => {
 
 export const createNDaysHoliday = (openForCreation) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
-return requestFromServer
+  return requestFromServer
     .createStoreClosedForNDays(JSON.stringify(openForCreation))
     .then((response) => {
       const nDays = response.data;
       console.log(response.data);
       console.log(response);
       dispatch(actions.storeClosedNDaysCreated({ nDays }));
-      if (nDays==true) {
+      if (nDays === true) {
         toast.success(
           "Successfully save Store Holidays/Closed and marked Attendance for all Employees, Check Attendance Page for Details!",
           { position: toast.POSITION.TOP_CENTER }
@@ -202,14 +202,16 @@ return requestFromServer
           "It fails to add store close and marked attendance, Kindly check store Holiday and Attendances Pages",
           { position: toast.POSITION.TOP_CENTER }
         );
-      }      
+      }
     })
     .catch((error) => {
       error.clientMessage = "Can't create Store Open";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
-export const createStoreHolidayWithAttendance = (openForCreation) => (dispatch) => {
+export const createStoreHolidayWithAttendance = (openForCreation) => (
+  dispatch
+) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
     .createStoreClosed(JSON.stringify(openForCreation))
