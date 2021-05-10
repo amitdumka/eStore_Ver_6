@@ -5,6 +5,7 @@ import * as actions from "../../../_redux/DailySales/Actions";
 import * as cActions from "../../../../_redux/Actions";
 import { useUIContext } from "../UIContext";
 import { Formik, Form, Field } from "formik";
+import { makeStyles } from "@material-ui/core";
 import * as Yup from "yup";
 import {
   Input,
@@ -13,6 +14,13 @@ import {
 } from "../../../../../../_metronic/_partials/controls";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
 import { Button } from "@material-ui/core";
+import {
+  Select as MSelect,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+} from "@material-ui/core";
 
 export default function PaymentsDialog({ id, show, onHide, payMode }) {
   const uiContext = useUIContext();
@@ -124,7 +132,19 @@ export default function PaymentsDialog({ id, show, onHide, payMode }) {
           </>
         ); //Coupons
       case 11:
-        break; //MixPayments
+        return (
+          <>
+            {" "}
+            <MixPaymentDialog
+              actionsLoading={actionsLoading}
+              onHide={onHide}
+              dailySale={dailySaleForEdit}
+              saveData="saveDataFunction"
+              payment={paymentForEdit || initBank}
+              payModes={payModes}
+            />{" "}
+          </>
+        ); //MixPayments
       case 5:
       //wallets
       // eslint-disable-next-line no-fallthrough
@@ -141,7 +161,6 @@ export default function PaymentsDialog({ id, show, onHide, payMode }) {
             />
           </>
         ); //UPI
-        break;
       default:
         console.log("PayMode= " + payMode);
       //return (<></>);
@@ -193,6 +212,124 @@ export function DialogHeader({ id, paymentId }) {
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">{title}</Modal.Title>
       </Modal.Header>
+    </>
+  );
+}
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    maxWidth: 752,
+  },
+  demo: {
+    backgroundColor: theme.palette.background.paper,
+  },
+  title: {
+    margin: theme.spacing(1, 0, 1),
+  },
+}));
+export function MixPaymentDialog({
+  actionsLoading,
+  payment,
+  onHide,
+  payModes,
+  saveData,
+  dailySale,
+  edcList,
+  cardModes,
+  paymentList,
+}) {
+  const classes = useStyles();
+  const [pMode, setPMode] = useState(11);
+  const handleAddPay = () => {
+    return (
+      <>
+        <MixPayments
+          actionsLoading={actionsLoading}
+          payment={payment}
+          onHide={onHide}
+          payModes={payModes}
+          saveData={saveData}
+          edcList={edcList}
+          cardModes={cardModes}
+          dailySale={dailySale}
+        />
+      </>
+    );
+  };
+
+  return (
+    <>
+      <div className="m-4 p-2">
+        <div className="row mb-3 mt-3 ">
+          <div className="col-lg-4 text-primary">
+            Invoice No: {dailySale && dailySale.invNo}
+          </div>
+          <div className="col-lg-4 text-primary">
+            Date: {dailySale && dailySale.saleDate}
+          </div>
+          <div className="col-lg-4 text-primary">
+            Mode: {dailySale && payModes[dailySale.payMode].name}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-4 text-info">
+            <label className="text-primary mr-3 ml-3" id="lbSelect">
+              Payment Mode{" "}
+            </label>
+            <MSelect
+              name="newPayMode"
+              label="Payment Mode"
+              labelId="lbSelect"
+              value={11}
+              autoWidth
+              onChange={(val) => {
+                setPMode(val.target.value);
+              }}
+            >
+              {payModes &&
+                payModes.map((item) => (
+                  <option key={item.value} value={item.value}>
+                    {item.name}
+                  </option>
+                ))}
+            </MSelect>
+          </div>
+          <div className="col-lg-4">
+            <Button className="btn btn-success btn-sm" onClick={handleAddPay}>
+              Add Payment
+            </Button>{" "}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-5">
+            <Typography variant="h6" className="text-danger mt-3  ">
+              Payments
+            </Typography>
+            <List dense={true}>
+              {paymentList ? (
+                paymentList.map((item) => (
+                  <>
+                    <ListItem>
+                      <ListItemText
+                        primary={"Payment Id: "+item.paymentId+" Payment Mode: "+item.Mode}
+                        secondary={"Amount: "+item.Amount}
+                      />
+                    </ListItem>
+                    ,
+                  </>
+                ))
+              ) : (
+                <ListItem>
+                  <ListItemText
+                    primary="No payment added"
+                    secondary={"Add Payment for Invoice"}
+                  />
+                </ListItem>
+              )}
+            </List>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
@@ -264,7 +401,6 @@ export function EditForm({
                       component={Input}
                       placeholder="Invoice No"
                       label="Invoice No"
-                      disabled={true}
                     />
                   </div>
                   {/*  particulars Name*/}
@@ -274,7 +410,6 @@ export function EditForm({
                       component={Input}
                       placeholder="Amount"
                       label="Amount"
-                      disabled={true}
                     />
                   </div>
                   {/* PayMode */}
@@ -431,7 +566,6 @@ export function BankPaymentForm({
                       component={Input}
                       placeholder="Amount"
                       label="Amount"
-                      disabled={true}
                     />
                   </div>
                   {/*  particulars Name*/}
@@ -441,7 +575,6 @@ export function BankPaymentForm({
                       component={Input}
                       placeholder="ReferenceNumber"
                       label="ReferenceNumber"
-                      disabled={true}
                     />
                   </div>
                 </div>
@@ -488,6 +621,7 @@ export function CouponPaymentForm({
   onHide,
   payModes,
   saveData,
+  dailySale,
 }) {
   const PaymentEditSchema = Yup.object().shape({
     amount: Yup.number()
@@ -521,21 +655,28 @@ export function CouponPaymentForm({
                 <div className="form-group row">
                   {/* Date of DailySale */}
                   <div className="col-lg-4">
-                    <label className="">On Date {payment.saleDate}</label>
+                    <label className="text-primary">
+                      On Date : {dailySale && dailySale.saleDate}
+                    </label>
                   </div>
                   {/* Invoice No */}
                   <div className="col-lg-4">
-                    <label className="">Invoice No {payment.invNo}</label>
+                    <label className="text-success">
+                      Invoice No : {dailySale && dailySale.invNo}
+                    </label>
                   </div>
                   {/* Payment Mode */}
                   <div className="col-lg-4">
-                    <label className="">Payment Mode {payment.payMode}</label>
+                    <label className="text-info">
+                      Payment Mode :{" "}
+                      {dailySale && payModes[dailySale.payMode].name}
+                    </label>
                   </div>
                 </div>
 
                 <div className="form-group row">
                   {/* PayMode */}
-                  <div className="col-lg-4">
+                  {/* <div className="col-lg-4">
                     <Select name="payMode" label="Payment Mode">
                       {payModes &&
                         payModes.map((item) => (
@@ -544,7 +685,7 @@ export function CouponPaymentForm({
                           </option>
                         ))}
                     </Select>
-                  </div>
+                  </div> */}
                   {/*  particulars Name*/}
                   <div className="col-lg-4">
                     <Field
@@ -552,7 +693,6 @@ export function CouponPaymentForm({
                       component={Input}
                       placeholder="Amount"
                       label="Amount"
-                      disabled={true}
                     />
                   </div>
                   {/*  particulars Name*/}
@@ -562,7 +702,6 @@ export function CouponPaymentForm({
                       component={Input}
                       placeholder="CouponNumber"
                       label="CouponNumber"
-                      disabled={true}
                     />
                   </div>
                 </div>
@@ -683,7 +822,6 @@ export function PointRedeemedForm({
                       component={Input}
                       placeholder="Amount"
                       label="Amount"
-                      disabled={true}
                     />
                   </div>
                   {/*  particulars Name*/}
@@ -693,7 +831,6 @@ export function PointRedeemedForm({
                       component={Input}
                       placeholder="Customer Mobile Number"
                       label="Customer Mobile Number"
-                      disabled={true}
                     />
                   </div>
                 </div>
@@ -816,7 +953,6 @@ export function WalletPaymentForm({
                       component={Input}
                       placeholder="Amount"
                       label="Amount"
-                      disabled={true}
                     />
                   </div>
                   {/*  particulars Name*/}
@@ -826,7 +962,6 @@ export function WalletPaymentForm({
                       component={Input}
                       placeholder="with reference Number"
                       label="Wallet Mobile Number"
-                      disabled={true}
                     />
                   </div>
                 </div>
@@ -946,7 +1081,6 @@ export function CardPaymentForm({
                       component={Input}
                       placeholder="Amount"
                       label="Amount"
-                      disabled={true}
                     />
                   </div>
                   {/* Date of DailySale */}
@@ -988,7 +1122,6 @@ export function CardPaymentForm({
                       component={Input}
                       placeholder="Card Ending Number"
                       label="Card Ending Number"
-                      disabled={true}
                     />
                   </div>
                   {/*  particulars Name*/}
@@ -998,7 +1131,6 @@ export function CardPaymentForm({
                       component={Input}
                       placeholder="Auth Code"
                       label="Auth Code"
-                      disabled={true}
                     />
                   </div>
                 </div>
