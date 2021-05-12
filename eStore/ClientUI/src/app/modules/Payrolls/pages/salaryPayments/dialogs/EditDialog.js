@@ -39,6 +39,8 @@ export function EditDialog({ id, show, onHide }) {
     dispatch(actions.fetchEmployees());
     dispatch(commonActions.fetchEnumValue("salarycomponets"));
     dispatch(commonActions.fetchEnumValue("payMode"));
+    dispatch(commonActions.fetchStores());
+    
   }, [id, dispatch]);
 
   // server request for saving salaryPayment

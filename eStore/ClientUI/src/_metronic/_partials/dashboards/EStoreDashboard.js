@@ -5,6 +5,7 @@ import {
   TailoringWidget,
   EmpInfoWidget,DailySaleTableWidget
 } from "../widgets";
+import { NoticeBoardWidget } from "../widgets/advance-tables/NoticeBoardWidget";
 
 export function EStoreDashboard({ totalCashBook, cashBook, masterReports, totalDailySale,dailySaleList  }) {
   return (
@@ -108,6 +109,17 @@ export function EStoreDashboard({ totalCashBook, cashBook, masterReports, totalD
         </div>
       </div>
       {/**end Row */}
+       {/**Begin Row */}
+       <div className="row">
+       <div className="col-xxl-6 order-2 order-xxl-1">
+          <NoticeBoardWidget
+            className="card-stretch gutter-b"
+            dailySaleList={dailySaleList}
+            totalCount={totalDailySale}
+          />
+        </div>
+       </div>
+       {/**end Row */}
     </>
   );
 }
