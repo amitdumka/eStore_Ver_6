@@ -21,9 +21,13 @@ export function UserProfileDropdown() {
       // When user isn't authenticated, forget any user info
       setUserInfo(null);
     } else {
+      // oktaAuth.getUser().then((info)=>{
+      //   console.log(info);
+      // });
       authService.getUser().then((info) => {
         setUserInfo(info);
-        // console.log(info);
+         console.log(info);
+         console.log(info.profileUrl);
       });
     }
   }, [authState, authService]); // Update if authState changes
