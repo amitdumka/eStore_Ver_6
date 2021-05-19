@@ -18,29 +18,29 @@ import { SalaryPaymentsCard } from "./SalaryPaymentsCard";
 export function SalaryPaymentsPage({ history }) {
   const salaryPaymentsUIEvents = {
     newSalaryPaymentButtonClick: () => {
-      history.push("/payroll/employee/salarypayments/new");
+      history.push("/payroll/employee/salaryPayments/new");
     },
     openEditSalaryPaymentDialog: (id) => {
-      history.push(`/payroll/employee/salarypayments/${id}/edit`);
+      history.push(`/payroll/employee/salaryPayments/${id}/edit`);
     },
     openDeleteSalaryPaymentDialog: (id) => {
-      history.push(`/payroll/employee/salarypayments/${id}/delete`);
+      history.push(`/payroll/employee/salaryPayments/${id}/delete`);
     },
     openDeleteSalaryPaymentsDialog: () => {
-      history.push(`/payroll/employee/salarypayments/deleteSalaryPayments`);
+      history.push(`/payroll/employee/salaryPayments/deleteSalaryPayments`);
     },
     openFetchSalaryPaymentsDialog: () => {
-      history.push(`/payroll/employee/salarypayments/fetch`);
+      history.push(`/payroll/employee/salaryPayments/fetch`);
     },
     openUpdateSalaryPaymentsStatusDialog: () => {
-      history.push("/payroll/employee/salarypayments/updateStatus");
+      history.push("/payroll/employee/salaryPayments/updateStatus");
     }
   }
 
   return (
     <UIProvider UIEvents={salaryPaymentsUIEvents}>
       <SalaryPaymentsLoadingDialog />
-      <Route path="/payroll/employee/salarypayments/new">
+      <Route path="/payroll/employee/salaryPayments/new">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
@@ -50,7 +50,7 @@ export function SalaryPaymentsPage({ history }) {
           />
         )}
       </Route>
-      <Route path="/payroll/employee/salarypayments/:id/edit">
+      <Route path="/payroll/employee/salaryPayments/:id/edit">
         {({ history, match }) => (
           <EditDialog
             show={match != null}
@@ -61,7 +61,7 @@ export function SalaryPaymentsPage({ history }) {
           />
         )}
       </Route>
-      <Route path="/payroll/employee/salarypayments/deleteSalaryPayments">
+      <Route path="/payroll/employee/salaryPayments/deleteSalaryPayments">
         {({ history, match }) => (
           <DeletesDialog
             show={match != null}
@@ -71,7 +71,7 @@ export function SalaryPaymentsPage({ history }) {
           />
         )}
       </Route>
-      <Route path="/payroll/employee/salarypayments/:id/delete">
+      <Route path="/payroll/employee/salaryPayments/:id/delete">
         {({ history, match }) => (
           <DeleteDialog
             show={match != null}
@@ -82,7 +82,7 @@ export function SalaryPaymentsPage({ history }) {
           />
         )}
       </Route>
-      <Route path="/payroll/employee/salarypayments/fetch">
+      <Route path="/payroll/employee/salaryPayments/fetch">
         {({ history, match }) => (
           <FetchDialog
             show={match != null}
@@ -92,7 +92,7 @@ export function SalaryPaymentsPage({ history }) {
           />
         )}
       </Route>
-      <Route path="/payroll/employee/salarypayments/updateStatus">
+      <Route path="/payroll/employee/salaryPayments/updateStatus">
         {({ history, match }) => (
           <UpdateStateDialog
             show={match != null}

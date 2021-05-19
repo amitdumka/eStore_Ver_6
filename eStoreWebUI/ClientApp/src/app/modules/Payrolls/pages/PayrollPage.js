@@ -20,7 +20,7 @@ export default function PayrollPage() {
         {/* <ContentRoute path="/payroll/stores" component={StoresPage}/> */}
         <ContentRoute path="/payroll/employee/employees" component={EmployeesPage} />
         <ContentRoute path="/payroll/employee/attendances" component={AttendancesPage} />
-        <ContentRoute path="/payroll/employee/salarypayments" component={SalaryPaymentsPage} />
+        <ContentRoute path="/payroll/employee/salaryPayments" component={SalaryPaymentsPage} />
       </Switch>
     </Suspense>
   );
