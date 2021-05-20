@@ -5,6 +5,7 @@ import * as actions from "../../../_redux/connections/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
+import * as commonActions from "../../../../_redux/Actions";
 
 
 //Connection
@@ -25,7 +26,7 @@ export function EditDialog({ id, show, onHide }) {
     (state) => ({
       actionsLoading: state.connections.actionsLoading,
       connectionForEdit: state.connections.connectionForEdit,
-      rentTypes: state.connections.rentTypes
+      rentTypes: state.commonTypes.rentTypes
     }),
     shallowEqual
   );
@@ -33,7 +34,7 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting Connection by id
     dispatch(actions.fetchConnection(id));
-    dispatch(actions.fetchRentTypes());
+    dispatch(commonActions.fetchEnumValue("rentType"));
   }, [id, dispatch]);
 
   // server request for saving connection

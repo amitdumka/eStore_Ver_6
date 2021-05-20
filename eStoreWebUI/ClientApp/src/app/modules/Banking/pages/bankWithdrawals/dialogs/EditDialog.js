@@ -5,6 +5,7 @@ import * as actions from "../../../_redux/bankWithdrawals/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
+import * as commonActions from "../../../../_redux/Actions";
 //bankWithdrawal
 //BankWithdrawal
 
@@ -24,7 +25,7 @@ export function EditDialog({ id, show, onHide }) {
       actionsLoading: state.bankWithdrawals.actionsLoading,
       bankWithdrawalForEdit: state.bankWithdrawals.bankWithdrawalForEdit,
       bankList:state.bankWithdrawals.bankEntities,
-      payModes: state.bankWithdrawals.payModes
+      payModes: state.commonTypes.payModes
     }),
     shallowEqual
   );
@@ -33,7 +34,7 @@ export function EditDialog({ id, show, onHide }) {
     // server call for getting BankWithdrawal by id
     dispatch(actions.fetchBankWithdrawal(id));
     dispatch(actions.fetchBanks());
-    dispatch(actions.fetchPayModes());
+    dispatch(commonActions.fetchEnumValue("payMode"));
   }, [id, dispatch]);
 
   // server request for saving bankWithdrawal

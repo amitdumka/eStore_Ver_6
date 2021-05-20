@@ -5,6 +5,7 @@ import * as actions from "../../../_redux/payments/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
+import * as commonActions from "../../../../_redux/Actions";
 
 //payment
 //Payment
@@ -20,13 +21,14 @@ export function EditDialog({ id, show, onHide }) {
 
   // Payments Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, paymentForEdit ,employeeList, partiesList, bankAccountsList} = useSelector(
+  const { actionsLoading, paymentForEdit ,employeeList, partiesList, bankAccountsList,payModes} = useSelector(
     (state) => ({
       actionsLoading: state.payments.actionsLoading,
       paymentForEdit: state.payments.paymentForEdit,
       employeeList:state.payments.employeeEntities,
       partiesList:state.payments.partiesEntities, 
-      bankAccountsList:state.payments.bankaccEntities
+      bankAccountsList:state.payments.bankaccEntities, 
+      payModes:state.commonTypes.payModes
     }),
     shallowEqual
   );
@@ -37,6 +39,7 @@ export function EditDialog({ id, show, onHide }) {
     dispatch(actions.fetchParties());
     dispatch(actions.fetchBankAccounts());
     dispatch(actions.fetchEmployees());
+    dispatch(commonActions.fetchEnumValue("payMode"));
   }, [id, dispatch]);
 
   // server request for saving payment
@@ -67,6 +70,7 @@ export function EditDialog({ id, show, onHide }) {
         employeeList={employeeList}
         partiesList={partiesList}
         bankAccountsList={bankAccountsList}
+        payModes={payModes}
       />
     </Modal>
   );

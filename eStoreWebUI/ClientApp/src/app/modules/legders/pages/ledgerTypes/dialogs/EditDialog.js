@@ -5,6 +5,7 @@ import * as actions from "../../../_redux/ledgerTypes/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
+import * as commonActions from "../../../../_redux/Actions";
 
 //ledgerType
 //LedgerType
@@ -24,7 +25,7 @@ export function EditDialog({ id, show, onHide }) {
     (state) => ({
       actionsLoading: state.ledgerTypes.actionsLoading,
       ledgerTypeForEdit: state.ledgerTypes.ledgerTypeForEdit,
-      ledgerCategory: state.ledgerTypes.ledgerCategory,
+      ledgerCategory: state.commonTypes.ledgerCategoryType,
     }),
     shallowEqual
   );
@@ -32,7 +33,7 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting LedgerType by id
     dispatch(actions.fetchLedgerType(id));
-    dispatch(actions.fetchLedgerCategory());
+    dispatch(commonActions.fetchEnumValue("ledgerCategoryType"));
   }, [id, dispatch]);
 
   // server request for saving ledgerType

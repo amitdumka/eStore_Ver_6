@@ -5,6 +5,7 @@ import * as actions from "../../../_redux/saleTaxes/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
+import * as cActions from "../../../../_redux/Actions";
 
 //SaleTaxes
 //saleTaxes
@@ -26,7 +27,7 @@ export function EditDialog({ id, show, onHide }) {
     (state) => ({
       actionsLoading: state.saleTaxes.actionsLoading,
       saleTaxForEdit: state.saleTaxes.saleTaxForEdit,
-      taxTypes:state.saleTaxes.taxTypes
+      taxTypes:state.commonTypes.taxType
     }),
     shallowEqual
   );
@@ -34,7 +35,7 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting SaleTax by id
     dispatch(actions.fetchSaleTax(id));
-    dispatch(actions.fetchTaxTypes());
+    dispatch(cActions.fetchEnumValue("taxType"));
   }, [id, dispatch]);
 
   // server request for saving saleTax

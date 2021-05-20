@@ -5,6 +5,7 @@ import * as actions from "../../../_redux/receipts/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
+import * as commonActions from "../../../../_redux/Actions";
 
 //receipt
 //Receipt
@@ -20,13 +21,14 @@ export function EditDialog({ id, show, onHide }) {
 
   // Receipts Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, receiptForEdit ,employeeList, partiesList, bankAccountsList} = useSelector(
+  const { actionsLoading, receiptForEdit ,employeeList, partiesList, bankAccountsList,payModes} = useSelector(
     (state) => ({
       actionsLoading: state.receipts.actionsLoading,
       receiptForEdit: state.receipts.receiptForEdit,
       employeeList:state.receipts.employeeEntities,
       partiesList:state.receipts.partiesEntities, 
-      bankAccountsList:state.receipts.bankaccEntities
+      bankAccountsList:state.receipts.bankaccEntities, 
+      payModes:state.commonTypes.payModes
     }),
     shallowEqual
   );
@@ -37,6 +39,7 @@ export function EditDialog({ id, show, onHide }) {
     dispatch(actions.fetchParties());
     dispatch(actions.fetchBankAccounts());
     dispatch(actions.fetchEmployees());
+    dispatch(commonActions.fetchEnumValue("payMode"));
   }, [id, dispatch]);
 
   // server request for saving receipt
@@ -67,6 +70,7 @@ export function EditDialog({ id, show, onHide }) {
         employeeList={employeeList}
         partiesList={partiesList}
         bankAccountsList={bankAccountsList}
+        payModes={payModes}
       />
     </Modal>
   );

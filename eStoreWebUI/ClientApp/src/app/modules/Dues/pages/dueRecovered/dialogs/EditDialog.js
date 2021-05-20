@@ -5,6 +5,7 @@ import * as actions from "../../../_redux/dueRecovereds/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
+import * as commonActions from "../../../../_redux/Actions";
 
 //dueRecovered
 //DueRecovered
@@ -31,7 +32,7 @@ export function EditDialog({ id, show, onHide }) {
       employeeList: state.dueRecovereds.employeeEntities,
       partiesList: state.dueRecovereds.partiesEntities,
       bankAccountsList: state.dueRecovereds.bankaccEntities,
-      payModes: state.dueRecovereds.payModes, 
+      payModes: state.commonTypes.payModes, 
       dueList: state.dueRecovereds.dueList
     }),
     shallowEqual
@@ -40,7 +41,7 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting DueRecovered by id
     dispatch(actions.fetchDueRecovered(id));
-     dispatch(actions.fetchPayModes());
+     dispatch(commonActions.fetchEnumValue("payMode"));
      dispatch(actions.fetchDueList());
     //dispatch(actions.fetchEmployees());
   }, [id, dispatch]);

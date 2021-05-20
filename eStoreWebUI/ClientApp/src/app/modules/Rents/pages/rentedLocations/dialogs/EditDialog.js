@@ -25,7 +25,7 @@ export function EditDialog({ id, show, onHide }) {
     (state) => ({
       actionsLoading: state.rentedLocations.actionsLoading,
       rentedLocationForEdit: state.rentedLocations.rentedLocationForEdit,
-      rentTypes: state.rentedLocations.rentTypes,
+      rentTypes: state.commonTypes.rentTypes,
       storeList: state.commonTypes.storeList
     }),
     shallowEqual
@@ -34,7 +34,7 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting RentedLocation by id
     dispatch(actions.fetchRentedLocation(id));
-    dispatch(actions.fetchRentTypes());
+    dispatch(commonActions.fetchEnumValue("rentType"));
     dispatch(commonActions.fetchStores());
   }, [id, dispatch]);
 

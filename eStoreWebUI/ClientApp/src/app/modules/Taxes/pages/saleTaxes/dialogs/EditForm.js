@@ -29,6 +29,7 @@ export function EditForm({
   onHide,
   taxTypes,
 }) {
+  taxTypes && console.log(taxTypes);
   return (
     <>
       <Formik
@@ -57,7 +58,7 @@ export function EditForm({
                       label="Tax Type"
                     >
                       <option value="">Select Tax Type </option>
-                      {taxTypes.map((item) => (
+                      {taxTypes && taxTypes.map((item) => (
                         <option key={item.value} value={item.value}>
                           {item.name}
                         </option>

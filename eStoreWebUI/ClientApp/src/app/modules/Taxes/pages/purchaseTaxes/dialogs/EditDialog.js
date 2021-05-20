@@ -5,6 +5,7 @@ import * as actions from "../../../_redux/purchaseTaxes/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
+import * as cActions from "../../../../_redux/Actions";
 
 //purchaseTax
 //PurchaseTax
@@ -24,7 +25,7 @@ export function EditDialog({ id, show, onHide }) {
     (state) => ({
       actionsLoading: state.purchaseTaxes.actionsLoading,
       purchaseTaxForEdit: state.purchaseTaxes.purchaseTaxForEdit,
-      taxTypes: state.purchaseTaxes.taxTypes,
+      taxTypes: state.purchaseTaxes.taxType,
     }),
     shallowEqual
   );
@@ -32,7 +33,7 @@ export function EditDialog({ id, show, onHide }) {
   useEffect(() => {
     // server call for getting PurchaseTax by id
     dispatch(actions.fetchPurchaseTax(id));
-    dispatch(actions.fetchTaxType());
+    dispatch(cActions.fetchEnumValue("taxType"));
   }, [id, dispatch]);
 
   // server request for saving purchaseTax

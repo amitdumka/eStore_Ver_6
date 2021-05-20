@@ -24,8 +24,8 @@ export function EditDialog({ id, show, onHide }) {
     (state) => ({
       actionsLoading: state.rents.actionsLoading,
       rentForEdit: state.rents.rentForEdit,
-      payModes:state.rents.payModes,
-      rentTypes:state.rents.rentTypes,
+      payModes:state.commonTypes.payModes,
+      rentTypes:state.commonTypes.rentTypes,
       rentedLocations:state.rents.rentedLocations, 
       storeList: state.commonTypes.storeList
     }),
@@ -36,8 +36,8 @@ export function EditDialog({ id, show, onHide }) {
     // server call for getting Rent by id
     dispatch(actions.fetchRent(id));
     dispatch(actions.fetchLocations());
-    dispatch(actions.fetchRentTypes());
-    dispatch(actions.fetchPayModes());
+    dispatch(commonActions.fetchEnumValue("rentType"));
+    dispatch(commonActions.fetchEnumValue("payMode"));
     dispatch(commonActions.fetchStores());
 
   }, [id, dispatch]);
