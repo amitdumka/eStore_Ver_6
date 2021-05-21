@@ -5,7 +5,7 @@ import {PaymentsPage} from "./payments/PaymentsPage";
 import {ReceiptsPage} from "./receipts/ReceiptsPage";
 import {CashReceiptsPage} from "./cashReceipts/CashReceiptsPage";
 import {CashPaymentsPage} from "./cashPayments/CashPaymentsPage";
-
+import {TranscationModesPage} from "./TranscationModes/TranscationModesPage";
 import { LayoutSplashScreen, ContentRoute } from "../../../../_metronic/layout";
 
 export default function AccountingPage() {
@@ -25,6 +25,8 @@ export default function AccountingPage() {
         <ContentRoute path="/accounting/expense/payments" component={PaymentsPage} />
         <ContentRoute path="/accounting/receipt/cashReceipts" component={CashReceiptsPage} />
         <ContentRoute path="/accounting/expense/cashPayments" component={CashPaymentsPage} />
+        <ContentRoute path="/accounting/transcationModes" component={TranscationModesPage}/>
+
          
       </Switch>
     </Suspense>

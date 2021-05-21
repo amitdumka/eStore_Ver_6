@@ -42,10 +42,12 @@ import { cashDetailsSlice } from "../app/modules/StoreOperations/_redux/CashDeta
 import {  endOfDaysSlice} from "../app/modules/StoreOperations/_redux/EndOfDays/Slice";
 import { dayClosingsSlice } from "../app/modules/StoreOperations/_redux/DayClosing/Slice";
 import {contactsSlice} from "../app/modules/Stores/_redux/Contacts/Slice";
+import {transcationModesSlice} from "../app/modules/Accounting/_redux/TranscationModes/Slice";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
   ledgerTypes: ledgerTypesSlice.reducer,
+  transcationModes:transcationModesSlice.reducer,
   customers: customersSlice.reducer,
   employees: employeesSlice.reducer,
   attendances: attendancesSlice.reducer,
