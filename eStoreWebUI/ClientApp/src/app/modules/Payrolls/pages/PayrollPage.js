@@ -4,6 +4,7 @@ import { EmployeesPage } from "./employees/EmployeesPage";
 import {AttendancesPage} from "./attendances/AttendancesPage";
 import {SalaryPaymentsPage} from "./salaryPayments/SalaryPaymentsPage";
 import { LayoutSplashScreen, ContentRoute } from "../../../../_metronic/layout";
+import {StaffAdvanceReceiptsPage} from "./StaffAdvanceReceipts/StaffAdvanceReceiptsPage";
 
 export default function PayrollPage() {
   return (
@@ -21,6 +22,7 @@ export default function PayrollPage() {
         <ContentRoute path="/payroll/employee/employees" component={EmployeesPage} />
         <ContentRoute path="/payroll/employee/attendances" component={AttendancesPage} />
         <ContentRoute path="/payroll/employee/salaryPayments" component={SalaryPaymentsPage} />
+        <ContentRoute path="/payroll/salary/receipts" component={StaffAdvanceReceiptsPage} />
       </Switch>
     </Suspense>
   );
