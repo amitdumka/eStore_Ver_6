@@ -43,27 +43,7 @@ export function UIProvider({ UIEvents, children }) {
 
   const initTranscationMode = {
     transcationModeId: 0,
-    partyName: "",
-    transcationModeSlipNo: "",
-    onDate: new Date(),
-    payMode: 0,
-    bankAccountId: null,
-    fromAccount: null,
-    transcationModeDetails: "",
-    amount: 0.0,
-    remarks: "",
-    partyId: null,
-    ledgerEnteryId: null,
-    isCash: false,
-    isOn: false,
-    isDyn: false,
-    party: null,
-    ledgerEntry: null,
-    storeId: 1,
-    store: null,
-    userId: "WebUI",
-    entryStatus: 0,
-    isReadOnly: false,
+    transcation: "",
   };
 
   const value = {

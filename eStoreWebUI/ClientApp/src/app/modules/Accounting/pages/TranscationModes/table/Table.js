@@ -8,7 +8,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/transcationModes/Actions";
+import * as actions from "../../../_redux/TranscationModes/Actions";
 import {
   getSelectRow,
   getHandlerTableChange,
@@ -67,67 +67,14 @@ export function TranscationModesTable() {
       sortCaret: sortCaret,
       headerSortingClasses,
     }, {
-      dataField: "onDate",
-      text: "Date",
+      dataField: "transcation",
+      text: "transcation",
       sort: true,
-      type:      'date',
-      formatter: FieldDateFormater,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     
    
-    {
-      dataField: "partyName",
-      text: "Party",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },   
-    
-    {
-      dataField: "transcationModeSlipNo",
-      text: "TranscationMode Slip No",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "amount",
-      text: "amount",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "payMode",
-      text: "Mode",
-      sort: true,
-      formatter: columnFormatters.PayModeColumnFormatter,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "transcationModeDetails",
-      text: "TranscationMode Details",
-      //formatter: columnFormatters.SalaryComponentsColumnFormatter,
-      sort: false,
-      sortCaret: sortCaret,
-    },
-    {
-      dataField: "fromAccount.account",
-      text: "Account",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
-      dataField: "party.partyName",
-      text: "Ledger",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
     {
       dataField: "action",
       text: "Actions",
@@ -166,7 +113,7 @@ export function TranscationModesTable() {
              
                 wrapperClasses="table-responsive"
                 bordered={true}
-                classes="table table-head-custom table-vertical-center overflow-hidden"
+                classes="table table-head-custom table-vertical-center overflow-hidden table-sm"
                 bootstrap4
                 //remote
                 noDataIndication="No Record Found now.."

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/transcationModes/Actions";
+import * as actions from "../../../_redux/TranscationModes/Actions";
 import { EditDialogHeader } from "./EditDialogHeader";
 import { EditForm } from "./EditForm";
 import { useUIContext } from "../UIContext";
@@ -21,25 +21,18 @@ export function EditDialog({ id, show, onHide }) {
 
   // TranscationModes Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, transcationModeForEdit ,employeeList, partiesList, bankAccountsList,payModes} = useSelector(
+  const { actionsLoading, transcationModeForEdit} = useSelector(
     (state) => ({
       actionsLoading: state.transcationModes.actionsLoading,
       transcationModeForEdit: state.transcationModes.transcationModeForEdit,
-      employeeList:state.transcationModes.employeeEntities,
-      partiesList:state.transcationModes.partiesEntities, 
-      bankAccountsList:state.transcationModes.bankaccEntities, 
-      payModes:state.commonTypes.payModes
+      
     }),
     shallowEqual
   );
 
   useEffect(() => {
     // server call for getting TranscationMode by id
-    dispatch(actions.fetchTranscationMode(id));
-    dispatch(actions.fetchParties());
-    dispatch(actions.fetchBankAccounts());
-    dispatch(actions.fetchEmployees());
-    dispatch(commonActions.fetchEnumValue("payMode"));
+    dispatch(actions.fetchTranscationMode(id));    
   }, [id, dispatch]);
 
   // server request for saving transcationMode
@@ -66,11 +59,7 @@ export function EditDialog({ id, show, onHide }) {
         saveTranscationMode={saveTranscationMode}
         actionsLoading={actionsLoading}
         transcationMode={transcationModeForEdit || transcationModesUIProps.initTranscationMode}
-        onHide={onHide}
-        employeeList={employeeList}
-        partiesList={partiesList}
-        bankAccountsList={bankAccountsList}
-        payModes={payModes}
+        onHide={onHide} 
       />
     </Modal>
   );

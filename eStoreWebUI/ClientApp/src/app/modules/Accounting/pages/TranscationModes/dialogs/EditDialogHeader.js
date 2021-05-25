@@ -19,9 +19,9 @@ export function EditDialogHeader({ id }) {
   const [title, setTitle] = useState("");
   // Title couting
   useEffect(() => {
-    let _title = id ? "" : "New TranscationMode";
+    let _title = id ? "" : "New Transaction Mode";
     if (transcationModeForEdit && id) {
-      _title = `Edit transcationMode '${transcationModeForEdit.firstName} ${transcationModeForEdit.lastName}'`;
+      _title = `Edit transcation Mode '${transcationModeForEdit.transcation}'`;
     }
 
     setTitle(_title);

@@ -17,15 +17,9 @@ import {
 
 // Validation schema
 const TranscationModeEditSchema = Yup.object().shape({
-  onDate: Yup.date().required("Date is required"),
-  amount: Yup.number().integer().moreThan(0).positive().min(1).required("Amount is required"),
- // employeeId: Yup.number().moreThan(0).required("Paid By is required"),
- // particulars: Yup.string().required("Particulars Month is required"),
-  payMode: Yup.number().required("TranscationMode Mode is required"),
-  partyName: Yup.string().required("Paid To is required"),
-  remarks: Yup.string().required("TranscationMode details is required"),
-  storeId: Yup.number().required("Select Store "),
-  transcationModeSlipNo:Yup.string().required("TranscationMode Slip No is required"),
+   // employeeId: Yup.number().moreThan(0).required("Paid By is required"),
+  transcation: Yup.string().required("Transaction name  is required"),
+  
 });
 
 export function EditForm({
@@ -54,127 +48,22 @@ export function EditForm({
                 </div>
               )}
               <Form className="form form-label-right">
-                <div className="form-group row">
-                  
-                   {/* Store */}
-                   <div className="col-lg-4">
-                    <Select name="storeId" label="Store">
-                      <option value="1">Dumka</option>
-                      <option value="2">Jamshedpur</option>
-                    </Select>
-                  </div>
-
-                   {/* Paid By
-                   <div className="col-lg-4">
-                    <Select
-                      name="employeeId"
-                      placeholder="Paid By"
-                      label="Paid By"
-                    >
-                      <option value="">Select Employee</option>
-                      {employeeList.map((item) => (
-                        <option key={item.employeeId} value={item.employeeId}>
-                          {item.staffName}
-                        </option>
-                      ))}
-                    </Select>
-                  </div> */}
-                  
-                  {/* Party  */}
-                  <div className="col-lg-4">
-                    <Select name="partyId" label="Ledger">
-                      <option value={null} >Select Party</option>
-                      {partiesList.map((item) => (
-                        <option key={item.partyId} value={item.partyId}>
-                          {item.partyName}
-                        </option>
-                      ))}
-                    </Select>
-                  </div>
-                  
-                 
-                </div>
+                
                
                 <div className="form-group row">
-                  {/* Date of TranscationMode */}
-                  <div className="col-lg-4">
-                    <DatePickerField
-                      dateFormat="yyyy-MM-dd"
-                      name="onDate"
-                      label="On Date"
-                    />
-                  </div>
+                
                   {/*  State Name*/}
                  <div className="col-lg-4">
                     <Field
-                      name="transcationModeSlipNo"
+                      name="transcation"
                       component={Input}
-                      placeholder="TranscationMode SlipNo"
-                      label="TranscationMode SlipNo"
+                      placeholder="Transcation Name"
+                      label="Transcation"
                     />
                   </div>
-                   {/*  Paid To Name*/}
-                   <div className="col-lg-4">
-                    <Field
-                      name="partyName"
-                      component={Input}
-                      placeholder="Paid To"
-                      label="Paid To"
-                    />
-                  </div>
+                  
                 </div>
-                <div className="form-group row">
-                  {/*  State Name*/}
-                  <div className="col-lg-4">
-                    <Field
-                      name="amount"
-                      component={Input}
-                      placeholder="Amount"
-                      label="Amount"
-                    />
-                  </div>
-                 {/*  State Name*/}
-                 <div className="col-lg-4">
-                    <Field
-                      name="remarks"
-                      component={Input}
-                      placeholder="Remarks"
-                      label="Remarks"
-                    />
-                  </div>
-                   {/* PayMode */}
-                   <div className="col-lg-4">
-                    <Select name="payMode" label="TranscationMode Mode">
-                      <option value="0">Cash</option>
-                      <option value="1">Card</option>
-                    </Select>
-                  </div>
-                 </div>
-                 <div className="form-group row">
-                    {/* FROM aCCOUNT */}
-                    <div className="col-lg-4">
-                    <Select name="bankAccountId" label="From Account">
-                      <option value={null}>Select Bank Account</option>
-                      {bankAccountsList.map((item) => (
-                        <option key={item.bankAccountId} value={item.bankAccountId}>
-                          {item.account}
-                        </option>
-                      ))}
-                    </Select>
-                  </div>                  
-                 {/*  State Name*/}
-                 <div className="col-lg-4">
-                    <Field
-                      name="transcationModeDetails"
-                      component={Input}
-                      placeholder="TranscationMode Details"
-                      label="TranscationMode Details"
-                    />
-                  </div>
-                  
-                  
-                 </div> 
-              </Form>
+                </Form>
             </Modal.Body>
             <Modal.Footer>
               <button

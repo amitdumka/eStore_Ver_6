@@ -25,14 +25,14 @@ export function TranscationModesCard() {
 
   return (
     <Card>
-      <CardHeader title="TranscationMode list">
+      <CardHeader title="Transcation Mode list">
         <CardHeaderToolbar>
           <button
             type="button"
             className="btn btn-primary btn-rounded"
             onClick={TranscationModesUIProps.newTranscationModeButtonClick}
           >
-            New TranscationMode
+            New Transcation Mode
           </button>
         </CardHeaderToolbar>
       </CardHeader>
