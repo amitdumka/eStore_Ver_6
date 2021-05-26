@@ -24,11 +24,11 @@ export default function AccoutingMenuList({ layoutProps }) {
           <h4 className="menu-text">Accounting</h4>
           <i className="menu-icon flaticon-more-v2"></i>
         </li>
-        <ExpensesMenu />
-        <BankingMenu />  
-        <LedgerMenu/>
-        <DuesMenu/>
-        <TaxMenu/>
+        {/* <ExpensesMenu /> */}
+        {/* <BankingMenu />  
+        <LedgerMenu/> */}
+        {/* <DuesMenu/> */}
+        {/* <TaxMenu/> */}
 
     </>
   );

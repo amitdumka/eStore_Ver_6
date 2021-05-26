@@ -7,7 +7,7 @@ import SVG from "react-inlinesvg";
 import { toAbsoluteUrl, checkIsActive } from "../../../../_helpers";
 
 import TailoringMenu from "./eStore/Tailoring/TailoringMenu";
-import PayrollMenu from "./eStore/Payroll/PayrollMenu";
+import PayrollLiteMenu from "./eStore/Payroll/PayrollLiteMenu";
 import StoreMenu from "./eStore/Stores/StoreMenu";
 import ExpenseMenu from "./eStore/Accounting/Accouting-menu";
 import ReportsMenuList from "./eStore/Reports/ReportsMenu";
@@ -53,10 +53,10 @@ export function AsideMenuList({ layoutProps }) {
         </li>
         {/*end::1 Level*/}
         {/**Start of eStore Menu  */}
-        <ExpenseMenu/>
+        {/* <ExpenseMenu/> */}
         <TailoringMenu/>
         <ReportsMenuList/>
-        <PayrollMenu />
+        <PayrollLiteMenu />
         <StoreMenu/>
         {/**end of eStore Menu*/}
 
