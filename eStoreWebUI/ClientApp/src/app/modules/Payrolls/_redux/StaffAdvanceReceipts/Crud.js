@@ -35,10 +35,14 @@ export async function findStaffAdvanceReceipts(queryParams) {
 export async function getAllEmployees(){
   return await axios.get("https://www.aprajitaretails.in/api/employees") ; 
 }
+// function to get all list of employees
+export async function getAllParties(){
+  return await axios.get("https://www.aprajitaretails.in/api/parties") ; 
+}
 
 // UPDATE => PUT: update the staffAdvanceReceipt on the server
 export async function updateStaffAdvanceReceipt(staffAdvanceReceipt) {
-  return await axios.put(`${API_URL}/${staffAdvanceReceipt.satffAdvanceReceiptId}`, JSON.stringify( staffAdvanceReceipt ),{
+  return await axios.put(`${API_URL}/${staffAdvanceReceipt.staffAdvanceReceiptId}`, JSON.stringify( staffAdvanceReceipt ),{
     headers: {         'Content-Type' : 'application/json; charset=utf-8' }
 });
 }

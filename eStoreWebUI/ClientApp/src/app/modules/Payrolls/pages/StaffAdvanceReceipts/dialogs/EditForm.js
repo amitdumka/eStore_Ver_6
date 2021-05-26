@@ -17,13 +17,16 @@ import {
 
 // Validation schema
 const StaffAdvanceReceiptEditSchema = Yup.object().shape({
-  paymentDate: Yup.date().required("Date is required"),
-  amount: Yup.number().integer().moreThan(0).positive().min(1).required("Amount is required"),
+  receiptDate: Yup.date().required("Date is required"),
+  amount: Yup.number()
+    .integer()
+    .moreThan(0)
+    .positive()
+    .min(1)
+    .required("Amount is required"),
   employeeId: Yup.number().required("Employee is required"),
-  salaryMonth: Yup.string().required("Salary Month is required"),
   payMode: Yup.number().required("Payment Mode is required"),
   details: Yup.string().required("Details is required"),
-  salaryComponet: Yup.number().required("Salary Component is required"),
 });
 
 export function EditForm({
@@ -31,7 +34,10 @@ export function EditForm({
   staffAdvanceReceipt,
   actionsLoading,
   onHide,
-  employeeList,payModes,salaryComponets,storeList
+  employeeList,
+  payModes,
+  partyList,
+  storeList,
 }) {
   return (
     <>
@@ -53,65 +59,52 @@ export function EditForm({
               )}
               <Form className="form form-label-right">
                 <div className="form-group row">
-                  
-                   {/* Store */}
-                    {/* Store */}
-                    <div className="col-lg-4">
-                    <Select name="storeId" label="Store">
-                      {storeList && storeList.map((item) => (
-                        <option key={item.storeId} value={item.storeId}>
-                          {item.storeName}
-                        </option>
-                      ))}
-                    </Select>
-                  </div>
-                  
-                  {/* Salary Component */}
+                 
+                  {/* Store */}
                   <div className="col-lg-4">
-                    <Select name="salaryComponet" label="Salary Component">
-                      <option >Select Payment Head</option>
-                      {salaryComponets && salaryComponets.map((item) => (
-                        <option key={item.value} value={item.value}>
-                          {item.name}
-                        </option>
-                      ))}
+                    <Select name="storeId" label="Store">
+                      {storeList &&
+                        storeList.map((item) => (
+                          <option key={item.storeId} value={item.storeId}>
+                            {item.storeName}
+                          </option>
+                        ))}
                     </Select>
                   </div>
-                  
+
                   {/* Email */}
                   <div className="col-lg-4">
-                    <Select
-                      name="employeeId"
-                      placeholder="Employee"
-                      label="Employee"
-                    >
+                    <Select  name="employeeId"   label="Employee">
                       <option value="">Select Employee</option>
-                      {employeeList && employeeList.map((item) => (
-                        <option key={item.employeeId} value={item.employeeId}>
-                          {item.staffName}
-                        </option>
-                      ))}
+                      {employeeList &&
+                        employeeList.map((item) => (
+                          <option key={item.employeeId} value={item.employeeId}>
+                            {item.staffName}
+                          </option>
+                        ))}
                     </Select>
                   </div>
                 </div>
-               
                 <div className="form-group row">
                   {/* Date of StaffAdvanceReceipt */}
                   <div className="col-lg-4">
                     <DatePickerField
                       dateFormat="yyyy-MM-dd"
-                      name="paymentDate"
+                      name="receiptDate"
                       label="On Date"
                     />
                   </div>
-                  {/*  Father Name*/}
+                  {/* Email */}
                   <div className="col-lg-4">
-                    <Field
-                      name="salaryMonth"
-                      component={Input}
-                      placeholder="Salary Month"
-                      label="Salary Month"
-                    />
+                    <Select name="partyId" placeholder="Ledger" label="Ledger">
+                      <option value="">Select Ledger/Party</option>
+                      {partyList &&
+                        partyList.map((item) => (
+                          <option key={item.partyId} value={item.partyId}>
+                            {item.partyName}
+                          </option>
+                        ))}
+                    </Select>
                   </div>
                 </div>
                 <div className="form-group row">
@@ -124,8 +117,22 @@ export function EditForm({
                       label="Amount"
                     />
                   </div>
-                 {/*  State Name*/}
-                 <div className="col-lg-4">
+
+                  {/* PayMode */}
+                  <div className="col-lg-4">
+                    <Select name="payMode" label="Receipt Mode">
+                      {payModes &&
+                        payModes.map((item) => (
+                          <option key={item.value} value={item.value}>
+                            {item.name}
+                          </option>
+                        ))}
+                    </Select>
+                  </div>
+                </div>
+                <div className="form-group row">
+                  {/*  State Name*/}
+                  <div className="col-lg-4">
                     <Field
                       name="details"
                       component={Input}
@@ -133,18 +140,7 @@ export function EditForm({
                       label="Details"
                     />
                   </div>
-                   {/* PayMode */}
-                   <div className="col-lg-4">
-                    <Select name="payMode" label="Salary payMode">
-                     
-                      {payModes && payModes.map((item) => (
-                        <option key={item.value} value={item.value}>
-                          {item.name}
-                        </option>
-                      ))}
-                    </Select>
-                  </div>
-                 </div> 
+                </div>
               </Form>
             </Modal.Body>
             <Modal.Footer>

@@ -13,7 +13,8 @@ const initialStaffAdvanceReceiptsState = {
   staffAdvanceReceiptForEdit: undefined,
   lastError: null, 
   employeeEntities: null, 
-  totalCountEmp:0
+  totalCountEmp:0, 
+  partyEntities:null, totalCountParty:0
 };
 export const callTypes = {
   list: "list",
@@ -50,6 +51,16 @@ export const staffAdvanceReceiptsSlice = createSlice({
      state.totalCountEmp=totalCount;
 
     },
+    // get All party List 
+    partiesListFetched: function(state,action){
+      const{totalCount,entities}=action.payload;
+     state.actionsLoading=false;
+     state.listLoading =false;
+     state.error=null;
+     state.partyEntities=entities;
+     state.totalCountParty=totalCount;
+
+    },
     // getStaffAdvanceReceiptById
     staffAdvanceReceiptFetched: (state, action) => {
       state.actionsLoading = false;
@@ -75,7 +86,7 @@ export const staffAdvanceReceiptsSlice = createSlice({
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.map(entity => {
-        if (entity.satffAdvanceReceiptId === action.payload.staffAdvanceReceipt.satffAdvanceReceiptId) {
+        if (entity.staffAdvanceReceiptId === action.payload.staffAdvanceReceipt.staffAdvanceReceiptId) {
           return action.payload.staffAdvanceReceipt;
         }
         return entity;
@@ -85,14 +96,14 @@ export const staffAdvanceReceiptsSlice = createSlice({
     staffAdvanceReceiptDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
-      state.entities = state.entities.filter(el => el.satffAdvanceReceiptId !== action.payload.satffAdvanceReceiptId);
+      state.entities = state.entities.filter(el => el.staffAdvanceReceiptId !== action.payload.staffAdvanceReceiptId);
     },
     // deleteStaffAdvanceReceipts
     staffAdvanceReceiptsDeleted: (state, action) => {
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        el => !action.payload.ids.includes(el.satffAdvanceReceiptId)
+        el => !action.payload.ids.includes(el.staffAdvanceReceiptId)
       );
     },
 
@@ -103,7 +114,7 @@ export const staffAdvanceReceiptsSlice = createSlice({
       state.error = null;
       const { ids, status } = action.payload;
       state.entities = state.entities.map(entity => {
-        if (ids.findIndex(id => id === entity.satffAdvanceReceiptId) > -1) {
+        if (ids.findIndex(id => id === entity.staffAdvanceReceiptId) > -1) {
           entity.status = status;
         }
         return entity;

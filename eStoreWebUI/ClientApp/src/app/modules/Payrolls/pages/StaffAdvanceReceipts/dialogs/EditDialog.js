@@ -21,11 +21,12 @@ export function EditDialog({ id, show, onHide }) {
 
   // StaffAdvanceReceipts Redux state
   const dispatch = useDispatch();
-  const { actionsLoading, staffAdvanceReceiptForEdit ,employeeList, payModes,storeList} = useSelector(
+  const { actionsLoading, staffAdvanceReceiptForEdit ,employeeList, payModes,storeList,partyList} = useSelector(
     (state) => ({
       actionsLoading: state.staffAdvanceReceipts.actionsLoading,
       staffAdvanceReceiptForEdit: state.staffAdvanceReceipts.staffAdvanceReceiptForEdit,
       employeeList:state.staffAdvanceReceipts.employeeEntities, 
+      partyList:state.staffAdvanceReceipts.partyEntities,
       payModes: state.commonTypes.payModes,
       storeList: state.commonTypes.storeList
     }),
@@ -36,6 +37,7 @@ export function EditDialog({ id, show, onHide }) {
     // server call for getting StaffAdvanceReceipt by id
     dispatch(actions.fetchStaffAdvanceReceipt(id));
     dispatch(actions.fetchEmployees());
+    dispatch(actions.fetchParties());
     dispatch(commonActions.fetchEnumValue("payMode"));
     dispatch(commonActions.fetchStores());
     
@@ -43,7 +45,6 @@ export function EditDialog({ id, show, onHide }) {
 
   // server request for saving staffAdvanceReceipt
   const saveStaffAdvanceReceipt = (staffAdvanceReceipt) => {
-    staffAdvanceReceipt.salaryComponet=parseInt(staffAdvanceReceipt.salaryComponet);
     staffAdvanceReceipt.payMode=parseInt(staffAdvanceReceipt.payMode);
     
     if (!id) {
@@ -71,6 +72,7 @@ export function EditDialog({ id, show, onHide }) {
         employeeList={employeeList}
         payModes={payModes}
         storeList={storeList}
+        partyList={partyList}
       />
     </Modal>
   );

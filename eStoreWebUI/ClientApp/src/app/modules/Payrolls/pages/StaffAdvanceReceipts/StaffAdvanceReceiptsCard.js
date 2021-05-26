@@ -24,7 +24,7 @@ export function StaffAdvanceReceiptsCard() {
 
   return (
     <Card>
-      <CardHeader title="Advance Receipt list">
+      <CardHeader title="Advance Receipt list (Staff)">
         <CardHeaderToolbar>
           <button
             type="button"
