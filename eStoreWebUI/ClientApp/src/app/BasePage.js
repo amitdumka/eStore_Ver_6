@@ -4,6 +4,7 @@ import { LayoutSplashScreen, ContentRoute } from "../_metronic/layout";
 import { BuilderPage } from "./pages/BuilderPage";
 import { MyPage } from "./pages/MyPage";
 import { DashboardPage } from "./pages/DashboardPage";
+import {FinReportPage} from "./pages/FinReportPage";
 import {  SecureRoute, LoginCallback } from "@okta/okta-react";
 import CustomLoginComponent from "./modules/okta/Login";
 import Messages from "./modules/okta/Messages";
@@ -30,6 +31,9 @@ const ElectricityPage = lazy(() =>
  const StoreOperationsMainPage= lazy(() =>import("./modules/StoreOperations/pages/StoreOperationsMainPage"));
  const SalesPage = lazy(() =>import("./modules/Sales/pages/SalesPage"));
 
+ //const FinReportPage = lazy(() =>import("./pages/FinReportPage"));
+
+
 export default function BasePage() {
   // useEffect(() => {
   //   console.log('Base page');
@@ -46,6 +50,7 @@ export default function BasePage() {
         <ContentRoute path="/dashboard" component={DashboardPage} />
         <ContentRoute path="/builder" component={BuilderPage} />
         <ContentRoute path="/my-page" component={MyPage} />
+        <ContentRoute path="/fin-page" component={FinReportPage} />
         <Route path="/store" component={StoreMainPage} />
         <Route path="/payroll" component={PayrollPage} />
         <Route path="/accounting" component={AccountingPage} />

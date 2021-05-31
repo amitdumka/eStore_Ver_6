@@ -38,3 +38,4 @@ const tName="stores";
       dispatch(actions.catchError({ error, callTypes: callTypes.list }));
     });
 };
+
