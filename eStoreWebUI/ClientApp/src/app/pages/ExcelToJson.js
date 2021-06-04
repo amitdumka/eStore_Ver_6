@@ -1,6 +1,7 @@
 import { Button, Select, MenuItem } from "@material-ui/core";
 import React, { useState } from "react";
 import * as XLSX from "xlsx";
+import axios from "axios";
 
 const SheetJSFT = [
   "xlsx",
@@ -40,7 +41,8 @@ export default function ExcelToJson() {
   const [startRow, setStartRow] = useState(0);
   const [sheetName, setSheetName] = useState("");
   const [file, setFile] = useState();
-  const[uploadMode,setUploadMode] = useState("");
+  const [uploadMode, setUploadMode] = useState("");
+  const [uploadVoyMode, setUploadVoyMode] = useState("");
 
   const handleSheetName = (e) => {
     setSheetName(e.target.value);
@@ -53,25 +55,36 @@ export default function ExcelToJson() {
     console.log(startRow);
     console.log(file);
 
-    readExcelFile();
+    readExcelFile("all");
   };
-  const handleMode=(e)=>{
+  const handleVoyClick = (e) => {
+    console.log(sheetName);
+    console.log(startRow);
+    console.log(file);
+
+    readExcelFile("voy");
+  };
+  const handleMode = (e) => {
     setUploadMode(e.target.value);
+  };
+  const handleVoyMode = (e) => {
+    setUploadVoyMode(e.target.value);
   };
   const handleFileSelect = (e) => {
     const files = e.target.files;
     if (files && files[0]) setFile(files[0]);
   };
 
-  const readExcelFile = () => {
+  const readExcelFile = (uMode) => {
     const reader = new FileReader();
     const rABS = !!reader.readAsBinaryString;
+    alert("Fetching.....");
     reader.onload = (e) => {
       console.log(startRow);
       /* Parse data */
       const bstr = e.target.result;
       const wb = XLSX.read(bstr, {
-        type: rABS ? "binary" : "array",
+        type: rABS ? "binary" : "array",cellDates: true, dateNF: 'dd/mm/yyyy;@',
         bookVBA: true,
       });
       /* Get first worksheet */
@@ -81,12 +94,24 @@ export default function ExcelToJson() {
           ? wb.Sheets[sheetName]
           : wb.Sheets[wsname];
       /* Convert array of arrays */
-      const data = XLSX.utils.sheet_to_json(ws, { blankRows: false });
+      const data = XLSX.utils.sheet_to_json(ws, { blankRows: false, raw:false,dateNF:'yyyy-MM-ddThh:mm:ss.000Z"'} );
       console.log(JSON.stringify(data, null, 1));
-      
-     if(uploadMode!=="")  
-        UploadData(data,uploadMode);
-      else alert("Kindly Select upload Mode");
+
+      if (uMode === "voy") {
+        if (uploadVoyMode !== "") {
+          const jData = {
+            CommandMode: uploadVoyMode,
+            JsonData: data,
+            EmailId: "amitnarayansah@gmail.com",
+            CallBackUrl: "http://localhost:3000/notification/upload",
+          };
+          alert("Uploading...");
+          UploadVoyData(jData);
+        } else alert("Kindly Select upload Mode");
+      } else {
+        if (uploadMode !== "") UploadData(data, uploadMode);
+        else alert("Kindly Select upload Mode");
+      }
 
       /* Update state */
       // this.setState({ data: data, cols: make_cols(ws['!ref']) }, () => {
@@ -111,15 +136,20 @@ export default function ExcelToJson() {
         Sheet name{" "}
         <input type="text" id="sheetName" onChange={handleSheetName} />
       </div>
-      <div className="h5">
+      {/* <div className="h5">
         Start Row{" "}
         <input type="numeric" id="startRow" onChange={handleStartRow} />
-      </div>
+      </div> */}
       <div>
-        <span className="h5 text-primary">Select Upload Type</span>
+        <hr />
+        <span className="h5 text-primary mr-1">Select Upload Type</span>
         <Select displayEmpty value={uploadMode} onChange={handleMode}>
           <MenuItem value="">Select Upload Mode</MenuItem>
-          {UploadType.map((item,index)=>(<MenuItem key={index} value={item}>{item}</MenuItem>))}
+          {UploadType.map((item, index) => (
+            <MenuItem key={index} value={item}>
+              {item}
+            </MenuItem>
+          ))}
         </Select>
       </div>
       <Button className="btn btn-primary" onClick={handleClick}>
@@ -131,6 +161,24 @@ export default function ExcelToJson() {
         *Note: First row of sheet must be header row. Any other Data on First
         row will give wrong data.
       </div>
+      <div className="h6 text-danger ">
+        <hr />
+      </div>
+
+      <div>
+        <span className="h5 text-primary mr-1">Select Voyager Upload Type</span>
+        <Select displayEmpty value={uploadVoyMode} onChange={handleVoyMode}>
+          <MenuItem value="">Select Upload Mode</MenuItem>
+          {UploadVoyType.map((item, index) => (
+            <MenuItem key={index} value={item}>
+              {item}
+            </MenuItem>
+          ))}
+        </Select>
+      </div>
+      <Button className="btn btn-primary" onClick={handleVoyClick}>
+        Upload Voy
+      </Button>
     </>
   );
 }
@@ -188,7 +236,46 @@ const UploadType = [
   "Bookings",
   "Deliveries",
 ];
+const UploadVoyType=[
+  "VoyBrandName","ProductMaster","ProductList","TaxRegister","VoySaleInvoice","VoySaleInvoiceSum","VoyPurchaseInward","InwardSummary","SaleWithCustomer"
+  
+];
+export const API_URL = "https://www.aprajitaretails.in/api/Importer";
 
-export function UploadData(jsonData,mode) {
+export async function UploadData(jsonData, mode) {
+  const api = "https://localhost:44385/api/Importer";
+  await axios
+    .post(`${api}?uploadMode=${mode}`, jsonData, {
+      method: "POST",
+      responseType: "json", //Force to receive data in a Blob Format
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+    })
+    .then((response) => {
+      console.log("Response from server");
+      console.log(response);
+      alert("Your data has been, uploaded to server, It will inform after processing data!");
+    })
+    .catch((error) => {
+      console.log(error);
+      alert(error);
+    });
+}
 
+export async function UploadVoyData(jsonData) {
+  const api = "https://localhost:44385/api/Importer/voyagerImport";
+  
+  await axios
+    .post(`${api}`, jsonData, {
+      method: "POST",
+      responseType: "json", //Force to receive data in a Blob Format
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+    })
+    .then((response) => {
+      console.log("Response from server");
+      console.log(response);
+      alert("Your data has been, uploaded to server, It will inform after processing data!");
+    })
+    .catch((error) => {
+      console.log(error);alert(error);
+    });
 }
