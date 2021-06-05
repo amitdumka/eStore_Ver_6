@@ -84,7 +84,8 @@ export default function ExcelToJson() {
       /* Parse data */
       const bstr = e.target.result;
       const wb = XLSX.read(bstr, {
-        type: rABS ? "binary" : "array",cellDates: true, dateNF: 'dd/mm/yyyy;@',
+        type: rABS ? "binary" : "array",
+        cellDates: true,
         bookVBA: true,
       });
       /* Get first worksheet */
@@ -94,7 +95,10 @@ export default function ExcelToJson() {
           ? wb.Sheets[sheetName]
           : wb.Sheets[wsname];
       /* Convert array of arrays */
-      const data = XLSX.utils.sheet_to_json(ws, { blankRows: false, raw:false,dateNF:'yyyy-MM-ddThh:mm:ss.000Z"'} );
+      const data = XLSX.utils.sheet_to_json(ws, {
+        blankRows: false,
+        dateNF: 'yyyy-MM-ddThh:mm:ss.000Z"',
+      });
       console.log(JSON.stringify(data, null, 1));
 
       if (uMode === "voy") {
@@ -103,10 +107,11 @@ export default function ExcelToJson() {
             CommandMode: uploadVoyMode,
             JsonData: data,
             EmailId: "amitnarayansah@gmail.com",
-            CallBackUrl: "http://localhost:3000/notification/upload",
+            CallBackUrl: "https://estores.aprajitaretails.in/notification/upload",
           };
-          alert("Uploading...");
+
           UploadVoyData(jData);
+          alert("Uploading...");
         } else alert("Kindly Select upload Mode");
       } else {
         if (uploadMode !== "") UploadData(data, uploadMode);
@@ -236,16 +241,23 @@ const UploadType = [
   "Bookings",
   "Deliveries",
 ];
-const UploadVoyType=[
-  "VoyBrandName","ProductMaster","ProductList","TaxRegister","VoySaleInvoice","VoySaleInvoiceSum","VoyPurchaseInward","InwardSummary","SaleWithCustomer"
-  
+const UploadVoyType = [
+  "VoyBrandName",
+  "ProductMaster",
+  "ProductList",
+  "TaxRegister",
+  "VoySaleInvoice",
+  "VoySaleInvoiceSum",
+  "VoyPurchaseInward",
+  "InwardSummary",
+  "SaleWithCustomer",
 ];
 export const API_URL = "https://www.aprajitaretails.in/api/Importer";
 
 export async function UploadData(jsonData, mode) {
-  const api = "https://localhost:44385/api/Importer";
+  //const api = "https://localhost:44385/api/Importer";
   await axios
-    .post(`${api}?uploadMode=${mode}`, jsonData, {
+    .post(`${API_URL}?uploadMode=${mode}`, jsonData, {
       method: "POST",
       responseType: "json", //Force to receive data in a Blob Format
       headers: { "Content-Type": "application/json; charset=utf-8" },
@@ -253,7 +265,9 @@ export async function UploadData(jsonData, mode) {
     .then((response) => {
       console.log("Response from server");
       console.log(response);
-      alert("Your data has been, uploaded to server, It will inform after processing data!");
+      alert(
+        "Your data has been, uploaded to server, It will inform after processing data via Email."
+      );
     })
     .catch((error) => {
       console.log(error);
@@ -262,8 +276,8 @@ export async function UploadData(jsonData, mode) {
 }
 
 export async function UploadVoyData(jsonData) {
-  const api = "https://localhost:44385/api/Importer/voyagerImport";
-  
+  const api = "https://www.aprajitaretails.in/api/Importer/voyagerImport";
+
   await axios
     .post(`${api}`, jsonData, {
       method: "POST",
@@ -273,9 +287,12 @@ export async function UploadVoyData(jsonData) {
     .then((response) => {
       console.log("Response from server");
       console.log(response);
-      alert("Your data has been, uploaded to server, It will inform after processing data!");
+      alert(
+        "Your data has been, uploaded to server, It will inform after processing data via Email."
+      );
     })
     .catch((error) => {
-      console.log(error);alert(error);
+      console.log(error);
+      alert(error);
     });
 }
