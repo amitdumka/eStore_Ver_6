@@ -251,6 +251,7 @@ const UploadVoyType = [
   "VoyPurchaseInward",
   "InwardSummary",
   "SaleWithCustomer",
+  "ItemCategory"
 ];
 export const API_URL = "https://www.aprajitaretails.in/api/Importer";
 

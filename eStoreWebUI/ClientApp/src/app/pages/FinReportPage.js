@@ -112,8 +112,8 @@ export const RequestCard = () => {
             <TableCell>
               <Select value={repoMode} onChange={handleModeChange} id="modeSelect">
                 <MenuItem value={1}>Sale Data</MenuItem>
-                <MenuItem value={2}>Salary Data</MenuItem>
-                <MenuItem value={3}>Cash Book</MenuItem>
+                <MenuItem value={3}>Salary Data</MenuItem>
+                <MenuItem value={2}>Cash Book</MenuItem>
                 <MenuItem value={4}>Expenses Data</MenuItem>
                 <MenuItem value={5}>Payment Data</MenuItem>
                 <MenuItem value={6}>Receipts Data</MenuItem>
