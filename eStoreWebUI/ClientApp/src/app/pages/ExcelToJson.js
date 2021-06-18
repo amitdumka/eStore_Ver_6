@@ -251,7 +251,7 @@ const UploadVoyType = [
   "VoyPurchaseInward",
   "InwardSummary",
   "SaleWithCustomer",
-  "ItemCategory"
+  "ItemCategory","ItemData"
 ];
 export const API_URL = "https://www.aprajitaretails.in/api/Importer";
 
@@ -278,9 +278,9 @@ export async function UploadData(jsonData, mode) {
 
 export async function UploadVoyData(jsonData) {
   const api = "https://www.aprajitaretails.in/api/Importer/voyagerImport";
-
+  const localApi="https://localhost:44385/api/Importer/voyagerImport";
   await axios
-    .post(`${api}`, jsonData, {
+    .post(`${localApi}`, jsonData, {
       method: "POST",
       responseType: "json", //Force to receive data in a Blob Format
       headers: { "Content-Type": "application/json; charset=utf-8" },
